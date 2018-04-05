@@ -17,10 +17,6 @@ export default {
             type: String,
             required: true
         },
-        token: {
-            type: String,
-            required: true
-        }
     },
 
     data() {
@@ -41,6 +37,6 @@ export default {
 iframe {
     border: none;
     width: 100%;
-    height: 380px;
+    height: 420px;
 }
 </style>

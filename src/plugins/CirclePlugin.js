@@ -6,27 +6,55 @@ export default class CirclePlugin {
         _Vue.prototype.$circle = new CirclePlugin();
     }
 
-    getArtifacts(vcs, username, project, token) {
+    getArtifacts(vcs, username, project, token, build = 'latest') {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
-                project
-                }/latest/artifacts?circle-token=${token}&filter=completed`
+                    project
+                    }/${build}/artifacts?circle-token=${token}&filter=completed`
             )
             .then(resp => {
                 return resp.body;
             });
     }
 
-    getBuildInfo({ vcs, username, project, token }) {
+    getLatestBuildInfo({ vcs, username, project, token }) {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
-                project
-                }?circle-token=${token}&limit=1&filter=completed`
+                    project
+                    }?circle-token=${token}&limit=1&filter=completed`
             )
             .then(resp => {
                 return resp.body.shift();
+            });
+    }
+
+    getBuildInfo({ vcs, username, project, token }, build) {
+        if(!build){
+            return this.getLatestBuildInfo({ vcs, username, project, token });
+        }
+
+        return Vue.http
+            .get(
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
+                    project
+                    }/${build}?circle-token=${token}`
+            )
+            .then(resp => {
+                return resp.body;
+            });
+    }
+
+    getAllBuilds({ vcs, username, project, token }) {
+        return Vue.http
+            .get(
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
+                    project
+                    }?circle-token=${token}&filter=completed&limit=${Vue.config.buildsLimit}`
+            )
+            .then(resp => {
+                return resp.body;
             });
     }
 
@@ -41,7 +69,7 @@ export default class CirclePlugin {
                 token
             } = projectConfig;
 
-            p.push(this.getBuildInfo({
+            p.push(this.getLatestBuildInfo({
                 vcs,
                 username,
                 project,
@@ -68,8 +96,8 @@ export default class CirclePlugin {
             });
     }
 
-    getArtifactsByType(type, { vcs, username, project, token }) {
-        return this.getArtifacts(vcs, username, project, token)
+    getArtifactsByType(type, { vcs, username, project, token }, build = 'latest') {
+        return this.getArtifacts(vcs, username, project, token, build)
             .then(artifacts => {
                 return artifacts.filter(item => {
                     return path.extname(item.path) === `.${type}` ? item : null;
@@ -77,16 +105,16 @@ export default class CirclePlugin {
             });
     }
 
-    getJsonArtifacts(opt) {
-        return this.getArtifactsByType('json', opt);
+    getJsonArtifacts(opt, build= 'latest') {
+        return this.getArtifactsByType('json', opt, build);
     }
 
-    getHtmlArtifacts(opt) {
-        return this.getArtifactsByType('html', opt);
+    getHtmlArtifacts(opt, build= 'latest') {
+        return this.getArtifactsByType('html', opt, build);
     }
 
-    getDashboardArtifacts(opt) {
-        return this.getArtifactsByType('html', opt)
+    getDashboardArtifacts(opt, build= 'latest') {
+        return this.getArtifactsByType('html', opt, build)
             .then(artifacts => {
                 return artifacts.filter((item) => {
                     if (path.basename(item.path).startsWith('dashboard_')) {

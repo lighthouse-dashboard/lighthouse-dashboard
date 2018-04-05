@@ -1,48 +1,48 @@
 <template>
-  <div id="app" class="row">
-    <div class='row' v-for="project in sortedProjects" :key="project.vcs_revision">
-        <BuildInfo class='col s12 m4' :vcs="project.vcs" :username="project.username" :project="project.project" :token="project.token"/>
-        <BuildView class='col s12 m8' :vcs="project.vcs" :username="project.username" :project="project.project" :token="project.token"/>
+    <div id="app">
+        <ProjectList id="slide-out" class="sidenav" :projects="projects"/>
+
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large waves-effect waves-light green darken-2" @click="open"><i
+                class="material-icons">menu</i></a>
+        </div>
+
+
+        <router-view></router-view>
     </div>
-  </div>
 </template>
 
 <script>
-import Vue from "vue";
 
-import BuildInfo from "./components/BuildInfo";
-import BuildView from "./components/BuildView";
+    import Vue from 'vue';
+    import ProjectList from './components/ProjectList'
 
-export default {
-    name: "App",
+    export default {
+        name: "App",
 
-    components: {
-        BuildView,
-        BuildInfo
-    },
+        components: {
+            ProjectList
+        },
 
-    data() {
-        return {
-            sortedProjects: [],
-            projects: Vue.config.projects
-        };
-    },
+        data() {
+            return {
+                sidenav: null,
+                projects: Vue.config.projects
+            }
+        },
 
-    mounted() {
-        this.load();
-    },
+        mounted() {
+            M.AutoInit();
 
-    methods: {
-        load() {
-            this.$circle
-                .sortProjectByLatestBuild(this.projects)
-                .then(sortedProjects => {
-                    this.sortedProjects = sortedProjects;
-                });
-            setTimeout(() => {
-                this.load();
-            }, Vue.config.refreshInterval);
+            var elem = document.querySelector('.sidenav');
+            this.sidenav = M.Sidenav.init(elem, {});
+        },
+
+        methods: {
+            open() {
+                this.sidenav.open();
+            }
         }
-    }
-};
+    };
 </script>
