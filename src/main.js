@@ -8,6 +8,7 @@ import CirclePlugin from './plugins/CirclePlugin';
 
 Vue.config.productionTip = false;
 Vue.config.refreshInterval = 1000 * 5;
+Vue.config.projects = require('./projects');
 
 Vue.use(VueResorce);
 Vue.use(CirclePlugin);

@@ -6,7 +6,6 @@
 
 <script>
 import Chart from "./Chart.vue";
-import exampleData from "../assets/example.json";
 
 export default {
     components: {

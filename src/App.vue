@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
-    <div class='buildView' v-for="project in sortedProjects" :key="project.vcs_revision">
-        <BuildInfo class='info' :vcs="project.vcs" :username="project.username" :project="project.project" :token="project.token"/>        
-        <BuildView class='view' :vcs="project.vcs" :username="project.username" :project="project.project" :token="project.token"/>
-    </div>   
+  <div id="app" class="row">
+    <div class='row' v-for="project in sortedProjects" :key="project.vcs_revision">
+        <BuildInfo class='col s12 m4' :vcs="project.vcs" :username="project.username" :project="project.project" :token="project.token"/>
+        <BuildView class='col s12 m8' :vcs="project.vcs" :username="project.username" :project="project.project" :token="project.token"/>
+    </div>
   </div>
 </template>
 
@@ -24,21 +24,7 @@ export default {
     data() {
         return {
             sortedProjects: [],
-            projects: [
-                {
-                    vcs: "github",
-                    username: "faebeee",
-                    project: "lh-reporter-test",
-                    token: "ce17db5395f697724da815ce49773bd9068f921d"
-                },
-
-                {
-                    vcs: "github",
-                    username: "dreipol",
-                    project: "dreipol-website",
-                    token: "207e6f55687b5dc8d43dea013ab8165872693eb0"
-                }
-            ]
+            projects: Vue.config.projects
         };
     },
 
@@ -60,16 +46,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-.buildView {
-    display: flex;
-    flex-flow: row;
-}
-.view {
-    width: 100%;
-}
-.info {
-    width: 30%;
-}
-</style>
