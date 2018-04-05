@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <nav class="green lighten-1">
             <div class="nav-wrapper">
                 <router-link :to="{name: 'index'}" class="brand-logo center">{{username}}/{{project}}</router-link>

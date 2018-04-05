@@ -1,16 +1,16 @@
 <template>
-    <div v-if="build">
-        <div>
-            <h2>
-                <router-link :to="{name: 'project', params: project}">
-                    <small>
-                        #{{build.build_num}}
-                    </small>
-                    {{build.reponame}}
-                </router-link>
+    <div class="row" v-if="build">
+        <h2>
+            <router-link :to="{name: 'project', params: project}">
+                <small>
+                    #{{build.build_num}}
+                </small>
+                {{build.reponame}}
+            </router-link>
 
-            </h2>
+        </h2>
 
+        <div class="col s12 m6 l12">
             <ul class="collection">
                 <li class="collection-item avatar">
                     <img :src="userAvatar" alt="" class="circle">
@@ -40,7 +40,7 @@
         </div>
 
 
-        <div>
+        <div class="col s12 m6 l12">
             <div class="collection with-header">
                 <div class="collection-header"><h6>Artifacts</h6></div>
                 <a v-for='html in htmlArtifacts' class="collection-item" :key='html.url' target='_blank'

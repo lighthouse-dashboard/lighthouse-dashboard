@@ -1,14 +1,10 @@
 <template>
     <div id="app">
         <ProjectList id="slide-out" class="sidenav" :projects="projects"/>
-
-
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large waves-effect waves-light green darken-2" @click="open"><i
                 class="material-icons">menu</i></a>
         </div>
-
-
         <router-view></router-view>
     </div>
 </template>

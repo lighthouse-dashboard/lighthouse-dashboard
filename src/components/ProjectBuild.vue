@@ -1,15 +1,16 @@
 <template>
     <div class="row" v-if="build">
         <BuildInfo
-            class='col s12 m4'
+            class='col s12 l4'
             :build="build"
             :project="project"
         />
 
         <BuildView
             v-if="artifacts"
-            class='col s12 m8'
-            :artifacts="artifacts"/>
+            class='col s12 l8'
+            :artifacts="artifacts"
+            :token="project.token"/>
     </div>
 </template>
 
