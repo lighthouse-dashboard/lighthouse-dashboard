@@ -1,16 +1,21 @@
 <template>
     <div>
-        <nav class="green lighten-1">
-            <div class="nav-wrapper">
-                <router-link :to="{name: 'index'}" class="brand-logo center">Dashboard</router-link>
-            </div>
-        </nav>
+        <div class="navbar-fixed">
+            <nav class="green lighten-1">
+                <div class="nav-wrapper">
+                    <router-link :to="{name: 'index'}" class="brand-logo center">Dreihouse Dashboard</router-link>
+                </div>
+            </nav>
+        </div>
 
-        <ProjectBuild
-            class='row'
-            v-for="project in sortedProjects"
-            :key="project.vcs_revision"
-            :project="project"/>
+        <div class="row">
+            <ProjectBuild
+                v-for="(project, index) in sortedProjects"
+                class='col s12'
+                :class="{'grey lighten-5': layout === 'list' ? index%2 : false, 'xl6': layout === 'grid'}"
+                :key="project.buildIdentifier"
+                :project="project"/>
+        </div>
     </div>
 </template>
 
@@ -28,7 +33,8 @@
         data() {
             return {
                 sortedProjects: [],
-                projects: Vue.config.projects
+                projects: Vue.config.projects,
+                layout: Vue.config.layout,
             };
         },
 
@@ -42,10 +48,11 @@
                     .sortProjectByLatestBuild(this.projects)
                     .then(sortedProjects => {
                         this.sortedProjects = sortedProjects;
+                        setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                     });
-                setTimeout(() => {
-                    this.load();
-                }, Vue.config.refreshInterval);
+
             }
         }
     };

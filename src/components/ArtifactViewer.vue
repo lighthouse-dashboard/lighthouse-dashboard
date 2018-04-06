@@ -5,13 +5,8 @@
 </template>
 
 <script>
-import Chart from "./Chart.vue";
 
 export default {
-    components: {
-        Chart
-    },
-
     props: {
         artifactUrl: {
             type: String,

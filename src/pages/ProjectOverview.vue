@@ -1,13 +1,25 @@
 <template>
     <div>
-        <nav class="green lighten-1">
-            <div class="nav-wrapper">
-                <router-link :to="{name: 'index'}" class="brand-logo center">{{username}}/{{project}}</router-link>
-            </div>
-        </nav>
+        <div class="navbar-fixed">
+            <nav class="green lighten-1">
+                <div class="nav-wrapper">
+                    <router-link :to="{name: 'index'}" class="brand-logo center">
+                        {{username}}/{{project}}
+                    </router-link>
+                </div>
+            </nav>
+        </div>
+
+        <loader v-if="!builds"/>
+
         <div v-if="builds">
             <ProjectBuild
-                v-for="build in builds" :project="projectObject" :buildNum="build.build_num" :key="build.build_num"/>
+                v-for="(build, index) in builds"
+                :class="{'grey lighten-5': index%2}"
+                :project="projectObject"
+                :buildNum="build.build_num"
+                :showTitle="false"
+                :key="build.build_num"/>
         </div>
     </div>
 </template>
@@ -42,26 +54,33 @@
             }
         },
 
+        watch: {
+            token() {
+                this.load();
+            }
+        },
+
+
         data() {
             return {
-                builds: [],
+                builds: null,
                 projectObject: null
             };
         },
 
         mounted() {
-            this.projectObject = {
-                vcs: this.vcs,
-                username: this.username,
-                project: this.project,
-                token: this.token,
-            };
-
             this.load();
         },
 
         methods: {
             load() {
+                this.projectObject = {
+                    vcs: this.vcs,
+                    username: this.username,
+                    project: this.project,
+                    token: this.token,
+                };
+
                 this.$circle
                     .getAllBuilds(this.projectObject)
                     .then(builds => {

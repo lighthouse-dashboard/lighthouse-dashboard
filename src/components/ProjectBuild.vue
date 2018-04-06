@@ -1,14 +1,16 @@
 <template>
     <div class="row" v-if="build">
         <BuildInfo
-            class='col s12 l4'
+            class='col s12'
+            :class="{'xl4': artifacts}"
             :build="build"
             :project="project"
+            :showTitle="showTitle"
         />
 
         <BuildView
             v-if="artifacts"
-            class='col s12 l8'
+            class='col s12 xl8'
             :artifacts="artifacts"
             :token="project.token"/>
     </div>
@@ -35,13 +37,19 @@
                 type: Number,
                 required: false,
                 default: null,
+            },
+
+            showTitle: {
+                type: Boolean,
+                required: false,
+                default: true
             }
         },
 
         data() {
             return {
                 build: null,
-                artifacts: [],
+                artifacts: null,
             };
         },
 
@@ -62,7 +70,7 @@
                 this.$circle
                     .getDashboardArtifacts(this.project, this.buildNum ? this.buildNum : 'latest')
                     .then(artifacts => {
-                        this.artifacts = artifacts;
+                        this.artifacts = artifacts.length > 0 ? artifacts : null;
                     });
             }
         }

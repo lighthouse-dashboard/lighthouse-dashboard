@@ -1,11 +1,15 @@
 <template>
     <div id="app">
-        <ProjectList id="slide-out" class="sidenav" :projects="projects"/>
-        <div class="fixed-action-btn">
-            <a class="btn-floating btn-large waves-effect waves-light green darken-2" @click="open"><i
-                class="material-icons">menu</i></a>
+        <ProjectList id="slide-out" class="sidenav sidenav-fixed" :projects="projects"/>
+
+        <div class="fixed-action-btn hide-on-large-only">
+            <a class="btn-floating btn-large waves-effect waves-light green darken-2" @click="open">
+                <i class="material-icons">menu</i></a>
         </div>
-        <router-view></router-view>
+
+        <main>
+            <router-view></router-view>
+        </main>
     </div>
 </template>
 
@@ -42,3 +46,16 @@
         }
     };
 </script>
+
+<style>
+    header, main, footer {
+        padding-left: 300px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+
+</style>

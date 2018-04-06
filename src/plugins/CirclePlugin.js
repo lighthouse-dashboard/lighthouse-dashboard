@@ -46,6 +46,18 @@ export default class CirclePlugin {
             });
     }
 
+    hasRunningBuild({ vcs, username, project, token }) {
+        return Vue.http
+            .get(
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
+                    project
+                    }?circle-token=${token}&filter=running`
+            )
+            .then(resp => {
+                return resp.body.length > 0;
+            });
+    }
+
     getAllBuilds({ vcs, username, project, token }) {
         return Vue.http
             .get(
@@ -76,8 +88,8 @@ export default class CirclePlugin {
                 token
             })
                 .then(data => {
-                    const { stop_time, vcs_revision } = data;
-                    projectConfig.vcs_revision = vcs_revision;
+                    const { stop_time, build_num } = data;
+                    projectConfig.buildIdentifier = build_num;
                     return {
                         date: new Date(stop_time),
                         config: projectConfig

@@ -1,10 +1,7 @@
 <template>
     <div class="row" v-if="build">
-        <h2>
+        <h2 v-if="showTitle">
             <router-link :to="{name: 'project', params: project}">
-                <small>
-                    #{{build.build_num}}
-                </small>
                 {{build.reponame}}
             </router-link>
 
@@ -26,7 +23,15 @@
                 </li>
 
                 <li class="collection-item">
-                    <b>Completed</b> {{build.stop_time}}
+                    <b>Build duration</b> {{ buildDuration }}
+                </li>
+
+                <li class="collection-item">
+                    <b>Completed</b> {{ buildCompletedTime }}
+                </li>
+
+                <li class="collection-item">
+                    <b>Build</b> #{{build.build_num}}
                 </li>
 
                 <li class="collection-item">
@@ -51,6 +56,8 @@
 </template>
 
 <script>
+    import Vue from 'vue';
+    import moment from 'moment';
 
     export default {
         props: {
@@ -62,6 +69,12 @@
             build: {
                 type: Object,
                 required: true
+            },
+
+            showTitle: {
+                type: Boolean,
+                required: false,
+                default: true
             }
         },
 
@@ -70,14 +83,29 @@
                 branch: null,
                 user: null,
                 userAvatar: null,
-                htmlArtifacts: []
+                htmlArtifacts: [],
+                buildCompletedTime: null,
+                buildDuration: null,
             };
         },
 
         mounted() {
             const {
                 user,
+                stop_time,
+                build_time_millis
             } = this.build;
+
+
+            const mStopTime = moment(stop_time);
+            const now = moment();
+            if (now.diff(mStopTime, 'hours') < 12) {
+                this.buildCompletedTime = mStopTime.fromNow();
+            } else {
+                this.buildCompletedTime = mStopTime.format(Vue.config.dateFormat);
+            }
+
+            this.buildDuration = moment.duration(build_time_millis).humanize();
 
             this.user = user.login;
             this.userAvatar = user.avatar_url;
