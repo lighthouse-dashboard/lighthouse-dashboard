@@ -57,6 +57,9 @@
         watch: {
             token() {
                 this.load();
+            },
+            project() {
+                this.load();
             }
         },
 
@@ -64,8 +67,15 @@
         data() {
             return {
                 builds: null,
-                projectObject: null
+                projectObject: null,
+                updater: null,
             };
+        },
+
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
+            }
         },
 
         mounted() {
@@ -85,10 +95,10 @@
                     .getAllBuilds(this.projectObject)
                     .then(builds => {
                         this.builds = builds;
+                        this.updater = setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                     });
-                setTimeout(() => {
-                    this.load();
-                }, Vue.config.refreshInterval);
             }
         }
     };

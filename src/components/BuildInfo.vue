@@ -34,6 +34,10 @@
                     <b>Build</b> #{{build.build_num}}
                 </li>
 
+                <li class="collection-item" :class="buildStatusClass">
+                    <b>Status</b> {{build.status}}
+                </li>
+
                 <li class="collection-item">
                     <a :href="build.build_url" target="_blank">CircleCi</a>
                 </li>
@@ -47,9 +51,16 @@
 
         <div class="col s12 m6 l12">
             <div class="collection with-header">
-                <div class="collection-header"><h6>Artifacts</h6></div>
-                <a v-for='html in htmlArtifacts' class="collection-item" :key='html.url' target='_blank'
-                   :href='html.url'>{{html.path}}</a>
+                <div class="collection-header">
+                    <h6>Artifacts</h6>
+                </div>
+                <a v-for='html in htmlArtifacts'
+                   class="collection-item"
+                   :key='html.url'
+                   target='_blank'
+                   :href='html.url'>
+                    {{html.path}}
+                </a>
             </div>
         </div>
     </div>
@@ -86,6 +97,7 @@
                 htmlArtifacts: [],
                 buildCompletedTime: null,
                 buildDuration: null,
+                buildStatusClass: null,
             };
         },
 
@@ -93,9 +105,17 @@
             const {
                 user,
                 stop_time,
-                build_time_millis
+                build_time_millis,
+                status,
             } = this.build;
 
+            const classMap = {
+                'success': 'green lighten-4',
+                'fixed': 'green lighten-4',
+                'failed': 'red lighten-4',
+            };
+
+            this.buildStatusClass = classMap[status] || null;
 
             const mStopTime = moment(stop_time);
             const now = moment();

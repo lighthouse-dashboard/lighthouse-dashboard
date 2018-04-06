@@ -10,7 +10,7 @@
 
         <div class="row">
             <ProjectBuild
-                v-for="(project, index) in sortedProjects"
+                v-for="(project, index) in projects"
                 class='col s12'
                 :class="{'grey lighten-5': layout === 'list' ? index%2 : false, 'xl6': layout === 'grid'}"
                 :key="project.buildIdentifier"
@@ -32,10 +32,16 @@
 
         data() {
             return {
-                sortedProjects: [],
-                projects: Vue.config.projects,
+                projects: null,
                 layout: Vue.config.layout,
+                updater: null,
             };
+        },
+
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
+            }
         },
 
         mounted() {
@@ -45,14 +51,13 @@
         methods: {
             load() {
                 this.$circle
-                    .sortProjectByLatestBuild(this.projects)
-                    .then(sortedProjects => {
-                        this.sortedProjects = sortedProjects;
-                        setTimeout(() => {
-                            this.load();
-                        }, Vue.config.refreshInterval);
+                    .getAllProjects(Vue.config.circleToken)
+                    .then(projects => {
+                        return this.$circle.sortProjectByLatestBuild(projects)
+                    })
+                    .then(projects => {
+                        this.projects = projects;
                     });
-
             }
         }
     };

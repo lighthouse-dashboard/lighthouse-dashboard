@@ -1,34 +1,33 @@
 <template>
     <div id="app">
-        <ProjectList id="slide-out" class="sidenav sidenav-fixed" :projects="projects"/>
+        <SideNav id="slide-out" class="sidenav sidenav-fixed" />
 
         <div class="fixed-action-btn hide-on-large-only">
             <a class="btn-floating btn-large waves-effect waves-light green darken-2" @click="open">
-                <i class="material-icons">menu</i></a>
+                <i class="material-icons">menu</i>
+            </a>
         </div>
 
         <main>
-            <router-view></router-view>
+            <router-view/>
         </main>
     </div>
 </template>
 
 <script>
 
-    import Vue from 'vue';
-    import ProjectList from './components/ProjectList'
+    import SideNav from './components/SideNav'
 
     export default {
         name: "App",
 
         components: {
-            ProjectList
+            SideNav
         },
 
         data() {
             return {
                 sidenav: null,
-                projects: Vue.config.projects
             }
         },
 
@@ -52,10 +51,10 @@
         padding-left: 300px;
     }
 
-    @media only screen and (max-width : 992px) {
-      header, main, footer {
-        padding-left: 0;
-      }
+    @media only screen and (max-width: 992px) {
+        header, main, footer {
+            padding-left: 0;
+        }
     }
 
 </style>

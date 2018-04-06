@@ -19,10 +19,11 @@ import Loader from './components/Loader';
 
 Vue.config.productionTip = false;
 Vue.config.refreshInterval = 1000 * 15;
-Vue.config.buildsLimit = 10;
+Vue.config.buildsLimit = 5;
 Vue.config.dateFormat = 'DD-MM-YYYY HH:mm:SS';
-Vue.config.projects = require('./projects');
 Vue.config.layout = 'list'; // list | grid
+Vue.config.defaultBranch = 'develop';
+Vue.config.circleToken = 'e9912f7d1465197a2509bb73bfd06b2f22b2c82a';
 
 Vue.component('loader', Loader);
 

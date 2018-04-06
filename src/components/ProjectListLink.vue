@@ -1,9 +1,9 @@
 <template>
     <router-link
-                 tag="li"
-                 :to="{name: 'project', params: project}"
-                 exact
-                 active-class="active">
+        tag="li"
+        :to="{name: 'project', params: project}"
+        exact
+        active-class="active">
         <a><i class="material-icons" v-if="hasRunningBuild">cloud_circle</i> {{ project.project }}</a>
     </router-link>
 </template>
@@ -22,22 +22,30 @@
 
         data() {
             return {
-                hasRunningBuild : false
+                hasRunningBuild: false,
+                updater: null,
             };
         },
 
-        mounted(){
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
+            }
+        },
+
+        mounted() {
             this.checkIfHasRunning();
         },
+
         methods: {
-            checkIfHasRunning(){
+            checkIfHasRunning() {
                 this.$circle.hasRunningBuild(this.project)
-                .then((has) => {
-                    this.hasRunningBuild = has;
-                    setTimeout( () => {
-                        this.checkIfHasRunning();
-                    }, Vue.config.refreshInterval)
-                })
+                    .then((has) => {
+                        this.hasRunningBuild = has;
+                        this.updater = setTimeout(() => {
+                            this.checkIfHasRunning();
+                        }, Vue.config.refreshInterval)
+                    })
             }
         }
     };
