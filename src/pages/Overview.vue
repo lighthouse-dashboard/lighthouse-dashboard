@@ -9,6 +9,10 @@
         </div>
 
         <div class="row">
+            <div v-if="projects" class="card-panel">
+                <h5 class="center-align red-text">No Projects Available</h5>
+            </div>
+
             <ProjectBuild
                 v-for="(project, index) in projects"
                 class='col s12'

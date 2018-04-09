@@ -22,16 +22,25 @@ export default {
         };
     },
 
-    mounted() {},
+    mounted() {
+        this.load();
+    },
 
-    methods: {}
+    methods: {
+        load() {
+            this.$circle.getArtifact(this.artifactUrl)
+                .then( resp => {
+                    console.log(resp);
+                })
+        }
+    }
 };
 </script>
 
 <style scoped>
-iframe {
-    border: none;
-    width: 100%;
-    height: 420px;
-}
+    iframe {
+        border: none;
+        width: 100%;
+        height: 420px;
+    }
 </style>

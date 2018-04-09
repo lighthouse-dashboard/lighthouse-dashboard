@@ -6,6 +6,11 @@ export default class CirclePlugin {
         _Vue.prototype.$circle = new CirclePlugin();
     }
 
+    /**
+     * Find all projects that have supported lighthouse artifacts
+     * @param token
+     * @return {*}
+     */
     getAllProjects(token) {
         return Vue.http.get(`https://circleci.com/api/v1.1/projects?circle-token=${token}`)
             .then((resp) => {
@@ -38,6 +43,14 @@ export default class CirclePlugin {
             })
     }
 
+    /**
+     * Check if project is supported
+     * @param vcs
+     * @param username
+     * @param project
+     * @param token
+     * @return {*}
+     */
     checkIfProjectIsSupported({ vcs, username, project, token }) {
         return this.getLatestBuildInfoForBranch({ vcs, username, project, token }, Vue.config.defaultBranch)
             .then((build) => {
@@ -55,6 +68,15 @@ export default class CirclePlugin {
             })
     }
 
+    /**
+     * Get last build for given branch
+     * @param vcs
+     * @param username
+     * @param project
+     * @param token
+     * @param branch
+     * @return {*}
+     */
     getLatestBuildInfoForBranch({ vcs, username, project, token }, branch) {
         return Vue.http
             .get(
@@ -65,6 +87,15 @@ export default class CirclePlugin {
             });
     }
 
+    /**
+     * Get all artifacts for specific build
+     * @param vcs
+     * @param username
+     * @param project
+     * @param token
+     * @param build
+     * @return {*}
+     */
     getArtifacts(vcs, username, project, token, build = 'latest') {
         return Vue.http
             .get(
@@ -77,6 +108,14 @@ export default class CirclePlugin {
             });
     }
 
+    /**
+     * Get latest build
+     * @param vcs
+     * @param username
+     * @param project
+     * @param token
+     * @return {*}
+     */
     getLatestBuildInfo({ vcs, username, project, token }) {
         return Vue.http
             .get(
@@ -89,6 +128,15 @@ export default class CirclePlugin {
             });
     }
 
+    /**
+     * Get info for given build
+     * @param vcs
+     * @param username
+     * @param project
+     * @param token
+     * @param build
+     * @return {*}
+     */
     getBuildInfo({ vcs, username, project, token }, build) {
         if (!build) {
             return this.getLatestBuildInfo({ vcs, username, project, token });
@@ -105,6 +153,14 @@ export default class CirclePlugin {
             });
     }
 
+    /**
+     * Check if project has running build
+     * @param vcs
+     * @param username
+     * @param project
+     * @param token
+     * @return {*}
+     */
     hasRunningBuild({ vcs, username, project, token }) {
         return Vue.http
             .get(
@@ -117,6 +173,14 @@ export default class CirclePlugin {
             });
     }
 
+    /**
+     * Get all builds for oroject
+     * @param vcs
+     * @param username
+     * @param project
+     * @param token
+     * @return {*}
+     */
     getAllBuilds({ vcs, username, project, token }) {
         return Vue.http
             .get(
@@ -129,6 +193,16 @@ export default class CirclePlugin {
             });
     }
 
+    /**
+     * Get artifacts filtered by type
+     * @param type
+     * @param vcs
+     * @param username
+     * @param project
+     * @param token
+     * @param build
+     * @return {*}
+     */
     getArtifactsByType(type, { vcs, username, project, token }, build = 'latest') {
         return this.getArtifacts(vcs, username, project, token, build)
             .then(artifacts => {
@@ -138,25 +212,58 @@ export default class CirclePlugin {
             });
     }
 
+    /**
+     * Get artifact content
+     * @param url
+     * @return {*}
+     */
+    getArtifact(url) {
+        return Vue.http.get(`http://localhost:3000/artifacts?url=${url}`);
+    }
+
+    /**
+     * Get all json artifacts
+     * @param opt
+     * @param build
+     * @return {*}
+     */
     getJsonArtifacts(opt, build = 'latest') {
         return this.getArtifactsByType('json', opt, build);
     }
 
+    /**
+     * Get HTML artifacts
+     * @param opt
+     * @param build
+     * @return {*}
+     */
     getHtmlArtifacts(opt, build = 'latest') {
         return this.getArtifactsByType('html', opt, build);
     }
 
+    /**
+     * Get Dashboard Artifact
+     * @param opt
+     * @param build
+     * @return {*}
+     */
     getDashboardArtifacts(opt, build = 'latest') {
-        return this.getArtifactsByType('html', opt, build)
+        return this.getArtifactsByType('json', opt, build)
             .then(artifacts => {
                 return artifacts.filter((item) => {
-                    if (path.basename(item.path).startsWith('dashboard_')) {
+
+                    if (path.basename(item.path).indexOf('.dashboard.') !== -1) {
                         return item;
                     }
                 });
             });
     }
 
+    /**
+     * Sort all projects by it's latest build
+     * @param projects
+     * @return {Promise<any[]>}
+     */
     sortProjectByLatestBuild(projects) {
         const p = [];
         for (let i = 0; i < projects.length; i++) {
@@ -183,6 +290,7 @@ export default class CirclePlugin {
                     };
                 }));
         }
+
         return Promise.all(p)
             .then((all) => {
                 all = all.sort((a, b) => {

@@ -16,6 +16,8 @@
 
         <li><a class="subheader">Projects</a></li>
 
+        <li v-if="!projects"><a class="disabled">No Projects Available</a></li>
+
         <ProjectListLink v-for="project in projects"
                          v-if="projects"
                          :project="project"
