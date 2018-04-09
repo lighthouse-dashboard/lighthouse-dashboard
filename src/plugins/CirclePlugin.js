@@ -217,8 +217,11 @@ export default class CirclePlugin {
      * @param url
      * @return {*}
      */
-    getArtifact(url) {
-        return Vue.http.get(`http://localhost:3000/artifacts?url=${url}`);
+    getArtifact(url, token = '') {
+        return Vue.http.get(`http://localhost:3000/artifacts?url=${url}&circle-token=${token}`)
+            .then((resp) => {
+                return resp.body;
+            })
     }
 
     /**
@@ -257,6 +260,56 @@ export default class CirclePlugin {
                     }
                 });
             });
+    }
+
+    getDashboardContentsByBuild(buildArtifacts, token) {
+        return Promise.all(buildArtifacts.map((item) => {
+            return this.getArtifact(item.url, token)
+                .then((data) => {
+                    return data;
+                })
+        }));
+    }
+
+    getDashboardForAllBuilds(opt) {
+        return this.getAllBuilds(opt)
+            .then(builds => {
+                this.builds = builds;
+                const p = builds.map((item) => {
+                    return this.getDashboardArtifacts(opt, item.build_num);
+                });
+                return Promise.all(p);
+            })
+            .then((builds) => {
+                return Promise.all(builds.map((item) => {
+                    return this.getDashboardContentsByBuild(item, opt.token);
+                }));
+            })
+            .then((builds) => {
+                const urls = {};
+
+                for (let i = 0; i < builds.length; i++) {
+                    const artifacts = builds[i];
+
+                    for (let a = 0; a < artifacts.length; a++) {
+
+                        const { categories, url } = artifacts[a];
+
+                        if (!urls[url]) {
+                            urls[url] = {};
+                        }
+
+                        for (let c = 0; c < categories.length; c++) {
+                            const { score, name } = categories[c];
+                            if (!urls[url][name]) {
+                                urls[url][name] = [];
+                            }
+                            urls[url][name].push(score);
+                        }
+                    }
+                }
+                return urls;
+            })
     }
 
     /**
