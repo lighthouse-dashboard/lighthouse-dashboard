@@ -83,7 +83,10 @@
                         this.updater = setTimeout(() => {
                             this.load();
                         }, Vue.config.refreshInterval);
-                    });
+                    })
+                    .catch((e) => {
+                        this.$toast.notify(e.message);
+                    })
             }
         }
     };

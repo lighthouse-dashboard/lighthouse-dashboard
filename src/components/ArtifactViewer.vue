@@ -83,7 +83,10 @@
                         };
 
                         bb.generate(options);
-                    });
+                    })
+                    .catch( (e) => {
+                        this.$toast.notify(e.message);
+                    })
             }
         }
     };

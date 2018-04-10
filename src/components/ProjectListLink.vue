@@ -46,6 +46,9 @@
                             this.checkIfHasRunning();
                         }, Vue.config.refreshInterval)
                     })
+                    .catch( (e) => {
+                        this.$toast.notify(e.message);
+                    })
             }
         }
     };

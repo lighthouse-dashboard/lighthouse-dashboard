@@ -134,7 +134,10 @@
                 .getHtmlArtifacts(this.project, this.build.build_num)
                 .then(htmlArtifacts => {
                     this.htmlArtifacts = htmlArtifacts;
-                });
+                })
+                .catch((e) => {
+                    this.$toast.notify(e.message);
+                })
         }
     };
 </script>

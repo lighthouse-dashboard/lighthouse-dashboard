@@ -4,7 +4,7 @@ import path from 'path';
 import sortBuildArtifactsByUrl from './helper';
 
 export default class CirclePlugin {
-    constructor(token){
+    constructor(token) {
         this.token = token;
     }
 
@@ -102,7 +102,7 @@ export default class CirclePlugin {
      * @param build
      * @return {*}
      */
-    getArtifacts({vcs, username, project}, build = 'latest') {
+    getArtifacts({ vcs, username, project }, build = 'latest') {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
@@ -187,7 +187,7 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    getAllBuilds({ vcs, username, project }, limit= Vue.config.buildsLimit) {
+    getAllBuilds({ vcs, username, project }, limit = Vue.config.buildsLimit) {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
@@ -210,7 +210,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getArtifactsByType(type, { vcs, username, project }, build = 'latest') {
-        return this.getArtifacts({vcs, username, project}, build)
+        return this.getArtifacts({ vcs, username, project }, build)
             .then(artifacts => {
                 return artifacts.filter(item => {
                     return path.extname(item.path) === `.${type}` ? item : null;
@@ -300,7 +300,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getAllBuildsWithDashboardArtifacts(opt) {
-        return this.getAllBuilds(opt, 10)
+        return this.getAllBuilds(opt, Vue.config.buildsLimit)
             .then(builds => {
                 this.builds = builds;
                 const p = builds.map((item) => {
@@ -311,7 +311,7 @@ export default class CirclePlugin {
                 });
                 return Promise.all(p);
             })
-            .then( (builds) => {
+            .then((builds) => {
                 return builds.sort((item1, item2) => {
                     return item1.build_num > item2.build_num
                 })

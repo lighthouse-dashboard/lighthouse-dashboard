@@ -7,20 +7,19 @@ const Boom = require('boom');
 require('dotenv').config();
 
 const TOKEN = process.env.CIRCLE_TOKEN;
+const PORT = process.env.PORT || 3000;
 
 const server = Hapi.server({
-    port: 3000,
+    port: PORT,
     host: '0.0.0.0',
     routes: {
         cors: true,
-
     }
 });
 
 const init = async () => {
     await server.start();
     await server.register(require('inert'));
-
 
     server.route({
         method: 'GET',

@@ -76,7 +76,10 @@
                 this.$circle.getAllBuildsWithDashboardArtifacts(this.projectObject)
                     .then(data => {
                         this.data = data;
-                    });
+                    })
+                    .catch((e) => {
+                        this.$toast.notify(e.message);
+                    })
             }
         }
     };

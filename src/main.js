@@ -14,6 +14,7 @@ import VueResorce from 'vue-resource';
 import VueRouter from 'vue-router';
 
 import CirclePlugin from './plugins/CirclePlugin';
+import ToastPlugin from './plugins/ToastPlugin';
 import routes from './routes';
 import Loader from './components/Loader';
 
@@ -40,6 +41,7 @@ const router = new VueRouter({
 Vue.use(CirclePlugin, {
     token: Vue.config.circleToken
 });
+Vue.use(ToastPlugin);
 
 new Vue({
     el: '#app',

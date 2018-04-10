@@ -64,6 +64,9 @@
                     .then((build) => {
                         this.build = build;
                     })
+                    .catch((e) => {
+                        this.$toast.notify(e.message);
+                    })
             },
 
             getLatestBuildArtifacts() {
@@ -71,7 +74,10 @@
                     .getDashboardArtifacts(this.project, this.buildNum ? this.buildNum : 'latest')
                     .then(artifacts => {
                         this.artifacts = artifacts.length > 0 ? artifacts : null;
-                    });
+                    })
+                    .catch((e) => {
+                        this.$toast.notify(e.message);
+                    })
             }
         }
     };

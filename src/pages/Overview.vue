@@ -8,8 +8,11 @@
             </nav>
         </div>
 
-        <div class="row">
-            <div v-if="!projects" class="card-panel">
+        <div class="row" v-if="!projects">
+            <loader/>
+        </div>
+        <div class="row" v-if="projects">
+            <div v-if="projects.length <= 0" class="card-panel">
                 <h5 class="center-align red-text">No Projects Available</h5>
             </div>
 
@@ -67,7 +70,10 @@
                     .then(projects => {
                         this.projects = projects;
                         return this.refreshProjects();
-                    });
+                    })
+                    .catch( (e) => {
+                        this.$toast.notify(e.message);
+                    })
             }
         }
     };

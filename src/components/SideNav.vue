@@ -16,7 +16,9 @@
 
         <li><a class="subheader">Projects</a></li>
 
-        <li v-if="!projects"><a class="disabled">No Projects Available</a></li>
+        <li v-if="projects && projects.length <= 0">
+            <a class="disabled">No Projects Available</a>
+        </li>
 
         <ProjectListLink v-for="project in projects"
                          v-if="projects"
@@ -26,8 +28,6 @@
 </template>
 
 <script>
-
-    import Vue from 'vue';
 
     import ProjectListLink from './ProjectListLink';
 
@@ -57,7 +57,10 @@
                     })
                     .then(projects => {
                         this.projects = projects;
-                    });
+                    })
+                    .catch((e) => {
+                        this.$toast.notify(e.message);
+                    })
             }
         }
     };

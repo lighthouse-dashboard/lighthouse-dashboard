@@ -4,5 +4,5 @@ module.exports = {
     dateFormat: 'DD-MM-YYYY HH:mm:SS',
     layout: 'list',
     defaultBranch: 'master',
-    circleToken: process.env.CIRCLE_TOKEN.toString()
+    circleToken: process.env.CIRCLE_TOKEN
 };
