@@ -3,13 +3,10 @@
         <div class="navbar-fixed">
             <nav class="green lighten-1">
                 <div class="nav-wrapper">
-                    <router-link :to="{name: 'index'}" class="brand-logo center">
-                        {{username}}/{{project}}
-                    </router-link>
 
-                    <ul class="left">
+                    <ul class="">
                         <router-link
-                            :to="{name: 'project', params: {vcs, username, project}}"
+                            :to="{name: 'project', params: {vcs, username, project}, query: $route.query}"
                             tag="li"
                             :exact="true"
                             activeClass="active">
@@ -17,7 +14,7 @@
                         </router-link>
 
                         <router-link
-                            :to="{name: 'history', params: {vcs, username, project}}"
+                            :to="{name: 'history', params: {vcs, username, project}, query: $route.query}"
                             tag="li"
                             :exact="true"
                             activeClass="active">

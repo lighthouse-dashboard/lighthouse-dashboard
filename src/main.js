@@ -18,7 +18,7 @@ import ToastPlugin from './plugins/ToastPlugin';
 import routes from './routes';
 import Loader from './components/Loader';
 
-import { refreshInterval, buildsLimit, dateFormat, layout, defaultBranch, circleToken } from './config';
+import { refreshInterval, buildsLimit, dateFormat, layout, defaultBranch, circleToken, selectableBranches } from './config';
 
 Vue.config.productionTip = false;
 
@@ -28,6 +28,7 @@ Vue.config.dateFormat = dateFormat;
 Vue.config.layout = layout; // list | grid
 Vue.config.defaultBranch = defaultBranch;
 Vue.config.circleToken = circleToken;
+Vue.config.selectableBranches = selectableBranches;
 
 Vue.component('loader', Loader);
 
@@ -39,7 +40,9 @@ const router = new VueRouter({
 });
 
 Vue.use(CirclePlugin, {
-    token: Vue.config.circleToken
+    token: Vue.config.circleToken,
+    branch: Vue.config.defaultBranch,
+    limit: Vue.config.buildsLimit,
 });
 Vue.use(ToastPlugin);
 

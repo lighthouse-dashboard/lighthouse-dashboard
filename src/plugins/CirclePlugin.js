@@ -4,13 +4,14 @@ import path from 'path';
 import sortBuildArtifactsByUrl from './helper';
 
 export default class CirclePlugin {
-    constructor(token) {
+    constructor(token, branch, limit) {
         this.token = token;
+        this.branch = branch;
+        this.limit = limit;
     }
 
     static install(_Vue, opts) {
-        _Vue.prototype.$circle = new CirclePlugin(opts.token);
-
+        _Vue.prototype.$circle = new CirclePlugin(opts.token, opts.branch, opts.limit);
     }
 
     /**
@@ -18,7 +19,7 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    getAllProjects() {
+    getAllProjects(branch = this.branch) {
         return Vue.http.get(`https://circleci.com/api/v1.1/projects?circle-token=${this.token}`)
             .then((resp) => {
                 return resp.body;
@@ -30,7 +31,7 @@ export default class CirclePlugin {
                         username: project.username,
                         project: project.reponame,
                     };
-                    return this.checkIfProjectIsSupported(projectConfig)
+                    return this.checkIfProjectIsSupported(projectConfig, branch)
                         .then((isSupported) => {
                             if (!isSupported) {
                                 return
@@ -57,8 +58,8 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    checkIfProjectIsSupported(config) {
-        return this.getLatestBuildInfoForBranch(config, Vue.config.defaultBranch)
+    checkIfProjectIsSupported(config, branch = this.branch) {
+        return this.getLatestBuildInfoForBranch(config, branch)
             .then((build) => {
                 if (!build) {
                     return [];
@@ -83,7 +84,7 @@ export default class CirclePlugin {
      * @param branch
      * @return {*}
      */
-    getLatestBuildInfoForBranch({ vcs, username, project }, branch) {
+    getLatestBuildInfoForBranch({ vcs, username, project }, branch = this.branch) {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/tree/${branch}?circle-token=${this.token}&limit=1&filter=completed`
@@ -105,9 +106,7 @@ export default class CirclePlugin {
     getArtifacts({ vcs, username, project }, build = 'latest') {
         return Vue.http
             .get(
-                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
-                    project
-                    }/${build}/artifacts?circle-token=${this.token}&filter=completed`
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/${build}/artifacts?circle-token=${this.token}&filter=completed`
             )
             .then(resp => {
                 return resp.body;
@@ -122,12 +121,10 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    getLatestBuildInfo({ vcs, username, project }) {
+    getLatestBuildInfo({ vcs, username, project }, branch = this.branch) {
         return Vue.http
             .get(
-                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
-                    project
-                    }?circle-token=${this.token}&limit=1&filter=completed`
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/tree/${branch}?circle-token=${this.token}&limit=1&filter=completed`
             )
             .then(resp => {
                 return resp.body.shift();
@@ -143,16 +140,14 @@ export default class CirclePlugin {
      * @param build
      * @return {*}
      */
-    getBuildInfo({ vcs, username, project }, build) {
+    getBuildInfo({ vcs, username, project }, build, branch = this.branch) {
         if (!build) {
-            return this.getLatestBuildInfo({ vcs, username, project });
+            return this.getLatestBuildInfo({ vcs, username, project }, branch);
         }
 
         return Vue.http
             .get(
-                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
-                    project
-                    }/${build}?circle-token=${this.token}`
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/${build}?circle-token=${this.token}`
             )
             .then(resp => {
                 return resp.body;
@@ -167,12 +162,10 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    hasRunningBuild({ vcs, username, project }) {
+    hasRunningBuild({ vcs, username, project }, branch = this.branch) {
         return Vue.http
             .get(
-                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
-                    project
-                    }?circle-token=${this.token}&filter=running`
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/tree/${branch}?circle-token=${this.token}&filter=running`
             )
             .then(resp => {
                 return resp.body.length > 0;
@@ -187,12 +180,10 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    getAllBuilds({ vcs, username, project }, limit = Vue.config.buildsLimit) {
+    getAllBuilds({ vcs, username, project }, limit = this.limit, branch = this.branch) {
         return Vue.http
             .get(
-                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
-                    project
-                    }?circle-token=${this.token}&filter=completed&limit=${limit}`
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/tree/${branch}?circle-token=${this.token}&filter=completed&limit=${limit}`
             )
             .then(resp => {
                 return resp.body;
@@ -299,8 +290,8 @@ export default class CirclePlugin {
      * @param opt
      * @return {*}
      */
-    getAllBuildsWithDashboardArtifacts(opt) {
-        return this.getAllBuilds(opt, Vue.config.buildsLimit)
+    getAllBuildsWithDashboardArtifacts(opt, limit = this.limit, branch = this.branch) {
+        return this.getAllBuilds(opt, limit, branch)
             .then(builds => {
                 this.builds = builds;
                 const p = builds.map((item) => {
@@ -335,7 +326,7 @@ export default class CirclePlugin {
      * @param projects
      * @return {Promise<any[]>}
      */
-    sortProjectByLatestBuild(projects) {
+    sortProjectByLatestBuild(projects, branch = this.branch) {
         const p = [];
         for (let i = 0; i < projects.length; i++) {
             const projectConfig = projects[i];
@@ -349,7 +340,7 @@ export default class CirclePlugin {
                 vcs,
                 username,
                 project,
-            })
+            }, branch)
                 .then(data => {
                     const { stop_time, build_num } = data;
                     projectConfig.buildIdentifier = build_num;

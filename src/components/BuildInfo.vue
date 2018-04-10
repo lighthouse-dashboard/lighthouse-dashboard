@@ -1,7 +1,7 @@
 <template>
     <div class="row" v-if="build">
         <h2 v-if="showTitle">
-            <router-link :to="{name: 'project', params: project}">
+            <router-link :to="{name: 'project', params: project, query: $route.query}">
                 {{build.reponame}}
             </router-link>
 

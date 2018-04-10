@@ -73,7 +73,7 @@
                 };
 
 
-                this.$circle.getAllBuildsWithDashboardArtifacts(this.projectObject)
+                this.$circle.getAllBuildsWithDashboardArtifacts(this.projectObject, undefined, this.$route.query.branch)
                     .then(data => {
                         this.data = data;
                     })

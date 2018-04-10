@@ -44,6 +44,12 @@
             };
         },
 
+        watch : {
+            $route(){
+                this.load();
+            }
+        },
+
         beforeDestroy() {
             if (this.updater) {
                 clearTimeout(this.updater);
@@ -56,7 +62,7 @@
 
         methods: {
             refreshProjects() {
-                return this.$circle.sortProjectByLatestBuild(this.projects)
+                return this.$circle.sortProjectByLatestBuild(this.projects, this.$route.query.branch)
                     .then(projects => {
                         this.projects = projects;
                         this.updater = setTimeout(() => {
@@ -66,7 +72,7 @@
             },
             load() {
                 this.$circle
-                    .getAllProjects()
+                    .getAllProjects(this.$route.query.branch)
                     .then(projects => {
                         this.projects = projects;
                         return this.refreshProjects();

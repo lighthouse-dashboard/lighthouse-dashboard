@@ -1,7 +1,7 @@
 <template>
     <router-link
         tag="li"
-        :to="{name: 'project', params: project}"
+        :to="{name: 'project', params: project, query: $route.query}"
         exact
         active-class="active">
         <a><i class="material-icons" v-if="hasRunningBuild">cloud_circle</i> {{ project.project }}</a>

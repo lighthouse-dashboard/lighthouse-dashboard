@@ -14,6 +14,17 @@
             </router-link>
         </li>
 
+
+        <li><a class="subheader">Branches</a></li>
+
+        <li v-for="branch in branches"
+            :key="branch"
+            :class="{'active' : $route.query.branch === branch}">
+            <router-link :to="{name: 'index', query: {branch}}">
+                {{branch}}
+            </router-link>
+        </li>
+
         <li><a class="subheader">Projects</a></li>
 
         <li v-if="projects && projects.length <= 0">
@@ -29,6 +40,7 @@
 
 <script>
 
+    import Vue from 'vue';
     import ProjectListLink from './ProjectListLink';
 
     export default {
@@ -40,8 +52,16 @@
 
         data() {
             return {
-                projects: null
+                projects: null,
+                branches: Vue.config.selectableBranches
             };
+        },
+
+
+        watch : {
+            $route(){
+                this.load();
+            }
         },
 
         mounted() {
@@ -51,7 +71,7 @@
         methods: {
             load() {
                 this.$circle
-                    .getAllProjects()
+                    .getAllProjects(this.$route.query.branch)
                     .then(projects => {
                         return this.$circle.sortProjectByLatestBuild(projects)
                     })

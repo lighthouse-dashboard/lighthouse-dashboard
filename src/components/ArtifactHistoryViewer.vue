@@ -33,7 +33,7 @@
                 const options = {
                     data: {
                         json: this.data,
-                        type: "spline",
+                        type: "line",
                         labels: true
                     },
                     axis: {

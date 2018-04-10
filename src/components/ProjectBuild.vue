@@ -60,7 +60,7 @@
 
         methods: {
             getLatestBuild() {
-                this.$circle.getBuildInfo(this.project, this.buildNum)
+                this.$circle.getBuildInfo(this.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
                     })
