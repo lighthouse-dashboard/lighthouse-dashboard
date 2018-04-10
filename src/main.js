@@ -23,7 +23,7 @@ Vue.config.buildsLimit = 5;
 Vue.config.dateFormat = 'DD-MM-YYYY HH:mm:SS';
 Vue.config.layout = 'list'; // list | grid
 Vue.config.defaultBranch = 'develop';
-Vue.config.circleToken = 'e9912f7d1465197a2509bb73bfd06b2f22b2c82a';
+Vue.config.circleToken = process.env.CIRCLE_TOKEN;
 
 Vue.component('loader', Loader);
 
