@@ -5,12 +5,12 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-COPY . .
+COPY . ./
 
-ENV CIRCLE_TOKEN ''
+ARG CIRCLE_TOKEN
 ENV PORT 3000
 
 EXPOSE ${PORT}
 
-CMD [ "npm", "run", "build" ]
+RUN npm run build
 CMD [ "npm", "run", "proxy" ]

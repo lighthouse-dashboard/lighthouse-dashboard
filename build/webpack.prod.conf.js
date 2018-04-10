@@ -11,9 +11,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-require('dotenv').config()
-
 const CIRCLE_TOKEN = process.env.CIRCLE_TOKEN;
+console.log('Token', CIRCLE_TOKEN);
 
 const env = process.env.NODE_ENV === 'testing'
     ? require('../config/test.env')
@@ -37,7 +36,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         // http://vuejs.github.io/vue-loader/en/workflow/production.html
         new webpack.DefinePlugin({
             'process.env': env,
-            'process.env.CIRCLE_TOKEN': CIRCLE_TOKEN,
+            'process.env.CIRCLE_TOKEN': `'${CIRCLE_TOKEN}'`,
         }),
 
         new UglifyJsPlugin({
