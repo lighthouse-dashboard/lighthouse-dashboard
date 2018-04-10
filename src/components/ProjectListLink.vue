@@ -1,8 +1,7 @@
 <template>
     <router-link
         tag="li"
-        :to="{name: 'project', params: project, query: $route.query}"
-        exact
+        :to="{name: 'overview', params: project, query: $route.query}"
         active-class="active">
         <a><i class="material-icons" v-if="hasRunningBuild">cloud_circle</i> {{ project.project }}</a>
     </router-link>
@@ -47,7 +46,7 @@
                         }, Vue.config.refreshInterval)
                     })
                     .catch( (e) => {
-                        this.$toast.notify(e.message);
+                        this.$toast.error(e);
                     })
             }
         }

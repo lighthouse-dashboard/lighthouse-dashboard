@@ -78,7 +78,7 @@
                         this.data = data;
                     })
                     .catch((e) => {
-                        this.$toast.notify(e.message);
+                        this.$toast.error(e);
                     })
             }
         }

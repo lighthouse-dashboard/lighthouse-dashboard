@@ -6,7 +6,7 @@
 
                     <ul class="">
                         <router-link
-                            :to="{name: 'project', params: {vcs, username, project}, query: $route.query}"
+                            :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}"
                             tag="li"
                             :exact="true"
                             activeClass="active">

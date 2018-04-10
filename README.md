@@ -1,27 +1,33 @@
-# test-project
+# lighthouse-dashboard
 
-> A Vue.js project
+# Build
+The app is built every time the docker container is built.
+Therefore the `argument` `CIRCLE_TOKEN` is required.
 
-## Build Setup
+# Running
+When you start the docker container a small node server starts. This server also requires the env variable `CIRCLE_TOKEN`.
+After starting your server you can access the dashboard via `http://localhost:3000`
 
-``` bash
-# install dependencies
-npm install
+# Development
+To start debugging or enhancing the app you don't have to use docker.
+First create a `.env` file in the project root.
+It's content should be like this
 
-# serve with hot reload at localhost:8080
-npm run dev
+    CIRCLE_TOKEN=<API_TOKEN>
 
-# build for production with minification
-npm run build
+This token is used in the server and the app
 
-# build for production and view the bundle analyzer report
-npm run build --report
+Now you can start the server with
 
-# run unit tests
-npm run unit
+    npm run proxy
 
-# run all tests
-npm test
-```
+or
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+    npm run proxy-dev
+
+and start the frontend app with
+
+    npm run dev
+
+# Config
+All config is stored in `src/config.js`

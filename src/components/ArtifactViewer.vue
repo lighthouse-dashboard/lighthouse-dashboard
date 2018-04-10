@@ -21,7 +21,7 @@
             return {
                 reportCategories: null,
                 url: null,
-                score: null
+                isLoaded: false
             };
         },
 
@@ -33,7 +33,13 @@
             load() {
                 this.$circle.getArtifact(this.artifactUrl)
                     .then(data => {
+                        this.isLoaded = true;
+
                         const { budget, categories } = data;
+                        if (!categories) {
+                            return;
+                        }
+
                         this.url = data.url;
                         const shrinkedCategories = categories.map((item) => {
                             return item.score;
@@ -47,7 +53,7 @@
                             return item.name;
                         });
 
-                        const options = {
+                        const config = {
                             data: {
                                 columns: [
                                     ['Report', ...shrinkedCategories],
@@ -82,10 +88,10 @@
                             bindto: this.$refs.chart
                         };
 
-                        bb.generate(options);
+                        bb.generate(config);
                     })
-                    .catch( (e) => {
-                        this.$toast.notify(e.message);
+                    .catch((e) => {
+                        this.$toast.error(e);
                     })
             }
         }

@@ -9,8 +9,9 @@ export default [
         path: '/:vcs/:username/:project',
         component: Project,
         props: true,
+        name: 'project',
         children: [
-            { path: 'overview', name: 'project', component: ProjectOverview, props: true },
+            { path: '', name: 'overview', component: ProjectOverview, props: true },
             { path: 'history', name: 'history', component: ProjectHistory, props: true },
         ]
 

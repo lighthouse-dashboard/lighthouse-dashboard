@@ -71,6 +71,7 @@
                     });
             },
             load() {
+                this.projects = null;
                 this.$circle
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
@@ -78,7 +79,7 @@
                         return this.refreshProjects();
                     })
                     .catch( (e) => {
-                        this.$toast.notify(e.message);
+                        this.$toast.error(e);
                     })
             }
         }

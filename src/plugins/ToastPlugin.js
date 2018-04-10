@@ -7,4 +7,9 @@ export default class ToastPlugin {
         M.toast({ html });
     }
 
+    error(e) {
+        console.error(e);
+        M.toast({ html: e.message });
+    }
+
 }

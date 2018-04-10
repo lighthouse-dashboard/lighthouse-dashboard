@@ -65,7 +65,7 @@
                         this.build = build;
                     })
                     .catch((e) => {
-                        this.$toast.notify(e.message);
+                        this.$toast.error(e);
                     })
             },
 
@@ -76,7 +76,7 @@
                         this.artifacts = artifacts.length > 0 ? artifacts : null;
                     })
                     .catch((e) => {
-                        this.$toast.notify(e.message);
+                        this.$toast.error(e);
                     })
             }
         }

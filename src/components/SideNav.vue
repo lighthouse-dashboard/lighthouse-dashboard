@@ -79,7 +79,7 @@
                         this.projects = projects;
                     })
                     .catch((e) => {
-                        this.$toast.notify(e.message);
+                        this.$toast.error(e);
                     })
             }
         }
