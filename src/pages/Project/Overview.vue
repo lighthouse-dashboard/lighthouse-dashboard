@@ -1,34 +1,28 @@
 <template>
     <div>
-        <div class="navbar-fixed">
-            <nav class="green lighten-1">
-                <div class="nav-wrapper">
-                    <router-link :to="{name: 'index'}" class="brand-logo center">
-                        {{username}}/{{project}}
-                    </router-link>
-                </div>
-            </nav>
-        </div>
+        <loader v-if="!builds"/>
 
-        <loader v-if="!data"/>
-
-        <div>
-            <div v-for="(target, url) in data">
-                <h6>{{url}}</h6>
-                <ArtifactHistoryViewer :url="url" :data="target" v-if="target"/>
-            </div>
+        <div v-if="builds">
+            <ProjectBuild
+                v-for="(build, index) in builds"
+                :class="{'grey lighten-5': index%2}"
+                :project="projectObject"
+                :buildNum="build.build_num"
+                :showTitle="false"
+                :key="build.build_num"/>
         </div>
     </div>
 </template>
 
 <script>
+    import Vue from "vue";
 
-    import ArtifactHistoryViewer from "../components/ArtifactHistoryViewer";
+    import ProjectBuild from "../../components/ProjectBuild";
 
     export default {
 
         components: {
-            ArtifactHistoryViewer,
+            ProjectBuild,
         },
 
         props: {
@@ -62,7 +56,7 @@
 
         data() {
             return {
-                data: null,
+                builds: null,
                 projectObject: null,
                 updater: null,
             };
@@ -87,9 +81,13 @@
                     token: this.token,
                 };
 
-                this.$circle.getDashboardForAllBuilds(this.projectObject)
-                    .then((data) => {
-                        this.data = data;
+                this.$circle
+                    .getAllBuilds(this.projectObject)
+                    .then(builds => {
+                        this.builds = builds;
+                        this.updater = setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                     });
             }
         }

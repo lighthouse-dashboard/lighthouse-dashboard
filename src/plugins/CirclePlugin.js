@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import path from 'path';
 
+import sortBuildArtifactsByUrl from './helper';
+
 export default class CirclePlugin {
     static install(_Vue, opts) {
         _Vue.prototype.$circle = new CirclePlugin();
@@ -181,12 +183,12 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    getAllBuilds({ vcs, username, project, token }) {
+    getAllBuilds({ vcs, username, project, token }, limit= Vue.config.buildsLimit) {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
                     project
-                    }?circle-token=${token}&filter=completed&limit=${Vue.config.buildsLimit}`
+                    }?circle-token=${token}&filter=completed&limit=${limit}`
             )
             .then(resp => {
                 return resp.body;
@@ -262,6 +264,12 @@ export default class CirclePlugin {
             });
     }
 
+    /**
+     * Get content for dashboard artifacts
+     * @param buildArtifacts
+     * @param token
+     * @return {Promise<[any]>}
+     */
     getDashboardContentsByBuild(buildArtifacts, token) {
         return Promise.all(buildArtifacts.map((item) => {
             return this.getArtifact(item.url, token)
@@ -271,44 +279,50 @@ export default class CirclePlugin {
         }));
     }
 
-    getDashboardForAllBuilds(opt) {
-        return this.getAllBuilds(opt)
+    /**
+     * To create the history graph we need to fetch all the artifact data and restructure it in this format:
+     *
+     * - URL1
+     *  - scores
+     *      - Performance: []
+     *      - SEO: []
+     *      - ...: []
+     *
+     *  - builds: []
+     * - URL2
+     *  - ...
+     *
+     * @param opt
+     * @return {*}
+     */
+    getAllBuildsWithDashboardArtifacts(opt) {
+        return this.getAllBuilds(opt, 10)
             .then(builds => {
                 this.builds = builds;
                 const p = builds.map((item) => {
-                    return this.getDashboardArtifacts(opt, item.build_num);
+                    return this.getDashboardArtifacts(opt, item.build_num)
+                        .then((artifacts) => {
+                            return { build_num: item.build_num, artifacts };
+                        })
                 });
                 return Promise.all(p);
             })
+            .then( (builds) => {
+                return builds.sort((item1, item2) => {
+                    return item1.build_num > item2.build_num
+                })
+            })
             .then((builds) => {
                 return Promise.all(builds.map((item) => {
-                    return this.getDashboardContentsByBuild(item, opt.token);
+                    return this.getDashboardContentsByBuild(item.artifacts, opt.token)
+                        .then((data) => {
+                            item.artifactContent = data;
+                            return item;
+                        })
                 }));
             })
             .then((builds) => {
-                const urls = {};
-
-                for (let i = 0; i < builds.length; i++) {
-                    const artifacts = builds[i];
-
-                    for (let a = 0; a < artifacts.length; a++) {
-
-                        const { categories, url } = artifacts[a];
-
-                        if (!urls[url]) {
-                            urls[url] = {};
-                        }
-
-                        for (let c = 0; c < categories.length; c++) {
-                            const { score, name } = categories[c];
-                            if (!urls[url][name]) {
-                                urls[url][name] = [];
-                            }
-                            urls[url][name].push(score);
-                        }
-                    }
-                }
-                return urls;
+                return sortBuildArtifactsByUrl(builds);
             })
     }
 

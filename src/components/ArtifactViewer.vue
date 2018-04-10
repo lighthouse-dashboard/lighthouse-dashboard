@@ -33,6 +33,7 @@
             load() {
                 this.$circle.getArtifact(this.artifactUrl)
                     .then(data => {
+                        console.log(data);
 
                         const { budget, categories } = data;
                         this.url = data.url;

@@ -14,6 +14,10 @@
                 type: Object,
                 required: true
             },
+            categories: {
+                type: Array,
+                required: true
+            },
             url: {
                 type: String,
                 required: true
@@ -29,13 +33,13 @@
                 const options = {
                     data: {
                         json: this.data,
-                        type: "line",
+                        type: "spline",
                         labels: true
                     },
                     axis: {
                         x: {
                             type: "category",
-                            //categories: categoryNames
+                            categories: this.categories
                         },
                         y: {
                             show: false,
@@ -46,9 +50,7 @@
                             bottom: 0
                         }
                     },
-                    legend: {
-                        show: false
-                    },
+
                     size: {
                         height: 340
                     },

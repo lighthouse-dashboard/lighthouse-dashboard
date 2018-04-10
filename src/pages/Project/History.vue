@@ -1,38 +1,24 @@
 <template>
     <div>
-        <div class="navbar-fixed">
-            <nav class="green lighten-1">
-                <div class="nav-wrapper">
-                    <router-link :to="{name: 'index'}" class="brand-logo center">
-                        {{username}}/{{project}}
-                    </router-link>
-                </div>
-            </nav>
-        </div>
+        <loader v-if="!data"/>
 
-        <loader v-if="!builds"/>
-
-        <div v-if="builds">
-            <ProjectBuild
-                v-for="(build, index) in builds"
-                :class="{'grey lighten-5': index%2}"
-                :project="projectObject"
-                :buildNum="build.build_num"
-                :showTitle="false"
-                :key="build.build_num"/>
+        <div class="row">
+            <div class="col s12" v-for="(target, url, index) in data" :class="{'grey lighten-5': index%2}">
+                <h5 class="center">{{url}}</h5>
+                <ArtifactHistoryViewer :url="url" :data="target.scores" :categories="target.builds" v-if="target"/>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Vue from "vue";
 
-    import ProjectBuild from "../components/ProjectBuild";
+    import ArtifactHistoryViewer from "../../components/ArtifactHistoryViewer";
 
     export default {
 
         components: {
-            ProjectBuild,
+            ArtifactHistoryViewer,
         },
 
         props: {
@@ -66,7 +52,7 @@
 
         data() {
             return {
-                builds: null,
+                data: null,
                 projectObject: null,
                 updater: null,
             };
@@ -91,13 +77,10 @@
                     token: this.token,
                 };
 
-                this.$circle
-                    .getAllBuilds(this.projectObject)
-                    .then(builds => {
-                        this.builds = builds;
-                        this.updater = setTimeout(() => {
-                            this.load();
-                        }, Vue.config.refreshInterval);
+
+                this.$circle.getAllBuildsWithDashboardArtifacts(this.projectObject)
+                    .then(data => {
+                        this.data = data;
                     });
             }
         }
