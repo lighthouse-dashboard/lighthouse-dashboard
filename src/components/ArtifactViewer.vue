@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h6>{{url}}</h6>
+        <h6><a :href="url" target="_blank">{{url}}</a></h6>
         <div ref="chart"></div>
     </div>
 </template>

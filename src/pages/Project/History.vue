@@ -4,7 +4,6 @@
 
         <div class="row">
             <div class="col s12" v-for="(target, url, index) in data" :class="{'grey lighten-5': index%2}">
-                <h5 class="center">{{url}}</h5>
                 <ArtifactHistoryViewer :url="url" :data="target.scores" :categories="target.builds" v-if="target"/>
             </div>
         </div>
