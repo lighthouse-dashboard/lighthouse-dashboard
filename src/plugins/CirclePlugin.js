@@ -4,8 +4,13 @@ import path from 'path';
 import sortBuildArtifactsByUrl from './helper';
 
 export default class CirclePlugin {
+    constructor(token){
+        this.token = token;
+    }
+
     static install(_Vue, opts) {
-        _Vue.prototype.$circle = new CirclePlugin();
+        _Vue.prototype.$circle = new CirclePlugin(opts.token);
+
     }
 
     /**
@@ -13,8 +18,8 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    getAllProjects(token) {
-        return Vue.http.get(`https://circleci.com/api/v1.1/projects?circle-token=${token}`)
+    getAllProjects() {
+        return Vue.http.get(`https://circleci.com/api/v1.1/projects?circle-token=${this.token}`)
             .then((resp) => {
                 return resp.body;
             })
@@ -24,7 +29,6 @@ export default class CirclePlugin {
                         vcs: 'github',
                         username: project.username,
                         project: project.reponame,
-                        token
                     };
                     return this.checkIfProjectIsSupported(projectConfig)
                         .then((isSupported) => {
@@ -53,13 +57,13 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    checkIfProjectIsSupported({ vcs, username, project, token }) {
-        return this.getLatestBuildInfoForBranch({ vcs, username, project, token }, Vue.config.defaultBranch)
+    checkIfProjectIsSupported(config) {
+        return this.getLatestBuildInfoForBranch(config, Vue.config.defaultBranch)
             .then((build) => {
                 if (!build) {
                     return [];
                 }
-                return this.getDashboardArtifacts({ vcs, username, project, token }, build.build_num)
+                return this.getDashboardArtifacts(config, build.build_num)
             })
             .then(artifacts => {
                 if (!artifacts || artifacts.length <= 0) {
@@ -79,10 +83,10 @@ export default class CirclePlugin {
      * @param branch
      * @return {*}
      */
-    getLatestBuildInfoForBranch({ vcs, username, project, token }, branch) {
+    getLatestBuildInfoForBranch({ vcs, username, project }, branch) {
         return Vue.http
             .get(
-                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/tree/${branch}?circle-token=${token}&limit=1&filter=completed`
+                `https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/tree/${branch}?circle-token=${this.token}&limit=1&filter=completed`
             )
             .then(resp => {
                 return resp.body.shift();
@@ -98,12 +102,12 @@ export default class CirclePlugin {
      * @param build
      * @return {*}
      */
-    getArtifacts(vcs, username, project, token, build = 'latest') {
+    getArtifacts({vcs, username, project}, build = 'latest') {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
                     project
-                    }/${build}/artifacts?circle-token=${token}&filter=completed`
+                    }/${build}/artifacts?circle-token=${this.token}&filter=completed`
             )
             .then(resp => {
                 return resp.body;
@@ -118,12 +122,12 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    getLatestBuildInfo({ vcs, username, project, token }) {
+    getLatestBuildInfo({ vcs, username, project }) {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
                     project
-                    }?circle-token=${token}&limit=1&filter=completed`
+                    }?circle-token=${this.token}&limit=1&filter=completed`
             )
             .then(resp => {
                 return resp.body.shift();
@@ -139,16 +143,16 @@ export default class CirclePlugin {
      * @param build
      * @return {*}
      */
-    getBuildInfo({ vcs, username, project, token }, build) {
+    getBuildInfo({ vcs, username, project }, build) {
         if (!build) {
-            return this.getLatestBuildInfo({ vcs, username, project, token });
+            return this.getLatestBuildInfo({ vcs, username, project });
         }
 
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
                     project
-                    }/${build}?circle-token=${token}`
+                    }/${build}?circle-token=${this.token}`
             )
             .then(resp => {
                 return resp.body;
@@ -163,12 +167,12 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    hasRunningBuild({ vcs, username, project, token }) {
+    hasRunningBuild({ vcs, username, project }) {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
                     project
-                    }?circle-token=${token}&filter=running`
+                    }?circle-token=${this.token}&filter=running`
             )
             .then(resp => {
                 return resp.body.length > 0;
@@ -183,12 +187,12 @@ export default class CirclePlugin {
      * @param token
      * @return {*}
      */
-    getAllBuilds({ vcs, username, project, token }, limit= Vue.config.buildsLimit) {
+    getAllBuilds({ vcs, username, project }, limit= Vue.config.buildsLimit) {
         return Vue.http
             .get(
                 `https://circleci.com/api/v1.1/project/${vcs}/${username}/${
                     project
-                    }?circle-token=${token}&filter=completed&limit=${limit}`
+                    }?circle-token=${this.token}&filter=completed&limit=${limit}`
             )
             .then(resp => {
                 return resp.body;
@@ -205,8 +209,8 @@ export default class CirclePlugin {
      * @param build
      * @return {*}
      */
-    getArtifactsByType(type, { vcs, username, project, token }, build = 'latest') {
-        return this.getArtifacts(vcs, username, project, token, build)
+    getArtifactsByType(type, { vcs, username, project }, build = 'latest') {
+        return this.getArtifacts({vcs, username, project}, build)
             .then(artifacts => {
                 return artifacts.filter(item => {
                     return path.extname(item.path) === `.${type}` ? item : null;
@@ -219,8 +223,8 @@ export default class CirclePlugin {
      * @param url
      * @return {*}
      */
-    getArtifact(url, token = '') {
-        return Vue.http.get(`http://localhost:3000/artifacts?url=${url}&circle-token=${token}`)
+    getArtifact(url) {
+        return Vue.http.get(`http://localhost:3000/artifacts?url=${url}&circle-token=${this.token}`)
             .then((resp) => {
                 return resp.body;
             })
@@ -270,9 +274,9 @@ export default class CirclePlugin {
      * @param token
      * @return {Promise<[any]>}
      */
-    getDashboardContentsByBuild(buildArtifacts, token) {
+    getDashboardContentsByBuild(buildArtifacts) {
         return Promise.all(buildArtifacts.map((item) => {
-            return this.getArtifact(item.url, token)
+            return this.getArtifact(item.url)
                 .then((data) => {
                     return data;
                 })
@@ -314,7 +318,7 @@ export default class CirclePlugin {
             })
             .then((builds) => {
                 return Promise.all(builds.map((item) => {
-                    return this.getDashboardContentsByBuild(item.artifacts, opt.token)
+                    return this.getDashboardContentsByBuild(item.artifacts, this.token)
                         .then((data) => {
                             item.artifactContent = data;
                             return item;
@@ -339,14 +343,12 @@ export default class CirclePlugin {
                 vcs,
                 username,
                 project,
-                token
             } = projectConfig;
 
             p.push(this.getLatestBuildInfo({
                 vcs,
                 username,
                 project,
-                token
             })
                 .then(data => {
                     const { stop_time, build_num } = data;

@@ -33,8 +33,6 @@
             load() {
                 this.$circle.getArtifact(this.artifactUrl)
                     .then(data => {
-                        console.log(data);
-
                         const { budget, categories } = data;
                         this.url = data.url;
                         const shrinkedCategories = categories.map((item) => {
@@ -85,7 +83,6 @@
                         };
 
                         bb.generate(options);
-                        console.log(data);
                     })
             }
         }

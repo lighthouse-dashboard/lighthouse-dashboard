@@ -34,7 +34,9 @@ const router = new VueRouter({
   routes
 });
 
-Vue.use(CirclePlugin);
+Vue.use(CirclePlugin, {
+    token: Vue.config.circleToken
+});
 
 new Vue({
   el: '#app',

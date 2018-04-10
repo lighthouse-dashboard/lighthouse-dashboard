@@ -12,7 +12,7 @@
             v-if="artifacts"
             class='col s12 xl8'
             :artifacts="artifacts"
-            :token="project.token"/>
+        />
     </div>
 </template>
 

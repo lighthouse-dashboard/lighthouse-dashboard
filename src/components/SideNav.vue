@@ -51,7 +51,7 @@
         methods: {
             load() {
                 this.$circle
-                    .getAllProjects(Vue.config.circleToken)
+                    .getAllProjects()
                     .then(projects => {
                         return this.$circle.sortProjectByLatestBuild(projects)
                     })

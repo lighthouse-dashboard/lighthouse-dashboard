@@ -51,9 +51,6 @@
                         }
                     },
 
-                    size: {
-                        height: 340
-                    },
                     bindto: this.$refs.chart
                 };
 
