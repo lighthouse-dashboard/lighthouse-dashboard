@@ -9,7 +9,7 @@
 
                     <ul class="left">
                         <router-link
-                            :to="{name: 'project', params: {vcs, username, project, token}}"
+                            :to="{name: 'project', params: {vcs, username, project}}"
                             tag="li"
                             :exact="true"
                             activeClass="active">
@@ -17,7 +17,7 @@
                         </router-link>
 
                         <router-link
-                            :to="{name: 'history', params: {vcs, username, project, token}}"
+                            :to="{name: 'history', params: {vcs, username, project}}"
                             tag="li"
                             :exact="true"
                             activeClass="active">
@@ -47,10 +47,6 @@
                 required: true
             },
             project: {
-                type: String,
-                required: true
-            },
-            token: {
                 type: String,
                 required: true
             }

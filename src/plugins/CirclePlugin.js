@@ -224,7 +224,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getArtifact(url) {
-        return Vue.http.get(`http://localhost:3000/artifacts?url=${url}&circle-token=${this.token}`)
+        return Vue.http.get(`http://localhost:3000/api/artifacts?url=${url}`)
             .then((resp) => {
                 return resp.body;
             })

@@ -31,7 +31,7 @@ Vue.use(VueResorce);
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  routes
+    routes
 });
 
 Vue.use(CirclePlugin, {
@@ -39,8 +39,8 @@ Vue.use(CirclePlugin, {
 });
 
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>',
+    el: '#app',
+    router,
+    components: { App },
+    template: '<App/>',
 });

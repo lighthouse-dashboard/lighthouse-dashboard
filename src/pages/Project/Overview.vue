@@ -37,10 +37,6 @@
             project: {
                 type: String,
                 required: true
-            },
-            token: {
-                type: String,
-                required: true
             }
         },
 
@@ -77,8 +73,7 @@
                 this.projectObject = {
                     vcs: this.vcs,
                     username: this.username,
-                    project: this.project,
-                    token: this.token,
+                    project: this.project
                 };
 
                 this.$circle

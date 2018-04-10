@@ -83,7 +83,7 @@
                         };
 
                         bb.generate(options);
-                    })
+                    });
             }
         }
     };

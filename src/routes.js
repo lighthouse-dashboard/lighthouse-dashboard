@@ -6,11 +6,11 @@ import Project from './pages/Project/Main.vue';
 export default [
     { path: '/', name: 'index', component: Overview },
     {
-        path: '/:vcs/:username/:project/:token',
+        path: '/:vcs/:username/:project',
         component: Project,
         props: true,
         children: [
-            { path: '', name: 'project', component: ProjectOverview, props: true },
+            { path: 'overview', name: 'project', component: ProjectOverview, props: true },
             { path: 'history', name: 'history', component: ProjectHistory, props: true },
         ]
 
