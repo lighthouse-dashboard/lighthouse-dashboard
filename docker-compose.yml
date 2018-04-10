@@ -7,4 +7,4 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      - CIRCLE_TOKEN=e9912f7d1465197a2509bb73bfd06b2f22b2c82a
+      - CIRCLE_TOKEN=e9912f7d1465197a2509bb73bfd06b2f22b2c82a #dreipol

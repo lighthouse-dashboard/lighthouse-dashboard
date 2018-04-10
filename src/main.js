@@ -17,13 +17,16 @@ import CirclePlugin from './plugins/CirclePlugin';
 import routes from './routes';
 import Loader from './components/Loader';
 
+import { refreshInterval, buildsLimit, dateFormat, layout, defaultBranch, circleToken } from './config';
+
 Vue.config.productionTip = false;
-Vue.config.refreshInterval = 1000 * 15;
-Vue.config.buildsLimit = 5;
-Vue.config.dateFormat = 'DD-MM-YYYY HH:mm:SS';
-Vue.config.layout = 'list'; // list | grid
-Vue.config.defaultBranch = 'develop';
-Vue.config.circleToken = process.env.CIRCLE_TOKEN;
+
+Vue.config.refreshInterval = refreshInterval;
+Vue.config.buildsLimit = buildsLimit;
+Vue.config.dateFormat = dateFormat;
+Vue.config.layout = layout; // list | grid
+Vue.config.defaultBranch = defaultBranch;
+Vue.config.circleToken = circleToken;
 
 Vue.component('loader', Loader);
 

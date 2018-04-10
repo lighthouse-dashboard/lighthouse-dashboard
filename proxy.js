@@ -3,7 +3,8 @@
 const Hapi = require('hapi');
 const request = require('request');
 const Boom = require('boom');
-const Path = require('path');
+
+require('dotenv').config();
 
 const TOKEN = process.env.CIRCLE_TOKEN;
 

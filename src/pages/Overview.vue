@@ -25,7 +25,6 @@
 
 <script>
     import Vue from "vue";
-
     import ProjectBuild from "../components/ProjectBuild";
 
     export default {
@@ -53,14 +52,21 @@
         },
 
         methods: {
-            load() {
-                this.$circle
-                    .getAllProjects(Vue.config.circleToken)
-                    .then(projects => {
-                        return this.$circle.sortProjectByLatestBuild(projects)
-                    })
+            refreshProjects() {
+                return this.$circle.sortProjectByLatestBuild(this.projects)
                     .then(projects => {
                         this.projects = projects;
+                        this.updater = setTimeout(() => {
+                            this.refreshProjects();
+                        }, Vue.config.refreshInterval);
+                    });
+            },
+            load() {
+                this.$circle
+                    .getAllProjects()
+                    .then(projects => {
+                        this.projects = projects;
+                        return this.refreshProjects();
                     });
             }
         }

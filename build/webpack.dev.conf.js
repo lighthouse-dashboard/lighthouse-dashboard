@@ -10,6 +10,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+require('dotenv').config()
+
 const HOST = process.env.HOST;
 const CIRCLE_TOKEN = process.env.CIRCLE_TOKEN;
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -47,10 +49,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': require('../config/dev.env')
+            'process.env': require('../config/dev.env'),
+            'process.env.CIRCLE_TOKEN': `'${CIRCLE_TOKEN}'`,
         }),
 
-        new webpack.EnvironmentPlugin(['CIRCLE_TOKEN']),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
         new webpack.NoEmitOnErrorsPlugin(),
