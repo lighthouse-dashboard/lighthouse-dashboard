@@ -1,20 +1,30 @@
 <template>
     <div id="app">
-        <SideNav id="slide-out" class="sidenav sidenav-fixed" />
 
-        <div class="fixed-action-btn hide-on-large-only">
-            <a class="btn-floating btn-large waves-effect waves-light green darken-2" @click="open">
-                <i class="material-icons">menu</i>
-            </a>
+        <div v-if="!token" class="panel">
+            <h5 class="center-align red-text">
+                {{ $t("message.no_token_available") }}
+            </h5>
         </div>
+        <div v-if="token">
+            <SideNav id="slide-out" class="sidenav sidenav-fixed"/>
 
-        <main>
-            <router-view/>
-        </main>
+            <div class="fixed-action-btn hide-on-large-only">
+                <a class="btn-floating btn-large waves-effect waves-light green darken-2" @click="open">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+
+            <main>
+                <router-view/>
+            </main>
+
+        </div>
     </div>
 </template>
 
 <script>
+    import Vue from 'vue';
 
     import SideNav from './components/SideNav'
 
@@ -28,6 +38,7 @@
         data() {
             return {
                 sidenav: null,
+                token: Vue.config.circleToken
             }
         },
 
@@ -48,7 +59,7 @@
 
 
 <style>
-    header, main, footer{
+    header, main, footer {
         padding-left: 300px;
     }
 
