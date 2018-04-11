@@ -4,13 +4,12 @@ require('dotenv').config();
 const users = {
     dreipol: {
         username: 'dreipol',
-        password: process.env.BASIC_PASS,   // 'secret'
+        password: process.env.BASIC_PASS,
     }
 };
 
 module.exports = {
     validate: async (request, username, password, h) => {
-        console.log(request);
         const user = users[username];
         if (!user) {
             return { credentials: null, isValid: false };

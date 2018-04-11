@@ -13,7 +13,6 @@ require('dotenv').config();
 const TOKEN = process.env.CIRCLE_TOKEN;
 const PORT = process.env.PORT || 3000;
 const LIMIT = process.env.LIMIT || 10;
-const SECRET = process.env.SECRET || 'dev';
 
 const server = Hapi.server({
     port: PORT,
@@ -28,7 +27,6 @@ const server = Hapi.server({
 
 server.app.token = TOKEN;
 server.app.limit = LIMIT;
-server.app.secret = SECRET;
 
 const init = async () => {
     await server.register(require('inert'));

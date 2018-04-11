@@ -50,3 +50,9 @@ git remote add deis dokku@furio.drei.io:lighthouse-dashboard
 ```bash
 git push deis master
 ```
+
+# Env Vars
+ - BASIC_PASS - password for basic auth
+ - CIRCLE_TOKEN - circle ci token
+ - PORT - port for the server
+ - LIMIT - limit of build numbers fetched
