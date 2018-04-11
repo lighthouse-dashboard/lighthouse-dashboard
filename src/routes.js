@@ -14,7 +14,5 @@ export default [
             { path: '', name: 'overview', component: ProjectOverview, props: true },
             { path: 'history', name: 'history', component: ProjectHistory, props: true },
         ]
-
     },
-
 ]
