@@ -33,10 +33,22 @@
             </a>
         </li>
 
+        <loader v-if="isLoading"/>
+
         <ProjectListLink v-for="project in projects"
                          v-if="projects"
                          :project="project"
                          :key="project.project"/>
+
+        <li><a class="subheader">{{ $t("message.options") }}</a></li>
+
+        <li>
+            <a @click="clearCache"
+               v-if="!isClearingCache">
+                <i
+                    class="material-icons">delete</i> Clear cache
+            </a>
+        </li>
     </ul>
 </template>
 
@@ -55,13 +67,15 @@
         data() {
             return {
                 projects: null,
-                branches: Vue.config.selectableBranches
+                branches: Vue.config.selectableBranches,
+                isClearingCache: false,
+                isLoading: false,
             };
         },
 
 
         watch: {
-            '$route.query.branch' () {
+            '$route.query.branch'() {
                 this.load();
             }
         },
@@ -73,6 +87,7 @@
         methods: {
             load() {
                 this.projects = null;
+                this.isLoading = true;
                 this.$circle
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
@@ -83,6 +98,25 @@
                     })
                     .catch((e) => {
                         this.$toast.error(e);
+                    })
+                    .finally( () => {
+                        this.isLoading = false;
+                    })
+            },
+            clearCache() {
+                this.projects = null;
+                this.isClearingCache = true;
+                this.isLoading = true;
+
+                this.$circle.invalidateProjectsCache(this.$route.query.branch)
+                    .then(() => {
+                        return this.load();
+                    })
+                    .catch((e) => {
+                        this.$toast.error(e);
+                    })
+                    .finally(() => {
+                        this.isClearingCache = false;
                     })
             }
         }

@@ -26,6 +26,7 @@ const server = Hapi.server({
     }
 });
 
+
 server.app.token = TOKEN;
 server.app.limit = LIMIT;
 
@@ -33,8 +34,7 @@ const init = async () => {
     await server.register(require('inert'));
     await server.register(AuthBasic);
     await server.register({
-        plugin: laabr,
-        options: {},
+        plugin: laabr
     });
 
     server.auth.strategy('basic', 'basic', basicStrategy);
@@ -51,10 +51,5 @@ const init = async () => {
     await server.start();
 
 };
-
-process.on('unhandledRejection', (err) => {
-    console.log(err);
-    process.exit(1);
-});
 
 init();

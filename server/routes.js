@@ -14,11 +14,22 @@ module.exports = [
         method: 'GET',
         path: '/api/artifacts',
         handler: require('./handlers/artifactProxyHandler'),
+        options: {
+            cache: {
+                expiresIn: 60 * 60 * 1000,
+                privacy: 'public'
+            }
+        }
     },
     {
         method: 'GET',
-        path: '/api/projects',
+        path: '/api/projects/{branch}',
         handler: require('./handlers/getAllProjects'),
+    },
+    {
+        method: 'DELETE',
+        path: '/api/projects/{branch}',
+        handler: require('./handlers/invalidateProjects'),
     },
     {
         method: 'GET',
@@ -40,10 +51,22 @@ module.exports = [
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}',
         handler: require('./handlers/getBuildInfo'),
+        options: {
+            cache: {
+                expiresIn: 60 * 60 * 1000,
+                privacy: 'public'
+            }
+        }
     },
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/artifacts',
         handler: require('./handlers/getArtifacts'),
+        options: {
+            cache: {
+                expiresIn: 60 * 60 * 1000,
+                privacy: 'public'
+            }
+        }
     },
 ];

@@ -67,25 +67,18 @@
         },
 
         methods: {
-            refreshProjects() {
-                return this.$circle.sortProjectByLatestBuild(this.projects, this.$route.query.branch)
-                    .then(projects => {
-                        this.projects = projects;
-                        this.updater = setTimeout(() => {
-                            this.refreshProjects();
-                        }, Vue.config.refreshInterval);
-                    })
-                    .catch((e) => {
-                        this.$toast.error(e);
-                    })
-            },
             load() {
                 this.isLoading = true;
                 this.$circle
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
+                        return this.$circle.sortProjectByLatestBuild(projects, this.$route.query.branch)
+                    })
+                    .then(projects => {
                         this.projects = projects;
-                        return this.refreshProjects();
+                        this.updater = setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                     })
                     .catch((e) => {
                         this.$toast.error(e);

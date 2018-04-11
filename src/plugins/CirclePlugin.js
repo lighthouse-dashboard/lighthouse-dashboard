@@ -22,58 +22,21 @@ export default class CirclePlugin {
      * @return {*}
      */
     getAllProjects(branch = this.branch) {
-        return Vue.http.get(`${API}/api/projects`)
+        return Vue.http.get(`${API}/api/projects/${branch}`)
             .then((resp) => {
                 return resp.body;
-            })
-            .then((projects) => {
-                const p = projects.map((project) => {
-                    const projectConfig = {
-                        vcs: 'github',
-                        username: project.username,
-                        project: project.reponame,
-                    };
-                    return this.checkIfProjectIsSupported(projectConfig, branch)
-                        .then((isSupported) => {
-                            if (!isSupported) {
-                                return
-                            }
-                            return projectConfig
-                        })
-                });
-                return Promise.all(p);
-            })
-            .then(projects => {
-                return projects.filter((item) => {
-                    if (item) {
-                        return item;
-                    }
-                })
             })
     }
 
     /**
-     * Check if project is supported
-     * @param vcs
-     * @param username
-     * @param project
+     * Invalidate projects cache
      * @param token
      * @return {*}
      */
-    checkIfProjectIsSupported(config, branch = this.branch) {
-        return this.getLatestBuildInfo(config, branch)
-            .then((build) => {
-                if (!build) {
-                    return [];
-                }
-                return this.getDashboardArtifacts(config, build.build_num)
-            })
-            .then(artifacts => {
-                if (!artifacts || artifacts.length <= 0) {
-                    return false;
-                }
-
-                return true;
+    invalidateProjectsCache(branch = this.branch) {
+        return Vue.http.delete(`${API}/api/projects/${branch}`)
+            .then((resp) => {
+                return resp.body;
             })
     }
 

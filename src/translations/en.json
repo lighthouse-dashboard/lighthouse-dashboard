@@ -18,7 +18,8 @@
         "no_projects_available" : "No projects available",
         "overview" : "Overview",
         "history" : "History",
-        "no_token_available" : "No CircleCi token found"
+        "no_token_available" : "No CircleCi token found",
+        "options": "Options"
     },
     "dashboard" : {
         "title" : "Dreihouse"
