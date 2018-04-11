@@ -10,12 +10,12 @@
 
         <li>
             <router-link :to="{name: 'index'}">
-                Dashboard
+                {{ $t("message.dashboard_link_text") }}
             </router-link>
         </li>
 
 
-        <li><a class="subheader">Branches</a></li>
+        <li><a class="subheader">{{ $t("message.branches") }}</a></li>
 
         <li v-for="branch in branches"
             :key="branch"
@@ -25,10 +25,12 @@
             </router-link>
         </li>
 
-        <li><a class="subheader">Projects</a></li>
+        <li><a class="subheader">{{ $t("message.projects") }}</a></li>
 
         <li v-if="projects && projects.length <= 0">
-            <a class="disabled">No Projects Available</a>
+            <a class="disabled">
+                {{ $t("message.no_projects_available") }}
+            </a>
         </li>
 
         <ProjectListLink v-for="project in projects"
@@ -58,8 +60,8 @@
         },
 
 
-        watch : {
-            $route(){
+        watch: {
+            '$route.query.branch' () {
                 this.load();
             }
         },
@@ -70,6 +72,7 @@
 
         methods: {
             load() {
+                this.projects = null;
                 this.$circle
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {

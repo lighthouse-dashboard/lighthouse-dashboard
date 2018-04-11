@@ -1,0 +1,25 @@
+{
+    "message" : {
+        "user" : "User",
+        "commit" : "Commit",
+        "branch" : "Branch",
+        "build_duration" : "Build duration",
+        "build_completed" : "Completed",
+        "build_num" : "Build",
+        "build_status" : "Status",
+        "circleci_link_text" : "CircleCi",
+        "vcs_link_text" : "Repository",
+        "artifacts" : "Artifacts",
+        "no_dashboard_available" : "No Dashboard available",
+        "no_artifacts_available" : "No Artifacts available",
+        "dashboard_link_text" : "Dashboard",
+        "branches" : "Branches",
+        "projects" : "Projects",
+        "no_projects_available" : "No projects available",
+        "overview" : "Overview",
+        "history" : "History"
+    },
+    "dashboard" : {
+        "title" : "Dreihouse"
+    }
+}

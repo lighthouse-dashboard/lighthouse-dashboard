@@ -59,7 +59,10 @@
                                     ['Report', ...shrinkedCategories],
                                     ['Budget', ...shrinkedBudget],
                                 ],
-                                type: "bar",
+                                type: "line",
+                                types: {
+                                    Budget: "area",
+                                },
                                 labels: true
                             },
                             axis: {

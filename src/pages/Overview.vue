@@ -3,7 +3,9 @@
         <div class="navbar-fixed">
             <nav class="green lighten-1">
                 <div class="nav-wrapper">
-                    <router-link :to="{name: 'index'}" class="brand-logo center">Dreihouse Dashboard</router-link>
+                    <router-link :to="{name: 'index'}" class="brand-logo center">
+                        {{ $t("dashboard.title")}}
+                    </router-link>
                 </div>
             </nav>
         </div>
@@ -13,7 +15,9 @@
         </div>
         <div class="row" v-if="projects">
             <div v-if="projects.length <= 0" class="card-panel">
-                <h5 class="center-align red-text">No Projects Available</h5>
+                <h5 class="center-align red-text">
+                    {{ $t("message.no_projects_available") }}
+                </h5>
             </div>
 
             <ProjectBuild

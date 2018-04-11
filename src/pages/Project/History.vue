@@ -3,8 +3,15 @@
         <loader v-if="!data"/>
 
         <div class="row">
-            <div class="col s12" v-for="(target, url, index) in data" :class="{'grey lighten-5': index%2}">
-                <ArtifactHistoryViewer :url="url" :data="target.scores" :categories="target.builds" v-if="target"/>
+            <div
+                class="col s12"
+                v-for="(target, url, index) in data"
+                :class="{'grey lighten-5': index%2}">
+                <ArtifactHistoryViewer
+                    :url="url"
+                    :data="target.scores"
+                    :categories="target.builds"
+                    v-if="target"/>
             </div>
         </div>
     </div>

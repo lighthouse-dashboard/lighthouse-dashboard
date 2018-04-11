@@ -10,7 +10,7 @@
                             tag="li"
                             :exact="true"
                             activeClass="active">
-                            <a>Overview</a>
+                            <a>{{ $t("message.overview") }}</a>
                         </router-link>
 
                         <router-link
@@ -18,7 +18,7 @@
                             tag="li"
                             :exact="true"
                             activeClass="active">
-                            <a>History</a>
+                            <a>{{ $t("message.history") }}</a>
                         </router-link>
                     </ul>
                 </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="row" v-if="build">
         <h2 v-if="showTitle">
-            <router-link :to="{name: 'project', params: project, query: $route.query}">
+            <router-link :to="{name: 'overview', params: project, query: $route.query}">
                 {{build.reponame}}
             </router-link>
 
@@ -11,39 +11,43 @@
             <ul class="collection">
                 <li class="collection-item avatar">
                     <img :src="userAvatar" alt="" class="circle">
-                    <b>User</b> {{user}}
+                    <b>{{ $t("message.user") }}</b> {{user}}
                 </li>
 
                 <li class="collection-item">
-                    <b>Commit</b> {{build.subject}}
+                    <b>{{ $t("message.commit") }}</b> {{build.subject}}
                 </li>
 
                 <li class="collection-item">
-                    <b>Branch</b> {{build.branch}}
+                    <b>{{ $t("message.branch") }}</b> {{build.branch}}
                 </li>
 
                 <li class="collection-item">
-                    <b>Build duration</b> {{ buildDuration }}
+                    <b>{{ $t("message.build_duration") }}</b> {{ buildDuration }}
                 </li>
 
                 <li class="collection-item">
-                    <b>Completed</b> {{ buildCompletedTime }}
+                    <b>{{ $t("message.build_completed") }}</b> {{ buildCompletedTime }}
                 </li>
 
                 <li class="collection-item">
-                    <b>Build</b> #{{build.build_num}}
+                    <b>{{ $t("message.build_num") }}</b> #{{build.build_num}}
                 </li>
 
                 <li class="collection-item" :class="buildStatusClass">
-                    <b>Status</b> {{build.status}}
+                    <b>{{ $t("message.build_status") }}</b> {{build.status}}
                 </li>
 
                 <li class="collection-item">
-                    <a :href="build.build_url" target="_blank">CircleCi</a>
+                    <a :href="build.build_url" target="_blank">
+                        {{ $t("message.circleci_link_text") }}
+                    </a>
                 </li>
 
                 <li class="collection-item">
-                    <a :href="build.vcs_url" target="_blank">Repository</a>
+                    <a :href="build.vcs_url" target="_blank">
+                        {{ $t("message.vcs_link_text") }}
+                    </a>
                 </li>
             </ul>
         </div>
@@ -52,7 +56,7 @@
         <div class="col s12 m6 l12">
             <div class="collection with-header">
                 <div class="collection-header">
-                    <h6>Artifacts</h6>
+                    <h6>{{ $t("message.artifacts") }}</h6>
                 </div>
                 <a v-for='html in htmlArtifacts'
                    class="collection-item"
