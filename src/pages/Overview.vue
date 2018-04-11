@@ -10,10 +10,11 @@
             </nav>
         </div>
 
-        <div class="row" v-if="!projects">
+        <div class="row" v-if="isLoading">
             <loader/>
         </div>
-        <div class="row" v-if="projects">
+
+        <div class="row" v-if="!isLoading && projects">
             <div v-if="projects.length <= 0" class="card-panel">
                 <h5 class="center-align red-text">
                     {{ $t("message.no_projects_available") }}
@@ -45,11 +46,12 @@
                 projects: null,
                 layout: Vue.config.layout,
                 updater: null,
+                isLoading: true,
             };
         },
 
-        watch : {
-            $route(){
+        watch: {
+            $route() {
                 this.load();
             }
         },
@@ -72,18 +74,24 @@
                         this.updater = setTimeout(() => {
                             this.refreshProjects();
                         }, Vue.config.refreshInterval);
-                    });
+                    })
+                    .catch((e) => {
+                        this.$toast.error(e);
+                    })
             },
             load() {
-                this.projects = null;
+                this.isLoading = true;
                 this.$circle
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
                         this.projects = projects;
                         return this.refreshProjects();
                     })
-                    .catch( (e) => {
+                    .catch((e) => {
                         this.$toast.error(e);
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
                     })
             }
         }

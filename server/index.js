@@ -3,6 +3,7 @@
 const Hapi = require('hapi');
 const AuthBasic = require('hapi-auth-basic');
 const path = require('path');
+const laabr = require('laabr');
 
 const basicStrategy = require('./auth/basicStrategy');
 const routes = require('./routes');
@@ -31,10 +32,14 @@ server.app.limit = LIMIT;
 const init = async () => {
     await server.register(require('inert'));
     await server.register(AuthBasic);
+    await server.register({
+        plugin: laabr,
+        options: {},
+    });
 
     server.auth.strategy('basic', 'basic', basicStrategy);
 
-    if(!DISABLE_AUTH){
+    if (!DISABLE_AUTH) {
         server.auth.default('basic');
     }
 
