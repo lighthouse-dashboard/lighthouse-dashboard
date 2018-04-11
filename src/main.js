@@ -20,7 +20,7 @@ import routes from './routes';
 import Loader from './components/Loader';
 import translations from './translations';
 
-import { refreshInterval, buildsLimit, dateFormat, layout, defaultBranch, circleToken, selectableBranches } from './config';
+import { refreshInterval, buildsLimit, dateFormat, layout, defaultBranch, circleToken, selectableBranches, } from './config';
 
 Vue.config.productionTip = false;
 
@@ -39,7 +39,6 @@ Vue.use(VueRouter);
 Vue.use(VueI18n);
 
 Vue.use(CirclePlugin, {
-    token: Vue.config.circleToken,
     branch: Vue.config.defaultBranch,
     limit: Vue.config.buildsLimit,
 });

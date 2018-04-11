@@ -11,6 +11,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+require('dotenv').config();
+
 const CIRCLE_TOKEN = process.env.CIRCLE_TOKEN;
 console.log('Token', CIRCLE_TOKEN);
 

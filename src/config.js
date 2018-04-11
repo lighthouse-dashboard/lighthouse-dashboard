@@ -5,5 +5,4 @@ module.exports = {
     layout: 'list',
     defaultBranch: 'master',
     selectableBranches : ['develop', 'master'],
-    circleToken: process.env.CIRCLE_TOKEN
 };
