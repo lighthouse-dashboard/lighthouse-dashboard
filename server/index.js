@@ -1,7 +1,6 @@
 'use strict';
 
 const Hapi = require('hapi');
-const AuthBearer = require('hapi-auth-bearer-token');
 const AuthBasic = require('hapi-auth-basic');
 const path = require('path');
 
@@ -31,7 +30,6 @@ server.app.limit = LIMIT;
 
 const init = async () => {
     await server.register(require('inert'));
-    await server.register(AuthBearer);
     await server.register(AuthBasic);
 
     server.auth.strategy('basic', 'basic', basicStrategy);

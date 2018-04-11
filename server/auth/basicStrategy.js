@@ -1,4 +1,5 @@
-const Bcrypt = require('bcrypt');
+const md5 = require('md5');
+
 require('dotenv').config();
 
 const users = {
@@ -15,7 +16,7 @@ module.exports = {
             return { credentials: null, isValid: false };
         }
 
-        const isValid = await Bcrypt.compare(password, user.password);
+        const isValid = md5(password) === user.password;
         const credentials = { name: user.username };
 
         return { isValid, credentials };
