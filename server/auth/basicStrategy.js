@@ -10,8 +10,6 @@ const users = {
 
 module.exports = {
     validate: async (request, username, password, h) => {
-        return {isValid: true, credentials: {name: 'dev'}};
-
         const user = users[username];
         if (!user) {
             return { credentials: null, isValid: false };
