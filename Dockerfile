@@ -8,9 +8,10 @@ RUN npm install
 COPY . ./
 
 ARG CIRCLE_TOKEN
-ENV PORT 3000
+RUN npm run build
 
+ENV CIRCLE_TOKEN ''
+ENV PORT 3000
 EXPOSE ${PORT}
 
-RUN npm run build
 CMD [ "npm", "run", "proxy" ]

@@ -31,3 +31,11 @@ and start the frontend app with
 
 # Config
 All config is stored in `src/config.js`
+
+# Docker Build
+
+    docker build --build-arg CIRCLE_TOKEN=<TOKEN> . -t dreipol/dreihouse-dashboard
+
+# Docker Run 
+    
+    docker run --name dashboard -p 3000:3000 -e CIRCLE_TOKEN=<TOKEN> dreipol/dreihouse-dashboard
