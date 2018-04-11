@@ -13,6 +13,7 @@ require('dotenv').config();
 const TOKEN = process.env.CIRCLE_TOKEN;
 const PORT = process.env.PORT || 3000;
 const LIMIT = process.env.LIMIT || 10;
+const DISABLE_AUTH = !!(process.env.NO_AUTH) || false;
 
 const server = Hapi.server({
     port: PORT,
@@ -34,6 +35,10 @@ const init = async () => {
     await server.register(AuthBasic);
 
     server.auth.strategy('basic', 'basic', basicStrategy);
+
+    if(!DISABLE_AUTH){
+        server.auth.default('basic');
+    }
 
     for (let i = 0; i < routes.length; i++) {
         server.route(routes[i]);

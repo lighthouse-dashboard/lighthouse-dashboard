@@ -32,8 +32,6 @@
         },
 
         mounted() {
-            M.AutoInit();
-
             var elem = document.querySelector('.sidenav');
             this.sidenav = M.Sidenav.init(elem, {});
         },

@@ -53,7 +53,7 @@ const i18n = new VueI18n({
   messages: translations
 });
 
-
+M.AutoInit();
 
 new Vue({
     el: '#app',

@@ -56,3 +56,4 @@ git push deis master
  - CIRCLE_TOKEN - circle ci token
  - PORT - port for the server
  - LIMIT - limit of build numbers fetched
+ - NO_AUTH=1 - can beused to disable basic auth for local development
