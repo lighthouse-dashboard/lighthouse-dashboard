@@ -58,7 +58,7 @@
 
     import Vue from 'vue';
     import ProjectListLink from './ProjectListLink';
-    import {version} from '@/../package.json';
+    import { version } from '@/../package.json';
 
     export default {
 
@@ -109,6 +109,12 @@
                     })
                     .catch((e) => {
                         this.$toast.error(e);
+
+                        if (e.status === 401) {
+                            this.$auth.logout();
+                            this.$router.push({ name: 'login' });
+                        }
+
                     })
                     .finally(() => {
                         this.isLoading = false;
@@ -125,6 +131,9 @@
                     })
                     .catch((e) => {
                         this.$toast.error(e);
+                        if (e.status === 401) {
+                            this.$auth.logout();
+                        }
                     })
                     .finally(() => {
                         this.isClearingCache = false;

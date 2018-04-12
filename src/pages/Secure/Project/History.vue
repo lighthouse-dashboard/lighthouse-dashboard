@@ -85,6 +85,10 @@
                     })
                     .catch((e) => {
                         this.$toast.error(e);
+                        if (e.status === 401) {
+                            this.$auth.logout();
+                            this.$router.push({ name: 'login' });
+                        }
                     })
             }
         }

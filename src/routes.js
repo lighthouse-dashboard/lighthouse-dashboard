@@ -1,4 +1,4 @@
-import Overview from './pages/Secure/Overview/Index.vue';
+import Overview from './pages/Secure/Dashboard/Index.vue';
 import MainSecure from './pages/Secure/Index.vue';
 import ProjectOverview from './pages/Secure/Project/Overview.vue';
 import ProjectHistory from './pages/Secure/Project/History.vue';

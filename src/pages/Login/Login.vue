@@ -23,13 +23,13 @@
                     <div class="card-content">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="password" type="password" class="validate" v-model="password">
+                                <input id="password" type="password" class="validate" v-model="password" :disabled="isSubmitting">
                                 <label for="password">{{ $t('message.password') }}</label>
                             </div>
                         </div>
                     </div>
                     <div class="card-action">
-                        <a class="waves-effect waves-light btn" @click="submit">{{ $t('message.login') }}</a>
+                        <button class="waves-effect waves-light btn" @click="submit" :disabled="isSubmitting">{{ $t('message.login') }}</button>
                     </div>
                 </div>
             </div>
@@ -38,18 +38,29 @@
 </template>
 
 <script>
+    import Vue from 'vue';
+
     export default {
 
         components: {},
 
         data() {
             return {
-                password: null
+                password: null,
+                isSubmitting: false
             };
+        },
+
+        beforeRouteEnter: (to, from, next) => {
+            if (Vue.auth.isAuthenticated()) {
+                return next({ name: 'dashboard' });
+            }
+            return next();
         },
 
         methods: {
             submit() {
+                this.isSubmitting = true;
                 this.$auth.login(this.password)
                     .then(() => {
                         this.$toast.notify(this.$t('message.login_succeed'));
@@ -57,6 +68,9 @@
                     })
                     .catch(e => {
                         this.$toast.notify(this.$t('error.login_failed'))
+                    })
+                    .finally( () => {
+                        this.isSubmitting = false;
                     })
             }
         }

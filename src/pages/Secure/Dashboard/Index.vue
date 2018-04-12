@@ -3,7 +3,7 @@
         <div class="navbar-fixed">
             <nav class="green lighten-1">
                 <div class="nav-wrapper">
-                    <router-link :to="{name: 'index'}" class="brand-logo center">
+                    <router-link :to="{name: 'dashboard'}" class="brand-logo center">
                         {{ $t("dashboard.title")}}
                     </router-link>
                 </div>
@@ -78,6 +78,10 @@
                     })
                     .catch((e) => {
                         this.$toast.error(e);
+                        if (e.status === 401) {
+                            this.$auth.logout();
+                            this.$router.push({ name: 'login' });
+                        }
                     })
                     .finally(() => {
                         this.isLoading = false;

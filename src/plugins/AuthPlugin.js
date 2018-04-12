@@ -33,6 +33,10 @@ export default class AuthPlugin {
         })
     }
 
+    logout() {
+        Vue.cookie.delete(STORE_KEY);
+    }
+
     isAuthenticated() {
         return typeof this.token === 'string' && this.token !== null
     }
