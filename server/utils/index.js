@@ -173,10 +173,13 @@ function getAllProjects(token, branch) {
         })
 }
 
-function addTokenToHTMLArtifacts(artifacts, token){
-    return artifacts.map( (item) => {
-        if(path.extname(item.path) === '.html') {
-            item.path+=`?circle_token=${token}`
+function addTokenToHTMLArtifacts(artifacts, token) {
+    if (!artifacts) {
+        return;
+    }
+    return artifacts.map((item) => {
+        if (path.extname(item.path) === '.html') {
+            item.url += `?circle_token=${token}`
         }
         return item;
     });
@@ -276,10 +279,29 @@ function getBuild(vcs, username, project, build, token) {
     });
 }
 
+/**
+ *
+ * @param url
+ * @param token
+ * @return {Promise<any>}
+ */
+function getArtifactContent(url, token) {
+    return new Promise((resolve, rej) => {
+        request(`${url}?&circle-token=${token}`, { json: true }, (err, res, body) => {
+            if (err) {
+                return rej(Boom.boomify(err));
+            }
+            return resolve(body);
+        });
+    });
+}
+
 module.exports = {
     getAllProjects,
     getArtifacts,
     getBranchBuilds,
     getBuild,
-    invalidateCache
+    invalidateCache,
+    getDashboardArtifacts,
+    getArtifactContent
 };

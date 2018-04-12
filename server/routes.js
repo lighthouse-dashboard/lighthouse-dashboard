@@ -131,6 +131,26 @@ module.exports = [
             }
         }
     },
+    {
+        method: 'GET',
+        path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/dashboardartifacts',
+        handler: require('./handlers/getBuildsWithDashboardArtifacts'),
+        options: {
+            tags: ['api'],
+            description: "Get all builds with dashboard artifacts",
+            validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
+                params: {
+                    vcs: joi.string().required().description('VCS Type'),
+                    username: joi.string().required().description('Username used to fetch CircleCI projects'),
+                    project: joi.string().required().description('Specific CI project'),
+                    branch: joi.string().required().description('Branch name'),
+                }
+            }
+        }
+    },
 
     {
         method: 'GET',

@@ -235,31 +235,14 @@ export default class CirclePlugin {
      * @param branch
      * @return {*}
      */
-    getAllBuildsWithDashboardArtifacts(opt, branch = this.branch) {
-        return this.getAllBuilds(opt, branch)
-            .then(builds => {
-                this.builds = builds;
-                const p = builds.map((item) => {
-                    return this.getDashboardArtifacts(opt, item.build_num)
-                        .then((artifacts) => {
-                            return { build_num: item.build_num, artifacts };
-                        })
-                });
-                return Promise.all(p);
-            })
-            .then((builds) => {
-                return builds.sort((item1, item2) => {
-                    return item1.build_num > item2.build_num
-                })
-            })
-            .then((builds) => {
-                return Promise.all(builds.map((item) => {
-                    return this.getDashboardContentsByBuild(item.artifacts)
-                        .then((data) => {
-                            item.artifactContent = data;
-                            return item;
-                        })
-                }));
+    getAllBuildsWithDashboardArtifacts({vcs, username, project}, branch = this.branch) {
+
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/dashboardartifacts`
+            )
+            .then(resp => {
+                return resp.body;
             })
             .then((builds) => {
                 return sortBuildArtifactsByUrl(builds);
