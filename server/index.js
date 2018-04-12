@@ -8,8 +8,6 @@ const laabr = require('laabr');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 const Inert = require('inert');
-const Tv = require('tv');
-const options = { endpoint: '/awesome' };
 
 const { name, version } = require('../package');
 const bearerStrategy = require('./auth/bearerStrategy');
@@ -50,8 +48,6 @@ const init = async () => {
     await server.register({
         plugin: laabr
     });
-
-    await server.register({register: Tv.register});
 
     if (process.env.NODE_ENV === 'development') {
         await server.register([
