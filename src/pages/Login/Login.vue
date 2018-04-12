@@ -23,7 +23,7 @@
                     <div class="card-content">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="password" type="password" class="validate" v-model="password" :disabled="isSubmitting">
+                                <input id="password" type="password" class="validate" v-model="password" :disabled="isSubmitting" v-on:keyup.13="submit">
                                 <label for="password">{{ $t('message.password') }}</label>
                             </div>
                         </div>

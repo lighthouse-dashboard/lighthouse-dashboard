@@ -161,7 +161,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getArtifact(url) {
-        return Vue.http.get(`${this.endpoint}/api/artifacts?url=${url}`)
+        return Vue.http.get(`${this.endpoint}/api/artifact?url=${url}`)
             .then((resp) => {
                 return resp.body;
             })

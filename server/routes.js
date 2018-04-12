@@ -5,27 +5,9 @@ const MONTH = 30 * 24 * HOUR;
 
 module.exports = [
     {
-        method: 'GET',
-        path: '/{param*}',
-        handler: {
-            directory: {
-                path: 'dist',
-                index: ['index.html']
-            }
-        },
-        options: {
-            auth: false,
-            cache: {
-                expiresIn: HOUR,
-                privacy: 'public'
-            }
-        }
-    },
-
-    {
         method: 'POST',
         path: '/auth/login',
-        handler: require('./handlers/postLogin'),
+        handler: require('./handlers/login'),
         options: {
             auth: false,
             validate: {
@@ -38,12 +20,19 @@ module.exports = [
 
     {
         method: 'GET',
-        path: '/api/artifacts',
+        path: '/api/artifact',
         handler: require('./handlers/artifactProxyHandler'),
         options: {
             cache: {
                 expiresIn: MONTH,
                 privacy: 'public'
+            },
+            tags: ['api'],
+            description: "Load content of artifact. This is used due ti CORS on circle ci side",
+            validate: {
+                query: {
+                    url: joi.string().required().description('Url of the artifact')
+                }
             }
         }
     },
@@ -51,26 +40,80 @@ module.exports = [
         method: 'GET',
         path: '/api/projects/{branch}',
         handler: require('./handlers/getAllProjects'),
+        options: {
+            tags: ['api'],
+            description: "Get list of valid projects for a given branch",
+            validate: {
+                params: {
+                    branch: joi.string().required().description('Branch of the project'),
+                }
+            }
+        }
     },
     {
         method: 'DELETE',
         path: '/api/projects/{branch}',
         handler: require('./handlers/invalidateProjects'),
+        options: {
+            tags: ['api'],
+            description: "Invalidate cache of fetched projects",
+            validate: {
+                params: {
+                    branch: joi.string().required().description('Branch of the project'),
+                }
+            }
+        }
     },
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}',
         handler: require('./handlers/getBranchBuilds'),
+        options: {
+            tags: ['api'],
+            description: "Get builds",
+            validate: {
+                params: {
+                    vcs: joi.string().required().description('VCS Type'),
+                    username: joi.string().required().description('Username used to fetch CircleCI projects'),
+                    project: joi.string().required().description('Specific CI project'),
+                    branch: joi.string().required().description('Branch of the project'),
+                }
+            }
+        }
     },
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/latest',
         handler: require('./handlers/getBranchLatestBuildInfo'),
+        options: {
+            tags: ['api'],
+            description: "Get latest build",
+            validate: {
+                params: {
+                    vcs: joi.string().required().description('VCS Type'),
+                    username: joi.string().required().description('Username used to fetch CircleCI projects'),
+                    project: joi.string().required().description('Specific CI project'),
+                    branch: joi.string().required().description('Branch of the project'),
+                }
+            }
+        }
     },
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/running',
         handler: require('./handlers/getBranchRunningBuild'),
+        options: {
+            tags: ['api'],
+            description: "Get current running build",
+            validate: {
+                params: {
+                    vcs: joi.string().required().description('VCS Type'),
+                    username: joi.string().required().description('Username used to fetch CircleCI projects'),
+                    project: joi.string().required().description('Specific CI project'),
+                    branch: joi.string().required().description('Branch of the project'),
+                }
+            }
+        }
     },
 
     {
@@ -81,6 +124,16 @@ module.exports = [
             cache: {
                 expiresIn: MONTH,
                 privacy: 'public'
+            },
+            tags: ['api'],
+            description: "Get current running build",
+            validate: {
+                params: {
+                    vcs: joi.string().required().description('VCS Type'),
+                    username: joi.string().required().description('Username used to fetch CircleCI projects'),
+                    project: joi.string().required().description('Specific CI project'),
+                    build:  joi.alternatives().try(joi.string(), joi.number()).required().description('Build number'),
+                }
             }
         }
     },
@@ -92,7 +145,30 @@ module.exports = [
             cache: {
                 expiresIn: MONTH,
                 privacy: 'public'
+            },
+            tags: ['api'],
+            description: "Get all artifacts for build",
+            validate: {
+                params: {
+                    vcs: joi.string().required().description('VCS Type'),
+                    username: joi.string().required().description('Username used to fetch CircleCI projects'),
+                    project: joi.string().required().description('Specific CI project'),
+                    build:  joi.alternatives().try(joi.string(), joi.number()).required().description('Build number'),
+                }
             }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/{param*}',
+        handler: {
+            directory: {
+                path: 'dist',
+                index: ['index.html']
+            }
+        },
+        options: {
+            auth: false
         }
     },
 ];

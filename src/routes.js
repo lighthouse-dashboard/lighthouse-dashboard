@@ -8,7 +8,7 @@ import Login from './pages/Login/Login.vue';
 export default [
     { path: '/login', name: 'login', component: Login, meta: { requiresAuth: false } },
     {
-        path: '/secure', name: 'index', component: MainSecure,
+        path: '/', name: 'index', component: MainSecure,
         children: [
             { path: '', name: 'dashboard', component: Overview },
             {

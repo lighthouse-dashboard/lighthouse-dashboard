@@ -173,6 +173,15 @@ function getAllProjects(token, branch) {
         })
 }
 
+function addTokenToHTMLArtifacts(artifacts, token){
+    return artifacts.map( (item) => {
+        if(path.extname(item.path) === '.html') {
+            item.path+=`?circle_token=${token}`
+        }
+        return item;
+    });
+}
+
 /**
  * Invalidate & rebuild projects cache
  *
@@ -201,7 +210,7 @@ function getArtifacts(vcs, username, project, build, token) {
             if (err) {
                 return rej(Boom.boomify(err));
             }
-            return resolve(body);
+            return resolve(addTokenToHTMLArtifacts(body, token));
         });
     });
 }

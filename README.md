@@ -31,6 +31,12 @@ and start the frontend app with
 ## Config
 All config is stored in `src/config.js`
 
+## API DOC
+There is `swagger` includet to create th API documentation. This is only available when the environment varable `NODE_ENV` is set to `development`.
+When running `npm run server-dev` this is done automatically
+
+[http://localhost:3000/documentation](http://localhost:3000/documentation)
+
 # Docker
 ## Docker Build
 
