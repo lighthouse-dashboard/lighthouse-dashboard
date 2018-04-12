@@ -54,18 +54,12 @@
 
 
         <div class="col s12 m6 l12" v-if="showArtifactList">
-            <div class="collection with-header">
-                <div class="collection-header">
-                    <h6>{{ $t("message.artifacts") }}</h6>
-                </div>
-                <a v-for='html in htmlArtifacts'
-                   class="collection-item"
-                   :key='html.url'
-                   target='_blank'
-                   :href='html.url'>
-                    {{html.path}}
-                </a>
-            </div>
+            <ArtifactList
+                :vcs="project.vcs"
+                :username="project.username"
+                :project="project.project"
+                :buildNum="build.build_num"
+            />
         </div>
     </div>
 </template>
@@ -73,14 +67,19 @@
 <script>
     import Vue from 'vue';
     import moment from 'moment';
+    import ArtifactList from '@/components/ArtifactList';
 
     export default {
+        components: {
+            ArtifactList
+        },
         props: {
 
             project: {
                 type: Object,
                 required: true
             },
+
             build: {
                 type: Object,
                 required: true
@@ -91,6 +90,7 @@
                 required: false,
                 default: true
             },
+
             showArtifactList: {
                 type: Boolean,
                 required: false,
@@ -139,18 +139,6 @@
             this.user = user.login;
             this.userAvatar = user.avatar_url;
 
-            this.$circle
-                .getHtmlArtifacts(this.project.vcs, this.project.username, this.project.project, this.build.build_num)
-                .then(htmlArtifacts => {
-                    this.htmlArtifacts = htmlArtifacts;
-                })
-                .catch((e) => {
-                    this.$toast.error(e);
-                    if (e.status === 401) {
-                        this.$auth.logout();
-                        this.$router.push({ name: 'login' });
-                    }
-                })
         }
     };
 </script>

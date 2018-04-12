@@ -20,8 +20,8 @@
 <script>
     import Vue from 'vue';
 
-    import BuildInfo from "../components/BuildInfo";
-    import BuildView from "../components/BuildView";
+    import BuildInfo from "@/components/BuildInfo";
+    import BuildView from "@/components/BuildView";
 
     export default {
 
