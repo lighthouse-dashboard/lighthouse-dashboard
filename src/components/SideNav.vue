@@ -16,16 +16,8 @@
             </router-link>
         </li>
 
+        <BranchList/>
 
-        <li><a class="subheader">{{ $t("message.branches") }}</a></li>
-
-        <li v-for="branch in branches"
-            :key="branch"
-            :class="{'active' : $route.query.branch === branch}">
-            <router-link :to="{name: 'dashboard', query: {branch}}">
-                {{branch}}
-            </router-link>
-        </li>
 
         <li><a class="subheader">{{ $t("message.projects") }}</a></li>
 
@@ -58,12 +50,14 @@
 
     import Vue from 'vue';
     import ProjectListLink from './ProjectListLink';
+    import BranchList from './BranchList';
     import { version } from '@/../package.json';
 
     export default {
 
         components: {
-            ProjectListLink
+            ProjectListLink,
+            BranchList
         },
 
 
@@ -71,7 +65,6 @@
             return {
                 projects: null,
                 updater: null,
-                branches: Vue.config.selectableBranches,
                 isClearingCache: false,
                 isLoading: false,
                 version
