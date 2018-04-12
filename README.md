@@ -53,6 +53,7 @@ git push deis master
 
 # Env Vars
  - BASIC_PASS - password for login page (md5 hashed password)
+ - SECRET - secret key for api bearer
  - CIRCLE_TOKEN - circle ci token
  - PORT - port for the server
  - LIMIT - limit of build numbers fetched

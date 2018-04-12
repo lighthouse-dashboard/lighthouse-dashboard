@@ -14,8 +14,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 require('dotenv').config();
 
 const CIRCLE_TOKEN = process.env.CIRCLE_TOKEN;
-console.log('Token', CIRCLE_TOKEN);
-
 const env = process.env.NODE_ENV === 'testing'
     ? require('../config/test.env')
     : require('../config/prod.env')
