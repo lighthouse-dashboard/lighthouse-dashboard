@@ -8,6 +8,8 @@
             </nav>
         </li>
 
+        <li><a class="subheader">v{{ version }}</a></li>
+
         <li>
             <router-link :to="{name: 'dashboard'}">
                 {{ $t("message.dashboard_link_text") }}
@@ -20,7 +22,7 @@
         <li v-for="branch in branches"
             :key="branch"
             :class="{'active' : $route.query.branch === branch}">
-            <router-link :to="{name: 'index', query: {branch}}">
+            <router-link :to="{name: 'dashboard', query: {branch}}">
                 {{branch}}
             </router-link>
         </li>
@@ -56,6 +58,7 @@
 
     import Vue from 'vue';
     import ProjectListLink from './ProjectListLink';
+    import {version} from '@/../package.json';
 
     export default {
 
@@ -71,6 +74,7 @@
                 branches: Vue.config.selectableBranches,
                 isClearingCache: false,
                 isLoading: false,
+                version
             };
         },
 

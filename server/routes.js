@@ -1,5 +1,8 @@
 const joi = require('joi');
 
+const HOUR = 60 * 60 * 1000;
+const MONTH = 30 * 24 * HOUR;
+
 module.exports = [
     {
         method: 'GET',
@@ -11,7 +14,11 @@ module.exports = [
             }
         },
         options: {
-            auth: null
+            auth: false,
+            cache: {
+                expiresIn: HOUR,
+                privacy: 'public'
+            }
         }
     },
 
@@ -35,7 +42,7 @@ module.exports = [
         handler: require('./handlers/artifactProxyHandler'),
         options: {
             cache: {
-                expiresIn: 60 * 60 * 1000,
+                expiresIn: MONTH,
                 privacy: 'public'
             }
         }
@@ -72,7 +79,7 @@ module.exports = [
         handler: require('./handlers/getBuildInfo'),
         options: {
             cache: {
-                expiresIn: 60 * 60 * 1000,
+                expiresIn: MONTH,
                 privacy: 'public'
             }
         }
@@ -83,7 +90,7 @@ module.exports = [
         handler: require('./handlers/getArtifacts'),
         options: {
             cache: {
-                expiresIn: 60 * 60 * 1000,
+                expiresIn: MONTH,
                 privacy: 'public'
             }
         }

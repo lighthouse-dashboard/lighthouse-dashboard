@@ -9,4 +9,4 @@ COPY . ./
 
 RUN npm run build
 
-CMD [ "npm", "run", "proxy" ]
+CMD [ "npm", "run", "server" ]

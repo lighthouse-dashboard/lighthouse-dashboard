@@ -52,8 +52,7 @@ git push deis master
 ```
 
 # Env Vars
- - BASIC_PASS - password for basic auth (md5 hashed password)
+ - BASIC_PASS - password for login page (md5 hashed password)
  - CIRCLE_TOKEN - circle ci token
  - PORT - port for the server
  - LIMIT - limit of build numbers fetched
- - NO_AUTH=1 - can beused to disable basic auth for local development

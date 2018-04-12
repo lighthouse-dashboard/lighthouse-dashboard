@@ -6,7 +6,6 @@ const AuthBearer = require('hapi-auth-bearer-token');
 const path = require('path');
 const laabr = require('laabr');
 
-const basicStrategy = require('./auth/basicStrategy');
 const bearerStrategy = require('./auth/bearerStrategy');
 const routes = require('./routes');
 
