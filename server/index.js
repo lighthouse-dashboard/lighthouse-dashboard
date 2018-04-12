@@ -35,15 +35,12 @@ server.app.limit = LIMIT;
 const init = async () => {
     await server.register(require('inert'));
     await server.register(AuthBasic);
-     await server.register(AuthBearer)
+    await server.register(AuthBearer);
     await server.register({
         plugin: laabr
     });
 
-
-
-     server.auth.strategy('bearer', 'bearer-access-token', bearerStrategy);
-    server.auth.strategy('basic', 'basic', basicStrategy);
+    server.auth.strategy('bearer', 'bearer-access-token', bearerStrategy);
 
     server.auth.default('bearer');
 
