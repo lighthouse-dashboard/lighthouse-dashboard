@@ -3,6 +3,17 @@ const request = require('request');
 const Boom = require('boom');
 let cachedResponse = {};
 
+/**
+ * Get artifacts by file type
+ *
+ * @param {string} type
+ * @param {string} vcs
+ * @param {string} username
+ * @param {string} project
+ * @param {string|number} build
+ * @param {string} token
+ * @return {*|PromiseLike<T>|Promise<T>}
+ */
 function getArtifactsByType(type, vcs, username, project, build = 'latest', token) {
     return getArtifacts(vcs, username, project, build, token)
         .then(artifacts => {
@@ -12,6 +23,16 @@ function getArtifactsByType(type, vcs, username, project, build = 'latest', toke
         });
 }
 
+/**
+ * Get artifacts usable for dashboard chart
+ *
+ * @param {string} vcs
+ * @param {string} username
+ * @param {string} project
+ * @param {string|number} build
+ * @param {string} token
+ * @return {*|PromiseLike<T>|Promise<T>}
+ */
 function getDashboardArtifacts(vcs, username, project, build, token) {
     return getArtifactsByType('json', vcs, username, project, build, token)
         .then(artifacts => {
@@ -23,8 +44,18 @@ function getDashboardArtifacts(vcs, username, project, build, token) {
         });
 }
 
+/**
+ * GCheck if latest build of branch contains dashboard artifacts
+ *
+ * @param {string} vcs
+ * @param {string} username
+ * @param {string} project
+ * @param {string} branch
+ * @param {string} token
+ * @return {*|PromiseLike<T>|Promise<T>}
+ */
 function checkIfProjectIsSupported(vcs, username, project, branch, token) {
-    return getBranchBuilds(vcs, username, project, branch, token)
+    return getLatestBranchBuild(vcs, username, project, branch, token)
         .then((build) => {
             if (!build) {
                 return [];
@@ -40,6 +71,62 @@ function checkIfProjectIsSupported(vcs, username, project, branch, token) {
         });
 }
 
+/**
+ * Sort projects by it's latest build timestamp
+ *
+ * @param {Object[]} projects
+ * @param {string} branch
+ * @param {string} token
+ * @return {Promise<any[]>}
+ */
+function sortProjectByLatestBuild(projects, branch, token) {
+    const p = [];
+    for (let i = 0; i < projects.length; i++) {
+        const projectConfig = projects[i];
+        const {
+            vcs,
+            username,
+            project,
+        } = projectConfig;
+
+        p.push(getLatestBranchBuild(vcs, username, project, branch, token)
+            .then(data => {
+                if (!data) {
+                    return null;
+                }
+                const { stop_time, build_num } = data;
+                projectConfig.buildIdentifier = build_num;
+                return {
+                    date: new Date(stop_time),
+                    config: projectConfig
+                };
+            }));
+    }
+
+    return Promise.all(p)
+        .then((all) => {
+            all = all.filter((item) => {
+                if (item) {
+                    return item;
+                }
+            });
+            all = all.sort((a, b) => {
+                return a.date < b.date;
+            });
+            all = all.map((item) => {
+                return item.config;
+            });
+            return all;
+        });
+}
+
+/**
+ * Get list of valid projects
+ *
+ * @param {string} token
+ * @param {string} branch
+ * @return {*}
+ */
 function getAllProjects(token, branch) {
     if (cachedResponse[branch] && cachedResponse[branch].length > 0) {
         return Promise.resolve(cachedResponse[branch]);
@@ -78,16 +165,36 @@ function getAllProjects(token, branch) {
             })
         })
         .then((projects) => {
+            return sortProjectByLatestBuild(projects, branch, token);
+        })
+        .then((projects) => {
             cachedResponse[branch] = projects;
             return projects;
         })
 }
 
-function invalidateCache(token, branch){
+/**
+ * Invalidate & rebuild projects cache
+ *
+ * @param {string} token
+ * @param {string} branch
+ * @return {*}
+ */
+function invalidateCache(token, branch) {
     cachedResponse[branch] = [];
     return getAllProjects(token, branch)
 }
 
+/**
+ * Get all artifacts
+ *
+ * @param {string} vcs
+ * @param {string} username
+ * @param {string} project
+ * @param {string|number} build
+ * @param {string} token
+ * @return {Promise<any>}
+ */
 function getArtifacts(vcs, username, project, build, token) {
     return new Promise((resolve, rej) => {
         request(`https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/${build}/artifacts?circle-token=${token}&filter=completed`, { json: true }, (err, res, body) => {
@@ -99,6 +206,18 @@ function getArtifacts(vcs, username, project, build, token) {
     });
 }
 
+/**
+ * Get all builds for branch
+ *
+ * @param {string} vcs
+ * @param {string} username
+ * @param {string} project
+ * @param {string} branch
+ * @param {string} token
+ * @param {number} limit
+ * @param {string} filter
+ * @return {Promise<any>}
+ */
 function getBranchBuilds(vcs, username, project, branch, token, limit, filter = 'completed') {
     return new Promise((resolve, rej) => {
         request(`https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/tree/${branch}?circle-token=${token}&limit=${limit}&filter=${filter}`, { json: true }, (err, res, body) => {
@@ -110,6 +229,33 @@ function getBranchBuilds(vcs, username, project, branch, token, limit, filter = 
     });
 }
 
+/**
+ * Get latest build for branch
+ *
+ * @param {string} vcs
+ * @param {string} username
+ * @param {string} project
+ * @param {string} branch
+ * @param {string} token
+ * @param {string} filter
+ * @return {Promise<any>}
+ */
+function getLatestBranchBuild(vcs, username, project, branch, token, filter = 'completed') {
+    return getBranchBuilds(vcs, username, project, branch, token, 1, filter)
+        .then((builds) => {
+            return builds.shift();
+        })
+}
+
+/**
+ * Get build by number
+ * @param {string} vcs
+ * @param {string} username
+ * @param {string} project
+ * @param {number} build
+ * @param {string} token
+ * @return {Promise<any>}
+ */
 function getBuild(vcs, username, project, build, token) {
     return new Promise((resolve, rej) => {
         request(`https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/${build}?circle-token=${token}&filter=completed`, { json: true }, (err, res, body) => {

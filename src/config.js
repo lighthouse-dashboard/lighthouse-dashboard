@@ -1,5 +1,6 @@
 module.exports = {
-    refreshInterval: 1000 * 15,
+    buildStatusInterval: 1000 * 15,
+    refreshInterval: 1000 * 60,
     buildsLimit: 5,
     dateFormat: 'DD-MM-YYYY HH:mm:SS',
     layout: 'list',

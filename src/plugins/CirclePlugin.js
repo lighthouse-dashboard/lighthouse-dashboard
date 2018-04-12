@@ -266,46 +266,4 @@ export default class CirclePlugin {
                 return sortBuildArtifactsByUrl(builds);
             })
     }
-
-    /**
-     * Sort all projects by it's latest build
-     * @param projects
-     * @return {Promise<any[]>}
-     */
-    sortProjectByLatestBuild(projects, branch = this.branch) {
-        const p = [];
-        for (let i = 0; i < projects.length; i++) {
-            const projectConfig = projects[i];
-            const {
-                vcs,
-                username,
-                project,
-            } = projectConfig;
-
-            p.push(this.getLatestBuildInfo({
-                vcs,
-                username,
-                project,
-            }, branch)
-                .then(data => {
-                    const { stop_time, build_num } = data;
-                    projectConfig.buildIdentifier = build_num;
-                    return {
-                        date: new Date(stop_time),
-                        config: projectConfig
-                    };
-                }));
-        }
-
-        return Promise.all(p)
-            .then((all) => {
-                all = all.sort((a, b) => {
-                    return a.date < b.date;
-                });
-                all = all.map((item) => {
-                    return item.config;
-                });
-                return all;
-            });
-    }
 }

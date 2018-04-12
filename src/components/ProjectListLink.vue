@@ -45,7 +45,7 @@
                         this.hasRunningBuild = has;
                         this.updater = setTimeout(() => {
                             this.checkIfHasRunning();
-                        }, Vue.config.refreshInterval)
+                        }, Vue.config.buildStatusInterval)
                     })
                     .catch( (e) => {
                         this.$toast.error(e);

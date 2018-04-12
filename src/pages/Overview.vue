@@ -68,12 +68,8 @@
 
         methods: {
             load() {
-                this.isLoading = true;
                 this.$circle
                     .getAllProjects(this.$route.query.branch)
-                    .then(projects => {
-                        return this.$circle.sortProjectByLatestBuild(projects, this.$route.query.branch)
-                    })
                     .then(projects => {
                         this.projects = projects;
                         this.updater = setTimeout(() => {

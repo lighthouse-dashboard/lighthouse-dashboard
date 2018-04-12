@@ -20,7 +20,7 @@ import routes from './routes';
 import Loader from './components/Loader';
 import translations from './translations';
 
-import { refreshInterval, buildsLimit, dateFormat, layout, defaultBranch, circleToken, selectableBranches, } from './config';
+import { refreshInterval, buildsLimit, dateFormat, layout, defaultBranch, selectableBranches, buildStatusInterval } from './config';
 
 Vue.config.productionTip = false;
 
@@ -29,8 +29,8 @@ Vue.config.buildsLimit = buildsLimit;
 Vue.config.dateFormat = dateFormat;
 Vue.config.layout = layout; // list | grid
 Vue.config.defaultBranch = defaultBranch;
-Vue.config.circleToken = circleToken;
 Vue.config.selectableBranches = selectableBranches;
+Vue.config.buildStatusInterval = buildStatusInterval;
 
 Vue.component('loader', Loader);
 

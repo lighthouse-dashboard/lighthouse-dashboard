@@ -17,6 +17,8 @@
 </template>
 
 <script>
+    import Vue from 'vue';
+
     import BuildInfo from "../components/BuildInfo";
     import BuildView from "../components/BuildView";
 
@@ -49,20 +51,31 @@
         data() {
             return {
                 build: null,
+
+                updater: null,
                 artifacts: null,
             };
         },
 
+         beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
+            }
+        },
+
         mounted() {
-            this.getLatestBuild();
+            this.load();
             this.getLatestBuildArtifacts();
         },
 
         methods: {
-            getLatestBuild() {
+            load() {
                 this.$circle.getBuildInfo(this.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
+                        this.updater = setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                     })
                     .catch((e) => {
                         this.$toast.error(e);

@@ -67,6 +67,7 @@
         data() {
             return {
                 projects: null,
+                updater: null,
                 branches: Vue.config.selectableBranches,
                 isClearingCache: false,
                 isLoading: false,
@@ -77,6 +78,12 @@
         watch: {
             '$route.query.branch'() {
                 this.load();
+            }
+        },
+
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
             }
         },
 
@@ -91,15 +98,15 @@
                 this.$circle
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
-                        return this.$circle.sortProjectByLatestBuild(projects)
-                    })
-                    .then(projects => {
                         this.projects = projects;
+                        this.updater = setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                     })
                     .catch((e) => {
                         this.$toast.error(e);
                     })
-                    .finally( () => {
+                    .finally(() => {
                         this.isLoading = false;
                     })
             },
