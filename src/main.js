@@ -13,14 +13,25 @@ import App from './App';
 import VueResorce from 'vue-resource';
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n'
+import VueCookie from 'vue-cookie';
 
+import AuthPlugin from './plugins/AuthPlugin';
 import CirclePlugin from './plugins/CirclePlugin';
 import ToastPlugin from './plugins/ToastPlugin';
 import routes from './routes';
 import Loader from './components/Loader';
 import translations from './translations';
 
-import { refreshInterval, buildsLimit, dateFormat, layout, defaultBranch, selectableBranches, buildStatusInterval } from './config';
+import {
+    refreshInterval,
+    buildsLimit,
+    dateFormat,
+    layout,
+    defaultBranch,
+    selectableBranches,
+    buildStatusInterval,
+    apiEndpoint
+} from './config';
 
 Vue.config.productionTip = false;
 
@@ -31,26 +42,46 @@ Vue.config.layout = layout; // list | grid
 Vue.config.defaultBranch = defaultBranch;
 Vue.config.selectableBranches = selectableBranches;
 Vue.config.buildStatusInterval = buildStatusInterval;
+Vue.config.apiEndpoint = apiEndpoint;
 
 Vue.component('loader', Loader);
 
 Vue.use(VueResorce);
 Vue.use(VueRouter);
 Vue.use(VueI18n);
+Vue.use(VueCookie);
 
 Vue.use(CirclePlugin, {
+    api: apiEndpoint,
     branch: Vue.config.defaultBranch,
     limit: Vue.config.buildsLimit,
 });
 Vue.use(ToastPlugin);
+Vue.use(AuthPlugin);
+
+Vue.http.interceptors.push((request) => {
+    if (Vue.auth.isAuthenticated()) {
+        request.headers.set('Authorization', `Bearer ${Vue.auth.token}`);
+    }
+});
 
 const router = new VueRouter({
     routes
 });
+router.beforeEach((to, from, next) => {
+    if (to.meta.requiresAuth === false) {
+        return next();
+    }
+
+    if (!Vue.auth.isAuthenticated()) {
+        return next({ name: 'login' });
+    }
+    next();
+});
 
 const i18n = new VueI18n({
-  locale: 'en', // set locale
-  messages: translations
+    locale: 'en', // set locale
+    messages: translations
 });
 
 M.AutoInit();

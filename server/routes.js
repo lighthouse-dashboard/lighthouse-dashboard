@@ -1,3 +1,5 @@
+const joi = require('joi');
+
 module.exports = [
     {
         method: 'GET',
@@ -7,6 +9,23 @@ module.exports = [
                 path: 'dist',
                 index: ['index.html']
             }
+        },
+        options: {
+            auth: null
+        }
+    },
+
+    {
+        method: 'POST',
+        path: '/auth/login',
+        handler: require('./handlers/postLogin'),
+        options: {
+            auth: false,
+            validate: {
+                payload: {
+                    password: joi.string().min(6).max(32).required().description('Password')
+                }
+            },
         }
     },
 

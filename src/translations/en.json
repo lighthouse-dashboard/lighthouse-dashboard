@@ -19,9 +19,15 @@
         "overview" : "Overview",
         "history" : "History",
         "no_token_available" : "No CircleCi token found",
-        "options": "Options"
+        "options": "Options",
+        "password" : "Password",
+        "login" : "Login",
+        "login_succeed" : "Login successful"
     },
     "dashboard" : {
         "title" : "Dreihouse"
+    },
+    "error": {
+        "login_failed": "Login Failed."
     }
 }

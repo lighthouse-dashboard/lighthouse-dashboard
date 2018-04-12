@@ -19,7 +19,7 @@
 
 <script>
 
-    import ArtifactHistoryViewer from "../../components/ArtifactHistoryViewer";
+    import ArtifactHistoryViewer from "@/components/ArtifactHistoryViewer";
 
     export default {
 

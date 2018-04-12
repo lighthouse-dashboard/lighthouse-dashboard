@@ -6,4 +6,5 @@ module.exports = {
     layout: 'list',
     defaultBranch: 'master',
     selectableBranches : ['develop', 'master'],
+    apiEndpoint : process.env.API_ENDPOINT
 };

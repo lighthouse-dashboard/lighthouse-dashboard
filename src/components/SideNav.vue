@@ -9,7 +9,7 @@
         </li>
 
         <li>
-            <router-link :to="{name: 'index'}">
+            <router-link :to="{name: 'dashboard'}">
                 {{ $t("message.dashboard_link_text") }}
             </router-link>
         </li>

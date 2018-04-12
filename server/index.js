@@ -2,10 +2,12 @@
 
 const Hapi = require('hapi');
 const AuthBasic = require('hapi-auth-basic');
+const AuthBearer = require('hapi-auth-bearer-token');
 const path = require('path');
 const laabr = require('laabr');
 
 const basicStrategy = require('./auth/basicStrategy');
+const bearerStrategy = require('./auth/bearerStrategy');
 const routes = require('./routes');
 
 require('dotenv').config();
@@ -33,15 +35,17 @@ server.app.limit = LIMIT;
 const init = async () => {
     await server.register(require('inert'));
     await server.register(AuthBasic);
+     await server.register(AuthBearer)
     await server.register({
         plugin: laabr
     });
 
+
+
+     server.auth.strategy('bearer', 'bearer-access-token', bearerStrategy);
     server.auth.strategy('basic', 'basic', basicStrategy);
 
-    if (!DISABLE_AUTH) {
-        server.auth.default('basic');
-    }
+    server.auth.default('bearer');
 
     for (let i = 0; i < routes.length; i++) {
         server.route(routes[i]);

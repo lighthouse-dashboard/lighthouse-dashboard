@@ -3,17 +3,17 @@ import path from 'path';
 
 import sortBuildArtifactsByUrl from './helper';
 
-const API = 'http://localhost:3000';
 
 export default class CirclePlugin {
-    constructor(branch, limit) {
+    constructor(api, branch, limit) {
         this.branch = branch;
         this.limit = limit;
+        this.endpoint = api
 
     }
 
     static install(_Vue, opts) {
-        _Vue.prototype.$circle = new CirclePlugin(opts.branch, opts.limit);
+        _Vue.prototype.$circle = new CirclePlugin(opts.api, opts.branch, opts.limit);
     }
 
     /**
@@ -22,7 +22,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getAllProjects(branch = this.branch) {
-        return Vue.http.get(`${API}/api/projects/${branch}`)
+        return Vue.http.get(`${this.endpoint}/api/projects/${branch}`)
             .then((resp) => {
                 return resp.body;
             })
@@ -34,7 +34,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     invalidateProjectsCache(branch = this.branch) {
-        return Vue.http.delete(`${API}/api/projects/${branch}`)
+        return Vue.http.delete(`${this.endpoint}/api/projects/${branch}`)
             .then((resp) => {
                 return resp.body;
             })
@@ -52,7 +52,7 @@ export default class CirclePlugin {
     getArtifacts({ vcs, username, project }, build = 'latest') {
         return Vue.http
             .get(
-                `${API}/api/projects/${vcs}/${username}/${project}/build/${build}/artifacts`
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}/artifacts`
             )
             .then(resp => {
                 return resp.body;
@@ -70,7 +70,7 @@ export default class CirclePlugin {
     getLatestBuildInfo({ vcs, username, project }, branch = this.branch) {
         return Vue.http
             .get(
-                `${API}/api/projects/${vcs}/${username}/${project}/branch/${branch}/latest`
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/latest`
             )
             .then(resp => {
                 return resp.body.shift();
@@ -93,7 +93,7 @@ export default class CirclePlugin {
 
         return Vue.http
             .get(
-                `${API}/api/projects/${vcs}/${username}/${project}/build/${build}`
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}`
             )
             .then(resp => {
                 return resp.body;
@@ -111,7 +111,7 @@ export default class CirclePlugin {
     hasRunningBuild({ vcs, username, project }, branch = this.branch) {
         return Vue.http
             .get(
-                `${API}/api/projects/${vcs}/${username}/${project}/branch/${branch}/running`
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/running`
             )
             .then(resp => {
                 return resp.body.length > 0;
@@ -129,7 +129,7 @@ export default class CirclePlugin {
     getAllBuilds({ vcs, username, project }, limit = this.limit, branch = this.branch) {
         return Vue.http
             .get(
-                `${API}/api/projects/${vcs}/${username}/${project}/branch/${branch}`
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}`
             )
             .then(resp => {
                 return resp.body;
@@ -161,7 +161,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getArtifact(url) {
-        return Vue.http.get(`${API}/api/artifacts?url=${url}`)
+        return Vue.http.get(`${this.endpoint}/api/artifacts?url=${url}`)
             .then((resp) => {
                 return resp.body;
             })

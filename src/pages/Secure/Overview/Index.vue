@@ -33,7 +33,7 @@
 
 <script>
     import Vue from "vue";
-    import ProjectBuild from "../components/ProjectBuild";
+    import ProjectBuild from "@/components/ProjectBuild";
 
     export default {
 

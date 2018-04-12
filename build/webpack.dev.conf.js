@@ -50,7 +50,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': require('../config/dev.env'),
-            'process.env.CIRCLE_TOKEN': `'${CIRCLE_TOKEN}'`,
         }),
 
         new webpack.HotModuleReplacementPlugin(),
