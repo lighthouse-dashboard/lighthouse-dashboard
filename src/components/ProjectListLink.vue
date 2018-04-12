@@ -40,7 +40,7 @@
 
         methods: {
             checkIfHasRunning() {
-                this.$circle.hasRunningBuild(this.project, this.$route.query.branch)
+                this.$circle.hasRunningBuild(this.project.vcs, this.project.username, this.project.project, this.$route.query.branch)
                     .then((has) => {
                         this.hasRunningBuild = has;
                         this.updater = setTimeout(() => {

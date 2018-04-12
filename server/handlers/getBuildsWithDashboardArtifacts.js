@@ -9,6 +9,7 @@ function getDashboardContentsByBuild(buildArtifacts, token) {
         }));
     }
 
+
 module.exports = async (req, h) => {
     const { vcs, username, project, branch } = req.params;
     const {limit, token }= req.server.app;

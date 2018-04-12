@@ -78,7 +78,7 @@
                 };
 
                 this.$circle
-                    .getAllBuilds(this.projectObject, undefined, this.$route.query.branch)
+                    .getAllBuilds(this.vcs, this.username, this.project, undefined, this.$route.query.branch)
                     .then(builds => {
                         this.builds = builds;
                         this.updater = setTimeout(() => {

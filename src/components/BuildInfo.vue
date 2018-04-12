@@ -135,7 +135,7 @@
             this.userAvatar = user.avatar_url;
 
             this.$circle
-                .getHtmlArtifacts(this.project, this.build.build_num)
+                .getHtmlArtifacts(this.project.vcs, this.project.username, this.project.project, this.build.build_num)
                 .then(htmlArtifacts => {
                     this.htmlArtifacts = htmlArtifacts;
                 })

@@ -173,9 +173,15 @@ function getAllProjects(token, branch) {
         })
 }
 
+/**
+ * Add token query param to artifact urls
+ * @param {Object[]} artifacts
+ * @param {string} token
+ * @return {Array}
+ */
 function addTokenToHTMLArtifacts(artifacts, token) {
     if (!artifacts) {
-        return;
+        return [];
     }
     return artifacts.map((item) => {
         if (path.extname(item.path) === '.html') {

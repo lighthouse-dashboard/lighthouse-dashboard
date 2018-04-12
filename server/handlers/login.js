@@ -6,5 +6,6 @@ module.exports = async (req, h) => {
     if(md5(password) === process.env.BASIC_PASS){
         return {token: process.env.SECRET}
     }
+
     return boom.forbidden();
 };

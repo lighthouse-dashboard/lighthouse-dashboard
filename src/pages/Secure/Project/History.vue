@@ -55,7 +55,6 @@
         data() {
             return {
                 data: null,
-                projectObject: null,
                 updater: null,
             };
         },
@@ -72,14 +71,7 @@
 
         methods: {
             load() {
-                this.projectObject = {
-                    vcs: this.vcs,
-                    username: this.username,
-                    project: this.project
-                };
-
-
-                this.$circle.getAllBuildsWithDashboardArtifacts(this.projectObject, undefined, this.$route.query.branch)
+                this.$circle.getAllBuildsWithDashboardArtifacts(this.vcs, this.username, this.project, this.$route.query.branch)
                     .then(data => {
                         this.data = data;
                     })

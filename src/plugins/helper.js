@@ -34,7 +34,7 @@ function collectReportCategories(builds) {
 
         for (let a = 0; a < artifactContent.length; a++) {
             const { categories, url } = artifactContent[a];
-            endpoints[url].builds.push('#'+build_num);
+            endpoints[url].builds.push('#' + build_num);
 
 
             const simplifiedCategory = simplifyCategoryScores(categories);
@@ -77,6 +77,21 @@ function simplifyCategoryScores(categories) {
     return data;
 }
 
+/**
+ * Prepare data for chart
+ *
+ * - URL1
+ *  - scores
+ *      - Performance: []
+ *      - SEO: []
+ *      - ...: []
+ *
+ *  - builds: []
+ * - URL2
+ *  - ...
+ *
+ * @param {Array} builds
+ */
 export default function sortBuildArtifactsByUrl(builds) {
     const data = collectReportCategories(builds);
     return data;

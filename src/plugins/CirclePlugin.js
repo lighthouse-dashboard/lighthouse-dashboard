@@ -41,14 +41,13 @@ export default class CirclePlugin {
 
     /**
      * Get all artifacts for specific build
-     * @param vcs
-     * @param username
-     * @param project
-     * @param token
-     * @param build
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string} build
      * @return {*}
      */
-    getArtifacts({ vcs, username, project }, build = 'latest') {
+    getArtifacts(vcs, username, project, build = 'latest') {
         return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}/artifacts`
@@ -60,13 +59,14 @@ export default class CirclePlugin {
 
     /**
      * Get latest build
-     * @param vcs
-     * @param username
-     * @param project
-     * @param token
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string} branch
      * @return {*}
      */
-    getLatestBuildInfo({ vcs, username, project }, branch = this.branch) {
+    getLatestBuildInfo(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/latest`
@@ -78,16 +78,17 @@ export default class CirclePlugin {
 
     /**
      * Get info for given build
-     * @param vcs
-     * @param username
-     * @param project
-     * @param build
-     * @param branch
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string|number} build
+     * @param {string} branch
      * @return {*}
      */
-    getBuildInfo({ vcs, username, project }, build, branch = this.branch) {
+    getBuildInfo(vcs, username, project, build, branch = this.branch) {
         if (!build) {
-            return this.getLatestBuildInfo({ vcs, username, project }, branch);
+            return this.getLatestBuildInfo(vcs, username, project, branch);
         }
 
         return Vue.http
@@ -101,13 +102,14 @@ export default class CirclePlugin {
 
     /**
      * Check if project has running build
-     * @param vcs
-     * @param username
-     * @param project
-     * @param branch
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string} branch
      * @return {*}
      */
-    hasRunningBuild({ vcs, username, project }, branch = this.branch) {
+    hasRunningBuild(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/running`
@@ -119,13 +121,14 @@ export default class CirclePlugin {
 
     /**
      * Get all builds for project
-     * @param vcs
-     * @param username
-     * @param project
-     * @param branch
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string} branch
      * @return {*}
      */
-    getAllBuilds({ vcs, username, project }, branch = this.branch) {
+    getAllBuilds(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}`
@@ -137,16 +140,15 @@ export default class CirclePlugin {
 
     /**
      * Get artifacts filtered by type
-     * @param type
-     * @param vcs
-     * @param username
-     * @param project
-     * @param token
-     * @param build
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string|number} build
      * @return {*}
      */
-    getArtifactsByType(type, { vcs, username, project }, build = 'latest') {
-        return this.getArtifacts({ vcs, username, project }, build)
+    getArtifactsByType(type, vcs, username, project, build = 'latest') {
+        return this.getArtifacts(vcs, username, project, build)
             .then(artifacts => {
                 return artifacts.filter(item => {
                     return path.extname(item.path) === `.${type}` ? item : null;
@@ -156,7 +158,7 @@ export default class CirclePlugin {
 
     /**
      * Get artifact content
-     * @param url
+     * @param {string} url
      * @return {*}
      */
     getArtifact(url) {
@@ -167,33 +169,29 @@ export default class CirclePlugin {
     }
 
     /**
-     * Get all json artifacts
-     * @param opt
-     * @param build
-     * @return {*}
-     */
-    getJsonArtifacts(opt, build = 'latest') {
-        return this.getArtifactsByType('json', opt, build);
-    }
-
-    /**
      * Get HTML artifacts
-     * @param opt
-     * @param build
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string|number} build
      * @return {*}
      */
-    getHtmlArtifacts(opt, build = 'latest') {
-        return this.getArtifactsByType('html', opt, build);
+    getHtmlArtifacts(vcs, username, project, build = 'latest') {
+        return this.getArtifactsByType('html',  vcs, username, project, build);
     }
 
     /**
      * Get Dashboard Artifact
-     * @param opt
-     * @param build
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string|number} build
      * @return {*}
      */
-    getDashboardArtifacts(opt, build = 'latest') {
-        return this.getArtifactsByType('json', opt, build)
+    getDashboardArtifacts(vcs, username, project, build = 'latest') {
+        return this.getArtifactsByType('json', vcs, username, project, build)
             .then(artifacts => {
                 return artifacts.filter((item) => {
 
@@ -205,37 +203,14 @@ export default class CirclePlugin {
     }
 
     /**
-     * Get content for dashboard artifacts
-     * @param buildArtifacts
-     * @return {Promise<[any]>}
-     */
-    getDashboardContentsByBuild(buildArtifacts) {
-        return Promise.all(buildArtifacts.map((item) => {
-            return this.getArtifact(item.url)
-                .then((data) => {
-                    return data;
-                })
-        }));
-    }
-
-    /**
      * To create the history graph we need to fetch all the artifact data and restructure it in this format:
-     *
-     * - URL1
-     *  - scores
-     *      - Performance: []
-     *      - SEO: []
-     *      - ...: []
-     *
-     *  - builds: []
-     * - URL2
-     *  - ...
-     *
-     * @param opt
-     * @param branch
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string} branch
      * @return {*}
      */
-    getAllBuildsWithDashboardArtifacts({vcs, username, project}, branch = this.branch) {
+    getAllBuildsWithDashboardArtifacts(vcs, username, project, branch= this.branch) {
 
         return Vue.http
             .get(

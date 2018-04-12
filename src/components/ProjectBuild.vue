@@ -70,7 +70,7 @@
 
         methods: {
             load() {
-                this.$circle.getBuildInfo(this.project, this.buildNum, this.$route.query.branch)
+                this.$circle.getBuildInfo(this.project.vcs, this.project.username, this.project.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
                         this.updater = setTimeout(() => {
@@ -88,7 +88,7 @@
 
             getLatestBuildArtifacts() {
                 this.$circle
-                    .getDashboardArtifacts(this.project, this.buildNum ? this.buildNum : 'latest')
+                    .getDashboardArtifacts(this.project.vcs, this.project.username, this.project.project, this.buildNum ? this.buildNum : 'latest')
                     .then(artifacts => {
                         this.artifacts = artifacts.length > 0 ? artifacts : null;
                     })
