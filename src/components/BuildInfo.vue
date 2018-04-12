@@ -53,7 +53,7 @@
         </div>
 
 
-        <div class="col s12 m6 l12">
+        <div class="col s12 m6 l12" v-if="showArtifactList">
             <div class="collection with-header">
                 <div class="collection-header">
                     <h6>{{ $t("message.artifacts") }}</h6>
@@ -87,6 +87,11 @@
             },
 
             showTitle: {
+                type: Boolean,
+                required: false,
+                default: true
+            },
+            showArtifactList: {
                 type: Boolean,
                 required: false,
                 default: true

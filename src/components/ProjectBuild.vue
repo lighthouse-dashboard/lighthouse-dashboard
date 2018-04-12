@@ -5,6 +5,7 @@
             :class="{'xl4': artifacts}"
             :build="build"
             :project="project"
+            :showArtifactList="showArtifactList"
             :showTitle="showTitle"
         />
 
@@ -42,6 +43,12 @@
             },
 
             showTitle: {
+                type: Boolean,
+                required: false,
+                default: true
+            },
+
+            showArtifactList: {
                 type: Boolean,
                 required: false,
                 default: true
