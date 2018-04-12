@@ -31,7 +31,8 @@ module.exports = [
             description: "Load content of artifact. This is used due ti CORS on circle ci side",
             validate: {
                 query: {
-                    url: joi.string().required().description('Url of the artifact')
+                    url: joi.string().required().description('Url of the artifact'),
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
                 }
             }
         }
@@ -44,6 +45,9 @@ module.exports = [
             tags: ['api'],
             description: "Get list of valid projects for a given branch",
             validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
                 params: {
                     branch: joi.string().required().description('Branch of the project'),
                 }
@@ -58,6 +62,9 @@ module.exports = [
             tags: ['api'],
             description: "Invalidate cache of fetched projects",
             validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
                 params: {
                     branch: joi.string().required().description('Branch of the project'),
                 }
@@ -72,6 +79,9 @@ module.exports = [
             tags: ['api'],
             description: "Get builds",
             validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
                 params: {
                     vcs: joi.string().required().description('VCS Type'),
                     username: joi.string().required().description('Username used to fetch CircleCI projects'),
@@ -89,6 +99,9 @@ module.exports = [
             tags: ['api'],
             description: "Get latest build",
             validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
                 params: {
                     vcs: joi.string().required().description('VCS Type'),
                     username: joi.string().required().description('Username used to fetch CircleCI projects'),
@@ -106,6 +119,9 @@ module.exports = [
             tags: ['api'],
             description: "Get current running build",
             validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
                 params: {
                     vcs: joi.string().required().description('VCS Type'),
                     username: joi.string().required().description('Username used to fetch CircleCI projects'),
@@ -128,11 +144,14 @@ module.exports = [
             tags: ['api'],
             description: "Get current running build",
             validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
                 params: {
                     vcs: joi.string().required().description('VCS Type'),
                     username: joi.string().required().description('Username used to fetch CircleCI projects'),
                     project: joi.string().required().description('Specific CI project'),
-                    build:  joi.alternatives().try(joi.string(), joi.number()).required().description('Build number'),
+                    build: joi.alternatives().try(joi.string(), joi.number()).required().description('Build number'),
                 }
             }
         }
@@ -149,11 +168,14 @@ module.exports = [
             tags: ['api'],
             description: "Get all artifacts for build",
             validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
                 params: {
                     vcs: joi.string().required().description('VCS Type'),
                     username: joi.string().required().description('Username used to fetch CircleCI projects'),
                     project: joi.string().required().description('Specific CI project'),
-                    build:  joi.alternatives().try(joi.string(), joi.number()).required().description('Build number'),
+                    build: joi.alternatives().try(joi.string(), joi.number()).required().description('Build number'),
                 }
             }
         }

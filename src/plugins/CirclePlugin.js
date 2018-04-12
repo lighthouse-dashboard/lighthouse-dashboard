@@ -5,21 +5,20 @@ import sortBuildArtifactsByUrl from './helper';
 
 
 export default class CirclePlugin {
-    constructor(api, branch, limit) {
+    constructor(api, branch) {
         this.branch = branch;
-        this.limit = limit;
         this.endpoint = api
 
     }
 
     static install(_Vue, opts) {
-        _Vue.prototype.$circle = new CirclePlugin(opts.api, opts.branch, opts.limit);
+        _Vue.prototype.$circle = new CirclePlugin(opts.api, opts.branch);
     }
 
     /**
      * Find all projects that have supported lighthouse artifacts
-     * @param token
      * @return {*}
+     * @param branch
      */
     getAllProjects(branch = this.branch) {
         return Vue.http.get(`${this.endpoint}/api/projects/${branch}`)
@@ -30,8 +29,8 @@ export default class CirclePlugin {
 
     /**
      * Invalidate projects cache
-     * @param token
      * @return {*}
+     * @param branch
      */
     invalidateProjectsCache(branch = this.branch) {
         return Vue.http.delete(`${this.endpoint}/api/projects/${branch}`)
@@ -82,8 +81,8 @@ export default class CirclePlugin {
      * @param vcs
      * @param username
      * @param project
-     * @param token
      * @param build
+     * @param branch
      * @return {*}
      */
     getBuildInfo({ vcs, username, project }, build, branch = this.branch) {
@@ -105,7 +104,7 @@ export default class CirclePlugin {
      * @param vcs
      * @param username
      * @param project
-     * @param token
+     * @param branch
      * @return {*}
      */
     hasRunningBuild({ vcs, username, project }, branch = this.branch) {
@@ -119,14 +118,14 @@ export default class CirclePlugin {
     }
 
     /**
-     * Get all builds for oroject
+     * Get all builds for project
      * @param vcs
      * @param username
      * @param project
-     * @param token
+     * @param branch
      * @return {*}
      */
-    getAllBuilds({ vcs, username, project }, limit = this.limit, branch = this.branch) {
+    getAllBuilds({ vcs, username, project }, branch = this.branch) {
         return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}`
@@ -208,7 +207,6 @@ export default class CirclePlugin {
     /**
      * Get content for dashboard artifacts
      * @param buildArtifacts
-     * @param token
      * @return {Promise<[any]>}
      */
     getDashboardContentsByBuild(buildArtifacts) {
@@ -234,10 +232,11 @@ export default class CirclePlugin {
      *  - ...
      *
      * @param opt
+     * @param branch
      * @return {*}
      */
-    getAllBuildsWithDashboardArtifacts(opt, limit = this.limit, branch = this.branch) {
-        return this.getAllBuilds(opt, limit, branch)
+    getAllBuildsWithDashboardArtifacts(opt, branch = this.branch) {
+        return this.getAllBuilds(opt, branch)
             .then(builds => {
                 this.builds = builds;
                 const p = builds.map((item) => {
@@ -255,7 +254,7 @@ export default class CirclePlugin {
             })
             .then((builds) => {
                 return Promise.all(builds.map((item) => {
-                    return this.getDashboardContentsByBuild(item.artifacts, this.token)
+                    return this.getDashboardContentsByBuild(item.artifacts)
                         .then((data) => {
                             item.artifactContent = data;
                             return item;

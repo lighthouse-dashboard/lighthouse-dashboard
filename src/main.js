@@ -24,7 +24,6 @@ import translations from './translations';
 
 import {
     refreshInterval,
-    buildsLimit,
     dateFormat,
     layout,
     defaultBranch,
@@ -36,7 +35,6 @@ import {
 Vue.config.productionTip = false;
 
 Vue.config.refreshInterval = refreshInterval;
-Vue.config.buildsLimit = buildsLimit;
 Vue.config.dateFormat = dateFormat;
 Vue.config.layout = layout; // list | grid
 Vue.config.defaultBranch = defaultBranch;
@@ -54,7 +52,6 @@ Vue.use(VueCookie);
 Vue.use(CirclePlugin, {
     api: apiEndpoint,
     branch: Vue.config.defaultBranch,
-    limit: Vue.config.buildsLimit,
 });
 Vue.use(ToastPlugin);
 Vue.use(AuthPlugin);
