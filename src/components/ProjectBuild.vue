@@ -77,7 +77,7 @@
 
         methods: {
             load() {
-                this.$circle.getBuildInfo(this.project.vcs, this.project.username, this.project.project, this.buildNum, this.$route.query.branch)
+                this.$circle.getBuildInfo(this.project.vcs, this.project.username, this.project.project, false, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
                         this.updater = setTimeout(() => {

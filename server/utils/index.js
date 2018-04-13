@@ -72,6 +72,27 @@ function checkIfProjectIsSupported(vcs, username, project, branch, token) {
 }
 
 /**
+ * GCheck if latest build of branch contains dashboard artifacts
+ *
+ * @param {string} vcs
+ * @param {string} username
+ * @param {string} project
+ * @param {string} build
+ * @param {string} token
+ * @return {*|PromiseLike<T>|Promise<T>}
+ */
+function checkIfBuildIsSupported(vcs, username, project, build, token) {
+    return getDashboardArtifacts(vcs, username, project, build, token)
+        .then(artifacts => {
+            if (!artifacts || artifacts.length <= 0) {
+                return false;
+            }
+
+            return true;
+        });
+}
+
+/**
  * Sort projects by it's latest build timestamp
  *
  * @param {Object[]} projects
@@ -129,7 +150,7 @@ function sortProjectByLatestBuild(projects, branch, token) {
  */
 function getAllProjects(token, branch) {
     if (cachedResponse[branch] && cachedResponse[branch].length > 0) {
-        return Promise.resolve(cachedResponse[branch]);
+        //return Promise.resolve(cachedResponse[branch]);
     }
 
     return new Promise((resolve, rej) => {
@@ -141,12 +162,14 @@ function getAllProjects(token, branch) {
         });
     })
         .then((projects) => {
-
             const p = projects.map((project) => {
-                return checkIfProjectIsSupported('github', project.username, project.reponame, branch, token)
+                if (!project.branches[branch] || !project.branches[branch].last_success || !project.branches[branch].last_success.build_num) {
+                    return;
+                }
+                return checkIfBuildIsSupported('github', project.username, project.reponame, project.branches[branch].last_success.build_num, token)
                     .then((isSupported) => {
                         if (!isSupported) {
-                            return
+                            return;
                         }
 
                         return {
@@ -164,9 +187,6 @@ function getAllProjects(token, branch) {
                     return item;
                 }
             })
-        })
-        .then((projects) => {
-            return sortProjectByLatestBuild(projects, branch, token);
         })
         .then((projects) => {
             cachedResponse[branch] = projects;
@@ -224,7 +244,7 @@ function getArtifacts(vcs, username, project, build, token) {
         })
     })
         .then(artifacts => {
-            artifacts = artifacts.map( (artifact) => {
+            artifacts = artifacts.map((artifact) => {
                 artifact.key = path.basename(artifact.path).split('.').shift();
                 return artifact;
             });
@@ -317,5 +337,6 @@ module.exports = {
     getBuild,
     invalidateCache,
     getDashboardArtifacts,
-    getArtifactContent
+    getArtifactContent,
+    sortProjectByLatestBuild
 };
