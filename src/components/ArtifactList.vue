@@ -22,14 +22,17 @@
                 type: String,
                 required: true
             },
+
             username: {
                 type: String,
                 required: true
             },
+
             project: {
                 type: String,
                 required: true
             },
+
             buildNum: {
                 type: [String, Number],
                 required: true

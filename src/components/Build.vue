@@ -4,17 +4,20 @@
             class='col s12'
             :class="{'xl4': artifacts}"
             :build="build"
+            :vcs="vcs"
+            :username="username"
             :project="project"
+            :buildNum="buildNum"
             :showArtifactList="showArtifactList"
             :showTitle="showTitle"
         />
 
-        <BuildView
+        <BuildArtifacts
             v-if="artifacts && artifacts.length > 0"
             class='col s12 xl8'
-            :vcs="project.vcs"
-            :username="project.username"
-            :project="project.project"
+            :vcs="vcs"
+            :username="username"
+            :project="project"
             :buildNum="buildNum"
         />
     </div>
@@ -24,25 +27,34 @@
     import Vue from 'vue';
 
     import BuildInfo from "@/components/BuildInfo";
-    import BuildView from "@/components/BuildView";
+    import BuildArtifacts from "@/components/BuildArtifacts";
 
     export default {
 
         components: {
-            BuildView,
+            BuildArtifacts,
             BuildInfo,
         },
 
         props: {
+            vcs: {
+                type: String,
+                required: true
+            },
+
+            username: {
+                type: String,
+                required: true
+            },
+
             project: {
-                type: Object,
+                type: String,
                 required: true
             },
 
             buildNum: {
                 type: Number,
-                required: false,
-                default: null,
+                required: true
             },
 
             showTitle: {
@@ -80,7 +92,7 @@
 
         methods: {
             load() {
-                this.$circle.getBuildInfo(this.project.vcs, this.project.username, this.project.project, false, this.$route.query.branch)
+                this.$circle.getBuildInfo(this.vcs, this.username, this.project, false, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
                         this.updater = setTimeout(() => {
@@ -98,7 +110,7 @@
 
             getLatestBuildArtifacts() {
                 this.$circle
-                    .getDashboardArtifacts(this.project.vcs, this.project.username, this.project.project, this.buildNum)
+                    .getDashboardArtifacts(this.vcs, this.username, this.project, this.buildNum)
                     .then(artifacts => {
                         this.artifacts = artifacts.length > 0 ? artifacts : null;
                     })

@@ -15,10 +15,12 @@
                 type: Object,
                 required: true
             },
+
             categories: {
                 type: Array,
                 required: true
             },
+
             url: {
                 type: String,
                 required: true

@@ -21,26 +21,42 @@
                 </h5>
             </div>
 
-            <ProjectBuild
-                v-for="(project, index) in projects"
-                class='col s12'
-                :class="{'grey lighten-5': layout === 'list' ? index%2 : false, 'xl6': layout === 'grid'}"
-                :key="project.buildIdentifier"
+            <div v-for="(project, index) in projects"
+                 class='col s12'
+                 :class="{'grey lighten-5':  index%2}"
+                 :key="project.buildIdentifier"
+            >
+                <DashboardProjectTitle
                 :buildNum="project.buildIdentifier"
-                :showArtifactList="false"
-                :project="project"/>
+                    :vcs="project.vcs"
+                    :username="project.username"
+                    :project="project.project">{{project.project}}
+                </DashboardProjectTitle>
+
+                <BuildArtifacts
+                    :buildNum="project.buildIdentifier"
+                    :vcs="project.vcs"
+                    :username="project.username"
+                    :project="project.project"
+                    :height="200"
+                />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import Vue from "vue";
-    import ProjectBuild from "@/components/ProjectBuild";
+    import Build from "@/components/Build";
+    import BuildArtifacts from "@/components/BuildArtifacts";
+    import DashboardProjectTitle from "@/components/DashboardProjectTitle";
 
     export default {
 
         components: {
-            ProjectBuild,
+            Build,
+            BuildArtifacts,
+            DashboardProjectTitle
         },
 
         data() {

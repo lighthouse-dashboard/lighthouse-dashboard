@@ -16,6 +16,11 @@
             categories: {
                 type: Array,
                 required: true
+            },
+            height: {
+                type: Number,
+                required: true,
+                default: 340
             }
         },
 
@@ -57,7 +62,7 @@
                         pattern: ["#607D8B", "#66bb6a"],
                     },
                     size: {
-                        height: 340
+                        height: this.height
                     },
                     bindto: this.$refs.chart
                 };

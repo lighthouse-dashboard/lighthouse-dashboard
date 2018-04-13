@@ -1,7 +1,7 @@
 <template>
     <div class="row" v-if="build">
         <h2 v-if="showTitle">
-            <router-link :to="{name: 'overview', params: project, query: $route.query}">
+            <router-link :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
                 {{build.reponame}}
             </router-link>
 
@@ -55,10 +55,10 @@
 
         <div class="col s12 m6 l12" v-if="showArtifactList">
             <ArtifactList
-                :vcs="project.vcs"
-                :username="project.username"
-                :project="project.project"
-                :buildNum="build.build_num"
+                :vcs="vcs"
+                :username="username"
+                :project="project"
+                :buildNum="buildNum"
             />
         </div>
     </div>
@@ -75,8 +75,23 @@
         },
         props: {
 
+            vcs: {
+                type: String,
+                required: true
+            },
+
+            username: {
+                type: String,
+                required: true
+            },
+
             project: {
-                type: Object,
+                type: String,
+                required: true
+            },
+
+            buildNum: {
+                type: Number,
                 required: true
             },
 

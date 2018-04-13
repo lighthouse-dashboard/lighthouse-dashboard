@@ -1,12 +1,13 @@
 <template>
     <div>
         <loader v-if="!builds"/>
-
         <div v-if="builds">
-            <ProjectBuild
+            <Build
                 v-for="(build, index) in builds"
                 :class="{'grey lighten-5': index%2}"
-                :project="projectObject"
+                :vcs="vcs"
+                :username="username"
+                :project="project"
                 :buildNum="build.build_num"
                 :showTitle="false"
                 :key="build.build_num"/>
@@ -17,12 +18,12 @@
 <script>
     import Vue from "vue";
 
-    import ProjectBuild from "@/components/ProjectBuild";
+    import Build from "@/components/Build";
 
     export default {
 
         components: {
-            ProjectBuild,
+            Build,
         },
 
         props: {

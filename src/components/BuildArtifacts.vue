@@ -3,7 +3,7 @@
         <p v-if="!artifacts">{{ $t("message.no_dashboard_available") }}</p>
         <div v-for="(data, key) in chartData" :key="key">
             <h5><a :href="key" target="_blank">{{key}}</a></h5>
-            <BuildChart :columns="data.columns" :categories="categories"/>
+            <BuildChart :columns="data.columns" :categories="categories" :height="height"/>
         </div>
     </div>
 </template>
@@ -32,6 +32,12 @@
             buildNum: {
                 type: Number,
                 required: true
+            },
+
+            height: {
+                type: Number,
+                required: true,
+                default: 340
             }
         },
 
