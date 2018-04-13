@@ -36,7 +36,6 @@ function getArtifactsByType(type, vcs, username, project, build = 'latest', toke
 function getDashboardArtifacts(vcs, username, project, build, token) {
     return getArtifactsByType('json', vcs, username, project, build, token)
         .then(artifacts => {
-            console.log(artifacts)
             return artifacts.filter((item) => {
                 if (path.basename(item.path).indexOf('.dashboard.') !== -1) {
                     return item;
@@ -130,7 +129,7 @@ function sortProjectByLatestBuild(projects, branch, token) {
  */
 function getAllProjects(token, branch) {
     if (cachedResponse[branch] && cachedResponse[branch].length > 0) {
-        //return Promise.resolve(cachedResponse[branch]);
+        return Promise.resolve(cachedResponse[branch]);
     }
 
     return new Promise((resolve, rej) => {
@@ -222,8 +221,15 @@ function getArtifacts(vcs, username, project, build, token) {
                 return rej(Boom.boomify(err));
             }
             return resolve(addTokenToHTMLArtifacts(body, token));
-        });
-    });
+        })
+    })
+        .then(artifacts => {
+            artifacts = artifacts.map( (artifact) => {
+                artifact.key = path.basename(artifact.path).split('.').shift();
+                return artifact;
+            });
+            return artifacts;
+        })
 }
 
 /**

@@ -1,17 +1,27 @@
 <template>
     <div>
-        <h6><a :href="url" target="_blank">{{url}}</a></h6>
-        <div ref="chart"></div>
+        <h6>
+            <a :href="url" target="_blank">{{url}}</a>
+            <a class="right" :href="artifactUrl" target="_blank">{{artifactPath}}</a>
+        </h6>
+        <BuildChart :columns="columns" :categories="categories" v-if="categories && columns"/>
     </div>
 </template>
 
 <script>
 
-    import bb from 'billboard.js';
-
+    import BuildChart from '@/components/BuildChart.vue';
     export default {
+        components: {
+            BuildChart
+        },
+
         props: {
             artifactUrl: {
+                type: String,
+                required: true
+            },
+            artifactPath: {
                 type: String,
                 required: true
             },
@@ -19,9 +29,9 @@
 
         data() {
             return {
-                reportCategories: null,
+                columns: null,
                 url: null,
-                isLoaded: false
+                categories: null
             };
         },
 
@@ -33,8 +43,6 @@
             load() {
                 this.$circle.getArtifact(this.artifactUrl)
                     .then(data => {
-                        this.isLoaded = true;
-
                         const { budget, categories } = data;
                         if (!categories) {
                             return;
@@ -49,54 +57,18 @@
                             return budget[item.id] ? budget[item.id] : null;
                         });
 
-                        const categoryNames = categories.map((item) => {
+                        this.categories = categories.map((item) => {
                             return item.name;
                         });
 
-                        const config = {
-                            data: {
-                                columns: [
-                                    ['Report', ...shrinkedCategories],
-                                    ['Budget', ...shrinkedBudget],
-                                ],
-                                type: "bar",
-
-                                labels: true
-                            },
-                            axis: {
-                                x: {
-                                    type: "category",
-                                    categories: categoryNames
-                                },
-                                y: {
-                                    show: false,
-                                    label: "Score",
-                                    max: 100,
-                                    min: 0,
-                                    top: 0,
-                                    bottom: 0
-                                }
-                            },
-                            legend: {
-                                show: false
-                            },
-                            color: {
-                                pattern: ["#607D8B", "#66bb6a"],
-                            },
-                            size: {
-                                height: 340
-                            },
-                            bindto: this.$refs.chart
-                        };
-
-                        bb.generate(config);
-                    })
-                    .catch((e) => {
-                        this.$toast.error(e);
+                        this.columns = [
+                            ['Report', ...shrinkedCategories],
+                            ['Budget', ...shrinkedBudget],
+                        ]
                     })
             }
         }
-    };
+    }
 </script>
 
 <style scoped>
