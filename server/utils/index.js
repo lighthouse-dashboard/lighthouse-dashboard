@@ -50,33 +50,6 @@ function getDashboardArtifacts(vcs, username, project, build, token) {
  * @param {string} vcs
  * @param {string} username
  * @param {string} project
- * @param {string} branch
- * @param {string} token
- * @return {*|PromiseLike<T>|Promise<T>}
- */
-function checkIfProjectIsSupported(vcs, username, project, branch, token) {
-    return getLatestBranchBuild(vcs, username, project, branch, token, 'successful')
-        .then((build) => {
-            if (!build) {
-                return [];
-            }
-            return getDashboardArtifacts(vcs, username, project, build.build_num, token);
-        })
-        .then(artifacts => {
-            if (!artifacts || artifacts.length <= 0) {
-                return false;
-            }
-
-            return true;
-        });
-}
-
-/**
- * GCheck if latest build of branch contains dashboard artifacts
- *
- * @param {string} vcs
- * @param {string} username
- * @param {string} project
  * @param {string} build
  * @param {string} token
  * @return {*|PromiseLike<T>|Promise<T>}
@@ -150,7 +123,7 @@ function sortProjectByLatestBuild(projects, branch, token) {
  */
 function getAllProjects(token, branch) {
     if (cachedResponse[branch] && cachedResponse[branch].length > 0) {
-        //return Promise.resolve(cachedResponse[branch]);
+        return Promise.resolve(cachedResponse[branch]);
     }
 
     return new Promise((resolve, rej) => {

@@ -9,9 +9,11 @@ function collectReportEndpoints(builds) {
 
         for (let a = 0; a < artifactContent.length; a++) {
             const artifact = artifactContent[a];
+            artifact.tag = artifact.tag || 'untagged';
+            artifact.key = `${artifact.tag}:${artifact.url}`;
 
-            if (!urls[artifact.url]) {
-                urls[artifact.url] = {
+            if (!urls[artifact.key]) {
+                urls[artifact.key] = {
                     scores: {},
                     builds: []
                 };
@@ -33,12 +35,15 @@ function collectReportCategories(builds) {
 
 
         for (let a = 0; a < artifactContent.length; a++) {
-            const { categories, url } = artifactContent[a];
-            endpoints[url].builds.push('#' + build_num);
+            const artifact = artifactContent[a];
+            artifact.key = artifact.key || artifact.tag;
+
+            const { categories, key } = artifact;
+            endpoints[key].builds.push('#' + build_num);
 
 
             const simplifiedCategory = simplifyCategoryScores(categories);
-            addSimplifiedCategoryToResults(endpoints, url, simplifiedCategory);
+            addSimplifiedCategoryToResults(endpoints, key, simplifiedCategory);
         }
     }
 
