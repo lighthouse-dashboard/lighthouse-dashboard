@@ -63,3 +63,9 @@ git push deis master
  - CIRCLE_TOKEN - circle ci token
  - PORT - port for the server
  - LIMIT - limit of build numbers fetched
+
+# Add new project
+- Add the project to circleci
+- Configure the project so it runs with [`deihouse`](https://www.npmjs.com/package/@dreipol/lighthouse-runner)
+- Make sure that the `dreipoldev` account has access to it (circleci & github)
+- Clear the cash in the dashboard

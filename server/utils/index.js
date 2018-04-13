@@ -36,6 +36,7 @@ function getArtifactsByType(type, vcs, username, project, build = 'latest', toke
 function getDashboardArtifacts(vcs, username, project, build, token) {
     return getArtifactsByType('json', vcs, username, project, build, token)
         .then(artifacts => {
+            console.log(artifacts)
             return artifacts.filter((item) => {
                 if (path.basename(item.path).indexOf('.dashboard.') !== -1) {
                     return item;
@@ -129,7 +130,7 @@ function sortProjectByLatestBuild(projects, branch, token) {
  */
 function getAllProjects(token, branch) {
     if (cachedResponse[branch] && cachedResponse[branch].length > 0) {
-        return Promise.resolve(cachedResponse[branch]);
+        //return Promise.resolve(cachedResponse[branch]);
     }
 
     return new Promise((resolve, rej) => {
@@ -141,6 +142,7 @@ function getAllProjects(token, branch) {
         });
     })
         .then((projects) => {
+
             const p = projects.map((project) => {
                 return checkIfProjectIsSupported('github', project.username, project.reponame, branch, token)
                     .then((isSupported) => {
