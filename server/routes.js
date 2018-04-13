@@ -178,6 +178,26 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/api/projects/{vcs}/{username}/{project}/build/latest/artifacts',
+        handler: require('./handlers/getArtifacts'),
+        options: {
+            tags: ['api'],
+            description: "Get all artifacts for build",
+            validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                },
+                params: {
+                    vcs: joi.string().required().description('VCS Type'),
+                    username: joi.string().required().description('Username used to fetch CircleCI projects'),
+                    project: joi.string().required().description('Specific CI project'),
+                    build: joi.alternatives().try(joi.string(), joi.number()).required().description('Build number'),
+                }
+            }
+        }
+    },
+    {
+        method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/artifacts',
         handler: require('./handlers/getArtifacts'),
         options: {

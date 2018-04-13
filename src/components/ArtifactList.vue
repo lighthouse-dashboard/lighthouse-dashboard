@@ -1,5 +1,5 @@
 <template>
-    <div class="collection with-header">
+    <div class="collection with-header" v-if="htmlArtifacts && htmlArtifacts.length > 0">
         <div class="collection-header">
             <h6>{{ $t("message.artifacts") }}</h6>
         </div>

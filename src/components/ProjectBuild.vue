@@ -10,7 +10,7 @@
         />
 
         <BuildView
-            v-if="artifacts"
+            v-if="artifacts && artifacts.length > 0"
             class='col s12 xl8'
             :artifacts="artifacts"
         />
@@ -95,7 +95,7 @@
 
             getLatestBuildArtifacts() {
                 this.$circle
-                    .getDashboardArtifacts(this.project.vcs, this.project.username, this.project.project, this.buildNum ? this.buildNum : 'latest')
+                    .getDashboardArtifacts(this.project.vcs, this.project.username, this.project.project, this.buildNum)
                     .then(artifacts => {
                         this.artifacts = artifacts.length > 0 ? artifacts : null;
                     })

@@ -26,6 +26,7 @@
                 class='col s12'
                 :class="{'grey lighten-5': layout === 'list' ? index%2 : false, 'xl6': layout === 'grid'}"
                 :key="project.buildIdentifier"
+                :buildNum="project.buildIdentifier"
                 :showArtifactList="false"
                 :project="project"/>
         </div>

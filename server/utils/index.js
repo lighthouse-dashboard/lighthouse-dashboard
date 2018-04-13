@@ -55,7 +55,7 @@ function getDashboardArtifacts(vcs, username, project, build, token) {
  * @return {*|PromiseLike<T>|Promise<T>}
  */
 function checkIfProjectIsSupported(vcs, username, project, branch, token) {
-    return getLatestBranchBuild(vcs, username, project, branch, token)
+    return getLatestBranchBuild(vcs, username, project, branch, token, 'successful')
         .then((build) => {
             if (!build) {
                 return [];
