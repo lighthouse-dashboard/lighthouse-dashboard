@@ -25,14 +25,12 @@
 
     import BuildInfo from "@/components/BuildInfo";
     import BuildView from "@/components/BuildView";
-    import ArtifactChart from "@/components/ArtifactChart";
 
     export default {
 
         components: {
             BuildView,
             BuildInfo,
-            ArtifactChart
         },
 
         props: {
