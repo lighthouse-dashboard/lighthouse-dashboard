@@ -24,7 +24,5 @@
                 branches: Vue.config.selectableBranches,
             };
         },
-
-
     };
 </script>

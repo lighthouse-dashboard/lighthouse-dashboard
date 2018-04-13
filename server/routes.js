@@ -191,7 +191,6 @@ module.exports = [
                     vcs: joi.string().required().description('VCS Type'),
                     username: joi.string().required().description('Username used to fetch CircleCI projects'),
                     project: joi.string().required().description('Specific CI project'),
-                    build: joi.alternatives().try(joi.string(), joi.number()).required().description('Build number'),
                 }
             }
         }

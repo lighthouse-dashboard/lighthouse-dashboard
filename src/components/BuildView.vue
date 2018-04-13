@@ -9,19 +9,28 @@
 </template>
 
 <script>
-    import ArtifactViewer from "./ArtifactViewer";
-
     import BuildChart from '@/components/BuildChart.vue';
 
     export default {
         components: {
-            ArtifactViewer,
             BuildChart,
         },
 
         props: {
-            artifacts: {
-                type: Array,
+            vcs: {
+                type: String,
+                required: true
+            },
+            username: {
+                type: String,
+                required: true
+            },
+            project: {
+                type: String,
+                required: true
+            },
+            buildNum: {
+                type: Number,
                 required: true
             }
         },
@@ -30,70 +39,87 @@
             return {
                 chartData: null,
                 categories: null,
+                artifacts: null,
             };
         },
 
         mounted() {
-            const p = [];
-
-            this.artifacts.forEach((item) => {
-                p.push(this.$circle.getArtifact(item.url)
-                    .then((result) => {
-                        return result;
-                    }))
-            });
-
-            Promise.all(p)
-                .then((artifacts) => {
-                    const endpoints = {};
-
-                    artifacts.forEach((item) => {
-                        if (!endpoints[item.url]) {
-                            endpoints[item.url] = [];
-                        }
-
-                        endpoints[item.url].push(item);
-                    });
-
-                    return endpoints;
+            this.loadArtifacts()
+                .then(() => {
+                    return this.buildChartData();
                 })
-                .then((data) => {
-                    const keys = Object.keys(data);
-                    const result = {};
+        },
+        methods: {
+            loadArtifacts() {
+                return this.$circle
+                    .getDashboardArtifacts(this.vcs, this.username, this.project, this.buildNum)
+                    .then(artifacts => {
+                        this.artifacts = artifacts.length > 0 ? artifacts : null;
+                    })
+            },
 
-                    keys.forEach((key) => {
-                        const reports = data[key];
-                        if (!result[key]) {
-                            result[key] = { columns: [] };
-                        }
+            buildChartData() {
+                const p = [];
 
-                        reports.forEach((item) => {
-                            const { budget, categories, url, tag } = item;
-                            if (!categories) {
-                                return;
+                this.artifacts.forEach((item) => {
+                    p.push(this.$circle.getArtifact(item.url)
+                        .then((result) => {
+                            return result;
+                        }))
+                });
+
+                Promise.all(p)
+                    .then((artifacts) => {
+                        const endpoints = {};
+
+                        artifacts.forEach((item) => {
+                            if (!endpoints[item.url]) {
+                                endpoints[item.url] = [];
                             }
 
-                            const shrinkedCategories = categories.map((item) => {
-                                return item.score;
-                            });
+                            endpoints[item.url].push(item);
+                        });
 
-                            const shrinkedBudget = categories.map((item) => {
-                                return budget[item.id] ? budget[item.id] : null;
-                            });
+                        return endpoints;
+                    })
+                    .then((data) => {
+                        const keys = Object.keys(data);
+                        const result = {};
 
-                            this.categories = categories.map((item) => {
-                                return item.name;
-                            });
+                        keys.forEach((key) => {
+                            const reports = data[key];
+                            if (!result[key]) {
+                                result[key] = { columns: [] };
+                            }
 
-                            result[key].columns.push(
-                                [`Report ${tag ? tag : ''}`, ...shrinkedCategories],
-                                [`Budget ${tag ? tag : ''}`, ...shrinkedBudget],
-                            );
-                        })
+                            reports.forEach((item) => {
+                                const { budget, categories, url, tag } = item;
+                                if (!categories) {
+                                    return;
+                                }
+
+                                const shrinkedCategories = categories.map((item) => {
+                                    return item.score;
+                                });
+
+                                const shrinkedBudget = categories.map((item) => {
+                                    return budget[item.id] ? budget[item.id] : null;
+                                });
+
+                                this.categories = categories.map((item) => {
+                                    return item.name;
+                                });
+
+                                result[key].columns.push(
+                                    [`Report ${tag ? tag : ''}`, ...shrinkedCategories],
+                                    [`Budget ${tag ? tag : ''}`, ...shrinkedBudget],
+                                );
+                            })
+                        });
+
+                        this.chartData = result;
                     });
-
-                    this.chartData = result;
-                });
+            }
         }
 
     };

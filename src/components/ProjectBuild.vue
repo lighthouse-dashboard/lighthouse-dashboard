@@ -12,7 +12,10 @@
         <BuildView
             v-if="artifacts && artifacts.length > 0"
             class='col s12 xl8'
-            :artifacts="artifacts"
+            :vcs="project.vcs"
+            :username="project.username"
+            :project="project.project"
+            :buildNum="buildNum"
         />
     </div>
 </template>
@@ -22,12 +25,14 @@
 
     import BuildInfo from "@/components/BuildInfo";
     import BuildView from "@/components/BuildView";
+    import ArtifactChart from "@/components/ArtifactChart";
 
     export default {
 
         components: {
             BuildView,
-            BuildInfo
+            BuildInfo,
+            ArtifactChart
         },
 
         props: {
@@ -64,7 +69,7 @@
             };
         },
 
-         beforeDestroy() {
+        beforeDestroy() {
             if (this.updater) {
                 clearTimeout(this.updater);
             }
@@ -86,7 +91,7 @@
                     })
                     .catch((e) => {
                         this.$toast.error(e);
-                         if (e.status === 401) {
+                        if (e.status === 401) {
                             this.$auth.logout();
                             this.$router.push({ name: 'login' });
                         }
@@ -101,7 +106,7 @@
                     })
                     .catch((e) => {
                         this.$toast.error(e);
-                         if (e.status === 401) {
+                        if (e.status === 401) {
                             this.$auth.logout();
                             this.$router.push({ name: 'login' });
                         }
