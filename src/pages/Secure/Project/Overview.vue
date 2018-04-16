@@ -9,7 +9,6 @@
                 :username="username"
                 :project="project"
                 :buildNum="build.build_num"
-                :showTitle="false"
                 :key="build.build_num"/>
         </div>
     </div>

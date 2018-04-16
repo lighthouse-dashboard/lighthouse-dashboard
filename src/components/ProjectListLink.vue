@@ -4,7 +4,7 @@
         :to="{name: 'overview', params: project, query: $route.query}"
         active-class="active">
         <a>
-            <i class="material-icons" v-if="hasRunningBuild">cloud_circle</i> {{ project.project }}
+            <i class="material-icons green-text lighten-1" v-if="hasRunningBuild">cloud_circle</i> {{ project.project }}
         </a>
     </router-link>
 </template>

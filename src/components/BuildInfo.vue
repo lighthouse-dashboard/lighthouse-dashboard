@@ -1,17 +1,14 @@
 <template>
     <div class="row" v-if="build">
-        <h2 v-if="showTitle">
-            <router-link :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
-                {{build.reponame}}
-            </router-link>
-
+        <h2>
+            #{{ build.build_num }}
         </h2>
 
         <div class="col s12 m6 l12">
             <ul class="collection">
-                <li class="collection-item avatar">
-                    <img :src="userAvatar" alt="" class="circle">
-                    <b>{{ $t("message.user") }}</b> {{user}}
+                <li class="collection-item avatar" v-if="user">
+                    <img :src="user.avatar_url" alt="" class="circle">
+                    <b>{{ $t("message.user") }}</b> {{user.login}}
                 </li>
 
                 <li class="collection-item">
@@ -28,10 +25,6 @@
 
                 <li class="collection-item">
                     <b>{{ $t("message.build_completed") }}</b> {{ buildCompletedTime }}
-                </li>
-
-                <li class="collection-item">
-                    <b>{{ $t("message.build_num") }}</b> #{{build.build_num}}
                 </li>
 
                 <li class="collection-item" :class="buildStatusClass">
@@ -52,8 +45,7 @@
             </ul>
         </div>
 
-
-        <div class="col s12 m6 l12" v-if="showArtifactList">
+        <div class="col s12 m6 l12">
             <ArtifactList
                 :vcs="vcs"
                 :username="username"
@@ -95,29 +87,14 @@
                 required: true
             },
 
-            build: {
-                type: Object,
-                required: true
-            },
 
-            showTitle: {
-                type: Boolean,
-                required: false,
-                default: true
-            },
-
-            showArtifactList: {
-                type: Boolean,
-                required: false,
-                default: true
-            }
         },
 
         data() {
             return {
+                build: null,
                 branch: null,
                 user: null,
-                userAvatar: null,
                 htmlArtifacts: [],
                 buildCompletedTime: null,
                 buildDuration: null,
@@ -126,34 +103,54 @@
         },
 
         mounted() {
-            const {
-                user,
-                stop_time,
-                build_time_millis,
-                status,
-            } = this.build;
+            this.loadBuild()
+                .then(() => {
+                    this.loadInfo();
+                })
+        },
 
-            const classMap = {
-                'success': 'green lighten-4',
-                'fixed': 'green lighten-4',
-                'failed': 'red lighten-4',
-            };
+        methods: {
+            loadBuild() {
+                return this.$circle.getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
+                    .then((build) => {
+                        this.build = build;
+                    })
+                    .catch((e) => {
+                        this.$toast.error(e);
+                        if (e.status === 401) {
+                            this.$auth.logout();
+                            this.$router.push({ name: 'login' });
+                        }
+                    })
+            },
+            loadInfo() {
+                const {
+                    user,
+                    stop_time,
+                    build_time_millis,
+                    status,
+                } = this.build;
 
-            this.buildStatusClass = classMap[status] || null;
+                const classMap = {
+                    'success': 'green lighten-4',
+                    'fixed': 'green lighten-4',
+                    'failed': 'red lighten-4',
+                };
 
-            const mStopTime = moment(stop_time);
-            const now = moment();
-            if (now.diff(mStopTime, 'hours') < 12) {
-                this.buildCompletedTime = mStopTime.fromNow();
-            } else {
-                this.buildCompletedTime = mStopTime.format(Vue.config.dateFormat);
+                this.buildStatusClass = classMap[status] || null;
+
+                const mStopTime = moment(stop_time);
+                const now = moment();
+                if (now.diff(mStopTime, 'hours') < 12) {
+                    this.buildCompletedTime = mStopTime.fromNow();
+                } else {
+                    this.buildCompletedTime = mStopTime.format(Vue.config.dateFormat);
+                }
+
+                this.buildDuration = moment.duration(build_time_millis).humanize();
+
+                this.user = user;
             }
-
-            this.buildDuration = moment.duration(build_time_millis).humanize();
-
-            this.user = user.login;
-            this.userAvatar = user.avatar_url;
-
         }
     };
 </script>

@@ -1,13 +1,15 @@
 <template>
-    <div class="row" v-if="build" :class="buildStatusClass">
-        <div class="col s4">#{{build.build_num}} - {{ buildCompletedTime }}</div>
-
-        <div class="col s4">
+    <div v-if="build" class="row">
+        <div class="col s6 m3">
             <router-link
+                lass="center"
                 :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
-                <h5 class="center">{{ project }}</h5>
+                {{ project }}
             </router-link>
         </div>
+        <div class="col s6 m3">#{{build.build_num}}</div>
+        <div class="col s6 m3">{{ buildCompletedTime }}</div>
+        <div class="col s6 m3">by {{user.login}}</div>
     </div>
 </template>
 
@@ -44,7 +46,6 @@
             return {
                 branch: null,
                 user: null,
-                userAvatar: null,
                 htmlArtifacts: [],
                 buildCompletedTime: null,
                 buildDuration: null,
@@ -66,6 +67,7 @@
                         const {
                             stop_time,
                             status,
+                            user
                         } = this.build;
 
                         const classMap = {
@@ -83,6 +85,8 @@
                         } else {
                             this.buildCompletedTime = mStopTime.format(Vue.config.dateFormat);
                         }
+
+                        this.user = user;
                     });
             }
         }

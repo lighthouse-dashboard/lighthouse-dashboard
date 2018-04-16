@@ -1,15 +1,12 @@
 <template>
-    <div class="row" v-if="build">
+    <div class="row">
         <BuildInfo
             class='col s12'
             :class="{'xl4': artifacts}"
-            :build="build"
             :vcs="vcs"
             :username="username"
             :project="project"
             :buildNum="buildNum"
-            :showArtifactList="showArtifactList"
-            :showTitle="showTitle"
         />
 
         <BuildArtifacts
@@ -56,24 +53,10 @@
                 type: Number,
                 required: true
             },
-
-            showTitle: {
-                type: Boolean,
-                required: false,
-                default: true
-            },
-
-            showArtifactList: {
-                type: Boolean,
-                required: false,
-                default: true
-            }
         },
 
         data() {
             return {
-                build: null,
-
                 updater: null,
                 artifacts: null,
             };
@@ -92,20 +75,7 @@
 
         methods: {
             load() {
-                this.$circle.getBuildInfo(this.vcs, this.username, this.project, false, this.$route.query.branch)
-                    .then((build) => {
-                        this.build = build;
-                        this.updater = setTimeout(() => {
-                            this.load();
-                        }, Vue.config.refreshInterval);
-                    })
-                    .catch((e) => {
-                        this.$toast.error(e);
-                        if (e.status === 401) {
-                            this.$auth.logout();
-                            this.$router.push({ name: 'login' });
-                        }
-                    })
+
             },
 
             getLatestBuildArtifacts() {

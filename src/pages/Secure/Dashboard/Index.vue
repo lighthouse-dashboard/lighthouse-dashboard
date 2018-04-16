@@ -26,20 +26,23 @@
                  :class="{'grey lighten-5':  index%2}"
                  :key="project.buildIdentifier"
             >
-                <DashboardProjectTitle
-                :buildNum="project.buildIdentifier"
-                    :vcs="project.vcs"
-                    :username="project.username"
-                    :project="project.project">{{project.project}}
-                </DashboardProjectTitle>
-
-                <BuildArtifacts
-                    :buildNum="project.buildIdentifier"
-                    :vcs="project.vcs"
-                    :username="project.username"
-                    :project="project.project"
-                    :height="200"
-                />
+                <div class="row">
+                    <div class="col s12">
+                        <DashboardProjectTitle
+                            :buildNum="project.buildIdentifier"
+                            :vcs="project.vcs"
+                            :username="project.username"
+                            :project="project.project"/>
+                    </div>
+                    <div class="col s12">
+                        <BuildArtifacts
+                            :buildNum="project.buildIdentifier"
+                            :vcs="project.vcs"
+                            :username="project.username"
+                            :project="project.project"
+                            :height="200"/>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

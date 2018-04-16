@@ -1,15 +1,22 @@
 <template>
-    <div>
-        <p v-if="!artifacts">{{ $t("message.no_dashboard_available") }}</p>
-        <div v-for="(data, key) in chartData" :key="key">
+    <div class="row">
+        <p v-if="!artifacts || artifacts.length === 0" class="center">{{ $t("message.no_dashboard_available") }}</p>
+        <div v-for="(data, key, index) in chartData"
+             :key="key"
+             class="col s12"
+             :class="getClass(index)"
+        >
             <h5><a :href="key" target="_blank">{{key}}</a></h5>
-            <BuildChart :columns="data.columns" :categories="categories" :height="height"/>
+            <BuildChart
+                :columns="data.columns"
+                :categories="categories"
+                :height="height"/>
         </div>
     </div>
 </template>
 
 <script>
-    import BuildChart from '@/components/BuildChart.vue';
+    import BuildChart from '@/components/Chart.vue';
 
     export default {
         components: {
@@ -36,7 +43,6 @@
 
             height: {
                 type: Number,
-                required: true,
                 default: 340
             }
         },
@@ -44,8 +50,10 @@
         data() {
             return {
                 chartData: null,
+                chartDataLength: null,
                 categories: null,
                 artifacts: null,
+                computedClass: null
             };
         },
 
@@ -56,11 +64,20 @@
                 })
         },
         methods: {
+
+            getClass(index) {
+                if (index === this.chartDataLength - 1 && this.chartDataLength % 2 !== 0) {
+                    return 'm12';
+                }
+
+                return 'm6';
+            },
+
             loadArtifacts() {
                 return this.$circle
                     .getDashboardArtifacts(this.vcs, this.username, this.project, this.buildNum)
                     .then(artifacts => {
-                        this.artifacts = artifacts.length > 0 ? artifacts : null;
+                        this.artifacts = artifacts.length > 0 ? artifacts : [];
                     })
             },
 
@@ -99,7 +116,8 @@
                             }
 
                             reports.forEach((item) => {
-                                const { budget, categories, url, tag } = item;
+                                const { budget, categories,
+                                    tag } = item;
                                 if (!categories) {
                                     return;
                                 }
@@ -124,6 +142,8 @@
                         });
 
                         this.chartData = result;
+                        this.chartDataLength = Object.keys(this.chartData).length;
+                        this.computedClass = this.chartDataLength % 2 === 0 ? 'm6' : 'm12';
                     });
             }
         }

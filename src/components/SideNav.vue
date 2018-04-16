@@ -90,7 +90,6 @@
 
         methods: {
             load() {
-                this.projects = null;
                 this.isLoading = true;
                 this.$circle
                     .getAllProjects(this.$route.query.branch)
