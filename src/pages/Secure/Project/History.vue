@@ -7,12 +7,21 @@
                 class="col s12"
                 v-for="(target, url, index) in data"
                 :class="{'grey lighten-5': index%2}">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card-title"><a :href="url" target="_blank">{{url}}</a></div>
+                                <ArtifactHistoryChart
+                                    :url="url"
+                                    :data="target.scores"
+                                    :categories="target.builds"
+                                    v-if="target"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <ArtifactHistoryChart
-                    :url="url"
-                    :data="target.scores"
-                    :categories="target.builds"
-                    v-if="target"/>
             </div>
         </div>
     </div>

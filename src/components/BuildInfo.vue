@@ -1,58 +1,63 @@
 <template>
     <div class="row" v-if="build">
-        <h2>
-            #{{ build.build_num }}
-        </h2>
+        <div class="card">
+            <div class="card-content">
+                <h4>
+                    #{{ build.build_num }}
+                </h4>
 
-        <div class="col s12 m6 l12">
-            <ul class="collection">
-                <li class="collection-item avatar" v-if="user">
-                    <img :src="user.avatar_url" alt="" class="circle">
-                    <b>{{ $t("message.user") }}</b> {{user.login}}
-                </li>
+                <div class="row">
+                    <div class="col s12 m6 l12">
+                        <ul class="collection">
+                            <li class="collection-item avatar" v-if="user">
+                                <img :src="user.avatar_url" alt="" class="circle">
+                                <b>{{ $t("message.user") }}</b> {{user.login}}
+                            </li>
 
-                <li class="collection-item">
-                    <b>{{ $t("message.commit") }}</b> {{build.subject}}
-                </li>
+                            <li class="collection-item">
+                                <b>{{ $t("message.commit") }}</b> {{build.subject}}
+                            </li>
 
-                <li class="collection-item">
-                    <b>{{ $t("message.branch") }}</b> {{build.branch}}
-                </li>
+                            <li class="collection-item">
+                                <b>{{ $t("message.branch") }}</b> {{build.branch}}
+                            </li>
 
-                <li class="collection-item">
-                    <b>{{ $t("message.build_duration") }}</b> {{ buildDuration }}
-                </li>
+                            <li class="collection-item">
+                                <b>{{ $t("message.build_duration") }}</b> {{ buildDuration }}
+                            </li>
 
-                <li class="collection-item">
-                    <b>{{ $t("message.build_completed") }}</b> {{ buildCompletedTime }}
-                </li>
+                            <li class="collection-item">
+                                <b>{{ $t("message.build_completed") }}</b> {{ buildCompletedTime }}
+                            </li>
 
-                <li class="collection-item" :class="buildStatusClass">
-                    <b>{{ $t("message.build_status") }}</b> {{build.status}}
-                </li>
+                            <li class="collection-item" :class="buildStatusClass">
+                                <b>{{ $t("message.build_status") }}</b> {{build.status}}
+                            </li>
 
-                <li class="collection-item">
-                    <a :href="build.build_url" target="_blank">
-                        {{ $t("message.circleci_link_text") }}
-                    </a>
-                </li>
+                            <li class="collection-item">
+                                <a :href="build.build_url" target="_blank">
+                                    {{ $t("message.circleci_link_text") }}
+                                </a>
+                            </li>
 
-                <li class="collection-item">
-                    <a :href="build.vcs_url" target="_blank">
-                        {{ $t("message.vcs_link_text") }}
-                    </a>
-                </li>
-            </ul>
+                            <li class="collection-item">
+                                <a :href="build.vcs_url" target="_blank">
+                                    {{ $t("message.vcs_link_text") }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="col s12 m6 l12">
-            <ArtifactList
-                :vcs="vcs"
-                :username="username"
-                :project="project"
-                :buildNum="buildNum"
-            />
-        </div>
+                        <ArtifactList
+                            :vcs="vcs"
+                            :username="username"
+                            :project="project"
+                            :buildNum="buildNum"
+                        />
+
     </div>
 </template>
 

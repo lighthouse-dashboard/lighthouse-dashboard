@@ -178,8 +178,6 @@ function addTokenToHTMLArtifacts(artifacts, token) {
         return [];
     }
 
-    console.log(artifacts);
-
     return artifacts.map((item) => {
         if (path.extname(item.path) === '.html') {
             item.url += `?circle_token=${token}`

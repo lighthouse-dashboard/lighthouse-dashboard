@@ -1,6 +1,7 @@
 const joi = require('joi');
 
-const HOUR = 60 * 60 * 1000;
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
 const MONTH = 30 * 24 * HOUR;
 
 module.exports = [
@@ -42,6 +43,10 @@ module.exports = [
         path: '/api/projects/{branch}',
         handler: require('./handlers/getAllProjects'),
         options: {
+            cache: {
+                expiresIn: MINUTE,
+                privacy: 'public'
+            },
             tags: ['api'],
             description: "Get list of valid projects for a given branch",
             validate: {
@@ -76,8 +81,12 @@ module.exports = [
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}',
         handler: require('./handlers/getBranchBuilds'),
         options: {
+            cache: {
+                expiresIn: MINUTE,
+                privacy: 'public'
+            },
             tags: ['api'],
-            description: "Get builds",
+            description: "Get all builds for project on specific branch",
             validate: {
                 query: {
                     access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
@@ -96,6 +105,10 @@ module.exports = [
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/latest',
         handler: require('./handlers/getBranchLatestBuildInfo'),
         options: {
+            cache: {
+                expiresIn: MINUTE,
+                privacy: 'public'
+            },
             tags: ['api'],
             description: "Get latest build",
             validate: {
@@ -116,6 +129,10 @@ module.exports = [
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/running',
         handler: require('./handlers/getBranchRunningBuild'),
         options: {
+            cache: {
+                expiresIn: MINUTE,
+                privacy: 'public'
+            },
             tags: ['api'],
             description: "Get current running build",
             validate: {
@@ -136,6 +153,10 @@ module.exports = [
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/dashboardartifacts',
         handler: require('./handlers/getBuildsWithDashboardArtifacts'),
         options: {
+            cache: {
+                expiresIn: 10 * MINUTE,
+                privacy: 'public'
+            },
             tags: ['api'],
             description: "Get all builds with dashboard artifacts",
             validate: {

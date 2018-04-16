@@ -23,7 +23,7 @@
 
             <div v-for="(project, index) in projects"
                  class='col s12'
-                 :class="{'grey lighten-5':  index%2}"
+                 :class="{'grey lighten-3':  index%2}"
                  :key="project.buildIdentifier"
             >
                 <div class="row">
@@ -35,12 +35,16 @@
                             :project="project.project"/>
                     </div>
                     <div class="col s12">
-                        <BuildArtifacts
-                            :buildNum="project.buildIdentifier"
-                            :vcs="project.vcs"
-                            :username="project.username"
-                            :project="project.project"
-                            :height="200"/>
+                        <div class="card">
+                            <div class="card-content">
+                                <BuildArtifacts
+                                    :buildNum="project.buildIdentifier"
+                                    :vcs="project.vcs"
+                                    :username="project.username"
+                                    :project="project.project"
+                                    :height="200"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

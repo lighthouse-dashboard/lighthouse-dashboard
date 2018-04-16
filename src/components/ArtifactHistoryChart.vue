@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h6><a :href="url" target="_blank">{{url}}</a></h6>
         <div ref="chart"></div>
     </div>
 </template>
@@ -21,10 +20,6 @@
                 required: true
             },
 
-            url: {
-                type: String,
-                required: true
-            },
         },
 
         mounted() {

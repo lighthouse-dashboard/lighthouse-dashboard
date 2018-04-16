@@ -4,10 +4,9 @@
         <div v-for="(data, key, index) in chartData"
              :key="key"
              class="col s12"
-             :class="getClass(index)"
         >
-            <h5><a :href="key" target="_blank">{{key}}</a></h5>
-            <BuildChart
+            <p><a :href="key" target="_blank">{{key}}</a></p>
+            <Chart
                 :columns="data.columns"
                 :categories="categories"
                 :height="height"/>
@@ -16,11 +15,11 @@
 </template>
 
 <script>
-    import BuildChart from '@/components/Chart.vue';
+    import Chart from '@/components/Chart.vue';
 
     export default {
         components: {
-            BuildChart,
+            Chart,
         },
 
         props: {
@@ -65,13 +64,6 @@
         },
         methods: {
 
-            getClass(index) {
-                if (index === this.chartDataLength - 1 && this.chartDataLength % 2 !== 0) {
-                    return 'm12';
-                }
-
-                return 'm6';
-            },
 
             loadArtifacts() {
                 return this.$circle
@@ -116,8 +108,10 @@
                             }
 
                             reports.forEach((item) => {
-                                const { budget, categories,
-                                    tag } = item;
+                                const {
+                                    budget, categories,
+                                    tag
+                                } = item;
                                 if (!categories) {
                                     return;
                                 }

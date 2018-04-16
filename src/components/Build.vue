@@ -9,14 +9,23 @@
             :buildNum="buildNum"
         />
 
-        <BuildArtifacts
-            v-if="artifacts && artifacts.length > 0"
-            class='col s12 xl8'
-            :vcs="vcs"
-            :username="username"
-            :project="project"
-            :buildNum="buildNum"
-        />
+        <div class='col s12 xl8' v-if="artifacts && artifacts.length > 0">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <BuildArtifacts
+
+
+                            :vcs="vcs"
+                            :username="username"
+                            :project="project"
+                            :buildNum="buildNum"
+                        />
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </template>
 
