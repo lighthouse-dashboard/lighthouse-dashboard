@@ -14,7 +14,7 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <div class="card-title">Add Project to dashboard</div>
+                        <div class="card-title">Add new project</div>
                         <p>- Add the project to circleci. <a href="https://github.com/dreipol/dreipol-website/blob/master/.circleci/config.yml" target="_blank">Example Config</a></p>
                         <p>- Configure the project so it runs with <a
                             href="https://www.npmjs.com/package/@dreipol/lighthouse-runner" target="_blank">deihouse</a>

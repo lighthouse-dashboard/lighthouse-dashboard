@@ -14,8 +14,6 @@
                 <div class="card-content">
                     <div class="row">
                         <BuildArtifacts
-
-
                             :vcs="vcs"
                             :username="username"
                             :project="project"
