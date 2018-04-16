@@ -68,4 +68,4 @@ git push deis master
 - Add the project to circleci
 - Configure the project so it runs with [`deihouse`](https://www.npmjs.com/package/@dreipol/lighthouse-runner)
 - Make sure that the `dreipoldev` account has access to it (circleci & github)
-- Clear the cash in the dashboard
+- Clear the cache in the dashboard

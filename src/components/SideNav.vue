@@ -15,6 +15,11 @@
                 {{ $t("message.dashboard_link_text") }}
             </router-link>
         </li>
+    <li>
+            <router-link :to="{name: 'help'}">
+                {{ $t("message.help") }}
+            </router-link>
+        </li>
 
         <BranchList/>
 
