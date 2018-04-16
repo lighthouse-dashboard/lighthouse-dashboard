@@ -42,6 +42,7 @@
                     <small>User</small>
                     <div class="card-title">
                         {{user.login}}
+                        <img :src="user.avatar_url" alt="" class="circle right" height="45px">
                     </div>
                 </div>
             </div>
