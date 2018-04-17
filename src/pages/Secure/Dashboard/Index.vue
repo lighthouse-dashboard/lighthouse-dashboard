@@ -35,16 +35,12 @@
                             :project="project.project"/>
                     </div>
                     <div class="col s12">
-                        <div class="card">
-                            <div class="card-content">
-                                <BuildArtifacts
-                                    :buildNum="project.buildIdentifier"
-                                    :vcs="project.vcs"
-                                    :username="project.username"
-                                    :project="project.project"
-                                    :height="200"/>
-                            </div>
-                        </div>
+                        <BuildArtifacts
+                            :buildNum="project.buildIdentifier"
+                            :vcs="project.vcs"
+                            :username="project.username"
+                            :project="project.project"
+                            :height="200"/>
                     </div>
                 </div>
             </div>

@@ -15,15 +15,18 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-title">Add new project</div>
-                        <p>- Add the project to circleci. <a href="https://github.com/dreipol/dreipol-website/blob/master/.circleci/config.yml" target="_blank">Example Config</a></p>
+                        <p>- Add the project to circleci. <a
+                            href="https://github.com/dreipol/dreipol-website/blob/master/.circleci/config.yml"
+                            target="_blank">Example Config</a></p>
                         <p>- Configure the project so it runs with <a
-                            href="https://www.npmjs.com/package/@dreipol/lighthouse-runner" target="_blank">deihouse</a>
+                            href="https://www.npmjs.com/package/@dreipol/lighthouse-runner"
+                            target="_blank">dreihouse</a>
                         </p>
-                        <p>- Make sure that the <i>dreipoldev</i> account has access to it (circleci & github)
-</p>
+                        <p>- Modify the config files so they report your preferred paths and domains.</p>
                         <p>- Add the project to circleci</p>
-                        <p>- Clear the cache in the dashboard
-</p>
+                        <p>- Make sure that the <i>dreipoldev</i> account has access to it (circleci & github)</p>
+                        <p>- Start a new build</p>
+                        <p>- Clear the cache in the dashboard</p>
                     </div>
                 </div>
             </div>

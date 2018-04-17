@@ -1,31 +1,30 @@
 <template>
-    <div class="card" v-if="htmlArtifacts && htmlArtifacts.length > 0">
-        <div class="card-content">
-            <div class="row">
-                <div class="col s12 m6 l12">
-                    <div class="collection with-header">
-                        <div class="collection-header">
-                            <h6>{{ $t("message.artifacts") }}</h6>
-                        </div>
-                        <a v-for='html in htmlArtifacts'
-                           class="collection-item"
-                           :key='html.url'
-                           target='_blank'
-                           :href='html.url'>
-                            {{html.path}}
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <Card v-if="htmlArtifacts && htmlArtifacts.length > 0">
+        <span slot="title">{{ $t("message.artifacts") }}</span>
+        <div class="collection">
+            <a v-for='html in htmlArtifacts'
+               class="truncate collection-item"
+               :key='html.url'
+               target='_blank'
+               :href='html.url'>
+                {{ getFilename(html.path) }}
+            </a>
         </div>
-    </div>
+    </Card>
 </template>
 
 <script>
 
-    export default {
-        props: {
+    import Card from '@/components/cards/Card';
+    import { basename } from 'path';
 
+    export default {
+
+        components: {
+            Card
+        },
+
+        props: {
             vcs: {
                 type: String,
                 required: true
@@ -66,6 +65,12 @@
                         this.$router.push({ name: 'login' });
                     }
                 })
+        },
+
+        methods: {
+            getFilename(path) {
+                return basename(path);
+            }
         }
     };
 </script>

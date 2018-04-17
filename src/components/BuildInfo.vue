@@ -1,74 +1,61 @@
 <template>
-    <div class="row" v-if="build">
-        <div class="card">
-            <div class="card-content">
-                <h4>
-                    #{{ build.build_num }}
-                </h4>
-
-                <div class="row">
-                    <div class="col s12 m6 l12">
-                        <ul class="collection">
-                            <li class="collection-item avatar" v-if="user">
-                                <img :src="user.avatar_url" alt="" class="circle">
-                                <b>{{ $t("message.user") }}</b> {{user.login}}
-                            </li>
-
-                            <li class="collection-item">
-                                <b>{{ $t("message.commit") }}</b> {{build.subject}}
-                            </li>
-
-                            <li class="collection-item">
-                                <b>{{ $t("message.branch") }}</b> {{build.branch}}
-                            </li>
-
-                            <li class="collection-item">
-                                <b>{{ $t("message.build_duration") }}</b> {{ buildDuration }}
-                            </li>
-
-                            <li class="collection-item">
-                                <b>{{ $t("message.build_completed") }}</b> {{ buildCompletedTime }}
-                            </li>
-
-                            <li class="collection-item" :class="buildStatusClass">
-                                <b>{{ $t("message.build_status") }}</b> {{build.status}}
-                            </li>
-
-                            <li class="collection-item">
-                                <a :href="build.build_url" target="_blank">
-                                    {{ $t("message.circleci_link_text") }}
-                                </a>
-                            </li>
-
-                            <li class="collection-item">
-                                <a :href="build.vcs_url" target="_blank">
-                                    {{ $t("message.vcs_link_text") }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div v-if="build">
+        <div class="col s12 m4 l3">
+            <Card>
+                <span slot="title">{{ $t("message.build_num") }}</span>
+                <BuildStatus
+                    class="right"
+                    :vcs="vcs"
+                    :username="username"
+                    :project="project"
+                    :buildNum="buildNum"/>
+                #{{build.build_num}}
+            </Card>
         </div>
 
-                        <ArtifactList
-                            :vcs="vcs"
-                            :username="username"
-                            :project="project"
-                            :buildNum="buildNum"
-                        />
+        <div class="col s12 m4 l3">
+            <BuiltAt :stopTime="build.stop_time"/>
 
+        </div>
+
+        <div class="col s12 m4 l3">
+            <Card>
+                <span slot="title">{{ $t("message.build_duration") }}</span>
+                {{ buildDuration }}
+            </Card>
+        </div>
+
+        <div class="col s12 m4 l3" v-if="user">
+            <Card>
+                <span slot="title">{{ $t("message.commit") }}</span>
+                <img :src="user.avatar_url" alt="" class="circle left" height="35px">
+                <span class="truncate">{{build.subject}}</span>
+
+            </Card>
+        </div>
     </div>
 </template>
 
 <script>
-    import Vue from 'vue';
+
     import moment from 'moment';
+
     import ArtifactList from '@/components/ArtifactList';
+    import BuildStatus from '@/components/BuildStatus';
+
+    import BuildNum from '@/components/cards/BuildNum';
+    import Author from '@/components/cards/Author';
+    import Card from '@/components/cards/Card';
+    import BuiltAt from '@/components/cards/BuiltAt';
 
     export default {
         components: {
-            ArtifactList
+            ArtifactList,
+            BuildStatus,
+            BuildNum,
+            Author,
+            Card,
+            BuiltAt,
         },
         props: {
 
@@ -133,24 +120,7 @@
                     user,
                     stop_time,
                     build_time_millis,
-                    status,
                 } = this.build;
-
-                const classMap = {
-                    'success': 'green lighten-4',
-                    'fixed': 'green lighten-4',
-                    'failed': 'red lighten-4',
-                };
-
-                this.buildStatusClass = classMap[status] || null;
-
-                const mStopTime = moment(stop_time);
-                const now = moment();
-                if (now.diff(mStopTime, 'hours') < 12) {
-                    this.buildCompletedTime = mStopTime.fromNow();
-                } else {
-                    this.buildCompletedTime = mStopTime.format(Vue.config.dateFormat);
-                }
 
                 this.buildDuration = moment.duration(build_time_millis).humanize();
 

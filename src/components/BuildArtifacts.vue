@@ -1,15 +1,20 @@
 <template>
-    <div class="row">
-        <p v-if="!artifacts || artifacts.length === 0" class="center">{{ $t("message.no_dashboard_available") }}</p>
-        <div v-for="(data, key, index) in chartData"
-             :key="key"
-             class="col s12"
-        >
-            <p><a :href="key" target="_blank">{{key}}</a></p>
-            <Chart
-                :columns="data.columns"
-                :categories="categories"
-                :height="height"/>
+    <div class="card">
+        <div class="card-content">
+            <div class="row">
+                <p v-if="!artifacts || artifacts.length === 0" class="center">{{ $t("message.no_dashboard_available")
+                    }}</p>
+                <div v-for="(data, key, index) in chartData"
+                     :key="key"
+                     class="col s12"
+                >
+                    <p><a :href="key" target="_blank">{{key}}</a></p>
+                    <Chart
+                        :columns="data.columns"
+                        :categories="categories"
+                        :height="height"/>
+                </div>
+            </div>
         </div>
     </div>
 </template>

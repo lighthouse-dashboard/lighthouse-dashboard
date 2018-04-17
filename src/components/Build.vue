@@ -1,27 +1,23 @@
 <template>
     <div class="row">
-        <BuildInfo
-            class='col s12'
-            :class="{'xl4': artifacts}"
-            :vcs="vcs"
-            :username="username"
-            :project="project"
-            :buildNum="buildNum"
-        />
+        <div class='col s12'>
+            <BuildInfo
+                :vcs="vcs"
+                :username="username"
+                :project="project"
+                :buildNum="buildNum"
+            />
 
-        <div class='col s12 xl8' v-if="artifacts && artifacts.length > 0">
-            <div class="card">
-                <div class="card-content">
-                    <div class="row">
-                        <BuildArtifacts
-                            :vcs="vcs"
-                            :username="username"
-                            :project="project"
-                            :buildNum="buildNum"
-                        />
-                    </div>
-                </div>
-            </div>
+
+        </div>
+
+        <div class='col s12'>
+            <BuildArtifacts
+                :vcs="vcs"
+                :username="username"
+                :project="project"
+                :buildNum="buildNum"
+            />
 
         </div>
     </div>
@@ -32,12 +28,15 @@
 
     import BuildInfo from "@/components/BuildInfo";
     import BuildArtifacts from "@/components/BuildArtifacts";
+    import ArtifactList from '@/components/ArtifactList';
+
 
     export default {
 
         components: {
             BuildArtifacts,
             BuildInfo,
+            ArtifactList
         },
 
         props: {
@@ -76,29 +75,10 @@
         },
 
         mounted() {
-            this.load();
-            this.getLatestBuildArtifacts();
         },
 
         methods: {
-            load() {
 
-            },
-
-            getLatestBuildArtifacts() {
-                this.$circle
-                    .getDashboardArtifacts(this.vcs, this.username, this.project, this.buildNum)
-                    .then(artifacts => {
-                        this.artifacts = artifacts.length > 0 ? artifacts : null;
-                    })
-                    .catch((e) => {
-                        this.$toast.error(e);
-                        if (e.status === 401) {
-                            this.$auth.logout();
-                            this.$router.push({ name: 'login' });
-                        }
-                    })
-            }
         }
     };
 </script>

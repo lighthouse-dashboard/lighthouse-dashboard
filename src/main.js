@@ -29,7 +29,8 @@ import {
     defaultBranch,
     selectableBranches,
     buildStatusInterval,
-    apiEndpoint
+    apiEndpoint,
+    dateShortFormat,
 } from './config';
 
 Vue.config.productionTip = false;
@@ -41,6 +42,7 @@ Vue.config.defaultBranch = defaultBranch;
 Vue.config.selectableBranches = selectableBranches;
 Vue.config.buildStatusInterval = buildStatusInterval;
 Vue.config.apiEndpoint = apiEndpoint;
+Vue.config.dateShortFormat = dateShortFormat;
 
 Vue.component('loader', Loader);
 
