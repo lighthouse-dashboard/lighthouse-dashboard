@@ -22,6 +22,8 @@ import routes from './routes';
 import Loader from './components/Loader';
 import translations from './translations';
 
+import '@/assets/scss/main.scss';
+
 import {
     refreshInterval,
     dateFormat,

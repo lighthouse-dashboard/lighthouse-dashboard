@@ -57,11 +57,3 @@
         }
     };
 </script>
-
-<style scoped>
-    iframe {
-        border: none;
-        width: 100%;
-        height: 420px;
-    }
-</style>

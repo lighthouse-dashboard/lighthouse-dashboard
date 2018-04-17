@@ -13,7 +13,6 @@ const portfinder = require('portfinder')
 require('dotenv').config();
 
 const HOST = process.env.HOST;
-const CIRCLE_TOKEN = process.env.CIRCLE_TOKEN;
 const PORT = process.env.PORT && Number(process.env.PORT);
 
 const devWebpackConfig = merge(baseWebpackConfig, {

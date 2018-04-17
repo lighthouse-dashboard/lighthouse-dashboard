@@ -4,7 +4,7 @@
         :to="{name: 'overview', params: project, query: $route.query}"
         active-class="active">
         <a>
-            <i class="material-icons green-text lighten-1" v-if="hasRunningBuild">cloud_circle</i> {{ project.project }}
+            <Pineapple :height="50" v-if="hasRunningBuild"/>{{ project.project }}
         </a>
     </router-link>
 </template>
@@ -12,8 +12,13 @@
 <script>
 
     import Vue from 'vue';
+    import Pineapple from '@/components/happyPineapple';
 
     export default {
+        components: {
+            Pineapple
+        },
+
         props: {
             project: {
                 type: Object,
