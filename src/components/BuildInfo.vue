@@ -49,7 +49,7 @@
     import Card from '@/components/cards/Card';
     import BuiltAt from '@/components/cards/BuiltAt';
 
-    import Pineapple from '@/components/happyPineapple';
+    import Pineapple from '@/components/HappyPineapple';
 
     export default {
         components: {

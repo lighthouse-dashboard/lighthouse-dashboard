@@ -40,7 +40,7 @@
     import Author from '@/components/cards/Author';
     import BuiltAt from '@/components/cards/BuiltAt';
     import Card from '@/components/cards/Card';
-    import Pineapple from '@/components/happyPineapple';
+    import Pineapple from '@/components/HappyPineapple';
 
 
     export default {
