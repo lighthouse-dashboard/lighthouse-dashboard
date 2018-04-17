@@ -1,6 +1,31 @@
 <template>
     <div>
         <loader v-if="!builds"/>
+
+        <div class="row">
+            <div class="col s4">
+                <Card>
+                    <span slot="title">{{ $t('message.project')}}</span>
+                    {{project}}
+                </Card>
+            </div>
+
+            <div class="col s4">
+                <Card>
+                    <span slot="title">{{ $t('message.link')}}</span>
+                    <CiLink :username="username" :project="project"/>
+                </Card>
+            </div>
+
+
+            <div class="col s4">
+                <Card>
+                    <span slot="title">{{ $t('message.link')}}</span>
+                    <GitHubLink :username="username" :project="project"/>
+                </Card>
+            </div>
+        </div>
+
         <div v-if="builds">
             <Build
                 v-for="(build, index) in builds"
@@ -18,11 +43,17 @@
     import Vue from "vue";
 
     import Build from "@/components/Build";
+    import Card from '@/components/cards/Card';
+    import CiLink from '@/components/links/ci';
+    import GitHubLink from '@/components/links/github';
 
     export default {
 
         components: {
             Build,
+            Card,
+            CiLink,
+            GitHubLink,
         },
 
         props: {

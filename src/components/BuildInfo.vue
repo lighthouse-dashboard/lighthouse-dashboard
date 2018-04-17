@@ -30,7 +30,6 @@
                 <span slot="title">{{ $t("message.commit") }}</span>
                 <img :src="user.avatar_url" alt="" class="circle left" height="35px">
                 <span class="truncate">{{build.subject}}</span>
-
             </Card>
         </div>
     </div>

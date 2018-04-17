@@ -1,6 +1,7 @@
 {
     "message": {
         "user": "User",
+        "project": "Project",
         "commit": "Commit",
         "branch": "Branch",
         "build_duration": "Build duration",
@@ -24,7 +25,8 @@
         "password": "Password",
         "login": "Login",
         "login_succeed": "Login successful",
-        "help": "Help"
+        "help": "Help",
+        "link": "Link"
     },
     "dashboard": {
         "title": "Dreihouse"
