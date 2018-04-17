@@ -45,12 +45,10 @@
 
 <script>
     import Vue from 'vue';
-    import Pineapple from '@/components/happyPineapple';
 
     export default {
 
         components: {
-            Pineapple
         },
 
         data() {
