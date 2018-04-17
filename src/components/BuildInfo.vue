@@ -4,12 +4,14 @@
             <Card>
                 <span slot="title">{{ $t("message.build_num") }}</span>
                 <BuildStatus
-                    class="right"
                     :vcs="vcs"
                     :username="username"
                     :project="project"
                     :buildNum="buildNum"/>
                 #{{build.build_num}}
+
+
+                <Pineapple v-if="hasReachedBudget" class="right" :size="45"/>
             </Card>
         </div>
 
@@ -47,6 +49,8 @@
     import Card from '@/components/cards/Card';
     import BuiltAt from '@/components/cards/BuiltAt';
 
+    import Pineapple from '@/components/happyPineapple';
+
     export default {
         components: {
             ArtifactList,
@@ -55,6 +59,7 @@
             Author,
             Card,
             BuiltAt,
+            Pineapple,
         },
         props: {
 
@@ -90,13 +95,20 @@
                 buildCompletedTime: null,
                 buildDuration: null,
                 buildStatusClass: null,
+                hasReachedBudget: null,
             };
         },
 
         mounted() {
             this.loadBuild()
                 .then(() => {
-                    this.loadInfo();
+                    return this.loadInfo();
+                })
+                .then(() => {
+                    this.$circle.hasAllartifactsReachedBudget(this.vcs, this.username, this.project, this.buildNum)
+                        .then((has) => {
+                            this.hasReachedBudget = has;
+                        })
                 })
         },
 

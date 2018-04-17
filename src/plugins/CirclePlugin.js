@@ -178,7 +178,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getHtmlArtifacts(vcs, username, project, build = 'latest') {
-        return this.getArtifactsByType('html',  vcs, username, project, build);
+        return this.getArtifactsByType('html', vcs, username, project, build);
     }
 
     /**
@@ -203,15 +203,14 @@ export default class CirclePlugin {
     }
 
     /**
-     * To create the history graph we need to fetch all the artifact data and restructure it in this format:
+     * To create the history graph we need to fetch all the artifact data
      * @param {string} vcs
      * @param {string} username
      * @param {string} project
      * @param {string} branch
      * @return {*}
      */
-    getAllBuildsWithDashboardArtifacts(vcs, username, project, branch= this.branch) {
-
+    getAllBuildsWithDashboardArtifacts(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/dashboardartifacts`
@@ -221,6 +220,42 @@ export default class CirclePlugin {
             })
             .then((builds) => {
                 return sortBuildArtifactsByUrl(builds);
+            })
+    }
+
+    /**
+     *
+     * Check if the project has reached the budget
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string} branch
+     * @return {*}
+     */
+    hasAllartifactsReachedBudget(vcs, username, project, build = 'latest') {
+        return this.getDashboardArtifacts(vcs, username, project, build)
+            .then((artifacts) => {
+                return Promise.all(artifacts.map((artifact) => {
+                    return this.getArtifact(artifact.url)
+                }))
+            })
+            .then((artifacts) => {
+                return Promise.all(artifacts.filter((artifact) => {
+                    const { categories, budget } = artifact;
+                    const keys = Object.keys(categories);
+                    for (let i = 0; i < keys.length; i++) {
+                        const key = keys[i];
+                        const { id, score } = categories[key];
+
+                        if (budget[id] && score < budget[id]) {
+                            return artifact
+                        }
+                    }
+                }));
+            })
+            .then((reports) => {
+                return (reports.length === 0)
             })
     }
 }

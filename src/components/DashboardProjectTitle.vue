@@ -4,10 +4,10 @@
             <Card>
                 <span slot="title">Project</span>
                 <router-link
-                    lass="center"
                     :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
                     <BuildStatus :vcs="vcs" :username="username" :project="project" :buildNum="buildNum"/>
                     {{ project }}
+                    <Pineapple v-if="hasReachedBudget" class="right" :size="45"/>
                 </router-link>
             </Card>
         </div>
@@ -36,6 +36,7 @@
     import Author from '@/components/cards/Author';
     import BuiltAt from '@/components/cards/BuiltAt';
     import Card from '@/components/cards/Card';
+    import Pineapple from '@/components/happyPineapple';
 
 
     export default {
@@ -45,6 +46,7 @@
             Author,
             BuiltAt,
             Card,
+            Pineapple,
         },
 
         props: {
@@ -82,6 +84,7 @@
                 build: null,
                 updater: null,
                 hasRunningBuild: null,
+                hasReachedBudget: null,
             };
         },
 
@@ -96,7 +99,10 @@
         mounted() {
             this.load()
                 .then(() => {
-
+                    this.$circle.hasAllartifactsReachedBudget(this.vcs, this.username, this.project, this.buildNum)
+                        .then( (has) => {
+                            this.hasReachedBudget = has;
+                        })
                 })
         },
 

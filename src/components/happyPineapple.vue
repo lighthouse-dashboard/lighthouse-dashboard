@@ -1,5 +1,6 @@
 <template>
-    <div class="pineapple" :style="{width: height*0.8+'px', height: height+'px'}">
+    <div class="pineapple" :style="{width: size*0.8+'px', height: size+'px'}">
+        <div class="bubble">Budget Reached!</div>
         <div class="leaf middle"></div>
         <div class="leaf left"></div>
         <div class="leaf right"></div>
@@ -19,7 +20,7 @@
 <script>
     export default {
         props: {
-            height: {
+            size: {
                 type: Number,
                 default: 200
             }

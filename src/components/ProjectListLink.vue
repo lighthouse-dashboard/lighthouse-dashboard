@@ -4,7 +4,7 @@
         :to="{name: 'overview', params: project, query: $route.query}"
         active-class="active">
         <a>
-            <Pineapple :height="50" v-if="hasRunningBuild"/>{{ project.project }}
+            {{ project.project }} <BuildingAnimation class="right" :size="20" v-if="hasRunningBuild"/>
         </a>
     </router-link>
 </template>
@@ -12,11 +12,11 @@
 <script>
 
     import Vue from 'vue';
-    import Pineapple from '@/components/happyPineapple';
+    import BuildingAnimation from '@/components/BuildingAnimation';
 
     export default {
         components: {
-            Pineapple
+            BuildingAnimation
         },
 
         props: {
