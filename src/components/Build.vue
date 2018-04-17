@@ -11,8 +11,17 @@
 
         </div>
 
-        <div class='col s12'>
+        <div class='col s12 l9'>
             <BuildArtifacts
+                :vcs="vcs"
+                :username="username"
+                :project="project"
+                :buildNum="buildNum"
+            />
+
+        </div>
+        <div class='col s12 l3'>
+            <ArtifactList
                 :vcs="vcs"
                 :username="username"
                 :project="project"

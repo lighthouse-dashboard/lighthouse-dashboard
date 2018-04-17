@@ -1,8 +1,15 @@
 <template>
     <Card class="author-card">
         <span slot="title">{{ $t("message.user") }}</span>
-        {{username}}
-        <img :src="avatar" alt="" class="circle right avatar" height="45px">
+        <div class="row">
+            <div class="col s10">
+                <span class="truncate">{{username}}</span>
+            </div>
+            <div class="col s2">
+                <img :src="avatar" alt="" class="circle avatar">
+
+            </div>
+        </div>
     </Card>
 </template>
 

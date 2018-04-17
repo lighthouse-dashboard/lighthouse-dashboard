@@ -1,6 +1,10 @@
-.pineapple {
+.pineapple-wrapper {
 
-    &{
+    & {
+        display: inline-block;
+    }
+
+    .pineapple{
         display: inline-block;
         font-size: 90vmin;
         width: 100%;
@@ -8,7 +12,7 @@
         position: relative;
     }
 
-    & div {
+    .pineapple div {
         position: absolute;
     }
 
