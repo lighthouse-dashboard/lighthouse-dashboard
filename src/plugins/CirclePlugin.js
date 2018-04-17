@@ -241,6 +241,9 @@ export default class CirclePlugin {
                 }))
             })
             .then((artifacts) => {
+                if(artifacts.length === 0){
+                    return [false];
+                }
                 return Promise.all(artifacts.filter((artifact) => {
                     const { categories, budget } = artifact;
                     const keys = Object.keys(categories);

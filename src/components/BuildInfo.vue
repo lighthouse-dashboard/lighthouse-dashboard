@@ -28,9 +28,9 @@
         </div>
 
         <div class="col s12 m4 l3" v-if="user">
-            <Card>
+            <Card class="author-card">
                 <span slot="title">{{ $t("message.commit") }}</span>
-                <img :src="user.avatar_url" alt="" class="circle left" height="35px">
+                <img :src="user.avatar_url" alt="" class="circle left avatar">
                 <span class="truncate">{{build.subject}}</span>
             </Card>
         </div>
