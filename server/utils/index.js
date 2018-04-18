@@ -1,7 +1,7 @@
 const path = require('path');
 const request = require('request');
 const Boom = require('boom');
-const { get, sortBy } = require('lodash');
+const { get, sortBy, compact, reverse } = require('lodash');
 
 let cachedResponse = {};
 
@@ -101,13 +101,10 @@ function sortProjectByLatestBuild(projects, branch, token) {
 
     return Promise.all(p)
         .then((all) => {
-            all = all.filter((item) => {
-                if (item) {
-                    return item;
-                }
-            });
-
+            all = compact(all);
             all = sortBy(all, ['date']);
+            all = reverse(all);
+
             all = all.map((item) => {
                 return item.config;
             });
@@ -157,11 +154,7 @@ function getAllProjects(token, branch) {
             return Promise.all(p);
         })
         .then(projects => {
-            return projects.filter((item) => {
-                if (item) {
-                    return item;
-                }
-            })
+            return compact(projects);
         })
         .then((projects) => {
             cachedResponse[branch] = projects;

@@ -1,4 +1,4 @@
-const {sortBy} = require('lodash');
+const { sortBy } = require('lodash');
 
 const { getBranchBuilds, getDashboardArtifacts, getArtifactContent } = require('../utils');
 
@@ -37,5 +37,5 @@ module.exports = async (req, h) => {
                         return item;
                     })
             }));
-        })
+        });
 };
