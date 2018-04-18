@@ -1,3 +1,5 @@
+const {sortBy} = require('lodash');
+
 const { getBranchBuilds, getDashboardArtifacts, getArtifactContent } = require('../utils');
 
 function getDashboardContentsByBuild(buildArtifacts, token) {
@@ -25,9 +27,7 @@ module.exports = async (req, h) => {
             return Promise.all(p);
         })
         .then((builds) => {
-            return builds.sort((item1, item2) => {
-                return item1.build_num > item2.build_num
-            })
+            return sortBy(builds, ['build_num']);
         })
         .then((builds) => {
             return Promise.all(builds.map((item) => {

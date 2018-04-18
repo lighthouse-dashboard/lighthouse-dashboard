@@ -1,6 +1,8 @@
 const path = require('path');
 const request = require('request');
 const Boom = require('boom');
+const { get, sortBy } = require('lodash');
+
 let cachedResponse = {};
 
 /**
@@ -104,9 +106,8 @@ function sortProjectByLatestBuild(projects, branch, token) {
                     return item;
                 }
             });
-            all = all.sort((a, b) => {
-                return a.date < b.date;
-            });
+
+            all = sortBy(all, ['date']);
             all = all.map((item) => {
                 return item.config;
             });
@@ -136,9 +137,10 @@ function getAllProjects(token, branch) {
     })
         .then((projects) => {
             const p = projects.map((project) => {
-                if (!project.branches[branch] || !project.branches[branch].last_success || !project.branches[branch].last_success.build_num) {
+                if (!get(project, `branches.${branch}.last_success.build_num`)) {
                     return;
                 }
+
                 return checkIfBuildIsSupported('github', project.username, project.reponame, project.branches[branch].last_success.build_num, token)
                     .then((isSupported) => {
                         if (!isSupported) {
