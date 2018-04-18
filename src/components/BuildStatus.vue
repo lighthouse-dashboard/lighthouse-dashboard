@@ -6,13 +6,9 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import moment from 'moment';
-
     export default {
 
         props: {
-
             vcs: {
                 type: String,
                 required: true

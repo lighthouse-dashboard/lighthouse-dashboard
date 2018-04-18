@@ -1,6 +1,6 @@
 <template>
     <Card>
-        <span slot="title">Build</span>
+        <span slot="title">{{ $t("message.build_num")}}</span>
          #{{buildNum}}
     </Card>
 </template>

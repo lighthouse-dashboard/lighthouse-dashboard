@@ -33,6 +33,7 @@ import {
     buildStatusInterval,
     apiEndpoint,
     dateShortFormat,
+    chartColors
 } from './config';
 
 Vue.config.productionTip = false;
@@ -45,6 +46,7 @@ Vue.config.selectableBranches = selectableBranches;
 Vue.config.buildStatusInterval = buildStatusInterval;
 Vue.config.apiEndpoint = apiEndpoint;
 Vue.config.dateShortFormat = dateShortFormat;
+Vue.config.chartColors = chartColors;
 
 Vue.component('loader', Loader);
 

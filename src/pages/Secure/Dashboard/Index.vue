@@ -34,6 +34,7 @@
                             :username="project.username"
                             :project="project.project"/>
                     </div>
+
                     <div class="col s12">
                         <BuildArtifacts
                             :buildNum="project.buildIdentifier"

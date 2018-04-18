@@ -1,7 +1,5 @@
 <template>
     <div class="component">
-
-
         <div class="aux-lockdown">
             <div class="aux-lockdown--wrap">
                 <div class="aux-lockdown--wrap-outer aux-lockdown--logosection">
@@ -11,15 +9,12 @@
                         </a>
                     </div>
                 </div>
+
                 <div class="aux-lockdown--wrap-outer aux-lockdown--content">
                     <div class="aux-lockdown--wrap-inner">
-                        <h1 class="aux-lockdown--title">Login</h1>
+                        <h1 class="aux-lockdown--title">{{ $t("login.title") }}</h1>
 
-                        <p class="aux-lockdown--description">
-                            Diese Seite ist nicht öffentlich zugänglich!
-                            <br>
-                            Bitte geben Sie das Passwort ein:
-                        </p>
+                        <p class="aux-lockdown--description" v-html="$t('login.lead')"></p>
 
                         <div class="aux-lockdown--field">
                             <input type="password"
@@ -27,7 +22,7 @@
                                    name="password"
                                    id="id_password"
                                    v-model="password"
-                                   placeholder="Passwort">
+                                   :placeholder="$t('login.password')">
 
                             <button type="submit" class="aux-lockdown--submit" tabindex="2" @click="submit">
                                 <img src="/static/lockdown/arrow.svg" alt="senden" class="arrow arrow__main">

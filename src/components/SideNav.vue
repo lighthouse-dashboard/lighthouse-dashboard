@@ -44,7 +44,7 @@
             <a @click="clearCache"
                v-if="!isClearingCache">
                 <i
-                    class="material-icons">delete</i> Clear cache
+                    class="material-icons">delete</i> {{ $t("message.clear_cache")}}
             </a>
         </li>
     </ul>

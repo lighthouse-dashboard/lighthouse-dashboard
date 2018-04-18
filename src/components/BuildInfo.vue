@@ -9,8 +9,6 @@
                     :project="project"
                     :buildNum="buildNum"/>
                 #{{build.build_num}}
-
-
                 <Pineapple v-if="hasReachedBudget" class="right" :size="45"/>
             </Card>
         </div>

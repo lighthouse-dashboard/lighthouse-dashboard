@@ -26,10 +26,16 @@
         "login": "Login",
         "login_succeed": "Login successful",
         "help": "Help",
-        "link": "Link"
+        "link": "Link",
+        "clear_cache": "Clear Cache"
     },
     "dashboard": {
         "title": "dreihouse"
+    },
+    "login": {
+        "lead": "Diese Seite ist nicht öffentlich zugänglich!<br>Bitte geben Sie das Passwort ein:",
+        "password": "Password",
+        "title": "Login"
     },
     "error": {
         "login_failed": "Login Failed."

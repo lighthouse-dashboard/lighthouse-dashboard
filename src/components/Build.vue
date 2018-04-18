@@ -7,8 +7,6 @@
                 :project="project"
                 :buildNum="buildNum"
             />
-
-
         </div>
 
         <div class='col s12 l9'>
@@ -18,8 +16,8 @@
                 :project="project"
                 :buildNum="buildNum"
             />
-
         </div>
+
         <div class='col s12 l3'>
             <ArtifactList
                 :vcs="vcs"
@@ -27,7 +25,6 @@
                 :project="project"
                 :buildNum="buildNum"
             />
-
         </div>
     </div>
 </template>

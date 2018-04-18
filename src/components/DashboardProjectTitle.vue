@@ -111,19 +111,7 @@
         },
 
         methods: {
-            checkIfIsRunning() {
-                return this.$circle.hasRunningBuild(this.vcs, this.username, this.project, this.$route.query.branch)
-                    .then((has) => {
-                        this.hasRunningBuild = has;
-                    })
-                    .catch((e) => {
-                        this.$toast.error(e);
-                        if (e.status === 401) {
-                            this.$auth.logout();
-                            this.$router.push({ name: 'login' });
-                        }
-                    });
-            },
+
             load() {
                 return this.$circle.getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
@@ -134,9 +122,6 @@
                         } = this.build;
 
                         this.user = user;
-                    })
-                    .then(() => {
-                        return this.checkIfIsRunning();
                     })
                     .then(() => {
                         this.updater = setTimeout(() => {

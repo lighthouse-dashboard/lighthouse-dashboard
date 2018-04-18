@@ -4,6 +4,7 @@
 
 <script>
 
+    import Vue from 'vue';
     import bb from 'billboard.js';
 
     export default {
@@ -59,7 +60,7 @@
                         show: false
                     },
                     color: {
-                        pattern: ["#607D8B", "#66bb6a"],
+                        pattern: Vue.config.chartColors,
                     },
                     size: {
                         height: this.height
