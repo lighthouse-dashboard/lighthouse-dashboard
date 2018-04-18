@@ -127,7 +127,6 @@
             loadInfo() {
                 const {
                     user,
-                    stop_time,
                     build_time_millis,
                 } = this.build;
 

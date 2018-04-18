@@ -58,25 +58,6 @@ export default class CirclePlugin {
     }
 
     /**
-     * Get latest build
-     *
-     * @param {string} vcs
-     * @param {string} username
-     * @param {string} project
-     * @param {string} branch
-     * @return {*}
-     */
-    getLatestBuildInfo(vcs, username, project, branch = this.branch) {
-        return Vue.http
-            .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/latest`
-            )
-            .then(resp => {
-                return resp.body.shift();
-            });
-    }
-
-    /**
      * Get info for given build
      *
      * @param {string} vcs
@@ -87,11 +68,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getBuildInfo(vcs, username, project, build, branch = this.branch) {
-        if (!build) {
-            return this.getLatestBuildInfo(vcs, username, project, branch);
-        }
-
-        return Vue.http
+              return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}`
             )

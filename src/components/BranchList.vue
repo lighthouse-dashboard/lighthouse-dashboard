@@ -1,5 +1,5 @@
 <template>
-    <templa>
+    <div>
         <li><a class="subheader">{{ $t("message.branches") }}</a></li>
         <li v-for="branch in branches"
             :key="branch"
@@ -8,7 +8,7 @@
                 {{branch}}
             </router-link>
         </li>
-    </templa>
+    </div>
 </template>
 
 

@@ -18,6 +18,8 @@ require('dotenv').config();
 const TOKEN = process.env.CIRCLE_TOKEN;
 const PORT = process.env.PORT || 3000;
 const LIMIT = process.env.LIMIT || 10;
+const ENV = process.env.NODE_ENV || 'development';
+const IS_DEV = ENV === 'development';
 
 const server = Hapi.server({
     port: PORT,
@@ -45,11 +47,13 @@ const init = async () => {
     await server.register(Inert);
     await server.register(AuthBasic);
     await server.register(AuthBearer);
-    await server.register({
-        plugin: laabr
-    });
 
-    if (process.env.NODE_ENV === 'development') {
+
+    if (IS_DEV) {
+        await server.register({
+            plugin: laabr
+        });
+
         await server.register([
             Inert,
             Vision,
@@ -68,9 +72,16 @@ const init = async () => {
         server.route(routes[i]);
     }
 
-    console.log(`Server running at: ${server.info.uri}`);
+    if(IS_DEV) {
+        console.log(`Server running at: ${server.info.uri}`);
+    }
+
     await server.start();
 
 };
 
 init();
+
+if (module) {
+    module.exports = server;
+}
