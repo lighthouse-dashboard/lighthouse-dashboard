@@ -176,6 +176,8 @@ describe('Routes', function () {
         })
             .then((data) => {
                 data = JSON.parse(data);
+                console.log(data);
+
                 unit.array(data).hasLength(2);
 
                 const build = data.shift();

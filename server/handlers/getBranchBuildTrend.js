@@ -1,12 +1,9 @@
-const { set } = require('lodash');
 const { getProjectTrends } = require('../utils');
 
-
-module.exports = async (req, h) => {
+module.exports = async(req) => {
     const { vcs, username, project, branch } = req.params;
     const { category } = req.query;
     const { token } = req.server.app;
-
 
     return getProjectTrends(vcs, username, project, branch, token, 2)
         .then((trend) => {

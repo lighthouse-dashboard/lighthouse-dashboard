@@ -19,7 +19,7 @@ let cachedResponse = {};
  * @return {*|PromiseLike<T>|Promise<T>}
  */
 function getArtifactsByType(type, vcs, username, project, build = 'latest', token) { //eslint-disable-line
-    return getArtifacts(vcs, username, project, build, token)
+    return getArtifactsForBuild(vcs, username, project, build, token)
         .then(artifacts => {
             return artifacts.filter(item => {
                 return path.extname(item.path) === `.${type}` ? item : null;
@@ -133,7 +133,11 @@ function filterForSupportedProjects(projects, branch, token) {
                 };
             });
     });
-    return Promise.all(p);
+
+    return Promise.all(p)
+        .then(data => {
+            return compact(data);
+        });
 }
 
 /**
@@ -158,9 +162,6 @@ function getAllProjects(token, branch) {
     })
         .then((projects) => {
             return filterForSupportedProjects(projects, branch, token);
-        })
-        .then(projects => {
-            return compact(projects);
         })
         .then((projects) => {
             cachedResponse[branch] = projects;
@@ -209,7 +210,7 @@ function invalidateCache(token, branch) {
  * @param {string} token
  * @return {Promise<any>}
  */
-function getArtifacts(vcs, username, project, build, token) {
+function getArtifactsForBuild(vcs, username, project, build, token) {
     return new Promise((resolve, rej) => {
         request(`https://circleci.com/api/v1.1/project/${ vcs }/${ username }/${ project }/${ build }/artifacts?circle-token=${ token }&filter=completed`, { json: true }, (err, res, body) => {
             if (err) {
@@ -344,7 +345,7 @@ function getArtifactsContentForBuilds(builds, token) {
     }));
 }
 
-function getSortedArtifactsForProject(vcs, username, project, branch, token, limit){
+function getSortedArtifactsForProject(vcs, username, project, branch, token, limit) {
     return getBranchBuilds(vcs, username, project, branch, token, limit)
         .then((builds) => {
             return loadDashboardArtifactsForBuilds(builds, vcs, username, project, token);
@@ -353,6 +354,7 @@ function getSortedArtifactsForProject(vcs, username, project, branch, token, lim
             return sortBy(builds, ['build_num']);
         });
 }
+
 /**
  *
  * @param vcs
@@ -387,9 +389,33 @@ function getProjectTrends(vcs, username, project, branch, token, limit) { //esli
         });
 }
 
+function loadArtifactsContentFromBands(builds, token) {
+    const p = builds.map((item) => {
+        return getDashboardContentsByBuild(item.artifacts, token)
+            .then((data) => {
+                item.artifactContent = data;
+                return item;
+            });
+    });
+    return Promise.all(p);
+}
+
+function getProjectHistoryChartData(vcs, username, project, branch, token, limit) {
+    return getBranchBuilds(vcs, username, project, branch, token, limit)
+        .then((builds) => {
+            return loadDashboardArtifactsForBuilds(builds, vcs, username, project, token);
+        })
+        .then((builds) => {
+            return sortBy(builds, ['build_num']);
+        })
+        .then((builds) => {
+            return loadArtifactsContentFromBands(builds, token);
+        });
+}
+
 module.exports = {
     getAllProjects,
-    getArtifacts,
+    getArtifacts: getArtifactsForBuild,
     getBranchBuilds,
     getBuild,
     invalidateCache,
@@ -398,4 +424,5 @@ module.exports = {
     sortProjectByLatestBuild,
     getArtifactContentForProject,
     getProjectTrends,
+    getProjectHistoryChartData,
 };
