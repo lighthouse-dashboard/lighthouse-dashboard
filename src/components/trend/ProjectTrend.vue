@@ -1,20 +1,33 @@
 <template>
     <div>
-        <div class="row" v-for="(report, trend) in trendScores" :key="trend">
-            <div>{{trend}}</div>
-            <div v-for="category in categories"
-                 :key="category"
-                 class="col s12 m2">
-                <TrendCard
-                    :vcs="vcs"
-                    :username="username"
-                    :project="project"
-                    :trendScore="report.trend[category]"
-                    :buildScore="report.build[category]"
-                    :category="category"
-                />
-            </div>
-        </div>
+        <table class="striped centered">
+            <tbody>
+            <tr>
+                <td></td>
+                <td v-for="category in categories"
+                    :key="category">
+                    {{ $t(`message.category_${category}`) }}
+                </td>
+            </tr>
+            </tbody>
+
+            <tbody>
+            <tr v-for="(report, trend) in trendScores" :key="trend">
+                <td>{{ trend }}</td>
+                <td v-for="category in categories"
+                    :key="category">
+                    <TrendCard
+                        :vcs="vcs"
+                        :username="username"
+                        :project="project"
+                        :trendscore="report.trend[category]"
+                        :buildscore="report.build[category]"
+                        :category="category"
+                    />
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -30,17 +43,17 @@
 
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
 
             username: {
                 type: String,
-                required: true
+                required: true,
             },
 
             project: {
                 type: String,
-                required: true
+                required: true,
             },
         },
 
@@ -53,16 +66,16 @@
                     'accessibility',
                     'best-practices',
                     'seo',
-                    'dreipol'
-                ]
-            }
+                    'dreipol',
+                ],
+            };
         },
+
         mounted() {
             this.$circle.getProjectTrend(this.vcs, this.username, this.project, this.$route.query.branch)
                 .then((trend) => {
                     this.trendScores = trend;
-                })
-        }
-
+                });
+        },
     };
 </script>

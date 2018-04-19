@@ -1,7 +1,7 @@
 <template>
     <div v-if="build" class="row">
 
-        <div class="col s12">
+        <div class="col s12 xl6">
             <Card>
                 <span slot="title">Project</span>
 
@@ -15,7 +15,7 @@
             </Card>
         </div>
 
-        <div class="col s12">
+        <div class="col s12 xl6">
             <BuiltAt :stopTime="build.stop_time"/>
         </div>
 

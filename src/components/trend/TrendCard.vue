@@ -1,13 +1,8 @@
 <template>
-    <Card>
-        <span slot="title">{{ $t(`message.category_${category}`) }}</span>
-
-        {{buildScore}}
-
-        <span class="right" :class="color">
-            <i class="material-icons">{{icon}}</i> <small v-if="trendScore !== 0">{{trendScore}}</small>
-        </span>
-    </Card>
+    <div>
+        <span >{{ buildscore }}</span>
+        <small v-if="trendscore !== 0" :class="color" >{{ trendscore }}</small>
+    </div>
 </template>
 
 <script>
@@ -22,41 +17,41 @@
 
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
 
             username: {
                 type: String,
-                required: true
+                required: true,
             },
 
             project: {
                 type: String,
-                required: true
+                required: true,
             },
 
             category: {
                 type: String,
-                required: true
+                required: true,
             },
 
-            trendScore: {
+            trendscore: {
                 type: Number,
-                required: true
+                required: true,
             },
-            buildScore: {
+            buildscore: {
                 type: Number,
-                required: true
+                required: true,
             },
         },
 
         computed: {
             icon() {
-                if (this.trendScore > 0) {
+                if (this.trendscore > 0) {
                     return 'arrow_upward';
                 }
 
-                if (this.trendScore < 0) {
+                if (this.trendscore < 0) {
                     return 'arrow_downward';
                 }
 
@@ -64,17 +59,16 @@
             },
 
             color() {
-                if (this.trendScore > 0) {
+                if (this.trendscore > 0) {
                     return 'green-text';
                 }
 
-                if (this.trendScore < 0) {
+                if (this.trendscore < 0) {
                     return 'red-text';
                 }
 
                 return '';
-            }
-        }
-
+            },
+        },
     };
 </script>

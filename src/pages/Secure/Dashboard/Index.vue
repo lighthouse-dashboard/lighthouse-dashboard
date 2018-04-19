@@ -23,11 +23,11 @@
 
             <div v-for="(project, index) in projects"
                  class='col s12'
-                 :class="{'grey lighten-3':  index%2}"
+                 :class="{'grey lighten-5': index%2}"
                  :key="project.buildIdentifier"
             >
                 <div class="row">
-                    <div class="col s12 m4">
+                    <div class="col s12">
                         <DashboardProjectTitle
                             :buildNum="project.buildIdentifier"
                             :vcs="project.vcs"
@@ -35,7 +35,7 @@
                             :project="project.project"/>
                     </div>
 
-                    <div class="col s12 m8">
+                    <div class="col s12">
                         <ProjectTrend
                             :vcs="project.vcs"
                             :username="project.username"
