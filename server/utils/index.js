@@ -1,7 +1,7 @@
 const path = require('path');
 const request = require('request');
 const Boom = require('boom');
-const { get, sortBy, compact, reverse } = require('lodash');
+const { get, sortBy, compact, reverse, groupBy } = require('lodash');
 
 const { getTrendsFromBuilds } = require('./trendUtils');
 
@@ -311,6 +311,9 @@ function getDashboardContentsByBuild(buildArtifacts, token) {
     return Promise.all(buildArtifacts.map((item) => {
         return getArtifactContent(item.url, token)
             .then((data) => {
+                if(!data.key){
+                    data.key = `${data.tag}:${data.url}`;
+                }
                 return data;
             })
     }));
@@ -343,6 +346,9 @@ function getArtifactContentForProject(vcs, username, project, branch, token, lim
         .then((builds) => {
             return Promise.all(builds.map((item) => {
                 return getDashboardContentsByBuild(item.artifacts, token)
+                    .then( (data) => {
+                        return groupBy(data, 'key');
+                    })
             }));
         })
 }

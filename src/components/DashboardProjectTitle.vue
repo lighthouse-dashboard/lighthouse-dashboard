@@ -1,31 +1,21 @@
 <template>
     <div v-if="build" class="row">
-        <div class="col s12 m2 xl1" v-if="hasReachedBudget">
-            <Card>
-                <Pineapple :size="45"/>
-            </Card>
-        </div>
 
-        <div class="col s12 m10 xl3">
+        <div class="col s12">
             <Card>
                 <span slot="title">Project</span>
+
                 <router-link
                     :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
                     <BuildStatus :vcs="vcs" :username="username" :project="project" :buildNum="buildNum"/>
                     {{ project }}
                 </router-link>
+
+                <Pineapple v-if="hasReachedBudget" class="right" :size="45"/>
             </Card>
         </div>
 
-        <div class="col s12 m3 xl2" :class="{'m3 xl2': hasReachedBudget,'m4 xl3': !hasReachedBudget }">
-            <BuildNum :buildNum="build.build_num"/>
-        </div>
-
-        <div class="col s12 m5 xl3">
-            <Author :username="user.login" :avatar="user.avatar_url"/>
-        </div>
-
-        <div class="col s12 m4 xl3">
+        <div class="col s12">
             <BuiltAt :stopTime="build.stop_time"/>
         </div>
 

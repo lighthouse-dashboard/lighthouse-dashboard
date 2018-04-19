@@ -27,7 +27,7 @@
                  :key="project.buildIdentifier"
             >
                 <div class="row">
-                    <div class="col s12">
+                    <div class="col s12 m4">
                         <DashboardProjectTitle
                             :buildNum="project.buildIdentifier"
                             :vcs="project.vcs"
@@ -35,12 +35,8 @@
                             :project="project.project"/>
                     </div>
 
-                    <div class="col s12">
-                        <ProjectHistory
-                            :showLegend="false"
-                            :showX="false"
-                            :showY="false"
-                            :height="100"
+                    <div class="col s12 m8">
+                        <ProjectTrend
                             :vcs="project.vcs"
                             :username="project.username"
                             :project="project.project"
@@ -58,6 +54,7 @@
     import BuildArtifacts from "@/components/BuildArtifacts";
     import DashboardProjectTitle from "@/components/DashboardProjectTitle";
     import ProjectHistory from "@/components/ProjectHistory";
+    import ProjectTrend from "@/components/trend/ProjectTrend";
 
     export default {
 
@@ -65,7 +62,8 @@
             Build,
             BuildArtifacts,
             DashboardProjectTitle,
-            ProjectHistory
+            ProjectHistory,
+            ProjectTrend
         },
 
         data() {

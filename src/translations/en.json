@@ -27,7 +27,13 @@
         "login_succeed": "Login successful",
         "help": "Help",
         "link": "Link",
-        "clear_cache": "Clear Cache"
+        "clear_cache": "Clear Cache",
+        "category_performance": "Performance",
+        "category_pwa": "PWA",
+        "category_accessibility": "Accessibility",
+        "category_best-practices": "Best Practices",
+        "category_seo": "SEO",
+        "category_dreipol": "Dreipol"
     },
     "dashboard": {
         "title": "dreihouse"

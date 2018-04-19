@@ -68,7 +68,7 @@ export default class CirclePlugin {
      * @return {*}
      */
     getBuildInfo(vcs, username, project, build, branch = this.branch) {
-              return Vue.http
+        return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}`
             )
@@ -201,6 +201,25 @@ export default class CirclePlugin {
     }
 
     /**
+     * To create the history graph we need to fetch all the artifact data
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string} branch
+     * @param {string|null} category
+     * @return {*}
+     */
+    getProjectTrend(vcs, username, project, branch = this.branch, category = null) {
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/trending`
+            )
+            .then(resp => {
+                return resp.body;
+            })
+    }
+
+    /**
      *
      * Check if the project has reached the budget
      *
@@ -218,7 +237,7 @@ export default class CirclePlugin {
                 }))
             })
             .then((artifacts) => {
-                if(artifacts.length === 0){
+                if (artifacts.length === 0) {
                     return [false];
                 }
                 return Promise.all(artifacts.filter((artifact) => {
