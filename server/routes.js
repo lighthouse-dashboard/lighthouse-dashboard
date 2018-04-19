@@ -102,6 +102,31 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/trending',
+        handler: require('./handlers/getBranchBuildTrend'),
+        options: {
+            cache: {
+                expiresIn: MINUTE,
+                privacy: 'public'
+            },
+            tags: ['api'],
+            description: "Get all builds for project on specific branch",
+            validate: {
+                query: {
+                    access_token: joi.string().description('API Secret. Can also be passed as Bearer token'),
+                    category: joi.string().description('Filter for specific category'),
+                },
+                params: {
+                    vcs: joi.string().required().description('VCS Type'),
+                    username: joi.string().required().description('Username used to fetch CircleCI projects'),
+                    project: joi.string().required().description('Specific CI project'),
+                    branch: joi.string().required().description('Branch of the project'),
+                }
+            }
+        }
+    },
+    {
+        method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/latest',
         handler: require('./handlers/getBranchLatestBuildInfo'),
         options: {

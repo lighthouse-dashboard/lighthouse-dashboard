@@ -3,6 +3,8 @@ const request = require('request');
 const Boom = require('boom');
 const { get, sortBy, compact, reverse } = require('lodash');
 
+const { getTrendsFromBuilds } = require('./trendUtils');
+
 let cachedResponse = {};
 
 /**
@@ -299,6 +301,69 @@ function getArtifactContent(url, token) {
     });
 }
 
+/**
+ *
+ * @param buildArtifacts
+ * @param token
+ * @return {Promise<[any]>}
+ */
+function getDashboardContentsByBuild(buildArtifacts, token) {
+    return Promise.all(buildArtifacts.map((item) => {
+        return getArtifactContent(item.url, token)
+            .then((data) => {
+                return data;
+            })
+    }));
+}
+
+/**
+ *
+ * @param vcs
+ * @param username
+ * @param project
+ * @param branch
+ * @param token
+ * @param limit
+ * @return {Promise<[any]>}
+ */
+function getArtifactContentForProject(vcs, username, project, branch, token, limit) {
+    return getBranchBuilds(vcs, username, project, branch, token, limit)
+        .then((builds) => {
+            const p = builds.map((item) => {
+                return getDashboardArtifacts(vcs, username, project, item.build_num, token)
+                    .then((artifacts) => {
+                        return { build_num: item.build_num, artifacts };
+                    })
+            });
+            return Promise.all(p);
+        })
+        .then((builds) => {
+            return sortBy(builds, ['build_num']);
+        })
+        .then((builds) => {
+            return Promise.all(builds.map((item) => {
+                return getDashboardContentsByBuild(item.artifacts, token)
+            }));
+        })
+}
+
+/**
+ *
+ * @param vcs
+ * @param username
+ * @param project
+ * @param branch
+ * @param token
+ * @param limit
+ * @return {Promise<[any]>}
+ */
+function getProjectTrends(vcs, username, project, branch, token, limit) {
+    return getArtifactContentForProject(vcs, username, project, branch, token, limit)
+        .then((builds) => {
+            return getTrendsFromBuilds(builds);
+        })
+}
+
 module.exports = {
     getAllProjects,
     getArtifacts,
@@ -307,5 +372,7 @@ module.exports = {
     invalidateCache,
     getDashboardArtifacts,
     getArtifactContent,
-    sortProjectByLatestBuild
+    sortProjectByLatestBuild,
+    getArtifactContentForProject,
+    getProjectTrends
 };

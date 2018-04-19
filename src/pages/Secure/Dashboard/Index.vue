@@ -36,12 +36,15 @@
                     </div>
 
                     <div class="col s12">
-                        <BuildArtifacts
-                            :buildNum="project.buildIdentifier"
+                        <ProjectHistory
+                            :showLegend="false"
+                            :showX="false"
+                            :showY="false"
+                            :height="100"
                             :vcs="project.vcs"
                             :username="project.username"
                             :project="project.project"
-                            :height="200"/>
+                        />
                     </div>
                 </div>
             </div>
@@ -54,13 +57,15 @@
     import Build from "@/components/Build";
     import BuildArtifacts from "@/components/BuildArtifacts";
     import DashboardProjectTitle from "@/components/DashboardProjectTitle";
+    import ProjectHistory from "@/components/ProjectHistory";
 
     export default {
 
         components: {
             Build,
             BuildArtifacts,
-            DashboardProjectTitle
+            DashboardProjectTitle,
+            ProjectHistory
         },
 
         data() {

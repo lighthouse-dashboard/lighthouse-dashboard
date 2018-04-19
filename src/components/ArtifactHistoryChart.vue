@@ -20,6 +20,24 @@
                 required: true
             },
 
+            height: {
+                type: Number,
+                default: 380
+            },
+
+            showLegend: {
+                type: Boolean,
+                default: true
+            },
+            showX: {
+                type: Boolean,
+                default: false
+            },
+            showY: {
+                type: Boolean,
+                default: false
+            },
+
         },
 
         mounted() {
@@ -36,17 +54,21 @@
                     },
                     axis: {
                         x: {
+                            show: this.showX,
                             type: "category",
                             categories: this.categories
                         },
                         y: {
-                            show: false,
+                            show: this.showY,
                             label: "Score",
                             max: 100,
-                            min: 0,
-                            top: 0,
-                            bottom: 0
                         }
+                    },
+                    legend: {
+                        show: this.showLegend
+                    },
+                    size: {
+                        height: this.height
                     },
 
                     bindto: this.$refs.chart

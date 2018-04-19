@@ -209,4 +209,45 @@ describe('Routes', function () {
     });
 
 
+    it('get project trends', () => {
+        nock(API)
+            .defaultReplyHeaders({
+                'Content-Type': 'application/json'
+            })
+            .get('/project/github/test/test/tree/master')
+            .query(true)
+            .reply(200, require('./data/getProject'))
+
+            .get('/project/github/test/test/13/artifacts')
+            .query(true)
+            .reply(200, require('./data/getBuildArtifacts'))
+
+            .get('/project/github/test/test/13/artifacts')
+            .query(true)
+            .reply(200, require('./data/getBuildArtifacts'))
+
+            .get('/0/lighthouse/desktop.json')
+            .query(true)
+            .reply(200, require('./data/artifacts/desktop.20180303-062322__test.io__.dashboard'))
+
+            .get('/0/lighthouse/desktop.json')
+            .query(true)
+            .reply(200, require('./data/artifacts/desktop.20180303-062322__test.io__.dashboard'))
+
+
+        return request({
+            url: `${SERVER}/api/projects/github/test/test/branch/master/trending?access_token=${SECRET}`
+        })
+            .then((data) => {
+                const build = JSON.parse(data);
+
+                unit.object(build).hasProperty('performance');
+                unit.object(build).hasProperty('pwa');
+                unit.object(build).hasProperty('accessibility');
+                unit.object(build).hasProperty('best-practices');
+                unit.object(build).hasProperty('seo');
+            });
+    });
+
+
 });
