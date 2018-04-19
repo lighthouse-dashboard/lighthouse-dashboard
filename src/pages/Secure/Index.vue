@@ -1,14 +1,11 @@
 <template>
     <div id="app">
-
-        <SideNav id="slide-out" class="sidenav sidenav-fixed"/>
-
+        <side-nav class="sidenav sidenav-fixed" id="slide-out"/>
         <div class="fixed-action-btn hide-on-large-only">
             <a class="btn-floating btn-large waves-effect waves-light green darken-2" @click="open">
                 <i class="material-icons">menu</i>
             </a>
         </div>
-
         <main>
             <router-view/>
         </main>
@@ -16,44 +13,31 @@
 </template>
 
 <script>
-    import SideNav from '@/components/SideNav'
+    import SideNav from '@/components/SideNav';
 
     export default {
-        name: "App",
+        name: 'App',
 
         components: {
-            SideNav
+            SideNav,
         },
 
         data() {
             return {
                 sidenav: null,
-            }
-        },
-
-        mounted() {
-            var elem = document.querySelector('.sidenav');
-            this.sidenav = M.Sidenav.init(elem, {});
+            };
         },
 
         methods: {
             open() {
                 this.sidenav.open();
-            }
-        }
+            },
+        },
+
+        mounted() {
+            let elem = document.querySelector('.sidenav');
+            this.sidenav = M.Sidenav.init(elem, {}); //eslint-disable-line
+        },
+
     };
 </script>
-
-
-<style>
-    header, main, footer {
-        padding-left: 300px;
-    }
-
-    @media only screen and (max-width: 992px) {
-        header, main, footer {
-            padding-left: 0;
-        }
-    }
-
-</style>

@@ -2,11 +2,11 @@
     <Card v-if="htmlArtifacts && htmlArtifacts.length > 0">
         <span slot="title">{{ $t("message.artifacts") }}</span>
         <div class="collection">
-            <a v-for='html in htmlArtifacts'
-               class="truncate collection-item"
-               :key='html.url'
-               target='_blank'
-               :href='html.url'>
+            <a class="truncate collection-item"
+               target="_blank"
+               v-for="html in htmlArtifacts"
+               :key="html.url"
+               :href="html.url">
                 {{ getFilename(html.path) }}
             </a>
         </div>
@@ -21,28 +21,28 @@
     export default {
 
         components: {
-            Card
+            Card,
         },
 
         props: {
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
 
             username: {
                 type: String,
-                required: true
+                required: true,
             },
 
             project: {
                 type: String,
-                required: true
+                required: true,
             },
 
             buildNum: {
                 type: [String, Number],
-                required: true
+                required: true,
             },
         },
 
@@ -50,6 +50,12 @@
             return {
                 htmlArtifacts: [],
             };
+        },
+
+        methods: {
+            getFilename(path) {
+                return basename(path);
+            },
         },
 
         mounted() {
@@ -64,13 +70,7 @@
                         this.$auth.logout();
                         this.$router.push({ name: 'login' });
                     }
-                })
+                });
         },
-
-        methods: {
-            getFilename(path) {
-                return basename(path);
-            }
-        }
     };
 </script>

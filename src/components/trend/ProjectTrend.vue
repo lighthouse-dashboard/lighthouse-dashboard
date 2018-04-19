@@ -1,43 +1,42 @@
 <template>
-    <div>
-        <table class="striped centered">
-            <tbody>
+    <table class="striped centered">
+        <tbody>
             <tr>
-                <td></td>
+                <td/>
                 <td v-for="category in categories"
-                    :key="category">
+                        :key="category">
                     {{ $t(`message.category_${category}`) }}
                 </td>
             </tr>
-            </tbody>
+        </tbody>
 
-            <tbody>
+        <tbody>
             <tr v-for="(report, trend) in trendScores" :key="trend">
                 <td>{{ trend }}</td>
                 <td v-for="category in categories"
-                    :key="category">
-                    <TrendCard
-                        :vcs="vcs"
-                        :username="username"
-                        :project="project"
-                        :trendscore="report.trend[category]"
-                        :buildscore="report.build[category]"
-                        :category="category"
+                        :key="category">
+
+                    <trend-score
+                            :vcs="vcs"
+                            :username="username"
+                            :project="project"
+                            :trendscore="report.trend[category]"
+                            :buildscore="report.build[category]"
+                            :category="category"
                     />
                 </td>
             </tr>
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
 </template>
 
 <script>
 
-    import TrendCard from '@/components/trend/TrendCard';
+    import TrendScore from '@/components/trend/TrendScore';
 
     export default {
         components: {
-            TrendCard,
+            TrendScore,
         },
         props: {
 

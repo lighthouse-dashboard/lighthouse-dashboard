@@ -1,7 +1,7 @@
 <template>
     <div class="loader-wrapper">
         <div class="loader" :style="{ width: width, height: width}">
-            <span class="loader-inner"></span>
+            <span class="loader-inner"/>
         </div>
     </div>
 </template>
@@ -11,18 +11,14 @@
         props: {
             size: {
                 type: Number,
-                default: 10
-            }
+                default: 10,
+            },
         },
 
         computed: {
             width() {
-                return `${this.size}px`;
+                return `${ this.size }px`;
             },
-            margin() {
-
-                return `-${this.size / 2}px`;
-            }
-        }
-    }
+        },
+    };
 </script>

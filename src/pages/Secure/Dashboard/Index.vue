@@ -3,8 +3,8 @@
         <div class="navbar-fixed">
             <nav class="green lighten-1">
                 <div class="nav-wrapper">
-                    <router-link :to="{name: 'dashboard'}" class="brand-logo center">
-                        {{ $t("dashboard.title")}}
+                    <router-link class="brand-logo center" :to="{name: 'dashboard'}">
+                        {{ $t("dashboard.title") }}
                     </router-link>
                 </div>
             </nav>
@@ -21,14 +21,14 @@
                 </h5>
             </div>
 
-            <div v-for="(project, index) in projects"
-                 class='col s12'
+            <div class="col s12"
+                 v-for="(project, index) in projects"
                  :class="{'grey lighten-5': index%2}"
                  :key="project.buildIdentifier"
             >
                 <div class="row">
                     <div class="col s12">
-                        <DashboardProjectTitle
+                        <dashboard-project-title
                             :buildNum="project.buildIdentifier"
                             :vcs="project.vcs"
                             :username="project.username"
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="col s12">
-                        <ProjectTrend
+                        <project-trend
                             :vcs="project.vcs"
                             :username="project.username"
                             :project="project.project"
@@ -63,7 +63,7 @@
             BuildArtifacts,
             DashboardProjectTitle,
             ProjectHistory,
-            ProjectTrend
+            ProjectTrend,
         },
 
         data() {
@@ -73,22 +73,6 @@
                 updater: null,
                 isLoading: true,
             };
-        },
-
-        watch: {
-            $route() {
-                this.load();
-            }
-        },
-
-        beforeDestroy() {
-            if (this.updater) {
-                clearTimeout(this.updater);
-            }
-        },
-
-        mounted() {
-            this.load();
         },
 
         methods: {
@@ -110,8 +94,24 @@
                     })
                     .finally(() => {
                         this.isLoading = false;
-                    })
+                    });
+            },
+        },
+
+        watch: {
+            $route() {
+                this.load();
+            },
+        },
+
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
             }
-        }
+        },
+
+        mounted() {
+            this.load();
+        },
     };
 </script>

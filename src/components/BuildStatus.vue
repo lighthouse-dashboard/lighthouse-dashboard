@@ -1,7 +1,7 @@
 <template>
     <span v-if="build">
-        <i class="material-icons" :class="buildStatusClass" v-if="isBuildSuccessful">done</i>
-        <i class="material-icons" :class="buildStatusClass" v-if="!isBuildSuccessful">cancel</i>
+        <i class="material-icons" v-if="isBuildSuccessful" :class="buildStatusClass">done</i>
+        <i class="material-icons" v-if="!isBuildSuccessful" :class="buildStatusClass">cancel</i>
     </span>
 </template>
 
@@ -11,22 +11,22 @@
         props: {
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
 
             username: {
                 type: String,
-                required: true
+                required: true,
             },
 
             project: {
                 type: String,
-                required: true
+                required: true,
             },
 
             buildNum: {
                 type: Number,
-                required: true
+                required: true,
             },
         },
 
@@ -36,13 +36,6 @@
                 isBuildSuccessful: null,
                 build: null,
             };
-        },
-
-        mounted() {
-            this.load()
-                .then(() => {
-
-                })
         },
 
         methods: {
@@ -56,23 +49,25 @@
                         } = build;
 
                         const classMap = {
-                            'success': 'green-text lighten-4',
-                            'fixed': 'green-text lighten-4',
-                            'failed': 'red-text lighten-4',
+                            success: 'green-text lighten-4',
+                            fixed: 'green-text lighten-4',
+                            failed: 'red-text lighten-4',
                         };
 
                         const successfulMapping = {
-                            'success': true,
-                            'fixed': true,
-                            'failed': false,
+                            success: true,
+                            fixed: true,
+                            failed: false,
                         };
 
-
                         this.isBuildSuccessful = successfulMapping[status];
-
                         this.buildStatusClass = classMap[status] || null;
-                    })
-            }
-        }
+                    });
+            },
+        },
+
+        mounted() {
+            this.load();
+        },
     };
 </script>

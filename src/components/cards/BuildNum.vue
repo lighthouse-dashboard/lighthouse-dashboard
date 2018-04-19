@@ -1,7 +1,7 @@
 <template>
     <Card>
-        <span slot="title">{{ $t("message.build_num")}}</span>
-         #{{buildNum}}
+        <span slot="title">{{ $t('message.build_num') }}</span>
+        #{{ buildNum }}
     </Card>
 </template>
 
@@ -11,14 +11,14 @@
 
     export default {
         components: {
-            Card
+            Card,
         },
 
         props: {
             buildNum: {
                 type: Number,
-                required: true
-            }
-        }
-    }
+                required: true,
+            },
+        },
+    };
 </script>

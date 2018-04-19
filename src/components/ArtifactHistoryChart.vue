@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <div ref="chart"></div>
-    </div>
+    <div ref="chart"/>
 </template>
 
 <script>
@@ -12,36 +10,32 @@
         props: {
             data: {
                 type: Object,
-                required: true
+                required: true,
             },
 
             categories: {
                 type: Array,
-                required: true
+                required: true,
             },
 
             height: {
                 type: Number,
-                default: 380
+                default: 380,
             },
 
             showLegend: {
                 type: Boolean,
-                default: true
+                default: true,
             },
             showX: {
                 type: Boolean,
-                default: false
+                default: false,
             },
             showY: {
                 type: Boolean,
-                default: false
+                default: false,
             },
 
-        },
-
-        mounted() {
-            this.load();
         },
 
         methods: {
@@ -49,33 +43,36 @@
                 const options = {
                     data: {
                         json: this.data,
-                        type: "line",
-                        labels: true
+                        type: 'line',
+                        labels: true,
                     },
                     axis: {
                         x: {
                             show: this.showX,
-                            type: "category",
-                            categories: this.categories
+                            type: 'category',
+                            categories: this.categories,
                         },
                         y: {
                             show: this.showY,
-                            label: "Score",
+                            label: 'Score',
                             max: 100,
-                        }
+                        },
                     },
                     legend: {
-                        show: this.showLegend
+                        show: this.showLegend,
                     },
                     size: {
-                        height: this.height
+                        height: this.height,
                     },
-
-                    bindto: this.$refs.chart
+                    bindto: this.$refs.chart,
                 };
 
                 bb.generate(options);
-            }
-        }
+            },
+        },
+
+        mounted() {
+            this.load();
+        },
     };
 </script>

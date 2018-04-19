@@ -6,18 +6,18 @@
 
                     <ul class="">
                         <router-link
-                            :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}"
                             tag="li"
-                            :exact="true"
-                            activeClass="active">
+                            activeClass="active"
+                            :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}"
+                            :exact="true">
                             <a>{{ $t("message.overview") }}</a>
                         </router-link>
 
                         <router-link
-                            :to="{name: 'history', params: {vcs, username, project}, query: $route.query}"
+                            activeClass="active"
                             tag="li"
-                            :exact="true"
-                            activeClass="active">
+                            :to="{name: 'history', params: {vcs, username, project}, query: $route.query}"
+                            :exact="true">
                             <a>{{ $t("message.history") }}</a>
                         </router-link>
                     </ul>
@@ -37,16 +37,16 @@
         props: {
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
             username: {
                 type: String,
-                required: true
+                required: true,
             },
             project: {
                 type: String,
-                required: true
-            }
-        }
+                required: true,
+            },
+        },
     };
 </script>

@@ -33,18 +33,16 @@
 
         <loader v-if="isLoading"/>
 
-        <ProjectListLink v-for="project in projects"
-                         v-if="projects"
-                         :project="project"
-                         :key="project.project"/>
+        <project-list-link v-for="project in projects"
+                           v-if="projects"
+                           :project="project"
+                           :key="project.project"/>
 
         <li><a class="subheader">{{ $t("message.options") }}</a></li>
 
         <li>
-            <a @click="clearCache"
-               v-if="!isClearingCache">
-                <i
-                    class="material-icons">delete</i> {{ $t("message.clear_cache")}}
+            <a v-if="!isClearingCache" @click="clearCache">
+                <i class="material-icons">delete</i> {{ $t('message.clear_cache') }}
             </a>
         </li>
     </ul>
@@ -61,9 +59,8 @@
 
         components: {
             ProjectListLink,
-            BranchList
+            BranchList,
         },
-
 
         data() {
             return {
@@ -71,25 +68,8 @@
                 updater: null,
                 isClearingCache: false,
                 isLoading: false,
-                version
+                version,
             };
-        },
-
-
-        watch: {
-            '$route.query.branch'() {
-                this.load();
-            }
-        },
-
-        beforeDestroy() {
-            if (this.updater) {
-                clearTimeout(this.updater);
-            }
-        },
-
-        mounted() {
-            this.load();
         },
 
         methods: {
@@ -110,12 +90,12 @@
                             this.$auth.logout();
                             this.$router.push({ name: 'login' });
                         }
-
                     })
                     .finally(() => {
                         this.isLoading = false;
-                    })
+                    });
             },
+
             clearCache() {
                 this.projects = null;
                 this.isClearingCache = true;
@@ -133,8 +113,24 @@
                     })
                     .finally(() => {
                         this.isClearingCache = false;
-                    })
+                    });
+            },
+        },
+
+        watch: {
+            '$route.query.branch'() {
+                this.load();
+            },
+        },
+
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
             }
-        }
+        },
+
+        mounted() {
+            this.load();
+        },
     };
 </script>

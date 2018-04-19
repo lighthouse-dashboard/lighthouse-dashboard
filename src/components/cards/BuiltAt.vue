@@ -1,7 +1,7 @@
 <template>
     <Card>
-        <span slot="title">{{ $t("message.build_completed") }}</span>
-        {{buildCompletedTime}}
+        <span slot="title">{{ $t('message.build_completed') }}</span>
+        {{ buildCompletedTime }}
     </Card>
 </template>
 
@@ -14,20 +14,20 @@
 
     export default {
         components: {
-            Card
+            Card,
         },
 
         props: {
             stopTime: {
                 type: String,
-                required: true
+                required: true,
             },
         },
 
         data() {
             return {
-                buildCompletedTime: null
-            }
+                buildCompletedTime: null,
+            };
         },
 
         mounted() {
@@ -40,6 +40,6 @@
             } else {
                 this.buildCompletedTime = mStopTime.format(Vue.config.dateFormat);
             }
-        }
-    }
+        },
+    };
 </script>

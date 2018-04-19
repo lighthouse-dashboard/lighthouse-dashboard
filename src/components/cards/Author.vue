@@ -3,10 +3,10 @@
         <span slot="title">{{ $t("message.user") }}</span>
         <div class="row">
             <div class="col s10">
-                <span class="truncate">{{username}}</span>
+                <span class="truncate">{{ username }}</span>
             </div>
             <div class="col s2">
-                <img :src="avatar" alt="" class="circle avatar">
+                <img alt="avatar" class="circle avatar" :src="avatar">
 
             </div>
         </div>
@@ -19,18 +19,19 @@
 
     export default {
         components: {
-            Card
+            Card,
         },
 
         props: {
             username: {
                 type: String,
-                required: true
+                required: true,
             },
             avatar: {
                 type: String,
-                required: true
+                required: true,
             },
-        }
-    }
+        },
+    };
+
 </script>

@@ -4,7 +4,7 @@
             <nav class="green lighten-1">
                 <div class="nav-wrapper">
                     <router-link :to="{name: 'help'}" class="brand-logo center">
-                        {{ $t("message.help")}}
+                        {{ $t("message.help") }}
                     </router-link>
                 </div>
             </nav>
@@ -36,8 +36,6 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-
     export default {
 
         components: {},
@@ -45,10 +43,8 @@
         data() {
             return {
                 password: null,
-                isSubmitting: false
+                isSubmitting: false,
             };
         },
-
-        methods: {}
     };
 </script>

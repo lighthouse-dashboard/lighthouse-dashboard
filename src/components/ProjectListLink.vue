@@ -1,10 +1,11 @@
 <template>
     <router-link
         tag="li"
-        :to="{name: 'overview', params: project, query: $route.query}"
-        active-class="active">
+        active-class="active"
+        :to="{name: 'overview', params: project, query: $route.query}">
         <a>
-            {{ project.project }} <BuildingAnimation class="right" :size="20" v-if="hasRunningBuild"/>
+            {{ project.project }}
+            <building-animation class="right" v-if="hasRunningBuild" :size="20"/>
         </a>
     </router-link>
 </template>
@@ -16,13 +17,13 @@
 
     export default {
         components: {
-            BuildingAnimation
+            BuildingAnimation,
         },
 
         props: {
             project: {
                 type: Object,
-                required: true
+                required: true,
             },
         },
 
@@ -31,6 +32,25 @@
                 hasRunningBuild: false,
                 updater: null,
             };
+        },
+
+        methods: {
+            checkIfHasRunning() {
+                this.$circle.hasRunningBuild(this.project.vcs, this.project.username, this.project.project, this.$route.query.branch)
+                    .then((has) => {
+                        this.hasRunningBuild = has;
+                        this.updater = setTimeout(() => {
+                            this.checkIfHasRunning();
+                        }, Vue.config.buildStatusInterval);
+                    })
+                    .catch((e) => {
+                        this.$toast.error(e);
+                        if (e.status === 401) {
+                            this.$auth.logout();
+                            this.$router.push({ name: 'login' });
+                        }
+                    });
+            },
         },
 
         beforeDestroy() {
@@ -42,24 +62,5 @@
         mounted() {
             this.checkIfHasRunning();
         },
-
-        methods: {
-            checkIfHasRunning() {
-                this.$circle.hasRunningBuild(this.project.vcs, this.project.username, this.project.project, this.$route.query.branch)
-                    .then((has) => {
-                        this.hasRunningBuild = has;
-                        this.updater = setTimeout(() => {
-                            this.checkIfHasRunning();
-                        }, Vue.config.buildStatusInterval)
-                    })
-                    .catch( (e) => {
-                        this.$toast.error(e);
-                        if (e.status === 401) {
-                            this.$auth.logout();
-                            this.$router.push({ name: 'login' });
-                        }
-                    })
-            }
-        }
     };
 </script>

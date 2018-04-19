@@ -4,30 +4,30 @@
 
         <div class="row">
             <div class="col s4">
-                <Card>
-                    <span slot="title">{{ $t('message.project')}}</span>
-                    {{project}}
-                </Card>
+                <card>
+                    <span slot="title">{{ $t('message.project') }}</span>
+                    {{ project }}
+                </card>
             </div>
 
             <div class="col s4">
-                <Card>
-                    <span slot="title">{{ $t('message.link')}}</span>
-                    <CiLink :username="username" :project="project"/>
-                </Card>
+                <card>
+                    <span slot="title">{{ $t('message.link') }}</span>
+                    <ci-link :username="username" :project="project"/>
+                </card>
             </div>
 
 
             <div class="col s4">
-                <Card>
-                    <span slot="title">{{ $t('message.link')}}</span>
-                    <GitHubLink :username="username" :project="project"/>
-                </Card>
+                <card>
+                    <span slot="title">{{ $t('message.link') }}</span>
+                    <git-hub-link :username="username" :project="project"/>
+                </card>
             </div>
         </div>
 
         <div v-if="builds">
-            <Build
+            <build
                 v-for="(build, index) in builds"
                 :class="{'grey lighten-5': index%2}"
                 :vcs="vcs"
@@ -59,27 +59,19 @@
         props: {
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
+
             username: {
                 type: String,
-                required: true
+                required: true,
             },
+
             project: {
                 type: String,
-                required: true
-            }
-        },
-
-        watch: {
-            token() {
-                this.load();
+                required: true,
             },
-            project() {
-                this.load();
-            }
         },
-
 
         data() {
             return {
@@ -89,23 +81,12 @@
             };
         },
 
-        beforeDestroy() {
-            if (this.updater) {
-                clearTimeout(this.updater);
-            }
-        },
-
-        mounted() {
-
-            this.load();
-        },
-
         methods: {
             load() {
                 this.projectObject = {
                     vcs: this.vcs,
                     username: this.username,
-                    project: this.project
+                    project: this.project,
                 };
 
                 this.$circle
@@ -122,8 +103,28 @@
                             this.$auth.logout();
                             this.$router.push({ name: 'login' });
                         }
-                    })
+                    });
+            },
+        },
+
+        watch: {
+            token() {
+                this.load();
+            },
+
+            project() {
+                this.load();
+            },
+        },
+
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
             }
-        }
+        },
+
+        mounted() {
+            this.load();
+        },
     };
 </script>

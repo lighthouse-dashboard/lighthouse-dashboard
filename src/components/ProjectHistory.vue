@@ -1,10 +1,11 @@
 <template>
     <div class="card">
         <div class="card-content">
-            <div class="row" v-for="(target, url, index) in data">
+            <div class="row" v-for="(target, url) in data" :key="url">
                 <div class="col s12">
-                    <div class="card-title"><a :href="url" target="_blank">{{url}}</a></div>
-                    <ArtifactHistoryChart
+                    <div class="card-title"><a target="_blank" :href="url">{{ url }}</a></div>
+                    <artifact-history-chart
+                        v-if="target"
                         :showLegend="showLegend"
                         :showX="showX"
                         :showY="showY"
@@ -12,7 +13,7 @@
                         :url="url"
                         :data="target.scores"
                         :categories="target.builds"
-                        v-if="target"/>
+                    />
                 </div>
             </div>
         </div>
@@ -32,62 +33,41 @@
         props: {
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
             username: {
                 type: String,
-                required: true
+                required: true,
             },
             project: {
                 type: String,
-                required: true
+                required: true,
             },
 
             height: {
                 type: Number,
-                default: 380
+                default: 380,
             },
 
             showLegend: {
                 type: Boolean,
-                default: true
+                default: true,
             },
             showX: {
                 type: Boolean,
-                default: false
+                default: false,
             },
             showY: {
                 type: Boolean,
-                default: false
+                default: false,
             },
-
         },
-
-        watch: {
-            token() {
-                this.load();
-            },
-            project() {
-                this.load();
-            }
-        },
-
 
         data() {
             return {
                 data: null,
                 updater: null,
             };
-        },
-
-        beforeDestroy() {
-            if (this.updater) {
-                clearTimeout(this.updater);
-            }
-        },
-
-        mounted() {
-            this.load();
         },
 
         methods: {
@@ -102,8 +82,28 @@
                             this.$auth.logout();
                             this.$router.push({ name: 'login' });
                         }
-                    })
+                    });
+            },
+        },
+
+        watch: {
+            token() {
+                this.load();
+            },
+
+            project() {
+                this.load();
+            },
+        },
+
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
             }
-        }
+        },
+
+        mounted() {
+            this.load();
+        },
     };
 </script>

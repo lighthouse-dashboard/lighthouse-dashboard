@@ -43,13 +43,10 @@
 
     export default {
 
-        components: {
-        },
-
         data() {
             return {
                 password: null,
-                isSubmitting: false
+                isSubmitting: false,
             };
         },
 
@@ -66,46 +63,15 @@
                 this.$auth.login(this.password)
                     .then(() => {
                         this.$toast.notify(this.$t('message.login_succeed'));
-                        this.$router.push({ name: 'dashboard' })
+                        this.$router.push({ name: 'dashboard' });
                     })
-                    .catch(e => {
-                        this.$toast.notify(this.$t('error.login_failed'))
+                    .catch(() => {
+                        this.$toast.notify(this.$t('error.login_failed'));
                     })
                     .finally(() => {
                         this.isSubmitting = false;
-                    })
-            }
-        }
+                    });
+            },
+        },
     };
 </script>
-
-<style scoped>
-
-    .title {
-        font-size: 4rem;
-    }
-
-    .logo {
-        height: 83px;
-    }
-
-    .component {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-
-    }
-
-    .wrapper {
-        display: flex;
-        flex-flow: column;
-        height: 100%;
-        justify-content: center;
-        flex: 1 1 100%;
-    }
-
-    .card-image {
-        padding-top: 20px;
-    }
-
-</style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ProjectHistory
+        <project-history
             :vcs="vcs"
             :username="username"
             :project="project"/>
@@ -20,16 +20,18 @@
         props: {
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
+
             username: {
                 type: String,
-                required: true
+                required: true,
             },
+
             project: {
                 type: String,
-                required: true
-            }
-        }
+                required: true,
+            },
+        },
     };
 </script>

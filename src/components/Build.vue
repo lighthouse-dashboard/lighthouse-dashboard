@@ -1,7 +1,7 @@
 <template>
     <div class="row">
-        <div class='col s12'>
-            <BuildInfo
+        <div class="col s12">
+            <build-info
                 :vcs="vcs"
                 :username="username"
                 :project="project"
@@ -9,8 +9,8 @@
             />
         </div>
 
-        <div class='col s12 l9'>
-            <BuildArtifacts
+        <div class="col s12 l9">
+            <build-artifacts
                 :vcs="vcs"
                 :username="username"
                 :project="project"
@@ -18,8 +18,8 @@
             />
         </div>
 
-        <div class='col s12 l3'>
-            <ArtifactList
+        <div class="col s12 l3">
+            <artifact-listt
                 :vcs="vcs"
                 :username="username"
                 :project="project"
@@ -42,28 +42,28 @@
         components: {
             BuildArtifacts,
             BuildInfo,
-            ArtifactList
+            ArtifactList,
         },
 
         props: {
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
 
             username: {
                 type: String,
-                required: true
+                required: true,
             },
 
             project: {
                 type: String,
-                required: true
+                required: true,
             },
 
             buildNum: {
                 type: Number,
-                required: true
+                required: true,
             },
         },
 
@@ -79,12 +79,5 @@
                 clearTimeout(this.updater);
             }
         },
-
-        mounted() {
-        },
-
-        methods: {
-
-        }
     };
 </script>

@@ -1,24 +1,26 @@
 <template>
-    <div v-if="build" class="row">
-
+    <div class="row" v-if="build">
         <div class="col s12 xl6">
             <Card>
                 <span slot="title">Project</span>
 
                 <router-link
                     :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
-                    <BuildStatus :vcs="vcs" :username="username" :project="project" :buildNum="buildNum"/>
+                    <build-status
+                        :vcs="vcs"
+                        :username="username"
+                        :project="project"
+                        :buildNum="buildNum"/>
                     {{ project }}
                 </router-link>
 
-                <Pineapple v-if="hasReachedBudget" class="right" :size="45"/>
+                <pineapple class="right" v-if="hasReachedBudget" :size="45"/>
             </Card>
         </div>
 
         <div class="col s12 xl6">
-            <BuiltAt :stopTime="build.stop_time"/>
+            <built-at :stopTime="build.stop_time"/>
         </div>
-
     </div>
 </template>
 
@@ -47,22 +49,22 @@
 
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
 
             username: {
                 type: String,
-                required: true
+                required: true,
             },
 
             project: {
                 type: String,
-                required: true
+                required: true,
             },
 
             buildNum: {
                 type: Number,
-                required: true
+                required: true,
             },
         },
 
@@ -84,24 +86,7 @@
 
         computed: {},
 
-        beforeDestroy() {
-            if (this.updater) {
-                clearTimeout(this.updater);
-            }
-        },
-
-        mounted() {
-            this.load()
-                .then(() => {
-                    this.$circle.hasAllartifactsReachedBudget(this.vcs, this.username, this.project, this.buildNum)
-                        .then((has) => {
-                            this.hasReachedBudget = has;
-                        })
-                })
-        },
-
         methods: {
-
             load() {
                 return this.$circle.getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
@@ -125,7 +110,23 @@
                             this.$router.push({ name: 'login' });
                         }
                     });
+            },
+        },
+
+        beforeDestroy() {
+            if (this.updater) {
+                clearTimeout(this.updater);
             }
-        }
+        },
+
+        mounted() {
+            this.load()
+                .then(() => {
+                    return this.$circle.hasAllartifactsReachedBudget(this.vcs, this.username, this.project, this.buildNum);
+                })
+                .then((has) => {
+                    this.hasReachedBudget = has;
+                });
+        },
     };
 </script>

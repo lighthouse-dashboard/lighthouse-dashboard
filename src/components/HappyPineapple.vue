@@ -23,8 +23,8 @@
         props: {
             size: {
                 type: Number,
-                default: 200
-            }
-        }
-    }
+                default: 200,
+            },
+        },
+    };
 </script>

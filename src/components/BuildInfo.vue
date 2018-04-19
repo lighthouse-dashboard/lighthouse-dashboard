@@ -1,36 +1,36 @@
 <template>
     <div v-if="build">
         <div class="col s12 m4 l3">
-            <Card>
+            <card>
                 <span slot="title">{{ $t("message.build_num") }}</span>
-                <BuildStatus
+                <build-status
                     :vcs="vcs"
                     :username="username"
                     :project="project"
                     :buildNum="buildNum"/>
-                #{{build.build_num}}
-                <Pineapple v-if="hasReachedBudget" class="right" :size="45"/>
-            </Card>
+                #{{ build.build_num }}
+                <pineapple class="right" v-if="hasReachedBudget" :size="45"/>
+            </card>
         </div>
 
         <div class="col s12 m4 l3">
-            <BuiltAt :stopTime="build.stop_time"/>
+            <built-at :stopTime="build.stop_time"/>
 
         </div>
 
         <div class="col s12 m4 l3">
-            <Card>
+            <card>
                 <span slot="title">{{ $t("message.build_duration") }}</span>
                 {{ buildDuration }}
-            </Card>
+            </card>
         </div>
 
         <div class="col s12 m4 l3" v-if="user">
-            <Card class="author-card">
+            <card class="author-card">
                 <span slot="title">{{ $t("message.commit") }}</span>
-                <img :src="user.avatar_url" alt="" class="circle left avatar">
-                <span class="truncate">{{build.subject}}</span>
-            </Card>
+                <img alt="" class="circle left avatar" :src="user.avatar_url">
+                <span class="truncate">{{ build.subject }}</span>
+            </card>
         </div>
     </div>
 </template>
@@ -63,22 +63,22 @@
 
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
 
             username: {
                 type: String,
-                required: true
+                required: true,
             },
 
             project: {
                 type: String,
-                required: true
+                required: true,
             },
 
             buildNum: {
                 type: Number,
-                required: true
+                required: true,
             },
 
 
@@ -97,19 +97,6 @@
             };
         },
 
-        mounted() {
-            this.loadBuild()
-                .then(() => {
-                    return this.loadInfo();
-                })
-                .then(() => {
-                    this.$circle.hasAllartifactsReachedBudget(this.vcs, this.username, this.project, this.buildNum)
-                        .then((has) => {
-                            this.hasReachedBudget = has;
-                        })
-                })
-        },
-
         methods: {
             loadBuild() {
                 return this.$circle.getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
@@ -122,18 +109,32 @@
                             this.$auth.logout();
                             this.$router.push({ name: 'login' });
                         }
-                    })
+                    });
             },
+
             loadInfo() {
                 const {
                     user,
-                    build_time_millis,
+                    build_time_millis, // eslint-disable-line
                 } = this.build;
 
                 this.buildDuration = moment.duration(build_time_millis).humanize();
 
                 this.user = user;
-            }
-        }
+            },
+        },
+
+        mounted() {
+            this.loadBuild()
+                .then(() => {
+                    return this.loadInfo();
+                })
+                .then(() => {
+                    this.$circle.hasAllartifactsReachedBudget(this.vcs, this.username, this.project, this.buildNum)
+                        .then((has) => {
+                            this.hasReachedBudget = has;
+                        });
+                });
+        },
     };
 </script>

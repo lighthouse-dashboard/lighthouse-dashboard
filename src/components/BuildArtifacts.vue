@@ -2,22 +2,21 @@
     <div class="card">
         <div class="card-content">
             <div class="row">
-                <p v-if="!artifacts || artifacts.length === 0"
-                   class="center">
+                <p class="center"
+                   v-if="!artifacts || artifacts.length === 0">
                     {{ $t("message.no_dashboard_available") }}
                 </p>
 
-                <div v-for="(data, key, index) in chartData"
-                     :key="key"
-                     class="col s12"
-                >
+                <div class="col s12"
+                     v-for="(data, key) in chartData"
+                     :key="key">
                     <p>
-                        <a :href="key" target="_blank">
-                            {{key}}
+                        <a target="_blank" :href="key">
+                            {{ key }}
                         </a>
                     </p>
 
-                    <Chart
+                    <chart
                         :columns="data.columns"
                         :categories="categories"
                         :height="height"/>
@@ -38,25 +37,25 @@
         props: {
             vcs: {
                 type: String,
-                required: true
+                required: true,
             },
             username: {
                 type: String,
-                required: true
+                required: true,
             },
             project: {
                 type: String,
-                required: true
+                required: true,
             },
             buildNum: {
                 type: Number,
-                required: true
+                required: true,
             },
 
             height: {
                 type: Number,
-                default: 340
-            }
+                default: 340,
+            },
         },
 
         data() {
@@ -65,19 +64,11 @@
                 chartDataLength: null,
                 categories: null,
                 artifacts: null,
-                computedClass: null
+                computedClass: null,
             };
         },
 
-        mounted() {
-            this.loadArtifacts()
-                .then(() => {
-                    return this.buildChartData();
-                })
-        },
         methods: {
-
-
             loadArtifacts() {
                 return this.$circle
                     .getDashboardArtifacts(this.vcs, this.username, this.project, this.buildNum)
@@ -152,7 +143,14 @@
                         this.chartDataLength = Object.keys(this.chartData).length;
                         this.computedClass = this.chartDataLength % 2 === 0 ? 'm6' : 'm12';
                     });
-            }
-        }
+            },
+
+            mounted() {
+                this.loadArtifacts()
+                    .then(() => {
+                        return this.buildChartData();
+                    });
+            },
+        },
     };
 </script>

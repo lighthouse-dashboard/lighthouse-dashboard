@@ -1,5 +1,5 @@
 <template>
-    <a :href="url" target="_blank">{{ $t("message.vcs_link_text") }}</a>
+    <a target="_blank" :href="url">{{ $t('message.vcs_link_text') }}</a>
 </template>
 
 <script>
@@ -7,18 +7,17 @@
         props: {
             username: {
                 type: String,
-                required: true
+                required: true,
             },
             project: {
                 type: String,
-                required: true
-            }
+                required: true,
+            },
         },
         computed: {
-            url(){
-                return `https://github.com/${this.username}/${this.project}`
-
-            }
-        }
-    }
+            url() {
+                return `https://github.com/${ this.username }/${ this.project }`;
+            },
+        },
+    };
 </script>
