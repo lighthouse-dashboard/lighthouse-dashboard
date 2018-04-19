@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const request = require('request-promise');
 const nock = require('nock');
 const unit = require('unit.js');
@@ -137,6 +139,7 @@ describe('Routes', function () {
         })
             .then((data) => {
                 data = JSON.parse(data);
+                console.log(data)
                 unit.array(data).hasLength(1);
 
                 const artifact = data.shift();
@@ -212,7 +215,7 @@ describe('Routes', function () {
     it('get project trends', () => {
         nock(API)
             .defaultReplyHeaders({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             })
             .get('/project/github/test/test/tree/master')
             .query(true)
@@ -239,13 +242,18 @@ describe('Routes', function () {
             url: `${SERVER}/api/projects/github/test/test/branch/master/trending?access_token=${SECRET}`
         })
             .then((data) => {
-                const build = JSON.parse(data);
+                const report = JSON.parse(data);
+                const build = report['desktop:https://test.io/'];
+                unit.object(build).hasProperty('trend');
+                unit.object(build).hasProperty('build');
 
-                unit.object(build).hasProperty('performance');
-                unit.object(build).hasProperty('pwa');
-                unit.object(build).hasProperty('accessibility');
-                unit.object(build).hasProperty('best-practices');
-                unit.object(build).hasProperty('seo');
+                const trend = build.trend;
+
+                unit.object(trend).hasProperty('performance');
+                unit.object(trend).hasProperty('pwa');
+                unit.object(trend).hasProperty('accessibility');
+                unit.object(trend).hasProperty('best-practices');
+                unit.object(trend).hasProperty('seo');
             });
     });
 

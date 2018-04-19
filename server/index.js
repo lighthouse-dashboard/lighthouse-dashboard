@@ -27,9 +27,9 @@ const server = Hapi.server({
     routes: {
         cors: true,
         files: {
-            relativeTo: path.join(__dirname, '..')
-        }
-    }
+            relativeTo: path.join(__dirname, '..'),
+        },
+    },
 });
 
 const swaggerOptions = {
@@ -43,7 +43,7 @@ const swaggerOptions = {
 server.app.token = TOKEN;
 server.app.limit = LIMIT;
 
-const init = async () => {
+const init = async() => {
     await server.register(Inert);
     await server.register(AuthBasic);
     await server.register(AuthBearer);
@@ -51,7 +51,7 @@ const init = async () => {
 
     if (IS_DEV) {
         await server.register({
-            plugin: laabr
+            plugin: laabr,
         });
 
         await server.register([
@@ -59,8 +59,8 @@ const init = async () => {
             Vision,
             {
                 plugin: HapiSwagger,
-                options: swaggerOptions
-            }
+                options: swaggerOptions,
+            },
         ]);
     }
 
@@ -72,12 +72,11 @@ const init = async () => {
         server.route(routes[i]);
     }
 
-    if(IS_DEV) {
-        console.log(`Server running at: ${server.info.uri}`);
+    if (IS_DEV) {
+        console.log(`Server running at: ${ server.info.uri }`);
     }
 
     await server.start();
-
 };
 
 init();

@@ -19,7 +19,7 @@
         </div>
 
         <div class="col s12 l3">
-            <artifact-listt
+            <artifact-list
                 :vcs="vcs"
                 :username="username"
                 :project="project"
@@ -30,8 +30,6 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-
     import BuildInfo from "@/components/BuildInfo";
     import BuildArtifacts from "@/components/BuildArtifacts";
     import ArtifactList from '@/components/ArtifactList';
@@ -74,10 +72,5 @@
             };
         },
 
-        beforeDestroy() {
-            if (this.updater) {
-                clearTimeout(this.updater);
-            }
-        },
     };
 </script>

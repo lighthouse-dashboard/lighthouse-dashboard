@@ -18,7 +18,7 @@ let cachedResponse = {};
  * @param {string} token
  * @return {*|PromiseLike<T>|Promise<T>}
  */
-function getArtifactsByType(type, vcs, username, project, build = 'latest', token) {
+function getArtifactsByType(type, vcs, username, project, build = 'latest', token) { //eslint-disable-line
     return getArtifacts(vcs, username, project, build, token)
         .then(artifacts => {
             return artifacts.filter(item => {
@@ -44,6 +44,7 @@ function getDashboardArtifacts(vcs, username, project, build, token) {
                 if (path.basename(item.path).indexOf('.dashboard.') !== -1) {
                     return item;
                 }
+                return null;
             });
         });
 }
@@ -64,7 +65,6 @@ function checkIfBuildIsSupported(vcs, username, project, build, token) {
             if (!artifacts || artifacts.length <= 0) {
                 return false;
             }
-
             return true;
         });
 }
@@ -92,11 +92,11 @@ function sortProjectByLatestBuild(projects, branch, token) {
                 if (!data) {
                     return null;
                 }
-                const { stop_time, build_num } = data;
-                projectConfig.buildIdentifier = build_num;
+                const { stop_time, build_num } = data; //eslint-disable-line
+                projectConfig.buildIdentifier = build_num; //eslint-disable-line
                 return {
                     date: new Date(stop_time),
-                    config: projectConfig
+                    config: projectConfig,
                 };
             }));
     }
@@ -114,6 +114,28 @@ function sortProjectByLatestBuild(projects, branch, token) {
         });
 }
 
+function filterForSupportedProjects(projects, branch, token) {
+    const p = projects.map((project) => {
+        if (!get(project, `branches.${ branch }.last_success.build_num`)) {
+            return null;
+        }
+
+        return checkIfBuildIsSupported('github', project.username, project.reponame, project.branches[branch].last_success.build_num, token)
+            .then((isSupported) => {
+                if (!isSupported) {
+                    return null;
+                }
+
+                return {
+                    vcs: 'github',
+                    username: project.username,
+                    project: project.reponame,
+                };
+            });
+    });
+    return Promise.all(p);
+}
+
 /**
  * Get list of valid projects
  *
@@ -127,7 +149,7 @@ function getAllProjects(token, branch) {
     }
 
     return new Promise((resolve, rej) => {
-        request(`https://circleci.com/api/v1.1/projects?circle-token=${token}`, { json: true }, (err, res, body) => {
+        request(`https://circleci.com/api/v1.1/projects?circle-token=${ token }`, { json: true }, (err, res, body) => {
             if (err) {
                 return rej(Boom.boomify(err));
             }
@@ -135,25 +157,7 @@ function getAllProjects(token, branch) {
         });
     })
         .then((projects) => {
-            const p = projects.map((project) => {
-                if (!get(project, `branches.${branch}.last_success.build_num`)) {
-                    return;
-                }
-
-                return checkIfBuildIsSupported('github', project.username, project.reponame, project.branches[branch].last_success.build_num, token)
-                    .then((isSupported) => {
-                        if (!isSupported) {
-                            return;
-                        }
-
-                        return {
-                            vcs: 'github',
-                            username: project.username,
-                            project: project.reponame
-                        };
-                    })
-            });
-            return Promise.all(p);
+            return filterForSupportedProjects(projects, branch, token);
         })
         .then(projects => {
             return compact(projects);
@@ -161,7 +165,7 @@ function getAllProjects(token, branch) {
         .then((projects) => {
             cachedResponse[branch] = projects;
             return projects;
-        })
+        });
 }
 
 /**
@@ -177,7 +181,7 @@ function addTokenToHTMLArtifacts(artifacts, token) {
 
     return artifacts.map((item) => {
         if (path.extname(item.path) === '.html') {
-            item.url += `?circle_token=${token}`
+            item.url += `?circle_token=${ token }`;
         }
         return item;
     });
@@ -192,7 +196,7 @@ function addTokenToHTMLArtifacts(artifacts, token) {
  */
 function invalidateCache(token, branch) {
     cachedResponse[branch] = [];
-    return getAllProjects(token, branch)
+    return getAllProjects(token, branch);
 }
 
 /**
@@ -207,20 +211,22 @@ function invalidateCache(token, branch) {
  */
 function getArtifacts(vcs, username, project, build, token) {
     return new Promise((resolve, rej) => {
-        request(`https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/${build}/artifacts?circle-token=${token}&filter=completed`, { json: true }, (err, res, body) => {
+        request(`https://circleci.com/api/v1.1/project/${ vcs }/${ username }/${ project }/${ build }/artifacts?circle-token=${ token }&filter=completed`, { json: true }, (err, res, body) => {
             if (err) {
                 return rej(Boom.boomify(err));
             }
             return resolve(addTokenToHTMLArtifacts(body, token));
-        })
+        });
     })
         .then(artifacts => {
             artifacts = artifacts.map((artifact) => {
-                artifact.key = path.basename(artifact.path).split('.').shift();
+                artifact.key = path.basename(artifact.path)
+                    .split('.')
+                    .shift();
                 return artifact;
             });
             return artifacts;
-        })
+        });
 }
 
 /**
@@ -235,9 +241,9 @@ function getArtifacts(vcs, username, project, build, token) {
  * @param {string} filter
  * @return {Promise<any>}
  */
-function getBranchBuilds(vcs, username, project, branch, token, limit, filter = 'completed') {
+function getBranchBuilds(vcs, username, project, branch, token, limit, filter = 'completed') {  //eslint-disable-line
     return new Promise((resolve, rej) => {
-        request(`https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/tree/${branch}?circle-token=${token}&limit=${limit}&filter=${filter}`, { json: true }, (err, res, body) => {
+        request(`https://circleci.com/api/v1.1/project/${ vcs }/${ username }/${ project }/tree/${ branch }?circle-token=${ token }&limit=${ limit }&filter=${ filter }`, { json: true }, (err, res, body) => {
             if (err) {
                 return rej(Boom.boomify(err));
             }
@@ -257,11 +263,11 @@ function getBranchBuilds(vcs, username, project, branch, token, limit, filter = 
  * @param {string} filter
  * @return {Promise<any>}
  */
-function getLatestBranchBuild(vcs, username, project, branch, token, filter = 'completed') {
+function getLatestBranchBuild(vcs, username, project, branch, token, filter = 'completed') { //eslint-disable-line
     return getBranchBuilds(vcs, username, project, branch, token, 1, filter)
         .then((builds) => {
             return builds.shift();
-        })
+        });
 }
 
 /**
@@ -275,7 +281,7 @@ function getLatestBranchBuild(vcs, username, project, branch, token, filter = 'c
  */
 function getBuild(vcs, username, project, build, token) {
     return new Promise((resolve, rej) => {
-        request(`https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/${build}?circle-token=${token}&filter=completed`, { json: true }, (err, res, body) => {
+        request(`https://circleci.com/api/v1.1/project/${ vcs }/${ username }/${ project }/${ build }?circle-token=${ token }&filter=completed`, { json: true }, (err, res, body) => {
             if (err) {
                 return rej(Boom.boomify(err));
             }
@@ -292,7 +298,7 @@ function getBuild(vcs, username, project, build, token) {
  */
 function getArtifactContent(url, token) {
     return new Promise((resolve, rej) => {
-        request(`${url}?&circle-token=${token}`, { json: true }, (err, res, body) => {
+        request(`${ url }?&circle-token=${ token }`, { json: true }, (err, res, body) => {
             if (err) {
                 return rej(Boom.boomify(err));
             }
@@ -311,14 +317,42 @@ function getDashboardContentsByBuild(buildArtifacts, token) {
     return Promise.all(buildArtifacts.map((item) => {
         return getArtifactContent(item.url, token)
             .then((data) => {
-                if(!data.key){
-                    data.key = `${data.tag}:${data.url}`;
+                if (!data.key) {
+                    data.key = `${ data.tag }:${ data.url }`;
                 }
                 return data;
-            })
+            });
     }));
 }
 
+function loadDashboardArtifactsForBuilds(builds, vcs, username, project, token) {
+    const p = builds.map((item) => {
+        return getDashboardArtifacts(vcs, username, project, item.build_num, token)
+            .then((artifacts) => {
+                return { build_num: item.build_num, artifacts };
+            });
+    });
+    return Promise.all(p);
+}
+
+function getArtifactsContentForBuilds(builds, token) {
+    return Promise.all(builds.map((item) => {
+        return getDashboardContentsByBuild(item.artifacts, token)
+            .then((data) => {
+                return groupBy(data, 'key');
+            });
+    }));
+}
+
+function getSortedArtifactsForProject(vcs, username, project, branch, token, limit){
+    return getBranchBuilds(vcs, username, project, branch, token, limit)
+        .then((builds) => {
+            return loadDashboardArtifactsForBuilds(builds, vcs, username, project, token);
+        })
+        .then((builds) => {
+            return sortBy(builds, ['build_num']);
+        });
+}
 /**
  *
  * @param vcs
@@ -329,28 +363,11 @@ function getDashboardContentsByBuild(buildArtifacts, token) {
  * @param limit
  * @return {Promise<[any]>}
  */
-function getArtifactContentForProject(vcs, username, project, branch, token, limit) {
-    return getBranchBuilds(vcs, username, project, branch, token, limit)
+function getArtifactContentForProject(vcs, username, project, branch, token, limit) { //eslint-disable-line
+    return getSortedArtifactsForProject(vcs, username, project, branch, token, limit)
         .then((builds) => {
-            const p = builds.map((item) => {
-                return getDashboardArtifacts(vcs, username, project, item.build_num, token)
-                    .then((artifacts) => {
-                        return { build_num: item.build_num, artifacts };
-                    })
-            });
-            return Promise.all(p);
-        })
-        .then((builds) => {
-            return sortBy(builds, ['build_num']);
-        })
-        .then((builds) => {
-            return Promise.all(builds.map((item) => {
-                return getDashboardContentsByBuild(item.artifacts, token)
-                    .then( (data) => {
-                        return groupBy(data, 'key');
-                    })
-            }));
-        })
+            return getArtifactsContentForBuilds(builds, token);
+        });
 }
 
 /**
@@ -363,11 +380,11 @@ function getArtifactContentForProject(vcs, username, project, branch, token, lim
  * @param limit
  * @return {Promise<[any]>}
  */
-function getProjectTrends(vcs, username, project, branch, token, limit) {
+function getProjectTrends(vcs, username, project, branch, token, limit) { //eslint-disable-line
     return getArtifactContentForProject(vcs, username, project, branch, token, limit)
         .then((builds) => {
             return getTrendsFromBuilds(builds);
-        })
+        });
 }
 
 module.exports = {
@@ -380,5 +397,5 @@ module.exports = {
     getArtifactContent,
     sortProjectByLatestBuild,
     getArtifactContentForProject,
-    getProjectTrends
+    getProjectTrends,
 };

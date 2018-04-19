@@ -7,12 +7,11 @@ function getDashboardContentsByBuild(buildArtifacts, token) {
         return getArtifactContent(item.url, token)
             .then((data) => {
                 return data;
-            })
+            });
     }));
 }
 
-
-module.exports = async (req, h) => {
+module.exports = async(req) => {
     const { vcs, username, project, branch } = req.params;
     const { limit, token } = req.server.app;
 
@@ -22,7 +21,7 @@ module.exports = async (req, h) => {
                 return getDashboardArtifacts(vcs, username, project, item.build_num, token)
                     .then((artifacts) => {
                         return { build_num: item.build_num, artifacts };
-                    })
+                    });
             });
             return Promise.all(p);
         })
