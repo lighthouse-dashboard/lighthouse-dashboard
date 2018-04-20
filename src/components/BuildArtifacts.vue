@@ -3,7 +3,7 @@
         <div class="card-content">
             <div class="row">
                 <p class="center"
-                   v-if="!artifacts || artifacts.length === 0">
+                   v-if="!chartData">
                     {{ $t("message.no_dashboard_available") }}
                 </p>
 
