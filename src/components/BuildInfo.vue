@@ -128,12 +128,6 @@
             this.loadBuild()
                 .then(() => {
                     return this.loadInfo();
-                })
-                .then(() => {
-                    this.$circle.hasAllartifactsReachedBudget(this.vcs, this.username, this.project, this.buildNum)
-                        .then((has) => {
-                            this.hasReachedBudget = has;
-                        });
                 });
         },
     };

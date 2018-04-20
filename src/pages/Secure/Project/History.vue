@@ -2,6 +2,7 @@
     <div>
         <project-history
             :vcs="vcs"
+            :showX="true"
             :username="username"
             :project="project"/>
     </div>

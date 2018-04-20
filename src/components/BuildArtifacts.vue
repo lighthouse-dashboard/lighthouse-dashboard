@@ -69,74 +69,18 @@
         },
 
         methods: {
-            loadArtifacts() {
 
+            buildChartData(result) {
+                this.categories = result.categories;
+                this.chartData = result.columns;
+                this.chartDataLength = Object.keys(this.chartData).length;
+                this.computedClass = this.chartDataLength % 2 === 0 ? 'm6' : 'm12';
             },
+        },
 
-            buildChartData() {
-                const p = [];
-
-                Promise.all(p)
-                    .then((artifacts) => {
-                        const endpoints = {};
-
-                        artifacts.forEach((item) => {
-                            if (!endpoints[item.url]) {
-                                endpoints[item.url] = [];
-                            }
-
-                            endpoints[item.url].push(item);
-                        });
-
-                        return endpoints;
-                    })
-                    .then((data) => {
-                        const keys = Object.keys(data);
-                        const result = {};
-
-                        keys.forEach((key) => {
-                            const reports = data[key];
-                            if (!result[key]) {
-                                result[key] = { columns: [] };
-                            }
-
-                            reports.forEach((item) => {
-                                const {
-                                    budget, categories,
-                                    tag
-                                } = item;
-                                if (!categories) {
-                                    return;
-                                }
-
-                                const shrinkedCategories = categories.map((item) => {
-                                    return item.score;
-                                });
-
-                                const shrinkedBudget = categories.map((item) => {
-                                    return budget[item.id] ? budget[item.id] : null;
-                                });
-
-                                this.categories = categories.map((item) => {
-                                    return item.name;
-                                });
-
-                                result[key].columns.push(
-                                    [`Report ${tag ? tag : ''}`, ...shrinkedCategories],
-                                    [`Budget ${tag ? tag : ''}`, ...shrinkedBudget],
-                                );
-                            })
-                        });
-
-                        this.chartData = result;
-                        this.chartDataLength = Object.keys(this.chartData).length;
-                        this.computedClass = this.chartDataLength % 2 === 0 ? 'm6' : 'm12';
-                    });
-            },
-
-            mounted() {
-
-            },
+        mounted() {
+            this.$circle.getBuildChartDataInfo(this.vcs, this.username, this.project, this.buildNum)
+                .then(this.buildChartData);
         },
     };
 </script>

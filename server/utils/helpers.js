@@ -1,4 +1,4 @@
-const { get, compact, forEach } = require('lodash');
+const { get, compact, orderBy } = require('lodash');
 const { extname, basename } = require('path');
 
 const { getArtifactsForBuild, getArtifactContent } = require('./api');
@@ -69,7 +69,7 @@ function getDashboardArtifacts(vcs, username, project, build, token) {
                 }
                 return null;
             });
-        })
+        });
 }
 
 function getArtifactsForBuilds(builds, vcs, username, project, token) {
@@ -96,11 +96,12 @@ function loadArtifactsContentForBuilds(builds, token) {
 
 function getDashboardContentsByBuild(buildArtifacts, token) {
     return Promise.all(buildArtifacts.map((item) => {
-        return getArtifactContent(item.url+`?circle-token=${ token }`)
+        return getArtifactContent(item.url + `?circle-token=${ token }`)
             .then((data) => {
                 if (!data.key) {
                     data.key = `${ data.tag }:${ data.url }`;
                 }
+                item.data = data;
                 return data;
             });
     }));

@@ -11,6 +11,7 @@ const getBranchRunningBuild = require('./handlers/getBranchRunningBuild');
 const getProjectHistoryChartData = require('./handlers/getProjectHistoryChartData');
 const getBuildInfo = require('./handlers/getBuildInfo');
 const getArtifacts = require('./handlers/getArtifacts');
+const getBuildChartData = require('./handlers/getBuildChartData');
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
@@ -143,7 +144,7 @@ module.exports = [
         handler: getBranchBuildTrend,
         options: {
             cache: {
-                expiresIn: MINUTE,
+                expiresIn: 15*MINUTE,
                 privacy: 'public',
             },
             tags: ['api'],
@@ -348,6 +349,41 @@ module.exports = [
             },
             tags: ['api'],
             description: 'Get all artifacts for build',
+            validate: {
+                query: {
+                    access_token: joi.string()
+                        .description('API Secret. Can also be passed as Bearer token'),
+                },
+                params: {
+                    vcs: joi.string()
+                        .required()
+                        .description('VCS Type'),
+                    username: joi.string()
+                        .required()
+                        .description('Username used to fetch CircleCI projects'),
+                    project: joi.string()
+                        .required()
+                        .description('Specific CI project'),
+                    build: joi.alternatives()
+                        .try(joi.string(), joi.number())
+                        .required()
+                        .description('Build number'),
+                },
+            },
+        },
+    },
+
+    {
+        method: 'GET',
+        path: '/api/projects/{vcs}/{username}/{project}/build/{build}/chartdata',
+        handler: getBuildChartData,
+        options: {
+            cache: {
+                expiresIn: MONTH,
+                privacy: 'public',
+            },
+            tags: ['api'],
+            description: 'Get all chart data for build',
             validate: {
                 query: {
                     access_token: joi.string()

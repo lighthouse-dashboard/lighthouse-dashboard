@@ -23,7 +23,7 @@ function setCategorySeriesData(categories, series) {
 
 function getTrendForSeries(series) {
     const lastTwoValues = takeRight(series, 2);
-    return subtract(...lastTwoValues);
+    return subtract(...lastTwoValues.reverse());
 }
 
 function setupSeriesData(builds) {
@@ -32,11 +32,12 @@ function setupSeriesData(builds) {
     forEach(builds, (build) => {
         forEach(build.artifactContent, (artifact) => {
             if (!series[artifact.key]) {
-                series[artifact.key] = { series: {} };
+                series[artifact.key] = { series: {}, categories: [] };
             }
 
             series[artifact.key].series = populateCategorySeriesData(artifact.categories, series[artifact.key].series);
             series[artifact.key].build = setCategorySeriesData(artifact.categories, {});
+            series[artifact.key].categories.push(build.build_num);
         });
     });
 

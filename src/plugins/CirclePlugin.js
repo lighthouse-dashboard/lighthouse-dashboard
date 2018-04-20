@@ -76,6 +76,25 @@ export default class CirclePlugin {
                 return resp.body;
             });
     }
+    /**
+     * Get info for given build
+     *
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
+     * @param {string|number} build
+     * @param {string} branch
+     * @return {*}
+     */
+    getBuildChartDataInfo(vcs, username, project, build) {
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}/chartdata`
+            )
+            .then(resp => {
+                return resp.body;
+            });
+    }
 
     /**
      * Check if project has running build
@@ -115,68 +134,6 @@ export default class CirclePlugin {
             });
     }
 
-    /**
-     * Get artifacts filtered by type
-     *
-     * @param {string} vcs
-     * @param {string} username
-     * @param {string} project
-     * @param {string|number} build
-     * @return {*}
-     */
-    getArtifactsByType(type, vcs, username, project, build = 'latest') {
-        return this.getArtifacts(vcs, username, project, build)
-            .then(artifacts => {
-                return artifacts.filter(item => {
-                    return path.extname(item.path) === `.${type}` ? item : null;
-                });
-            });
-    }
-
-    /**
-     * Get artifact content
-     * @param {string} url
-     * @return {*}
-     */
-    getArtifact(url) {
-        return Vue.http.get(`${this.endpoint}/api/artifact?url=${url}`)
-            .then((resp) => {
-                return resp.body;
-            })
-    }
-
-    /**
-     * Get HTML artifacts
-     *
-     * @param {string} vcs
-     * @param {string} username
-     * @param {string} project
-     * @param {string|number} build
-     * @return {*}
-     */
-    getHtmlArtifacts(vcs, username, project, build = 'latest') {
-        return this.getArtifactsByType('html', vcs, username, project, build);
-    }
-
-    /**
-     * Get Dashboard Artifact
-     *
-     * @param {string} vcs
-     * @param {string} username
-     * @param {string} project
-     * @param {string|number} build
-     * @return {*}
-     */
-    getDashboardArtifacts(vcs, username, project, build = 'latest') {
-        return this.getArtifactsByType('json', vcs, username, project, build)
-            .then(artifacts => {
-                return artifacts.filter((item) => {
-                    if (path.basename(item.path).indexOf('.dashboard.') !== -1) {
-                        return item;
-                    }
-                });
-            });
-    }
 
     /**
      * To create the history graph we need to fetch all the artifact data
@@ -193,9 +150,6 @@ export default class CirclePlugin {
             )
             .then(resp => {
                 return resp.body;
-            })
-            .then((builds) => {
-                return sortBuildArtifactsByUrl(builds);
             })
     }
 
@@ -218,42 +172,4 @@ export default class CirclePlugin {
             });
     }
 
-    /**
-     *
-     * Check if the project has reached the budget
-     *
-     * @param {string} vcs
-     * @param {string} username
-     * @param {string} project
-     * @param {string} branch
-     * @return {*}
-     */
-    hasAllartifactsReachedBudget(vcs, username, project, build = 'latest') {
-        return this.getDashboardArtifacts(vcs, username, project, build)
-            .then((artifacts) => {
-                return Promise.all(artifacts.map((artifact) => {
-                    return this.getArtifact(artifact.url)
-                }))
-            })
-            .then((artifacts) => {
-                if (artifacts.length === 0) {
-                    return [false];
-                }
-                return Promise.all(artifacts.filter((artifact) => {
-                    const { categories, budget } = artifact;
-                    const keys = Object.keys(categories);
-                    for (let i = 0; i < keys.length; i++) {
-                        const key = keys[i];
-                        const { id, score } = categories[key];
-
-                        if (budget[id] && score < budget[id]) {
-                            return artifact
-                        }
-                    }
-                }));
-            })
-            .then((reports) => {
-                return (reports.length === 0)
-            })
-    }
 }

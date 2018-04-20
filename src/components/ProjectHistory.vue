@@ -11,8 +11,8 @@
                         :showY="showY"
                         :height="height"
                         :url="url"
-                        :data="target.scores"
-                        :categories="target.builds"
+                        :data="target.series"
+                        :categories="target.categories"
                     />
                 </div>
             </div>
