@@ -73,8 +73,9 @@
                 return this.$circle
                     .getDashboardArtifacts(this.vcs, this.username, this.project, this.buildNum)
                     .then(artifacts => {
+                        console.log(artifacts);
                         this.artifacts = artifacts.length > 0 ? artifacts : [];
-                    })
+                    });
             },
 
             buildChartData() {
@@ -84,7 +85,7 @@
                     p.push(this.$circle.getArtifact(item.url)
                         .then((result) => {
                             return result;
-                        }))
+                        }));
                 });
 
                 Promise.all(p)

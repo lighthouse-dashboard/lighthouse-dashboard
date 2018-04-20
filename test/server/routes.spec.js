@@ -38,12 +38,12 @@ describe('Routes', function () {
             .then((data) => {
                 data = JSON.parse(data);
                 unit.array(data).hasLength(1);
-                unit.array(data).is([{
-                    vcs: 'github',
-                    username: 'test',
-                    project: 'test',
-                    buildIdentifier: 13
-                }])
+                const project = data.shift();
+
+                unit.object(project).hasProperty('vcs');
+                unit.object(project).hasProperty('username');
+                unit.object(project).hasProperty('project');
+                unit.object(project).hasProperty('lastBuild');
             })
     });
 

@@ -9,6 +9,7 @@ const getBranchBuildTrend = require('./handlers/getBranchBuildTrend');
 const getBranchLatestBuildInfo = require('./handlers/getBranchLatestBuildInfo');
 const getBranchRunningBuild = require('./handlers/getBranchRunningBuild');
 const getBuildsWithDashboardArtifacts = require('./handlers/getBuildsWithDashboardArtifacts');
+const getProjectHistoryChartData = require('./handlers/getProjectHistoryChartData');
 const getBuildInfo = require('./handlers/getBuildInfo');
 const getArtifacts = require('./handlers/getArtifacts');
 
@@ -243,8 +244,8 @@ module.exports = [
 
     {
         method: 'GET',
-        path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/dashboardartifacts',
-        handler: getBuildsWithDashboardArtifacts,
+        path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/history',
+        handler: getProjectHistoryChartData,
         options: {
             cache: {
                 expiresIn: 10 * MINUTE,

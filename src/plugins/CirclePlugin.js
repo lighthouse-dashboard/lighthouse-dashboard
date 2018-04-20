@@ -171,7 +171,6 @@ export default class CirclePlugin {
         return this.getArtifactsByType('json', vcs, username, project, build)
             .then(artifacts => {
                 return artifacts.filter((item) => {
-
                     if (path.basename(item.path).indexOf('.dashboard.') !== -1) {
                         return item;
                     }
@@ -187,10 +186,10 @@ export default class CirclePlugin {
      * @param {string} branch
      * @return {*}
      */
-    getAllBuildsWithDashboardArtifacts(vcs, username, project, branch = this.branch) {
+    getProjectHistoryData(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/dashboardartifacts`
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/history`
             )
             .then(resp => {
                 return resp.body;

@@ -141,35 +141,6 @@ function filterForSupportedProjects(projects, branch, token) {
 }
 
 /**
- * Get list of valid projects
- *
- * @param {string} token
- * @param {string} branch
- * @return {*}
- */
-function getAllProjects(token, branch) {
-    if (cachedResponse[branch] && cachedResponse[branch].length > 0) {
-        return Promise.resolve(cachedResponse[branch]);
-    }
-
-    return new Promise((resolve, rej) => {
-        request(`https://circleci.com/api/v1.1/projects?circle-token=${ token }`, { json: true }, (err, res, body) => {
-            if (err) {
-                return rej(Boom.boomify(err));
-            }
-            return resolve(body);
-        });
-    })
-        .then((projects) => {
-            return filterForSupportedProjects(projects, branch, token);
-        })
-        .then((projects) => {
-            cachedResponse[branch] = projects;
-            return projects;
-        });
-}
-
-/**
  * Add token query param to artifact urls
  * @param {Object[]} artifacts
  * @param {string} token
@@ -400,7 +371,7 @@ function loadArtifactsContentFromBands(builds, token) {
     return Promise.all(p);
 }
 
-function getProjectHistoryChartData(vcs, username, project, branch, token, limit) {
+function getProjectHistoryChartData(vcs, username, project, branch, token, limit) { //eslint-disable-line
     return getBranchBuilds(vcs, username, project, branch, token, limit)
         .then((builds) => {
             return loadDashboardArtifactsForBuilds(builds, vcs, username, project, token);
@@ -414,7 +385,6 @@ function getProjectHistoryChartData(vcs, username, project, branch, token, limit
 }
 
 module.exports = {
-    getAllProjects,
     getArtifacts: getArtifactsForBuild,
     getBranchBuilds,
     getBuild,

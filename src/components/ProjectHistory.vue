@@ -72,7 +72,8 @@
 
         methods: {
             load() {
-                this.$circle.getAllBuildsWithDashboardArtifacts(this.vcs, this.username, this.project, this.$route.query.branch)
+                this.$circle
+                    .getProjectHistoryData(this.vcs, this.username, this.project, this.$route.query.branch)
                     .then(data => {
                         this.data = data;
                     })

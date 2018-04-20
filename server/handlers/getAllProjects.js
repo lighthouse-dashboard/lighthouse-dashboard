@@ -1,11 +1,11 @@
-const { getAllProjects, sortProjectByLatestBuild } = require('../utils');
+const { getProjects } = require('../utils/utils');
 
 module.exports = async(req) => {
     const { branch } = req.params;
     const { token } = req.server.app;
 
-    return await getAllProjects(token, branch)
+    return getProjects(branch, token)
         .then((projects) => {
-            return sortProjectByLatestBuild(projects, branch, token);
+            return projects;
         });
 };
