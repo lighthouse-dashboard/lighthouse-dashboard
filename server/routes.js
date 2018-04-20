@@ -12,6 +12,7 @@ const getProjectHistoryChartData = require('./handlers/getProjectHistoryChartDat
 const getBuildInfo = require('./handlers/getBuildInfo');
 const getArtifacts = require('./handlers/getArtifacts');
 const getBuildChartData = require('./handlers/getBuildChartData');
+const getVersion = require('./handlers/getVersion');
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
@@ -51,6 +52,27 @@ module.exports = [
                     url: joi.string()
                         .required()
                         .description('Url of the artifact'),
+                    access_token: joi.string()
+                        .description('API Secret. Can also be passed as Bearer token'),
+                },
+            },
+        },
+    },
+    {
+        method: 'GET',
+        path: '/api/version',
+        handler: getVersion,
+        options: {
+            cache: {
+                expiresIn: HOUR,
+                privacy: 'public',
+            },
+            tags: ['api'],
+            description: 'Get the current api version',
+            validate: {
+                query: {
+
+
                     access_token: joi.string()
                         .description('API Secret. Can also be passed as Bearer token'),
                 },
