@@ -8,7 +8,7 @@
             </nav>
         </li>
 
-        <li><a class="subheader">v{{ version }}</a></li>
+        <li><a class="subheader"><version/></a></li>
 
         <li>
             <router-link :to="{name: 'dashboard'}">
@@ -53,13 +53,14 @@
     import Vue from 'vue';
     import ProjectListLink from './ProjectListLink';
     import BranchList from './BranchList';
-    import { version } from '@/../package.json';
+    import Version from './Version';
 
     export default {
 
         components: {
             ProjectListLink,
             BranchList,
+            Version
         },
 
         data() {
@@ -68,14 +69,13 @@
                 updater: null,
                 isClearingCache: false,
                 isLoading: false,
-                version,
             };
         },
 
         methods: {
             load() {
                 this.isLoading = true;
-                this.$circle
+                this.$api
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
                         this.projects = projects;
@@ -101,7 +101,7 @@
                 this.isClearingCache = true;
                 this.isLoading = true;
 
-                this.$circle.invalidateProjectsCache(this.$route.query.branch)
+                this.$api.invalidateProjectsCache(this.$route.query.branch)
                     .then(() => {
                         return this.load();
                     })

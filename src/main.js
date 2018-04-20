@@ -16,7 +16,7 @@ import VueI18n from 'vue-i18n'
 import VueCookie from 'vue-cookie';
 
 import AuthPlugin from './plugins/AuthPlugin';
-import CirclePlugin from './plugins/CirclePlugin';
+import APIPlugin from './plugins/APIPlugin';
 import ToastPlugin from './plugins/ToastPlugin';
 import routes from './routes';
 import Loader from './components/Loader';
@@ -33,7 +33,7 @@ import {
     buildStatusInterval,
     apiEndpoint,
     dateShortFormat,
-    chartColors
+    chartColors,
 } from './config';
 
 Vue.config.productionTip = false;
@@ -47,6 +47,7 @@ Vue.config.buildStatusInterval = buildStatusInterval;
 Vue.config.apiEndpoint = apiEndpoint;
 Vue.config.dateShortFormat = dateShortFormat;
 Vue.config.chartColors = chartColors;
+Vue.config.versionUpdateInterval = 1000 * 60 * 60;
 
 Vue.component('loader', Loader);
 
@@ -55,7 +56,7 @@ Vue.use(VueRouter);
 Vue.use(VueI18n);
 Vue.use(VueCookie);
 
-Vue.use(CirclePlugin, {
+Vue.use(APIPlugin, {
     api: apiEndpoint,
     branch: Vue.config.defaultBranch,
 });

@@ -99,7 +99,7 @@
 
         methods: {
             loadBuild() {
-                return this.$circle.getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
+                return this.$api.getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
                     })

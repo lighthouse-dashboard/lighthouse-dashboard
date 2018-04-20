@@ -79,7 +79,7 @@
         },
 
         mounted() {
-            this.$circle.getBuildChartDataInfo(this.vcs, this.username, this.project, this.buildNum)
+            this.$api.getBuildChartDataInfo(this.vcs, this.username, this.project, this.buildNum)
                 .then(this.buildChartData);
         },
     };

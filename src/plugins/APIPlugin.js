@@ -1,10 +1,7 @@
 import Vue from 'vue';
-import path from 'path';
-
-import sortBuildArtifactsByUrl from './helper';
 
 
-export default class CirclePlugin {
+export default class APIPlugin {
     constructor(api, branch) {
         this.branch = branch;
         this.endpoint = api
@@ -12,7 +9,7 @@ export default class CirclePlugin {
     }
 
     static install(_Vue, opts) {
-        _Vue.prototype.$circle = new CirclePlugin(opts.api, opts.branch);
+        _Vue.prototype.$api = new APIPlugin(opts.api, opts.branch);
     }
 
     /**
@@ -76,6 +73,7 @@ export default class CirclePlugin {
                 return resp.body;
             });
     }
+
     /**
      * Get info for given build
      *
@@ -169,6 +167,17 @@ export default class CirclePlugin {
             )
             .then(resp => {
                 return resp.body;
+            });
+    }
+
+    getVersion() {
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/version`
+            )
+            .then(resp => {
+                const data = resp.body;
+                return data.version;
             });
     }
 

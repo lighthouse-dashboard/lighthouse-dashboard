@@ -72,7 +72,7 @@
 
         methods: {
             load() {
-                this.$circle
+                this.$api
                     .getProjectHistoryData(this.vcs, this.username, this.project, this.$route.query.branch)
                     .then(data => {
                         this.data = data;

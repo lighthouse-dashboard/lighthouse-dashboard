@@ -89,7 +89,7 @@
                     project: this.project,
                 };
 
-                this.$circle
+                this.$api
                     .getAllBuilds(this.vcs, this.username, this.project, undefined, this.$route.query.branch)
                     .then(builds => {
                         this.builds = builds;

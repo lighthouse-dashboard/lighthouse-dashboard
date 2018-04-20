@@ -59,7 +59,7 @@
         },
 
         mounted() {
-            this.$circle
+            this.$api
                 .getArtifacts(this.vcs, this.username, this.project, this.buildNum)
                 .then(htmlArtifacts => {
                     this.htmlArtifacts = htmlArtifacts;

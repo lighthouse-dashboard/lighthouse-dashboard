@@ -77,7 +77,7 @@
 
         methods: {
             load() {
-                this.$circle
+                this.$api
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
                         this.projects = projects;

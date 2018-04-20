@@ -71,7 +71,7 @@
         },
 
         mounted() {
-            this.$circle.getProjectTrend(this.vcs, this.username, this.project, this.$route.query.branch)
+            this.$api.getProjectTrend(this.vcs, this.username, this.project, this.$route.query.branch)
                 .then((trend) => {
                     this.trendScores = trend;
                 });
