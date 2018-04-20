@@ -15,6 +15,13 @@
                 {{ $t("message.dashboard_link_text") }}
             </router-link>
         </li>
+
+        <li>
+            <router-link :to="{name: 'kiosk'}">
+                {{ $t("message.kiosk_link_text") }}
+            </router-link>
+        </li>
+
         <li>
             <router-link :to="{name: 'help'}">
                 {{ $t("message.help") }}
@@ -60,7 +67,7 @@
         components: {
             ProjectListLink,
             BranchList,
-            Version
+            Version,
         },
 
         data() {
