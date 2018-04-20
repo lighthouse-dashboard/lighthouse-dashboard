@@ -1,5 +1,5 @@
-const { invalidateCache } = require('../utils');
+const { deleteProjectsCache } = require('../utils/utils');
 
 module.exports = async(req) => {
-    return await invalidateCache(req.server.app.token, req.params.branch);
+    return await deleteProjectsCache(req.params.branch);
 };

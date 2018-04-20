@@ -6,7 +6,16 @@ function getListOfProjects(branch, token) {
         return Promise.resolve(cachedResponse[branch]);
     }
 
-    return request(`https://circleci.com/api/v1.1/projects?circle-token=${ token }`, { json: true });
+    return request(`https://circleci.com/api/v1.1/projects?circle-token=${ token }`, { json: true })
+        .then((data) => {
+            cachedResponse[branch] = data;
+            return data;
+        });
+}
+
+function invalidateProjectsCache(branch) {
+    cachedResponse[branch] = [];
+    return Promise.resolve();
 }
 
 function getBuildsForProject(vcs, username, project, branch, token, limit, filter = 'completed') { //eslint-disable-line
@@ -15,11 +24,15 @@ function getBuildsForProject(vcs, username, project, branch, token, limit, filte
 }
 
 function getArtifactsForBuild(vcs, username, project, build, token) {
-    return request(`https://circleci.com/api/v1.1/project/${ vcs }/${ username }/${ project }/${ build }/artifacts?circle-token=${ token }&filter=completed`, { json: true });
+    return request(`https://circleci.com/api/v1.1/project/${ vcs }/${ username }/${ project }/${ build }/artifacts?circle-token=${ token }&filter=completed`, { json: true })
 }
 
-function getArtifactContent(url, token) {
-    return request(`${ url }?&circle-token=${ token }`, { json: true });
+function getBuild(vcs, username, project, build, token) {
+    return request(`https://circleci.com/api/v1.1/project/${ vcs }/${ username }/${ project }/${ build }?circle-token=${ token }`, { json: true });
+}
+
+function getArtifactContent(url) {
+    return request(url, { json: true });
 }
 
 module.exports = {
@@ -27,4 +40,6 @@ module.exports = {
     getArtifactsForBuild,
     getBuildsForProject,
     getArtifactContent,
+    getBuild,
+    invalidateProjectsCache,
 };

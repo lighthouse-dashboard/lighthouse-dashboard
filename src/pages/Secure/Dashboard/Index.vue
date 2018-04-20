@@ -24,12 +24,12 @@
             <div class="col s12"
                  v-for="(project, index) in projects"
                  :class="{'grey lighten-5': index%2}"
-                 :key="project.buildIdentifier"
+                 :key="project.lastBuild.build_num"
             >
                 <div class="row">
                     <div class="col s12">
                         <dashboard-project-title
-                            :buildNum="project.buildIdentifier"
+                            :buildNum="project.lastBuild.build_num"
                             :vcs="project.vcs"
                             :username="project.username"
                             :project="project.project"/>

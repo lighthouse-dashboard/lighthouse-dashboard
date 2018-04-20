@@ -215,7 +215,7 @@ export default class CirclePlugin {
             )
             .then(resp => {
                 return resp.body;
-            })
+            });
     }
 
     /**

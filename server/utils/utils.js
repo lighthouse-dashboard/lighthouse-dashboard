@@ -1,4 +1,4 @@
-const { getListOfProjects, getBuildsForProject } = require('./api');
+const { getListOfProjects, getBuildsForProject, getArtifactContent, getArtifactsForBuild, getBuild, invalidateProjectsCache } = require('./api');
 const { filterSupportedProjects, getArtifactsForBuilds, loadArtifactsContentForBuilds } = require('./helpers');
 const { calculateTrendForSeries, setupSeriesData } = require('./trendUtils');
 
@@ -7,6 +7,10 @@ function getProjects(branch, token) {
         .then((projects) => {
             return filterSupportedProjects(projects, branch, token);
         });
+}
+
+function getBuildByNum(vcs, username, project, build, token) {
+    return getBuild(vcs, username, project, build, token);
 }
 
 function getLatestBuildsForProject(vcs, username, project, branch, token, limit, filter = 'completed') { //eslint-disable-line
@@ -19,7 +23,7 @@ function getProjectTrendData(vcs, username, project, branch, token) {
             return getArtifactsForBuilds(builds, vcs, username, project, token);
         })
         .then((builds) => {
-            return loadArtifactsContentForBuilds(builds, vcs, username, project, token);
+            return loadArtifactsContentForBuilds(builds, token);
         })
         .then((builds) => {
             return setupSeriesData(builds);
@@ -39,7 +43,19 @@ function getHistoryData(vcs, username, project, branch, token, limit) {  //eslin
         })
         .then((builds) => {
             return setupSeriesData(builds);
-        })
+        });
+}
+
+function getArtifact(url, token) {
+    return getArtifactContent(url, token);
+}
+
+function getArtifactListForBuild(vcs, username, project, build, token) {
+    return getArtifactsForBuild(vcs, username, project, build, token);
+}
+
+function deleteProjectsCache(branch) {
+    return invalidateProjectsCache(branch);
 }
 
 module.exports = {
@@ -47,4 +63,8 @@ module.exports = {
     getLatestBuildsForProject,
     getProjectTrendData,
     getHistoryData,
+    getArtifact,
+    getArtifactListForBuild,
+    getBuildByNum,
+    deleteProjectsCache,
 };

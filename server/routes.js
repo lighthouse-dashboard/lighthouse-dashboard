@@ -8,7 +8,6 @@ const getBranchBuilds = require('./handlers/getBranchBuilds');
 const getBranchBuildTrend = require('./handlers/getBranchBuildTrend');
 const getBranchLatestBuildInfo = require('./handlers/getBranchLatestBuildInfo');
 const getBranchRunningBuild = require('./handlers/getBranchRunningBuild');
-const getBuildsWithDashboardArtifacts = require('./handlers/getBuildsWithDashboardArtifacts');
 const getProjectHistoryChartData = require('./handlers/getProjectHistoryChartData');
 const getBuildInfo = require('./handlers/getBuildInfo');
 const getArtifacts = require('./handlers/getArtifacts');

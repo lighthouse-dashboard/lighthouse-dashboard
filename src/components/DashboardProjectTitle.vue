@@ -88,7 +88,8 @@
 
         methods: {
             load() {
-                return this.$circle.getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
+                return this.$circle
+                    .getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
 
@@ -121,12 +122,6 @@
 
         mounted() {
             this.load()
-                .then(() => {
-                    return this.$circle.hasAllartifactsReachedBudget(this.vcs, this.username, this.project, this.buildNum);
-                })
-                .then((has) => {
-                    this.hasReachedBudget = has;
-                });
         },
     };
 </script>

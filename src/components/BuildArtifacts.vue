@@ -70,23 +70,11 @@
 
         methods: {
             loadArtifacts() {
-                return this.$circle
-                    .getDashboardArtifacts(this.vcs, this.username, this.project, this.buildNum)
-                    .then(artifacts => {
-                        console.log(artifacts);
-                        this.artifacts = artifacts.length > 0 ? artifacts : [];
-                    });
+
             },
 
             buildChartData() {
                 const p = [];
-
-                this.artifacts.forEach((item) => {
-                    p.push(this.$circle.getArtifact(item.url)
-                        .then((result) => {
-                            return result;
-                        }));
-                });
 
                 Promise.all(p)
                     .then((artifacts) => {
@@ -147,10 +135,7 @@
             },
 
             mounted() {
-                this.loadArtifacts()
-                    .then(() => {
-                        return this.buildChartData();
-                    });
+
             },
         },
     };

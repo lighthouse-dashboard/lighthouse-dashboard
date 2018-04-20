@@ -1,6 +1,7 @@
-const {getArtifactContent} = require('../utils');
+const { getArtifact } = require('../utils/utils');
 
-module.exports = async (req, h) => {
+module.exports = async(req) => {
     const { url } = req.query;
-    return await getArtifactContent(url, req.server.app.token)
+
+    return await getArtifact(url, req.server.app.token);
 };

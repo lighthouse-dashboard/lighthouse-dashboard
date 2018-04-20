@@ -69,7 +69,7 @@ function getDashboardArtifacts(vcs, username, project, build, token) {
                 }
                 return null;
             });
-        });
+        })
 }
 
 function getArtifactsForBuilds(builds, vcs, username, project, token) {
@@ -96,7 +96,7 @@ function loadArtifactsContentForBuilds(builds, token) {
 
 function getDashboardContentsByBuild(buildArtifacts, token) {
     return Promise.all(buildArtifacts.map((item) => {
-        return getArtifactContent(item.url, token)
+        return getArtifactContent(item.url+`?circle-token=${ token }`)
             .then((data) => {
                 if (!data.key) {
                     data.key = `${ data.tag }:${ data.url }`;
@@ -106,21 +106,8 @@ function getDashboardContentsByBuild(buildArtifacts, token) {
     }));
 }
 
-function getCategoryObjectFromReportResult(report) {
-    let categories = {};
-
-    forEach(report.categories, (category) => {
-        categories[category.id] = category.score;
-    });
-
-    return categories;
-}
-
 module.exports = {
     filterSupportedProjects,
-    getArtifactsByType,
-    isBuildSupported,
     getArtifactsForBuilds,
     loadArtifactsContentForBuilds,
-    getCategoryObjectFromReportResult,
 };

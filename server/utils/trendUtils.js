@@ -13,6 +13,14 @@ function populateCategorySeriesData(categories, series) {
     return series;
 }
 
+function setCategorySeriesData(categories, series) {
+    forEach(categories, (category) => {
+        series[category.id] = category.score;
+    });
+
+    return series;
+}
+
 function getTrendForSeries(series) {
     const lastTwoValues = takeRight(series, 2);
     return subtract(...lastTwoValues);
@@ -28,6 +36,7 @@ function setupSeriesData(builds) {
             }
 
             series[artifact.key].series = populateCategorySeriesData(artifact.categories, series[artifact.key].series);
+            series[artifact.key].build = setCategorySeriesData(artifact.categories, {});
         });
     });
 
