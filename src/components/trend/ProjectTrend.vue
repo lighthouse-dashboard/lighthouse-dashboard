@@ -15,13 +15,13 @@
                 <td>{{ trend }}</td>
                 <td v-for="category in categories"
                         :key="category">
-
                     <trend-score
                             :vcs="vcs"
                             :username="username"
                             :project="project"
                             :trendscore="report.trend[category]"
                             :buildscore="report.build[category]"
+                            :budgetscore="report.budget[category]"
                             :category="category"
                     />
                 </td>

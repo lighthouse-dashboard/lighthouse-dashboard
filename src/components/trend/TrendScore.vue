@@ -1,7 +1,11 @@
 <template>
     <div>
-        <span >{{ buildscore }}</span>
-        <small v-if="trendscore !== 0" :class="color" >{{ trendscore }}</small>
+        <span :class="scorecolor">{{ buildscore }}</span>
+        <span v-if="trendscore !== 0" :class="color">
+            <i class="material-icons tiny" v-if="trendscore > 0">trending_up</i>
+            <i class="material-icons tiny" v-if="trendscore < 0">trending_down</i>
+            <small>{{ trendscore }}</small>
+        </span>
     </div>
 </template>
 
@@ -39,9 +43,15 @@
                 type: Number,
                 required: true,
             },
+
             buildscore: {
                 type: Number,
                 required: true,
+            },
+            budgetscore: {
+                type: [Number, Boolean],
+                required: false,
+                default: false,
             },
         },
 
@@ -68,6 +78,19 @@
                 }
 
                 return '';
+            },
+
+            scorecolor() {
+
+                if (!this.budgetscore) {
+                    return null;
+                }
+
+                if (this.buildscore < this.budgetscore) {
+                    return 'red-text';
+                }
+
+                return null;
             },
         },
     };

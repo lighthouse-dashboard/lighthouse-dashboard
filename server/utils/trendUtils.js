@@ -38,6 +38,7 @@ function setupSeriesData(builds) {
             series[artifact.key].series = populateCategorySeriesData(artifact.categories, series[artifact.key].series);
             series[artifact.key].build = setCategorySeriesData(artifact.categories, {});
             series[artifact.key].categories.push(build.build_num);
+            series[artifact.key].budget = artifact.budget;
         });
     });
 
