@@ -8,51 +8,109 @@ const server = require('../../server');
 
 const { SERVER, SECRET, BRANCH, API } = require('../config');
 
-describe('getAllProjects', function () {
+describe('Builds', function () {
     after(async () => {
         return await server.stop();
     });
 
-    it('get all projects', () => {
+    it('get build', () => {
         nock(API)
             .defaultReplyHeaders({
                 'Content-Type': 'application/json'
             })
 
-            .get('/projects')
+            .get('/project/github/test/project/tree/master')
             .query(true)
-            .reply(200, require('./data/getAllProjects'))
-
-            .get('/project/github/test/test/13/artifacts')
-            .query(true)
-            .reply(200, require('./data/getBuildArtifacts'))
-
-            .get('/project/github/test2/test2/43/artifacts')
-            .query(true)
-            .reply(200, require('./data/getBuildArtifacts'))
-
-            .get('/project/github/test/test/tree/master')
-            .query(true)
-            .reply(200, require('./data/getProject'))
-
-            .get('/project/github/test2/test2/tree/master')
-            .query(true)
-            .reply(200, require('./data/getProject'));
+            .reply(200, require('./data/test/project/project'));
 
 
         return request({
-            url: `${SERVER}/api/projects/${BRANCH}?access_token=${SECRET}`
+            url: `${SERVER}/api/projects/github/test/project/branch/${BRANCH}?access_token=${SECRET}`
         })
             .then((data) => {
                 data = JSON.parse(data);
                 unit.array(data).hasLength(2);
-                const project = data.shift();
-                unit.string(project.project).is('test2');
 
-                unit.object(project).hasProperty('vcs');
-                unit.object(project).hasProperty('username');
-                unit.object(project).hasProperty('project');
-                unit.object(project).hasProperty('lastBuild');
+                const build = data.shift();
+
+                unit.object(build).hasProperty('build_num');
             });
     });
+
+
+    it('get latest build', () => {
+        nock(API)
+            .defaultReplyHeaders({
+                'Content-Type': 'application/json'
+            })
+
+            .get('/project/github/test/project/tree/master')
+            .query(true)
+            .reply(200, require('./data/test/project/lastBuild'));
+
+
+        return request({
+            url: `${SERVER}/api/projects/github/test/project/branch/master/latest?access_token=${SECRET}`
+        })
+            .then((data) => {
+                data = JSON.parse(data);
+                unit.array(data).hasLength(1);
+
+                const build = data.shift();
+
+                unit.object(build).hasProperty('build_num');
+            });
+    });
+
+    it('get running build', () => {
+        nock(API)
+            .defaultReplyHeaders({
+                'Content-Type': 'application/json'
+            })
+
+            .get('/project/github/test/project/tree/master')
+            .query(true)
+            .reply(200, require('./data/test/project/runningBuild'));
+
+
+        return request({
+            url: `${SERVER}/api/projects/github/test/project/branch/master/running?access_token=${SECRET}`
+        })
+            .then((data) => {
+                data = JSON.parse(data);
+                unit.array(data).hasLength(1);
+
+                const build = data.shift();
+
+                unit.object(build).hasProperty('build_num');
+            });
+    });
+
+
+    it('get specific build', () => {
+        nock(API)
+            .defaultReplyHeaders({
+                'Content-Type': 'application/json'
+            })
+
+            .get('/project/github/test/project/43')
+            .query(true)
+            .reply(200, require('./data/test/project/43/build'));
+
+        return request({
+            url: `${SERVER}/api/projects/github/test/project/build/43?access_token=${SECRET}`
+        })
+            .then((data) => {
+                data = JSON.parse(data);
+                unit.object(data).isNot(null);
+                unit.object(data).hasProperty('build_num');
+                unit.object(data).hasProperty('subject');
+                unit.object(data).hasProperty('user');
+                unit.object(data).hasProperty('build_time_millis');
+                unit.object(data).hasProperty('status');
+                unit.object(data).hasProperty('stop_time');
+            });
+    });
+
+
 });

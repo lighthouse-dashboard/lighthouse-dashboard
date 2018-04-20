@@ -16,11 +16,10 @@
                 }
             }
         },
-        "reponame": "test",
+        "reponame": "project",
         "username": "test",
         "default_branch": "master"
     },
-
     {
         "irc_server": null,
         "ssh_keys": [],
@@ -33,13 +32,13 @@
                     "build_num": 43,
                     "vcs_revision": "9f693f34aea9587f940f32456cb1c9a14c5b5765",
                     "pushed_at": "2018-04-17T13:39:40.121Z",
-                    "stop_time": "2018-04-19T06:24:02.834Z",
-                    "added_at": "2018-04-19T06:24:02.834Z"
+                    "added_at": "2018-04-18T06:24:02.834Z",
+                    "stop_time": "2018-04-18T06:24:02.834Z"
                 }
             }
         },
-        "reponame": "test2",
-        "username": "test2",
+        "reponame": "project2",
+        "username": "test",
         "default_branch": "master"
     }
 ]

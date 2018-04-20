@@ -1,9 +1,4 @@
 {
-    "previous_successful_build": {
-        "build_num": 12,
-        "status": "success",
-        "build_time_millis": 292265
-    },
     "build_parameters": null,
     "oss": false,
     "committer_date": "2018-04-17T15:39:28+02:00",
@@ -11,17 +6,17 @@
     "usage_queued_at": "2018-04-18T06:19:24.570Z",
     "fail_reason": null,
     "retry_of": 12,
-    "reponame": "portfolio-backend",
+    "reponame": "project",
     "ssh_users": [],
     "parallel": 1,
     "failed": false,
     "branch": "master",
-    "username": "faebeee",
+    "username": "test",
     "author_date": "2018-04-17T15:39:28+02:00",
     "why": "retry",
     "vcs_tag": null,
     "pull_requests": [],
-    "build_num": 13,
+    "build_num": 43,
     "infrastructure_fail": false,
     "has_artifacts": true,
     "status": "success",
@@ -47,7 +42,6 @@
     "user": {
         "is_user": true,
         "login": "test",
-        "avatar_url": "https://avatars0.githubusercontent.com/",
         "name": "test"
     }
 }

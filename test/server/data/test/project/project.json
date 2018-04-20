@@ -1,6 +1,6 @@
 [
     {
-        "reponame": "test",
+        "reponame": "project",
         "ssh_users": [],
         "branch": "master",
         "username": "test",
@@ -16,11 +16,11 @@
         "author_name": "test"
     },
     {
-        "reponame": "test",
+        "reponame": "project",
         "ssh_users": [],
         "branch": "master",
         "username": "test",
-        "build_num": 13,
+        "build_num": 43,
         "has_artifacts": true,
         "status": "success",
         "subject": "Update budget",

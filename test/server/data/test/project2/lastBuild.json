@@ -1,0 +1,18 @@
+[
+    {
+        "reponame": "project",
+        "ssh_users": [],
+        "branch": "master",
+        "username": "test",
+        "build_num": 13,
+        "has_artifacts": true,
+        "status": "success",
+        "subject": "Update budget",
+        "vcs_type": "github",
+        "lifecycle": "finished",
+        "stop_time": "2018-04-18T06:24:02.719Z",
+        "build_time_millis": 276162,
+        "outcome": "success",
+        "author_name": "test"
+    }
+]

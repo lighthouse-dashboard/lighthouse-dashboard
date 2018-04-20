@@ -1,8 +1,8 @@
-const { getProjectHistoryChartData } = require('../utils');
+const { getHistoryData } = require('../utils/utils');
 
 module.exports = async(req) => {
     const { vcs, username, project, branch } = req.params;
     const { limit, token } = req.server.app;
 
-    return getProjectHistoryChartData(vcs, username, project, branch, token, limit);
+    return getHistoryData(vcs, username, project, branch, token, limit);
 };

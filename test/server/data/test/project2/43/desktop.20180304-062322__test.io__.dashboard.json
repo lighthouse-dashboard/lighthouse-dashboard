@@ -1,0 +1,50 @@
+{
+    "categories": [
+        {
+            "name": "Performance",
+            "description": "These encapsulate your web app's current performance and opportunities to improve it.",
+            "id": "performance",
+            "score": 93
+        },
+        {
+            "name": "Progressive Web App",
+            "description": "These checks validate the aspects of a Progressive Web App, as specified by the baseline [PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist).",
+            "id": "pwa",
+            "score": 60
+        },
+        {
+            "name": "Accessibility",
+            "description": "These checks highlight opportunities to [improve the accessibility of your web app](https://developers.google.com/web/fundamentals/accessibility). Only a subset of accessibility issues can be automatically detected so manual testing is also encouraged.",
+            "id": "accessibility",
+            "score": 90
+        },
+        {
+            "name": "Best Practices",
+            "description": "We've compiled some recommendations for modernizing your web app and avoiding performance pitfalls.",
+            "id": "best-practices",
+            "score": 22
+        },
+        {
+            "name": "SEO",
+            "description": "These checks ensure that your page is optimized for search engine results ranking. There are additional factors Lighthouse does not check that may affect your search ranking. [Learn more](https://support.google.com/webmasters/answer/35769).",
+            "id": "seo",
+            "score": 90
+        },
+        {
+            "name": "Dreipol Audits",
+            "description": "Dreipol audits",
+            "id": "dreipol",
+            "score": 80
+        }
+    ],
+    "budget": {
+        "performance": 90,
+        "pwa": 70,
+        "accessibility": 70,
+        "best-practices": 70,
+        "dreipol": 90,
+        "seo": 90
+    },
+    "url": "https://test.io/",
+    "tag": "desktop"
+}

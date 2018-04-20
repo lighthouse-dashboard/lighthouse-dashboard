@@ -8,12 +8,12 @@ const server = require('../../server');
 
 const { SERVER, SECRET, BRANCH, API } = require('../config');
 
-describe('getAllProjects', function () {
+describe('Project', function () {
     after(async () => {
         return await server.stop();
     });
 
-    it('get all projects', () => {
+    it('get all', () => {
         nock(API)
             .defaultReplyHeaders({
                 'Content-Type': 'application/json'
@@ -23,21 +23,21 @@ describe('getAllProjects', function () {
             .query(true)
             .reply(200, require('./data/getAllProjects'))
 
-            .get('/project/github/test/test/13/artifacts')
+            .get('/project/github/test/project/13/artifacts')
             .query(true)
-            .reply(200, require('./data/getBuildArtifacts'))
+            .reply(200, require('./data/test/project/13/artifacts'))
 
-            .get('/project/github/test2/test2/43/artifacts')
+            .get('/project/github/test/project2/43/artifacts')
             .query(true)
-            .reply(200, require('./data/getBuildArtifacts'))
+            .reply(200, require('./data/test/project2/43/artifacts'))
 
-            .get('/project/github/test/test/tree/master')
+            .get('/project/github/test/project/tree/master')
             .query(true)
-            .reply(200, require('./data/getProject'))
+            .reply(200, require('./data/test/project/project'))
 
-            .get('/project/github/test2/test2/tree/master')
+            .get('/project/github/test/project2/tree/master')
             .query(true)
-            .reply(200, require('./data/getProject'));
+            .reply(200, require('./data/test/project2/project'));
 
 
         return request({
@@ -47,7 +47,7 @@ describe('getAllProjects', function () {
                 data = JSON.parse(data);
                 unit.array(data).hasLength(2);
                 const project = data.shift();
-                unit.string(project.project).is('test2');
+                unit.string(project.project).is('project2');
 
                 unit.object(project).hasProperty('vcs');
                 unit.object(project).hasProperty('username');

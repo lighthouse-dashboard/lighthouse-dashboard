@@ -1,65 +1,52 @@
-const { forEach, subtract } = require('lodash');
+const { forEach, takeRight, subtract } = require('lodash');
 
-function populateCategoryScoreStore(artifact) {
-    const { categories } = artifact;
-    return categories.reduce((acc, category) => {
-        acc[category.id] = category.score;
-        return acc;
-    }, {});
-}
 
-function populateCategoryStore(artifact, categoryStore) {
-    const { categories } = artifact;
-    return categories.reduce((acc, category) => {
-        if (!acc[category.id]) {
-            acc[category.id] = [];
+function populateCategorySeriesData(categories, series) {
+    forEach(categories, (category) => {
+        if (!series[category.id]) {
+            series[category.id] = [];
         }
 
-        acc[category.id].push(category.score);
-        return acc;
-    }, categoryStore);
-}
-
-function getBuildScoreSeries(builds) {
-    let categoryStore = {};
-    let categoryScoreStore = {};
-    builds.forEach(artifacts => {
-        artifacts.forEach((artifact) => {
-            categoryScoreStore = populateCategoryScoreStore(artifact);
-            categoryStore = populateCategoryStore(artifact, categoryStore);
-        });
+        series[category.id].push(category.score);
     });
 
-    return { series: categoryStore, build: categoryScoreStore };
+    return series;
 }
 
-function getScoreSeriesByReport(builds) {
-    const { series, build } = getBuildScoreSeries(builds);
-    const trend = {};
-    forEach(series, (val, key) => {
-        trend[key] = subtract(...val);
-    });
-    return { trend, build };
+function getTrendForSeries(series) {
+    const lastTwoValues = takeRight(series, 2);
+    return subtract(...lastTwoValues);
 }
 
-function getTrendsFromBuilds(builds) {
-    let tags = {};
-    forEach(builds, (artifacts) => {
-        forEach(artifacts, (report, tag) => {
-            if (!tags[tag]) {
-                tags[tag] = [];
+function setupSeriesData(builds) {
+    let series = {};
+
+    forEach(builds, (build) => {
+        forEach(build.artifactContent, (artifact) => {
+            if (!series[artifact.key]) {
+                series[artifact.key] = { series: {} };
             }
-            tags[tag].push(report);
+
+            series[artifact.key].series = populateCategorySeriesData(artifact.categories, series[artifact.key].series);
         });
     });
 
-    forEach(tags, (_builds, key) => {
-        tags[key] = getScoreSeriesByReport(_builds);
+    return series;
+}
+
+function calculateTrendForSeries(taggedSeries) {
+    forEach(taggedSeries, (data) => {
+        const categories = data.series;
+        data.trend = {};
+        forEach(categories, (serie, category) => {
+            data.trend[category] = getTrendForSeries(serie);
+        });
     });
 
-    return tags;
+    return taggedSeries;
 }
 
 module.exports = {
-    getTrendsFromBuilds,
+    setupSeriesData,
+    calculateTrendForSeries,
 };
