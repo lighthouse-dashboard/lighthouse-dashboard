@@ -35,9 +35,14 @@
                 </div>
             </div>
         </div>
-        <div class="row" >
+        <div class="row">
             <div class="col s12">
-                <p class="center"><version/></p>
+                <p class="center">
+                    <version/>
+                    <router-link :to="{name: 'dashboard'}">
+                        {{ $t("message.dashboard_link_text") }}
+                    </router-link>
+                </p>
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@
         "no_dashboard_available": "No Dashboard available",
         "no_artifacts_available": "No Artifacts available",
         "dashboard_link_text": "Dashboard",
+        "kiosk_link_text": "Kiosk",
         "branches": "Branches",
         "projects": "Projects",
         "no_projects_available": "No projects available",
