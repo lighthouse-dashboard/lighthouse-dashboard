@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :title="buildscore+'/'+budgetscore">
         <span :class="scorecolor">{{ buildscore }}</span>
         <span v-if="trendscore !== 0" :class="color">
             <i class="material-icons tiny" v-if="trendscore > 0">trending_up</i>

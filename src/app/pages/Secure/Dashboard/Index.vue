@@ -15,15 +15,14 @@
         </div>
 
         <div class="row" v-if="!isLoading && projects">
-            <div v-if="projects.length <= 0" class="card-panel">
+            <div v-if="projects.length <= 0">
                 <h5 class="center-align red-text">
                     {{ $t("message.no_projects_available") }}
                 </h5>
             </div>
 
             <div class="col s12"
-                 v-for="(project, index) in projects"
-                 :class="{'grey lighten-5': index%2}"
+                 v-for="(project) in projects"
                  :key="project.lastBuild.build_num"
             >
                 <project-trend

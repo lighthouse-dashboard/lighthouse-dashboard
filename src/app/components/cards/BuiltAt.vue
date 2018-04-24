@@ -1,8 +1,7 @@
 <template>
-    <Card>
-        <span slot="title">{{ $t('message.build_completed') }}</span>
+    <span>
         {{ buildCompletedTime }}
-    </Card>
+    </span>
 </template>
 
 <script>
@@ -10,13 +9,7 @@
     import Vue from 'vue';
     import moment from 'moment';
 
-    import Card from '@/components/cards/Card';
-
     export default {
-        components: {
-            Card,
-        },
-
         props: {
             stopTime: {
                 type: String,

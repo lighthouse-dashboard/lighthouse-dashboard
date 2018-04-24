@@ -45,7 +45,7 @@ export function getBuilds(vcs: string, username: string, project: string, branch
 }
 
 export function getProjectTrendData(vcs: string, username: string, project: string, branch: string, token: string): Promise<ProjectSeriesData> {
-    return getBuilds(vcs, username, project, branch, token, 2)
+    return getBuilds(vcs, username, project, branch, token, 10)
         .then((builds) => {
             return getArtifactsForBuilds(builds, vcs, username, project, token);
         })

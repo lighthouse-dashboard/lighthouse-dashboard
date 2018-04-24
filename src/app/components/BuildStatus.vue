@@ -1,7 +1,8 @@
 <template>
-    <span v-if="build">
+    <span>
+        <i class="material-icons" v-if="isBuildSuccessful === null" :class="buildStatusClass">help_outline</i>
         <i class="material-icons" v-if="isBuildSuccessful" :class="buildStatusClass">done</i>
-        <i class="material-icons" v-if="!isBuildSuccessful" :class="buildStatusClass">cancel</i>
+        <i class="material-icons" v-if="isBuildSuccessful === false" :class="buildStatusClass">cancel</i>
     </span>
 </template>
 

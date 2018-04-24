@@ -1,31 +1,33 @@
 <template>
-    <table class="striped centered">
+    <table class="trend-table striped centered">
         <tbody>
-            <tr>
-                <td/>
-                <td v-for="category in categories"
-                        :key="category">
-                    {{ $t(`message.category_${category}`) }}
-                </td>
-            </tr>
+        <tr>
+            <td class="trend-table__title-cell"/>
+            <td v-for="category in categories"
+                :key="category">
+                {{ $t(`message.category_${category}`) }}
+            </td>
+        </tr>
         </tbody>
 
         <tbody>
-            <tr v-for="(report, trend) in trendScores" :key="trend">
-                <td>{{ trend }}</td>
-                <td v-for="category in categories"
-                        :key="category">
-                    <score
-                            :vcs="vcs"
-                            :username="username"
-                            :project="project"
-                            :trendscore="report.trend[category]"
-                            :buildscore="report.build[category]"
-                            :budgetscore="report.budget[category]"
-                            :category="category"
-                    />
-                </td>
-            </tr>
+        <tr v-for="(report, trend) in trendScores" :key="trend">
+            <td class="trend-table__title-cell">
+                <p class="truncate" :title="trend">{{ trend }}</p>
+            </td>
+            <td v-for="category in categories"
+                :key="category">
+                <score
+                    :vcs="vcs"
+                    :username="username"
+                    :project="project"
+                    :trendscore="report.trend[category]"
+                    :buildscore="report.build[category]"
+                    :budgetscore="report.budget[category]"
+                    :category="category"
+                />
+            </td>
+        </tr>
         </tbody>
     </table>
 </template>
