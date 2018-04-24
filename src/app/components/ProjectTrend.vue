@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="row">
-
             <div class="col s4">
                 <h5>
                     <router-link
@@ -16,11 +15,19 @@
                 </h5>
             </div>
 
-            <div class="col s4"></div>
             <div class="col s4">
                 <h5 v-if="build">
                     <built-at :stopTime="build.stop_time"/>
                 </h5>
+            </div>
+
+             <div class="col s4">
+                <commit-detail
+                    v-if="build"
+                    :useravatar="build.user.avatar_url"
+                    :username="build.user.name"
+                    :commitmessage="build.subject"
+                />
             </div>
         </div>
 
@@ -43,6 +50,7 @@
     import DashboardProjectTitle from "@/components/DashboardProjectTitle";
     import TrendTable from "@/components/trend/TrendTable";
     import BuiltAt from '@/components/cards/BuiltAt';
+    import CommitDetail from '@/components/commit-detail';
 
 
     export default {
@@ -52,6 +60,7 @@
             TrendTable,
             BuildStatus,
             BuiltAt,
+            CommitDetail
         },
 
         props: {

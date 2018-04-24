@@ -1,0 +1,15 @@
+.commit-detail {
+    &{
+
+    }
+
+    & .commit-detail__avatar{
+        max-height: 3rem;
+        border-radius: 100%;
+
+    }
+
+    & .commit-detail__message{
+
+    }
+}
