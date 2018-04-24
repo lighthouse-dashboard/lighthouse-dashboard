@@ -4,13 +4,18 @@ const request = require('request-promise');
 const nock = require('nock');
 const unit = require('unit.js');
 
-const server = require('../../server/index');
+const { start, stop } = require('../../dist/server/server');
 
 const { SERVER, SECRET, API } = require('../config');
 
 describe('Trend', function () {
+
+    before(async () => {
+        return await start();
+    });
+
     after(async () => {
-        return await server.stop();
+        return await stop();
     });
 
     it('get', () => {

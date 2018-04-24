@@ -9,7 +9,7 @@ const laabr = require('laabr');
 const AuthBearer = require('hapi-auth-bearer-token');
 const HapiSwagger = require('hapi-swagger');
 
-const {name, version} = require('../package.json');
+const {name, version} = require('../../package.json');
 import bearerStrategy from './auth/bearerStrategy';
 import routes from './routes';
 
@@ -21,16 +21,7 @@ const LIMIT = process.env.LIMIT || 10;
 const ENV = process.env.NODE_ENV || 'development';
 const IS_DEV = ENV === 'development';
 
-const server = new Server({
-    port: PORT,
-    host: '0.0.0.0',
-    routes: {
-        cors: true,
-        files: {
-            relativeTo: path.join(__dirname, '..'),
-        },
-    },
-});
+let server:Server;
 
 const swaggerOptions = {
     info: {
@@ -38,11 +29,6 @@ const swaggerOptions = {
         version: version,
     },
 };
-
-server.app = {
-    token: TOKEN,
-    limit: LIMIT
-}
 
 const init = async () => {
     await server.register(Inert);
@@ -81,8 +67,29 @@ const init = async () => {
     await server.start();
 };
 
-init();
 
-if (module) {
-    module.exports = server;
+export async function stop() {
+    return await server.stop();
+}
+
+export async function start() {
+
+    server = new Server({
+        port: PORT,
+        host: '0.0.0.0',
+        routes: {
+            cors: true,
+            files: {
+                relativeTo: path.join(__dirname, '..'),
+            },
+        },
+    });
+
+
+    server.app = {
+        token: TOKEN,
+        limit: LIMIT
+    };
+
+    return await init();
 }

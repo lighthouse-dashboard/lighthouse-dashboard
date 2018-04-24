@@ -7,10 +7,10 @@
     "scripts": {
         "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
         "start": "npm run dev",
-        "unit": "jest --config test/unit/jest.conf.js --coverage",
-        "test": "npm run unit",
+        "test": "npm run build-server &&NODE_ENV=test node_modules/.bin/mocha test/server/**/*.spec.js",
         "lint": "eslint --ext .js,.vue src test/unit",
-        "build": "node build/build.js",
+        "build": "npm run build-server && node build/build.js",
+        "build-server": "node_modules/.bin/tsc -p src/server",
         "server": "node dist/server/index.js",
         "server-dev": "NODE_ENV=development node_modules/.bin/nodemon --inspect ./dist/server/index.js"
     },

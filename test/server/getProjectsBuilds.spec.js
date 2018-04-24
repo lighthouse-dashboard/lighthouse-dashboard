@@ -4,13 +4,17 @@ const request = require('request-promise');
 const nock = require('nock');
 const unit = require('unit.js');
 
-const server = require('../../server/index');
+const { start, stop } = require('../../dist/server/server');
 
 const { SERVER, SECRET, BRANCH, API } = require('../config');
 
 describe('Builds', function () {
+    before(async () => {
+        return await start();
+    });
+
     after(async () => {
-        return await server.stop();
+        return await stop();
     });
 
     it('get build', () => {
@@ -54,7 +58,7 @@ describe('Builds', function () {
         })
             .then((data) => {
                 data = JSON.parse(data);
-                unit.array(data).hasLength(1);
+                unit.array(data).hasLength(2);
 
                 const build = data.shift();
 
