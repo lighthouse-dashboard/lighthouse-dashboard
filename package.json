@@ -1,6 +1,6 @@
 {
     "name": "dreihouse-dashboard",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "description": "A Vue.js project",
     "main": "src/main.js",
     "private": true,
