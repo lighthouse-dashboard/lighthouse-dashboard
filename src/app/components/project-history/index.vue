@@ -22,7 +22,7 @@
 
 <script>
 
-    import ArtifactHistoryChart from "@/components/ArtifactHistoryChart";
+    import ArtifactHistoryChart from "@/components/history-chart";
 
     export default {
 

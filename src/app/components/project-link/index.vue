@@ -13,7 +13,7 @@
 <script>
 
     import Vue from 'vue';
-    import BuildingAnimation from '@/components/BuildingAnimation';
+    import BuildingAnimation from '@/components/building-animation';
 
     export default {
         components: {

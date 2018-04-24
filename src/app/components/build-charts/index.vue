@@ -1,33 +1,26 @@
 <template>
-    <div class="card">
-        <div class="card-content">
-            <div class="row">
-                <p class="center"
-                   v-if="!chartData">
-                    {{ $t("message.no_dashboard_available") }}
+    <div v-if="chartData">
+        <div class="row">
+            <div class="col s12"
+                 v-for="(data, key) in chartData"
+                 :key="key">
+                <p>
+                    <a target="_blank" :href="key">
+                        {{ key }}
+                    </a>
                 </p>
 
-                <div class="col s12"
-                     v-for="(data, key) in chartData"
-                     :key="key">
-                    <p>
-                        <a target="_blank" :href="key">
-                            {{ key }}
-                        </a>
-                    </p>
-
-                    <chart
-                        :columns="data"
-                        :categories="categories"
-                        :height="height"/>
-                </div>
+                <chart
+                    :columns="data"
+                    :categories="categories"
+                    :height="height"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Chart from '@/components/Chart.vue';
+    import Chart from '@/components/chart';
 
     export default {
         components: {

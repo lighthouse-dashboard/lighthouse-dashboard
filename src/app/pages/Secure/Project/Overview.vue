@@ -42,7 +42,7 @@
 <script>
     import Vue from "vue";
 
-    import Build from "@/components/Build";
+    import Build from "@/components/build-view";
     import Card from '@/components/cards/Card';
     import CiLink from '@/components/links/ci';
     import GitHubLink from '@/components/links/github';

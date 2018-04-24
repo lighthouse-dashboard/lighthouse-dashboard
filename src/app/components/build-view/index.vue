@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col s12">
-            <build-info
+            <build-title
                 :vcs="vcs"
                 :username="username"
                 :project="project"
@@ -10,7 +10,7 @@
         </div>
 
         <div class="col s12 l9">
-            <build-artifacts
+            <build-charts
                 :vcs="vcs"
                 :username="username"
                 :project="project"
@@ -30,16 +30,16 @@
 </template>
 
 <script>
-    import BuildInfo from "@/components/BuildInfo";
-    import BuildArtifacts from "@/components/BuildArtifacts";
-    import ArtifactList from '@/components/ArtifactList';
+    import BuildTitle from "@/components/build-title";
+    import BuildCharts from "@/components/build-charts";
+    import ArtifactList from '@/components/artifact-list';
 
 
     export default {
 
         components: {
-            BuildArtifacts,
-            BuildInfo,
+            BuildCharts,
+            BuildTitle,
             ArtifactList,
         },
 

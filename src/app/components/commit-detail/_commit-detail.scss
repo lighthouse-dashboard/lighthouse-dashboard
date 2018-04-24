@@ -1,15 +1,29 @@
 .commit-detail {
-    &{
+    & {
+        display: flex;
+        flex-flow: row;
+        align-items: flex-start;
+    }
+
+    & .commit-detail__avatar-wrapper {
+        height: 100%;
+        max-height: 5rem;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
 
     }
 
-    & .commit-detail__avatar{
+    & .commit-detail__avatar {
         max-height: 3rem;
         border-radius: 100%;
-
     }
 
-    & .commit-detail__message{
-
+    & .commit-detail__message {
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        margin-left: 1rem;
     }
 }

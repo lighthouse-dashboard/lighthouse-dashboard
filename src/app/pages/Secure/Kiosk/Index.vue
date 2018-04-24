@@ -38,22 +38,17 @@
 
 <script>
     import Vue from "vue";
-    import Build from "@/components/Build";
-    import BuildArtifacts from "@/components/BuildArtifacts";
-    import DashboardProjectTitle from "@/components/DashboardProjectTitle";
-    import ProjectHistory from "@/components/ProjectHistory";
-    import ProjectTrend from "@/components/ProjectTrend";
-    import Version from "@/components/Version";
+
+    import Build from "@/components/build-view";
+    import ProjectTrend from "@/components/project-trend";
+    import Version from "@/components/version";
 
     export default {
 
         components: {
             Build,
-            BuildArtifacts,
-            DashboardProjectTitle,
-            ProjectHistory,
             ProjectTrend,
-            Version
+            Version,
         },
 
         data() {

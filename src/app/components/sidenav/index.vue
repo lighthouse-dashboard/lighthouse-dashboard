@@ -58,9 +58,9 @@
 <script>
 
     import Vue from 'vue';
-    import ProjectListLink from './ProjectListLink';
-    import BranchList from './BranchList';
-    import Version from './Version';
+    import ProjectListLink from '@/components/project-link';
+    import BranchList from '@/components/branch-list';
+    import Version from '@/components/version';
 
     export default {
 

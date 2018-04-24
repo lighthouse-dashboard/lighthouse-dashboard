@@ -435,7 +435,7 @@ const ROUTES: ServerRoute[] = [
         path: '/{param*}',
         handler: {
             directory: {
-                path: 'dist/app',
+                path: '../dist/app',
                 index: ['index.html'],
             },
         },

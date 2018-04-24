@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import SideNav from '@/components/SideNav';
+    import SideNav from '@/components/sidenav';
 
     export default {
         name: 'App',

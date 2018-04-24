@@ -1,81 +1,72 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="col s4">
+    <div class="row" v-if="build">
+        <div class="col s6 m4">
+            <router-link
+                :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
                 <h5>
-                    <router-link
-                        :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
-                        <build-status
-                            :vcs="vcs"
-                            :username="username"
-                            :project="project"
-                            :buildNum="buildNum"/>
-                        {{ project }}
-                    </router-link>
+                    <build-status
+                        :vcs="vcs"
+                        :username="username"
+                        :project="project"
+                        :buildNum="buildNum"/>
+                    {{ project }}
                 </h5>
-            </div>
+            </router-link>
 
-            <div class="col s4">
-                <h5 v-if="build">
-                    <built-at :stopTime="build.stop_time"/>
-                </h5>
-            </div>
-
-             <div class="col s4">
-                <commit-detail
-                    v-if="build"
-                    :useravatar="build.user.avatar_url"
-                    :username="build.user.name"
-                    :commitmessage="build.subject"
-                />
-            </div>
+            <pineapple class="right" v-if="hasReachedBudget" :size="45"/>
         </div>
 
-        <div class="row">
-            <div class="col s12">
-                <trend-table
-                    :vcs="vcs"
-                    :username="username"
-                    :project="project"
-                />
-            </div>
+        <div class="col s6 m7">
+            <h5 v-if="build">
+                <built-at :stopTime="build.stop_time"/>
+            </h5>
         </div>
+
+        <div class="col s12 m1">
+            <commit-detail
+                v-if="build"
+                :useravatar="build.user.avatar_url"
+                :username="build.user.name"
+            />
+        </div>
+
     </div>
 </template>
 
 <script>
-
     import Vue from 'vue';
-    import BuildStatus from '@/components/BuildStatus';
-    import DashboardProjectTitle from "@/components/DashboardProjectTitle";
-    import TrendTable from "@/components/trend/TrendTable";
-    import BuiltAt from '@/components/cards/BuiltAt';
+
+    import BuildStatus from '@/components/build-status';
+    import BuiltAt from '@/components/built-at';
     import CommitDetail from '@/components/commit-detail';
+    import Pineapple from '@/components/happy-pineapple';
 
 
     export default {
-
         components: {
-            DashboardProjectTitle,
-            TrendTable,
             BuildStatus,
             BuiltAt,
-            CommitDetail
+            Pineapple,
+            CommitDetail,
         },
 
         props: {
+
             vcs: {
                 type: String,
                 required: true,
             },
+
             username: {
                 type: String,
                 required: true,
             },
+
             project: {
                 type: String,
                 required: true,
             },
+
             buildNum: {
                 type: Number,
                 required: true,
@@ -84,10 +75,21 @@
 
         data() {
             return {
+                branch: null,
+                user: null,
+                htmlArtifacts: [],
+                buildCompletedTime: null,
+                buildDuration: null,
+                buildStatusClass: null,
+                isBuildSuccessful: null,
                 build: null,
                 updater: null,
+                hasRunningBuild: null,
+                hasReachedBudget: null,
             };
         },
+
+        computed: {},
 
         methods: {
             load() {
@@ -95,6 +97,11 @@
                     .getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
+                        const {
+                            user
+                        } = this.build;
+
+                        this.user = user;
                     })
                     .then(() => {
                         this.updater = setTimeout(() => {
