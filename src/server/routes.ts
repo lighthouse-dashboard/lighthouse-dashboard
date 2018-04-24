@@ -177,8 +177,6 @@ const ROUTES: ServerRoute[] = [
                 query: {
                     access_token: joi.string()
                         .description('API Secret. Can also be passed as Bearer token'),
-                    category: joi.string()
-                        .description('Filter for specific category'),
                 },
                 params: {
                     vcs: joi.string()

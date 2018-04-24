@@ -1,12 +1,14 @@
 import {
-    BuildInterface, ChartDataEntryInterface,
-    CircleArtifactInterface, CircleReportContentInterface, TaggedChartColumns,
-    TagGroupedArtifactDataInterface
+    BuildChartData, BuildChartRowsData,
+    BuildInterface,
+    CircleArtifactInterface,
+    CircleReportContentInterface,
+    GroupedBuildReports,
 } from "../Interfaces";
 
-function groupResultsByReportTag(buildData: BuildInterface): TagGroupedArtifactDataInterface {
+export function groupResultsByReportTag(buildData: BuildInterface): GroupedBuildReports {
     const { artifacts } = buildData;
-    const endpoints:TagGroupedArtifactDataInterface = {};
+    const endpoints:GroupedBuildReports = {};
 
     artifacts.forEach((item:CircleArtifactInterface) => {
         if (!endpoints[item.data.url]) {
@@ -18,15 +20,15 @@ function groupResultsByReportTag(buildData: BuildInterface): TagGroupedArtifactD
     return endpoints;
 }
 
-function buildChartDataFromTaggedResults(taggedResults: TagGroupedArtifactDataInterface): ChartDataEntryInterface {
+export function buildChartDataFromTaggedResults(taggedResults: GroupedBuildReports): BuildChartData {
     const keys = Object.keys(taggedResults);
-    const result: TaggedChartColumns = {};
+    const columns: BuildChartRowsData = {};
     let chartCategories:string[] = [];
 
     keys.forEach((key) => {
         const reports = taggedResults[key];
-        if (!result[key]) {
-            result[key] = [];
+        if (!columns[key]) {
+            columns[key] = [];
         }
 
         reports.forEach((item: CircleReportContentInterface) => {
@@ -40,7 +42,7 @@ function buildChartDataFromTaggedResults(taggedResults: TagGroupedArtifactDataIn
                 return;
             }
 
-            const shrinkedCategories = categories.map((_item) => {
+            const shrinkedCategories: number[] = categories.map((_item) => {
                 return _item.score;
             });
 
@@ -52,17 +54,12 @@ function buildChartDataFromTaggedResults(taggedResults: TagGroupedArtifactDataIn
                 return _item.name;
             });
 
-            result[key].push(
+            columns[key].push(
                 [`Report ${tag ? tag : ''}`, ...shrinkedCategories],
                 [`Budget ${tag ? tag : ''}`, ...shrinkedBudget],
             );
         });
     });
 
-    return {columns: result, categories: chartCategories};
+    return {columns, categories: chartCategories};
 }
-
-module.exports = {
-    buildChartDataFromTaggedResults,
-    groupResultsByReportTag,
-};

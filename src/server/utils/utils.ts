@@ -1,11 +1,12 @@
 import {
     BuildInterface,
     CircleArtifactInterface,
+    CircleBuildInterface,
     CircleProjectInterface,
-    CircleReportContentInterface,
-    TaggedBuildDataInterface,
-    TaggedBuildDataSeriesInterface,
-    TagGroupedArtifactDataInterface
+    CircleReportContentInterface, GroupedBuildReports,
+    ProjectArtifactTagData,
+    ProjectInterface,
+    ProjectSeriesData,
 } from "../Interfaces";
 
 const {orderBy} = require('lodash');
@@ -15,29 +16,29 @@ const {filterSupportedProjects, getArtifactsForBuilds, loadArtifactsContentForBu
 const {calculateTrendForSeries, setupSeriesData} = require('./trendUtils');
 const {buildChartDataFromTaggedResults, groupResultsByReportTag} = require('./chartDataUtils');
 
-function getProjects(branch: string, token: string): Promise<CircleProjectInterface[]> {
+export function getProjects(branch: string, token: string): Promise<ProjectInterface[]> {
     return getListOfProjects(branch, token)
         .then((projects: CircleProjectInterface[]) => {
             return filterSupportedProjects(projects, branch, token);
         });
 }
 
-function getBuildByNum(vcs: string, username: string, project: string, build: number | string, token: string): Promise<CircleProjectInterface> {
+export function getBuildByNum(vcs: string, username: string, project: string, build: number | string, token: string): Promise<CircleBuildInterface> {
     return getBuild(vcs, username, project, build, token);
 }
 
-function getLatestBuildsForProject(vcs: string, username: string, project: string, branch: string, token: string, limit: number, filter: string = 'completed'): Promise<BuildInterface[]> { //eslint-disable-line
+export function getLatestBuildsForProject(vcs: string, username: string, project: string, branch: string, token: string, limit: number, filter: string = 'completed'): Promise<CircleBuildInterface[]> {
     return getBuildsForProject(vcs, username, project, branch, token, limit, filter);
 }
 
-function getBuilds(vcs: string, username: string, project: string, branch: string, token: string, limit: number): Promise<BuildInterface[]> { //eslint-disable-line
+export function getBuilds(vcs: string, username: string, project: string, branch: string, token: string, limit: number): Promise<CircleBuildInterface[]> {
     return getBuildsForProject(vcs, username, project, branch, token, limit)
         .then((builds: BuildInterface[]) => {
             return orderBy(builds, ['build_num']);
         });
 }
 
-function getProjectTrendData(vcs: string, username: string, project: string, branch: string, token: string): Promise<TaggedBuildDataInterface> {
+export function getProjectTrendData(vcs: string, username: string, project: string, branch: string, token: string): Promise<ProjectSeriesData> {
     return getBuilds(vcs, username, project, branch, token, 2)
         .then((builds) => {
             return getArtifactsForBuilds(builds, vcs, username, project, token);
@@ -54,7 +55,7 @@ function getProjectTrendData(vcs: string, username: string, project: string, bra
 
 }
 
-function getHistoryData(vcs: string, username: string, project: string, branch: string, token: string, limit: number): Promise<TaggedBuildDataSeriesInterface> {  //eslint-disable-line
+export function getHistoryData(vcs: string, username: string, project: string, branch: string, token: string, limit: number): Promise<ProjectArtifactTagData> {
     return getBuilds(vcs, username, project, branch, token, limit)
         .then((builds) => {
             return getArtifactsForBuilds(builds, vcs, username, project, token);
@@ -67,20 +68,20 @@ function getHistoryData(vcs: string, username: string, project: string, branch: 
         });
 }
 
-function getArtifact(url: string, token: string): Promise<CircleReportContentInterface> {
+export function getArtifact(url: string, token: string): Promise<CircleReportContentInterface> {
     return getArtifactContent(url, token);
 }
 
-function getArtifactListForBuild(vcs: string, username: string, project: string, build: number | string, token: string): Promise<CircleArtifactInterface[]> {
+export function getArtifactListForBuild(vcs: string, username: string, project: string, build: number | string, token: string): Promise<CircleArtifactInterface[]> {
     return getArtifactsForBuild(vcs, username, project, build, token);
 }
 
-function deleteProjectsCache(branch: string) {
+export function deleteProjectsCache(branch: string) {
     return invalidateProjectsCache(branch);
 }
 
 
-function getBuildChartData(vcs: string, username: string, project: string, build: number | string, token: string) {
+export function getBuildChartData(vcs: string, username: string, project: string, build: number | string, token: string) {
     return getArtifactsForBuilds([{build_num: build}], vcs, username, project, token)
         .then((builds: BuildInterface[]) => {
             return loadArtifactsContentForBuilds(builds, token);
@@ -91,19 +92,7 @@ function getBuildChartData(vcs: string, username: string, project: string, build
         .then((buildData: BuildInterface) => {
             return groupResultsByReportTag(buildData);
         })
-        .then((data: TagGroupedArtifactDataInterface) => {
+        .then((data: GroupedBuildReports) => {
             return buildChartDataFromTaggedResults(data);
         });
 }
-
-module.exports = {
-    getProjects,
-    getLatestBuildsForProject,
-    getProjectTrendData,
-    getHistoryData,
-    getArtifact,
-    getArtifactListForBuild,
-    getBuildByNum,
-    deleteProjectsCache,
-    getBuildChartData
-};

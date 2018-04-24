@@ -2,7 +2,7 @@ import {
     BuildInterface,
     CircleReportContentInterface,
     ReportCategoryInterface, CategoriesScoreInterface, ReportDataSeriesInterface,
-    TaggedBuildDataInterface, TaggedBuildDataSeriesInterface
+    ProjectSeriesData, ProjectArtifactTagData
 } from '../Interfaces';
 
 const {forEach, takeRight, subtract} = require('lodash');
@@ -33,8 +33,8 @@ function getTrendForSeries(series: number[]): number {
     return subtract(...lastTwoValues.reverse());
 }
 
-export function setupSeriesData(builds: BuildInterface[]): TaggedBuildDataInterface {
-    let series: TaggedBuildDataInterface = {};
+export function setupSeriesData(builds: BuildInterface[]): ProjectSeriesData {
+    let series: ProjectSeriesData = {};
 
     forEach(builds, (build: BuildInterface) => {
         forEach(build.artifactContent, (artifact: CircleReportContentInterface) => {
@@ -58,8 +58,8 @@ export function setupSeriesData(builds: BuildInterface[]): TaggedBuildDataInterf
     return series;
 }
 
-export function calculateTrendForSeries(taggedSeries: TaggedBuildDataInterface): TaggedBuildDataInterface {
-    forEach(taggedSeries, (data: TaggedBuildDataSeriesInterface) => {
+export function calculateTrendForSeries(taggedSeries: ProjectSeriesData): ProjectSeriesData {
+    forEach(taggedSeries, (data: ProjectArtifactTagData) => {
         const categories = data.series;
         forEach(categories, (series: number[], category: string) => {
             data.trend[category] = getTrendForSeries(series);

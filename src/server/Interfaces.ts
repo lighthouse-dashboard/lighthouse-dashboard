@@ -16,6 +16,20 @@ export interface CircleArtifactInterface {
     data?: any;
 }
 
+export interface CircleReportContentInterface {
+    [key: string]: any;
+
+    key: string;
+    tag: string;
+    url: string;
+    categories: ReportCategoryInterface[];
+}
+
+export interface CircleProjectCacheInterface {
+    [key: string]: CircleProjectInterface[];
+}
+
+
 export interface ProjectInterface {
     username: string;
     project: string;
@@ -29,20 +43,12 @@ export interface BuildInterface {
     artifactContent?: CircleReportContentInterface[];
 }
 
-export interface CircleReportContentInterface {
-    [key: string]: any;
 
-    key: string;
-    tag: string;
-    url: string;
-    categories: ReportCategoryInterface[];
+export interface ProjectSeriesData {
+    [key: string]: ProjectArtifactTagData
 }
 
-export interface TaggedBuildDataInterface {
-    [key: string]: TaggedBuildDataSeriesInterface;
-}
-
-export interface TaggedBuildDataSeriesInterface {
+export interface ProjectArtifactTagData {
     series: ReportDataSeriesInterface;
     build: CategoriesScoreInterface;
     categories: number[];
@@ -50,8 +56,8 @@ export interface TaggedBuildDataSeriesInterface {
     trend: CategoriesScoreInterface
 }
 
-export interface TagGroupedArtifactDataInterface {
-    [key: string]: CircleReportContentInterface[];
+export interface GroupedBuildReports {
+    [key: string]: CircleReportContentInterface[]
 }
 
 export interface ReportDataSeriesInterface {
@@ -73,18 +79,15 @@ export interface BudgetInterface {
     [key: string]: number;
 }
 
-export interface ChartDataInterface {
-    [key: string]: ChartDataEntryInterface;
-}
-
-export interface ChartDataEntryInterface {
-    columns: TaggedChartColumns;
+export interface BuildChartData {
+    columns: BuildChartRowsData;
     categories: string[];
 }
 
-export interface TaggedChartColumns {
-    [key: string]: any[];
+export interface BuildChartRowsData {
+    [key: string]: Array<string | number>[];
 }
+
 
 export interface ApplicationState {
     token: string;
