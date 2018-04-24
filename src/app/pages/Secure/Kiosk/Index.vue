@@ -16,23 +16,12 @@
                  :class="{'grey lighten-5': index%2}"
                  :key="project.lastBuild.build_num"
             >
-                <div class="row">
-                    <div class="col s12">
-                        <dashboard-project-title
-                            :buildNum="project.lastBuild.build_num"
-                            :vcs="project.vcs"
-                            :username="project.username"
-                            :project="project.project"/>
-                    </div>
-
-                    <div class="col s12">
-                        <project-trend
-                            :vcs="project.vcs"
-                            :username="project.username"
-                            :project="project.project"
-                        />
-                    </div>
-                </div>
+                <project-trend
+                    :vcs="project.vcs"
+                    :username="project.username"
+                    :project="project.project"
+                    :buildNum="project.lastBuild.build_num"
+                />
             </div>
         </div>
         <div class="row">
@@ -54,7 +43,7 @@
     import BuildArtifacts from "@/components/BuildArtifacts";
     import DashboardProjectTitle from "@/components/DashboardProjectTitle";
     import ProjectHistory from "@/components/ProjectHistory";
-    import ProjectTrend from "@/components/trend/ProjectTrend";
+    import ProjectTrend from "@/components/ProjectTrend";
     import Version from "@/components/Version";
 
     export default {

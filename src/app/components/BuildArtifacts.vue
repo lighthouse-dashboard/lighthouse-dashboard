@@ -17,7 +17,7 @@
                     </p>
 
                     <chart
-                        :columns="data.columns"
+                        :columns="data"
                         :categories="categories"
                         :height="height"/>
                 </div>

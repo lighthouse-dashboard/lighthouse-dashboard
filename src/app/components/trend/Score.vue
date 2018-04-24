@@ -11,12 +11,7 @@
 
 <script>
 
-    import Card from '@/components/cards/Card';
-
     export default {
-        components: {
-            Card,
-        },
         props: {
 
             vcs: {

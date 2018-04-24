@@ -15,7 +15,7 @@
                 <td>{{ trend }}</td>
                 <td v-for="category in categories"
                         :key="category">
-                    <trend-score
+                    <score
                             :vcs="vcs"
                             :username="username"
                             :project="project"
@@ -32,11 +32,11 @@
 
 <script>
 
-    import TrendScore from '@/components/trend/TrendScore';
+    import Score from '@/components/trend/Score';
 
     export default {
         components: {
-            TrendScore,
+            Score,
         },
         props: {
 
