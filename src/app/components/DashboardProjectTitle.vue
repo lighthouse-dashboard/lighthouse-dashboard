@@ -92,7 +92,6 @@
                     .getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
                     .then((build) => {
                         this.build = build;
-
                         const {
                             user
                         } = this.build;

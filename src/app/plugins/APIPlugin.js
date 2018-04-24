@@ -61,10 +61,9 @@ export default class APIPlugin {
      * @param {string} username
      * @param {string} project
      * @param {string|number} build
-     * @param {string} branch
      * @return {*}
      */
-    getBuildInfo(vcs, username, project, build, branch = this.branch) {
+    getBuildInfo(vcs, username, project, build) {
         return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}`

@@ -11,7 +11,7 @@ import {
 
 const {getArtifactsForBuild, getArtifactContent} = require('./api');
 
-export function filterSupportedProjects(projects: CircleProjectInterface[], branch: string, token: string): Promise<ProjectInterface[]> {
+export function filterSupportedProjects(projects: CircleProjectInterface[], branch: string, token: string): Promise<CircleProjectInterface[]> {
     const p = projects.map((project) => {
         if (!get(project, `branches.${ branch }.last_success.build_num`)) {
             return null;
@@ -25,20 +25,29 @@ export function filterSupportedProjects(projects: CircleProjectInterface[], bran
                     return null;
                 }
 
-                return {
-                    vcs: 'github',
-                    username: project.username,
-                    project: project.reponame,
-                    lastBuild: lastSucceededBuild,
-                };
+                return project;
             });
     });
 
     return Promise.all(p)
-        .then((data: Array<ProjectInterface|null> ) => {
+        .then((data: Array<CircleProjectInterface | null>) => {
             return compact(data);
         })
-        .then(sortFilteredProjects);
+}
+
+export function transformProject(project: CircleProjectInterface, branch: string): ProjectInterface {
+    return {
+        vcs: project.vcs_type,
+        username: project.username,
+        project: project.reponame,
+        lastBuild: project.branches[branch].last_success
+    }
+}
+
+export function transformProjects(projects: CircleProjectInterface[], branch: string): ProjectInterface[] {
+    return projects.map((project:CircleProjectInterface) => {
+        return transformProject(project, branch)
+    })
 }
 
 export function sortFilteredProjects(projects: ProjectInterface[]): ProjectInterface[] {

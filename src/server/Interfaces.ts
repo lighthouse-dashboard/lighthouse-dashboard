@@ -2,7 +2,7 @@ export interface CircleProjectInterface {
     username: string;
     reponame: string;
     branches: any;
-    vcs: string;
+    vcs_type: string;
 }
 
 export interface CircleBuildInterface {

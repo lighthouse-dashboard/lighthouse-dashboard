@@ -7,6 +7,7 @@ export default async(req: Request) => {
     const { vcs, username, project, build } = req.params;
     const {token} = <ApplicationState>req.server.app;
 
-    const { build_num, subject, user, build_time_millis, stop_time, status } = await getBuildByNum(vcs, username, project, build, token); //eslint-disable-line
+    const buildInfo = await getBuildByNum(vcs, username, project, build, token);
+    const { build_num, subject, user, build_time_millis, stop_time, status } = buildInfo;
     return { build_num, subject, user, build_time_millis, stop_time, status };
 };

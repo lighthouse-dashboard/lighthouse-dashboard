@@ -12,7 +12,7 @@ import {
 const {orderBy} = require('lodash');
 
 const {getListOfProjects, getBuildsForProject, getArtifactContent, getArtifactsForBuild, getBuild, invalidateProjectsCache} = require('./api');
-const {filterSupportedProjects, getArtifactsForBuilds, loadArtifactsContentForBuilds} = require('./helpers');
+const {filterSupportedProjects, getArtifactsForBuilds, loadArtifactsContentForBuilds, transformProjects} = require('./helpers');
 const {calculateTrendForSeries, setupSeriesData} = require('./trendUtils');
 const {buildChartDataFromTaggedResults, groupResultsByReportTag} = require('./chartDataUtils');
 
@@ -20,7 +20,13 @@ export function getProjects(branch: string, token: string): Promise<ProjectInter
     return getListOfProjects(branch, token)
         .then((projects: CircleProjectInterface[]) => {
             return filterSupportedProjects(projects, branch, token);
-        });
+        })
+        .then((projects: CircleProjectInterface[]) => {
+            return transformProjects(projects, branch)
+        })
+        .then((projects: ProjectInterface[]) => {
+            return orderBy(projects, ['lastBuild.pushed_at'], ['desc'])
+        })
 }
 
 export function getBuildByNum(vcs: string, username: string, project: string, build: number | string, token: string): Promise<CircleBuildInterface> {
@@ -86,7 +92,7 @@ export function getBuildChartData(vcs: string, username: string, project: string
         .then((builds: BuildInterface[]) => {
             return loadArtifactsContentForBuilds(builds, token);
         })
-        .then((data:BuildInterface[]) => {
+        .then((data: BuildInterface[]) => {
             return data.shift();
         })
         .then((buildData: BuildInterface) => {
