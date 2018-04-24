@@ -4,7 +4,7 @@ const request = require('request-promise');
 const nock = require('nock');
 const unit = require('unit.js');
 
-const server = require('../../server');
+const server = require('../../server/index');
 
 const { SERVER, SECRET, BRANCH, API } = require('../config');
 

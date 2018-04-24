@@ -1,17 +1,17 @@
 'use strict';
+import {Server} from 'hapi';
+import AuthBasic from 'hapi-auth-basic';
+import path from 'path';
+import Vision from 'vision';
+import Inert from 'inert';
 
-const Hapi = require('hapi');
-const AuthBasic = require('hapi-auth-basic');
-const AuthBearer = require('hapi-auth-bearer-token');
-const path = require('path');
 const laabr = require('laabr');
-const Vision = require('vision');
+const AuthBearer = require('hapi-auth-bearer-token');
 const HapiSwagger = require('hapi-swagger');
-const Inert = require('inert');
 
-const { name, version } = require('../package');
-const bearerStrategy = require('./auth/bearerStrategy');
-const routes = require('./routes');
+const {name, version} = require('../package.json');
+import bearerStrategy from './auth/bearerStrategy';
+import routes from './routes';
 
 require('dotenv').config();
 
@@ -21,7 +21,7 @@ const LIMIT = process.env.LIMIT || 10;
 const ENV = process.env.NODE_ENV || 'development';
 const IS_DEV = ENV === 'development';
 
-const server = Hapi.server({
+const server = new Server({
     port: PORT,
     host: '0.0.0.0',
     routes: {
@@ -39,11 +39,12 @@ const swaggerOptions = {
     },
 };
 
+server.app = {
+    token: TOKEN,
+    limit: LIMIT
+}
 
-server.app.token = TOKEN;
-server.app.limit = LIMIT;
-
-const init = async() => {
+const init = async () => {
     await server.register(Inert);
     await server.register(AuthBasic);
     await server.register(AuthBearer);
@@ -54,13 +55,14 @@ const init = async() => {
             plugin: laabr,
         });
 
+        await server.register([{
+            plugin: HapiSwagger,
+            options: swaggerOptions,
+        }]);
+
         await server.register([
-            Inert,
             Vision,
-            {
-                plugin: HapiSwagger,
-                options: swaggerOptions,
-            },
+
         ]);
     }
 

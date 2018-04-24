@@ -1,28 +1,35 @@
-function groupResultsByReportTag(buildData) {
-    const { artifacts } = buildData;
-    const endpoints = {};
+import {
+    BuildInterface, ChartDataEntryInterface,
+    CircleArtifactInterface, CircleReportContentInterface, TaggedChartColumns,
+    TagGroupedArtifactDataInterface
+} from "../Interfaces";
 
-    artifacts.forEach((item) => {
+function groupResultsByReportTag(buildData: BuildInterface): TagGroupedArtifactDataInterface {
+    const { artifacts } = buildData;
+    const endpoints:TagGroupedArtifactDataInterface = {};
+
+    artifacts.forEach((item:CircleArtifactInterface) => {
         if (!endpoints[item.data.url]) {
             endpoints[item.data.url] = [];
         }
+
         endpoints[item.data.url].push(item.data);
     });
     return endpoints;
 }
 
-function buildChartDataFromTaggedResults(taggedResults) {
+function buildChartDataFromTaggedResults(taggedResults: TagGroupedArtifactDataInterface): ChartDataEntryInterface {
     const keys = Object.keys(taggedResults);
-    const result = {};
-    let chartCategories = [];
+    const result: TaggedChartColumns = {};
+    let chartCategories:string[] = [];
 
     keys.forEach((key) => {
         const reports = taggedResults[key];
         if (!result[key]) {
-            result[key] = { columns: [] };
+            result[key] = [];
         }
 
-        reports.forEach((item) => {
+        reports.forEach((item: CircleReportContentInterface) => {
             const {
                 budget,
                 categories,
@@ -45,7 +52,7 @@ function buildChartDataFromTaggedResults(taggedResults) {
                 return _item.name;
             });
 
-            result[key].columns.push(
+            result[key].push(
                 [`Report ${tag ? tag : ''}`, ...shrinkedCategories],
                 [`Budget ${tag ? tag : ''}`, ...shrinkedBudget],
             );

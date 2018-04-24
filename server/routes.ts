@@ -1,24 +1,26 @@
+import {ServerRoute} from "hapi";
+
 const joi = require('joi');
 
-const login = require('./handlers/login');
-const artifactProxyHandler = require('./handlers/artifactProxyHandler');
-const getAllProjects = require('./handlers/getAllProjects');
-const invalidateProjects = require('./handlers/invalidateProjects');
-const getBranchBuilds = require('./handlers/getBranchBuilds');
-const getBranchBuildTrend = require('./handlers/getBranchBuildTrend');
-const getBranchLatestBuildInfo = require('./handlers/getBranchLatestBuildInfo');
-const getBranchRunningBuild = require('./handlers/getBranchRunningBuild');
-const getProjectHistoryChartData = require('./handlers/getProjectHistoryChartData');
-const getBuildInfo = require('./handlers/getBuildInfo');
-const getArtifacts = require('./handlers/getArtifacts');
-const getBuildChartData = require('./handlers/getBuildChartData');
-const getVersion = require('./handlers/getVersion');
+import login from'./handlers/login';
+import artifactProxyHandler from'./handlers/artifactProxyHandler';
+import getAllProjects from'./handlers/getAllProjects';
+import invalidateProjects from'./handlers/invalidateProjects';
+import getBranchBuilds from'./handlers/getBranchBuilds';
+import getBranchBuildTrend from'./handlers/getBranchBuildTrend';
+import getBranchLatestBuildInfo from './handlers/getBranchLatestBuildInfo';
+import getBranchRunningBuild from'./handlers/getBranchRunningBuild';
+import getProjectHistoryChartData from'./handlers/getProjectHistoryChartData';
+import getBuildInfo from'./handlers/getBuildInfo';
+import getArtifacts from'./handlers/getArtifacts';
+import getBuildChartData from'./handlers/getBuildChartData';
+import getVersion from './handlers/getVersion';
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
 const MONTH = 30 * 24 * HOUR;
 
-module.exports = [
+const ROUTES: ServerRoute[] = [
     {
         method: 'POST',
         path: '/auth/login',
@@ -166,7 +168,7 @@ module.exports = [
         handler: getBranchBuildTrend,
         options: {
             cache: {
-                expiresIn: 15*MINUTE,
+                expiresIn: 15 * MINUTE,
                 privacy: 'public',
             },
             tags: ['api'],
@@ -435,7 +437,7 @@ module.exports = [
         path: '/{param*}',
         handler: {
             directory: {
-                path: 'dist',
+                path: 'dist/app',
                 index: ['index.html'],
             },
         },
@@ -444,3 +446,5 @@ module.exports = [
         },
     },
 ];
+
+export default ROUTES;

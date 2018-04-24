@@ -1,9 +1,10 @@
+import {Request} from "hapi";
 
 require('dotenv').config();
 
-module.exports = {
+export default {
     allowQueryToken: true,
-    validate: async (request, token, h) => {
+    validate: async (request: Request, token: string) => {
         const isValid = token === process.env.SECRET;
 
         const credentials = { token };

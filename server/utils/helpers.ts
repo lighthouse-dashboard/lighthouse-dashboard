@@ -1,9 +1,17 @@
-const { get, compact, orderBy } = require('lodash');
-const { extname, basename } = require('path');
+const {get, compact, orderBy} = require('lodash');
+const {extname, basename} = require('path');
 
-const { getArtifactsForBuild, getArtifactContent } = require('./api');
+import {
+    BuildInterface,
+    CircleArtifactInterface,
+    CircleBuildInterface,
+    CircleProjectInterface, CircleReportContentInterface,
+    ProjectInterface
+} from '../Interfaces';
 
-function filterSupportedProjects(projects, branch, token) {
+const {getArtifactsForBuild, getArtifactContent} = require('./api');
+
+export function filterSupportedProjects(projects: CircleProjectInterface[], branch: string, token: string): Promise<ProjectInterface[]> {
     const p = projects.map((project) => {
         if (!get(project, `branches.${ branch }.last_success.build_num`)) {
             return null;
@@ -12,7 +20,7 @@ function filterSupportedProjects(projects, branch, token) {
         const lastSucceededBuild = project.branches[branch].last_success;
 
         return isBuildSupported('github', project.username, project.reponame, lastSucceededBuild.build_num, token)
-            .then((isSupported) => {
+            .then((isSupported: boolean) => {
                 if (!isSupported) {
                     return null;
                 }
@@ -27,43 +35,43 @@ function filterSupportedProjects(projects, branch, token) {
     });
 
     return Promise.all(p)
-        .then(data => {
+        .then((data: Array<ProjectInterface|null> ) => {
             return compact(data);
         })
         .then(sortFilteredProjects);
 }
 
-function sortFilteredProjects(projects) {
-    return projects.sort((projectA, projectB) => {
+export function sortFilteredProjects(projects: ProjectInterface[]): ProjectInterface[] {
+    return projects.sort((projectA: ProjectInterface, projectB: ProjectInterface) => {
         const timeA = new Date(projectA.lastBuild.stop_time);
         const timeB = new Date(projectB.lastBuild.stop_time);
-        return timeA <= timeB;
+        return timeA <= timeB ? 1 : -1;
     });
 }
 
-function isBuildSupported(vcs, username, project, build, token) {
+export function isBuildSupported(vcs: string, username: string, project: string, build: number | string, token: string): Promise<boolean> {
     return getArtifactsForBuild(vcs, username, project, build, token)
-        .then(artifacts => {
+        .then((artifacts: CircleArtifactInterface[]) => {
             return getArtifactsByType('json', artifacts);
         })
-        .then(artifacts => {
+        .then((artifacts: CircleArtifactInterface[]) => {
             return !(!artifacts || artifacts.length <= 0);
         });
 }
 
-function getArtifactsByType(type, artifacts) {
+export function getArtifactsByType(type: string, artifacts: CircleArtifactInterface[]): Promise<CircleArtifactInterface[]> {
     return Promise.resolve(artifacts.filter(item => {
         return extname(item.path) === `.${ type }` ? item : null;
     }));
 }
 
-function getDashboardArtifacts(vcs, username, project, build, token) {
+export function getDashboardArtifacts(vcs: string, username: string, project: string, build: number | string, token: string): Promise<CircleArtifactInterface[]> {
     return getArtifactsForBuild(vcs, username, project, build, token)
-        .then(artifacts => {
+        .then((artifacts: CircleArtifactInterface[]) => {
             return getArtifactsByType('json', artifacts);
         })
-        .then(artifacts => {
-            return artifacts.filter((item) => {
+        .then((artifacts: CircleArtifactInterface[]) => {
+            return artifacts.filter((item: CircleArtifactInterface) => {
                 if (basename(item.path).indexOf('.dashboard.') !== -1) {
                     return item;
                 }
@@ -72,18 +80,18 @@ function getDashboardArtifacts(vcs, username, project, build, token) {
         });
 }
 
-function getArtifactsForBuilds(builds, vcs, username, project, token) {
+export function getArtifactsForBuilds(builds: CircleBuildInterface[], vcs: string, username: string, project: string, token: string): Promise<BuildInterface[]> {
     const data = builds.map((item) => {
         return getDashboardArtifacts(vcs, username, project, item.build_num, token)
-            .then((artifacts) => {
-                return { build_num: item.build_num, artifacts };
+            .then((artifacts: CircleArtifactInterface[]) => {
+                return {build_num: item.build_num, artifacts};
             });
     });
 
     return Promise.all(data);
 }
 
-function loadArtifactsContentForBuilds(builds, token) {
+export function loadArtifactsContentForBuilds(builds: BuildInterface[], token: string): Promise<BuildInterface[]> {
     const p = builds.map((item) => {
         return getDashboardContentsByBuild(item.artifacts, token)
             .then((data) => {
@@ -94,10 +102,10 @@ function loadArtifactsContentForBuilds(builds, token) {
     return Promise.all(p);
 }
 
-function getDashboardContentsByBuild(buildArtifacts, token) {
+export function getDashboardContentsByBuild(buildArtifacts: CircleArtifactInterface[], token: string): Promise<CircleReportContentInterface[]> {
     return Promise.all(buildArtifacts.map((item) => {
         return getArtifactContent(item.url + `?circle-token=${ token }`)
-            .then((data) => {
+            .then((data: any) => {
                 if (!data.key) {
                     data.key = `${ data.tag }:${ data.url }`;
                 }
@@ -106,9 +114,3 @@ function getDashboardContentsByBuild(buildArtifacts, token) {
             });
     }));
 }
-
-module.exports = {
-    filterSupportedProjects,
-    getArtifactsForBuilds,
-    loadArtifactsContentForBuilds,
-};

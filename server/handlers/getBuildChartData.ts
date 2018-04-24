@@ -1,8 +1,11 @@
+import {Request} from "hapi";
+import {ApplicationState} from "../Interfaces";
+
 const { getBuildChartData } = require('../utils/utils');
 
-module.exports = async(req) => {
+export default async(req: Request) => {
     const { vcs, username, project, build } = req.params;
-    const { token } = req.server.app;
+    const { token } = <ApplicationState>req.server.app;
 
     return getBuildChartData(vcs, username, project, build, token);
 };
