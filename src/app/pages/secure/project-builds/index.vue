@@ -7,6 +7,9 @@
                 v-for="(build, index) in builds"
                 :class="{'grey lighten-5': index%2}"
                 :buildnum="build.build_num"
+                :vcs="vcs"
+                :username="username"
+                :project="project"
                 :key="build.build_num"/>
         </div>
     </div>
@@ -24,6 +27,23 @@
             Build,
         },
 
+        props: {
+            vcs: {
+                type: String,
+                required: true,
+            },
+
+            username: {
+                type: String,
+                required: true,
+            },
+
+            project: {
+                type: String,
+                required: true,
+            },
+        },
+
 
         data() {
             return {
@@ -34,9 +54,6 @@
 
         computed: {
             ...mapGetters({
-                vcs: 'vcs',
-                username: 'username',
-                project: 'project',
                 branch: 'branch',
             }),
         },
