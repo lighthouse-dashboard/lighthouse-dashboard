@@ -30,7 +30,7 @@
                     })
                     .finally(() => {
                         this.updater = setTimeout(() => {
-                            this.load();
+                            this.loadVersion();
                         }, Vue.config.versionUpdateInterval);
                     })
             },
@@ -44,6 +44,6 @@
 
         mounted() {
             this.loadVersion();
-        }
-    }
+        },
+    };
 </script>
