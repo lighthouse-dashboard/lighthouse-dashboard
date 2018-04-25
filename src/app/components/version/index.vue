@@ -32,7 +32,7 @@
                         this.updater = setTimeout(() => {
                             this.loadVersion();
                         }, Vue.config.versionUpdateInterval);
-                    })
+                    });
             },
         },
 
