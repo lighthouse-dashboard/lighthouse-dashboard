@@ -270,7 +270,7 @@ const ROUTES: ServerRoute[] = [
         handler: getProjectHistoryChartData,
         options: {
             cache: {
-                expiresIn: 10 * MINUTE,
+                expiresIn: 15 * MINUTE,
                 privacy: 'public',
             },
             tags: ['api'],

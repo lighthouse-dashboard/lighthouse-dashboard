@@ -1,59 +1,48 @@
 <template>
     <div>
-        <loader v-if="!builds"/>
-
         <div class="row">
-            <div class="col s4">
-                <card>
-                    <span slot="title">{{ $t('message.project') }}</span>
-                    {{ project }}
-                </card>
+            <div class="col s12">
+                <h4>{{ $t('message.last_build_trends') }}</h4>
             </div>
-
-            <div class="col s4">
-                <card>
-                    <span slot="title">{{ $t('message.link') }}</span>
-                    <ci-link :username="username" :project="project"/>
-                </card>
-            </div>
-
-
-            <div class="col s4">
-                <card>
-                    <span slot="title">{{ $t('message.link') }}</span>
-                    <git-hub-link :username="username" :project="project"/>
-                </card>
+            <div class="col s12">
+                <trend-score-table
+                    :vcs="vcs"
+                    :username="username"
+                    :project="project"
+                />
             </div>
         </div>
 
-        <div v-if="builds">
-            <build
-                v-for="(build, index) in builds"
-                :class="{'grey lighten-5': index%2}"
-                :vcs="vcs"
-                :username="username"
-                :project="project"
-                :buildNum="build.build_num"
-                :key="build.build_num"/>
+        <div class="row">
+            <div class="col s12">
+                <h4>{{ $t('message.all_builds_trend') }}</h4>
+            </div>
+
+            <div class="col s12">
+                <trend-chart
+                    :vcs="vcs"
+                    :username="username"
+                    :project="project"
+                />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Vue from "vue";
 
-    import Build from "@/components/build-view";
-    import Card from '@/components/cards/Card';
     import CiLink from '@/components/links/ci';
     import GitHubLink from '@/components/links/github';
+    import TrendScoreTable from '@/components/trend-score-table';
+    import TrendChart from '@/components/trend-chart-table';
 
     export default {
 
         components: {
-            Build,
-            Card,
             CiLink,
             GitHubLink,
+            TrendScoreTable,
+            TrendChart,
         },
 
         props: {
@@ -74,57 +63,8 @@
         },
 
         data() {
-            return {
-                builds: null,
-                projectObject: null,
-                updater: null,
-            };
+            return {};
         },
 
-        methods: {
-            load() {
-                this.projectObject = {
-                    vcs: this.vcs,
-                    username: this.username,
-                    project: this.project,
-                };
-
-                this.$api
-                    .getAllBuilds(this.vcs, this.username, this.project, undefined, this.$route.query.branch)
-                    .then(builds => {
-                        this.builds = builds;
-                        this.updater = setTimeout(() => {
-                            this.load();
-                        }, Vue.config.refreshInterval);
-                    })
-                    .catch((e) => {
-                        this.$toast.error(e);
-                        if (e.status === 401) {
-                            this.$auth.logout();
-                            this.$router.push({ name: 'login' });
-                        }
-                    });
-            },
-        },
-
-        watch: {
-            token() {
-                this.load();
-            },
-
-            project() {
-                this.load();
-            },
-        },
-
-        beforeDestroy() {
-            if (this.updater) {
-                clearTimeout(this.updater);
-            }
-        },
-
-        mounted() {
-            this.load();
-        },
     };
 </script>

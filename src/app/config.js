@@ -1,11 +1,20 @@
 module.exports = {
     buildStatusInterval: 1000 * 60,
     refreshInterval: 1000 * 60,
+    //refreshInterval: 1000 * 10,
     dateFormat: 'YYYY-MM-DD HH:mm:SS',
     dateShortFormat: 'MM/DD HH:mm',
     layout: 'list',
     defaultBranch: 'master',
     selectableBranches: ['develop', 'master'],
     apiEndpoint: process.env.API_ENDPOINT,
-    chartColors: ["#607D8B", "#66bb6a"]
+    chartColors: ["#607D8B", "#66bb6a"],
+    reportCategories: [
+        'performance',
+        'pwa',
+        'accessibility',
+        'best-practices',
+        'seo',
+        'dreipol',
+    ],
 };

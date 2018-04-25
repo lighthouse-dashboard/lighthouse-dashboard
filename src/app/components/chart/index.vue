@@ -1,5 +1,5 @@
 <template>
-    <div ref="chart" />
+    <div ref="chart"/>
 </template>
 
 <script>
@@ -18,10 +18,61 @@
                 type: Array,
                 required: true,
             },
+
             height: {
                 type: Number,
-                required: true,
+                required: false,
                 default: 340,
+            },
+
+            width: {
+                type: Number,
+                required: false,
+                default: null,
+            },
+
+            type: {
+                type: String,
+                required: false,
+                default: 'line',
+            },
+
+            showx: {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
+
+            showy: {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
+
+            showlegend: {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
+
+            showlabels: {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
+
+            showpoint: {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
+
+            ylines: {
+                type: Array,
+                required: false,
+                default: () => {
+                    return [];
+                },
             },
         },
 
@@ -34,16 +85,17 @@
                 const config = {
                     data: {
                         columns: this.columns,
-                        type: 'bar',
-                        labels: true,
+                        type: this.type,
+                        labels: this.showlabels,
                     },
                     axis: {
                         x: {
+                            show: this.showx,
                             type: 'category',
                             categories: this.categories,
                         },
                         y: {
-                            show: false,
+                            show: this.showy,
                             label: 'Score',
                             max: 100,
                             min: 0,
@@ -51,14 +103,23 @@
                             bottom: 0,
                         },
                     },
+                    grid: {
+                        y: {
+                            lines: this.ylines,
+                        },
+                    },
                     legend: {
-                        show: false,
+                        show: this.showlegend,
+                    },
+                    point: {
+                        show: this.showpoint,
                     },
                     color: {
                         pattern: Vue.config.chartColors,
                     },
                     size: {
                         height: this.height,
+                        width: this.width,
                     },
                     bindto: this.$refs.chart,
                 };
@@ -70,6 +131,5 @@
         mounted() {
             this.load();
         },
-
     };
 </script>

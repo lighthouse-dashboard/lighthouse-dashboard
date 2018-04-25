@@ -8,7 +8,9 @@
             </nav>
         </li>
 
-        <li><a class="subheader"><version/></a></li>
+        <li><a class="subheader">
+            <version/>
+        </a></li>
 
         <li>
             <router-link :to="{name: 'dashboard'}">
@@ -30,7 +32,9 @@
 
         <BranchList/>
 
-        <li><a class="subheader">{{ $t("message.projects") }}</a></li>
+        <li>
+            <a class="subheader">{{ $t("message.projects") }}</a>
+        </li>
 
         <li v-if="projects && projects.length <= 0">
             <a class="disabled">
@@ -38,7 +42,6 @@
             </a>
         </li>
 
-        <loader v-if="isLoading"/>
 
         <project-list-link v-for="project in projects"
                            v-if="projects"

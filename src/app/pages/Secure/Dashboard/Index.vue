@@ -25,11 +25,17 @@
                  v-for="(project) in projects"
                  :key="project.lastBuild.build_num"
             >
-                <project-trend
+                <project-title
                     :vcs="project.vcs"
                     :username="project.username"
                     :project="project.project"
                     :buildNum="project.lastBuild.build_num"
+                />
+
+                <trend-chart-table
+                    :vcs="project.vcs"
+                    :username="project.username"
+                    :project="project.project"
                 />
             </div>
         </div>
@@ -39,13 +45,17 @@
 <script>
     import Vue from "vue";
     import Build from "@/components/build-view";
-    import ProjectTrend from "@/components/project-trend";
+    import TrendScoreTable from "@/components/trend-score-table";
+    import TrendChartTable from "@/components/trend-chart-table";
+    import ProjectTitle from "@/components/project-title";
 
     export default {
 
         components: {
             Build,
-            ProjectTrend,
+            TrendScoreTable,
+            TrendChartTable,
+            ProjectTitle,
         },
 
         data() {
@@ -59,13 +69,15 @@
 
         methods: {
             load() {
+                if (this.updater) {
+                    clearTimeout(this.updater);
+                    this.updater = null;
+                }
+
                 this.$api
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
                         this.projects = projects;
-                        this.updater = setTimeout(() => {
-                            this.load();
-                        }, Vue.config.refreshInterval);
                     })
                     .catch((e) => {
                         this.$toast.error(e);
@@ -76,12 +88,16 @@
                     })
                     .finally(() => {
                         this.isLoading = false;
+                        this.updater = setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                     });
             },
         },
 
         watch: {
             $route() {
+                this.projects = null;
                 this.load();
             },
         },

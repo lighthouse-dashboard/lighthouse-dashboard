@@ -3,11 +3,9 @@
 @import "lockdown/lockdown";
 
 @import "components/pineapple";
-@import "components/sidenav";
-@import "components/building_loader";
-@import "components/author_card";
-@import "components/card";
-@import "components/trend-table";
 
 @import '../../components/commit-detail/commit-detail';
 @import '../../components/build-title/build-title';
+@import '../../components/building-animation/building-animation';
+@import '../../components/sidenav/sidenav';
+@import '../../components/trend-table/trend-table';

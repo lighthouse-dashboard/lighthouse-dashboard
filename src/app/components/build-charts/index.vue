@@ -11,8 +11,10 @@
                 </p>
 
                 <chart
+                    type="bar"
                     :columns="data"
                     :categories="categories"
+                    :showx="true"
                     :height="height"/>
             </div>
         </div>

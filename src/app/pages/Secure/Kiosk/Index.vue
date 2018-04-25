@@ -1,11 +1,18 @@
 <template>
-    <div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12">
+                <h4>{{ $t("dashboard.title") }}</h4>
+            </div>
+        </div>
+
         <div class="row" v-if="isLoading">
             <loader/>
         </div>
 
         <div class="row" v-if="!isLoading && projects">
-            <div v-if="projects.length <= 0">
+            <div class="col s12" v-if="projects.length <= 0">
                 <h5 class="center-align red-text">
                     {{ $t("message.no_projects_available") }}
                 </h5>
@@ -15,14 +22,21 @@
                  v-for="(project) in projects"
                  :key="project.lastBuild.build_num"
             >
-                <project-trend
+                 <project-title
                     :vcs="project.vcs"
                     :username="project.username"
                     :project="project.project"
                     :buildNum="project.lastBuild.build_num"
                 />
+
+                <trend-score-table
+                    :vcs="project.vcs"
+                    :username="project.username"
+                    :project="project.project"
+                />
             </div>
         </div>
+
         <div class="row">
             <div class="col s12">
                 <p class="center">
@@ -40,15 +54,19 @@
     import Vue from "vue";
 
     import Build from "@/components/build-view";
-    import ProjectTrend from "@/components/project-trend";
+    import TrendScoreTable from "@/components/trend-score-table";
+    import TrendChartTable from "@/components/trend-chart-table";
     import Version from "@/components/version";
+    import ProjectTitle from "@/components/project-title";
 
     export default {
 
         components: {
             Build,
-            ProjectTrend,
+            TrendScoreTable,
+            TrendChartTable,
             Version,
+            ProjectTitle,
         },
 
         data() {

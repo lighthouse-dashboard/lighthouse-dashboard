@@ -43,6 +43,7 @@
                 type: Number,
                 required: true,
             },
+
             budgetscore: {
                 type: [Number, Boolean],
                 required: false,

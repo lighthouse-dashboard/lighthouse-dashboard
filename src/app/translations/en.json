@@ -34,7 +34,11 @@
         "category_accessibility": "Accessibility",
         "category_best-practices": "Best Practices",
         "category_seo": "SEO",
-        "category_dreipol": "Dreipol"
+        "category_dreipol": "Dreipol",
+        "no_trend_data": "No trenddata found",
+        "last_build_trends": "Lastest build trends",
+        "all_builds_trend": "All builds trends",
+        "builds": "Builds"
     },
     "dashboard": {
         "title": "dreihouse"

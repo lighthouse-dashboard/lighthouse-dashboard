@@ -1,31 +1,29 @@
 <template>
     <div>
-        <div class="row" v-for="(target, url) in data" :key="url">
-            <div class="col s12">
-                <div class="card-title"><a target="_blank" :href="url">{{ url }}</a></div>
-                <artifact-history-chart
-                    v-if="target"
-                    :showLegend="showLegend"
-                    :showX="showX"
-                    :showY="showY"
-                    :height="height"
-                    :url="url"
-                    :data="target.series"
-                    :categories="target.categories"
-                />
-            </div>
+        <loader v-if="!builds"/>
+
+        <div v-if="builds">
+            <build
+                v-for="(build, index) in builds"
+                :class="{'grey lighten-5': index%2}"
+                :vcs="vcs"
+                :username="username"
+                :project="project"
+                :buildNum="build.build_num"
+                :key="build.build_num"/>
         </div>
     </div>
 </template>
 
 <script>
+    import Vue from "vue";
 
-    import ArtifactHistoryChart from "@/components/history-chart";
+    import Build from "@/components/build-view";
 
     export default {
 
         components: {
-            ArtifactHistoryChart,
+            Build,
         },
 
         props: {
@@ -33,47 +31,41 @@
                 type: String,
                 required: true,
             },
+
             username: {
                 type: String,
                 required: true,
             },
+
             project: {
                 type: String,
                 required: true,
-            },
-
-            height: {
-                type: Number,
-                default: 380,
-            },
-
-            showLegend: {
-                type: Boolean,
-                default: true,
-            },
-            showX: {
-                type: Boolean,
-                default: false,
-            },
-            showY: {
-                type: Boolean,
-                default: false,
             },
         },
 
         data() {
             return {
-                data: null,
+                builds: null,
+                projectObject: null,
                 updater: null,
             };
         },
 
         methods: {
             load() {
+                this.projectObject = {
+                    vcs: this.vcs,
+                    username: this.username,
+                    project: this.project,
+                };
+
                 this.$api
-                    .getProjectHistoryData(this.vcs, this.username, this.project, this.$route.query.branch)
-                    .then(data => {
-                        this.data = data;
+                    .getAllBuilds(this.vcs, this.username, this.project, undefined, this.$route.query.branch)
+                    .then(builds => {
+                        this.builds = builds;
+                        this.updater = setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                     })
                     .catch((e) => {
                         this.$toast.error(e);

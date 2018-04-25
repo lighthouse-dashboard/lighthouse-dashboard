@@ -1,5 +1,5 @@
 <template>
-    <div class="loader-wrapper">
+    <div class="building-animation">
         <div class="loader" :style="{ width: width, height: width}">
             <span class="loader-inner"/>
         </div>
