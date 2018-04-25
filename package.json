@@ -32,6 +32,7 @@
         "moment": "^2.22.0",
         "nock": "^9.2.3",
         "nodemon": "^1.17.3",
+        "raven-js": "^3.24.2",
         "request": "^2.85.0",
         "request-promise": "^4.2.2",
         "show-toast": "^1.1.4",

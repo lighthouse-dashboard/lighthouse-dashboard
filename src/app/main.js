@@ -12,8 +12,10 @@ import Vue from 'vue';
 import App from './App';
 import VueResorce from 'vue-resource';
 import VueRouter from 'vue-router';
-import VueI18n from 'vue-i18n'
+import VueI18n from 'vue-i18n';
 import VueCookie from 'vue-cookie';
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
 
 import AuthPlugin from './plugins/AuthPlugin';
 import APIPlugin from './plugins/APIPlugin';
@@ -53,6 +55,13 @@ Vue.config.versionUpdateInterval = 1000 * 60 * 60;
 
 Vue.component('loader', Loader);
 
+if (process.env.RAVEN_DSN) {
+    Raven
+        .config(process.env.RAVEN_DSN)
+        .addPlugin(RavenVue, Vue)
+        .install();
+}
+
 Vue.use(VueResorce);
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -72,8 +81,9 @@ Vue.http.interceptors.push((request) => {
 });
 
 const router = new VueRouter({
-    routes
+    routes,
 });
+
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth === false) {
         return next();
