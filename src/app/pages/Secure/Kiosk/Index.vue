@@ -22,7 +22,7 @@
                  v-for="(project) in projects"
                  :key="project.lastBuild.build_num"
             >
-                 <project-title
+                <project-title
                     :vcs="project.vcs"
                     :username="project.username"
                     :project="project.project"
@@ -80,13 +80,15 @@
 
         methods: {
             load() {
+                if (this.updater) {
+                    clearTimeout(this.updater);
+                    this.updater = null;
+                }
+
                 this.$api
                     .getAllProjects(this.$route.query.branch)
                     .then(projects => {
                         this.projects = projects;
-                        this.updater = setTimeout(() => {
-                            this.load();
-                        }, Vue.config.refreshInterval);
                     })
                     .catch((e) => {
                         this.$toast.error(e);
@@ -96,6 +98,9 @@
                         }
                     })
                     .finally(() => {
+                        this.updater = setTimeout(() => {
+                            this.load();
+                        }, Vue.config.refreshInterval);
                         this.isLoading = false;
                     });
             },
@@ -110,6 +115,7 @@
         beforeDestroy() {
             if (this.updater) {
                 clearTimeout(this.updater);
+                this.updater = null;
             }
         },
 
