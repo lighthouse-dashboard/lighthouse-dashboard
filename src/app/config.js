@@ -1,6 +1,7 @@
 module.exports = {
     buildStatusInterval: 1000 * 60,
     refreshInterval: 1000 * 60,
+    versionUpdateInterval: 1000 * 60,
     //refreshInterval: 1000 * 10,
     dateFormat: 'YYYY-MM-DD HH:mm:SS',
     dateShortFormat: 'MM/DD HH:mm',

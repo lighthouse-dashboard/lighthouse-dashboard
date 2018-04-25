@@ -26,12 +26,13 @@
                             location.reload();
                             return;
                         }
-
                         this.apiVersion = apiVersion;
+                    })
+                    .finally(() => {
                         this.updater = setTimeout(() => {
                             this.load();
                         }, Vue.config.versionUpdateInterval);
-                    });
+                    })
             },
         },
 

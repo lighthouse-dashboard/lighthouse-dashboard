@@ -37,6 +37,7 @@ import {
     dateShortFormat,
     chartColors,
     reportCategories,
+    versionUpdateInterval,
 } from './config';
 
 Vue.config.productionTip = false;
@@ -51,7 +52,7 @@ Vue.config.apiEndpoint = apiEndpoint;
 Vue.config.dateShortFormat = dateShortFormat;
 Vue.config.chartColors = chartColors;
 Vue.config.reportCategories = reportCategories;
-Vue.config.versionUpdateInterval = 1000 * 60 * 60;
+Vue.config.versionUpdateInterval = versionUpdateInterval;
 
 Vue.component('loader', Loader);
 
