@@ -1,20 +1,22 @@
-import Overview from './pages/Secure/Dashboard/Index.vue';
-import MainSecure from './pages/Secure/Index.vue';
+import Overview from './pages/secure/dashboard';
+import MainSecure from './pages/secure';
 
-import ProjectOverview from './pages/Secure/Project/Overview.vue';
-import ProjectHistory from './pages/Secure/Project/History.vue';
-import ProjectBuild from './pages/Secure/Project/Builds.vue';
-import Project from './pages/Secure/Project/Index.vue';
+import ProjectOverview from './pages/secure/project-overview';
+import ProjectHistory from './pages/secure/project-history';
+import ProjectBuild from './pages/secure/project-builds';
+import Project from './pages/secure/project';
 
-import Login from './pages/Login/Login.vue';
-import Help from './pages/Help/Index.vue';
-import Kiosk from './pages/Secure/Kiosk/Index.vue';
+import Login from './pages/login';
+import Help from './pages/help';
+import Kiosk from './pages/secure/kiosk';
 
 export default [
     { path: '/login', name: 'login', component: Login, meta: { requiresAuth: false } },
     { path: '/kiosk', name: 'kiosk', component: Kiosk },
     {
-        path: '/', name: 'index', component: MainSecure,
+        path: '/',
+        name: 'index',
+        component: MainSecure,
         children: [
             { path: '', name: 'dashboard', component: Overview },
             { path: '/help', name: 'help', component: Help },
@@ -27,8 +29,8 @@ export default [
                     { path: '', name: 'overview', component: ProjectOverview, props: true },
                     { path: 'builds', name: 'builds', component: ProjectBuild, props: true },
                     { path: 'history', name: 'history', component: ProjectHistory, props: true },
-                ]
+                ],
             },
-        ]
-    }
-]
+        ],
+    },
+];

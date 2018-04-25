@@ -62,7 +62,7 @@
                 this.$api
                     .getAllBuilds(this.vcs, this.username, this.project, undefined, this.$route.query.branch)
                     .then(builds => {
-                        this.builds = builds;
+                        this.builds = index;
                         this.updater = setTimeout(() => {
                             this.load();
                         }, Vue.config.refreshInterval);
