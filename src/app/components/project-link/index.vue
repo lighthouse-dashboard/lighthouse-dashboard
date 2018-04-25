@@ -2,9 +2,9 @@
     <router-link
         tag="li"
         active-class="active"
-        :to="{name: 'overview', params: project, query: $route.query}">
+        :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
         <a>
-            {{ project.project }}
+            {{ project }}
             <building-animation class="right" v-if="hasRunningBuild" :size="20"/>
         </a>
     </router-link>
@@ -13,6 +13,7 @@
 <script>
 
     import Vue from 'vue';
+    import { mapGetters } from 'vuex';
     import BuildingAnimation from '@/components/building-animation';
 
     export default {
@@ -21,8 +22,16 @@
         },
 
         props: {
+            vcs: {
+                type: String,
+                required: true,
+            },
+            username: {
+                type: String,
+                required: true,
+            },
             project: {
-                type: Object,
+                type: String,
                 required: true,
             },
         },
@@ -34,9 +43,16 @@
             };
         },
 
+
+        computed: {
+            ...mapGetters({
+                branch: 'branch',
+            }),
+        },
+
         methods: {
             checkIfHasRunning() {
-                this.$api.hasRunningBuild(this.project.vcs, this.project.username, this.project.project, this.$route.query.branch)
+                this.$api.hasRunningBuild(this.vcs, this.username, this.project, this.branch)
                     .then((has) => {
                         this.hasRunningBuild = has;
                         this.updater = setTimeout(() => {

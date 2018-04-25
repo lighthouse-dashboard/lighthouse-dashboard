@@ -51,6 +51,7 @@
 
 <script>
     import Vue from 'vue';
+    import { mapGetters } from 'vuex';
 
     import Score from '@/components/trend-score';
     import Chart from '@/components/chart';
@@ -60,8 +61,8 @@
             Score,
             Chart,
         },
-        props: {
 
+        props: {
             vcs: {
                 type: String,
                 required: true,
@@ -87,11 +88,18 @@
             };
         },
 
+
+        computed: {
+            ...mapGetters({
+                branch: 'branch',
+            }),
+        },
+
         methods: {
             load() {
                 this.isLoaded = false;
 
-                this.$api.getProjectTrend(this.vcs, this.username, this.project, this.$route.query.branch)
+                this.$api.getProjectTrend(this.vcs, this.username, this.project, this.branch)
                     .then((trend) => {
                         this.trendScores = trend;
                     })

@@ -1,13 +1,3 @@
-/*
-      _          _             _
-   __| |_ __ ___(_)_ __   ___ | |
-  / _` | '__/ _ \ | '_ \ / _ \| |
- | (_| | | |  __/ | |_) | (_) | |
-  \__,_|_|  \___|_| .__/ \___/|_|
-                  |_|
-
- */
-
 import Vue from 'vue';
 import App from './App';
 import VueResorce from 'vue-resource';
@@ -20,7 +10,10 @@ import RavenVue from 'raven-js/plugins/vue';
 import AuthPlugin from './plugins/AuthPlugin';
 import APIPlugin from './plugins/APIPlugin';
 import ToastPlugin from './plugins/ToastPlugin';
-import routes from './routes';
+
+import router from './router';
+import store from './store';
+
 import Loader from './components/loader';
 import translations from './translations';
 
@@ -81,24 +74,9 @@ Vue.http.interceptors.push((request) => {
     }
 });
 
-const router = new VueRouter({
-    routes,
-});
-
-router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth === false) {
-        return next();
-    }
-
-    if (!Vue.auth.isAuthenticated()) {
-        return next({ name: 'login' });
-    }
-    next();
-});
-
 const i18n = new VueI18n({
     locale: 'en', // set locale
-    messages: translations
+    messages: translations,
 });
 
 M.AutoInit();
@@ -107,6 +85,7 @@ new Vue({
     el: '#app',
     router,
     i18n,
+    store,
     components: { App },
     template: '<App/>',
 });

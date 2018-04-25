@@ -23,15 +23,15 @@
                 default: 380,
             },
 
-            showLegend: {
+            showlegend: {
                 type: Boolean,
                 default: true,
             },
-            showX: {
+            showx: {
                 type: Boolean,
                 default: false,
             },
-            showY: {
+            showy: {
                 type: Boolean,
                 default: false,
             },
@@ -48,18 +48,18 @@
                     },
                     axis: {
                         x: {
-                            show: this.showX,
+                            show: this.showx,
                             type: 'category',
                             categories: this.categories,
                         },
                         y: {
-                            show: this.showY,
+                            show: this.showy,
                             label: 'Score',
                             max: 100,
                         },
                     },
                     legend: {
-                        show: this.showLegend,
+                        show: this.showlegend,
                     },
                     size: {
                         height: this.height,

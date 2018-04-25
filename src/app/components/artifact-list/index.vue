@@ -40,7 +40,7 @@
                 required: true,
             },
 
-            buildNum: {
+            buildnum: {
                 type: [String, Number],
                 required: true,
             },
@@ -60,7 +60,7 @@
 
         mounted() {
             this.$api
-                .getArtifacts(this.vcs, this.username, this.project, this.buildNum)
+                .getArtifacts(this.vcs, this.username, this.project, this.buildnum)
                 .then(htmlArtifacts => {
                     this.htmlArtifacts = htmlArtifacts;
                 })

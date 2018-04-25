@@ -42,7 +42,8 @@
                 type: String,
                 required: true,
             },
-            buildNum: {
+
+            buildnum: {
                 type: Number,
                 required: true,
             },
@@ -74,7 +75,7 @@
         },
 
         mounted() {
-            this.$api.getBuildChartDataInfo(this.vcs, this.username, this.project, this.buildNum)
+            this.$api.getBuildChartDataInfo(this.vcs, this.username, this.project, this.buildnum)
                 .then(this.buildChartData);
         },
     };

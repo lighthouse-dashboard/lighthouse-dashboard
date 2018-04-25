@@ -12,21 +12,13 @@
 
 <script>
 
-    import ProjectTitle from '@/components/project-title';
-    import BuildStatus from '@/components/build-status';
     import TrendTable from "@/components/trend-score-table";
-    import BuiltAt from '@/components/built-at';
-    import CommitDetail from '@/components/commit-detail';
 
 
     export default {
 
         components: {
             TrendTable,
-            BuildStatus,
-            BuiltAt,
-            CommitDetail,
-            ProjectTitle,
         },
 
         props: {

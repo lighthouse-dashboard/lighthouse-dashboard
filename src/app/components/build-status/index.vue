@@ -7,6 +7,7 @@
 </template>
 
 <script>
+
     export default {
 
         props: {
@@ -25,7 +26,7 @@
                 required: true,
             },
 
-            buildNum: {
+            buildnum: {
                 type: Number,
                 required: true,
             },
@@ -41,7 +42,7 @@
 
         methods: {
             load() {
-                return this.$api.getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
+                return this.$api.getBuildInfo(this.vcs, this.username, this.project, this.buildnum)
                     .then((build) => {
                         this.build = build;
 

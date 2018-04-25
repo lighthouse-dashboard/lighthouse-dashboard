@@ -8,7 +8,7 @@
                         :vcs="vcs"
                         :username="username"
                         :project="project"
-                        :buildNum="buildNum"/>
+                        :buildnum="buildnum"/>
                     {{ project }}
                 </h5>
             </router-link>
@@ -35,6 +35,7 @@
 
 <script>
     import Vue from 'vue';
+
 
     import BuildStatus from '@/components/build-status';
     import BuiltAt from '@/components/built-at';
@@ -67,7 +68,7 @@
                 required: true,
             },
 
-            buildNum: {
+            buildnum: {
                 type: [Number, String],
                 required: true,
             },
@@ -75,30 +76,22 @@
 
         data() {
             return {
-                branch: null,
                 user: null,
-                htmlArtifacts: [],
-                buildCompletedTime: null,
-                buildDuration: null,
-                buildStatusClass: null,
-                isBuildSuccessful: null,
                 build: null,
                 updater: null,
-                hasRunningBuild: null,
-                hasReachedBudget: null,
+                hasReachedBudget: false,
             };
         },
 
-        computed: {},
 
         methods: {
             load() {
                 return this.$api
-                    .getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
+                    .getBuildInfo(this.vcs, this.username, this.project, this.buildnum)
                     .then((build) => {
                         this.build = build;
                         const {
-                            user
+                            user,
                         } = this.build;
 
                         this.user = user;
@@ -125,7 +118,7 @@
         },
 
         mounted() {
-            this.load()
+            this.load();
         },
     };
 </script>

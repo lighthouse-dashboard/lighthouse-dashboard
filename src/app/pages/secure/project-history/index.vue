@@ -10,10 +10,10 @@
 
 <script>
 
+
     import ProjectHistory from "@/components/project-history";
 
     export default {
-
         components: {
             ProjectHistory,
         },

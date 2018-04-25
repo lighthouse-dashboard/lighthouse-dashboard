@@ -6,10 +6,7 @@
             <build
                 v-for="(build, index) in builds"
                 :class="{'grey lighten-5': index%2}"
-                :vcs="vcs"
-                :username="username"
-                :project="project"
-                :buildNum="build.build_num"
+                :buildnum="build.build_num"
                 :key="build.build_num"/>
         </div>
     </div>
@@ -17,6 +14,7 @@
 
 <script>
     import Vue from "vue";
+    import { mapGetters } from 'vuex';
 
     import Build from "@/components/build-view";
 
@@ -26,43 +24,29 @@
             Build,
         },
 
-        props: {
-            vcs: {
-                type: String,
-                required: true,
-            },
-
-            username: {
-                type: String,
-                required: true,
-            },
-
-            project: {
-                type: String,
-                required: true,
-            },
-        },
 
         data() {
             return {
                 builds: null,
-                projectObject: null,
                 updater: null,
             };
         },
 
+        computed: {
+            ...mapGetters({
+                vcs: 'vcs',
+                username: 'username',
+                project: 'project',
+                branch: 'branch',
+            }),
+        },
+
         methods: {
             load() {
-                this.projectObject = {
-                    vcs: this.vcs,
-                    username: this.username,
-                    project: this.project,
-                };
-
                 this.$api
-                    .getAllBuilds(this.vcs, this.username, this.project, undefined, this.$route.query.branch)
+                    .getAllBuilds(this.vcs, this.username, this.project, this.branch)
                     .then(builds => {
-                        this.builds = index;
+                        this.builds = builds;
                         this.updater = setTimeout(() => {
                             this.load();
                         }, Vue.config.refreshInterval);

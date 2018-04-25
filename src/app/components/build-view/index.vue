@@ -5,7 +5,7 @@
                 :vcs="vcs"
                 :username="username"
                 :project="project"
-                :buildNum="buildNum"
+                :buildnum="buildnum"
             />
         </div>
 
@@ -14,7 +14,7 @@
                 :vcs="vcs"
                 :username="username"
                 :project="project"
-                :buildNum="buildNum"
+                :buildnum="buildnum"
             />
         </div>
 
@@ -23,7 +23,7 @@
                 :vcs="vcs"
                 :username="username"
                 :project="project"
-                :buildNum="buildNum"
+                :buildnum="buildnum"
             />
         </div>
     </div>
@@ -59,7 +59,7 @@
                 required: true,
             },
 
-            buildNum: {
+            buildnum: {
                 type: Number,
                 required: true,
             },

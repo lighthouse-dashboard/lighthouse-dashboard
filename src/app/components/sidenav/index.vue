@@ -45,7 +45,9 @@
 
         <project-list-link v-for="project in projects"
                            v-if="projects"
-                           :project="project"
+                           :vcs="project.vcs"
+                           :username="project.username"
+                           :project="project.project"
                            :key="project.project"/>
 
         <li><a class="subheader">{{ $t("message.options") }}</a></li>

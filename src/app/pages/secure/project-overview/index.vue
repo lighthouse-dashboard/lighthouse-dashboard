@@ -30,7 +30,6 @@
 </template>
 
 <script>
-
     import CiLink from '@/components/links/ci';
     import GitHubLink from '@/components/links/github';
     import TrendScoreTable from '@/components/trend-score-table';
@@ -44,6 +43,7 @@
             TrendScoreTable,
             TrendChart,
         },
+
 
         props: {
             vcs: {

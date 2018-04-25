@@ -5,9 +5,9 @@
                 <div class="card-title"><a target="_blank" :href="url">{{ url }}</a></div>
                 <artifact-history-chart
                     v-if="target"
-                    :showLegend="showLegend"
-                    :showX="showX"
-                    :showY="showY"
+                    :showlegend="showlegend"
+                    :showx="showx"
+                    :showy="showy"
                     :height="height"
                     :url="url"
                     :data="target.series"
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
 
     import ArtifactHistoryChart from "@/components/history-chart";
 
@@ -47,15 +48,15 @@
                 default: 380,
             },
 
-            showLegend: {
+            showlegend: {
                 type: Boolean,
                 default: true,
             },
-            showX: {
+            showx: {
                 type: Boolean,
                 default: false,
             },
-            showY: {
+            showy: {
                 type: Boolean,
                 default: false,
             },
@@ -68,10 +69,16 @@
             };
         },
 
+        computed: {
+            ...mapGetters({
+                branch: 'branch',
+            }),
+        },
+
         methods: {
             load() {
                 this.$api
-                    .getProjectHistoryData(this.vcs, this.username, this.project, this.$route.query.branch)
+                    .getProjectHistoryData(this.vcs, this.username, this.project, this.branch)
                     .then(data => {
                         this.data = data;
                     })

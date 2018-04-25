@@ -6,8 +6,8 @@
                     :vcs="vcs"
                     :username="username"
                     :project="project"
-                    :buildNum="buildNum"/>
-                #{{ buildNum }}
+                    :buildnum="buildnum"/>
+                #{{ buildnum }}
             </h5>
             <pineapple class="right" v-if="hasReachedBudget" :size="45"/>
         </div>
@@ -32,6 +32,7 @@
 
 <script>
     import Vue from 'vue';
+    import { mapGetters } from 'vuex';
 
     import BuildStatus from '@/components/build-status';
     import BuiltAt from '@/components/built-at';
@@ -64,7 +65,7 @@
                 required: true,
             },
 
-            buildNum: {
+            buildnum: {
                 type: Number,
                 required: true,
             },
@@ -72,7 +73,6 @@
 
         data() {
             return {
-                branch: null,
                 user: null,
                 htmlArtifacts: [],
                 buildCompletedTime: null,
@@ -91,7 +91,7 @@
         methods: {
             load() {
                 return this.$api
-                    .getBuildInfo(this.vcs, this.username, this.project, this.buildNum, this.$route.query.branch)
+                    .getBuildInfo(this.vcs, this.username, this.project, this.buildnum)
                     .then((build) => {
                         this.build = build;
                         const {
@@ -122,7 +122,7 @@
         },
 
         mounted() {
-            this.load()
+            this.load();
         },
     };
 </script>

@@ -14,21 +14,6 @@
     export default {
         props: {
 
-            vcs: {
-                type: String,
-                required: true,
-            },
-
-            username: {
-                type: String,
-                required: true,
-            },
-
-            project: {
-                type: String,
-                required: true,
-            },
-
             category: {
                 type: String,
                 required: true,

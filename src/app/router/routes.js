@@ -1,14 +1,14 @@
-import Overview from './pages/secure/dashboard';
-import MainSecure from './pages/secure';
+import Overview from '../pages/secure/dashboard/index';
+import MainSecure from '../pages/secure/index';
 
-import ProjectOverview from './pages/secure/project-overview';
-import ProjectHistory from './pages/secure/project-history';
-import ProjectBuild from './pages/secure/project-builds';
-import Project from './pages/secure/project';
+import ProjectOverview from '../pages/secure/project-overview/index';
+import ProjectHistory from '../pages/secure/project-history/index';
+import ProjectBuild from '../pages/secure/project-builds/index';
+import Project from '../pages/secure/project/index';
 
-import Login from './pages/login';
-import Help from './pages/help';
-import Kiosk from './pages/secure/kiosk';
+import Login from '../pages/login/index';
+import Help from '../pages/help/index';
+import Kiosk from '../pages/secure/kiosk/index';
 
 export default [
     { path: '/login', name: 'login', component: Login, meta: { requiresAuth: false } },

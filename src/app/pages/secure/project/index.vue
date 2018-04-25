@@ -3,7 +3,6 @@
         <div class="navbar-fixed">
             <nav class="green lighten-1">
                 <div class="nav-wrapper">
-
                     <ul class="">
                         <router-link
                             tag="li"
