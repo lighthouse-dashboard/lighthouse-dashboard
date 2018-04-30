@@ -5,15 +5,13 @@ import {
     ProjectSeriesData, ProjectArtifactTagData
 } from '../Interfaces';
 
-const {forEach, takeRight, subtract} = require('lodash');
-
+const { forEach, takeRight, subtract } = require('lodash');
 
 function populateCategorySeriesData(categories: ReportCategoryInterface[], series: ReportDataSeriesInterface): ReportDataSeriesInterface {
     forEach(categories, (category: ReportCategoryInterface) => {
         if (!series[category.id]) {
             series[category.id] = [];
         }
-
         series[category.id].push(category.score);
     });
 
