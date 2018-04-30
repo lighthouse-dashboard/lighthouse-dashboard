@@ -1,9 +1,9 @@
 'use strict';
 import {Server} from 'hapi';
-import AuthBasic from 'hapi-auth-basic';
-import path from 'path';
-import Vision from 'vision';
-import Inert from 'inert';
+import * as AuthBasic from 'hapi-auth-basic';
+import { join } from 'path';
+import * as Vision from 'vision';
+import * as Inert from 'inert';
 
 const laabr = require('laabr');
 const AuthBearer = require('hapi-auth-bearer-token');
@@ -13,7 +13,7 @@ const {name, version} = require('../../package.json');
 import bearerStrategy from './auth/bearerStrategy';
 import routes from './routes';
 
-require('dotenv').config();
+require('dotenv').config()
 
 const TOKEN = process.env.CIRCLE_TOKEN;
 const PORT = process.env.PORT || 3000;
@@ -80,7 +80,7 @@ export async function start() {
         routes: {
             cors: true,
             files: {
-                relativeTo: path.join(__dirname, '..'),
+                relativeTo: join(__dirname, '..'),
             },
         },
     });

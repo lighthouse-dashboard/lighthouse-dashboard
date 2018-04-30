@@ -89,32 +89,4 @@ describe('Builds', function () {
                 unit.object(build).hasProperty('build_num');
             });
     });
-
-
-    it('get specific build', () => {
-        nock(API)
-            .defaultReplyHeaders({
-                'Content-Type': 'application/json'
-            })
-
-            .get('/project/github/test/project/43')
-            .query(true)
-            .reply(200, require('./data/test/project/43/build'));
-
-        return request({
-            url: `${SERVER}/api/projects/github/test/project/build/43?access_token=${SECRET}`
-        })
-            .then((data) => {
-                data = JSON.parse(data);
-                unit.object(data).isNot(null);
-                unit.object(data).hasProperty('build_num');
-                unit.object(data).hasProperty('subject');
-                unit.object(data).hasProperty('user');
-                unit.object(data).hasProperty('build_time_millis');
-                unit.object(data).hasProperty('status');
-                unit.object(data).hasProperty('stop_time');
-            });
-    });
-
-
 });

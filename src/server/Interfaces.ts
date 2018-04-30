@@ -25,8 +25,8 @@ export interface CircleReportContentInterface {
     categories: ReportCategoryInterface[];
 }
 
-export interface CircleProjectCacheInterface {
-    [key: string]: CircleProjectInterface[];
+export interface ProjectCacheInterface {
+    [key: string]: ProjectInterface[];
 }
 
 

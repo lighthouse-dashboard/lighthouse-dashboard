@@ -1,4 +1,6 @@
-const { get, compact, orderBy } = require('lodash');
+const get = require('lodash/get');
+const compact = require('lodash/compact');
+const orderBy = require('lodash/orderBy');
 const { extname, basename } = require('path');
 
 import {
@@ -10,46 +12,28 @@ import {
     ProjectInterface
 } from '../Interfaces';
 
-const { getArtifactsForBuild, getArtifactContent } = require('./api');
+const { getArtifactsForBuild, getArtifactContent } = require('../api');
 
-export async function filterSupportedProjects(projects: CircleProjectInterface[], branch: string, token: string): Promise<CircleProjectInterface[]> {
-    const p = projects.map((project) => {
-        return isProjectSupported(project, branch, token);
+export async function filterSupportedProjects(projects: ProjectInterface[], branch: string, token: string): Promise<ProjectInterface[]> {
+    const p = projects.map(async (project) => {
+        const isSupported = await isProjectSupported(project, branch, token);
+        if (isSupported) {
+            return project;
+        }
+        return null;
     });
 
     return Promise.all(p)
-        .then((data: Array<CircleProjectInterface | null>) => {
+        .then((data: Array<ProjectInterface | null>) => {
             return compact(data);
         })
 }
 
-export async function isProjectSupported(project: CircleProjectInterface, branch: string, token: string) {
-    if (!get(project, `branches.${branch}.last_success.build_num`)) {
-        return null;
-    }
-
-    const lastSucceededBuild = project.branches[branch].last_success;
-    const isSupported = await isBuildSupported('github', project.username, project.reponame, lastSucceededBuild.build_num, token)
-    if (!isSupported) {
-        return null;
-    }
-    return project;
+export async function isProjectSupported(project: ProjectInterface, branch: string, token: string): Promise<Boolean> {
+    const lastSucceededBuild = project.lastBuild;
+    return await isBuildSupported(project.vcs, project.username, project.project, lastSucceededBuild.build_num, token)
 }
 
-export function transformProject(project: CircleProjectInterface, branch: string): ProjectInterface {
-    return {
-        vcs: project.vcs_type,
-        username: project.username,
-        project: project.reponame,
-        lastBuild: project.branches[branch].last_success
-    }
-}
-
-export async function transformProjects(projects: CircleProjectInterface[], branch: string): Promise<ProjectInterface[]> {
-    return projects.map((project: CircleProjectInterface) => {
-        return transformProject(project, branch)
-    })
-}
 
 export function sortFilteredProjects(projects: ProjectInterface[]): ProjectInterface[] {
     return projects.sort((projectA: ProjectInterface, projectB: ProjectInterface) => {
@@ -109,17 +93,4 @@ export async function getDashboardContentsByBuild(buildArtifacts: CircleArtifact
         item.data = data;
         return data;
     }));
-}
-
-export function transformBuilds(builds: CircleBuildInterface[]): BuildInterface[] {
-    return builds.map((build: CircleBuildInterface) => {
-        return transformBuild(build);
-    })
-}
-
-export function transformBuild(build: CircleBuildInterface): BuildInterface {
-    return {
-        build_num: build.build_num,
-        artifacts: [],
-    }
 }

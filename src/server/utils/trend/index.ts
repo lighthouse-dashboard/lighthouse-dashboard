@@ -3,7 +3,7 @@ import {
     CircleReportContentInterface,
     ReportCategoryInterface, CategoriesScoreInterface, ReportDataSeriesInterface,
     ProjectSeriesData, ProjectArtifactTagData
-} from '../Interfaces';
+} from '../../Interfaces';
 
 const { forEach, takeRight, subtract } = require('lodash');
 
