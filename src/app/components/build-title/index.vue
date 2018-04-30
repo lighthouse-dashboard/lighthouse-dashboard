@@ -93,11 +93,6 @@
                     .getBuildInfo(this.vcs, this.username, this.project, this.buildnum)
                     .then((build) => {
                         this.build = build;
-                        const {
-                            user
-                        } = this.build;
-
-                        this.user = user;
                     })
                     .then(() => {
                         this.updater = setTimeout(() => {

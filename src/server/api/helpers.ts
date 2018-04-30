@@ -24,6 +24,11 @@ export function transformBuilds(builds: CircleBuildInterface[]): BuildInterface[
 export function transformBuild(build: CircleBuildInterface): BuildInterface {
     return {
         build_num: build.build_num,
+        subject: build.subject,
+        user: build.user,
+        build_time_millis: build.build_time_milis,
+        stop_time: build.stop_time,
+        status: build.status,
         artifacts: [],
     };
 }

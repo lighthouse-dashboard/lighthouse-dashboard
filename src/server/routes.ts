@@ -1,18 +1,19 @@
-import { ServerRoute } from "hapi";
+import {ServerRoute} from "hapi";
 
 const joi = require('joi');
 
-import login from './handlers/login';
-import artifactProxyHandler from './handlers/artifactProxyHandler';
-import getAllProjects from './handlers/getAllProjects';
-import invalidateProjects from './handlers/invalidateProjects';
-import getBranchBuilds from './handlers/getBranchBuilds';
-import getBranchBuildTrend from './handlers/getBranchBuildTrend';
+import login from'./handlers/login';
+import artifactProxyHandler from'./handlers/artifactProxyHandler';
+import getAllProjects from'./handlers/getAllProjects';
+import invalidateProjects from'./handlers/invalidateProjects';
+import getBranchBuilds from'./handlers/getBranchBuilds';
+import getBranchBuildTrend from'./handlers/getBranchBuildTrend';
 import getBranchLatestBuildInfo from './handlers/getBranchLatestBuildInfo';
-import getBranchRunningBuild from './handlers/getBranchRunningBuild';
-import getProjectHistoryChartData from './handlers/getProjectHistoryChartData';
-import getArtifacts from './handlers/getArtifacts';
-import getBuildChartData from './handlers/getBuildChartData';
+import getBranchRunningBuild from'./handlers/getBranchRunningBuild';
+import getProjectHistoryChartData from'./handlers/getProjectHistoryChartData';
+import getBuildInfo from'./handlers/getBuildInfo';
+import getArtifacts from'./handlers/getArtifacts';
+import getBuildChartData from'./handlers/getBuildChartData';
 import getVersion from './handlers/getVersion';
 
 const MINUTE = 60 * 1000;
@@ -292,6 +293,41 @@ const ROUTES: ServerRoute[] = [
                     branch: joi.string()
                         .required()
                         .description('Branch name'),
+                },
+            },
+        },
+    },
+
+    {
+        method: 'GET',
+        path: '/api/projects/{vcs}/{username}/{project}/build/{build}',
+        handler: getBuildInfo,
+        options: {
+            cache: {
+                expiresIn: MONTH,
+                privacy: 'public',
+            },
+            tags: ['api'],
+            description: 'Get current running build',
+            validate: {
+                query: {
+                    access_token: joi.string()
+                        .description('API Secret. Can also be passed as Bearer token'),
+                },
+                params: {
+                    vcs: joi.string()
+                        .required()
+                        .description('VCS Type'),
+                    username: joi.string()
+                        .required()
+                        .description('Username used to fetch CircleCI projects'),
+                    project: joi.string()
+                        .required()
+                        .description('Specific CI project'),
+                    build: joi.alternatives()
+                        .try(joi.string(), joi.number())
+                        .required()
+                        .description('Build number'),
                 },
             },
         },

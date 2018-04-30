@@ -8,6 +8,10 @@ export interface CircleProjectInterface {
 export interface CircleBuildInterface {
     stop_time: number;
     build_num: number;
+    subject: string;
+    user: any;
+    build_time_milis: number;
+    status: string;
 }
 
 export interface CircleArtifactInterface {
@@ -39,6 +43,11 @@ export interface ProjectInterface {
 
 export interface BuildInterface {
     build_num: number;
+    subject: string,
+    user: any;
+    build_time_millis: number, 
+    stop_time: any;
+    status: string;
     artifacts: CircleArtifactInterface[];
     artifactContent?: CircleReportContentInterface[];
 }
