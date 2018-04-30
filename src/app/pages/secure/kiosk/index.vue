@@ -26,7 +26,7 @@
                     :vcs="project.vcs"
                     :username="project.username"
                     :project="project.project"
-                    :buildNum="project.lastBuild.build_num"
+                    :buildnum="project.lastBuild.build_num"
                 />
 
                 <trend-score-table

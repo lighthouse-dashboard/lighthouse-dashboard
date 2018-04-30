@@ -6,43 +6,43 @@
 
         <div class="col s12" v-for="(report, trend) in trendScores" :key="trend">
             <div>
-                <h5 class="center">{{ trend }}</h5>
+                <h5>{{ trend }}</h5>
             </div>
 
             <table class="trend-table striped centered">
                 <tbody>
-                <tr>
-                    <td v-for="category in categories"
-                        :key="category">
-                        {{ $t(`message.category_${category}`) }}
-                    </td>
-                </tr>
+                    <tr>
+                        <td v-for="category in categories"
+                            :key="category">
+                            {{ $t(`message.category_${category}`) }}
+                        </td>
+                    </tr>
                 </tbody>
 
                 <tbody>
-                <tr>
-                    <td v-for="category in categories"
-                        :key="category">
+                    <tr>
+                        <td v-for="category in categories"
+                            :key="category">
 
-                        <score
-                            :vcs="vcs"
-                            :username="username"
-                            :project="project"
-                            :trendscore="report.trend[category]"
-                            :buildscore="report.build[category]"
-                            :budgetscore="report.budget[category]"
-                            :category="category"
-                        />
+                            <score
+                                :vcs="vcs"
+                                :username="username"
+                                :project="project"
+                                :trendscore="report.trend[category]"
+                                :buildscore="report.build[category]"
+                                :budgetscore="report.budget[category]"
+                                :category="category"
+                            />
 
-                        <chart
-                            type="line"
-                            :height="50"
-                            :width="150"
-                            :columns="[ [category, ...report.series[category]]]"
-                            :categories="report.categories"
-                        />
-                    </td>
-                </tr>
+                            <chart
+                                type="line"
+                                :height="50"
+                                :width="150"
+                                :columns="[ [category, ...report.series[category]]]"
+                                :categories="report.categories"
+                            />
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

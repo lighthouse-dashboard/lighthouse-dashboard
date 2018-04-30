@@ -9,7 +9,7 @@
             />
         </div>
 
-        <div class="col s12 l9">
+        <div class="col s12">
             <build-charts
                 :vcs="vcs"
                 :username="username"
@@ -18,7 +18,7 @@
             />
         </div>
 
-        <div class="col s12 l3">
+        <div class="col s12">
             <artifact-list
                 :vcs="vcs"
                 :username="username"

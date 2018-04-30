@@ -1,7 +1,9 @@
 <template>
-    <Card v-if="htmlArtifacts && htmlArtifacts.length > 0">
-        <span slot="title">{{ $t("message.artifacts") }}</span>
-        <div class="collection">
+    <div v-if="htmlArtifacts && htmlArtifacts.length > 0">
+        <div class="collection with-header">
+            <div class="collection-header">
+                <h4>{{ $t("message.artifacts") }}</h4>
+            </div>
             <a class="truncate collection-item"
                target="_blank"
                v-for="html in htmlArtifacts"
@@ -10,7 +12,7 @@
                 {{ getFilename(html.path) }}
             </a>
         </div>
-    </Card>
+    </div>
 </template>
 
 <script>
