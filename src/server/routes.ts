@@ -2,18 +2,11 @@ import {ServerRoute} from "hapi";
 
 const joi = require('joi');
 
-import login from'./handlers/login';
-import getAllProjects from'./handlers/getAllProjects';
-import invalidateProjects from'./handlers/invalidateProjects';
-import getBranchBuilds from'./handlers/getBranchBuilds';
-import getBranchBuildTrend from'./handlers/getBranchBuildTrend';
-import getBranchLatestBuildInfo from './handlers/getBranchLatestBuildInfo';
-import getBranchRunningBuild from'./handlers/getBranchRunningBuild';
-import getProjectHistoryChartData from'./handlers/getProjectHistoryChartData';
-import getBuildInfo from'./handlers/getBuildInfo';
-import getArtifacts from'./handlers/getArtifacts';
-import getBuildChartData from'./handlers/getBuildChartData';
-import getVersion from './handlers/getVersion';
+import * as project from './handlers/project';
+import * as build from './handlers/build';
+import * as artifact from './handlers/artifact';
+import * as misc from './handlers/misc';
+import * as login from './handlers/login';
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
@@ -23,7 +16,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'POST',
         path: '/auth/login',
-        handler: login,
+        handler: login.login,
         options: {
             auth: false,
             validate: {
@@ -40,7 +33,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/version',
-        handler: getVersion,
+        handler: misc.getVersion,
         options: {
             cache: {
                 expiresIn: HOUR,
@@ -62,7 +55,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{branch}',
-        handler: getAllProjects,
+        handler: project.getAllProjects,
         options: {
             cache: {
                 expiresIn: MINUTE,
@@ -87,7 +80,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'DELETE',
         path: '/api/projects/{branch}',
-        handler: invalidateProjects,
+        handler: project.invalidateCache,
         options: {
             tags: ['api'],
             description: 'Invalidate cache of fetched projects',
@@ -108,7 +101,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}',
-        handler: getBranchBuilds,
+        handler: build.getBranchBuilds,
         options: {
             cache: {
                 expiresIn: MINUTE,
@@ -142,7 +135,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/trending',
-        handler: getBranchBuildTrend,
+        handler: build.getBranchTrend,
         options: {
             cache: {
                 expiresIn: 15 * MINUTE,
@@ -176,7 +169,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/latest',
-        handler: getBranchLatestBuildInfo,
+        handler: build.getLatestBuilds,
         options: {
             cache: {
                 expiresIn: MINUTE,
@@ -210,7 +203,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/running',
-        handler: getBranchRunningBuild,
+        handler: build.getRunningBuild,
         options: {
             cache: {
                 expiresIn: MINUTE,
@@ -244,7 +237,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/history',
-        handler: getProjectHistoryChartData,
+        handler: project.getHistory,
         options: {
             cache: {
                 expiresIn: 15 * MINUTE,
@@ -278,7 +271,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}',
-        handler: getBuildInfo,
+        handler: build.getBuildInfo,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -313,7 +306,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/latest/artifacts',
-        handler: getArtifacts,
+        handler: artifact.getArtifacts,
         options: {
             tags: ['api'],
             description: 'Get all artifacts for build',
@@ -340,7 +333,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/artifacts',
-        handler: getArtifacts,
+        handler: artifact.getArtifacts,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -375,7 +368,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/chartdata',
-        handler: getBuildChartData,
+        handler: build.getBuildChartData,
         options: {
             cache: {
                 expiresIn: MONTH,

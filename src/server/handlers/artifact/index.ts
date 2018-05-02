@@ -1,9 +1,9 @@
 import { Request } from "hapi";
-import { ApplicationState, CircleArtifactInterface } from "../Interfaces";
+import { ApplicationState, CircleArtifactInterface } from "../../Interfaces";
 
-import { getArtifactsForBuildNum } from '../services/artifact'
+import { getArtifactsForBuildNum } from '../../services/artifact'
 
-export default async (req: Request) => {
+export async function getArtifacts (req: Request) {
     const { vcs, username, project, build } = req.params;
     const { token } = <ApplicationState>req.server.app;
     const artifacts = await getArtifactsForBuildNum(parseInt(build), vcs, username, project, token);

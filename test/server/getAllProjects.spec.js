@@ -47,7 +47,7 @@ describe('Project', function () {
         return request({
             url: `${SERVER}/api/projects/${BRANCH}?access_token=${SECRET}`
         })
-            .then((data) => {
+            .then((data) => { 
                 data = JSON.parse(data);
                 unit.array(data).hasLength(2);
                 const project = data.shift();

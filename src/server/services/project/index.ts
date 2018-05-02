@@ -10,7 +10,7 @@ import { loadBuildsArtifactData } from '../artifact';
 export async function getProjects(branch: string, token: string): Promise<ProjectInterface[]> {
     const projects = await api.getProjects(branch, token);
     const filteredProjects = await filterSupportedProjects(projects, branch, token);
-    return orderBy(filteredProjects, ['lastBuild.pushed_at'], ['desc'])
+    return orderBy(filteredProjects, ['lastBuild.stop_time'], ['desc'])
 }
 
 export async function deleteProjectsCache(branch: string) {
