@@ -40,10 +40,12 @@ function getCategoryNames(categories: ReportCategoryInterface[]) {
     });
 }
 
-export function fillColumn(key: string, reports: CircleReportContentInterface[], columns: BuildChartRowsData, chartCategories: string[]) {
+export function fillColumn(key: string, reports: CircleReportContentInterface[], columns: BuildChartRowsData): string[] {
     if (!columns[key]) {
         columns[key] = [];
     }
+
+    let chartCategories: string[] = [];
     reports.forEach((item: CircleReportContentInterface) => {
         const {
             budget,
@@ -54,6 +56,7 @@ export function fillColumn(key: string, reports: CircleReportContentInterface[],
         if (!categories) {
             return;
         }
+        
         const shrinkedCategories = getCategoryScores(categories)
         const shrinkedBudget = getCategoryBudget(categories, budget);
         chartCategories = getCategoryNames(categories);
@@ -64,6 +67,8 @@ export function fillColumn(key: string, reports: CircleReportContentInterface[],
             [`Budget ${name}`, ...shrinkedBudget],
         );
     });
+
+    return chartCategories;
 }
 
 export function buildChartDataFromTaggedResults(taggedResults: GroupedBuildReports): BuildChartData {
@@ -73,7 +78,7 @@ export function buildChartDataFromTaggedResults(taggedResults: GroupedBuildRepor
 
     keys.forEach((key) => {
         const reports = taggedResults[key];
-        fillColumn(key, reports, columns, chartCategories);
+        chartCategories = fillColumn(key, reports, columns);
     });
 
     return { columns, categories: chartCategories };

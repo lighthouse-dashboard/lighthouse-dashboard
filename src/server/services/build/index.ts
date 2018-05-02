@@ -22,7 +22,6 @@ export async function getChartData(vcs: string, username: string, project: strin
     }
 
     const buildWithArtifacts =await loadBuildArtifactData(build, vcs, username, project, token);
-    
     const groupedBuildReports = groupResultsByReportTag(buildWithArtifacts);
     return await buildChartDataFromTaggedResults(groupedBuildReports);
 }
