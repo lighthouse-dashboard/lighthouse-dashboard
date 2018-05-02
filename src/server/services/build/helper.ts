@@ -1,18 +1,16 @@
-import { BudgetInterface } from 'Interfaces';
-import {
-    BuildChartData, BuildChartRowsData,
-    BuildInterface,
-    CircleArtifactInterface,
-    CircleReportContentInterface,
-    GroupedBuildReports,
-    ReportCategoryInterface,
-} from "Interfaces";
+import { GroupedBuildReports } from "../../interfaces/GroupedBuildReports";
+import Build from "../../interfaces/Build";
+import CircleArtifact from "../../interfaces/Artifact";
+import { Budget } from "../../interfaces/ProjectSeriesData";
+import { ReportCategory } from "../../interfaces/ReportCategory";
+import { CircleReportContent } from "../../interfaces/CircleReportContent";
+import { BuildChartRowsData, BuildChartData } from '../../interfaces/BuildChartData';
 
-export function groupResultsByReportTag(buildData: BuildInterface): GroupedBuildReports {
+export function groupResultsByReportTag(buildData: Build): GroupedBuildReports {
     const { artifacts } = buildData;
     const endpoints: GroupedBuildReports = {};
 
-    artifacts.forEach((item: CircleArtifactInterface) => {
+    artifacts.forEach((item: CircleArtifact) => {
         if (!endpoints[item.data.url]) {
             endpoints[item.data.url] = [];
         }
@@ -22,31 +20,31 @@ export function groupResultsByReportTag(buildData: BuildInterface): GroupedBuild
     return endpoints;
 }
 
-function getCategoryScores(categories: ReportCategoryInterface[]): number[] {
+function getCategoryScores(categories: ReportCategory[]): number[] {
     return categories.map((item) => {
         return item.score;
     });
 }
 
-function getCategoryBudget(categories: ReportCategoryInterface[], budget: BudgetInterface): number[] {
+function getCategoryBudget(categories: ReportCategory[], budget: Budget): number[] {
     return categories.map((_item) => {
         return <number>(budget[_item.id] ? budget[_item.id] : null);
     });
 }
 
-function getCategoryNames(categories: ReportCategoryInterface[]) {
+function getCategoryNames(categories: ReportCategory[]) {
     return categories.map((_item) => {
         return _item.name;
     });
 }
 
-export function fillColumn(key: string, reports: CircleReportContentInterface[], columns: BuildChartRowsData): string[] {
+export function fillColumn(key: string, reports: CircleReportContent[], columns: BuildChartRowsData): string[] {
     if (!columns[key]) {
         columns[key] = [];
     }
 
     let chartCategories: string[] = [];
-    reports.forEach((item: CircleReportContentInterface) => {
+    reports.forEach((item: CircleReportContent) => {
         const {
             budget,
             categories,

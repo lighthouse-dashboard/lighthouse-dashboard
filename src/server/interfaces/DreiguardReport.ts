@@ -41,12 +41,12 @@ export interface Diff {
 	percentage: number;
 }
 
-export default interface DreiguardReportInterface {
+export default interface DreiguardReport {
 	config: Config;
 	capability: Capability;
 	threshold: number;
 	screenshot: string;
 	diff: Diff;
 	compareFiles: string[];
-	diffReport: DreiguardReportInterface;
+	diffReport: DreiguardReport;
 }

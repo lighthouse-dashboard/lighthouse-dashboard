@@ -1,8 +1,9 @@
 import { Request } from "hapi";
-import { ApplicationState, BuildInterface } from "../../Interfaces";
 
 import * as buildService  from '../../services/build'
 import { getTrendData } from "../../services/project";
+import { ApplicationState } from "../../interfaces/ApplicationState";
+import Build from "../../interfaces/Build";
 
 export async function getBranchBuilds (req: Request){
     const { vcs, username, project, branch } = req.params;
@@ -10,7 +11,7 @@ export async function getBranchBuilds (req: Request){
 
     const builds = await buildService.getLatestBuilds(vcs, username, project, branch, token, limit, 'completed');
 
-    return builds.map((build: BuildInterface) => {
+    return builds.map((build: Build) => {
         const { build_num } = build; //eslint-disable-line
         return {
             build_num,

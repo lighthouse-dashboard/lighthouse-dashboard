@@ -1,21 +1,22 @@
 import { extname } from "path";
 
-import { BuildInterface, CircleArtifactInterface } from '../../Interfaces';
 import { getArtifactsForBuildNum } from ".";
 import { getArtifactContent } from "../../api";
-import DreiguardReportInterface from "../../interfaces/DreiguardReportInterface";
+import CircleArtifact from "../../interfaces/Artifact";
+import Build from "../../interfaces/Build";
+import DreiguardReport from "../../interfaces/DreiguardReport";
 
-async function getArtifactsForBuild(build: BuildInterface, vcs: string, username: string, project: string, token: string): Promise<CircleArtifactInterface[]> {
+async function getArtifactsForBuild(build: Build, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
     const artifacts = await getArtifactsForBuildNum(build.build_num, vcs, username, project, token);
-    return artifacts.filter((artifact: CircleArtifactInterface) => {
+    return artifacts.filter((artifact: CircleArtifact) => {
         return (extname(artifact.path) === '.json' && artifact.path.startsWith('dreiguard'));
     })
 }
 
-async function loadArtifactsData(build: BuildInterface, vcs: string, username: string, project: string, token: string): Promise<CircleArtifactInterface[]> {
+async function loadArtifactsData(build: Build, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
     const artifacts = await getArtifactsForBuild(build, vcs, username, project, token);
-    const artifactsWithContent = artifacts.map(async (artifact: CircleArtifactInterface) => {
-        const content = await getArtifactContent<DreiguardReportInterface[]>(artifact.url + `?circle-token=${token}`);
+    const artifactsWithContent = artifacts.map(async (artifact: CircleArtifact) => {
+        const content = await getArtifactContent<DreiguardReport[]>(artifact.url + `?circle-token=${token}`);
         artifact.data = content;
         return artifact;
     });
@@ -23,16 +24,16 @@ async function loadArtifactsData(build: BuildInterface, vcs: string, username: s
     return await Promise.all(artifactsWithContent);
 }
 
-export async function getArtifactData(build: BuildInterface, vcs: string, username: string, project: string, token: string): Promise<Array<DreiguardReportInterface[]>> {
+export async function getArtifactData(build: Build, vcs: string, username: string, project: string, token: string): Promise<Array<DreiguardReport[]>> {
     const artifacts = await loadArtifactsData(build, vcs, username, project, token);
-    return artifacts.map((artifact: CircleArtifactInterface) => {
+    return artifacts.map((artifact: CircleArtifact) => {
         return artifact.data;
     });
 }
 
-export function flattenDreiguardData(data: Array<DreiguardReportInterface[]>) {
-    return data.map((reports: DreiguardReportInterface[]) => {
-        return reports.map((report: DreiguardReportInterface) => {
+export function flattenDreiguardData(data: Array<DreiguardReport[]>) {
+    return data.map((reports: DreiguardReport[]) => {
+        return reports.map((report: DreiguardReport) => {
             return {
                 compareFiles: report.compareFiles,
                 diff: report.diff,

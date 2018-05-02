@@ -1,7 +1,7 @@
-import { ApplicationState, ProjectInterface } from "../../Interfaces";
 import { Request } from "hapi";
 
 import { getProjects, deleteProjectsCache, getHistoryData } from '../../services/project'
+import { ApplicationState } from "../../interfaces/ApplicationState";
 
 export async function getAllProjects(req: Request) {
     const { branch } = req.params;

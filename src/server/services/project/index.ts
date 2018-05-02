@@ -1,13 +1,14 @@
 import { orderBy } from 'lodash';
 
 import * as api from '../../api';
-import { ProjectInterface, ProjectSeriesData } from '../../Interfaces';
 import { filterSupportedProjects } from './helper';
 import { getBuilds } from '../build';
 import { calculateTrendForSeries, setupSeriesData } from './trendUtils';
 import { getBuildsDreihouseArtifactData } from '../artifact/dreihouse';
+import { ProjectSeriesData } from '../../interfaces/ProjectSeriesData';
+import { Project } from '../../interfaces/Project';
 
-export async function getProjects(branch: string, token: string): Promise<ProjectInterface[]> {
+export async function getProjects(branch: string, token: string): Promise<Project[]> {
     const projects = await api.getProjects(branch, token);
     const filteredProjects = await filterSupportedProjects(projects, branch, token);
     return orderBy(filteredProjects, ['lastBuild.stop_time'], ['desc'])

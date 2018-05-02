@@ -1,6 +1,8 @@
-import { CircleProjectInterface, ProjectInterface, CircleBuildInterface, BuildInterface } from '../Interfaces';
+import { CircleProject, Project } from "../interfaces/Project";
+import Build from "../interfaces/Build";
+import { CircleBuild } from "../interfaces/CircleBuild";
 
-export function transformProject(project: CircleProjectInterface, branch: string): ProjectInterface {
+export function transformProject(project: CircleProject, branch: string): Project {
     return {
         vcs: project.vcs_type,
         username: project.username,
@@ -9,19 +11,19 @@ export function transformProject(project: CircleProjectInterface, branch: string
     };
 }
 
-export function transformProjects(projects: CircleProjectInterface[], branch: string): ProjectInterface[] {
-    return projects.map((project: CircleProjectInterface) => {
+export function transformProjects(projects: CircleProject[], branch: string): Project[] {
+    return projects.map((project: CircleProject) => {
         return transformProject(project, branch)
     });
 }
 
-export function transformBuilds(builds: CircleBuildInterface[]): BuildInterface[] {
-    return builds.map((build: CircleBuildInterface) => {
+export function transformBuilds(builds: CircleBuild[]): Build[] {
+    return builds.map((build: CircleBuild) => {
         return transformBuild(build);
     });
 }
 
-export function transformBuild(build: CircleBuildInterface): BuildInterface {
+export function transformBuild(build: CircleBuild): Build {
     return {
         build_num: build.build_num,
         subject: build.subject,

@@ -1,15 +1,12 @@
-import { CircleArtifactInterface } from '../../Interfaces';
-import {
-    BuildInterface,
-    CircleReportContentInterface,
-    ReportCategoryInterface, CategoriesScoreInterface, ReportDataSeriesInterface,
-    ProjectSeriesData, ProjectArtifactTagData
-} from '../../Interfaces';
+import { ReportDataSeries, CategoriesScore, ProjectSeriesData, ProjectArtifactTagData } from '../../interfaces/ProjectSeriesData';
+import { ReportCategory } from "../../interfaces/ReportCategory";
+import Build from '../../interfaces/Build';
+import CircleArtifact from '../../interfaces/Artifact';
 
 const { forEach, takeRight, subtract } = require('lodash');
 
-function populateCategorySeriesData(categories: ReportCategoryInterface[], series: ReportDataSeriesInterface): ReportDataSeriesInterface {
-    forEach(categories, (category: ReportCategoryInterface) => {
+function populateCategorySeriesData(categories: ReportCategory[], series: ReportDataSeries): ReportDataSeries {
+    forEach(categories, (category: ReportCategory) => {
         if (!series[category.id]) {
             series[category.id] = [];
         }
@@ -19,8 +16,8 @@ function populateCategorySeriesData(categories: ReportCategoryInterface[], serie
     return series;
 }
 
-function setCategorySeriesData(categories: ReportCategoryInterface[], series: CategoriesScoreInterface): CategoriesScoreInterface {
-    forEach(categories, (category: ReportCategoryInterface) => {
+function setCategorySeriesData(categories: ReportCategory[], series: CategoriesScore): CategoriesScore {
+    forEach(categories, (category: ReportCategory) => {
         series[category.id] = category.score;
     });
 
@@ -32,11 +29,11 @@ function getTrendForSeries(series: number[]): number {
     return subtract(...lastTwoValues.reverse());
 }
 
-export function setupSeriesData(builds: BuildInterface[]): ProjectSeriesData {
+export function setupSeriesData(builds: Build[]): ProjectSeriesData {
     let series: ProjectSeriesData = {};
 
-    forEach(builds, (build: BuildInterface) => {
-        forEach(build.artifacts, (artifact: CircleArtifactInterface) => {
+    forEach(builds, (build: Build) => {
+        forEach(build.artifacts, (artifact: CircleArtifact) => {
             const data = artifact.data;
             
             if (!series[data.key]) {
