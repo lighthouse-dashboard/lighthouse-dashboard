@@ -1,6 +1,6 @@
 import { Request } from "hapi";
 
-const { deleteProjectsCache } = require('../utils');
+import { deleteProjectsCache } from '../services/project';
 
 export default async (req: Request) => {
     await deleteProjectsCache(req.params.branch);

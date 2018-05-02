@@ -1,7 +1,7 @@
 import { ApplicationState } from "../Interfaces";
 import { Request } from "hapi";
 
-const { getProjects } = require('../utils');
+import {getProjects} from '../services/project'
 
 export default async (req: Request) => {
     const { branch } = req.params;

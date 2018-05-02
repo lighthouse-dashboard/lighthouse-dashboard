@@ -3,7 +3,6 @@ import {ServerRoute} from "hapi";
 const joi = require('joi');
 
 import login from'./handlers/login';
-import artifactProxyHandler from'./handlers/artifactProxyHandler';
 import getAllProjects from'./handlers/getAllProjects';
 import invalidateProjects from'./handlers/invalidateProjects';
 import getBranchBuilds from'./handlers/getBranchBuilds';
@@ -38,28 +37,6 @@ const ROUTES: ServerRoute[] = [
         },
     },
 
-    {
-        method: 'GET',
-        path: '/api/artifact',
-        handler: artifactProxyHandler,
-        options: {
-            cache: {
-                expiresIn: MONTH,
-                privacy: 'public',
-            },
-            tags: ['api'],
-            description: 'Load content of artifact. This is used due ti CORS on circle ci side',
-            validate: {
-                query: {
-                    url: joi.string()
-                        .required()
-                        .description('Url of the artifact'),
-                    access_token: joi.string()
-                        .description('API Secret. Can also be passed as Bearer token'),
-                },
-            },
-        },
-    },
     {
         method: 'GET',
         path: '/api/version',

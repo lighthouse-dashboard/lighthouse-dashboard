@@ -12,9 +12,8 @@ let cachedResponse: ProjectCacheInterface = {};
 const request = require('request-promise');
 
 import { transformProjects, transformBuilds, transformBuild } from "./helpers";
-import { buildChartDataFromTaggedResults } from '../utils/chartDataUtils';
 
-export async function getListOfProjects(branch: string, token: string): Promise<ProjectInterface[]> {
+export async function getProjects(branch: string, token: string): Promise<ProjectInterface[]> {
     if (cachedResponse[branch] && cachedResponse[branch].length > 0 && process.env.NODE_ENV !== 'test') {
         return cachedResponse[branch];
     }

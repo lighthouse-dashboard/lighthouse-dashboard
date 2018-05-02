@@ -5,7 +5,7 @@ export function transformProject(project: CircleProjectInterface, branch: string
         vcs: project.vcs_type,
         username: project.username,
         project: project.reponame,
-        lastBuild: project.branches[branch].last_success
+        lastBuild: transformBuild(project.branches[branch].last_success)
     };
 }
 

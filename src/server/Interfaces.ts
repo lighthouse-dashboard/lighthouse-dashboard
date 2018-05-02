@@ -37,7 +37,7 @@ export interface ProjectCacheInterface {
 export interface ProjectInterface {
     username: string;
     project: string;
-    lastBuild: CircleBuildInterface;
+    lastBuild: BuildInterface;
     vcs: string;
 }
 
@@ -46,7 +46,7 @@ export interface BuildInterface {
     subject: string,
     user: any;
     build_time_millis: number, 
-    stop_time: any;
+    stop_time: number;
     status: string;
     artifacts: CircleArtifactInterface[];
     artifactContent?: CircleReportContentInterface[];

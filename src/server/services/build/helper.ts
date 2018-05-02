@@ -1,4 +1,4 @@
-import { BudgetInterface } from '../Interfaces';
+import { BudgetInterface } from 'Interfaces';
 import {
     BuildChartData, BuildChartRowsData,
     BuildInterface,
@@ -6,7 +6,7 @@ import {
     CircleReportContentInterface,
     GroupedBuildReports,
     ReportCategoryInterface,
-} from "../Interfaces";
+} from "Interfaces";
 
 export function groupResultsByReportTag(buildData: BuildInterface): GroupedBuildReports {
     const { artifacts } = buildData;
@@ -35,7 +35,7 @@ function getCategoryBudget(categories: ReportCategoryInterface[], budget: Budget
 }
 
 function getCategoryNames(categories: ReportCategoryInterface[]) {
-     return categories.map((_item) => {
+    return categories.map((_item) => {
         return _item.name;
     });
 }

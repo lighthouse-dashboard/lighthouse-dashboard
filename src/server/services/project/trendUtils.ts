@@ -1,3 +1,4 @@
+import { CircleArtifactInterface } from '../../Interfaces';
 import {
     BuildInterface,
     CircleReportContentInterface,
@@ -35,9 +36,11 @@ export function setupSeriesData(builds: BuildInterface[]): ProjectSeriesData {
     let series: ProjectSeriesData = {};
 
     forEach(builds, (build: BuildInterface) => {
-        forEach(build.artifactContent, (artifact: CircleReportContentInterface) => {
-            if (!series[artifact.key]) {
-                series[artifact.key] = {
+        forEach(build.artifacts, (artifact: CircleArtifactInterface) => {
+            const data = artifact.data;
+            
+            if (!series[data.key]) {
+                series[data.key] = {
                     series: {},
                     categories: [],
                     build: {},
@@ -46,10 +49,10 @@ export function setupSeriesData(builds: BuildInterface[]): ProjectSeriesData {
                 };
             }
 
-            series[artifact.key].series = populateCategorySeriesData(artifact.categories, series[artifact.key].series);
-            series[artifact.key].build = setCategorySeriesData(artifact.categories, {});
-            series[artifact.key].categories.push(build.build_num);
-            series[artifact.key].budget = artifact.budget;
+            series[data.key].series = populateCategorySeriesData(data.categories, series[data.key].series);
+            series[data.key].build = setCategorySeriesData(data.categories, {});
+            series[data.key].categories.push(build.build_num);
+            series[data.key].budget = data.budget;
         });
     });
 

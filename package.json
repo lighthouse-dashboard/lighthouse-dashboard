@@ -50,6 +50,7 @@
         "@types/hapi": "^17.0.10",
         "@types/hapi-auth-basic": "^5.0.4",
         "@types/inert": "^5.1.0",
+        "@types/lodash": "^4.14.108",
         "autoprefixer": "^7.1.2",
         "babel-core": "^6.22.1",
         "babel-eslint": "^8.2.1",
