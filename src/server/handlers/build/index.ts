@@ -58,3 +58,12 @@ export async function getBuildInfo (req: Request) {
     const { build_num, subject, user, build_time_millis, stop_time, status } = buildInfo;
     return { build_num, subject, user, build_time_millis, stop_time, status };
 };
+
+export async function getDreiguard(req: Request) {
+    const { vcs, username, project, build } = req.params;
+    const { token } = <ApplicationState>req.server.app;
+
+    const buildNum = parseInt(build);
+
+    return await buildService.getDreiguardData(vcs, username, project, buildNum, token);
+};

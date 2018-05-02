@@ -43,6 +43,6 @@ export async function getBuild(vcs: string, username: string, project: string, b
     return transformBuild(build);
 }
 
-export async function getArtifactContent(url: string): Promise<CircleReportContentInterface> {
+export async function getArtifactContent<T>(url: string): Promise<T> {
     return await request(url, { json: true });
 }

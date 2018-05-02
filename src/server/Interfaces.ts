@@ -1,3 +1,4 @@
+import DreiguardReportInterface from './interfaces/DreiguardReportInterface';
 export interface CircleProjectInterface {
     username: string;
     reponame: string;
@@ -17,7 +18,7 @@ export interface CircleBuildInterface {
 export interface CircleArtifactInterface {
     url: string,
     path: string;
-    data?: any;
+    data?: any | DreiguardReportInterface;
 }
 
 export interface CircleReportContentInterface {
@@ -45,7 +46,7 @@ export interface BuildInterface {
     build_num: number;
     subject: string,
     user: any;
-    build_time_millis: number, 
+    build_time_millis: number,
     stop_time: number;
     status: string;
     artifacts: CircleArtifactInterface[];
@@ -96,7 +97,6 @@ export interface BuildChartData {
 export interface BuildChartRowsData {
     [key: string]: Array<string | number>[];
 }
-
 
 export interface ApplicationState {
     token: string;

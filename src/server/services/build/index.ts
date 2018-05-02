@@ -5,6 +5,9 @@ import { BuildInterface } from 'Interfaces';
 
 import { buildChartDataFromTaggedResults, groupResultsByReportTag } from './helper';
 import { getDreihouseArtifactData } from '../artifact/dreihouse';
+import * as dreiguard from '../artifact/dreiguard';
+import DreiguardReportInterface from '../../interfaces/DreiguardReportInterface';
+import { flattenDreiguardData } from '../artifact/dreiguard';
 
 export async function getBuild(vcs: string, username: string, project: string, build: number, token: string): Promise<BuildInterface> {
     return await api.getBuild(vcs, username, project, build, token);
@@ -30,6 +33,8 @@ export async function getLatestBuilds(vcs: string, username: string, project: st
     return await api.getBuildsForProject(vcs, username, project, branch, token, limit, filter);
 }
 
-export async function getDreiguardData(vcs: string, username: string, project: string, branch: string, token: string) {
-    return 
+export async function getDreiguardData(vcs: string, username: string, project: string, buildNumber: number, token: string) {
+    const build = await getBuild(vcs, username, project, buildNumber, token);
+    const dreiguardData = await dreiguard.getArtifactData(build, vcs, username, project, token);
+    return flattenDreiguardData(dreiguardData);
 }

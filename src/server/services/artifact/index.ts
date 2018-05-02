@@ -3,7 +3,6 @@ import { extname, basename } from 'path';
 import { BuildInterface, CircleArtifactInterface, CircleReportContentInterface } from '../../Interfaces';
 import * as api from '../../api';
 import { filterDashboardArtifacts } from './helper';
-import { getDreihouseArtifactsData } from './dreihouse';
 
 export async function getArtifactsForBuild(build: BuildInterface, vcs: string, username: string, project: string, token: string): Promise<CircleArtifactInterface[]> {
     return await getArtifactsForBuildNum(build.build_num, vcs, username, project, token);
