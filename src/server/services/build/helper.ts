@@ -6,8 +6,7 @@ import { ReportCategory } from "../../interfaces/ReportCategory";
 import { CircleReportContent } from "../../interfaces/CircleReportContent";
 import { BuildChartRowsData, BuildChartData } from '../../interfaces/BuildChartData';
 
-export function groupResultsByReportTag(buildData: Build): GroupedBuildReports {
-    const { artifacts } = buildData;
+export function groupResultsByReportTag(artifacts: CircleArtifact[]): GroupedBuildReports {
     const endpoints: GroupedBuildReports = {};
 
     artifacts.forEach((item: CircleArtifact) => {
@@ -54,7 +53,7 @@ export function fillColumn(key: string, reports: CircleReportContent[], columns:
         if (!categories) {
             return;
         }
-        
+
         const shrinkedCategories = getCategoryScores(categories)
         const shrinkedBudget = getCategoryBudget(categories, budget);
         chartCategories = getCategoryNames(categories);

@@ -1,10 +1,6 @@
-
-import {filterForImageArtifacts, filterForJsonArtifacts, getArtifactsForBuildNum} from "../artifact/index";
-import {getArtifactContent} from "../artifact";
+import {getArtifactContent, getArtifactsForBuildNum} from "../artifact";
 import CircleArtifact from "../../interfaces/Artifact";
-import Build from "../../interfaces/Build";
 import DreiguardReport, {FlattedDreiguardData} from "../../interfaces/DreiguardReport";
-import {getBuild} from "../build";
 
 import {
     getComparedImages,
@@ -14,10 +10,11 @@ import {
     filterDreiguardArtifacts
 } from "./helper";
 
+import {filterArtifactsByType} from "../artifact/helper";
 
 async function getDreiguardArtifactsWithData(buildNumber: number, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
     const artifacts = await getArtifactsForBuildNum(buildNumber, vcs, username, project, token);
-    const jsonArtifacts = filterForJsonArtifacts(artifacts);
+    const jsonArtifacts = filterArtifactsByType('json', artifacts);
     const filteredArtifacts = filterDreiguardArtifacts(jsonArtifacts);
 
     const artifactsWithContent = filteredArtifacts.map(async (artifact: CircleArtifact) => {
@@ -32,8 +29,8 @@ async function getReportData(buildNumber: number, vcs: string, username: string,
     const artifacts = await getDreiguardArtifactsWithData(buildNumber, vcs, username, project, token);
     const dreiguardArtifacts = filterDreiguardArtifacts(artifacts);
 
-    const imageArtifacts = filterForImageArtifacts(dreiguardArtifacts);
-    const jsonArtifacts = filterForJsonArtifacts(dreiguardArtifacts);
+    const imageArtifacts = filterArtifactsByType('png', dreiguardArtifacts);
+    const jsonArtifacts = filterArtifactsByType('json', dreiguardArtifacts);
 
     return jsonArtifacts.map((artifact: CircleArtifact) => {
         return replaceImagePaths(<DreiguardReport[]>artifact.data, imageArtifacts);

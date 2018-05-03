@@ -1,24 +1,18 @@
-import { extname } from "path";
-
-import { getArtifactsForBuildNum } from "../artifact/index";
-import { getArtifactContent } from "../../api/index";
+import {getArtifactsForBuildNum, getArtifactContent} from "../artifact";
 import Build from "../../interfaces/Build";
 import CircleArtifact from "../../interfaces/Artifact";
-import { CircleReportContent } from "../../interfaces/CircleReportContent";
-import {getBuild} from "../build";
+import {CircleReportContent} from "../../interfaces/CircleReportContent";
 import {buildChartDataFromTaggedResults, groupResultsByReportTag} from "../build/helper";
+import {filterDreihouseArtifacts} from "./helper";
+import {filterArtifactsByType} from "../artifact/helper";
 
-async function getDreihouseArtifactsForBuild(build: Build, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
-    const artifacts = await getArtifactsForBuildNum(build.build_num, vcs, username, project, token);
-    return artifacts.filter((artifact: CircleArtifact) => {
-        return (extname(artifact.path) === '.json' && artifact.path.indexOf('.dashboard.') !== -1);
-    })
-}
+async function getDreihouseArtifactsWithData(buildNumber: number, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
+    const artifacts = await getArtifactsForBuildNum(buildNumber, vcs, username, project, token);
+    const jsonArtifacts = filterArtifactsByType('json', artifacts);
+    const dreihouseArtifacts = filterDreihouseArtifacts(jsonArtifacts);
 
-async function getDreihouseArtifactsData(build: Build, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
-    const artifacts = await getDreihouseArtifactsForBuild(build, vcs, username, project, token);
-    const artifactsWithContent = artifacts.map(async (artifact: CircleArtifact) => {
-        const content = await getArtifactContent<CircleReportContent>(artifact.url + `?circle-token=${token}`);
+    const artifactsWithContent = dreihouseArtifacts.map(async (artifact: CircleArtifact) => {
+        const content = await getArtifactContent<CircleReportContent>(artifact.url, token);
         if (!content.key) {
             content.key = content.tag + ':' + content.url;
         }
@@ -29,27 +23,17 @@ async function getDreihouseArtifactsData(build: Build, vcs: string, username: st
     return await Promise.all(artifactsWithContent);
 }
 
-export async function getDreihouseArtifactData(build: Build, vcs: string, username: string, project: string, token: string): Promise<Build> {
-    const dashboardArtifacts = await getDreihouseArtifactsData(build, vcs, username, project, token);
-    build.artifacts = dashboardArtifacts;
-    return build;
-}
-
 export async function getBuildsDreihouseArtifactData(builds: Build[], vcs: string, username: string, project: string, token: string): Promise<Build[]> {
     const buildsWithArtifacts = builds.map(async (build: Build) => {
-        return await getDreihouseArtifactData(build, vcs, username, project, token);
+        build.artifacts = await getDreihouseArtifactsWithData(build.build_num, vcs, username, project, token);
+        return build;
     });
     return await Promise.all(buildsWithArtifacts);
 }
 
 
 export async function getChartData(vcs: string, username: string, project: string, buildNum: number, token: string) {
-    const build = await getBuild(vcs, username, project, buildNum, token)
-    if (!build) {
-        throw new Error('Build not found');
-    }
-
-    const buildWithArtifacts = await getDreihouseArtifactData(build, vcs, username, project, token);
-    const groupedBuildReports = groupResultsByReportTag(buildWithArtifacts);
+    const artifacts = await getDreihouseArtifactsWithData(buildNum, vcs, username, project, token);
+    const groupedBuildReports = groupResultsByReportTag(artifacts);
     return await buildChartDataFromTaggedResults(groupedBuildReports);
 }

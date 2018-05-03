@@ -13,6 +13,7 @@ function replaceImage(imagePath: string, images: CircleArtifact[]): string {
     }
     return imagePath;
 }
+
 function replaceImages(files: string[], images: CircleArtifact[]): string[] {
     return files.map((file: string) => {
         return replaceImage(file, images);

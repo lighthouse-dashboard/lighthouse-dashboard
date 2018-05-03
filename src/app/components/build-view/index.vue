@@ -10,15 +10,6 @@
         </div>
 
         <div class="col s12">
-            <dreiguard-images
-                :vcs="vcs"
-                :username="username"
-                :project="project"
-                :buildnum="buildnum"
-            />
-        </div>
-
-        <div class="col s12">
             <build-charts
                 :vcs="vcs"
                 :username="username"
@@ -26,7 +17,6 @@
                 :buildnum="buildnum"
             />
         </div>
-
     </div>
 </template>
 

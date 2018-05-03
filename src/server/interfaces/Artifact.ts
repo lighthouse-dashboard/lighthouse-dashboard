@@ -1,4 +1,4 @@
-import DreiguardReport from "./DreiguardReportInterface";
+import DreiguardReport from "./DreiguardReport";
 
 export default interface CircleArtifact {
     url: string,
