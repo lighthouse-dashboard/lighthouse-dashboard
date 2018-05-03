@@ -371,6 +371,40 @@ const ROUTES: ServerRoute[] = [
             },
         },
     },
+    {
+        method: 'GET',
+        path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreiguard/diffs',
+        handler: build.getDreiguardDiffs,
+        options: {
+            cache: {
+                expiresIn: MONTH,
+                privacy: 'public',
+            },
+            tags: ['api'],
+            description: 'Get current running build',
+            validate: {
+                query: {
+                    access_token: joi.string()
+                        .description('API Secret. Can also be passed as Bearer token'),
+                },
+                params: {
+                    vcs: joi.string()
+                        .required()
+                        .description('VCS Type'),
+                    username: joi.string()
+                        .required()
+                        .description('Username used to fetch CircleCI projects'),
+                    project: joi.string()
+                        .required()
+                        .description('Specific CI project'),
+                    build: joi.alternatives()
+                        .try(joi.string(), joi.number())
+                        .required()
+                        .description('Build number'),
+                },
+            },
+        },
+    },
 
     {
         method: 'GET',

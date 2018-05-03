@@ -45,7 +45,8 @@
     "dreiguard": {
         "diff": "Diff",
         "source": "Source",
-        "reference": "Compare"
+        "reference": "Compare",
+        "no_diffs_available": "No diff data available."
     },
     "dashboard": {
         "title": "dreihouse"

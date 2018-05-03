@@ -4,7 +4,6 @@
             <p>{{ $t("message.no_info_available" )}}</p>
         </div>
 
-        <dreiguard-images v-if="selectedComparison" :comparison="selectedComparison" />
         <div v-if="dreiguard && dreiguard.length > 0">
             <div v-for="(artifactData, index) in dreiguard" :key="index">
                 <div v-for="(compare, index2) in artifactData" :key="index2">
@@ -18,12 +17,10 @@
 <script>
 
     import DreiguardDiff from '@/components/dreiguard-diff-result';
-    import DreiguardImages from '@/components/dreiguard-diff-images';
 
     export default {
         components: {
             DreiguardDiff,
-            DreiguardImages,
         },
         props: {
             vcs: {

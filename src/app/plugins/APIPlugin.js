@@ -217,5 +217,14 @@ export default class APIPlugin {
                 return resp.body;
             });
     }
+    getDreiguardDiffImagesData(vcs, username, project, buildNum) {
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${buildNum}/dreiguard/diffs`
+            )
+            .then(resp => {
+                return resp.body;
+            });
+    }
 
 }

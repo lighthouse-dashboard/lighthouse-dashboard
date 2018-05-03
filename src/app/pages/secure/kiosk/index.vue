@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="">
 
         <div class="row">
             <div class="col s12">
@@ -18,22 +18,42 @@
                 </h5>
             </div>
 
-            <div class="col s12"
+            <div class="row"
                  v-for="(project) in projects"
                  :key="project.lastBuild.build_num"
             >
-                <project-title
-                    :vcs="project.vcs"
-                    :username="project.username"
-                    :project="project.project"
-                    :buildnum="project.lastBuild.build_num"
-                />
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12 m8">
+                            <project-title
+                                :vcs="project.vcs"
+                                :username="project.username"
+                                :project="project.project"
+                                :buildnum="project.lastBuild.build_num"
+                            />
+                        </div>
+                        <div class="col s12 m4">
+                            <dreiguard-diff-images
+                                :vcs="project.vcs"
+                                :username="project.username"
+                                :project="project.project"
+                                :buildnum="project.lastBuild.build_num"
+                                :max="4"
+                            />
+                        </div>
+                    </div>
 
-                <trend-score-table
-                    :vcs="project.vcs"
-                    :username="project.username"
-                    :project="project.project"
-                />
+
+                </div>
+
+                <div class="col s12">
+
+                    <trend-score-table
+                        :vcs="project.vcs"
+                        :username="project.username"
+                        :project="project.project"
+                    />
+                </div>
             </div>
         </div>
 
@@ -58,6 +78,7 @@
     import TrendChartTable from "@/components/trend-chart-table";
     import Version from "@/components/version";
     import ProjectTitle from "@/components/project-title";
+    import DreiguardDiffImages from "@/components/dreiguard-diff-images";
 
     export default {
 
@@ -67,6 +88,7 @@
             TrendChartTable,
             Version,
             ProjectTitle,
+            DreiguardDiffImages,
         },
 
         data() {

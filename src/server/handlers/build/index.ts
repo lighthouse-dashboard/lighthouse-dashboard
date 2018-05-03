@@ -76,7 +76,16 @@ export async function getDreiguardScreenshots(req: Request) {
     const buildNum = parseInt(build);
 
     const images = await dreiguardService.getScreenshots(vcs, username, project, buildNum, token);
-    console.log(images);
+    return images;
+
+}
+
+export async function getDreiguardDiffs(req: Request) {
+    const {vcs, username, project, build} = req.params;
+    const {token} = <ApplicationState>req.server.app;
+    const buildNum = parseInt(build);
+
+    const images = await dreiguardService.getDiffs(vcs, username, project, buildNum, token);
     return images;
 
 }

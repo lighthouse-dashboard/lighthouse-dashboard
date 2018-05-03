@@ -30,6 +30,19 @@ export function getComparedImages(artifacts: Array<DreiguardReport[]>): string[]
 
     return uniq(images);
 }
+export function getDiffImages(artifacts: Array<DreiguardReport[]>): string[] {
+    let images: string[] = [];
+
+    artifacts.forEach((reports: DreiguardReport[]) => {
+        reports.forEach((report: DreiguardReport) => {
+            if(report.diff.diffFile) {
+                images.push(report.diff.diffFile);
+            }
+        });
+    });
+
+    return uniq(images);
+}
 
 export function filterForImageArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
     return artifacts.filter((artifact: CircleArtifact) => {

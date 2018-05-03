@@ -11,7 +11,7 @@ import {
     filterForImageArtifacts,
     flattenDreiguardData,
     replaceImagePaths,
-    filterForJsonArtifacts
+    filterForJsonArtifacts, getDiffImages
 } from "./helper";
 
 async function getJsonArtifacts(build: Build, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
@@ -56,4 +56,10 @@ export async function getScreenshots(vcs: string, username: string, project: str
     const dreiguardData = await getReportData(build, vcs, username, project, token);
 
     return getComparedImages(dreiguardData);
+}
+
+export async function getDiffs(vcs: string, username: string, project: string, buildNumber: number, token: string): Promise<string[]> {
+    const build = await getBuild(vcs, username, project, buildNumber, token);
+    const dreiguardData = await getReportData(build, vcs, username, project, token);
+    return getDiffImages(dreiguardData);
 }
