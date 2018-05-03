@@ -1,5 +1,6 @@
 import {uniq} from 'lodash';
 import {basename, extname} from "path";
+
 import CircleArtifact from "../../interfaces/Artifact";
 import DreiguardReport, {FlattedDreiguardData} from "../../interfaces/DreiguardReport";
 
@@ -12,7 +13,6 @@ function replaceImage(imagePath: string, images: CircleArtifact[]): string {
     }
     return imagePath;
 }
-
 function replaceImages(files: string[], images: CircleArtifact[]): string[] {
     return files.map((file: string) => {
         return replaceImage(file, images);
@@ -30,6 +30,7 @@ export function getComparedImages(artifacts: Array<DreiguardReport[]>): string[]
 
     return uniq(images);
 }
+
 export function getDiffImages(artifacts: Array<DreiguardReport[]>): string[] {
     let images: string[] = [];
 
@@ -44,18 +45,7 @@ export function getDiffImages(artifacts: Array<DreiguardReport[]>): string[] {
     return uniq(images);
 }
 
-export function filterForImageArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
-    return artifacts.filter((artifact: CircleArtifact) => {
-        return (extname(artifact.path) === '.png' && artifact.path.startsWith('dreiguard'));
-    })
-}
-export function filterForJsonArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
-    return artifacts.filter((artifact: CircleArtifact) => {
-        return (extname(artifact.path) === '.json' && artifact.path.startsWith('dreiguard'));
-    })
-}
-
-export function flattenDreiguardData(data: Array<DreiguardReport[]>): Array<FlattedDreiguardData[]> {
+export function flattenData(data: Array<DreiguardReport[]>): Array<FlattedDreiguardData[]> {
     return data.map((reports: DreiguardReport[]) => {
         return reports.map((report: DreiguardReport) => {
             return {
@@ -73,5 +63,11 @@ export function replaceImagePaths(reports: DreiguardReport[], imageArtifacts: Ci
         report.compareFiles = replaceImages(report.compareFiles, imageArtifacts);
         report.diff.diffFile = report.diff.diffFile ? replaceImage(report.diff.diffFile, imageArtifacts) : null;
         return report;
+    })
+}
+
+export function filterDreiguardArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
+     return artifacts.filter((artifact: CircleArtifact) => {
+        return (artifact.path.startsWith('dreiguard'));
     })
 }

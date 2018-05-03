@@ -7,6 +7,8 @@ import * as build from './handlers/build';
 import * as artifact from './handlers/artifact';
 import * as misc from './handlers/misc';
 import * as login from './handlers/login';
+import * as dreiguard from './handlers/dreiguard';
+import * as dreihouse from './handlers/dreihouse';
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
@@ -237,7 +239,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/history',
-        handler: project.getHistory,
+        handler: dreihouse.getHistory,
         options: {
             cache: {
                 expiresIn: 15 * MINUTE,
@@ -306,7 +308,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreiguard',
-        handler: build.getDreiguard,
+        handler: dreiguard.getDiffData,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -340,7 +342,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreiguard/screenshots',
-        handler: build.getDreiguardScreenshots,
+        handler: dreiguard.getScreenshots,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -374,7 +376,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreiguard/diffs',
-        handler: build.getDreiguardDiffs,
+        handler: dreiguard.getDiffImages,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -471,7 +473,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/chartdata',
-        handler: build.getBuildChartData,
+        handler: dreihouse.getBuildChartData,
         options: {
             cache: {
                 expiresIn: MONTH,

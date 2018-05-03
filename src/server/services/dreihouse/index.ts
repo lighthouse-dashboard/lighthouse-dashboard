@@ -5,6 +5,8 @@ import { getArtifactContent } from "../../api/index";
 import Build from "../../interfaces/Build";
 import CircleArtifact from "../../interfaces/Artifact";
 import { CircleReportContent } from "../../interfaces/CircleReportContent";
+import {getBuild} from "../build";
+import {buildChartDataFromTaggedResults, groupResultsByReportTag} from "../build/helper";
 
 async function getDreihouseArtifactsForBuild(build: Build, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
     const artifacts = await getArtifactsForBuildNum(build.build_num, vcs, username, project, token);
@@ -38,4 +40,16 @@ export async function getBuildsDreihouseArtifactData(builds: Build[], vcs: strin
         return await getDreihouseArtifactData(build, vcs, username, project, token);
     });
     return await Promise.all(buildsWithArtifacts);
+}
+
+
+export async function getChartData(vcs: string, username: string, project: string, buildNum: number, token: string) {
+    const build = await getBuild(vcs, username, project, buildNum, token)
+    if (!build) {
+        throw new Error('Build not found');
+    }
+
+    const buildWithArtifacts = await getDreihouseArtifactData(build, vcs, username, project, token);
+    const groupedBuildReports = groupResultsByReportTag(buildWithArtifacts);
+    return await buildChartDataFromTaggedResults(groupedBuildReports);
 }
