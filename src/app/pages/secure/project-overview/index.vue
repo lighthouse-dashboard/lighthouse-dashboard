@@ -3,6 +3,19 @@
         <div class="col s12">
             <div class="card">
                 <div class="card-content">
+                    <div class="card-title">{{ $t('message.last_build_screenshots') }}</div>
+                    <dreiguard-images
+                        :vcs="vcs"
+                        :username="username"
+                        :project="project"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
                     <div class="card-title">{{ $t('message.last_build_trends') }}</div>
                     <trend-score-table
                         :vcs="vcs"
@@ -33,6 +46,7 @@
     import GitHubLink from '@/components/links/github';
     import TrendScoreTable from '@/components/trend-score-table';
     import TrendChart from '@/components/trend-chart-table';
+    import DreiguardImages from '@/components/dreiguard-images';
 
     export default {
 
@@ -41,6 +55,7 @@
             GitHubLink,
             TrendScoreTable,
             TrendChart,
+            DreiguardImages,
         },
 
 

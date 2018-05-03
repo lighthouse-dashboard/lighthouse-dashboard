@@ -41,6 +41,24 @@ export default class APIPlugin {
      * @param {string} vcs
      * @param {string} username
      * @param {string} project
+     * @param {string} branch
+     * @return {*}
+     */
+    getLatestBuilds(vcs, username, project, branch = this.branch) {
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/latest`
+            )
+            .then(resp => {
+                return resp.body;
+            });
+    }
+
+    /**
+     * Get all artifacts for specific build
+     * @param {string} vcs
+     * @param {string} username
+     * @param {string} project
      * @param {string} build
      * @return {*}
      */
@@ -184,6 +202,16 @@ export default class APIPlugin {
         return Vue.http
             .get(
                 `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${buildNum}/dreiguard`
+            )
+            .then(resp => {
+                return resp.body;
+            });
+    }
+
+    getDreiguardImagesData(vcs, username, project, buildNum) {
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${buildNum}/dreiguard/screenshots`
             )
             .then(resp => {
                 return resp.body;
