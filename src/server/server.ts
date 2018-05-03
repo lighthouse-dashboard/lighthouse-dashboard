@@ -1,7 +1,7 @@
 'use strict';
 import {Server} from 'hapi';
 import * as AuthBasic from 'hapi-auth-basic';
-import { join } from 'path';
+import {join} from 'path';
 import * as Vision from 'vision';
 import * as Inert from 'inert';
 
@@ -20,8 +20,9 @@ const PORT = process.env.PORT || 3000;
 const LIMIT = process.env.LIMIT || 10;
 const ENV = process.env.NODE_ENV || 'development';
 const IS_DEV = ENV === 'development';
+const IS_TEST = ENV === 'test';
 
-let server:Server;
+let server: Server;
 
 const swaggerOptions = {
     info: {
@@ -48,7 +49,6 @@ const init = async () => {
 
         await server.register([
             Vision,
-
         ]);
     }
 

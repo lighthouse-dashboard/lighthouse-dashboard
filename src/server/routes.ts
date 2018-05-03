@@ -1,18 +1,20 @@
 import {ServerRoute} from "hapi";
+import ServiceContainer from 'servicecontainer';
 
 const joi = require('joi');
+import {resolve} from 'path';
 
-import * as project from './handlers/project';
-import * as build from './handlers/build';
-import * as artifact from './handlers/artifact';
 import * as misc from './handlers/misc';
 import * as login from './handlers/login';
 import * as dreiguard from './handlers/dreiguard';
-import * as dreihouse from './handlers/dreihouse';
+import ProjectController from "./controller/ProjectController";
+import BuildController from "./controller/BuildController";
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
 const MONTH = 30 * 24 * HOUR;
+
+let container = ServiceContainer.create(resolve(__dirname, 'config/services'));
 
 const ROUTES: ServerRoute[] = [
     {
@@ -31,7 +33,6 @@ const ROUTES: ServerRoute[] = [
             },
         },
     },
-
     {
         method: 'GET',
         path: '/api/version',
@@ -45,19 +46,16 @@ const ROUTES: ServerRoute[] = [
             description: 'Get the current api version',
             validate: {
                 query: {
-
-
                     access_token: joi.string()
                         .description('API Secret. Can also be passed as Bearer token'),
                 },
             },
         },
     },
-
     {
         method: 'GET',
         path: '/api/projects/{branch}',
-        handler: project.getAllProjects,
+        handler: container.get<ProjectController>('controller.project').getAll,
         options: {
             cache: {
                 expiresIn: MINUTE,
@@ -82,7 +80,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'DELETE',
         path: '/api/projects/{branch}',
-        handler: project.invalidateCache,
+        handler: container.get<ProjectController>('controller.project').invalidateCaches,
         options: {
             tags: ['api'],
             description: 'Invalidate cache of fetched projects',
@@ -103,7 +101,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}',
-        handler: build.getBranchBuilds,
+        handler: container.get<BuildController>('controller.build').getBranchBuilds,
         options: {
             cache: {
                 expiresIn: MINUTE,
@@ -137,7 +135,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/trending',
-        handler: build.getBranchTrend,
+        handler: container.get<BuildController>('controller.build').getBranchTrend,
         options: {
             cache: {
                 expiresIn: 15 * MINUTE,
@@ -171,7 +169,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/latest',
-        handler: build.getLatestBuilds,
+        handler: container.get<BuildController>('controller.build').getLatest,
         options: {
             cache: {
                 expiresIn: MINUTE,
@@ -205,7 +203,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/running',
-        handler: build.getRunningBuild,
+        handler: container.get<BuildController>('controller.build').getRunning,
         options: {
             cache: {
                 expiresIn: MINUTE,
@@ -239,7 +237,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/branch/{branch}/history',
-        handler: dreihouse.getHistory,
+        handler: container.get<ProjectController>('controller.project').getHistory,
         options: {
             cache: {
                 expiresIn: 15 * MINUTE,
@@ -273,7 +271,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}',
-        handler: build.getBuildInfo,
+        handler: container.get<BuildController>('controller.build').get,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -411,7 +409,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/latest/artifacts',
-        handler: artifact.getArtifacts,
+        handler: container.get<BuildController>('controller.build').getArtifacts,
         options: {
             tags: ['api'],
             description: 'Get all artifacts for build',
@@ -438,7 +436,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/artifacts',
-        handler: artifact.getArtifacts,
+        handler: container.get<BuildController>('controller.build').getArtifacts,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -473,7 +471,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/chartdata',
-        handler: dreihouse.getBuildChartData,
+        handler: container.get<BuildController>('controller.build').getBuildChartData,
         options: {
             cache: {
                 expiresIn: MONTH,
