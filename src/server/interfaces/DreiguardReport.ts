@@ -39,6 +39,7 @@ export interface Capability {
 export interface Diff {
 	total: number;
 	percentage: number;
+	diffFile?: string | null;
 }
 
 export default interface DreiguardReport {
@@ -49,4 +50,10 @@ export default interface DreiguardReport {
 	diff: Diff;
 	compareFiles: string[];
 	diffReport: DreiguardReport;
+}
+export interface FlattedDreiguardData {
+	diff: Diff;
+	compareFiles: string[];
+	reference: Capability | null,
+    source: Capability
 }

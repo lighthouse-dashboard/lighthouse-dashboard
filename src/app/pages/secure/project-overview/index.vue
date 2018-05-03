@@ -1,29 +1,28 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="col s12">
-                <h4>{{ $t('message.last_build_trends') }}</h4>
-            </div>
-            <div class="col s12">
-                <trend-score-table
-                    :vcs="vcs"
-                    :username="username"
-                    :project="project"
-                />
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">{{ $t('message.last_build_trends') }}</div>
+                    <trend-score-table
+                        :vcs="vcs"
+                        :username="username"
+                        :project="project"
+                    />
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col s12">
-                <h4>{{ $t('message.all_builds_trend') }}</h4>
-            </div>
-
-            <div class="col s12">
-                <trend-chart
-                    :vcs="vcs"
-                    :username="username"
-                    :project="project"
-                />
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">{{ $t('message.all_builds_trend') }}</div>
+                    <trend-chart
+                        :vcs="vcs"
+                        :username="username"
+                        :project="project"
+                    />
+                </div>
             </div>
         </div>
     </div>

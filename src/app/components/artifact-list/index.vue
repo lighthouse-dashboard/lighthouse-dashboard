@@ -1,9 +1,6 @@
 <template>
     <div v-if="htmlArtifacts && htmlArtifacts.length > 0">
-        <div class="collection with-header">
-            <div class="collection-header">
-                <h4>{{ $t("message.artifacts") }}</h4>
-            </div>
+        <div class="collection">
             <a class="truncate collection-item"
                target="_blank"
                v-for="html in htmlArtifacts"
@@ -56,7 +53,7 @@
 
         methods: {
             getFilename(path) {
-                return basename(path);
+                return path;
             },
         },
 

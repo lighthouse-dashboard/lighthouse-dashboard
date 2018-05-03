@@ -7,7 +7,7 @@ export function filterArtifactsByType(type: string, artifacts: CircleArtifact[])
     });
 }
 
-export function filterDashboardArtifacts(artifacts: CircleArtifact[]) {
+export function filterDashboardArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
     artifacts = filterArtifactsByType('json', artifacts);
     return artifacts.filter((item: CircleArtifact) => {
         if (basename(item.path).indexOf('.dashboard.') !== -1) {

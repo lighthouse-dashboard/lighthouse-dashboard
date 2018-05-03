@@ -1,10 +1,10 @@
 import { extname } from "path";
 
-import { getArtifactsForBuildNum } from ".";
-import { getArtifactContent } from "../../api";
-import Build from "../../interfaces/Build";
-import CircleArtifact from "../../interfaces/Artifact";
-import { CircleReportContent } from "../../interfaces/CircleReportContent";
+import { getArtifactsForBuildNum } from "../index";
+import { getArtifactContent } from "../../../api/index";
+import Build from "../../../interfaces/Build";
+import CircleArtifact from "../../../interfaces/Artifact";
+import { CircleReportContent } from "../../../interfaces/CircleReportContent";
 
 async function getDreihouseArtifactsForBuild(build: Build, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
     const artifacts = await getArtifactsForBuildNum(build.build_num, vcs, username, project, token);

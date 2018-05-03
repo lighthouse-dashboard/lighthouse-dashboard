@@ -1,24 +1,24 @@
 <template>
     <div>
-        <project-history
+        <build
             :vcs="vcs"
-            :showx="true"
-            :showlegend="true"
             :username="username"
             :project="project"
-
+            :buildnum="buildnum"
         />
     </div>
 </template>
 
 <script>
+    import Vue from "vue";
+    import { mapGetters } from 'vuex';
 
-
-    import ProjectHistory from "@/components/project-history";
+    import Build from "@/components/build-detail-view";
 
     export default {
+
         components: {
-            ProjectHistory,
+            Build,
         },
 
         props: {
@@ -36,6 +36,24 @@
                 type: String,
                 required: true,
             },
+
+            buildnum: {
+                type: Number,
+                required: true,
+            },
         },
+
+
+        data() {
+            return {};
+        },
+
+        computed: {
+            ...mapGetters({
+                branch: 'branch',
+            }),
+        },
+
+
     };
 </script>

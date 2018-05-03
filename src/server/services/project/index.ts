@@ -4,7 +4,7 @@ import * as api from '../../api';
 import { filterSupportedProjects } from './helper';
 import { getBuilds } from '../build';
 import { calculateTrendForSeries, setupSeriesData } from './trendUtils';
-import { getBuildsDreihouseArtifactData } from '../artifact/dreihouse';
+import { getBuildsDreihouseArtifactData } from '../artifact/dreihouse/index';
 import { ProjectSeriesData } from '../../interfaces/ProjectSeriesData';
 import { Project } from '../../interfaces/Project';
 

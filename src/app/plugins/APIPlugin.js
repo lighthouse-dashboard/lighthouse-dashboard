@@ -180,4 +180,14 @@ export default class APIPlugin {
             });
     }
 
+    getDreiguardData(vcs, username, project, buildNum) {
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${buildNum}/dreiguard`
+            )
+            .then(resp => {
+                return resp.body;
+            });
+    }
+
 }

@@ -18,21 +18,12 @@
             />
         </div>
 
-        <div class="col s12">
-            <artifact-list
-                :vcs="vcs"
-                :username="username"
-                :project="project"
-                :buildnum="buildnum"
-            />
-        </div>
     </div>
 </template>
 
 <script>
     import BuildTitle from "@/components/build-title";
     import BuildCharts from "@/components/build-charts";
-    import ArtifactList from '@/components/artifact-list';
 
 
     export default {
@@ -40,7 +31,6 @@
         components: {
             BuildCharts,
             BuildTitle,
-            ArtifactList,
         },
 
         props: {

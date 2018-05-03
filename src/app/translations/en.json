@@ -38,7 +38,13 @@
         "no_trend_data": "No trenddata found",
         "last_build_trends": "Lastest build trends",
         "all_builds_trend": "All builds trends",
-        "builds": "Builds"
+        "builds": "Builds",
+        "no_info_available": "No information available."
+    },
+    "dreiguard": {
+        "diff": "Diff",
+        "source": "Source",
+        "reference": "Compare"
     },
     "dashboard": {
         "title": "dreihouse"

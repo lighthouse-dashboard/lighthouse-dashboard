@@ -16,17 +16,18 @@
             <pineapple class="right" v-if="hasReachedBudget" :size="45"/>
         </div>
 
-        <div class="col s6 m7">
+        <div class="col s6 m3">
             <h5 v-if="build">
                 <built-at :stopTime="build.stop_time"/>
             </h5>
         </div>
 
-        <div class="col s12 m1">
+        <div class="col s12 m5">
             <commit-detail
                 v-if="build"
                 :useravatar="build.user.avatar_url"
                 :username="build.user.name"
+                :commitmessage="build.subject"
             />
         </div>
 

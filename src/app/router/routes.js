@@ -4,6 +4,7 @@ import MainSecure from '../pages/secure/index';
 import ProjectOverview from '../pages/secure/project-overview/index';
 import ProjectHistory from '../pages/secure/project-history/index';
 import ProjectBuild from '../pages/secure/project-builds/index';
+import ProjectBuildInfo from '../pages/secure/project-build-detail/index';
 import Project from '../pages/secure/project/index';
 
 import Login from '../pages/login/index';
@@ -28,7 +29,20 @@ export default [
                 children: [
                     { path: '', name: 'overview', component: ProjectOverview, props: true },
                     { path: 'builds', name: 'builds', component: ProjectBuild, props: true },
-                    { path: 'history', name: 'history', component: ProjectHistory, props: true },
+                    {
+                        path: 'builds/:buildnum', name: 'buildinfo', component: ProjectBuildInfo, props: (route) => ({
+                            vcs: route.params.vcs,
+                            username: route.params.username,
+                            project: route.params.project,
+                            buildnum: parseInt(route.params.buildnum),
+                        }),
+                    },
+                    {
+                        path: 'history',
+                        name: 'history',
+                        component: ProjectHistory,
+                        props: true,
+                    },
                 ],
             },
         ],
