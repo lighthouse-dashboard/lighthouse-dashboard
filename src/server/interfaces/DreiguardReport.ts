@@ -48,6 +48,7 @@ export default interface DreiguardReport {
 	threshold: number;
 	screenshot: string;
 	diff: Diff;
+	diffFile: string | null;
 	compareFiles: string[];
 	diffReport: DreiguardReport;
 }

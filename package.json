@@ -35,7 +35,7 @@
         "raven-js": "^3.24.2",
         "request": "^2.85.0",
         "request-promise": "^4.2.2",
-        "servicecontainer": "^7.1.0",
+        "servicecontainer": "^7.2.1",
         "show-toast": "^1.1.4",
         "ts-node": "^6.0.0",
         "vision": "^5.3.2",

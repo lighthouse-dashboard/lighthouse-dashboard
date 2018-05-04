@@ -62,7 +62,7 @@ export function flattenData(data: Array<DreiguardReport[]>): Array<FlattedDreigu
 export function replaceImagePaths(reports: DreiguardReport[], imageArtifacts: CircleArtifact[]): DreiguardReport[] {
     return reports.map((report: DreiguardReport) => {
         report.compareFiles = replaceImages(report.compareFiles, imageArtifacts);
-        report.diff.diffFile = report.diff.diffFile ? replaceImage(report.diff.diffFile, imageArtifacts) : null;
+        report.diff.diffFile = report.diffFile ? replaceImage(report.diffFile, imageArtifacts) : report.diffFile;
         return report;
     })
 }

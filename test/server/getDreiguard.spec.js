@@ -46,6 +46,12 @@ describe('Dreiguard', function () {
                 unit.object(report).hasProperty('diff');
                 unit.object(report).hasProperty('source');
                 unit.object(report).hasProperty('reference');
+
+                unit.array(report.compareFiles).is([
+                    'https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/Windows10_Chrome66.0.png',
+                    'https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/Windows10_Edge16.0.png'
+                ]);
+                unit.string(report.diff.diffFile).is('https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/diff/Windows10_Chrome66.0--Windows10_Edge16.0.png');
             });
     });
 
@@ -68,12 +74,11 @@ describe('Dreiguard', function () {
         })
             .then((data) => {
                 data = JSON.parse(data);
-                console.log(data);
                 unit.array(data).hasLength(4);
             });
     });
 
-    it.skip('get screenshot images', () => {
+    it('get screenshot images', () => {
         nock(API)
             .defaultReplyHeaders({
                 'Content-Type': 'application/json'
@@ -84,6 +89,7 @@ describe('Dreiguard', function () {
             .reply(200, require('./data/test/project/66/artifacts'))
 
             .get('/0/dreiguard/dreipol.ch.json')
+            .query(true)
             .reply(200, require('./data/test/project/66/dreipol.ch'))
 
 
@@ -92,7 +98,13 @@ describe('Dreiguard', function () {
         })
             .then((data) => {
                 data = JSON.parse(data);
-                unit.array(data).is(require('./data/test/project/66/screenshots'));
+                unit.array(data).is([
+                        "https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/Windows10_Chrome66.0.png",
+                        "https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/Windows10_Edge16.0.png",
+                        "https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/OSXHigh%20Sierra_Chrome66.0.png",
+                        "https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/OSXHigh%20Sierra_Firefox59.0.png"
+                    ]
+                );
             });
     });
 

@@ -18,12 +18,8 @@ export default class DreiguardService {
         this.artifactService = artifactService;
     }
 
-    private async getArtifactsWithData(buildNumber: number, vcs: string, username: string, project: string, token: string): Promise<CircleArtifact[]> {
-        const artifacts = await this.artifactService.getArtifactsForBuildNum(buildNumber, vcs, username, project, token);
-        const jsonArtifacts = filterArtifactsByType('json', artifacts);
-        const filteredArtifacts = filterDreiguardArtifacts(jsonArtifacts);
-
-        const artifactsWithContent = filteredArtifacts.map(async (artifact: CircleArtifact) => {
+    private async loadForArtifacts(artifacts: CircleArtifact[], token: string){
+         const artifactsWithContent = artifacts.map(async (artifact: CircleArtifact) => {
             artifact.data = await this.artifactService.getArtifactContent<DreiguardReport[]>(artifact.url, token);
             return artifact;
         });
@@ -32,17 +28,18 @@ export default class DreiguardService {
     }
 
     private async getReportData(buildNumber: number, vcs: string, username: string, project: string, token: string): Promise<Array<DreiguardReport[]>> {
-        const artifacts = await this.getArtifactsWithData(buildNumber, vcs, username, project, token);
+        const artifacts = await this.artifactService.getArtifactsForBuildNum(buildNumber, vcs, username, project, token);
+
         const dreiguardArtifacts = filterDreiguardArtifacts(artifacts);
-
-        const imageArtifacts = filterArtifactsByType('png', dreiguardArtifacts);
         const jsonArtifacts = filterArtifactsByType('json', dreiguardArtifacts);
+        const imageArtifacts = filterArtifactsByType('png', dreiguardArtifacts);
 
-        return jsonArtifacts.map((artifact: CircleArtifact) => {
+        const jsonArtifactsWithData = await this.loadForArtifacts(jsonArtifacts, token);
+
+        return jsonArtifactsWithData.map((artifact: CircleArtifact) => {
             return replaceImagePaths(<DreiguardReport[]>artifact.data, imageArtifacts);
         });
     }
-
 
     public async getDiffData(vcs: string, username: string, project: string, buildNumber: number, token: string): Promise<Array<FlattedDreiguardData[]>> {
         const dreiguardData = await this.getReportData(buildNumber, vcs, username, project, token);
@@ -58,5 +55,4 @@ export default class DreiguardService {
         const dreiguardData = await this.getReportData(buildNumber, vcs, username, project, token);
         return getDiffImages(dreiguardData);
     }
-
 }

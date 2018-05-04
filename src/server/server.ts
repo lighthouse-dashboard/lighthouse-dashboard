@@ -1,9 +1,11 @@
 'use strict';
+import {forEach} from 'lodash';
 import {Server} from 'hapi';
 import * as AuthBasic from 'hapi-auth-basic';
-import {join} from 'path';
+import {join, resolve} from 'path';
 import * as Vision from 'vision';
 import * as Inert from 'inert';
+import ServiceContainer from 'servicecontainer';
 
 const laabr = require('laabr');
 const AuthBearer = require('hapi-auth-bearer-token');
@@ -13,7 +15,7 @@ const {name, version} = require('../../package.json');
 import bearerStrategy from './auth/bearerStrategy';
 import routes from './routes';
 
-require('dotenv').config()
+require('dotenv').config();
 
 const TOKEN = process.env.CIRCLE_TOKEN;
 const PORT = process.env.PORT || 3000;
@@ -23,6 +25,7 @@ const IS_DEV = ENV === 'development';
 const IS_TEST = ENV === 'test';
 
 let server: Server;
+ServiceContainer.create(resolve(__dirname, 'config/services'));
 
 const swaggerOptions = {
     info: {
@@ -56,9 +59,7 @@ const init = async () => {
 
     server.auth.default('bearer');
 
-    for (let i = 0; i < routes.length; i++) {
-        server.route(routes[i]);
-    }
+    forEach(routes(), route => server.route(route));
 
     if (IS_DEV) {
         console.log(`Server running at: ${ server.info.uri }`);
@@ -66,7 +67,6 @@ const init = async () => {
 
     await server.start();
 };
-
 
 export async function stop() {
     return await server.stop();
