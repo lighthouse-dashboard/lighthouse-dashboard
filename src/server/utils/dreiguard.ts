@@ -4,19 +4,19 @@ import {basename} from "path";
 import CircleArtifact from "../interfaces/Artifact";
 import DreiguardReport, {FlattedDreiguardData} from "../interfaces/DreiguardReport";
 
-function replaceImage(imagePath: string, images: CircleArtifact[]): string {
+function replaceImage(imagePath: string, images: CircleArtifact[], token: string): string {
     for (let i = 0; i < images.length; i++) {
         const image = images[i];
         if (basename(imagePath) === basename(image.path)) {
-            return image.url;
+            return image.url+`?circle-token=${token}`;
         }
     }
     return imagePath;
 }
 
-function replaceImages(files: string[], images: CircleArtifact[]): string[] {
+function replaceImages(files: string[], images: CircleArtifact[], token: string): string[] {
     return files.map((file: string) => {
-        return replaceImage(file, images);
+        return replaceImage(file, images, token);
     });
 }
 
@@ -59,10 +59,10 @@ export function flattenData(data: Array<DreiguardReport[]>): Array<FlattedDreigu
     });
 }
 
-export function replaceImagePaths(reports: DreiguardReport[], imageArtifacts: CircleArtifact[]): DreiguardReport[] {
+export function replaceImagePaths(reports: DreiguardReport[], imageArtifacts: CircleArtifact[], token: string): DreiguardReport[] {
     return reports.map((report: DreiguardReport) => {
-        report.compareFiles = replaceImages(report.compareFiles, imageArtifacts);
-        report.diff.diffFile = report.diffFile ? replaceImage(report.diffFile, imageArtifacts) : report.diffFile;
+        report.compareFiles = replaceImages(report.compareFiles, imageArtifacts, token);
+        report.diff.diffFile = report.diffFile ? replaceImage(report.diffFile, imageArtifacts, token) : report.diffFile;
         return report;
     })
 }

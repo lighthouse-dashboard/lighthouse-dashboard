@@ -1,26 +1,27 @@
 <template>
     <div class="build-title " v-if="build">
         <div class="row">
-            <div class="col s3 m2">
-                <h5>
-                    <build-status
-                        :vcs="vcs"
-                        :username="username"
-                        :project="project"
-                        :buildnum="buildnum"/>
-                    <router-link :to="{name: 'buildinfo', params: {vcs, username, project, buildnum}}">#{{ buildnum }}
-                    </router-link>
-                </h5>
-                <pineapple class="right" v-if="hasReachedBudget" :size="45"/>
+            <div class="col s3 m3">
+                <div>
+                    <h5 v-if="build">
+                        <built-at :stopTime="build.stop_time"/>
+                    </h5>
+                </div>
+                <div>
+                    <h5>
+                        <build-status
+                            :vcs="vcs"
+                            :username="username"
+                            :project="project"
+                            :buildnum="buildnum"/>
+                        <router-link :to="{name: 'buildinfo', params: {vcs, username, project, buildnum}}">#{{ buildnum
+                            }}
+                        </router-link>
+                    </h5>
+                </div>
             </div>
 
-            <div class="col s4 m3">
-                <h5 v-if="build">
-                    <built-at :stopTime="build.stop_time"/>
-                </h5>
-            </div>
-
-            <div class="build-title__cell col m6">
+            <div class="build-title__cell col m9">
                 <commit-detail
                     v-if="build"
                     :useravatar="build.user.avatar_url"

@@ -1,28 +1,28 @@
 <template>
     <div class="row" v-if="build">
-        <div class="col s6 m4">
-            <router-link
-                :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
-                <h5>
-                    <build-status
-                        :vcs="vcs"
-                        :username="username"
-                        :project="project"
-                        :buildnum="buildnum"/>
-                    {{ project }}
-                </h5>
-            </router-link>
-
-            <pineapple class="right" v-if="hasReachedBudget" :size="45"/>
-        </div>
-
         <div class="col s6 m3">
-            <h5 v-if="build">
-                <built-at :stopTime="build.stop_time"/>
-            </h5>
-        </div>
+            <div>
+                <h5>
+                    <built-at :stopTime="build.stop_time"/>
+                </h5>
+            </div>
 
-        <div class="col s12 m5">
+            <div>
+                <router-link
+                    :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
+                    <h5>
+                        <build-status
+                            :vcs="vcs"
+                            :username="username"
+                            :project="project"
+                            :buildnum="buildnum"/>
+                        {{ project }}
+                    </h5>
+                </router-link>
+            </div>
+
+        </div>
+        <div class="col s12 m9">
             <commit-detail
                 v-if="build"
                 :useravatar="build.user.avatar_url"
@@ -30,7 +30,6 @@
                 :commitmessage="build.subject"
             />
         </div>
-
     </div>
 </template>
 

@@ -37,7 +37,7 @@ export default class DreiguardService {
         const jsonArtifactsWithData = await this.loadForArtifacts(jsonArtifacts, token);
 
         return jsonArtifactsWithData.map((artifact: CircleArtifact) => {
-            return replaceImagePaths(<DreiguardReport[]>artifact.data, imageArtifacts);
+            return replaceImagePaths(<DreiguardReport[]>artifact.data, imageArtifacts, token);
         });
     }
 

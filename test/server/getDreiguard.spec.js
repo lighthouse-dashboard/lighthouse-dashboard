@@ -54,7 +54,6 @@ describe('Dreiguard', function () {
                 unit.string(report.diff.diffFile).is('https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/diff/Windows10_Chrome66.0--Windows10_Edge16.0.png');
             });
     });
-
     it('get diff images', () => {
         nock(API)
             .defaultReplyHeaders({
