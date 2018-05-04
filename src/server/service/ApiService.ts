@@ -1,5 +1,5 @@
 import {Project, ProjectCache} from "../interfaces/Project";
-import {transformBuild, transformBuilds, transformProjects} from "../api/helpers";
+import {transformBuild, transformBuilds, transformProjects} from "../utils/api";
 import Build from "../interfaces/Build";
 import CircleArtifact from "../interfaces/Artifact";
 

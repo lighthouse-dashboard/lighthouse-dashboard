@@ -16,7 +16,10 @@ export const services = {
     "service.project": {
         "file": "../service/ProjectService",
         "arguments": [
-            "@service.api"
+            "@service.api",
+            "@service.dreihouse",
+            "@service.build",
+            "@service.artifact"
         ]
     },
     "service.build": {
@@ -29,6 +32,18 @@ export const services = {
         "file": "../service/ArtifactService",
         "arguments": [
             "@service.api"
+        ]
+    },
+    "service.dreiguard": {
+        "file": "../service/DreiguardService",
+        "arguments": [
+            "@service.artifact"
+        ]
+    },
+    "service.dreihouse": {
+        "file": "../service/DreihouseService",
+        "arguments": [
+            "@service.artifact"
         ]
     }
 };

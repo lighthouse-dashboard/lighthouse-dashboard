@@ -1,10 +1,10 @@
-import { GroupedBuildReports } from "../../interfaces/GroupedBuildReports";
-import Build from "../../interfaces/Build";
-import CircleArtifact from "../../interfaces/Artifact";
-import { Budget } from "../../interfaces/ProjectSeriesData";
-import { ReportCategory } from "../../interfaces/ReportCategory";
-import { CircleReportContent } from "../../interfaces/CircleReportContent";
-import { BuildChartRowsData, BuildChartData } from '../../interfaces/BuildChartData';
+import { GroupedBuildReports } from "../interfaces/GroupedBuildReports";
+import Build from "../interfaces/Build";
+import CircleArtifact from "../interfaces/Artifact";
+import { Budget } from "../interfaces/ProjectSeriesData";
+import { ReportCategory } from "../interfaces/ReportCategory";
+import { CircleReportContent } from "../interfaces/CircleReportContent";
+import { BuildChartRowsData, BuildChartData } from '../interfaces/BuildChartData';
 
 export function groupResultsByReportTag(artifacts: CircleArtifact[]): GroupedBuildReports {
     const endpoints: GroupedBuildReports = {};

@@ -1,7 +1,7 @@
-import { ReportDataSeries, CategoriesScore, ProjectSeriesData, ProjectArtifactTagData } from '../../interfaces/ProjectSeriesData';
-import { ReportCategory } from "../../interfaces/ReportCategory";
-import Build from '../../interfaces/Build';
-import CircleArtifact from '../../interfaces/Artifact';
+import { ReportDataSeries, CategoriesScore, ProjectSeriesData, ProjectArtifactTagData } from '../interfaces/ProjectSeriesData';
+import { ReportCategory } from "../interfaces/ReportCategory";
+import Build from '../interfaces/Build';
+import CircleArtifact from '../interfaces/Artifact';
 
 const { forEach, takeRight, subtract } = require('lodash');
 
@@ -35,7 +35,7 @@ export function setupSeriesData(builds: Build[]): ProjectSeriesData {
     forEach(builds, (build: Build) => {
         forEach(build.artifacts, (artifact: CircleArtifact) => {
             const data = artifact.data;
-            
+
             if (!series[data.key]) {
                 series[data.key] = {
                     series: {},

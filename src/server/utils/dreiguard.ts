@@ -1,8 +1,8 @@
 import {uniq} from 'lodash';
-import {basename, extname} from "path";
+import {basename} from "path";
 
-import CircleArtifact from "../../interfaces/Artifact";
-import DreiguardReport, {FlattedDreiguardData} from "../../interfaces/DreiguardReport";
+import CircleArtifact from "../interfaces/Artifact";
+import DreiguardReport, {FlattedDreiguardData} from "../interfaces/DreiguardReport";
 
 function replaceImage(imagePath: string, images: CircleArtifact[]): string {
     for (let i = 0; i < images.length; i++) {

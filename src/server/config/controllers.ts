@@ -1,5 +1,7 @@
 export const parameters = {
-    "env": "test"
+    "env": "test",
+    "BASIC_PASS": process.env.BASIC_PASS,
+    "SECRET": process.env.SECRET,
 };
 
 export const services = {
@@ -15,6 +17,18 @@ export const services = {
             "@service.project",
             "@service.build",
             "@service.artifact",
+            "@service.dreiguard",
+            "@service.dreihouse",
         ]
+    },
+    "controller.login": {
+        "file": "../controller/LoginController",
+        "arguments": [
+            "%BASIC_PASS%",
+            "%SECRET%"
+        ]
+    },
+    "controller.version": {
+        "file": "../controller/VersionController"
     }
-}
+};

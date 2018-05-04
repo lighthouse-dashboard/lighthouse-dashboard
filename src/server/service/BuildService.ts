@@ -1,6 +1,7 @@
+import {orderBy} from 'lodash';
+
 import Build from "../interfaces/Build";
 import ApiService from "./ApiService";
-import * as api from "../api";
 
 export default class BuildService {
     apiService: ApiService;
@@ -9,12 +10,17 @@ export default class BuildService {
         this.apiService = apiService;
     }
 
-    async getLatestBuilds(vcs: string, username: string, project: string, branch: string, token: string, limit: number, filter: string = 'completed'): Promise<Build[]> {
+    public async getLatestBuilds(vcs: string, username: string, project: string, branch: string, token: string, limit: number, filter: string = 'completed'): Promise<Build[]> {
         return await this.apiService.getBuildsForProject(vcs, username, project, branch, token, limit, filter);
     }
 
-    async getBuild(vcs: string, username: string, project: string, build: number, token: string): Promise<Build> {
+    public async getBuild(vcs: string, username: string, project: string, build: number, token: string): Promise<Build> {
         return await this.apiService.getBuild(vcs, username, project, build, token);
+    }
+
+    public async getBuilds(vcs: string, username: string, project: string, branch: string, token: string, limit: number): Promise<Build[]> {
+        const builds = await this.apiService.getBuildsForProject(vcs, username, project, branch, token, limit)
+        return orderBy(builds, ['build_num']);
     }
 
 }

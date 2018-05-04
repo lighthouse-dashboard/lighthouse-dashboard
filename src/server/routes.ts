@@ -4,11 +4,10 @@ import ServiceContainer from 'servicecontainer';
 const joi = require('joi');
 import {resolve} from 'path';
 
-import * as misc from './handlers/misc';
-import * as login from './handlers/login';
-import * as dreiguard from './handlers/dreiguard';
 import ProjectController from "./controller/ProjectController";
 import BuildController from "./controller/BuildController";
+import LoginController from "./controller/LoginController";
+import VersionController from "./controller/VersionController";
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
@@ -20,7 +19,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'POST',
         path: '/auth/login',
-        handler: login.login,
+        handler: container.get<LoginController>('controller.login').login,
         options: {
             auth: false,
             validate: {
@@ -36,7 +35,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/version',
-        handler: misc.getVersion,
+        handler: container.get<VersionController>('controller.version').getVersion,
         options: {
             cache: {
                 expiresIn: HOUR,
@@ -306,7 +305,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreiguard',
-        handler: dreiguard.getDiffData,
+        handler: container.get<BuildController>('controller.build').getDreiguardDiffReport,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -340,7 +339,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreiguard/screenshots',
-        handler: dreiguard.getScreenshots,
+        handler: container.get<BuildController>('controller.build').getScreenshots,
         options: {
             cache: {
                 expiresIn: MONTH,
@@ -374,7 +373,7 @@ const ROUTES: ServerRoute[] = [
     {
         method: 'GET',
         path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreiguard/diffs',
-        handler: dreiguard.getDiffImages,
+        handler: container.get<BuildController>('controller.build').getDiffImages,
         options: {
             cache: {
                 expiresIn: MONTH,

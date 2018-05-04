@@ -1,4 +1,4 @@
-import CircleArtifact from "../../interfaces/Artifact";
+import CircleArtifact from "../interfaces/Artifact";
 
 export function filterDreihouseArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
      return artifacts.filter((artifact: CircleArtifact) => {
