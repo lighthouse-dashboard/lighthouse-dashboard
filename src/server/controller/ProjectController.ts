@@ -18,7 +18,8 @@ export default class ProjectController {
 
     invalidateCaches = async (req: Request) => {
         const {branch} = req.params;
-        return await this.projectService.invalidateProjectsCache(branch);
+        await this.projectService.invalidateProjectsCache(branch);
+        return {};
     }
 
     getHistory = (req: Request) => {

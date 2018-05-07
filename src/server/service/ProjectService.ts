@@ -49,7 +49,7 @@ export default class ProjectService {
     }
 
     public invalidateProjectsCache(branch: string): void {
-        return this.apiService.invalidateCache(branch);
+        this.apiService.invalidateCache(branch);
     }
 
     public async getTrendData(vcs: string, username: string, project: string, branch: string, token: string, limit: number): Promise<ProjectSeriesData> {
