@@ -24,9 +24,10 @@
                         </p>
                         <p>- Modify the config files so they report your preferred paths and domains.</p>
                         <p>- Add the project to circleci</p>
-                        <p>- Make sure that the <i>dreipoldev</i> account has access to it (circleci & github)</p>
-                        <p>- Start a new build</p>
+                        <p>- Add <i>dreipoldev</i> as contributor on github(Only read rights are required)</p>
+                        <p>- Make <i>dreipoldev</i> follow the project on circleCi</p>
                         <p>- Clear the cache in the dashboard</p>
+                        <p>- HTTP Request are also cached, so it's a good idea to clear your browser cache too</p>
                     </div>
                 </div>
             </div>
