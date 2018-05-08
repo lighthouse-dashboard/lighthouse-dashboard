@@ -1,7 +1,7 @@
 <template>
     <div class="build-title " v-if="build">
         <div class="row">
-            <div class="col s3 m3">
+            <div class="col s6 m3">
                 <div>
                     <h5 v-if="build">
                         <built-at :stopTime="build.stop_time"/>
@@ -14,19 +14,35 @@
                             :username="username"
                             :project="project"
                             :buildnum="buildnum"/>
-                        <router-link :to="{name: 'buildinfo', params: {vcs, username, project, buildnum}}">#{{ buildnum
-                            }}
+                        <router-link :to="{name: 'buildinfo', params: {vcs, username, project, buildnum}}">
+                            #{{ buildnum }}
                         </router-link>
                     </h5>
                 </div>
             </div>
 
-            <div class="build-title__cell col m9">
+            <div class="build-title__cell col s12 m6">
                 <commit-detail
                     v-if="build"
                     :useravatar="build.user.avatar_url"
                     :username="build.user.name"
                     :commitmessage="build.subject"
+                />
+            </div>
+
+            <div class="col s6 m2">
+                <dreiguard-whitepage-alert
+                    :vcs="vcs"
+                    :username="username"
+                    :project="project"
+                    :buildnum="buildnum"
+                />
+
+                <dreiguard-diff-alert
+                    :vcs="vcs"
+                    :username="username"
+                    :project="project"
+                    :buildnum="buildnum"
                 />
             </div>
         </div>
@@ -41,6 +57,8 @@
     import BuiltAt from '@/components/built-at';
     import CommitDetail from '@/components/commit-detail';
     import Pineapple from '@/components/happy-pineapple';
+    import DreiguardWhitepageAlert from '@/components/dreiguard-whitepage-alert';
+    import DreiguardDiffAlert from '@/components/dreiguard-diff-alert';
 
 
     export default {
@@ -49,6 +67,9 @@
             BuiltAt,
             Pineapple,
             CommitDetail,
+
+            DreiguardWhitepageAlert,
+            DreiguardDiffAlert,
         },
 
         props: {

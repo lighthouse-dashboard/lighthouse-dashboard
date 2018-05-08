@@ -18,4 +18,6 @@ module.exports = {
         'seo',
         'dreipol',
     ],
+    whitepageAlerts: 0.8,
+    diffAlerts: 0.2,
 };

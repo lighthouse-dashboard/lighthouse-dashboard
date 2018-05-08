@@ -1,11 +1,22 @@
 <template>
     <div class="row">
-        <div class="col s12">
-            <build-title
-                :vcs="vcs"
-                :username="username"
-                :project="project"
-                :buildnum="buildnum"
+        <div class="row" v-if="build">
+            <div class="col s12 m4" >
+                <router-link :to="{name: 'buildinfo', params: {vcs, username, project, buildnum: build.build_num}}">
+                    #{{ build.build_num}}
+                </router-link>
+            </div>
+            <div class="col s12 m8">
+                <built-at :stopTime="build.stop_time"/>
+            </div>
+        </div>
+
+        <div class="build-title__cell col s12">
+            <commit-detail
+                v-if="build"
+                :useravatar="build.user.avatar_url"
+                :username="build.user.name"
+                :commitmessage="build.subject"
             />
         </div>
 
@@ -54,10 +65,13 @@
 </template>
 
 <script>
+    import BuiltAt from '@/components/built-at';
+
     import BuildTitle from "@/components/build-title";
     import BuildCharts from "@/components/build-charts";
     import ArtifactList from '@/components/artifact-list';
     import DreiguardOverview from '@/components/dreiguard-overview';
+    import CommitDetail from '@/components/commit-detail';
 
 
     export default {
@@ -67,6 +81,8 @@
             BuildTitle,
             ArtifactList,
             DreiguardOverview,
+            CommitDetail,
+            BuiltAt,
         },
 
         props: {
@@ -95,7 +111,28 @@
             return {
                 updater: null,
                 artifacts: null,
+                build: null
             };
+        },
+        methods: {
+            load() {
+                return this.$api
+                    .getBuildInfo(this.vcs, this.username, this.project, this.buildnum)
+                    .then((build) => {
+                        this.build = build;
+                    })
+                    .catch((e) => {
+                        this.$toast.error(e);
+                        if (e.status === 401) {
+                            this.$auth.logout();
+                            this.$router.push({ name: 'login' });
+                        }
+                    });
+            },
+        },
+
+        mounted() {
+            this.load();
         },
 
     };

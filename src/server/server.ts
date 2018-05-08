@@ -12,12 +12,13 @@ const AuthBearer = require('hapi-auth-bearer-token');
 const HapiSwagger = require('hapi-swagger');
 
 const {name, version} = require('../../package.json');
-import bearerStrategy from './auth/bearerStrategy';
+import BearerStrategy from './auth/BearerStrategy';
 import routes from './routes';
 
 require('dotenv').config();
 
 const TOKEN = process.env.CIRCLE_TOKEN;
+const SECRET = <string>process.env.SECRET;
 const PORT = process.env.PORT || 3000;
 const LIMIT = process.env.LIMIT || 10;
 const ENV = process.env.NODE_ENV || 'development';
@@ -55,7 +56,7 @@ const init = async () => {
         ]);
     }
 
-    server.auth.strategy('bearer', 'bearer-access-token', bearerStrategy);
+    server.auth.strategy('bearer', 'bearer-access-token', BearerStrategy(SECRET));
 
     server.auth.default('bearer');
 

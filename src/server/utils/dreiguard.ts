@@ -50,6 +50,7 @@ export function flattenData(data: Array<DreiguardReport[]>): Array<FlattedDreigu
     return data.map((reports: DreiguardReport[]) => {
         return reports.map((report: DreiguardReport) => {
             return {
+                whitepageDiff: report.whitepageDiff,
                 compareFiles: report.compareFiles,
                 diff: report.diff,
                 source: report.capability,

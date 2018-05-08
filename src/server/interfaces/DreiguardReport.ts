@@ -51,6 +51,7 @@ export default interface DreiguardReport {
 	diffFile: string | null;
 	compareFiles: string[];
 	diffReport: DreiguardReport;
+	whitepageDiff: Diff | null;
 }
 export interface FlattedDreiguardData {
 	diff: Diff;

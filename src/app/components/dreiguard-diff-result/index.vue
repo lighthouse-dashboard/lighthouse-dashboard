@@ -18,7 +18,7 @@
 
                 <tr>
                     <td>
-                        {{ comparison.diff.percentage }}
+                        <i class="material-icons small red-text" v-if="comparison.diff.percentage >= maxDiff">warning</i>
                     </td>
                     <td>
                         {{ comparison.source.os }}
@@ -50,12 +50,19 @@
 </template>
 
 <script>
+    import Vue from 'vue';
+
     export default {
         props: {
             comparison: {
                 type: Object,
                 required: true,
             },
+        },
+        data(){
+            return {
+                maxDiff: Vue.config.diffAlerts,
+            };
         },
     };
 </script>

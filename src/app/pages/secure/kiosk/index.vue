@@ -23,31 +23,15 @@
                  :key="project.lastBuild.build_num"
             >
                 <div class="col s12">
-                    <div class="row">
-                        <div class="col s12 m8">
-                            <project-title
-                                :vcs="project.vcs"
-                                :username="project.username"
-                                :project="project.project"
-                                :buildnum="project.lastBuild.build_num"
-                            />
-                        </div>
-                        <div class="col s12 m4">
-                            <dreiguard-diff-images
-                                :vcs="project.vcs"
-                                :username="project.username"
-                                :project="project.project"
-                                :buildnum="project.lastBuild.build_num"
-                                :max="4"
-                            />
-                        </div>
-                    </div>
-
-
+                    <project-title
+                        :vcs="project.vcs"
+                        :username="project.username"
+                        :project="project.project"
+                        :buildnum="project.lastBuild.build_num"
+                    />
                 </div>
 
                 <div class="col s12">
-
                     <trend-score-table
                         :vcs="project.vcs"
                         :username="project.username"
@@ -78,7 +62,7 @@
     import TrendChartTable from "@/components/trend-chart-table";
     import Version from "@/components/version";
     import ProjectTitle from "@/components/project-title";
-    import DreiguardDiffImages from "@/components/dreiguard-diff-images";
+    import DreiguardImages from "@/components/dreiguard-images";
 
     export default {
 
@@ -88,7 +72,7 @@
             TrendChartTable,
             Version,
             ProjectTitle,
-            DreiguardDiffImages,
+            DreiguardImages,
         },
 
         data() {

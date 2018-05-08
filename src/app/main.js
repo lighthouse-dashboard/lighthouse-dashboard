@@ -31,6 +31,8 @@ import {
     chartColors,
     reportCategories,
     versionUpdateInterval,
+    whitepageAlerts,
+    diffAlerts,
 } from './config';
 
 Vue.config.productionTip = false;
@@ -46,6 +48,8 @@ Vue.config.dateShortFormat = dateShortFormat;
 Vue.config.chartColors = chartColors;
 Vue.config.reportCategories = reportCategories;
 Vue.config.versionUpdateInterval = versionUpdateInterval;
+Vue.config.whitepageAlerts = whitepageAlerts;
+Vue.config.diffAlerts = diffAlerts;
 
 Vue.component('loader', Loader);
 
@@ -62,7 +66,7 @@ Vue.use(VueI18n);
 Vue.use(VueCookie);
 
 Vue.use(APIPlugin, {
-    api: apiEndpoint,
+    api: Vue.config.apiEndpoint,
     branch: Vue.config.defaultBranch,
 });
 Vue.use(ToastPlugin);

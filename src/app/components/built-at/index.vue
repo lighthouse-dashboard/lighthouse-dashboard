@@ -24,15 +24,8 @@
         },
 
         mounted() {
-
             const mStopTime = moment(this.stopTime);
-            const now = moment();
-
-            if (now.diff(mStopTime, 'hours') < 12) {
-                this.buildCompletedTime = mStopTime.fromNow();
-            } else {
-                this.buildCompletedTime = mStopTime.format(Vue.config.dateFormat);
-            }
+            this.buildCompletedTime = mStopTime.format(Vue.config.dateFormat);
         },
     };
 </script>

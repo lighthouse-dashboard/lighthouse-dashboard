@@ -40,16 +40,19 @@
         "last_build_screenshots": "Lastest build screenshots",
         "all_builds_trend": "All builds trends",
         "builds": "Builds",
-        "no_info_available": "No information available."
+        "no_info_available": "No information available.",
+        "latest_build": "Latest Build"
     },
     "dreiguard": {
         "diff": "Diff",
         "source": "Source",
         "reference": "Compare",
-        "no_diffs_available": "No diff data available."
+        "no_diffs_available": "No diff data available.",
+        "whitepage_alert" : "Potential Whitepage detected",
+        "diff_alert": "Large diff detected"
     },
     "dashboard": {
-        "title": "dreihouse"
+        "title": "Dreiboard"
     },
     "login": {
         "lead": "Diese Seite ist nicht öffentlich zugänglich!<br>Bitte geben Sie das Passwort ein:",

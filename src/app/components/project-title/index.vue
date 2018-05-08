@@ -21,13 +21,38 @@
                 </router-link>
             </div>
 
+            <div>
+                <router-link :to="{name: 'buildinfo', params: {vcs, username, project, buildnum}}">
+                    {{ $t("message.latest_build") }} #{{ buildnum }}
+                </router-link>
+            </div>
+
+
         </div>
-        <div class="col s12 m9">
+
+
+        <div class="col s12 m7">
             <commit-detail
                 v-if="build"
                 :useravatar="build.user.avatar_url"
                 :username="build.user.name"
                 :commitmessage="build.subject"
+            />
+        </div>
+
+        <div class="col s12 m2">
+            <dreiguard-whitepage-alert
+                :vcs="vcs"
+                :username="username"
+                :project="project"
+                :buildnum="buildnum"
+            />
+
+            <dreiguard-diff-alert
+                :vcs="vcs"
+                :username="username"
+                :project="project"
+                :buildnum="buildnum"
             />
         </div>
     </div>
@@ -36,11 +61,12 @@
 <script>
     import Vue from 'vue';
 
-
     import BuildStatus from '@/components/build-status';
     import BuiltAt from '@/components/built-at';
     import CommitDetail from '@/components/commit-detail';
     import Pineapple from '@/components/happy-pineapple';
+    import DreiguardWhitepageAlert from '@/components/dreiguard-whitepage-alert';
+    import DreiguardDiffAlert from '@/components/dreiguard-diff-alert';
 
 
     export default {
@@ -49,6 +75,8 @@
             BuiltAt,
             Pineapple,
             CommitDetail,
+            DreiguardWhitepageAlert,
+            DreiguardDiffAlert,
         },
 
         props: {
