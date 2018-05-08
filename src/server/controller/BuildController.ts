@@ -119,6 +119,4 @@ export default class BuildController {
         return images;
 
     }
-
-
 }

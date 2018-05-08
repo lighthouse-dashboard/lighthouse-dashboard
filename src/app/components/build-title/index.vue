@@ -50,7 +50,7 @@
     </div>
 </template>
 
-<script>
+    <script>
     import Vue from 'vue';
 
     import BuildStatus from '@/components/build-status';
@@ -59,7 +59,6 @@
     import Pineapple from '@/components/happy-pineapple';
     import DreiguardWhitepageAlert from '@/components/dreiguard-whitepage-alert';
     import DreiguardDiffAlert from '@/components/dreiguard-diff-alert';
-
 
     export default {
         components: {
