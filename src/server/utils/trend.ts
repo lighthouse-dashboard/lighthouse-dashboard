@@ -1,7 +1,8 @@
 import { ReportDataSeries, CategoriesScore, ProjectSeriesData, ProjectArtifactTagData } from '../interfaces/ProjectSeriesData';
-import { ReportCategory } from "../interfaces/ReportCategory";
 import Build from '../interfaces/Build';
 import CircleArtifact from '../interfaces/Artifact';
+import ReportCategory from "@dreipol/lighthouse-runner/dist/Interfaces/ReportCategory";
+import ReportResult from "@dreipol/lighthouse-runner/dist/Interfaces/ReportResult";
 
 const { forEach, takeRight, subtract } = require('lodash');
 
@@ -34,10 +35,12 @@ export function setupSeriesData(builds: Build[]): ProjectSeriesData {
 
     forEach(builds, (build: Build) => {
         forEach(build.artifacts, (artifact: CircleArtifact) => {
-            const data = artifact.data;
+            const data = <ReportResult>artifact.data;
 
             if (!series[data.key]) {
                 series[data.key] = {
+                    url: data.url,
+                    tag: data.tag,
                     series: {},
                     categories: [],
                     build: {},
@@ -45,6 +48,7 @@ export function setupSeriesData(builds: Build[]): ProjectSeriesData {
                     trend: {}
                 };
             }
+
 
             series[data.key].series = populateCategorySeriesData(data.categories, series[data.key].series);
             series[data.key].build = setCategorySeriesData(data.categories, {});

@@ -6,7 +6,7 @@
 
         <div class="col s12" v-for="(report, trend) in trendScores" :key="trend">
             <div>
-                <h5>{{ trend }}</h5>
+                <h5><small>{{ report.tag }}</small> <a :href="report.url" target="_blank">{{ report.url }}</a></h5>
             </div>
 
             <table class="trend-table striped centered">
@@ -101,6 +101,7 @@
 
                 this.$api.getProjectTrend(this.vcs, this.username, this.project, this.branch)
                     .then((trend) => {
+                        console.log(trend);
                         this.trendScores = trend;
                     })
                     .finally(() => {

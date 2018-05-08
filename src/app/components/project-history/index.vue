@@ -1,17 +1,20 @@
 <template>
     <div>
-        <div class="row" v-for="(target, url) in data" :key="url">
+        <div class="row" v-for="(target, key) in data" :key="key">
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <div class="card-title"><a target="_blank" :href="url">{{ url }}</a></div>
+                        <div class="card-title">
+                            <small>{{ target.tag }}</small>
+                            <a target="_blank" :href="target.url">{{ target.url }}</a>
+                        </div>
+
                         <artifact-history-chart
                             v-if="target"
                             :showlegend="showlegend"
                             :showx="showx"
                             :showy="showy"
                             :height="height"
-                            :url="url"
                             :data="target.series"
                             :categories="target.categories"
                         />

@@ -1,27 +1,29 @@
 <template>
     <div class="row">
-        <div class="row" v-if="build">
-            <div class="col s12 m2">
-                <div>
-                    <router-link :to="{name: 'buildinfo', params: {vcs, username, project, buildnum: build.build_num}}">
-                        #{{ build.build_num}}
-                    </router-link>
+        <div class="col s12" v-if="build">
+            <div class="row">
+                <div class="col s12 m2">
+                    <div>
+                        <router-link
+                            :to="{name: 'buildinfo', params: {vcs, username, project, buildnum: build.build_num}}">
+                            #{{ build.build_num}}
+                        </router-link>
+                    </div>
+                    <div>
+                        <built-at :stopTime="build.stop_time"/>
+                    </div>
                 </div>
-                <div>
-                    <built-at :stopTime="build.stop_time"/>
-                </div>
-            </div>
 
-            <div class="build-title__cell col s12 m10">
-                <commit-detail
-                    v-if="build"
-                    :useravatar="build.user.avatar_url"
-                    :username="build.user.name"
-                    :commitmessage="build.subject"
-                />
+                <div class="build-title__cell col s12 m10">
+                    <commit-detail
+                        v-if="build"
+                        :useravatar="build.user.avatar_url"
+                        :username="build.user.name"
+                        :commitmessage="build.subject"
+                    />
+                </div>
             </div>
         </div>
-
 
         <div class="col s12">
             <div class="card">

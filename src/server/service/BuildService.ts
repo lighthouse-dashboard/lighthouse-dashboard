@@ -22,5 +22,4 @@ export default class BuildService {
         const builds = await this.apiService.getBuildsForProject(vcs, username, project, branch, token, limit)
         return orderBy(builds, ['build_num']);
     }
-
 }

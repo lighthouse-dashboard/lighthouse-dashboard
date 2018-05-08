@@ -1,10 +1,9 @@
 import { GroupedBuildReports } from "../interfaces/GroupedBuildReports";
-import Build from "../interfaces/Build";
 import CircleArtifact from "../interfaces/Artifact";
-import { Budget } from "../interfaces/ProjectSeriesData";
-import { ReportCategory } from "../interfaces/ReportCategory";
 import { CircleReportContent } from "../interfaces/CircleReportContent";
 import { BuildChartRowsData, BuildChartData } from '../interfaces/BuildChartData';
+import ReportCategory from "@dreipol/lighthouse-runner/dist/Interfaces/ReportCategory";
+import BudgetInterface from "@dreipol/lighthouse-runner/dist/Interfaces/BudgetInterface";
 
 export function groupResultsByReportTag(artifacts: CircleArtifact[]): GroupedBuildReports {
     const endpoints: GroupedBuildReports = {};
@@ -25,7 +24,7 @@ function getCategoryScores(categories: ReportCategory[]): number[] {
     });
 }
 
-function getCategoryBudget(categories: ReportCategory[], budget: Budget): number[] {
+function getCategoryBudget(categories: ReportCategory[], budget: BudgetInterface): number[] {
     return categories.map((_item) => {
         return <number>(budget[_item.id] ? budget[_item.id] : null);
     });

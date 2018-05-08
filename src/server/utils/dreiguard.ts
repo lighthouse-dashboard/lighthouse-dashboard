@@ -8,7 +8,10 @@ function replaceImage(imagePath: string, images: CircleArtifact[], token: string
     for (let i = 0; i < images.length; i++) {
         const image = images[i];
         if (basename(imagePath) === basename(image.path)) {
-            return image.url+`?circle-token=${token}`;
+            if (process.env.NODE_ENV === 'production') {
+                return image.url + `?circle-token=${token}`;
+            }
+            return image.url;
         }
     }
     return imagePath;
@@ -37,7 +40,7 @@ export function getDiffImages(artifacts: Array<DreiguardReport[]>): string[] {
 
     artifacts.forEach((reports: DreiguardReport[]) => {
         reports.forEach((report: DreiguardReport) => {
-            if(report.diff.diffFile) {
+            if (report.diff.diffFile) {
                 images.push(report.diff.diffFile);
             }
         });
@@ -69,7 +72,7 @@ export function replaceImagePaths(reports: DreiguardReport[], imageArtifacts: Ci
 }
 
 export function filterDreiguardArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
-     return artifacts.filter((artifact: CircleArtifact) => {
+    return artifacts.filter((artifact: CircleArtifact) => {
         return (artifact.path.startsWith('dreiguard'));
     })
 }
