@@ -3,12 +3,18 @@ import Build from "../interfaces/Build";
 import { CircleBuild } from "../interfaces/CircleBuild";
 
 export function transformProject(project: CircleProject, branch: string): Project {
-    return {
+    const _project: Project = {
         vcs: project.vcs_type,
         username: project.username,
         project: project.reponame,
-        lastBuild: transformBuild(project.branches[branch].last_success)
+        lastBuild: null,
     };
+
+    if(project.branches[branch]) {
+        _project.lastBuild = transformBuild(project.branches[branch].last_success)
+    }
+
+    return _project;
 }
 
 export function transformProjects(projects: CircleProject[], branch: string): Project[] {

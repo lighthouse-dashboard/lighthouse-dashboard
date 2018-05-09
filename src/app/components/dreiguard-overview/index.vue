@@ -53,7 +53,6 @@
                 this.$api.getDreiguardData(this.vcs, this.username, this.project, this.buildnum)
                     .then(data => {
                         this.dreiguard = data;
-                        console.log(data);
                     });
             },
             onSelect(data){

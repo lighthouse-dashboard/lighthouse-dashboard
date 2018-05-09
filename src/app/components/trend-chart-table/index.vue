@@ -101,7 +101,6 @@
 
                 this.$api.getProjectTrend(this.vcs, this.username, this.project, this.branch)
                     .then((trend) => {
-                        console.log(trend);
                         this.trendScores = trend;
                     })
                     .finally(() => {

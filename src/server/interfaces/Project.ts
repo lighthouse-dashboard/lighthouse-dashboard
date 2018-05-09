@@ -3,7 +3,7 @@ import Build from "./Build";
 export interface Project {
     username: string;
     project: string;
-    lastBuild: Build;
+    lastBuild: Build | null;
     vcs: string;
 }
 

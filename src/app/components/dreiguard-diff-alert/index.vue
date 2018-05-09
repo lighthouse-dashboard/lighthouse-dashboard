@@ -53,7 +53,6 @@
 
                 return this.dreiguardArtifacts.some((artifact) => {
                     return artifact.some((report) => {
-                        console.log(report.diff.percentage );
                         return report.diff !== null && report.diff.percentage >= this.maxDiff;
                     });
                 });

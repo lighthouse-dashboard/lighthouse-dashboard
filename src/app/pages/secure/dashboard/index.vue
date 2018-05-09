@@ -23,7 +23,7 @@
 
             <div class="col s12"
                  v-for="(project) in projects"
-                 :key="project.lastBuild.build_num"
+                 :key="project.project+project.lastBuild.build_num"
             >
                 <project-title
                     :vcs="project.vcs"

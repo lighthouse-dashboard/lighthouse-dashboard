@@ -27,6 +27,10 @@ export default class ProjectService {
 
     private async filterSupportedProjects(projects: Project[], branch: string, token: string): Promise<Project[]> {
         const filteredProjectsPromises = map(projects, (async (project: Project) => {
+            if(!project.lastBuild){
+                return null;
+            }
+
             const artifacts = await this.artifactService.getArtifactsForBuildNum(project.lastBuild.build_num, project.vcs, project.username, project.project, token);
             const jsonArtifacts = this.artifactService.filterArtifactsByType('json', artifacts);
             const dreihouseArtifacts = this.dreihouseService.filterArtifacts(jsonArtifacts);

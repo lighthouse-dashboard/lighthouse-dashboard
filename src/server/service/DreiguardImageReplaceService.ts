@@ -3,7 +3,6 @@ import RunReport from "@dreipol/dreiguard/bin/RunReport";
 import CircleArtifact from "../interfaces/Artifact";
 
 export default class DreiguardImageReplaceService {
-
     public replaceImage(imagePath: string, images: CircleArtifact[], token: string): string {
         for (let i = 0; i < images.length; i++) {
             const image = images[i];
@@ -26,6 +25,7 @@ export default class DreiguardImageReplaceService {
     public replaceImagePaths(reports: RunReport[], imageArtifacts: CircleArtifact[], token: string): RunReport[] {
         return reports.map((report: RunReport) => {
             report.compareFiles = this.replaceImages(report.compareFiles, imageArtifacts, token);
+            report.screenshot = this.replaceImage(report.screenshot, imageArtifacts, token);
             if (report.diff) {
                 report.diff.diffFile = report.diffFile ? this.replaceImage(report.diffFile, imageArtifacts, token) : report.diffFile;
             }
