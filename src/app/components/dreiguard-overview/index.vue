@@ -7,7 +7,7 @@
         <div v-if="dreiguard && dreiguard.length > 0">
             <div v-for="(artifactData, index) in dreiguard" :key="index">
                 <div v-for="(compare, index2) in artifactData" :key="index2">
-                    <dreiguard-diff :comparison="compare" @select="onSelect"/>
+                    <dreiguard-diff-result :comparison="compare" @select="onSelect"/>
                 </div>
             </div>
         </div>
@@ -16,11 +16,11 @@
 
 <script>
 
-    import DreiguardDiff from '@/components/dreiguard-diff-result';
+    import DreiguardDiffResult from '@/components/dreiguard-diff-result';
 
     export default {
         components: {
-            DreiguardDiff,
+            DreiguardDiffResult,
         },
         props: {
             vcs: {

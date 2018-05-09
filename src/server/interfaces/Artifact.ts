@@ -1,7 +1,7 @@
-import DreiguardReport from "./DreiguardReport";
+import RunReport from "@dreipol/dreiguard/bin/RunReport";
 
 export default interface CircleArtifact {
     url: string,
     path: string;
-    data?: any | DreiguardReport;
+    data?: any | RunReport;
 }

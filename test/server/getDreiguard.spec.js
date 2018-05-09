@@ -42,15 +42,11 @@ describe('Dreiguard', function () {
                 unit.array(reports).hasLength(4);
 
                 const report = reports[0];
-                unit.object(report).hasProperty('compareFiles');
+                unit.object(report).hasProperty('capability');
+                unit.object(report).hasProperty('screenshot');
                 unit.object(report).hasProperty('diff');
-                unit.object(report).hasProperty('source');
-                unit.object(report).hasProperty('reference');
 
-                unit.array(report.compareFiles).is([
-                    'https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/Windows10_Chrome66.0.png',
-                    'https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/Windows10_Edge16.0.png'
-                ]);
+
                 unit.string(report.diff.diffFile).is('https://circleci.com/api/v1.1/0/dreiguard/dreipol.ch/diff/Windows10_Chrome66.0--Windows10_Edge16.0.png');
             });
     });

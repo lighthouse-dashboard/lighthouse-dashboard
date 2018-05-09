@@ -6,8 +6,6 @@ import {ProjectSeriesData} from "../interfaces/ProjectSeriesData";
 import {calculateTrendForSeries, setupSeriesData} from "../utils/trend";
 import DreihouseService from "./DreihouseService";
 import BuildService from "./BuildService";
-import {filterDreihouseArtifacts} from "../utils/dreihouse";
-import {filterArtifactsByType} from "../utils/artifacts";
 import ArtifactService from "./ArtifactService";
 
 export default class ProjectService {
@@ -30,8 +28,8 @@ export default class ProjectService {
     private async filterSupportedProjects(projects: Project[], branch: string, token: string): Promise<Project[]> {
         const filteredProjectsPromises = map(projects, (async (project: Project) => {
             const artifacts = await this.artifactService.getArtifactsForBuildNum(project.lastBuild.build_num, project.vcs, project.username, project.project, token);
-            const jsonArtifacts = filterArtifactsByType('json', artifacts);
-            const dreihouseArtifacts = filterDreihouseArtifacts(jsonArtifacts);
+            const jsonArtifacts = this.artifactService.filterArtifactsByType('json', artifacts);
+            const dreihouseArtifacts = this.dreihouseService.filterArtifacts(jsonArtifacts);
             if (dreihouseArtifacts.length > 0) {
                 return project;
             }

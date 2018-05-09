@@ -15,6 +15,7 @@
                 :username="username"
                 :project="project"
                 :buildnum="buildnum"
+                :height="200"
             />
         </div>
     </div>

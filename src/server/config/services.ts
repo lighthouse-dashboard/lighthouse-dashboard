@@ -37,7 +37,8 @@ export const services = {
     "service.dreiguard": {
         "file": "../service/DreiguardService",
         "arguments": [
-            "@service.artifact"
+            "@service.artifact",
+            "@service.imagereplace",
         ]
     },
     "service.dreihouse": {
@@ -45,5 +46,9 @@ export const services = {
         "arguments": [
             "@service.artifact"
         ]
+    },
+    "service.imagereplace": {
+        "file": "../service/DreiguardImageReplaceService",
+        "arguments": []
     }
 };

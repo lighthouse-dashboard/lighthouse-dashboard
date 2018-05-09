@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="col s12">
+        <div class="col s12 xl6">
             <div class="card">
                 <div class="card-content">
                     <div class="card-title">Dreiguard</div>
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="col s12">
+        <div class="col s12 xl6">
             <div class="card">
                 <div class="card-content">
                     <div class="card-title">{{ $t("message.artifacts") }}</div>
