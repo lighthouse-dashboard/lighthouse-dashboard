@@ -1,6 +1,6 @@
 <template>
     <div>
-        <build
+        <build-detail-view
             :vcs="vcs"
             :username="username"
             :project="project"
@@ -13,12 +13,12 @@
     import Vue from "vue";
     import { mapGetters } from 'vuex';
 
-    import Build from "@/components/build-detail-view";
+    import BuildDetailView from "@/components/build-detail-view";
 
     export default {
 
         components: {
-            Build,
+            BuildDetailView,
         },
 
         props: {

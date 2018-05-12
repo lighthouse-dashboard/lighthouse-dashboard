@@ -10,7 +10,7 @@ export function transformProject(project: CircleProject, branch: string): Projec
         lastBuild: null,
     };
 
-    if(project.branches[branch]) {
+    if(project.branches[branch] && project.branches[branch].last_success) {
         _project.lastBuild = transformBuild(project.branches[branch].last_success)
     }
 

@@ -1,12 +1,19 @@
 <template>
-    <div :title="buildscore+'/'+budgetscore">
+    <small :class="color">
+        {{ buildscore }}
+        <i class="material-icons tiny" v-if="trendscore > 0">trending_up</i>
+        <i class="material-icons tiny" v-if="trendscore < 0">trending_down</i>
+    </small>
+    <!--
+    <span :title="buildscore+'/'+budgetscore">
         <span :class="scorecolor">{{ buildscore }}</span>
         <span v-if="trendscore !== 0" :class="color">
             <i class="material-icons tiny" v-if="trendscore > 0">trending_up</i>
             <i class="material-icons tiny" v-if="trendscore < 0">trending_down</i>
             <small>{{ trendscore }}</small>
         </span>
-    </div>
+    </span>
+    -->
 </template>
 
 <script>

@@ -25,47 +25,40 @@
             </div>
         </div>
 
-        <div class="col s12">
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-title">Dreihouse</div>
-
-                    <build-charts
-                        :vcs="vcs"
-                        :username="username"
-                        :project="project"
-                        :buildnum="buildnum"
-                    />
-                </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs" ref="tabs">
+                    <li class="tab col s4"><a class="active" href="#dreihouse">Dreihouse</a></li>
+                    <li class="tab col s4"><a href="#dreiguard">Dreiguard</a></li>
+                    <li class="tab col s4"><a href="#artifacts">Artifacts</a></li>
+                </ul>
+            </div>
+            <div class="col s12" id="dreihouse" >
+                <build-charts
+                    :vcs="vcs"
+                    :username="username"
+                    :project="project"
+                    :buildnum="buildnum"
+                />
+            </div>
+            <div class="col s12" id="dreiguard" >
+                <dreiguard-overview
+                    :vcs="vcs"
+                    :username="username"
+                    :project="project"
+                    :buildnum="buildnum"/>
             </div>
         </div>
-
-        <div class="col s12 xl6">
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-title">Dreiguard</div>
-                    <dreiguard-overview
-                        :vcs="vcs"
-                        :username="username"
-                        :project="project"
-                        :buildnum="buildnum"/>
-                </div>
-            </div>
+        <div class="col s12" id="artifacts">
+            <artifact-list
+                :vcs="vcs"
+                :username="username"
+                :project="project"
+                :buildnum="buildnum"
+            />
         </div>
+    </div>
 
-        <div class="col s12 xl6">
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-title">{{ $t("message.artifacts") }}</div>
-                    <artifact-list
-                        :vcs="vcs"
-                        :username="username"
-                        :project="project"
-                        :buildnum="buildnum"
-                    />
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -138,6 +131,8 @@
 
         mounted() {
             this.load();
+            const instance = M.Tabs.init(this.$refs.tabs, {});
+
         },
 
     };

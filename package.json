@@ -7,7 +7,7 @@
     "scripts": {
         "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
         "start": "npm run dev",
-        "test": "npm run build-server &&NODE_ENV=test node_modules/.bin/mocha test/server/**/*.spec.js",
+        "test": "npm run build-server && NODE_ENV=test node_modules/.bin/mocha test/server/**/*.spec.js",
         "lint": "eslint --ext .js,.vue src test/unit",
         "build": "npm run build-server && node build/build.js",
         "build-server": "node_modules/.bin/tsc -p src/server",

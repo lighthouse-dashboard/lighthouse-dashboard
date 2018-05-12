@@ -4,47 +4,45 @@
             <loader/>
         </div>
 
-        <div class="col s12" v-for="(report, trend) in trendScores" :key="trend">
-            <div>
-                <h5><small>{{ report.tag }}</small> <a :href="report.url" target="_blank">{{ report.url }}</a></h5>
+        <div v-for="(report, trend, index) in trendScores" :key="trend">
+            <div class="col s12 " :class="{'grey lighten-5': index%2}">
+                <div>
+                    <h5>
+                        <small>{{ report.tag }}</small>
+                        <a target="_blank" :href="report.url">{{ report.url }}</a>
+                    </h5>
+                </div>
+
+                <div class="row">
+                    <div class="col s6 m4 l2" v-for="category in categories" :key="category">
+                        <div class="card">
+                            <div class="card-panel " :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
+                                <span class="card-title truncate">
+                                    {{ $t(`message.category_${category}`) }}
+                                     <score
+                                         :vcs="vcs"
+                                         :username="username"
+                                         :project="project"
+                                         :trendscore="report.trend[category]"
+                                         :buildscore="report.build[category]"
+                                         :budgetscore="report.budget[category]"
+                                         :category="category"
+                                     />
+                                </span>
+
+                                <chart
+                                    type="line"
+                                    :height="50"
+                                    :columns="[ [category, ...report.series[category]]]"
+                                    :categories="report.categories"
+                                />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-            <table class="trend-table striped centered">
-                <tbody>
-                    <tr>
-                        <td v-for="category in categories"
-                            :key="category">
-                            {{ $t(`message.category_${category}`) }}
-                        </td>
-                    </tr>
-                </tbody>
-
-                <tbody>
-                    <tr>
-                        <td v-for="category in categories"
-                            :key="category">
-
-                            <score
-                                :vcs="vcs"
-                                :username="username"
-                                :project="project"
-                                :trendscore="report.trend[category]"
-                                :buildscore="report.build[category]"
-                                :budgetscore="report.budget[category]"
-                                :category="category"
-                            />
-
-                            <chart
-                                type="line"
-                                :height="50"
-                                :width="150"
-                                :columns="[ [category, ...report.series[category]]]"
-                                :categories="report.categories"
-                            />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </template>

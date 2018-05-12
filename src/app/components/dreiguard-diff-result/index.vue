@@ -1,15 +1,13 @@
 <template>
     <div class="row dreiguard-diff-result">
-        <div class="col s12">
+        <div class="col s12 m6">
             <img class="responsive-img dreiguard-diff-result__image" :src="comparison.screenshot"/>
+            {{ $t("message.screenshot") }}
         </div>
 
-        <div class="col s12">
-            <i class="material-icons small" v-if="comparison.diff.percentage >= maxDiff">warning</i>
-            {{ comparison.capability.os }}
-            {{ comparison.capability.os_version }}
-            {{ comparison.capability.browserName }}
-            {{ comparison.capability.browser_version }}
+        <div class="col s12 m6">
+            <img class="responsive-img dreiguard-diff-result__image" :src="comparison.diff.diffFile"/>
+            {{ $t("message.diffimage") }}
         </div>
     </div>
 </template>

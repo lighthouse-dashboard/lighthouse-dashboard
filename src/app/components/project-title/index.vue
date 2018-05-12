@@ -1,12 +1,14 @@
 <template>
     <div class="row" v-if="build">
-        <div class="col s6 m3">
+        <div class="col s6 m4 l3">
             <div>
                 <h5>
                     <built-at :stopTime="build.stop_time"/>
                 </h5>
             </div>
+        </div>
 
+        <div class="col s6 m4 l3">
             <div>
                 <router-link
                     :to="{name: 'overview', params: {vcs, username, project}, query: $route.query}">
@@ -26,21 +28,14 @@
                     {{ $t("message.latest_build") }} #{{ buildnum }}
                 </router-link>
             </div>
+        </div>
 
-
+        <div class="col s12 m3 l3" v-if="build && user">
+            <commit-detail :commitmessage="build.subject" :username="user.login" :useravatar="user.avatar_url"/>
         </div>
 
 
-        <div class="col s12 m7">
-            <commit-detail
-                v-if="build"
-                :useravatar="build.user.avatar_url"
-                :username="build.user.name"
-                :commitmessage="build.subject"
-            />
-        </div>
-
-        <div class="col s12 m2">
+        <div class="col s12 m4 l3">
             <dreiguard-whitepage-alert
                 :vcs="vcs"
                 :username="username"
@@ -122,6 +117,7 @@
                             user,
                         } = this.build;
 
+                        console.log(user);
                         this.user = user;
                     })
                     .then(() => {

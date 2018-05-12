@@ -41,7 +41,9 @@
         "all_builds_trend": "All builds trends",
         "builds": "Builds",
         "no_info_available": "No information available.",
-        "latest_build": "Latest Build"
+        "latest_build": "Latest Build",
+        "screenshot": "Screenshot",
+        "diffimage": "Diff Result"
     },
     "dreiguard": {
         "diff": "Diff",

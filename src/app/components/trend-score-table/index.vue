@@ -4,38 +4,38 @@
             <loader/>
         </div>
 
-        <div class="col s12">
-            <table class="trend-table striped centered" v-if="trendScores">
-                <tbody>
-                <tr>
-                    <td class="trend-table__title-cell"/>
-                    <td v-for="category in categories"
-                        :key="category">
-                        {{ $t(`message.category_${category}`) }}
-                    </td>
-                </tr>
-                </tbody>
+        <div v-for="(report, trend, index) in trendScores" :key="trend">
+            <div class="col s12 " :class="{'grey lighten-5': index%2}">
+                <div>
+                    <h5>
+                        <small>{{ report.tag }}</small>
+                        <a target="_blank" class="center" :href="report.url">{{ report.url }}</a>
+                    </h5>
+                </div>
 
-                <tbody>
-                <tr v-for="(report, trend) in trendScores" :key="trend">
-                    <td class="trend-table__title-cell">
-                        <p class="truncate" :title="trend">{{ trend }}</p>
-                    </td>
-                    <td v-for="category in categories"
-                        :key="category">
-                        <score
-                            :vcs="vcs"
-                            :username="username"
-                            :project="project"
-                            :trendscore="report.trend[category]"
-                            :buildscore="report.build[category]"
-                            :budgetscore="report.budget[category]"
-                            :category="category"
-                        />
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                <div class="row">
+                    <div class="col s6 m4 l2" v-for="category in categories" :key="category">
+                        <div class="card">
+                            <div class="card-panel " :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
+                                <span class="card-title truncate">
+                                    {{ $t(`message.category_${category}`) }}
+                                     <score
+                                         :vcs="vcs"
+                                         :username="username"
+                                         :project="project"
+                                         :trendscore="report.trend[category]"
+                                         :buildscore="report.build[category]"
+                                         :budgetscore="report.budget[category]"
+                                         :category="category"
+                                     />
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </template>

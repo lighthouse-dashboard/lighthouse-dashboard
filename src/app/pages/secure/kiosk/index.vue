@@ -19,8 +19,9 @@
             </div>
 
             <div class="row"
-                 v-for="(project) in projects"
+                 v-for="(project, index) in projects"
                  :key="project.lastBuild.build_num"
+                 :class="{'grey lighten-4': index%2}"
             >
                 <div class="col s12">
                     <project-title

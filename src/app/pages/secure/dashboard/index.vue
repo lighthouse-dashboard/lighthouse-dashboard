@@ -25,18 +25,22 @@
                  v-for="(project) in projects"
                  :key="project.project+project.lastBuild.build_num"
             >
-                <project-title
-                    :vcs="project.vcs"
-                    :username="project.username"
-                    :project="project.project"
-                    :buildnum="project.lastBuild.build_num"
-                />
+                <div class="card">
+                    <div class="card-content">
+                        <project-title
+                            :vcs="project.vcs"
+                            :username="project.username"
+                            :project="project.project"
+                            :buildnum="project.lastBuild.build_num"
+                        />
 
-                <trend-chart-table
-                    :vcs="project.vcs"
-                    :username="project.username"
-                    :project="project.project"
-                />
+                        <trend-chart-table
+                            :vcs="project.vcs"
+                            :username="project.username"
+                            :project="project.project"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

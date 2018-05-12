@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col s12">
-            <trend-table
+            <trend-score-table
                 :vcs="vcs"
                 :username="username"
                 :project="project"
@@ -12,13 +12,13 @@
 
 <script>
 
-    import TrendTable from "@/components/trend-score-table";
+    import TrendScoreTable from "@/components/trend-score-table";
 
 
     export default {
 
         components: {
-            TrendTable,
+            TrendScoreTable,
         },
 
         props: {
