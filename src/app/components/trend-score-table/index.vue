@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col s6 m4 l2" v-for="category in categories" :key="category">
+                    <div class="col s6 m4 l3" v-for="category in categories" :key="category">
                         <div class="card">
                             <div class="card-panel " :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
                                 <span class="card-title truncate">

@@ -6,17 +6,20 @@
 
         <div v-for="(report, trend, index) in trendScores" :key="trend">
             <div class="col s12 " :class="{'grey lighten-5': index%2}">
-                <div>
-                    <h5>
-                        <small>{{ report.tag }}</small>
-                        <a target="_blank" :href="report.url">{{ report.url }}</a>
-                    </h5>
+                <div class="row">
+                    <div class="col s12">
+                        <h5>
+                            <small>{{ report.tag }}</small>
+                            <a target="_blank" :href="report.url">{{ report.url }}</a>
+                        </h5>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col s6 m4 l2" v-for="category in categories" :key="category">
+                    <div class="col s6 m4 l3" v-for="category in categories" :key="category">
                         <div class="card">
-                            <div class="card-panel " :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
+                            <div class="card-panel"
+                                 :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
                                 <span class="card-title truncate">
                                     {{ $t(`message.category_${category}`) }}
                                      <score
@@ -36,7 +39,6 @@
                                     :columns="[ [category, ...report.series[category]]]"
                                     :categories="report.categories"
                                 />
-
                             </div>
                         </div>
                     </div>
