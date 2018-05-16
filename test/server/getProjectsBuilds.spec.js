@@ -17,6 +17,10 @@ describe('Builds', function () {
         return await stop();
     });
 
+    afterEach(() => {
+        nock.cleanAll();
+    })
+
     it('get build', () => {
         nock(API)
             .defaultReplyHeaders({
@@ -74,7 +78,7 @@ describe('Builds', function () {
 
             .get('/project/github/test/project/tree/master')
             .query(true)
-            .reply(200, require('./data/test/project/runningBuild'));
+            .reply(200, require('./data/test/project/project'));
 
 
         return request({
@@ -82,6 +86,7 @@ describe('Builds', function () {
         })
             .then((data) => {
                 data = JSON.parse(data);
+                console.log(data);
                 unit.array(data).hasLength(1);
 
                 const build = data.shift();
