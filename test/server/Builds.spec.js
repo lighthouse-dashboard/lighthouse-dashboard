@@ -62,7 +62,7 @@ describe('Builds', function () {
         })
             .then((data) => {
                 data = JSON.parse(data);
-                unit.array(data).hasLength(2);
+                unit.array(data).hasLength(1);
 
                 const build = data.shift();
 
@@ -78,7 +78,7 @@ describe('Builds', function () {
 
             .get('/project/github/test/project/tree/master')
             .query(true)
-            .reply(200, require('./data/test/project/project'));
+            .reply(200, require('./data/test/project/runningBuild'));
 
 
         return request({
@@ -86,7 +86,6 @@ describe('Builds', function () {
         })
             .then((data) => {
                 data = JSON.parse(data);
-                console.log(data);
                 unit.array(data).hasLength(1);
 
                 const build = data.shift();
@@ -94,4 +93,6 @@ describe('Builds', function () {
                 unit.object(build).hasProperty('build_num');
             });
     });
+
+
 });
