@@ -16,7 +16,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col s6 m4 l3" v-for="category in categories" :key="category" v-if="report.trend[category] !== 0">
+                    <div class="col s6 m4 l3"
+                         v-for="category in categories"
+                         :key="category"
+                         v-if="report.trend[category] && report.trend[category] !== 0">
                         <div class="card">
                             <div class="card-panel"
                                  :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">

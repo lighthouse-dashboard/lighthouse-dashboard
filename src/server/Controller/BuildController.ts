@@ -1,13 +1,13 @@
 import {Request} from 'hapi';
 
-import BuildService from "../service/BuildService";
-import {ApplicationState} from "../interfaces/ApplicationState";
-import Build from "../interfaces/Build";
-import ProjectService from "../service/ProjectService";
-import CircleArtifact from "../interfaces/Artifact";
-import ArtifactService from "../service/ArtifactService";
-import DreiguardService from "../service/DreiguardService";
-import DreihouseService from "../service/DreihouseService";
+import BuildService from "../Service/BuildService";
+import {ApplicationState} from "../Interfaces/ApplicationState";
+import Build from "../Interfaces/Build";
+import ProjectService from "../Service/ProjectService";
+import CircleArtifact from "../Interfaces/Artifact";
+import ArtifactService from "../Service/ArtifactService";
+import DreiguardService from "../Service/DreiguardService";
+import DreihouseService from "../Service/DreihouseService";
 
 export default class BuildController {
     buildService: BuildService;
@@ -92,6 +92,15 @@ export default class BuildController {
         });
     }
 
+    getDreihouseData = async (req: Request) => {
+        const {vcs, username, project, build} = req.params;
+        const {token} = <ApplicationState>req.server.app;
+
+        const buildNum = parseInt(build);
+
+        return await this.dreihouseService.getData(vcs, username, project, buildNum, token);
+    }
+
     getDreiguardDiffReport = async (req: Request) => {
         const {vcs, username, project, build} = req.params;
         const {token} = <ApplicationState>req.server.app;
@@ -114,6 +123,6 @@ export default class BuildController {
         const {token} = <ApplicationState>req.server.app;
         const buildNum = parseInt(build);
 
-        return  await this.dreiguardService.getDiffs(vcs, username, project, buildNum, token);
+        return await this.dreiguardService.getDiffs(vcs, username, project, buildNum, token);
     }
 }

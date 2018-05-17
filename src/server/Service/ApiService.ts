@@ -1,7 +1,7 @@
-import {Project, ProjectCache} from "../interfaces/Project";
+import {Project, ProjectCache} from "../Interfaces/Project";
 import {transformBuild, transformBuilds, transformProjects} from "../utils/api";
-import Build from "../interfaces/Build";
-import CircleArtifact from "../interfaces/Artifact";
+import Build from "../Interfaces/Build";
+import CircleArtifact from "../Interfaces/Artifact";
 
 const request = require('request-promise');
 

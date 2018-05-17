@@ -1,6 +1,6 @@
-import { ReportDataSeries, CategoriesScore, ProjectSeriesData, ProjectArtifactTagData } from '../interfaces/ProjectSeriesData';
-import Build from '../interfaces/Build';
-import CircleArtifact from '../interfaces/Artifact';
+import { ReportDataSeries, CategoriesScore, ProjectSeriesData, ProjectArtifactTagData } from '../Interfaces/ProjectSeriesData';
+import Build from '../Interfaces/Build';
+import CircleArtifact from '../Interfaces/Artifact';
 import ReportCategory from "@dreipol/lighthouse-runner/dist/Interfaces/ReportCategory";
 import ReportResult from "@dreipol/lighthouse-runner/dist/Interfaces/ReportResult";
 

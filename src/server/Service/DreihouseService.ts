@@ -1,8 +1,10 @@
 import {buildChartDataFromTaggedResults, groupResultsByReportTag} from "../utils/chart";
-import CircleArtifact from "../interfaces/Artifact";
-import {CircleReportContent} from "../interfaces/CircleReportContent";
+import CircleArtifact from "../Interfaces/Artifact";
 import ArtifactService from "./ArtifactService";
-import Build from "../interfaces/Build";
+import Build from "../Interfaces/Build";
+import TaggedDreihousehouseBuildReportInterface from "../Interfaces/TaggedDreihousehouseBuildReportInterface";
+import LighthouseDataCollector from "../DataModifier/LighthouseDataCollector";
+import ReportResult from "@dreipol/lighthouse-runner/dist/Interfaces/ReportResult";
 
 export default class DreihouseService {
     artifactService: ArtifactService;
@@ -11,7 +13,7 @@ export default class DreihouseService {
         this.artifactService = artifactService;
     }
 
-    public  filterArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
+    public filterArtifacts(artifacts: CircleArtifact[]): CircleArtifact[] {
         return artifacts.filter((artifact: CircleArtifact) => {
             return (artifact.path.indexOf('.dashboard.') !== -1);
         })
@@ -23,7 +25,7 @@ export default class DreihouseService {
         const dreihouseArtifacts = this.filterArtifacts(jsonArtifacts);
 
         const artifactsWithContent = dreihouseArtifacts.map(async (artifact: CircleArtifact) => {
-            const content = await this.artifactService.getArtifactContent<CircleReportContent>(artifact.url, token);
+            const content = await this.artifactService.getArtifactContent<ReportResult>(artifact.url, token);
             if (!content.key) {
                 content.key = content.tag + ':' + content.url;
             }
@@ -46,5 +48,10 @@ export default class DreihouseService {
         const artifacts = await this.getArtifactsWithData(buildNum, vcs, username, project, token);
         const groupedBuildReports = groupResultsByReportTag(artifacts);
         return await buildChartDataFromTaggedResults(groupedBuildReports);
+    }
+
+    public async getData(vcs: string, username: string, project: string, buildNum: number, token: string) {
+        const artifacts = await this.getArtifactsWithData(buildNum, vcs, username, project, token);
+        return LighthouseDataCollector.getBuildData(artifacts);
     }
 }

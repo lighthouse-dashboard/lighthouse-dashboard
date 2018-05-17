@@ -1,4 +1,4 @@
-import BudgetInterface from "@dreipol/lighthouse-runner/dist/Interfaces/BudgetInterface";
+import {Budget} from "@dreipol/lighthouse-config";
 
 export interface ProjectSeriesData {
     [key: string]: ProjectArtifactTagData
@@ -10,7 +10,7 @@ export interface ProjectArtifactTagData {
     series: ReportDataSeries;
     build: CategoriesScore;
     categories: number[];
-    budget: BudgetInterface,
+    budget: Budget,
     trend: CategoriesScore
 }
 

@@ -34,7 +34,7 @@
                 </ul>
             </div>
             <div class="col s12" id="dreihouse" >
-                <build-charts
+                <build-score-table
                     :vcs="vcs"
                     :username="username"
                     :project="project"
@@ -70,6 +70,7 @@
     import ArtifactList from '@/components/artifact-list';
     import DreiguardOverview from '@/components/dreiguard-overview';
     import CommitDetail from '@/components/commit-detail';
+    import BuildScoreTable from '@/components/build-score-table';
 
 
     export default {
@@ -81,6 +82,7 @@
             DreiguardOverview,
             CommitDetail,
             BuiltAt,
+            BuildScoreTable,
         },
 
         props: {
@@ -132,7 +134,6 @@
         mounted() {
             this.load();
             const instance = M.Tabs.init(this.$refs.tabs, {});
-
         },
 
     };

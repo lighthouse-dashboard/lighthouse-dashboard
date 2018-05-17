@@ -1,5 +1,5 @@
 import ApiService from "./ApiService";
-import CircleArtifact from "../interfaces/Artifact";
+import CircleArtifact from "../Interfaces/Artifact";
 import {extname} from "path";
 
 export default class ArtifactService {

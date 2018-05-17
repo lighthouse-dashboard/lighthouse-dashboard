@@ -2,10 +2,10 @@ import {ServerRoute} from "hapi";
 import ServiceContainer from 'servicecontainer';
 const joi = require('joi');
 
-import ProjectController from "./controller/ProjectController";
-import BuildController from "./controller/BuildController";
-import LoginController from "./controller/LoginController";
-import VersionController from "./controller/VersionController";
+import ProjectController from "./Controller/ProjectController";
+import BuildController from "./Controller/BuildController";
+import LoginController from "./Controller/LoginController";
+import VersionController from "./Controller/VersionController";
 
 const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
@@ -308,6 +308,40 @@ export default function () {
             method: 'GET',
             path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreiguard',
             handler: container.get<BuildController>('controller.build').getDreiguardDiffReport,
+            options: {
+                cache: {
+                    expiresIn: MONTH,
+                    privacy: 'public',
+                },
+                tags: ['api'],
+                description: 'Get current running build',
+                validate: {
+                    query: {
+                        access_token: joi.string()
+                            .description('API Secret. Can also be passed as Bearer token'),
+                    },
+                    params: {
+                        vcs: joi.string()
+                            .required()
+                            .description('VCS Type'),
+                        username: joi.string()
+                            .required()
+                            .description('Username used to fetch CircleCI projects'),
+                        project: joi.string()
+                            .required()
+                            .description('Specific CI project'),
+                        build: joi.alternatives()
+                            .try(joi.string(), joi.number())
+                            .required()
+                            .description('Build number'),
+                    },
+                },
+            },
+        },
+        {
+            method: 'GET',
+            path: '/api/projects/{vcs}/{username}/{project}/build/{build}/dreihouse',
+            handler: container.get<BuildController>('controller.build').getDreihouseData,
             options: {
                 cache: {
                     expiresIn: MONTH,

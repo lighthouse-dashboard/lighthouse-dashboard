@@ -1,6 +1,6 @@
 import {basename} from "path";
 import RunReport from "@dreipol/dreiguard/bin/RunReport";
-import CircleArtifact from "../interfaces/Artifact";
+import CircleArtifact from "../Interfaces/Artifact";
 
 export default class DreiguardImageReplaceService {
     public replaceImage(imagePath: string, images: CircleArtifact[], token: string): string {

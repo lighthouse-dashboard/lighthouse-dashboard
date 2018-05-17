@@ -1,6 +1,6 @@
 import {Request} from "hapi";
-import {ApplicationState} from "../interfaces/ApplicationState";
-import ProjectService from "../service/ProjectService";
+import {ApplicationState} from "../Interfaces/ApplicationState";
+import ProjectService from "../Service/ProjectService";
 
 export default class ProjectController {
     projectService: ProjectService;

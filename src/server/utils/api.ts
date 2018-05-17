@@ -1,6 +1,6 @@
-import { CircleProject, Project } from "../interfaces/Project";
-import Build from "../interfaces/Build";
-import { CircleBuild } from "../interfaces/CircleBuild";
+import { CircleProject, Project } from "../Interfaces/Project";
+import Build from "../Interfaces/Build";
+import { CircleBuild } from "../Interfaces/CircleBuild";
 
 export function transformProject(project: CircleProject, branch: string): Project {
     const _project: Project = {

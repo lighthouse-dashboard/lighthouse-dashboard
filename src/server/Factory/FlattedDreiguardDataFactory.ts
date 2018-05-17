@@ -1,5 +1,5 @@
 import RunReport from "@dreipol/dreiguard/bin/RunReport";
-import {Capability, FlattedDreiguardData} from "../interfaces/DreiguardReport";
+import {Capability, FlattedDreiguardData} from "../Interfaces/DreiguardReport";
 
 export default class FlattedDreiguardDataFactory{
     static transform(report: RunReport): FlattedDreiguardData{

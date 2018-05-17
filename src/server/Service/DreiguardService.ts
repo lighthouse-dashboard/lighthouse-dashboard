@@ -1,10 +1,10 @@
 import {uniq} from 'lodash';
 
-import {FlattedDreiguardData} from "../interfaces/DreiguardReport";
-import CircleArtifact from "../interfaces/Artifact";
+import {FlattedDreiguardData} from "../Interfaces/DreiguardReport";
+import CircleArtifact from "../Interfaces/Artifact";
 import ArtifactService from "./ArtifactService";
 import RunReport from "@dreipol/dreiguard/bin/RunReport";
-import FlattedDreiguardDataFactory from "../factory/FlattedDreiguardDataFactory";
+import FlattedDreiguardDataFactory from "../Factory/FlattedDreiguardDataFactory";
 import DreiguardImageReplaceService from "./DreiguardImageReplaceService";
 
 export default class DreiguardService {

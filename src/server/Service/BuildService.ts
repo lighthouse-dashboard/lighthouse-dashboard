@@ -1,6 +1,6 @@
 import {orderBy} from 'lodash';
 
-import Build from "../interfaces/Build";
+import Build from "../Interfaces/Build";
 import ApiService from "./ApiService";
 
 export default class BuildService {

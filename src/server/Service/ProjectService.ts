@@ -1,8 +1,8 @@
 import {orderBy, map, compact} from 'lodash';
 
 import ApiService from "./ApiService";
-import {Project} from "../interfaces/Project";
-import {ProjectSeriesData} from "../interfaces/ProjectSeriesData";
+import {Project} from "../Interfaces/Project";
+import {ProjectSeriesData} from "../Interfaces/ProjectSeriesData";
 import {calculateTrendForSeries, setupSeriesData} from "../utils/trend";
 import DreihouseService from "./DreihouseService";
 import BuildService from "./BuildService";

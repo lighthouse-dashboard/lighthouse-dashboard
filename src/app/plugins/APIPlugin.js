@@ -111,6 +111,16 @@ export default class APIPlugin {
             });
     }
 
+    getBuildDreihouseData(vcs, username, project, build) {
+        return Vue.http
+            .get(
+                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}/dreihouse`
+            )
+            .then(resp => {
+                return resp.body;
+            });
+    }
+
     /**
      * Check if project has running build
      *
@@ -217,6 +227,7 @@ export default class APIPlugin {
                 return resp.body;
             });
     }
+
     getDreiguardDiffImagesData(vcs, username, project, buildNum) {
         return Vue.http
             .get(

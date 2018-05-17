@@ -1,19 +1,25 @@
-import { GroupedBuildReports } from "../interfaces/GroupedBuildReports";
-import CircleArtifact from "../interfaces/Artifact";
-import { CircleReportContent } from "../interfaces/CircleReportContent";
-import { BuildChartRowsData, BuildChartData } from '../interfaces/BuildChartData';
+import { GroupedBuildReports } from "../Interfaces/GroupedBuildReports";
+import CircleArtifact from "../Interfaces/Artifact";
+import { BuildChartRowsData, BuildChartData } from '../Interfaces/BuildChartData';
 import ReportCategory from "@dreipol/lighthouse-runner/dist/Interfaces/ReportCategory";
-import BudgetInterface from "@dreipol/lighthouse-runner/dist/Interfaces/BudgetInterface";
+import ReportResult from "@dreipol/lighthouse-runner/dist/Interfaces/ReportResult";
+import {Budget} from "@dreipol/lighthouse-config";
 
 export function groupResultsByReportTag(artifacts: CircleArtifact[]): GroupedBuildReports {
     const endpoints: GroupedBuildReports = {};
 
     artifacts.forEach((item: CircleArtifact) => {
-        if (!endpoints[item.data.url]) {
-            endpoints[item.data.url] = [];
+        if(!item.data){
+            return;
         }
 
-        endpoints[item.data.url].push(item.data);
+        const data = <ReportResult>item.data;
+
+        if (!endpoints[data.url]) {
+            endpoints[data.url] = [];
+        }
+
+        endpoints[data.url].push(data);
     });
     return endpoints;
 }
@@ -24,7 +30,7 @@ function getCategoryScores(categories: ReportCategory[]): number[] {
     });
 }
 
-function getCategoryBudget(categories: ReportCategory[], budget: BudgetInterface): number[] {
+function getCategoryBudget(categories: ReportCategory[], budget: Budget): number[] {
     return categories.map((_item) => {
         return <number>(budget[_item.id] ? budget[_item.id] : null);
     });
@@ -36,13 +42,13 @@ function getCategoryNames(categories: ReportCategory[]) {
     });
 }
 
-export function fillColumn(key: string, reports: CircleReportContent[], columns: BuildChartRowsData): string[] {
+export function fillColumn(key: string, reports: ReportResult[], columns: BuildChartRowsData): string[] {
     if (!columns[key]) {
         columns[key] = [];
     }
 
     let chartCategories: string[] = [];
-    reports.forEach((item: CircleReportContent) => {
+    reports.forEach((item: ReportResult) => {
         const {
             budget,
             categories,
