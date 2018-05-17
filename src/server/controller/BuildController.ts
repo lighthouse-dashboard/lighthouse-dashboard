@@ -106,8 +106,7 @@ export default class BuildController {
         const {token} = <ApplicationState>req.server.app;
         const buildNum = parseInt(build);
 
-        const images = await this.dreiguardService.getScreenshots(vcs, username, project, buildNum, token);
-        return images;
+        return await this.dreiguardService.getScreenshots(vcs, username, project, buildNum, token);
     }
 
     getDiffImages = async (req: Request) => {
@@ -115,8 +114,6 @@ export default class BuildController {
         const {token} = <ApplicationState>req.server.app;
         const buildNum = parseInt(build);
 
-        const images = await this.dreiguardService.getDiffs(vcs, username, project, buildNum, token);
-        return images;
-
+        return  await this.dreiguardService.getDiffs(vcs, username, project, buildNum, token);
     }
 }

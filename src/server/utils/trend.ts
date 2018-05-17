@@ -41,8 +41,8 @@ export function setupSeriesData(builds: Build[]): ProjectSeriesData {
                 series[data.key] = {
                     url: data.url,
                     tag: data.tag,
-                    series: {},
                     categories: [],
+                    series: {},
                     build: {},
                     budget: {},
                     trend: {}

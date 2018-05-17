@@ -34,7 +34,7 @@
                             :buildnum="project.lastBuild.build_num"
                         />
 
-                        <trend-chart-table
+                        <trend-chart-table-minimal
                             :vcs="project.vcs"
                             :username="project.username"
                             :project="project.project"
@@ -47,18 +47,18 @@
 </template>
 
 <script>
-    import Vue from "vue";
-    import Build from "@/components/build-view";
-    import TrendScoreTable from "@/components/trend-score-table";
-    import TrendChartTable from "@/components/trend-chart-table";
-    import ProjectTitle from "@/components/project-title";
+    import Vue from 'vue';
+    import Build from '@/components/build-view';
+    import TrendScoreTable from '@/components/trend-score-table';
+    import TrendChartTableMinimal from '@/components/trend-chart-table-minimal';
+    import ProjectTitle from '@/components/project-title';
 
     export default {
 
         components: {
             Build,
             TrendScoreTable,
-            TrendChartTable,
+            TrendChartTableMinimal,
             ProjectTitle,
         },
 

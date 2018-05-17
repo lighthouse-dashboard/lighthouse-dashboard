@@ -81,7 +81,4 @@ describe('Artifacts', function () {
                 unit.object(data).hasProperty('desktop:https://test.io/');
             });
     });
-
-
-
 });
