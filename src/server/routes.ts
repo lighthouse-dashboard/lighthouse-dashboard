@@ -17,8 +17,7 @@ export default function () {
     routes.push(...LoginRoutes(container));
     routes.push(...VersionRoutes(container));
     routes.push(...ProjectRoutes(container));
-
-    routes.concat([
+    routes.push(
         {
             method: 'GET',
             path: '/{param*}',
@@ -31,8 +30,7 @@ export default function () {
             options: {
                 auth: false,
             },
-        },
-    ]);
+        });
 
     return routes;
 }
