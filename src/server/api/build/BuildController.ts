@@ -1,13 +1,13 @@
 import {Request} from 'hapi';
 
-import BuildService from "../Service/BuildService";
-import {ApplicationState} from "../Interfaces/ApplicationState";
-import Build from "../Interfaces/Build";
-import ProjectService from "../Service/ProjectService";
-import CircleArtifact from "../Interfaces/Artifact";
-import ArtifactService from "../Service/ArtifactService";
-import DreiguardService from "../Service/DreiguardService";
-import DreihouseService from "../Service/DreihouseService";
+import BuildService from "../../Service/BuildService";
+import {ApplicationState} from "../../Interfaces/ApplicationState";
+import Build from "../../Interfaces/Build";
+import ProjectService from "../../Service/ProjectService";
+import CircleArtifact from "../../Interfaces/Artifact";
+import ArtifactService from "../../Service/ArtifactService";
+import DreiguardService from "../../Service/DreiguardService";
+import DreihouseService from "../../Service/DreihouseService";
 
 export default class BuildController {
     buildService: BuildService;
@@ -29,7 +29,7 @@ export default class BuildController {
         this.dreihouseService = dreihouseService;
     }
 
-    getBranchBuilds = async (req: Request) => {
+    public async getBranchBuilds(req: Request) {
         const {vcs, username, project, branch} = req.params;
         const {token, limit} = <ApplicationState>req.server.app;
 
@@ -43,34 +43,34 @@ export default class BuildController {
         });
     }
 
-    getBranchTrend = async (req: Request) => {
+    public async getBranchTrend(req: Request) {
         const {vcs, username, project, branch} = req.params;
         const {token} = <ApplicationState>req.server.app;
-        return await this.projectService.getTrendData(vcs, username, project, branch, token, 10)
+        return await this.projectService.getTrendData(vcs, username, project, branch, token, 10);
     };
 
-    getBuildChartData = async (req: Request) => {
+    public async getBuildChartData(req: Request) {
         const {vcs, username, project, build} = req.params;
         const {token} = <ApplicationState>req.server.app;
 
         return this.dreihouseService.getChartData(vcs, username, project, parseInt(build), token);
     };
 
-    getLatest = async (req: Request) => {
+    public async getLatest(req: Request) {
         const {vcs, username, project, branch} = req.params;
         const {token} = <ApplicationState>req.server.app;
 
         return await this.buildService.getLatestBuilds(vcs, username, project, branch, token, 1, 'completed');
     }
 
-    getRunning = async (req: Request) => {
+    public async getRunning(req: Request) {
         const {vcs, username, project, branch} = req.params;
         const {token} = <ApplicationState>req.server.app;
 
         return await this.buildService.getLatestBuilds(vcs, username, project, branch, token, 1, 'running');
     }
 
-    get = async (req: Request) => {
+    public async get(req: Request) {
         const {vcs, username, project, build} = req.params;
         const {token} = <ApplicationState>req.server.app;
 
@@ -82,7 +82,7 @@ export default class BuildController {
         return {build_num, subject, user, build_time_millis, stop_time, status};
     }
 
-    getArtifacts = async (req: Request) => {
+    public async getArtifacts(req: Request) {
         const {vcs, username, project, build} = req.params;
         const {token} = <ApplicationState>req.server.app;
         const artifacts = await this.artifactService.getArtifactsForBuildNum(parseInt(build), vcs, username, project, token);
@@ -92,7 +92,7 @@ export default class BuildController {
         });
     }
 
-    getDreihouseData = async (req: Request) => {
+    public async getDreihouseData(req: Request) {
         const {vcs, username, project, build} = req.params;
         const {token} = <ApplicationState>req.server.app;
 
@@ -101,7 +101,7 @@ export default class BuildController {
         return await this.dreihouseService.getData(vcs, username, project, buildNum, token);
     }
 
-    getDreiguardDiffReport = async (req: Request) => {
+    public async getDreiguardDiffReport(req: Request) {
         const {vcs, username, project, build} = req.params;
         const {token} = <ApplicationState>req.server.app;
 
@@ -110,7 +110,7 @@ export default class BuildController {
         return await this.dreiguardService.getDiffData(vcs, username, project, buildNum, token);
     }
 
-    getScreenshots = async (req: Request) => {
+    public async getScreenshots(req: Request) {
         const {vcs, username, project, build} = req.params;
         const {token} = <ApplicationState>req.server.app;
         const buildNum = parseInt(build);
@@ -118,7 +118,7 @@ export default class BuildController {
         return await this.dreiguardService.getScreenshots(vcs, username, project, buildNum, token);
     }
 
-    getDiffImages = async (req: Request) => {
+    public async getDiffImages(req: Request) {
         const {vcs, username, project, build} = req.params;
         const {token} = <ApplicationState>req.server.app;
         const buildNum = parseInt(build);

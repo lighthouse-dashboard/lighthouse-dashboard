@@ -4,7 +4,9 @@
             <loader/>
         </div>
 
-        <div v-for="(report, trend, index) in trendScores" :key="trend">
+        <div v-for="(report, trend, index) in trendScores"
+             v-if="renderRequired(report, categories)"
+             :key="trend">
             <div class="col s12 " :class="{'grey lighten-5': index%2}">
                 <div class="row">
                     <div class="col s12">
@@ -18,11 +20,12 @@
                 <div class="row">
                     <div class="col s6 m4 l3"
                          v-for="category in categories"
+                         v-if="report.trend[category] && report.trend[category] !== 0"
                          :key="category"
-                         v-if="report.trend[category] && report.trend[category] !== 0">
+                    >
                         <div class="card">
                             <div class="card-panel"
-                                 :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
+                                 :class="getCategoryClass(report, category)">
                                 <span class="card-title truncate">
                                     {{ $t(`message.category_${category}`) }}
                                      <score
@@ -99,6 +102,22 @@
         },
 
         methods: {
+
+            renderRequired(report, categories) {
+                return categories.reduce((acc, category) => {
+                    if (acc === true) {
+                        return acc;
+                    }
+
+                    acc = (report.trend[category] && report.trend[category] !== 0);
+                    return acc;
+                }, false);
+            },
+
+            getCategoryClass(report, category) {
+                return { 'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0 }
+            },
+
             load() {
                 this.isLoaded = false;
 

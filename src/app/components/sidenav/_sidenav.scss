@@ -4,4 +4,10 @@
         margin-left: 25px;
         margin-top: 10px;
     }
+    .sidenav--subheader {
+        background-color: $c--sidenav-subheader-background;
+        a {
+            color: $c--white;
+        }
+    }
 }

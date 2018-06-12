@@ -1,5 +1,5 @@
 <template>
-    <ul>
+    <ul class="sidenav">
         <li>
             <nav class="blue-grey">
                 <div class="nav-wrapper">
@@ -8,9 +8,11 @@
             </nav>
         </li>
 
-        <li><a class="subheader">
-            <version/>
-        </a></li>
+        <li class="sidenav--subheader">
+            <a class="subheader">
+                <version/>
+            </a>
+        </li>
 
         <li>
             <router-link :to="{name: 'dashboard'}">
@@ -32,7 +34,7 @@
 
         <BranchList/>
 
-        <li>
+        <li class="sidenav--subheader">
             <a class="subheader">{{ $t("message.projects") }}</a>
         </li>
 

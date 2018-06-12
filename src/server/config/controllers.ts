@@ -6,13 +6,13 @@ export const parameters = {
 
 export const services = {
     "controller.project": {
-        "file": "../controller/ProjectController",
+        "file": "../api/project/ProjectController",
         "arguments": [
             "@service.project"
         ]
     },
     "controller.build": {
-        "file": "../controller/BuildController",
+        "file": "../api/build/BuildController",
         "arguments": [
             "@service.project",
             "@service.build",
@@ -22,13 +22,13 @@ export const services = {
         ]
     },
     "controller.login": {
-        "file": "../controller/LoginController",
+        "file": "../api/login/LoginController",
         "arguments": [
             "%BASIC_PASS%",
             "%SECRET%"
         ]
     },
     "controller.version": {
-        "file": "../controller/VersionController"
+        "file": "../api/version/VersionController"
     }
 };
