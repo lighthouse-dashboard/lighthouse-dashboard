@@ -3,7 +3,7 @@ import CircleArtifact from "../Interfaces/Artifact";
 import {extname} from "path";
 
 export default class ArtifactService {
-    apiServie: ApiService;
+    protected apiServie: ApiService;
 
     constructor(apiService: ApiService) {
         this.apiServie = apiService;
@@ -22,5 +22,4 @@ export default class ArtifactService {
             return extname(item.path) === `.${type}` ? item : null;
         });
     }
-
 }

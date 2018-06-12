@@ -19,7 +19,7 @@
                             href="https://github.com/dreipol/dreipol-website/blob/master/.circleci/config.yml"
                             target="_blank">Example Config</a></p>
                         <p>- Configure the project so it runs with <a
-                            href="https://www.npmjs.com/package/@dreipol/lighthouse-runner"
+                            href="https://www.npmjs.com/package/@dreipol/dreihouse-cli"
                             target="_blank">dreihouse</a>
                         </p>
                         <p>- Modify the config files so they report your preferred paths and domains.</p>

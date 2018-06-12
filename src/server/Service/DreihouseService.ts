@@ -7,7 +7,7 @@ import LighthouseDataCollector from "../DataModifier/LighthouseDataCollector";
 import ReportResult from "@dreipol/lighthouse-runner/dist/Interfaces/ReportResult";
 
 export default class DreihouseService {
-    artifactService: ArtifactService;
+    protected artifactService: ArtifactService;
 
     constructor(artifactService: ArtifactService) {
         this.artifactService = artifactService;

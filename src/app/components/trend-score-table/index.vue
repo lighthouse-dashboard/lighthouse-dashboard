@@ -16,16 +16,17 @@
                 <div class="row">
                     <div class="col s6 m4 l3" v-for="category in categories" :key="category">
                         <div class="card">
-                            <div class="card-panel " :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
+                            <div class="card-panel "
+                                 :class="getCardColor(report, category)">
                                 <span class="card-title truncate">
                                     {{ $t(`message.category_${category}`) }}
                                      <score
                                          :vcs="vcs"
                                          :username="username"
                                          :project="project"
-                                         :trendscore="report.trend[category]"
-                                         :buildscore="report.build[category]"
-                                         :budgetscore="report.budget[category]"
+                                         :trendscore="report.trend[category] || 0"
+                                         :buildscore="report.build[category] || 0"
+                                         :budgetscore="report.budget[category] || 0"
                                          :category="category"
                                      />
                                 </span>
@@ -88,6 +89,9 @@
         },
 
         methods: {
+            getCardColor(report, category) {
+                return { 'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0 };
+            },
             load() {
                 this.isLoaded = false;
 

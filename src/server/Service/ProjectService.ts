@@ -9,10 +9,10 @@ import BuildService from "./BuildService";
 import ArtifactService from "./ArtifactService";
 
 export default class ProjectService {
-    apiService: ApiService;
-    dreihouseService: DreihouseService;
-    buildService: BuildService;
-    artifactService: ArtifactService;
+    protected apiService: ApiService;
+    protected dreihouseService: DreihouseService;
+    protected buildService: BuildService;
+    protected artifactService: ArtifactService;
 
     constructor(apiService: ApiService,
                 dreihouseService: DreihouseService,
@@ -25,7 +25,7 @@ export default class ProjectService {
     }
 
 
-    private async filterSupportedProjects(projects: Project[], branch: string, token: string): Promise<Project[]> {
+    protected  async filterSupportedProjects(projects: Project[], branch: string, token: string): Promise<Project[]> {
         const filteredProjectsPromises = map(projects, (async (project: Project) => {
             if(!project.lastBuild){
                 return null;

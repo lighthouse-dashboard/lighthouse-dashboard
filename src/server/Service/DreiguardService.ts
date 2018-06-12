@@ -8,8 +8,8 @@ import FlattedDreiguardDataFactory from "../Factory/FlattedDreiguardDataFactory"
 import DreiguardImageReplaceService from "./DreiguardImageReplaceService";
 
 export default class DreiguardService {
-    artifactService: ArtifactService;
-    imageReplaceService: DreiguardImageReplaceService;
+    protected artifactService: ArtifactService;
+    protected imageReplaceService: DreiguardImageReplaceService;
 
     constructor(artifactService: ArtifactService,
                 imageReplaceService: DreiguardImageReplaceService) {

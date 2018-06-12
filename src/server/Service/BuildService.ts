@@ -4,7 +4,7 @@ import Build from "../Interfaces/Build";
 import ApiService from "./ApiService";
 
 export default class BuildService {
-    apiService: ApiService;
+    protected apiService: ApiService;
 
     constructor(apiService: ApiService) {
         this.apiService = apiService;

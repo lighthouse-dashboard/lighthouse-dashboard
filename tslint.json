@@ -17,6 +17,12 @@
         "no-submodule-imports": false,
         "object-literal-sort-keys": false,
         "no-console": false,
-        "object-literal-key-quotes": false
+        "object-literal-key-quotes": false,
+        "member-access": true,
+        "curly": true,
+        "no-empty": true,
+        "triple-equals": true,
+        "prefer-const": true,
+        "class-name": true
     }
 }
