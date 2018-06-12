@@ -14,7 +14,6 @@ export default class ToastPlugin {
     }
 
     error(e) {
-        console.log(e)
         showToast({
             str: e.message || e.statusText,
             time: 2000,

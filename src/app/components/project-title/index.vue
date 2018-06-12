@@ -117,7 +117,6 @@
                             user,
                         } = this.build;
 
-                        console.log(user);
                         this.user = user;
                     })
                     .then(() => {

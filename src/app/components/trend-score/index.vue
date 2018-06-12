@@ -1,8 +1,8 @@
 <template>
     <small :class="color">
         {{ buildscore }}
-        <i class="material-icons tiny" v-if="trendscore > 0">trending_up</i>
-        <i class="material-icons tiny" v-if="trendscore < 0">trending_down</i>
+        <i class="material-icons tiny" v-if="trendscore && trendscore > 0">trending_up</i>
+        <i class="material-icons tiny" v-if="trendscore && trendscore < 0">trending_down</i>
         <small v-if="trendscore">{{ trendscore }}</small>
     </small>
 </template>
@@ -19,7 +19,8 @@
 
             trendscore: {
                 type: Number,
-                required: true,
+                required: false,
+                default: null
             },
 
             buildscore: {
@@ -36,6 +37,10 @@
 
         computed: {
             icon() {
+                if (this.trendscore === null) {
+                    return '';
+                }
+
                 if (this.trendscore > 0) {
                     return 'arrow_upward';
                 }
@@ -48,6 +53,10 @@
             },
 
             color() {
+                if (this.trendscore === null) {
+                    return '';
+                }
+
                 if (this.trendscore > 0) {
                     return 'green-text';
                 }
@@ -57,19 +66,6 @@
                 }
 
                 return '';
-            },
-
-            scorecolor() {
-
-                if (!this.budgetscore) {
-                    return null;
-                }
-
-                if (this.buildscore < this.budgetscore) {
-                    return 'red-text';
-                }
-
-                return null;
             },
         },
     };
