@@ -8,13 +8,13 @@ export const imports = [
 
 export const services = {
     "service.api": {
-        "file": "../service/ApiService",
+        "file": "../Service/ApiService",
         "arguments": [
             "%env%"
         ]
     },
     "service.project": {
-        "file": "../service/ProjectService",
+        "file": "../Service/ProjectService",
         "arguments": [
             "@service.api",
             "@service.dreihouse",
@@ -23,32 +23,32 @@ export const services = {
         ]
     },
     "service.build": {
-        "file": "../service/BuildService",
+        "file": "../Service/BuildService",
         "arguments": [
             "@service.api"
         ]
     },
     "service.artifact": {
-        "file": "../service/ArtifactService",
+        "file": "../Service/ArtifactService",
         "arguments": [
             "@service.api"
         ]
     },
     "service.dreiguard": {
-        "file": "../service/DreiguardService",
+        "file": "../Service/DreiguardService",
         "arguments": [
             "@service.artifact",
             "@service.imagereplace",
         ]
     },
     "service.dreihouse": {
-        "file": "../service/DreihouseService",
+        "file": "../Service/DreihouseService",
         "arguments": [
             "@service.artifact"
         ]
     },
     "service.imagereplace": {
-        "file": "../service/DreiguardImageReplaceService",
+        "file": "../Service/DreiguardImageReplaceService",
         "arguments": []
     }
 };

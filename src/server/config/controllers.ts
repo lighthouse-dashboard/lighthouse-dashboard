@@ -11,6 +11,7 @@ export const services = {
             "@service.project"
         ]
     },
+
     "controller.build": {
         "file": "../api/build/BuildController",
         "arguments": [
@@ -21,6 +22,7 @@ export const services = {
             "@service.dreihouse",
         ]
     },
+
     "controller.login": {
         "file": "../api/login/LoginController",
         "arguments": [
@@ -28,6 +30,7 @@ export const services = {
             "%SECRET%"
         ]
     },
+
     "controller.version": {
         "file": "../api/version/VersionController"
     }
