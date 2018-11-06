@@ -1,52 +1,47 @@
 <template>
-    <div class="row">
+    <div class="trend-chart-table row">
         <div v-if="!isLoaded">
             <loader/>
         </div>
 
         <div v-for="(report, trend, index) in trendScores" :key="trend">
-            <div class="col s12 " :class="{'grey lighten-5': index%2}">
+            <div class="col s12 m6 " :class="{'grey lighten-5': index%2}">
                 <div class="row">
                     <div class="col s12">
                         <h5>
-                            <small>{{ report.tag }}</small>
-                            <a target="_blank" :href="report.url">{{ report.url }}</a>
+                            <small>{{ report.tag }}
+                                <a target="_blank" :href="report.url">{{ report.url }}</a>
+                            </small>
                         </h5>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col s6 m4 l3"
-                         v-for="category in categories"
-                         :key="category"
-                         v-if="report.build[category]">
-                        <div class="card">
-                            <div class="card-panel"
-                                 :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
-                                <span class="card-title truncate">
+                    <div class="col s12">
+                        <table>
+                            <tr
+                                v-for="category in categories"
+                                :key="category"
+                                v-if="report.build[category]"
+                                :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
+                                <td>
                                     {{ $t(`message.category_${category}`) }}
-                                     <score
-                                         :vcs="vcs"
-                                         :username="username"
-                                         :project="project"
-                                         :trendscore="report.trend[category]"
-                                         :buildscore="report.build[category]"
-                                         :budgetscore="report.budget[category]"
-                                         :category="category"
-                                     />
-                                </span>
-
-                                <chart
-                                    type="line"
-                                    :height="50"
-                                    :columns="[ [category, ...report.series[category]]]"
-                                    :categories="report.categories"
-                                />
-                            </div>
-                        </div>
+                                </td>
+                                <td>
+                                    <score
+                                        :vcs="vcs"
+                                        :username="username"
+                                        :project="project"
+                                        :trendscore="report.trend[category]"
+                                        :buildscore="report.build[category]"
+                                        :budgetscore="report.budget[category]"
+                                        :category="category"
+                                    />
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="trend-chart-table-minimal row">
         <div v-if="!isLoaded">
             <loader/>
         </div>

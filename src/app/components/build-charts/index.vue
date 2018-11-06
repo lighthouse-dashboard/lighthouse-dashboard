@@ -1,12 +1,12 @@
 <template>
-    <div v-if="chartData">
+    <div class="build-charts" v-if="chartData">
         <div class="row">
             <div class="col s12"
                  v-for="(data, key) in chartData"
                  :key="key">
                 <p>
                     <a target="_blank" :href="key">
-                        {{ key }}
+                        {{ key }} 1
                     </a>
                 </p>
 

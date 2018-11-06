@@ -15,7 +15,7 @@ export default function (container: Container): ServerRoute[] {
                 auth: false,
                 validate: {
                     payload: {
-                        password: joi.string().min(6)
+                        password: joi.string()
                             .max(32)
                             .required()
                             .description('Password'),

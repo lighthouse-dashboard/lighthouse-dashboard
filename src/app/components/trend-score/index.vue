@@ -1,6 +1,9 @@
 <template>
-    <small :class="color">
-        {{ buildscore }}
+    <small class="score"
+           v-if="buildscore"
+           :class="color"
+    >
+        {{ roundedScore }}
         <i class="material-icons tiny" v-if="trendscore && trendscore > 0">trending_up</i>
         <i class="material-icons tiny" v-if="trendscore && trendscore < 0">trending_down</i>
         <small v-if="trendscore">{{ trendscore }}</small>
@@ -20,12 +23,12 @@
             trendscore: {
                 type: Number,
                 required: false,
-                default: null
+                default: null,
             },
 
             buildscore: {
                 type: Number,
-                required: true,
+                default: null,
             },
 
             budgetscore: {
@@ -36,6 +39,9 @@
         },
 
         computed: {
+            roundedScore() {
+                return Math.round(this.buildscore * 100) / 100;
+            },
             icon() {
                 if (this.trendscore === null) {
                     return '';

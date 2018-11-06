@@ -55,7 +55,7 @@
                         y: {
                             show: this.showy,
                             label: 'Score',
-                            max: 100,
+                            max: 1,
                         },
                     },
                     legend: {

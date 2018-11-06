@@ -50,7 +50,7 @@
     import Vue from 'vue';
     import Build from '@/components/build-view';
     import TrendScoreTable from '@/components/trend-score-table';
-    import TrendChartTableMinimal from '@/components/trend-chart-table-minimal';
+    import TrendChartTableMinimal from '@/components/trend-chart-table';
     import ProjectTitle from '@/components/project-title';
 
     export default {

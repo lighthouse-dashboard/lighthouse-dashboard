@@ -97,7 +97,7 @@
                         y: {
                             show: this.showy,
                             label: 'Score',
-                            max: 100,
+                            max: 1,
                             min: 0,
                             top: 0,
                             bottom: 0,

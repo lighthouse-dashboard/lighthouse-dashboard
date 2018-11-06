@@ -14,7 +14,7 @@ export default class LoginController {
 
     public login(req: Request) {
         const {password} = <any>req.payload;
-        if (md5(password) === process.env.BASIC_PASS) {
+        if (md5(password) === process.env.BASIC_PASS || process.env.BASIC_PASS === null) {
             return {token: process.env.SECRET};
         }
 
