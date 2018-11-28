@@ -17,7 +17,6 @@ export default function (container: Container): ServerRoute[] {
                     payload: {
                         password: joi.string()
                             .max(32)
-                            .required()
                             .description('Password'),
                     },
                 },

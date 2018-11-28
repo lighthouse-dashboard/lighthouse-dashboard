@@ -23,6 +23,7 @@
         "no-empty": true,
         "triple-equals": true,
         "prefer-const": true,
-        "class-name": true
+        "class-name": true,
+        "no-angle-bracket-type-assertion": false
     }
 }

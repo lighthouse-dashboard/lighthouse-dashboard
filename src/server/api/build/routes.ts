@@ -1,11 +1,11 @@
-import {Request, ServerRoute} from "hapi";
-import BuildController from "./BuildController";
+import {Request, ServerRoute} from 'hapi';
+import BuildController from './BuildController';
 import Container from 'servicecontainer/bin/Container';
 import {MINUTE, MONTH} from '../../config/route-constants';
 
 const joi = require('joi');
 
-export default function (container: Container): ServerRoute[] {
+export default function(container: Container): ServerRoute[] {
     return [
         {
             method: 'GET',
@@ -116,7 +116,7 @@ export default function (container: Container): ServerRoute[] {
             options: {
                 cache: {
                     expiresIn: MINUTE,
-                    privacy: 'public'
+                    privacy: 'public',
                 },
                 tags: ['api'],
                 description: 'Get current running build',

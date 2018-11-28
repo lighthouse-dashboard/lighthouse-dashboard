@@ -1,7 +1,7 @@
-import {Project, ProjectCache} from "../Interfaces/Project";
-import {transformBuild, transformBuilds, transformProjects} from "../utils/api";
-import Build from "../Interfaces/Build";
-import CircleArtifact from "../Interfaces/Artifact";
+import {Project, ProjectCache} from '../Interfaces/Project';
+import {transformBuild, transformBuilds, transformProjects} from '../utils/api';
+import Build from '../Interfaces/Build';
+import CircleArtifact from '../Interfaces/Artifact';
 
 const request = require('request-promise');
 
@@ -35,7 +35,7 @@ export default class ApiService {
     }
 
     public async getArtifactsForBuild(vcs: string, username: string, project: string, buildNum: number, token: string): Promise<CircleArtifact[]> {
-        return await request(`https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/${buildNum}/artifacts?circle-token=${token}&filter=completed`, {json: true})
+        return await request(`https://circleci.com/api/v1.1/project/${vcs}/${username}/${project}/${buildNum}/artifacts?circle-token=${token}&filter=completed`, {json: true});
     }
 
     public async getBuild(vcs: string, username: string, project: string, buildNum: number, token: string): Promise<Build> {

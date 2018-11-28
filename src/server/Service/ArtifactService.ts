@@ -1,6 +1,6 @@
-import ApiService from "./ApiService";
-import CircleArtifact from "../Interfaces/Artifact";
-import {extname} from "path";
+import ApiService from './ApiService';
+import CircleArtifact from '../Interfaces/Artifact';
+import {extname} from 'path';
 
 export default class ArtifactService {
     protected apiServie: ApiService;
@@ -18,7 +18,7 @@ export default class ArtifactService {
     }
 
     public filterArtifactsByType(type: string, artifacts: CircleArtifact[]): CircleArtifact[] {
-        return artifacts.filter(item => {
+        return artifacts.filter((item) => {
             return extname(item.path) === `.${type}` ? item : null;
         });
     }

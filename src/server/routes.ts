@@ -1,4 +1,4 @@
-import {ServerRoute} from "hapi";
+import {ServerRoute} from 'hapi';
 import ServiceContainer from 'servicecontainer';
 
 import BuildRoutes from './api/build/routes';
@@ -6,13 +6,13 @@ import LoginRoutes from './api/login/routes';
 import VersionRoutes from './api/version/routes';
 import ProjectRoutes from './api/project/routes';
 
-export default function () {
+export default function() {
     const container = ServiceContainer.get();
     if (!container) {
         throw new Error('Container not created');
     }
 
-    let routes: ServerRoute[] = [];
+    const routes: ServerRoute[] = [];
     routes.push(...BuildRoutes(container));
     routes.push(...LoginRoutes(container));
     routes.push(...VersionRoutes(container));

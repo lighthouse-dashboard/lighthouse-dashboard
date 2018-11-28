@@ -1,9 +1,9 @@
-import RunReport from "@dreipol/dreiguard/bin/RunReport";
-import {Capability, FlattedDreiguardData} from "../Interfaces/DreiguardReport";
+import RunReport from '@dreipol/dreiguard/bin/RunReport';
+import {Capability, FlattedDreiguardData} from '../Interfaces/DreiguardReport';
 
-export default class FlattedDreiguardDataFactory{
-    static transform(report: RunReport): FlattedDreiguardData{
-        const capability:Capability = {
+export default class FlattedDreiguardDataFactory {
+    public static transform(report: RunReport): FlattedDreiguardData {
+        const capability: Capability = {
             browserName: report.capability.browserName,
             browser_version: report.capability.browser_version,
             os: report.capability.os,
@@ -18,6 +18,6 @@ export default class FlattedDreiguardDataFactory{
             screenshot: report.screenshot,
             diff: report.diff,
             whitepageDiff: report.whitepageDiff,
-        }
+        };
     }
 }

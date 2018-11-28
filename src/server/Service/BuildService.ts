@@ -1,7 +1,7 @@
 import {orderBy} from 'lodash';
 
-import Build from "../Interfaces/Build";
-import ApiService from "./ApiService";
+import Build from '../Interfaces/Build';
+import ApiService from './ApiService';
 
 export default class BuildService {
     protected apiService: ApiService;
@@ -19,7 +19,7 @@ export default class BuildService {
     }
 
     public async getBuilds(vcs: string, username: string, project: string, branch: string, token: string, limit: number): Promise<Build[]> {
-        const builds = await this.apiService.getBuildsForProject(vcs, username, project, branch, token, limit)
+        const builds = await this.apiService.getBuildsForProject(vcs, username, project, branch, token, limit);
         return orderBy(builds, ['build_num']);
     }
 }

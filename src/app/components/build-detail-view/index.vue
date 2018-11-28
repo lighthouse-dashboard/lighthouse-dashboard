@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="build-detail-view row">
         <div class="col s12" v-if="build">
             <div class="row">
                 <div class="col s12 m2">
@@ -57,8 +57,6 @@
                 :buildnum="buildnum"
             />
         </div>
-    </div>
-
     </div>
 </template>
 

@@ -1,12 +1,12 @@
 import {orderBy, map, compact} from 'lodash';
 
-import ApiService from "./ApiService";
-import {Project} from "../Interfaces/Project";
-import {ProjectSeriesData} from "../Interfaces/ProjectSeriesData";
-import {calculateTrendForSeries, setupSeriesData} from "../utils/trend";
-import DreihouseService from "./DreihouseService";
-import BuildService from "./BuildService";
-import ArtifactService from "./ArtifactService";
+import ApiService from './ApiService';
+import {Project} from '../Interfaces/Project';
+import {ProjectSeriesData} from '../Interfaces/ProjectSeriesData';
+import {calculateTrendForSeries, setupSeriesData} from '../utils/trend';
+import DreihouseService from './DreihouseService';
+import BuildService from './BuildService';
+import ArtifactService from './ArtifactService';
 
 export default class ProjectService {
     protected apiService: ApiService;
@@ -24,30 +24,10 @@ export default class ProjectService {
         this.artifactService = artifactService;
     }
 
-
-    protected  async filterSupportedProjects(projects: Project[], branch: string, token: string): Promise<Project[]> {
-        const filteredProjectsPromises = map(projects, (async (project: Project) => {
-            if(!project.lastBuild){
-                return null;
-            }
-
-            const artifacts = await this.artifactService.getArtifactsForBuildNum(project.lastBuild.build_num, project.vcs, project.username, project.project, token);
-            const jsonArtifacts = this.artifactService.filterArtifactsByType('json', artifacts);
-            const dreihouseArtifacts = this.dreihouseService.filterArtifacts(jsonArtifacts);
-            if (dreihouseArtifacts.length > 0) {
-                return project;
-            }
-            return null
-        }));
-
-        const filteredProjects = await Promise.all(filteredProjectsPromises);
-        return compact(filteredProjects);
-    }
-
     public async getAll(branch: string, token: string): Promise<Project[]> {
         const projects = await this.apiService.getProject(branch, token);
         const filteredProjects = await this.filterSupportedProjects(projects, branch, token);
-        return orderBy(filteredProjects, ['lastBuild.stop_time'], ['desc'])
+        return orderBy(filteredProjects, ['lastBuild.stop_time'], ['desc']);
     }
 
     public invalidateProjectsCache(branch: string): void {
@@ -65,5 +45,24 @@ export default class ProjectService {
         const builds = await this.buildService.getBuilds(vcs, username, project, branch, token, limit);
         const artifactsDataBuild = await this.dreihouseService.getBuildsArtifactData(builds, vcs, username, project, token);
         return setupSeriesData(artifactsDataBuild);
+    }
+
+    protected  async filterSupportedProjects(projects: Project[], branch: string, token: string): Promise<Project[]> {
+        const filteredProjectsPromises = map(projects, (async (project: Project) => {
+            if (!project.lastBuild) {
+                return null;
+            }
+
+            const artifacts = await this.artifactService.getArtifactsForBuildNum(project.lastBuild.build_num, project.vcs, project.username, project.project, token);
+            const jsonArtifacts = this.artifactService.filterArtifactsByType('json', artifacts);
+            const dreihouseArtifacts = this.dreihouseService.filterArtifacts(jsonArtifacts);
+            if (dreihouseArtifacts.length > 0) {
+                return project;
+            }
+            return null;
+        }));
+
+        const filteredProjects = await Promise.all(filteredProjectsPromises);
+        return compact(filteredProjects);
     }
 }

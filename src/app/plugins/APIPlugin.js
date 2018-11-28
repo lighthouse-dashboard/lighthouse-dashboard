@@ -4,8 +4,7 @@ import Vue from 'vue';
 export default class APIPlugin {
     constructor(api, branch) {
         this.branch = branch;
-        this.endpoint = api
-
+        this.endpoint = api;
     }
 
     static install(_Vue, opts) {
@@ -18,10 +17,10 @@ export default class APIPlugin {
      * @param branch
      */
     getAllProjects(branch = this.branch) {
-        return Vue.http.get(`${this.endpoint}/api/projects/${branch}`)
+        return Vue.http.get(`${ this.endpoint }/api/projects/${ branch }`)
             .then((resp) => {
                 return resp.body;
-            })
+            });
     }
 
     /**
@@ -30,10 +29,10 @@ export default class APIPlugin {
      * @param branch
      */
     invalidateProjectsCache(branch = this.branch) {
-        return Vue.http.delete(`${this.endpoint}/api/projects/${branch}`)
+        return Vue.http.delete(`${ this.endpoint }/api/projects/${ branch }`)
             .then((resp) => {
                 return resp.body;
-            })
+            });
     }
 
     /**
@@ -47,7 +46,7 @@ export default class APIPlugin {
     getLatestBuilds(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/latest`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/branch/${ branch }/latest`
             )
             .then(resp => {
                 return resp.body;
@@ -65,7 +64,7 @@ export default class APIPlugin {
     getArtifacts(vcs, username, project, build = 'latest') {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}/artifacts`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/build/${ build }/artifacts`
             )
             .then(resp => {
                 return resp.body;
@@ -84,7 +83,7 @@ export default class APIPlugin {
     getBuildInfo(vcs, username, project, build) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/build/${ build }`
             )
             .then(resp => {
                 return resp.body;
@@ -104,7 +103,7 @@ export default class APIPlugin {
     getBuildChartDataInfo(vcs, username, project, build) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}/chartdata`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/build/${ build }/chartdata`
             )
             .then(resp => {
                 return resp.body;
@@ -114,7 +113,7 @@ export default class APIPlugin {
     getBuildDreihouseData(vcs, username, project, build) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${build}/dreihouse`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/build/${ build }/dreihouse`
             )
             .then(resp => {
                 return resp.body;
@@ -133,7 +132,7 @@ export default class APIPlugin {
     hasRunningBuild(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/running`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/branch/${ branch }/running`
             )
             .then(resp => {
                 return resp.body.length > 0;
@@ -152,7 +151,7 @@ export default class APIPlugin {
     getAllBuilds(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/branch/${ branch }`
             )
             .then(resp => {
                 return resp.body;
@@ -171,11 +170,11 @@ export default class APIPlugin {
     getProjectHistoryData(vcs, username, project, branch = this.branch) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/history`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/branch/${ branch }/history`
             )
             .then(resp => {
                 return resp.body;
-            })
+            });
     }
 
     /**
@@ -190,7 +189,7 @@ export default class APIPlugin {
     getProjectTrend(vcs, username, project, branch = this.branch, category = null) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/branch/${branch}/trending`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/branch/${ branch }/trending`
             )
             .then(resp => {
                 return resp.body;
@@ -200,7 +199,7 @@ export default class APIPlugin {
     getVersion() {
         return Vue.http
             .get(
-                `${this.endpoint}/api/version`
+                `${ this.endpoint }/api/version`
             )
             .then(resp => {
                 const data = resp.body;
@@ -211,7 +210,7 @@ export default class APIPlugin {
     getDreiguardData(vcs, username, project, buildNum) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${buildNum}/dreiguard`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/build/${ buildNum }/dreiguard`
             )
             .then(resp => {
                 return resp.body;
@@ -221,7 +220,7 @@ export default class APIPlugin {
     getDreiguardImagesData(vcs, username, project, buildNum) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${buildNum}/dreiguard/screenshots`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/build/${ buildNum }/dreiguard/screenshots`
             )
             .then(resp => {
                 return resp.body;
@@ -231,11 +230,10 @@ export default class APIPlugin {
     getDreiguardDiffImagesData(vcs, username, project, buildNum) {
         return Vue.http
             .get(
-                `${this.endpoint}/api/projects/${vcs}/${username}/${project}/build/${buildNum}/dreiguard/diffs`
+                `${ this.endpoint }/api/projects/${ vcs }/${ username }/${ project }/build/${ buildNum }/dreiguard/diffs`
             )
             .then(resp => {
                 return resp.body;
             });
     }
-
 }

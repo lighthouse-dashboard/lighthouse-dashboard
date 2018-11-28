@@ -1,6 +1,6 @@
-import {CircleProject, Project} from "../Interfaces/Project";
-import Build from "../Interfaces/Build";
-import {CircleBuild} from "../Interfaces/CircleBuild";
+import {CircleProject, Project} from '../Interfaces/Project';
+import Build from '../Interfaces/Build';
+import {CircleBuild} from '../Interfaces/CircleBuild';
 import {MinimalCircleBuildInfo} from '../Interfaces/MinimalCircleBuildInfo';
 
 export function transformProject(project: CircleProject, branch: string): Project {
@@ -30,8 +30,6 @@ export function transformBuilds(builds: CircleBuild[]): Build[] {
     });
 }
 
-
-
 export function transformMinimalBuild(build: MinimalCircleBuildInfo): Build {
     return {
         build_num: build.build_num,
@@ -43,7 +41,6 @@ export function transformMinimalBuild(build: MinimalCircleBuildInfo): Build {
         artifacts: [],
     };
 }
-
 
 export function transformBuild(build: CircleBuild): Build {
     return {

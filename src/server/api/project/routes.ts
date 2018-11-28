@@ -1,11 +1,11 @@
-import {Request, ServerRoute} from "hapi";
+import {Request, ServerRoute} from 'hapi';
 import Container from 'servicecontainer/bin/Container';
 import {MINUTE} from '../../config/route-constants';
 import ProjectController from './ProjectController';
 
 const joi = require('joi');
 
-export default function (container: Container): ServerRoute[] {
+export default function(container: Container): ServerRoute[] {
     return [
         {
             method: 'GET',

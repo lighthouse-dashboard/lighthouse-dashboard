@@ -18,7 +18,6 @@ import routes from './routes';
 require('dotenv').config();
 
 const TOKEN = process.env.CIRCLE_TOKEN;
-const SECRET = <string>process.env.SECRET;
 const PORT = process.env.PORT || 3000;
 const LIMIT = process.env.LIMIT || 10;
 const ENV = process.env.NODE_ENV || 'development';
@@ -26,12 +25,12 @@ const IS_DEV = ENV === 'development';
 const IS_TEST = ENV === 'test';
 
 let server: Server;
-ServiceContainer.create(resolve(__dirname, 'config/services'));
+const container = ServiceContainer.create(resolve(__dirname, 'config/services'));
 
 const swaggerOptions = {
     info: {
         title: name,
-        version: version,
+        version,
     },
 };
 
@@ -39,7 +38,6 @@ const init = async () => {
     await server.register(Inert);
     await server.register(AuthBasic);
     await server.register(AuthBearer);
-
 
     if (IS_DEV) {
         await server.register({
@@ -56,11 +54,10 @@ const init = async () => {
         ]);
     }
 
-    server.auth.strategy('bearer', 'bearer-access-token', BearerStrategy(SECRET));
-
+    server.auth.strategy('bearer', 'bearer-access-token', BearerStrategy(container.getParameter('SECRET')));
     server.auth.default('bearer');
 
-    forEach(routes(), route => server.route(route));
+    forEach(routes(), (route) => server.route(route));
 
     if (IS_DEV) {
         console.log(`Server running at: ${ server.info.uri }`);
@@ -86,10 +83,9 @@ export async function start() {
         },
     });
 
-
     server.app = {
         token: TOKEN,
-        limit: LIMIT
+        limit: LIMIT,
     };
 
     return await init();

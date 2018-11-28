@@ -1,4 +1,4 @@
-import {Request} from "hapi";
+import {Request} from 'hapi';
 import {readFileSync} from 'fs';
 import {resolve} from 'path';
 

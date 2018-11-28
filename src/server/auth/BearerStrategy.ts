@@ -1,7 +1,6 @@
-import {Request} from "hapi";
+import {Request} from 'hapi';
 
-
-export default function create(secret: string) {
+export default function BearerStrategy(secret: string) {
     return {
         allowQueryToken: true,
         validate: async (request: Request, token: string) => {
@@ -11,6 +10,6 @@ export default function create(secret: string) {
             const artifacts = {};
 
             return {isValid, credentials, artifacts};
-        }
+        },
     };
 }

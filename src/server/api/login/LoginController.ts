@@ -1,4 +1,4 @@
-import {Request} from "hapi";
+import {Request} from 'hapi';
 
 const md5 = require('md5');
 const boom = require('boom');
@@ -13,9 +13,9 @@ export default class LoginController {
     }
 
     public login(req: Request) {
-        const {password} = <any>req.payload;
-        if (md5(password) === process.env.BASIC_PASS || process.env.BASIC_PASS === null) {
-            return {token: process.env.SECRET};
+        const {password} = req.payload as any;
+        if (md5(password) === this.pass || this.pass === '') {
+            return {token: this.secret};
         }
 
         return boom.forbidden();

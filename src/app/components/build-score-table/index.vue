@@ -1,39 +1,42 @@
 <template>
-    <div class="row">
+    <div class="build-score-table row">
         <div v-if="!isLoaded">
             <loader/>
         </div>
 
         <div v-for="(report, trend, index) in trendScores" :key="trend">
-            <div class="col s12 " :class="{'grey lighten-5': index%2}">
+            <div class="col s12 l6" :class="{'grey lighten-5': index%2}">
                 <div>
+                    <span class="new badge" :data-badge-caption="report.tag"></span>
                     <h5>
-                        <small>{{ report.tag }}</small>
                         <a target="_blank" class="center" :href="report.url">{{ report.url }}</a>
                     </h5>
                 </div>
 
                 <div class="row">
-                    <div class="col s6 m4 l3"
-                         v-for="category in categories"
-                         :key="category">
-                        <div class="card">
-                            <div class="card-panel "
-                                 :class="getCardColor(report.build[category], report.budget[category])">
-                                <span class="card-title truncate">
+                    <div class="col s12">
+                        <table>
+                            <tr
+                                v-for="category in categories"
+                                :key="category"
+                                v-if="report.build[category]"
+                                :class="{'red lighten-5': report.trend[category] < 0, 'green lighten-5': report.trend[category] > 0}">
+                                <td>
                                     {{ $t(`message.category_${category}`) }}
-                                     <score
-                                         :vcs="vcs"
-                                         :username="username"
-                                         :project="project"
-                                         :buildscore="report.build[category] || 0"
-                                         :budgetscore="report.budget[category] || 0"
-                                         :category="category"
-                                     />
-                                </span>
-
-                            </div>
-                        </div>
+                                </td>
+                                <td>
+                                    <score
+                                        :vcs="vcs"
+                                        :username="username"
+                                        :project="project"
+                                        :trendscore="report.trend[category]"
+                                        :buildscore="report.build[category]"
+                                        :budgetscore="report.budget[category]"
+                                        :category="category"
+                                    />
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -1,19 +1,19 @@
-import { GroupedBuildReports } from "../Interfaces/GroupedBuildReports";
-import CircleArtifact from "../Interfaces/Artifact";
+import { GroupedBuildReports } from '../Interfaces/GroupedBuildReports';
+import CircleArtifact from '../Interfaces/Artifact';
 import { BuildChartRowsData, BuildChartData } from '../Interfaces/BuildChartData';
-import ReportCategory from "@dreipol/lighthouse-runner/dist/Interfaces/ReportCategory";
-import ReportResult from "@dreipol/lighthouse-runner/dist/Interfaces/ReportResult";
-import {Budget} from "@dreipol/lighthouse-config";
+import ReportCategory from '@dreipol/lighthouse-runner/dist/Interfaces/ReportCategory';
+import ReportResult from '@dreipol/lighthouse-runner/dist/Interfaces/ReportResult';
+import {Budget} from '@dreipol/lighthouse-config';
 
 export function groupResultsByReportTag(artifacts: CircleArtifact[]): GroupedBuildReports {
     const endpoints: GroupedBuildReports = {};
 
     artifacts.forEach((item: CircleArtifact) => {
-        if(!item.data){
+        if (!item.data) {
             return;
         }
 
-        const data = <ReportResult>item.data;
+        const data = <ReportResult> item.data;
 
         if (!endpoints[data.url]) {
             endpoints[data.url] = [];
@@ -31,14 +31,14 @@ function getCategoryScores(categories: ReportCategory[]): number[] {
 }
 
 function getCategoryBudget(categories: ReportCategory[], budget: Budget): number[] {
-    return categories.map((_item) => {
-        return <number>(budget[_item.id] ? budget[_item.id] : null);
+    return categories.map((item) => {
+        return <number> (budget[item.id] ? budget[item.id] : null);
     });
 }
 
 function getCategoryNames(categories: ReportCategory[]) {
-    return categories.map((_item) => {
-        return _item.name;
+    return categories.map((item) => {
+        return item.name;
     });
 }
 
@@ -52,14 +52,14 @@ export function fillColumn(key: string, reports: ReportResult[], columns: BuildC
         const {
             budget,
             categories,
-            tag
+            tag,
         } = item;
 
         if (!categories) {
             return;
         }
 
-        const shrinkedCategories = getCategoryScores(categories)
+        const shrinkedCategories = getCategoryScores(categories);
         const shrinkedBudget = getCategoryBudget(categories, budget);
         chartCategories = getCategoryNames(categories);
 

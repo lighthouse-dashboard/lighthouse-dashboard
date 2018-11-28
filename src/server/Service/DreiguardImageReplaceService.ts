@@ -1,6 +1,6 @@
-import {basename} from "path";
-import RunReport from "@dreipol/dreiguard/bin/RunReport";
-import CircleArtifact from "../Interfaces/Artifact";
+import {basename} from 'path';
+import RunReport from '@dreipol/dreiguard/bin/RunReport';
+import CircleArtifact from '../Interfaces/Artifact';
 
 export default class DreiguardImageReplaceService {
     public replaceImage(imagePath: string, images: CircleArtifact[], token: string): string {
@@ -30,6 +30,6 @@ export default class DreiguardImageReplaceService {
                 report.diff.diffFile = report.diffFile ? this.replaceImage(report.diffFile, imageArtifacts, token) : report.diffFile;
             }
             return report;
-        })
+        });
     }
 }
