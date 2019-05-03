@@ -1,6 +1,6 @@
 export const parameters = {
     'env': 'test',
-    'BASIC_PASS': process.env.BASIC_PASS || '21232f297a57a5a743894a0e4a801fc3',
+    'BASIC_PASS': process.env.BASIC_PASS || '',
     'SECRET': process.env.SECRET || 'MYKV626FMzunTrUw4h',
 };
 
