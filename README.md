@@ -58,14 +58,12 @@ git push deis master
 ```
 
 # Env Vars
- - BASIC_PASS - password for login page (md5 hashed password)
- - SECRET - secret key for api bearer
- - CIRCLE_TOKEN - circle ci token
- - PORT - port for the server
- - LIMIT - limit of build numbers fetched
+```
+PORT=3000
+BASIC_PASS='foo'
+SECRET='foo'
+CIRCLE_TOKEN='992df13948558e1e264c382221a4215eabce90da'
+MONGO_DB_URL='mongodb://admin:admin@localhost:27017'
+MONGO_DB_NAME='auditreports'
 
-# Add new project
-- Add the project to circleci
-- Configure the project so it runs with [`deihouse`](https://www.npmjs.com/package/@dreipol/lighthouse-runner)
-- Make sure that the `dreipoldev` account has access to it (circleci & github)
-- Clear the cache in the dashboard
+```

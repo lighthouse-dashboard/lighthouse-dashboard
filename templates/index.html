@@ -1,0 +1,32 @@
+<html>
+<head>
+    <!-- 1) Load D3.js and billboard.js separately -->
+    <!-- Load D3 -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- Load billboard.js with base(or theme) style -->
+    <link rel="stylesheet"
+            href="http://naver.github.io/billboard.js/release/latest/dist/billboard.css">
+    <script src="http://naver.github.io/billboard.js/release/latest/dist/billboard.js"></script>
+</head>
+<body>
+<div>
+    <h2>www.fabs.io</h2>
+    <div id="dataFromURL"></div>
+    <script>
+        var chart = bb.generate({
+            data: {
+                columns: []
+            },
+            bindto: '#dataFromURL'
+        });
+
+        chart.load({
+            url: 'http://0.0.0.0:3000/assets/www.fabs.io',
+            mimeType: 'json',
+            type: 'line'
+        });
+    </script>
+</div>
+</body>
+</html>
