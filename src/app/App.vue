@@ -1,17 +1,31 @@
 <template>
-    <div id="app">
-        <img alt="Vue logo"
-                src="./assets/logo.png">
-        <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="columns">
+        <div class="column is-half"
+                v-for="site in sites"
+                :key="site.id">
+            <chart v-bind="site"/>
+        </div>
     </div>
 </template>
 
 <script>
-    import HelloWorld from './components/HelloWorld.vue';
+    import axios from 'axios';
+    import Chart from './components/chart/chart';
 
     export default {
         components: {
-            HelloWorld,
+            Chart,
+        },
+        data() {
+            return {
+                sites: [],
+            };
+        },
+        mounted() {
+            axios.get('/api')
+                .then(({ data }) => {
+                    this.sites = data;
+                });
         },
     };
 </script>

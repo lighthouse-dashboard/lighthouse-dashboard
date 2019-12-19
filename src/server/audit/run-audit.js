@@ -1,6 +1,6 @@
+import chromePaths from 'chrome-paths';
 import PWMetrics from 'pwmetrics';
 import url from 'url';
-import chromePaths from 'chrome-paths';
 
 
 /**
@@ -22,9 +22,9 @@ export default async function runAudit(pageUrl, runs, device) {
             json: false,
             showOutput: false,
             emulatedFormFactor: device,
-            chromePath: chromePaths.chromeCanary
-            //chromeFlags: '--headless' // run in headless Chrome
-        }
+            chromePath: chromePaths.chromeCanary,
+            chromeFlags: '--headless' // run in headless Chrome
+        },
     };
 
     const pwMetrics = new PWMetrics(pageUrl, options); // _All available configuration options_ can be used as `options`

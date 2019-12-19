@@ -1,11 +1,12 @@
 import joi from '@hapi/joi';
+import getSitesHandler from '../handler/get-sites-handler';
 import getRecentAuditsHandler from '../handler/get-recent-audits-handler';
 import runAudit from '../handler/run-audit-handler';
 
 export default [
     {
         method: 'GET',
-        path: '/data/{id}',
+        path: '/api/{id}',
         handler: getRecentAuditsHandler,
         options: {
             validate: {
@@ -16,8 +17,8 @@ export default [
         },
     },
     {
-        method: 'GET',
-        path: '/run/{id}',
+        method: 'POST',
+        path: '/api/{id}',
         handler: runAudit,
         options: {
             validate: {
@@ -27,7 +28,11 @@ export default [
             },
         },
     },
-
+    {
+        method: 'GET',
+        path: '/api',
+        handler: getSitesHandler,
+    },
     {
         method: 'GET',
         path: '/',
@@ -35,15 +40,16 @@ export default [
             file: 'templates/index.html',
         },
     },
+
     {
         method: 'GET',
-        path: '/assets/{param*}',
+        path: '/{param*}',
         handler: {
             directory: {
                 path: '.',
                 redirectToSlash: true,
-                index: true,
-            }
-        }
-    }
-]
+                index: false,
+            },
+        },
+    },
+];
