@@ -9,6 +9,8 @@ services:
       - MONGO_DB_URL='mongodb://admin:admin@database:27017'
       - MONGO_DB_NAME=auditreports
       - PORT=5000
+      - DISPLAY=:99
+      - CHROME_BIN=/usr/bin/chromium-browser
     ports:
       - '5000:5000'
   database:
@@ -19,4 +21,3 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=admin
     ports:
       - '27017-27019:27017-27019'
-

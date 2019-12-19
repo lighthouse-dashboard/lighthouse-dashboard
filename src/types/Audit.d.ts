@@ -1,5 +1,6 @@
 export interface AuditDocument extends Audit{
     asset: string;
+    siteId: string;
 }
 
 export interface Audit {

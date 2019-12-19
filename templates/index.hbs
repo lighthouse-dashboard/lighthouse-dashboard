@@ -1,0 +1,35 @@
+<html>
+<head>
+    <!-- 1) Load D3.js and billboard.js separately -->
+    <!-- Load D3 -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- Load billboard.js with base(or theme) style -->
+    <link rel="stylesheet"
+            href="http://naver.github.io/billboard.js/release/latest/dist/billboard.css">
+    <script src="http://naver.github.io/billboard.js/release/latest/dist/billboard.js"></script>
+</head>
+<body>
+<div>
+
+    {{#each sites}}
+        <h2>{{ url }}</h2>
+        <div id="{{ id }}"></div>
+        <a href="http://0.0.0.0:4000/run/{{ id }}"
+                target="_blank">RUN</a>
+        <script>
+            var chart = bb.generate({
+                data: {
+                    url: '/data/{{ id }}',
+                    mimeType: 'json',
+                    type: 'line'
+                },
+                bindto: '#{{ id }}'
+            });
+        </script>
+    {{/each}}
+
+</div>
+
+</body>
+</html>

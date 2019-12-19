@@ -1,4 +1,4 @@
-FROM node:10.16
+FROM amio/node-chrome
 
 WORKDIR /usr/src/app
 
