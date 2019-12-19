@@ -2,14 +2,19 @@
     "name": "dreihouse-dashboard",
     "version": "4.1.1",
     "description": "A Vue.js project",
-    "main": "src/main.js",
+    "main": "src/app/main.js",
     "private": true,
     "scripts": {
         "start": "node -r esm src/server/index.js",
-        "server-dev": "NODE_ENV=development node_modules/.bin/nodemon"
+        "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
     },
     "types": "./src/types/index.d.ts",
     "dependencies": {
+        "core-js": "^3.4.3",
+        "vue": "^2.6.10",
         "@hapi/boom": "^8.0.1",
         "@hapi/hapi": "^18.4.0",
         "@hapi/inert": "^5.2.2",
@@ -31,12 +36,38 @@
         "pwmetrics": "^4.2.2"
     },
     "devDependencies": {
+        "@dreipol/eslint-config": "^6.0.4",
         "@types/hapi": "^18.0.3",
-        "nodemon": "^2.0.2"
+        "@vue/cli-plugin-babel": "^4.1.0",
+        "@vue/cli-plugin-eslint": "^4.1.0",
+        "@vue/cli-service": "^4.1.0",
+        "babel-eslint": "^10.0.3",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-plugin-transform-vue-jsx": "^3.7.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-2": "^6.24.1",
+        "eslint": "^5.16.0",
+        "eslint-plugin-vue": "^5.0.0",
+        "nodemon": "^2.0.2",
+        "vue-template-compiler": "^2.6.10"
     },
     "engines": {
         "node": ">= 10.16",
         "npm": ">= 6.0.0"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "rules": {},
+        "parserOptions": {
+            "parser": "babel-eslint"
+        }
     },
     "browserslist": [
         "> 1%",

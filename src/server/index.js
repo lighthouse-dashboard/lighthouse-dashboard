@@ -13,6 +13,9 @@ const init = async () => {
         host: process.env.HOST || '0.0.0.0',
         routes: {
             cors: true,
+            files: {
+                relativeTo: join(__dirname, '../../assets'),
+            }
         },
     });
 

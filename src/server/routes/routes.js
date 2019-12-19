@@ -1,5 +1,4 @@
 import joi from '@hapi/joi';
-import dashboardViewHandler from '../handler/dashboard-view-handler';
 import getRecentAuditsHandler from '../handler/get-recent-audits-handler';
 import runAudit from '../handler/run-audit-handler';
 
@@ -32,11 +31,13 @@ export default [
     {
         method: 'GET',
         path: '/',
-        handler: dashboardViewHandler,
+        handler: {
+            file: 'templates/index.html',
+        },
     },
     {
         method: 'GET',
-        path: '/{param*}',
+        path: '/assets/{param*}',
         handler: {
             directory: {
                 path: '.',
