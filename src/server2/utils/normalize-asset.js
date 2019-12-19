@@ -1,6 +1,6 @@
 /**
  *
- * @param {AuditDocument[]} assets
+ * @param {AuditDocument} asset
  * @returns {NormalizedAsset[]}
  */
 export default function normalizeAsset(asset) {
@@ -9,6 +9,7 @@ export default function normalizeAsset(asset) {
     }
 
     return {
+        _id: asset._id,
         url: asset.median.finalUrl,
         timings: asset.median.timings,
         generatedTime: asset.median.generatedTime,

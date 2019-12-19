@@ -67,3 +67,10 @@ MONGO_DB_URL='mongodb://admin:admin@localhost:27017'
 MONGO_DB_NAME='auditreports'
 
 ```
+
+# Todo
+ - [ ] Add Templating
+ - [ ] Add method to get all assets
+ - [ ] Create Chart for all assets with speed index
+ - [ ] 
+ 

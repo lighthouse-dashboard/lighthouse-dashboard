@@ -5,4 +5,5 @@ export interface NormalizedAsset {
     timings: Timing[];
     generatedTime: string;
     asset: string;
+    _id: string;
 }

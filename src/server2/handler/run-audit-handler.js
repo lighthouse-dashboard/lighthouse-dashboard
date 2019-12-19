@@ -1,5 +1,4 @@
-import getDatabase from '../database';
-import runAudit from '../provider/run-audit';
+import createAudit from '../utils/create-audit';
 
 /**
  * Execute an audit
@@ -9,12 +8,6 @@ import runAudit from '../provider/run-audit';
 export default async function runAuditHandler(request) {
     const { page, runs, device } = request.query;
 
-    /** @type {AuditDocument} data */
-    const data = await runAudit(page, runs, device);
-
-    const { database, client } = await getDatabase();
-    const reportCollection = database.collection('reports');
-    reportCollection.insertOne(data);
-    client.close();
+    const data = await createAudit(page, runs, device);
     return data;
 }

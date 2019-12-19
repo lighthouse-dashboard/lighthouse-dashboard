@@ -2,12 +2,14 @@
 
 import Hapi from '@hapi/hapi';
 import { join } from 'path';
+import setupCronjobs from './cronjobs';
 import setupPlugins from './plugins';
 import setupRouter from './routes';
 
 require('dotenv').config();
 
 const init = async () => {
+    setupCronjobs();
     const server = Hapi.server({
         port: process.env.PORT || 3000,
         host: process.env.HOST || '0.0.0.0',
