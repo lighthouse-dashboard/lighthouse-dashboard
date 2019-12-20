@@ -2,12 +2,12 @@ import connectDatabase from './connect-database';
 
 /**
  *
- * @param {AuditDocument} audit
+ * @param {Report} audit
  * @return {Promise<void>}
  */
-export default async function saveAudit(audit) {
+export default async function saveAudit(report) {
     const { database, client } = await connectDatabase();
     const reportCollection = database.collection('reports');
-    reportCollection.insertOne(audit);
+    reportCollection.insertOne(report);
     client.close();
 }

@@ -2,7 +2,6 @@ import Boom from '@hapi/boom';
 import { getAuditsBySiteId } from '../database/get-adits';
 import getConfigForPage from '../utils/get-config-for-page';
 import getLineDataFromAssets from '../utils/get-line-data-from-asstes';
-import normalizeAsset from '../utils/normalize-asset';
 
 /**
  *
@@ -23,6 +22,5 @@ export default async function getRecentAuditsHandler(request) {
         return Boom.notFound('No audits found');
     }
 
-    const normalizedAssets = assets.map(normalizeAsset).filter(Boolean);
-    return getLineDataFromAssets(normalizedAssets);
+    return getLineDataFromAssets(assets);
 }

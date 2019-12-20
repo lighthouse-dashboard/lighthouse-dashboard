@@ -1,23 +1,23 @@
 /**
  *
- * @param {Timing[]} timings
+ * @param {ReportValue[]} values
  * @param {string} key
- * @return {Timing}
+ * @return {ReportValue}
  */
-export default function getTimingByKey(timings, key) {
-    return timings.find(t => t.id === key);
+export default function getReportValueByKey(values, key) {
+    return values.find(t => t.id === key);
 }
 
 /**
  *
- * @param {Timing[]} timings
+ * @param {ReportValue[]} values
  * @param {string} key
  * @return {number}
  */
-export function getTimingValueByKey(timings, key) {
-    const timing = getTimingByKey(timings, key);
+export function getTimingValueByKey(values, key) {
+    const timing = getReportValueByKey(values, key);
     if (!timing) {
         return null;
     }
-    return timing.timing;
+    return timing.value;
 }

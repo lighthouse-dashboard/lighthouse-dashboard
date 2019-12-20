@@ -1,6 +1,8 @@
+import curry from 'lodash.curry';
 import runAudit from '../audit/run-audit';
 import saveAudit from '../database/save-audit';
 import getConfigForPage from '../utils/get-config-for-page';
+import transformAudit from '../utils/transform-audit';
 
 /**
  * Execute an audit
@@ -15,7 +17,8 @@ export default async function runAuditHandler(request) {
     }
     const { url, runs, device } = getConfigForPage(id);
 
-    const data = await runAudit(url, runs, device);
-    await saveAudit({ ...data, siteId: id });
+    const transformAuditCurry = curry(transformAudit);
+    const data = await runAudit(url, runs, device, transformAuditCurry(id));
+    await saveAudit(data);
     return data;
 }

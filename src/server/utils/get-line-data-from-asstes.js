@@ -3,54 +3,52 @@ import { EXPORTED_TIMINGS } from '../config/export';
 
 /**
  *
- * @param {NormalizedAsset[]} assets
+ * @param {Report[]} reports
  */
-export default function getLineDataFromAssets(assets) {
+export default function getLineDataFromAssets(reports) {
     const data = {
         labels: [],
         datasets: [],
     };
 
-    data.labels = assets.reduce((acc, asset) => {
-        if (asset) {
-            acc.push(format(new Date(asset.generatedTime), 'dd/MM hh:mm'));
+    data.labels = reports.reduce((acc, report) => {
+        if (report) {
+            acc.push(format(new Date(report.createdAt), 'dd/MM hh:mm'));
         } else {
             acc.push(null);
         }
-
-        // acc.push(formatter.format(new Date(asset.generatedTime)));
         return acc;
     }, []);
 
     EXPORTED_TIMINGS.reduce((datasets, timingKey) => {
-        datasets.push(getLineDataSetForKey(assets, timingKey));
+        datasets.push(getLineDataSetForKey(reports, timingKey));
         return datasets;
-    }, data.datasets)
+    }, data.datasets);
 
     return data;
 }
 
 /**
  *
- * @param {NormalizedAsset[]} assets
+ * @param {Report[]} reports
  * @param {string} key
  * @return {*}
  */
-function getLineDataSetForKey(assets, key) {
-    return assets.reduce((dataSet, asset) => {
-        dataSet.data.push(getTimingValueForKey(asset.timings, key));
+function getLineDataSetForKey(reports, key) {
+    return reports.reduce((dataSet, report) => {
+        dataSet.data.push(getTimingValueForKey(report.values, key));
         return dataSet;
     }, {
         label: key,
-        data: []
+        data: [],
     });
 }
 
 /**
  *
- * @param {Timing[]} timings
+ * @param {ReportValue[]} timings
  * @return {*}
  */
 function getTimingValueForKey(timings, id) {
-    return timings.find(t => t.id === id).timing || null;
+    return timings.find(t => t.id === id).value || null;
 }

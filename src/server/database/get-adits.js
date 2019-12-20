@@ -4,7 +4,7 @@ import getDatabase from '../database/connect-database';
 /**
  * Get list of recent builds
  * @param {number | null} limit
- * @returns Promise<AuditDocument[]>
+ * @returns Promise<Report[]>
  */
 export async function getAudits(limit) {
     const { database, client } = await getDatabase();
@@ -30,7 +30,7 @@ export async function getAudits(limit) {
  *
  * @param {string} id
  * @param {number} limit
- * @return {Promise<AuditDocument[]>}
+ * @return {Promise<Report[]>}
  */
 export async function getAuditsBySiteId(id, limit) {
     const { database, client } = await getDatabase();
@@ -55,10 +55,9 @@ export async function getAuditsBySiteId(id, limit) {
 /**
  *
  * @param {string} id
- * @param {number} limit
- * @return {Promise<AuditDocument>}
+ * @return {Promise<Report>}
  */
-export async function getAuditBySiteId(id) {
+export async function getReportBySiteId(id) {
     const { database, client } = await getDatabase();
     const collection = database.collection(AUDIT_COLLECTION);
 

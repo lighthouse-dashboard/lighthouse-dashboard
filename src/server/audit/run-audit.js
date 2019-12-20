@@ -1,5 +1,4 @@
 import PWMetrics from 'pwmetrics';
-import url from 'url';
 
 
 /**
@@ -7,12 +6,11 @@ import url from 'url';
  * @param {string} pageUrl
  * @param {number} runs
  * @param {'desktop'|'mobile} device
- * @return {Promise<AuditDocument>}
+ * @param {function(Audit)}transformer
+ * @return {Promise<Audit>}
  */
-export default async function runAudit(pageUrl, runs, device) {
+export default async function runAudit(pageUrl, runs, device, transformer) {
     console.log('info', `Start new audit ${ pageUrl } ${ runs } ${ device }`);
-
-    const parsedUrl = new url.parse(pageUrl);
 
     const options = {
         flags: {
@@ -29,11 +27,7 @@ export default async function runAudit(pageUrl, runs, device) {
     };
 
     const pwMetrics = new PWMetrics(pageUrl, options); // _All available configuration options_ can be used as `options`
-    /** @type {Audit} */
-    const metricsData = await pwMetrics.start();
-
-    return {
-        ...metricsData,
-        asset: parsedUrl.host,
-    };
+    /** @type {Audit } */
+    const audit = await pwMetrics.start();
+    return transformer(audit);
 }

@@ -58,10 +58,6 @@
                     };
                 });
             },
-
-            runAudit() {
-                axios.post(`/api/${ this.id }`);
-            },
         },
         mounted() {
             this.loadData();

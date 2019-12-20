@@ -1,6 +1,6 @@
 import { TIMINGS } from '../../../config/audit';
 import PAGES from '../config/sites';
-import { getAuditBySiteId } from '../database/get-adits';
+import { getReportBySiteId } from '../database/get-adits';
 import { getTimingValueByKey } from '../utils/get-timing-by-key';
 
 export default async function getSpeedIndexesHandler() {
@@ -10,8 +10,8 @@ export default async function getSpeedIndexesHandler() {
 
     const values = [];
     for (let i = 0; i < PAGES.length; i++) {
-        const audit = await getAuditBySiteId(PAGES[i].id);
-        const value = audit && audit.median ? getTimingValueByKey(audit.median.timings, TIMINGS.SPEED_INDEX) : null;
+        const audit = await getReportBySiteId(PAGES[i].id);
+        const value = audit ? getTimingValueByKey(audit.values, TIMINGS.SPEED_INDEX) : null;
         values.push(value);
     }
 

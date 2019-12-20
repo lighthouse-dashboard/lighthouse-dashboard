@@ -21,5 +21,4 @@ export interface Timing {
     title:  string;
     id:     string;
     timing: number;
-    color:  string;
 }
