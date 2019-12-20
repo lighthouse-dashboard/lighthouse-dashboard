@@ -9,7 +9,7 @@ import PWMetrics from 'pwmetrics';
  * @param {function(Audit)}transformer
  * @return {Promise<Audit>}
  */
-export default async function runAudit(pageUrl, runs, device, transformer) {
+export default async function runPwmetrics(pageUrl, runs, device, transformer) {
     console.log('info', `Start new audit ${ pageUrl } ${ runs } ${ device }`);
 
     const options = {
