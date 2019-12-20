@@ -2,7 +2,6 @@
     <div class="site-overview box">
         <h2 class="title center">Speed Overview</h2>
         <canvas
-                style="width: 100%; height: 400px"
                 ref="chart"
         />
     </div>
@@ -11,7 +10,7 @@
 <script>
     import axios from 'axios';
     import Chart from 'chart.js';
-    import { TIMINGS } from '../../../../config/audit';
+    import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
     import { COLORS } from '../../../../config/colors';
 
     export default {
@@ -29,7 +28,16 @@
                     type: 'bar',
                     data: this.chartData,
                     options: {
-                        responsive: false,
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    max: 100,
+                                    min: 0,
+                                    stepSize: 5,
+                                },
+                            }],
+                        },
                         elements: {
                             point: {
                                 pointStyle: 'rectRot',
@@ -51,7 +59,7 @@
                 return datasets.map((dataset) => {
                     return {
                         ...dataset,
-                        backgroundColor: COLORS[TIMINGS.SPEED_INDEX],
+                        backgroundColor: COLORS[REPORT_AUDIT_KEYS.PERFORMANCE],
                         pointRadius: 5,
                         pointHoverRadius: 15,
                         fill: false,

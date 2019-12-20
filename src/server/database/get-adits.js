@@ -72,7 +72,7 @@ export async function getReportBySiteId(id) {
                 }
 
                 if (!data || data.length === 0) {
-                    throw new Error('No data found');
+                    return resolve(null);
                 }
 
                 return resolve(data.pop());

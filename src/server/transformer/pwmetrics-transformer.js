@@ -4,7 +4,7 @@
  * @param {Audit} audit
  * @returns {Report}
  */
-export default function transformAudit(id, audit) {
+export default function pwmetricsTransformer(id, audit) {
     return {
         siteId: id,
         values: transformTimings(audit.median.timings),

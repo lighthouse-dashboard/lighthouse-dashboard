@@ -1,7 +1,7 @@
-export const TIMINGS = {
-    SPEED_INDEX: 'speedIndex',
-    TTI: 'interactive',
-    CPU_IDLE: 'firstCPUIdle',
-    FMP: 'firstMeaningfulPaint',
-    FCP: 'firstContentfulPaint',
+export const REPORT_AUDIT_KEYS = {
+    PERFORMANCE: 'performance',
+    SEO: 'seo',
+    PWA: 'pwa',
+    ACCESSIBILITY: 'accessibility',
+    BEST_PRACTICES: 'best-practices',
 };

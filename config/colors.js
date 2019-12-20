@@ -1,7 +1,7 @@
-import { TIMINGS } from './audit';
+import { REPORT_AUDIT_KEYS } from './audit';
 
 export const COLORS = {
-    [TIMINGS.SPEED_INDEX]: 'rgb(84, 153, 199)',
+    [REPORT_AUDIT_KEYS.PERFORMANCE]: 'rgb(84, 153, 199)',
 };
 
 export default [
@@ -9,6 +9,6 @@ export default [
     'rgb(40, 180, 99)',
     'rgb(169, 50, 38)',
     'rgb(155, 89, 182)',
-    COLORS[TIMINGS.SPEED_INDEX],
+    COLORS[REPORT_AUDIT_KEYS.PERFORMANCE],
     'rgb(203, 67, 53)',
 ];

@@ -7,7 +7,7 @@ import getLineDataFromAssets from '../utils/get-line-data-from-asstes';
  *
  * @param {hapi.Request} request
  * @param h
- * @return {Promise<NormalizedAsset[]>}
+ * @return {Promise<Report[]>}
  */
 export default async function getRecentAuditsHandler(request) {
     const { id } = request.params;

@@ -3,13 +3,12 @@ import PWMetrics from 'pwmetrics';
 
 /**
  * Run Audit
- * @param {string} pageUrl
- * @param {number} runs
- * @param {'desktop'|'mobile} device
- * @param {function(Audit)}transformer
+ * @param {AuditConfig} config
+ * @param {AuditTransformer}transformer
  * @return {Promise<Audit>}
  */
-export default async function runPwmetrics(pageUrl, runs, device, transformer) {
+export default async function runPwmetrics(config, transformer) {
+    const { pageUrl, runs, device } = config;
     console.log('info', `Start new audit ${ pageUrl } ${ runs } ${ device }`);
 
     const options = {

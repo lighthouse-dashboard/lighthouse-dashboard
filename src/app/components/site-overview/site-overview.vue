@@ -38,7 +38,16 @@
                     type: 'line',
                     data: this.chartData,
                     options: {
-                        responsive: false,
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    max: 100,
+                                    min: 0,
+                                    stepSize: 5
+                                },
+                            }],
+                        },
                         elements: {
                             point: {
                                 pointStyle: 'rectRot',

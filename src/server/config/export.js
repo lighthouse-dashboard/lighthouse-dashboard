@@ -1,6 +1,8 @@
-import { TIMINGS } from '../../../config/audit';
+import { REPORT_AUDIT_KEYS } from '../../../config/audit';
 
 export const EXPORTED_TIMINGS = [
-    TIMINGS.FCP,
-    TIMINGS.SPEED_INDEX,
+    REPORT_AUDIT_KEYS.PERFORMANCE,
+    REPORT_AUDIT_KEYS.SEO,
+    //REPORT_AUDIT_KEYS.ACCESSIBILITY,
+    //REPORT_AUDIT_KEYS.BEST_PRACTICES,
 ];

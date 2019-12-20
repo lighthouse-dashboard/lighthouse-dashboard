@@ -4,6 +4,7 @@ import { EXPORTED_TIMINGS } from '../config/export';
 /**
  *
  * @param {Report[]} reports
+ * @return {ChartData}
  */
 export default function getLineDataFromAssets(reports) {
     const data = {
@@ -13,7 +14,7 @@ export default function getLineDataFromAssets(reports) {
 
     data.labels = reports.reduce((acc, report) => {
         if (report) {
-            acc.push(format(new Date(report.createdAt), 'dd/MM hh:mm'));
+            acc.push(format(new Date(report.createdAt), 'dd/MM HH:mm'));
         } else {
             acc.push(null);
         }
@@ -32,7 +33,7 @@ export default function getLineDataFromAssets(reports) {
  *
  * @param {Report[]} reports
  * @param {string} key
- * @return {*}
+ * @return {ChartDataDataSet}
  */
 function getLineDataSetForKey(reports, key) {
     return reports.reduce((dataSet, report) => {
@@ -45,9 +46,9 @@ function getLineDataSetForKey(reports, key) {
 }
 
 /**
- *
  * @param {ReportValue[]} timings
- * @return {*}
+ * @param {string} id
+ * @return {number}
  */
 function getTimingValueForKey(timings, id) {
     return timings.find(t => t.id === id).value || null;

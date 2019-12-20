@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <section class="hero">
             <div class="hero-body">
                 <div class="container">
@@ -13,14 +13,21 @@
             </div>
         </section>
 
-        <speed-overview/>
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half">
+                    <speed-overview/>
+                </div>
+            </div>
+        </div>
 
-        <div class="columns">
-
-            <div class="column is-half"
-                    v-for="site in sites"
-                    :key="site.id">
-                <site-overview v-bind="site"/>
+        <div class="container is-fluid">
+            <div class="columns is-desktop">
+                <div class="column is-half"
+                        v-for="site in sites"
+                        :key="site.id">
+                    <site-overview v-bind="site"/>
+                </div>
             </div>
         </div>
     </div>
