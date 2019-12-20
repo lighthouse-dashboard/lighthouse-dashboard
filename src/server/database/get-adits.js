@@ -13,52 +13,24 @@ export async function getAudits(limit) {
     return new Promise((resolve, reject) => {
         collection
             .find(null, { limit })
+            .sort({ _id: 1 })
             .toArray(
-                /**
-                 *
-                 * @param error
-                 * @param {AuditDocument[]} audits
-                 */
                 (error, audits) => {
                     client.close();
                     if (error) {
                         return reject(error);
                     }
 
-                    resolve(audits);
+                    return resolve(audits);
                 });
     });
 }
 
 /**
- * Get all audits by a given name
- * @param {string} assetName
- * @param {number | null} limit
- * @return {Promise<unknown>}
- */
-export async function getAuditsByName(assetName, limit) {
-    const { database, client } = await getDatabase();
-    const collection = database.collection(AUDIT_COLLECTION);
-
-    return new Promise((resolve, reject) => {
-        collection
-            .find({ 'siteId': assetName }, { limit })
-            .toArray((error, data) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                resolve(data);
-            });
-        client.close();
-    });
-}
-
-/**
  *
- * @param id
- * @param limit
- * @return {Promise<unknown>}
+ * @param {string} id
+ * @param {number} limit
+ * @return {Promise<AuditDocument[]>}
  */
 export async function getAuditsBySiteId(id, limit) {
     const { database, client } = await getDatabase();
@@ -66,13 +38,45 @@ export async function getAuditsBySiteId(id, limit) {
 
     return new Promise((resolve, reject) => {
         collection
-            .find({ 'siteId': id }, { limit })
+            .find({ siteId: id })
+            .sort({ _id: 1 })
+            .limit(limit)
             .toArray((error, data) => {
                 if (error) {
                     return reject(error);
                 }
 
-                resolve(data);
+                return resolve(data);
+            });
+        client.close();
+    });
+}
+
+/**
+ *
+ * @param {string} id
+ * @param {number} limit
+ * @return {Promise<AuditDocument>}
+ */
+export async function getAuditBySiteId(id) {
+    const { database, client } = await getDatabase();
+    const collection = database.collection(AUDIT_COLLECTION);
+
+    return new Promise((resolve, reject) => {
+        collection
+            .find({ siteId: id })
+            .sort({ _id: 1 })
+            .limit(1)
+            .toArray((error, data) => {
+                if (error) {
+                    return reject(error);
+                }
+
+                if (!data || data.length === 0) {
+                    throw new Error('No data found');
+                }
+
+                return resolve(data.pop());
             });
         client.close();
     });

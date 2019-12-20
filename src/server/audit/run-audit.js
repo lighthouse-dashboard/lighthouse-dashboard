@@ -1,4 +1,3 @@
-import chromePaths from 'chrome-paths';
 import PWMetrics from 'pwmetrics';
 import url from 'url';
 
@@ -19,11 +18,13 @@ export default async function runAudit(pageUrl, runs, device) {
         flags: {
             //chromePath: process.env.CHROME_BIN,
             runs,
-            json: false,
-            showOutput: false,
+            json: true,
+            showOutput: true,
             emulatedFormFactor: device,
-            chromePath: chromePaths.chromeCanary,
-            chromeFlags: '--headless' // run in headless Chrome
+            port: 9222,
+            hostname: '0.0.0.0',
+            chromePath: require('puppeteer').executablePath(),
+            chromeFlags: '--disable-gpu --headless --no-sandbox',
         },
     };
 
@@ -34,5 +35,5 @@ export default async function runAudit(pageUrl, runs, device) {
     return {
         ...metricsData,
         asset: parsedUrl.host,
-    }
+    };
 }

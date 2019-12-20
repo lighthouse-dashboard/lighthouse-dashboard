@@ -1,9 +1,15 @@
 import joi from '@hapi/joi';
+import getSpeedIndexesHandler from '../handler/get-speed-indexes-handler';
 import getSitesHandler from '../handler/get-sites-handler';
 import getRecentAuditsHandler from '../handler/get-recent-audits-handler';
 import runAudit from '../handler/run-audit-handler';
 
 export default [
+    {
+        method: 'GET',
+        path: '/api/speed',
+        handler: getSpeedIndexesHandler,
+    },
     {
         method: 'GET',
         path: '/api/{id}',

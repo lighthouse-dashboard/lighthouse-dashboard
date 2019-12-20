@@ -5,4 +5,4 @@ node_modules
 .gitignore
 
 .env
-dist
+assets

@@ -1,5 +1,5 @@
 <template>
-    <div class="chart box">
+    <div class="site-overview box">
         <div class="title"><h2>{{ id }}</h2></div>
         <button @click="runAudit">Run {{ url }}</button>
         <canvas
@@ -12,7 +12,7 @@
 <script>
     import axios from 'axios';
     import Chart from 'chart.js';
-    import colors from '../../config/colors';
+    import colors from '../../../../config/colors';
 
     export default {
         props: {

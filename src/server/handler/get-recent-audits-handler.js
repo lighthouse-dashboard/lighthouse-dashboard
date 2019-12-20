@@ -10,7 +10,7 @@ import normalizeAsset from '../utils/normalize-asset';
  * @param h
  * @return {Promise<NormalizedAsset[]>}
  */
-export default async function getRecentAuditsHandler(request, h) {
+export default async function getRecentAuditsHandler(request) {
     const { id } = request.params;
 
     const config = getConfigForPage(id);
@@ -18,7 +18,11 @@ export default async function getRecentAuditsHandler(request, h) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const assets = await getAuditsBySiteId(id);
-    const normalizedAssets = assets.map(normalizeAsset);
+    const assets = await getAuditsBySiteId(id, 10);
+    if (!assets || assets.length === 0) {
+        return Boom.notFound('No audits found');
+    }
+
+    const normalizedAssets = assets.map(normalizeAsset).filter(Boolean);
     return getLineDataFromAssets(normalizedAssets);
 }

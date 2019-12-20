@@ -69,8 +69,10 @@ MONGO_DB_NAME='auditreports'
 ```
 
 # Todo
- - [ ] Add Templating
- - [ ] Add method to get all assets
+ - [x] Add Templating
+ - [x] Add method to get all assets
  - [ ] Create Chart for all assets with speed index
- - [ ] 
+ - [ ] Make audits run in docker
+ - [ ] Make interface to add/ remove projects (stored in db)
+ - [ ] Host
  

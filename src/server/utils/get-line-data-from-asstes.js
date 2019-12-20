@@ -1,3 +1,6 @@
+import { format } from 'date-fns';
+import { EXPORTED_TIMINGS } from '../config/export';
+
 /**
  *
  * @param {NormalizedAsset[]} assets
@@ -7,11 +10,10 @@ export default function getLineDataFromAssets(assets) {
         labels: [],
         datasets: [],
     };
-    const mainTiming = assets[0].timings;
 
     data.labels = assets.reduce((acc, asset) => {
         if (asset) {
-            acc.push(asset.generatedTime);
+            acc.push(format(new Date(asset.generatedTime), 'dd/MM hh:mm'));
         } else {
             acc.push(null);
         }
@@ -20,10 +22,11 @@ export default function getLineDataFromAssets(assets) {
         return acc;
     }, []);
 
-    for (let i = 0; i < mainTiming.length; i++) {
-        const key = mainTiming[i].id;
-        data.datasets.push(getLineDataSetForKey(assets, key));
-    }
+    EXPORTED_TIMINGS.reduce((datasets, timingKey) => {
+        datasets.push(getLineDataSetForKey(assets, timingKey));
+        return datasets;
+    }, data.datasets)
+
     return data;
 }
 
