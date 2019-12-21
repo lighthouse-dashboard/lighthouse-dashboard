@@ -13,14 +13,7 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
     const chrome = await chromeLauncher.launch(opts);
     const port = chrome.port;
 
-    /*
-    // Connect to it using puppeteer.connect().
-    const resp = await util.promisify(request)(`http://0.0.0.0:${ port }/json/version`);
-    const { webSocketDebuggerUrl } = JSON.parse(resp.body);
-    const browser = await puppeteer.connect({ browserWSEndpoint: webSocketDebuggerUrl });
-*/
     const results = await lighthouse(url, { ...flags, port });
-//    await browser.disconnect();
     await chrome.kill();
     return results.lhr;
 }

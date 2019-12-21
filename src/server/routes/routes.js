@@ -1,44 +1,11 @@
-import joi from '@hapi/joi';
-import getSpeedIndexesHandler from '../handler/get-speed-indexes-handler';
-import getSitesHandler from '../handler/get-sites-handler';
-import getRecentAuditsHandler from '../handler/get-recent-audits-handler';
-import runAudit from '../handler/run-audit-handler';
+import REPORT_ROUTES from '../api/reports/routes';
+
+import SITE_ROUTES from '../api/sites/routes';
 
 export default [
-    {
-        method: 'GET',
-        path: '/api/speed',
-        handler: getSpeedIndexesHandler,
-    },
-    {
-        method: 'GET',
-        path: '/api/{id}',
-        handler: getRecentAuditsHandler,
-        options: {
-            validate: {
-                params: joi.object({
-                    id: joi.string().required(),
-                }),
-            },
-        },
-    },
-    {
-        method: 'POST',
-        path: '/api/{id}',
-        handler: runAudit,
-        options: {
-            validate: {
-                params: joi.object({
-                    id: joi.string().required(),
-                }),
-            },
-        },
-    },
-    {
-        method: 'GET',
-        path: '/api',
-        handler: getSitesHandler,
-    },
+    ...SITE_ROUTES,
+    ...REPORT_ROUTES,
+
     {
         method: 'GET',
         path: '/',

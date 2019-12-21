@@ -1,13 +1,13 @@
+import connectDatabase from '../database/connect-database';
 import { AUDIT_COLLECTION } from '../config/db';
-import getDatabase from '../database/connect-database';
 
 /**
- * Get list of recent builds
+ * Get list of recent reports
  * @param {number | null} limit
  * @returns Promise<Report[]>
  */
-export async function getAudits(limit) {
-    const { database, client } = await getDatabase();
+export async function getReports(limit) {
+    const { database, client } = await connectDatabase();
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -32,8 +32,8 @@ export async function getAudits(limit) {
  * @param {number} limit
  * @return {Promise<Report[]>}
  */
-export async function getAuditsBySiteId(id, limit) {
-    const { database, client } = await getDatabase();
+export async function getReportsBySiteId(id, limit) {
+    const { database, client } = await connectDatabase();
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -58,8 +58,8 @@ export async function getAuditsBySiteId(id, limit) {
  * @param {string} id
  * @return {Promise<Report>}
  */
-export async function getReportBySiteId(id) {
-    const { database, client } = await getDatabase();
+export async function getLatestReportBySiteId(id) {
+    const { database, client } = await connectDatabase();
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -82,3 +82,14 @@ export async function getReportBySiteId(id) {
     });
 }
 
+/**
+ * Save a new report in DB
+ * @param {Report} report
+ * @return {Promise<void>}
+ */
+export async function saveReport(report) {
+    const { database, client } = await connectDatabase();
+    const reportCollection = database.collection(AUDIT_COLLECTION);
+    reportCollection.insertOne(report);
+    client.close();
+}

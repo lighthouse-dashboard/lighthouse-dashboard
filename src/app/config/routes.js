@@ -1,0 +1,5 @@
+export const GET_REPORT_URL = (id) => `/api/reports/${ id }/recent`;
+export const CREATE_REPORT_URL = (id) => `/api/reports/${ id }`;
+export const SPEED_OVERVIEW_URL = `/api/reports/overview`;
+export const GET_SITES_URL = `/api/sites`;
+export const CREATE_SITE_URL = `/api/sites`;

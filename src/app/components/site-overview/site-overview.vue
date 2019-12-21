@@ -10,7 +10,9 @@
         <button @click="runAudit">Run {{ url }}</button>
         <div ref="chart"/>
 
-        <progress class="progress is-small is-primary" max="100" v-if="isLoading"></progress>
+        <progress class="progress is-small is-primary"
+                max="100"
+                v-if="isLoading"></progress>
 
         <span v-if="runError">{{ runError.message }}</span>
     </div>
@@ -20,6 +22,7 @@
     import ApexCharts from 'apexcharts';
     import axios from 'axios';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
+    import { CREATE_REPORT_URL, GET_REPORT_URL } from '../../config/routes';
 
     export default {
         props: {
@@ -67,7 +70,7 @@
 
             loadData() {
                 this.isLoading = true;
-                return axios.get(`/api/${ this.id }`)
+                return axios.get(GET_REPORT_URL(this.id))
                     .then(({ data }) => {
                         this.chartData = { ...data };
                         this.updateChart();
@@ -80,7 +83,7 @@
 
             runAudit() {
                 this.isLoading = true;
-                axios.post(`/api/${ this.id }`)
+                axios.post(CREATE_REPORT_URL(this.id))
                     .then(() => {
                         return this.loadData();
                     })

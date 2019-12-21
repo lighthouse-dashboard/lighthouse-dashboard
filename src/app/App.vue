@@ -10,6 +10,7 @@
                         page quality dashboard
                     </h2>
                 </div>
+                <create-site-form/>
             </div>
         </section>
 
@@ -37,13 +38,16 @@
 </template>
 
 <script>
+    import CreateSiteForm from './components/create-site-form/create-site-form';
     import axios from 'axios';
     import chunk from 'lodash.chunk';
     import SiteOverview from './components/site-overview/site-overview.vue';
     import SpeedOverview from './components/speed-overview/speed-overview.vue';
+    import { GET_SITES_URL } from './config/routes';
 
     export default {
         components: {
+            CreateSiteForm,
             SpeedOverview,
             SiteOverview,
         },
@@ -58,7 +62,7 @@
             },
         },
         mounted() {
-            axios.get('/api')
+            axios.get(GET_SITES_URL)
                 .then(({ data }) => {
                     this.sites = data;
                 });

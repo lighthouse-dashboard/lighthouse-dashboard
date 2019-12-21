@@ -10,6 +10,7 @@
     import axios from 'axios';
     import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
     import { COLORS } from '../../../../config/colors';
+    import { SPEED_OVERVIEW_URL } from '../../config/routes';
 
     export default {
         props: {},
@@ -43,7 +44,7 @@
             },
 
             loadData() {
-                axios.get(`/api/speed`)
+                axios.get(SPEED_OVERVIEW_URL)
                     .then(({ data }) => {
                         this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
                         this.buildChart();
