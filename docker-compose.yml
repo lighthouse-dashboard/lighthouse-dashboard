@@ -11,6 +11,7 @@ services:
       - PORT=5000
       - DISPLAY=:99
       - CHROME_BIN=/usr/bin/chromium-browser
+      - SHOW_ERROR_PAGES=true
     ports:
       - '5000:5000'
   database:

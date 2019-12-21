@@ -9,10 +9,10 @@ import { IS_DEV } from '../utils/env';
 export default async function setupPlugins(server) {
     const register = curry(registerPlugins)(server);
     if (IS_DEV) {
-        await register(devPlugins);
+        await register(devPlugins());
     }
 
-    await register(prodPlugins);
+    await register(prodPlugins());
 }
 
 /**

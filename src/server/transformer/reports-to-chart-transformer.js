@@ -6,7 +6,7 @@ import { EXPORTED_TIMINGS } from '../config/export';
  * @param {Report[]} reports
  * @return {ChartData}
  */
-export default function getLineDataFromAssets(reports) {
+export default function reportsToChartTransformer(reports) {
     const data = {
         labels: [],
         datasets: [],
@@ -40,7 +40,7 @@ function getLineDataSetForKey(reports, key) {
         dataSet.data.push(getTimingValueForKey(report.values, key));
         return dataSet;
     }, {
-        label: key,
+        name: key,
         data: [],
     });
 }

@@ -19,12 +19,10 @@ export default async function getSpeedIndexesHandler() {
         values.push(value);
     }
 
-    data.datasets = [
-        {
-            label: REPORT_AUDIT_KEYS.PERFORMANCE,
-            data: values,
-        },
-    ];
+    data.datasets = [{
+        name: REPORT_AUDIT_KEYS.PERFORMANCE,
+        data: values,
+    },];
 
     return data;
 }

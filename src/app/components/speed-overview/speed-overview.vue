@@ -1,15 +1,13 @@
 <template>
     <div class="site-overview box">
         <h2 class="title center">Speed Overview</h2>
-        <canvas
-                ref="chart"
-        />
+        <div ref="chart"/>
     </div>
 </template>
 
 <script>
+    import ApexCharts from 'apexcharts';
     import axios from 'axios';
-    import Chart from 'chart.js';
     import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
     import { COLORS } from '../../../../config/colors';
 
@@ -24,27 +22,24 @@
         },
         methods: {
             buildChart() {
-                this.chart = new Chart(this.$refs.chart, {
-                    type: 'bar',
-                    data: this.chartData,
-                    options: {
-                        responsive: true,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    max: 100,
-                                    min: 0,
-                                    stepSize: 5,
-                                },
-                            }],
-                        },
-                        elements: {
-                            point: {
-                                pointStyle: 'rectRot',
-                            },
-                        },
+                var options = {
+                    chart: {
+                        height: 400,
+                        type: 'bar',
                     },
-                });
+                    series: this.chartData.datasets,
+                    xaxis: {
+                        categories: this.chartData.labels,
+                    },
+                    yaxis: {
+                        show: false,
+                        tickAmount: 5,
+                        min: 0,
+                        max: 100,
+                    },
+                };
+                this.chart = new ApexCharts(this.$refs.chart, options);
+                this.chart.render();
             },
 
             loadData() {

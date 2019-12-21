@@ -65,14 +65,18 @@ SECRET='foo'
 CIRCLE_TOKEN='992df13948558e1e264c382221a4215eabce90da'
 MONGO_DB_URL='mongodb://admin:admin@localhost:27017'
 MONGO_DB_NAME='auditreports'
+SHOW_ERROR_PAGES=true
 
 ```
 
 # Todo
  - [x] Add Templating
  - [x] Add method to get all assets
- - [ ] Create Chart for all assets with speed index
+ - [x] Create Chart for all assets with speed index
  - [ ] Make audits run in docker
- - [ ] Make interface to add/ remove projects (stored in db)
- - [ ] Host
+ - [ ] Make UI to add/ remove projects (stored in db)
+ - [ ] Host somewhere
+ - [ ] Add [cronjobs](https://github.com/antonsamper/hapi-cron)
+ - [ ] Secure api requests with access token loaded from ENV
+ - [ ] Add unit tests
  

@@ -1,17 +1,23 @@
 <template>
     <div class="site-overview box">
-        <div class="title"><h2>{{ id }}</h2></div>
+        <div class="title">
+            <h2>
+                <a :href="url">
+                    {{ id }}
+                </a>
+            </h2>
+        </div>
         <button @click="runAudit">Run {{ url }}</button>
-        <canvas
-                style="width: 100%; height: 400px"
-                ref="chart"
-        />
+        <div ref="chart"/>
+
+        <span v-if="isLoading">Loading...</span>
+        <span v-if="runError">{{ runError.message }}</span>
     </div>
 </template>
 
 <script>
+    import ApexCharts from 'apexcharts';
     import axios from 'axios';
-    import Chart from 'chart.js';
     import colors from '../../../../config/colors';
 
     export default {
@@ -30,38 +36,42 @@
             return {
                 chart: null,
                 chartData: null,
+                isLoading: false,
+                runError: null,
             };
         },
         methods: {
             buildChart() {
-                this.chart = new Chart(this.$refs.chart, {
-                    type: 'line',
-                    data: this.chartData,
-                    options: {
-                        responsive: true,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    max: 100,
-                                    min: 0,
-                                    stepSize: 5
-                                },
-                            }],
-                        },
-                        elements: {
-                            point: {
-                                pointStyle: 'rectRot',
-                            },
-                        },
+                var options = {
+                    chart: {
+                        height: 200,
+                        type: 'line',
                     },
-                });
+                    series: this.chartData.datasets,
+                    xaxis: {
+                        categories: this.chartData.labels
+                    },
+                    yaxis: {
+                        show: false,
+                        tickAmount: 5,
+                        min: 0,
+                        max: 100,
+                    }
+                };
+                this.chart = new ApexCharts(this.$refs.chart, options);
+                this.chart.render();
             },
 
             loadData() {
+                this.isLoading = true;
                 axios.get(`/api/${ this.id }`)
                     .then(({ data }) => {
-                        this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
+                        this.chartData = { ...data };
                         this.buildChart();
+                        this.isLoading = false;
+                    })
+                    .catch(() => {
+                        this.isLoading = false;
                     });
             },
 
@@ -78,7 +88,16 @@
             },
 
             runAudit() {
-                axios.post(`/api/${ this.id }`);
+                this.isLoading = true;
+                axios.post(`/api/${ this.id }`)
+                    .catch((e) => {
+                        this.isLoading = false;
+                        if (e.isAxiosError) {
+                            this.runError = e.response.data;
+                            return;
+                        }
+                        this.runError = e;
+                    });
             },
         },
         mounted() {

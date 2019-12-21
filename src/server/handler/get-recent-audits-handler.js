@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
 import { getAuditsBySiteId } from '../database/get-adits';
+import reportsToChartTransformer from '../transformer/reports-to-chart-transformer';
 import getConfigForPage from '../utils/get-config-for-page';
-import getLineDataFromAssets from '../utils/get-line-data-from-asstes';
 
 /**
  *
@@ -22,5 +22,5 @@ export default async function getRecentAuditsHandler(request) {
         return Boom.notFound('No audits found');
     }
 
-    return getLineDataFromAssets(assets);
+    return reportsToChartTransformer(assets);
 }

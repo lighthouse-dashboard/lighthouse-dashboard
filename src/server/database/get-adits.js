@@ -64,7 +64,7 @@ export async function getReportBySiteId(id) {
     return new Promise((resolve, reject) => {
         collection
             .find({ siteId: id })
-            .sort({ _id: 1 })
+            .sort({ _id: -1 })
             .limit(1)
             .toArray((error, data) => {
                 if (error) {

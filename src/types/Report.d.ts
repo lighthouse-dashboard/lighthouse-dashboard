@@ -3,6 +3,7 @@ export interface Report {
     id: string;
     siteId: string;
     createdAt: string;
+    message: string | null;
 }
 
 export interface ReportValue {
