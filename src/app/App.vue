@@ -15,16 +15,19 @@
 
         <div class="container">
             <div class="columns">
-                <div class="column is-half">
+                <div class="column is-full">
                     <speed-overview/>
                 </div>
             </div>
         </div>
 
         <div class="container is-fluid">
-            <div class="columns is-desktop">
-                <div class="column is-half"
-                        v-for="site in sites"
+
+            <div class="columns is-desktop"
+                    v-for="(group, idx) in siteChunks"
+                    :key="idx">
+                <div class="column is-third"
+                        v-for="site in group"
                         :key="site.id">
                     <site-overview v-bind="site"/>
                 </div>
@@ -35,6 +38,7 @@
 
 <script>
     import axios from 'axios';
+    import chunk from 'lodash.chunk';
     import SiteOverview from './components/site-overview/site-overview.vue';
     import SpeedOverview from './components/speed-overview/speed-overview.vue';
 
@@ -47,6 +51,11 @@
             return {
                 sites: [],
             };
+        },
+        computed: {
+            siteChunks() {
+                return chunk(this.sites, 4);
+            },
         },
         mounted() {
             axios.get('/api')

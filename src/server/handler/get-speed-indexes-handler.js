@@ -6,23 +6,28 @@ import { getTimingValueByKey } from '../utils/get-timing-by-key';
 export default async function getSpeedIndexesHandler() {
     const data = { labels: [], datasets: [] };
 
-    data.labels = PAGES.map((p) => p.id);
+    data.labels = PAGES.map((p) => p.url);
+    const exportingValues = [
+        REPORT_AUDIT_KEYS.PERFORMANCE,
+        ];
 
-    const values = [];
-    for (let i = 0; i < PAGES.length; i++) {
-        const audit = await getReportBySiteId(PAGES[i].id);
-        if (!audit) {
-            continue;
+    for (let i = 0; i < exportingValues.length; i++) {
+        const values = [];
+        for (let p = 0; p < PAGES.length; p++) {
+            const audit = await getReportBySiteId(PAGES[p].id);
+            if (!audit) {
+                continue;
+            }
+
+            const value = audit ? getTimingValueByKey(audit.values, exportingValues[i]) : null;
+            values.push(value);
         }
 
-        const value = audit ? getTimingValueByKey(audit.values, REPORT_AUDIT_KEYS.PERFORMANCE) : null;
-        values.push(value);
+        data.datasets.push({
+            name: exportingValues[i],
+            data: values,
+        });
     }
-
-    data.datasets = [{
-        name: REPORT_AUDIT_KEYS.PERFORMANCE,
-        data: values,
-    },];
 
     return data;
 }

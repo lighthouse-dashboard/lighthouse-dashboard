@@ -73,7 +73,8 @@ SHOW_ERROR_PAGES=true
  - [x] Add Templating
  - [x] Add method to get all assets
  - [x] Create Chart for all assets with speed index
- - [ ] Make audits run in docker
+ - [x] Make audits run in docker
+ - [ ] Create overview for the latest n projects built
  - [ ] Make UI to add/ remove projects (stored in db)
  - [ ] Host somewhere
  - [ ] Add [cronjobs](https://github.com/antonsamper/hapi-cron)

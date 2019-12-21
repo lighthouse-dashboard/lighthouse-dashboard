@@ -1,6 +1,6 @@
 <template>
     <div class="site-overview box">
-        <h2 class="title center">Speed Overview</h2>
+        <h2 class="title center">Performance Overview</h2>
         <div ref="chart"/>
     </div>
 </template>

@@ -10,7 +10,8 @@
         <button @click="runAudit">Run {{ url }}</button>
         <div ref="chart"/>
 
-        <span v-if="isLoading">Loading...</span>
+        <progress class="progress is-small is-primary" max="100" v-if="isLoading"></progress>
+
         <span v-if="runError">{{ runError.message }}</span>
     </div>
 </template>
