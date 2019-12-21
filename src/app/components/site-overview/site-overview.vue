@@ -18,7 +18,7 @@
 <script>
     import ApexCharts from 'apexcharts';
     import axios from 'axios';
-    import colors from '../../../../config/colors';
+    import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
 
     export default {
         props: {
@@ -35,39 +35,41 @@
         data() {
             return {
                 chart: null,
-                chartData: null,
+                chartData: {
+                    datasets: [],
+                    labels: [],
+                },
                 isLoading: false,
                 runError: null,
             };
         },
         methods: {
             buildChart() {
-                var options = {
-                    chart: {
-                        height: 200,
-                        type: 'line',
-                    },
-                    series: this.chartData.datasets,
+                const options = Object.assign({}, SITE_OVERVIEW_CHART, {
+                    series: [],
                     xaxis: {
-                        categories: this.chartData.labels
+                        categories: [],
                     },
-                    yaxis: {
-                        show: false,
-                        tickAmount: 5,
-                        min: 0,
-                        max: 100,
-                    }
-                };
+                });
                 this.chart = new ApexCharts(this.$refs.chart, options);
                 this.chart.render();
             },
 
+            updateChart() {
+                this.chart.updateOptions({
+                    xaxis: {
+                        categories: this.chartData.labels,
+                    },
+                });
+                this.chart.updateSeries(this.chartData.datasets);
+            },
+
             loadData() {
                 this.isLoading = true;
-                axios.get(`/api/${ this.id }`)
+                return axios.get(`/api/${ this.id }`)
                     .then(({ data }) => {
                         this.chartData = { ...data };
-                        this.buildChart();
+                        this.updateChart();
                         this.isLoading = false;
                     })
                     .catch(() => {
@@ -75,21 +77,12 @@
                     });
             },
 
-            modifyDataSets(datasets) {
-                return datasets.map((dataset, index) => {
-                    return {
-                        ...dataset,
-                        borderColor: colors[index],
-                        pointRadius: 5,
-                        pointHoverRadius: 15,
-                        fill: false,
-                    };
-                });
-            },
-
             runAudit() {
                 this.isLoading = true;
                 axios.post(`/api/${ this.id }`)
+                    .then(() => {
+                        return this.loadData();
+                    })
                     .catch((e) => {
                         this.isLoading = false;
                         if (e.isAxiosError) {
@@ -101,6 +94,7 @@
             },
         },
         mounted() {
+            this.buildChart();
             this.loadData();
         },
     };

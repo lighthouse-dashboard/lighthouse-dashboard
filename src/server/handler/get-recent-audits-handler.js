@@ -17,7 +17,7 @@ export default async function getRecentAuditsHandler(request) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const assets = await getAuditsBySiteId(id, 10);
+    const assets = await getAuditsBySiteId(id, 100);
     if (!assets || assets.length === 0) {
         return Boom.notFound('No audits found');
     }

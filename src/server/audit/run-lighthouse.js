@@ -44,6 +44,7 @@ export default async function runLighthouse(config, transformer) {
         {
             // hostname: '0.0.0.0',
             emulatedFormFactor: 'desktop',
+            throttlingMethod: 'provided'
             // throttling: null,
         },
     );
