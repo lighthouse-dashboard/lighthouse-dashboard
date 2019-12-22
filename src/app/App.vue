@@ -1,44 +1,39 @@
 <template>
-    <div>
-        <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        dreipol
-                    </h1>
-                    <h2 class="subtitle">
-                        page quality dashboard
-                    </h2>
-                </div>
-                <create-site-form/>
-            </div>
-        </section>
+    <v-app id="inspire">
+        <v-app-bar
+                app
+                clipped-left
+        >
+            <v-toolbar-title>dreipol</v-toolbar-title>
+        </v-app-bar>
 
-        <div class="container">
-            <div class="columns">
-                <div class="column is-full">
-                    <speed-overview/>
-                </div>
-            </div>
-        </div>
+        <v-content>
+            <v-container>
+                <v-row>
+                    <v-col>
+                        <speed-overview/>
+                    </v-col>
+                </v-row>
 
-        <div class="container is-fluid">
+                <v-row>
+                    <v-col cols="12"
+                            sm="12"
+                            md="6"
+                            lg="4"
+                            v-for="site in sites"
+                            :key="site.id"
 
-            <div class="columns is-desktop"
-                    v-for="(group, idx) in siteChunks"
-                    :key="idx">
-                <div class="column is-third"
-                        v-for="site in group"
-                        :key="site.id">
-                    <site-overview v-bind="site"/>
-                </div>
-            </div>
-        </div>
-    </div>
+                    >
+                        <site-overview v-bind="site"/>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-content>
+        <v-footer app/>
+    </v-app>
 </template>
 
 <script>
-    import CreateSiteForm from './components/create-site-form/create-site-form';
     import axios from 'axios';
     import chunk from 'lodash.chunk';
     import SiteOverview from './components/site-overview/site-overview.vue';
@@ -47,7 +42,7 @@
 
     export default {
         components: {
-            CreateSiteForm,
+            // CreateSiteForm,
             SpeedOverview,
             SiteOverview,
         },
@@ -58,7 +53,7 @@
         },
         computed: {
             siteChunks() {
-                return chunk(this.sites, 4);
+                return chunk(this.sites, 3);
             },
         },
         mounted() {
@@ -66,6 +61,9 @@
                 .then(({ data }) => {
                     this.sites = data;
                 });
+        },
+        created() {
+            this.$vuetify.theme.dark = true;
         },
     };
 </script>

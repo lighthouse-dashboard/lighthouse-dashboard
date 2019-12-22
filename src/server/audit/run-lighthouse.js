@@ -1,5 +1,6 @@
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import { DEVICE_CONFIG } from '../config/REPORT_DEVICE_FLAGS';
 
 /**
  *
@@ -25,7 +26,7 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
  * @return {Report}
  */
 export default async function runLighthouse(config, transformer) {
-    const { pageUrl } = config;
+    const { pageUrl, device } = config;
 
     const audit = await launchChromeAndRunLighthouse(
         pageUrl,
@@ -35,9 +36,8 @@ export default async function runLighthouse(config, transformer) {
             port: 9222,
         },
         {
+            ...DEVICE_CONFIG[device],
             // hostname: '0.0.0.0',
-            emulatedFormFactor: 'desktop',
-            throttlingMethod: 'provided'
             // throttling: null,
         },
     );

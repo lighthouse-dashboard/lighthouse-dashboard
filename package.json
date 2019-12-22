@@ -1,80 +1,87 @@
 {
-    "name": "dreihouse-dashboard",
-    "version": "4.1.1",
-    "description": "A Vue.js project",
-    "main": "src/app/main.js",
-    "private": true,
-    "scripts": {
-        "start": "node -r esm src/server/index.js",
-        "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+  "name": "dreihouse-dashboard",
+  "version": "4.1.1",
+  "private": true,
+  "description": "A Vue.js project",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
+    "start": "node -r esm src/server/index.js"
+  },
+  "main": "src/app/main.js",
+  "dependencies": {
+    "@hapi/boom": "^8.0.1",
+    "@hapi/hapi": "^18.4.0",
+    "@hapi/inert": "^5.2.2",
+    "@hapi/joi": "^16.1.8",
+    "@hapi/vision": "^5.5.4",
+    "apexcharts": "^3.11.1",
+    "axios": "^0.19.0",
+    "chrome-launcher": "^0.12.0",
+    "chrome-paths": "^1.0.1",
+    "core-js": "^3.4.3",
+    "date-fns": "^2.8.1",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "fibers": "^4.0.2",
+    "hapi-dev-errors": "^3.3.0",
+    "hapi-error-page": "^1.0.0",
+    "hapi-swagger": "^11.1.0",
+    "laabr": "^5.1.5",
+    "lighthouse": "^5.6.0",
+    "lodash.chunk": "^4.2.0",
+    "lodash.curry": "^4.1.1",
+    "lodash.uniq": "^4.5.0",
+    "mongodb": "^3.4.1",
+    "puppeteer": "^2.0.0",
+    "vue": "^2.6.10",
+    "vuetify": "^2.1.15"
+  },
+  "devDependencies": {
+    "@dreipol/eslint-config": "^6.0.4",
+    "@types/hapi": "^18.0.3",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "babel-eslint": "^10.0.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2",
+    "sass": "^1.24.0",
+    "sass-loader": "^8.0.0",
+    "vue-cli-plugin-vuetify": "^2.0.2",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.3.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
     },
-    "types": "./src/types/index.d.ts",
-    "dependencies": {
-        "@hapi/boom": "^8.0.1",
-        "@hapi/hapi": "^18.4.0",
-        "@hapi/inert": "^5.2.2",
-        "@hapi/joi": "^16.1.8",
-        "@hapi/vision": "^5.5.4",
-        "apexcharts": "^3.11.1",
-        "axios": "^0.19.0",
-        "chrome-launcher": "^0.12.0",
-        "chrome-paths": "^1.0.1",
-        "core-js": "^3.4.3",
-        "date-fns": "^2.8.1",
-        "dotenv": "^8.2.0",
-        "esm": "^3.2.25",
-        "hapi-dev-errors": "^3.3.0",
-        "hapi-error-page": "^1.0.0",
-        "hapi-swagger": "^11.1.0",
-        "laabr": "^5.1.5",
-        "lighthouse": "^5.6.0",
-        "lodash.chunk": "^4.2.0",
-        "lodash.curry": "^4.1.1",
-        "lodash.uniq": "^4.5.0",
-        "mongodb": "^3.4.1",
-        "puppeteer": "^2.0.0",
-        "vue": "^2.6.10"
-    },
-    "devDependencies": {
-        "@dreipol/eslint-config": "^6.0.4",
-        "@types/hapi": "^18.0.3",
-        "@vue/cli-plugin-babel": "^4.1.0",
-        "@vue/cli-plugin-eslint": "^4.1.0",
-        "@vue/cli-service": "^4.1.0",
-        "babel-eslint": "^10.0.3",
-        "babel-plugin-transform-runtime": "^6.23.0",
-        "babel-plugin-transform-vue-jsx": "^3.7.0",
-        "babel-preset-env": "^1.7.0",
-        "babel-preset-stage-2": "^6.24.1",
-        "eslint": "^5.16.0",
-        "eslint-plugin-vue": "^5.0.0",
-        "nodemon": "^2.0.2",
-        "vue-template-compiler": "^2.6.10"
-    },
-    "engines": {
-        "node": ">= 10.16",
-        "npm": ">= 6.0.0"
-    },
-    "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
-        ],
-        "rules": {},
-        "parserOptions": {
-            "parser": "babel-eslint"
-        }
-    },
-    "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not ie <= 8"
-    ]
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "engines": {
+    "node": ">= 12.0",
+    "npm": ">= 6.0.0"
+  },
+  "types": "./src/types/index.d.ts"
 }

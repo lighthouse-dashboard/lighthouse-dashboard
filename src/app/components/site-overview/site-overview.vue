@@ -1,21 +1,29 @@
 <template>
-    <div class="site-overview box">
-        <div class="title">
-            <h2>
-                <a :href="url">
-                    {{ id }}
-                </a>
-            </h2>
-        </div>
-        <button @click="runAudit">Run {{ url }}</button>
-        <div ref="chart"/>
+    <v-card>
+        <v-card-title>
+            {{ id }}
+        </v-card-title>
+        <v-card-text>
+            <div ref="chart"/>
+            <v-progress-circular
+                    indeterminate
+                    v-if="isLoading"
+            />
 
-        <progress class="progress is-small is-primary"
-                max="100"
-                v-if="isLoading"></progress>
+            <span v-if="runError">{{ runError.message }}</span>
+        </v-card-text>
 
-        <span v-if="runError">{{ runError.message }}</span>
-    </div>
+        <v-card-actions>
+            <button @click="runAudit">
+                Run Report
+            </button>
+
+            <v-spacer/>
+            <a :href="url">
+                <v-icon>mdi-share-variant</v-icon>
+            </a>
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
@@ -49,12 +57,7 @@
         },
         methods: {
             buildChart() {
-                const options = Object.assign({}, SITE_OVERVIEW_CHART, {
-                    series: [],
-                    xaxis: {
-                        categories: [],
-                    },
-                });
+                const options = Object.assign({}, SITE_OVERVIEW_CHART, {});
                 this.chart = new ApexCharts(this.$refs.chart, options);
                 this.chart.render();
             },
@@ -103,3 +106,9 @@
         },
     };
 </script>
+
+<style>
+    .apexcharts-canvas.apexcharts-canvas {
+        background-color: transparent;
+    }
+</style>

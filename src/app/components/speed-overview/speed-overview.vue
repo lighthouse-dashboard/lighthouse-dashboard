@@ -1,12 +1,18 @@
 <template>
-    <div class="site-overview box">
-        <h2 class="title center">Performance Overview</h2>
-        <div ref="chart"/>
-    </div>
+    <v-card>
+        <v-card-title>
+            Performance Overview
+        </v-card-title>
+
+        <v-card-text>
+            <div ref="chart"/>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
     import ApexCharts from 'apexcharts';
+    import { SPEED_OVERVIEW_CHART } from '../../config/chart-options';
     import axios from 'axios';
     import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
     import { COLORS } from '../../../../config/colors';
@@ -23,31 +29,25 @@
         },
         methods: {
             buildChart() {
-                var options = {
-                    chart: {
-                        height: 400,
-                        type: 'bar',
-                    },
-                    series: this.chartData.datasets,
+                var options = Object.assign({}, SPEED_OVERVIEW_CHART);
+                this.chart = new ApexCharts(this.$refs.chart, options);
+                this.chart.render();
+            },
+
+            updateChart() {
+                this.chart.updateOptions({
                     xaxis: {
                         categories: this.chartData.labels,
                     },
-                    yaxis: {
-                        show: false,
-                        tickAmount: 5,
-                        min: 0,
-                        max: 100,
-                    },
-                };
-                this.chart = new ApexCharts(this.$refs.chart, options);
-                this.chart.render();
+                });
+                this.chart.updateSeries(this.chartData.datasets);
             },
 
             loadData() {
                 axios.get(SPEED_OVERVIEW_URL)
                     .then(({ data }) => {
                         this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
-                        this.buildChart();
+                        this.updateChart();
                     });
             },
 
@@ -64,6 +64,7 @@
             },
         },
         mounted() {
+            this.buildChart();
             this.loadData();
         },
     };
