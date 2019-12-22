@@ -4,7 +4,7 @@ import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
 import PAGES from '../../../../config/sites';
 import runLighthouse from '../../audit/run-lighthouse';
 import { getLatestReportBySiteId, getReportsBySiteId, saveReport } from '../../database/reports';
-import { getSiteConfigById } from '../../database/sites';
+import { getSiteConfigById, getSites } from '../../database/sites';
 import lighthouseTransformer from '../../transformer/lighthouse-transformer';
 import reportsToChartTransformer from '../../transformer/reports-to-chart-transformer';
 import { getTimingValueByKey } from '../../utils/get-timing-by-key';
@@ -60,15 +60,16 @@ export async function createReportHandler(request) {
 export async function getSpeedReportOverviewHandler() {
     const data = { labels: [], datasets: [] };
 
-    data.labels = PAGES.map((p) => p.url);
+    const pages = await getSites();
+    data.labels = pages.map((p) => p.id);
     const exportingValues = [
         REPORT_AUDIT_KEYS.PERFORMANCE,
     ];
 
     for (let i = 0; i < exportingValues.length; i++) {
         const values = [];
-        for (let p = 0; p < PAGES.length; p++) {
-            const audit = await getLatestReportBySiteId(PAGES[p].id);
+        for (let p = 0; p < pages.length; p++) {
+            const audit = await getLatestReportBySiteId(pages[p].id);
             if (!audit) {
                 continue;
             }

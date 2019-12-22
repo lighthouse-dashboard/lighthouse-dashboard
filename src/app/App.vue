@@ -5,6 +5,8 @@
                 clipped-left
         >
             <v-toolbar-title>dreipol</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <create-site-form/>
         </v-app-bar>
 
         <v-content>
@@ -36,13 +38,14 @@
 <script>
     import axios from 'axios';
     import chunk from 'lodash.chunk';
+    import CreateSiteForm from './components/create-site-form/create-site-form';
     import SiteOverview from './components/site-overview/site-overview.vue';
     import SpeedOverview from './components/speed-overview/speed-overview.vue';
     import { GET_SITES_URL } from './config/routes';
 
     export default {
         components: {
-            // CreateSiteForm,
+            CreateSiteForm,
             SpeedOverview,
             SiteOverview,
         },

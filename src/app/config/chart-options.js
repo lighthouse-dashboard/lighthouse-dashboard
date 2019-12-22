@@ -32,7 +32,7 @@ const DEFAULT_CHART = {
 export const SPEED_OVERVIEW_CHART = {
     ...DEFAULT_CHART,
     chart: {
-        height: 350,
+        height: 200,
         type: 'bar',
     },
     plotOptions: {

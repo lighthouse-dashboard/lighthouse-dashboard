@@ -13,6 +13,7 @@ export async function getSites() {
     return new Promise((resolve, reject) => {
         collection
             .find()
+            .sort({ $natural: -1 })
             .toArray((error, data) => {
                 if (error) {
                     return reject(error);
