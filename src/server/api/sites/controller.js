@@ -1,4 +1,4 @@
-import { addSite, getSites } from '../../database/sites';
+import { addSite, getSites, removeSite } from '../../database/sites';
 
 /**
  *
@@ -10,6 +10,18 @@ export async function addSiteHandler(request, h) {
     await addSite({ url, id, device });
 
     return h.response().code(201);
+}
+
+/**
+ *
+ * @param {hapi.Request} request
+ * @return {Promise<void>}
+ */
+export async function deleteSiteHandler(request) {
+    const { id } = request.params;
+    await removeSite(id);
+    return h.response().code(201);
+
 }
 
 /**

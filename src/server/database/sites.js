@@ -42,6 +42,18 @@ export async function addSite(config) {
 }
 
 /**
+ *
+ * @param {string} id
+ * @return {Promise<void>}
+ */
+export async function removeSite(id) {
+    const { database, client } = await connectDatabase();
+    const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
+    siteCollection.deleteOne({ id });
+    client.close();
+}
+
+/**
  * Get config for specific site
  * @param {string} id
  * @return {Promise<SiteConfig | null>}

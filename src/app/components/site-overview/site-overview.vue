@@ -2,26 +2,46 @@
     <v-card>
         <v-card-title>
             {{ id }}
+            <v-spacer/>
+            <v-menu offset-y>
+                <template v-slot:activator="{ on }">
+                    <v-btn
+                            icon
+                            dark
+                            v-on="on"
+                    >
+                        <v-icon>mdi-dots-vertical</v-icon>
+                    </v-btn>
+                </template>
+                <v-list>
+                    <v-list-item>
+                        <v-list-item-title>
+                            Open Page
+                        </v-list-item-title>
+                    </v-list-item>
+                    <v-list-item @click="removePage">
+                        <v-list-item-title>
+                            Remove Site
+                        </v-list-item-title>
+                    </v-list-item>
+                    <v-list-item @click="runAudit">
+                        <v-list-item-title>
+                            Run New Audit
+                        </v-list-item-title>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
         </v-card-title>
         <v-card-text>
             <div ref="chart"/>
+        </v-card-text>
+
+        <v-card-actions>
+            <span v-if="runError">{{ runError.message }}</span>
             <v-progress-circular
                     indeterminate
                     v-if="isLoading"
             />
-
-            <span v-if="runError">{{ runError.message }}</span>
-        </v-card-text>
-
-        <v-card-actions>
-            <button @click="runAudit">
-                Run Report
-            </button>
-
-            <v-spacer/>
-            <a :href="url">
-                <v-icon>mdi-share-variant</v-icon>
-            </a>
         </v-card-actions>
     </v-card>
 </template>
@@ -30,7 +50,7 @@
     import ApexCharts from 'apexcharts';
     import axios from 'axios';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
-    import { CREATE_REPORT_URL, GET_REPORT_URL } from '../../config/routes';
+    import { CREATE_REPORT_URL, GET_REPORT_URL, REMOVE_SITE_URL } from '../../config/routes';
 
     export default {
         props: {
@@ -98,6 +118,10 @@
                         }
                         this.runError = e;
                     });
+            },
+
+            removePage() {
+                axios.delete(REMOVE_SITE_URL(this.id));
             },
         },
         mounted() {
