@@ -1,6 +1,8 @@
 <template>
     <v-card>
         <v-card-title>
+            <v-icon v-if="is_favorite">mdi-star</v-icon>
+            <v-icon v-else>mdi-star-outline</v-icon>
             {{ id }}
             <v-spacer/>
             <v-menu offset-y>
@@ -60,6 +62,10 @@
             },
             url: {
                 type: String,
+                required: true,
+            },
+            is_favorite: {
+                type: Boolean,
                 required: true,
             },
         },

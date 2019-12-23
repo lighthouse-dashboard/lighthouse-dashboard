@@ -51,5 +51,5 @@ function getLineDataSetForKey(reports, key) {
  * @return {number}
  */
 function getTimingValueForKey(timings, id) {
-    return timings.find(t => t.id === id).value || null;
+    return timings.find(t => t.id === id).value || 0;
 }

@@ -1,6 +1,7 @@
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
 import { DEVICE_CONFIG } from '../config/REPORT_DEVICE_FLAGS';
+import { debug, error } from '../utils/logger';
 
 /**
  *
@@ -11,12 +12,20 @@ import { DEVICE_CONFIG } from '../config/REPORT_DEVICE_FLAGS';
  * @return {Promise<{}>}
  */
 async function launchChromeAndRunLighthouse(url, opts, flags) {
+    debug('Starting chrome');
     const chrome = await chromeLauncher.launch(opts);
     const port = chrome.port;
-
-    const results = await lighthouse(url, { ...flags, port });
-    await chrome.kill();
-    return results.lhr;
+    debug(`Chrome started in ${ port }`);
+    try {
+        debug(`Start lighthouse fro ${ url }`);
+        const results = await lighthouse(url, { ...flags, port });
+        await chrome.kill();
+        return results.lhr;
+    } catch (e) {
+        error(e);
+        await chrome.kill();
+    }
+    throw new Error('Lighthouse encountered an error');
 }
 
 /**

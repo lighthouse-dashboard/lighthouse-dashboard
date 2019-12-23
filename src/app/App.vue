@@ -41,7 +41,7 @@
     import CreateSiteForm from './components/create-site-form/create-site-form';
     import SiteOverview from './components/site-overview/site-overview.vue';
     import SpeedOverview from './components/speed-overview/speed-overview.vue';
-    import { GET_SITES_URL } from './config/routes';
+    import { GET_FAV_SITES_URL } from './config/routes';
 
     export default {
         components: {
@@ -60,7 +60,7 @@
             },
         },
         mounted() {
-            axios.get(GET_SITES_URL)
+            axios.get(GET_FAV_SITES_URL)
                 .then(({ data }) => {
                     this.sites = data;
                 });

@@ -1,4 +1,4 @@
-import { addSite, getSites, removeSite } from '../../database/sites';
+import { addSite, getFavoriteSites, getSites, removeSite } from '../../database/sites';
 
 /**
  *
@@ -7,7 +7,7 @@ import { addSite, getSites, removeSite } from '../../database/sites';
  */
 export async function addSiteHandler(request, h) {
     const { url, id, device } = request.payload;
-    await addSite({ url, id, device });
+    await addSite({ url, id, device, is_favorite: false, order: 0 });
 
     return h.response().code(201);
 }
@@ -21,13 +21,10 @@ export async function deleteSiteHandler(request) {
     const { id } = request.params;
     await removeSite(id);
     return h.response().code(201);
-
 }
 
-/**
- *
- * @param {hapi.Request} request
- * @return {Promise<SiteConfig[]>}
- */
 export const getSitesHandler = () => getSites();
+
+
+export const getFavSitesHandler = () => getFavoriteSites();
 

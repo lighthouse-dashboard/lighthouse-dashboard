@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { addSiteHandler, deleteSiteHandler, getSitesHandler } from './controller';
+import { addSiteHandler, deleteSiteHandler, getSitesHandler, getFavSitesHandler } from './controller';
 
 export default [
     {
@@ -7,7 +7,11 @@ export default [
         path: '/api/sites',
         handler: getSitesHandler,
     },
-
+    {
+        method: 'GET',
+        path: '/api/sites/fav',
+        handler: getFavSitesHandler,
+    },
     {
         method: 'DELETE',
         path: '/api/sites/{id}',

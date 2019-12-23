@@ -1,3 +1,4 @@
+import { info } from '../utils/logger';
 import routes from './routes';
 
 /**
@@ -7,6 +8,6 @@ import routes from './routes';
 export default function setupRouter(server) {
     routes.forEach((route) => {
         server.route(route);
-        console.log(`Route`, route.method, route.path);
+        info(`Route`, route.method, route.path);
     });
 }

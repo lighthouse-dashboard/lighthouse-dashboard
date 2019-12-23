@@ -25,6 +25,7 @@
     "date-fns": "^2.8.1",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
+    "fancy-log": "^1.3.3",
     "fibers": "^4.0.2",
     "hapi-dev-errors": "^3.3.0",
     "hapi-error-page": "^1.0.0",
@@ -35,6 +36,8 @@
     "lodash.curry": "^4.1.1",
     "lodash.uniq": "^4.5.0",
     "mongodb": "^3.4.1",
+    "node-cron": "^2.0.3",
+    "promise-sequential": "^1.1.1",
     "puppeteer": "^2.0.0",
     "vue": "^2.6.10",
     "vuetify": "^2.1.15"

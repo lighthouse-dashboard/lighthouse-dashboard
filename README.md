@@ -28,16 +28,8 @@ and start the frontend app with
 
     npm run dev
 
-## Config
-All config is stored in `src/config.js`
-
-## API DOC
-There is `swagger` includet to create th API documentation. This is only available when the environment varable `NODE_ENV` is set to `development`.
-When running `npm run server-dev` this is done automatically
-
-[http://localhost:3000/documentation](http://localhost:3000/documentation)
-
 # Docker
+Inside the docker, the app is managed by [pm2](https://pm2.keymetrics.io/) in order to restart after it crashes
 ## Docker Build
 
     docker build --build-arg CIRCLE_TOKEN=<TOKEN> . -t dreipol/dreihouse-dashboard
@@ -75,9 +67,14 @@ SHOW_ERROR_PAGES=true
  - [x] Create Chart for all assets with speed index
  - [x] Make audits run in docker
  - [ ] Create overview for the latest n projects built
- - [ ] Make UI to add/ remove projects (stored in db)
+ - [x] Make UI to add/ remove projects (stored in db)
  - [ ] Host somewhere
- - [ ] Add [cronjobs](https://github.com/antonsamper/hapi-cron)
+ - [x] Add cronjobs
  - [ ] Secure api requests with access token loaded from ENV
  - [ ] Add unit tests
- 
+ - [ ] Add toggle to site to indicate if it should be shown in the overview
+ - [x] Add order indicator to `SiteConfig` for reordering items
+ - [ ] Add pm2 for restarts after crash
+ - [ ] Improve logging for development
+ - [ ] Create dashboard view which only shows favorited projects
+ - [ ] Create view for all projects without speed overview

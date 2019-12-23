@@ -1,12 +1,10 @@
 import Boom from '@hapi/boom';
-import curry from 'lodash.curry';
+import { SITE_OVERVIEW_REPORT_LIMIT } from '../../config/api';
 import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
-import PAGES from '../../../../config/sites';
-import runLighthouse from '../../audit/run-lighthouse';
-import { getLatestReportBySiteId, getReportsBySiteId, saveReport } from '../../database/reports';
-import { getSiteConfigById, getSites } from '../../database/sites';
-import lighthouseTransformer from '../../transformer/lighthouse-transformer';
+import { getLatestReportBySiteId, getReportsBySiteId } from '../../database/reports';
+import { getFavoriteSites, getSiteConfigById } from '../../database/sites';
 import reportsToChartTransformer from '../../transformer/reports-to-chart-transformer';
+import createLighthouseReport from '../../utils/create-lighthouse-report';
 import { getTimingValueByKey } from '../../utils/get-timing-by-key';
 
 /**
@@ -23,7 +21,7 @@ export async function getRecentReportsHandler(request) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const assets = await getReportsBySiteId(id, 100);
+    const assets = await getReportsBySiteId(id, SITE_OVERVIEW_REPORT_LIMIT);
     if (!assets || assets.length === 0) {
         return Boom.notFound('No audits found');
     }
@@ -38,18 +36,11 @@ export async function getRecentReportsHandler(request) {
  */
 export async function createReportHandler(request) {
     const { id } = request.params;
-    const { message } = request.query;
     const config = await getSiteConfigById(id);
     if (!config) {
         return Boom.notFound('Config not found');
     }
-    const { url, runs, device } = config;
-    debugger;
-
-    const transformAuditCurry = curry(lighthouseTransformer);
-    const data = await runLighthouse({ pageUrl: url, runs, device }, transformAuditCurry(id));
-
-    await saveReport({ ...data, message });
+    const data = await createLighthouseReport(config);
     return data;
 }
 
@@ -60,7 +51,7 @@ export async function createReportHandler(request) {
 export async function getSpeedReportOverviewHandler() {
     const data = { labels: [], datasets: [] };
 
-    const pages = await getSites();
+    const pages = await getFavoriteSites();
     data.labels = pages.map((p) => p.id);
     const exportingValues = [
         REPORT_AUDIT_KEYS.PERFORMANCE,

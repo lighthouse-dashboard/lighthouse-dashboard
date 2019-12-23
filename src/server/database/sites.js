@@ -2,18 +2,23 @@ import { SITES_CONFIG_COLLECTION } from '../config/db';
 import connectDatabase from '../database/connect-database';
 import getDatabase from './connect-database';
 
+
 /**
- * Get list of sites from DB
+ * Find sites
+ * @param {object} find
+ * @param {sort} sort
+ * @param {number} limit
  * @return {Promise<SiteConfig[]>}
  */
-export async function getSites() {
+async function findSites(find, sort, limit = 100) {
     const { database, client } = await getDatabase();
     const collection = database.collection(SITES_CONFIG_COLLECTION);
 
     return new Promise((resolve, reject) => {
         collection
-            .find()
-            .sort({ $natural: -1 })
+            .find(find)
+            .sort(sort)
+            .limit(limit)
             .toArray((error, data) => {
                 if (error) {
                     return reject(error);
@@ -27,6 +32,22 @@ export async function getSites() {
             });
         client.close();
     });
+}
+
+/**
+ * Get list of sites from DB
+ * @return {Promise<SiteConfig[]>}
+ */
+export function getSites() {
+    return findSites({}, { order: 1 });
+}
+
+/**
+ * Get list of sites from DB
+ * @return {Promise<SiteConfig[]>}
+ */
+export function getFavoriteSites() {
+    return findSites({ is_favorite: true }, { order: 1, $natural: -1 });
 }
 
 /**
@@ -59,24 +80,10 @@ export async function removeSite(id) {
  * @return {Promise<SiteConfig | null>}
  */
 export async function getSiteConfigById(id) {
-    const { database, client } = await getDatabase();
-    const collection = database.collection(SITES_CONFIG_COLLECTION);
+    const sites = await findSites({ id }, {}, 1);
+    if (!sites || sites.length === 0) {
+        return null;
+    }
 
-    return new Promise((resolve, reject) => {
-        collection
-            .find({ id: id })
-            .limit(1)
-            .toArray((error, data) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                if (!data || data.length === 0) {
-                    return resolve(null);
-                }
-
-                return resolve(data.pop());
-            });
-        client.close();
-    });
+    return sites.pop();
 }

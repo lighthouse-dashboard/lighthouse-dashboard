@@ -1,15 +1,24 @@
-const promiseSerial = funcs =>
-    funcs.reduce((promise, func) =>
-            promise.then(result =>
-                func().then(Array.prototype.concat.bind(result))),
-        Promise.resolve([]))
+import promiseSeq from 'promise-sequential';
+import { getSites } from '../database/sites';
+import createLighthouseReport from '../utils/create-lighthouse-report';
 
 export default [
     {
         name: 'run-audits',
-        schedule: '*/15 * * * *',
+        schedule: '*/30 * * * *',
         handler: () => {
-
+            getSites()
+                .then(
+                    /**
+                     *
+                     * @param {SiteConfig[]} sites
+                     * @return {*}
+                     */
+                    (sites) => {
+                        return promiseSeq(sites.map(site => {
+                            return () => createLighthouseReport(site);
+                        }));
+                    });
         },
     },
-]
+];
