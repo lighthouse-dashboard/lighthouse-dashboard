@@ -78,3 +78,4 @@ SHOW_ERROR_PAGES=true
  - [ ] Improve logging for development
  - [ ] Create dashboard view which only shows favorited projects
  - [ ] Create view for all projects without speed overview
+ - [ ] Add swagger API doc

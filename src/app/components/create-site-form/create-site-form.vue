@@ -1,8 +1,12 @@
 <template>
     <div>
-        <v-btn text
+        <v-btn
+                fab
+                absolute
+                bottom
+                right
                 icon
-                color="green darken-1"
+                color="pink"
                 @click.stop="dialog = true"
         >
             <v-icon>mdi-plus</v-icon>

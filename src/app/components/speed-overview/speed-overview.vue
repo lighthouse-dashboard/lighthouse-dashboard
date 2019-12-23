@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title>
-            Performance Overview
+            Performance
         </v-card-title>
 
         <v-card-text>
