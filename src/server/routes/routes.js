@@ -16,6 +16,14 @@ export default [
 
     {
         method: 'GET',
+        path: '/projects',
+        handler: {
+            file: 'templates/index.html',
+        },
+    },
+
+    {
+        method: 'GET',
         path: '/{param*}',
         handler: {
             directory: {
