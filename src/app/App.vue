@@ -32,6 +32,7 @@
 
 <script>
 
+    import { USE_DARK_MODE } from '../../config/ui';
     import CreateSiteForm from './components/create-site-form/create-site-form';
 
     export default {
@@ -41,7 +42,7 @@
         },
 
         created() {
-            this.$vuetify.theme.dark = true;
+            this.$vuetify.theme.dark = USE_DARK_MODE;
         },
     };
 </script>

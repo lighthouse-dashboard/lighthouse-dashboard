@@ -1,7 +1,9 @@
+import { USE_DARK_MODE } from '../../../config/ui';
+
 const DEFAULT_CHART = {
     theme: {
         palette: 'palette5',
-        mode: 'dark',
+        mode: USE_DARK_MODE ? 'dark' : 'bright',
     },
     markers: {
         size: 4,
