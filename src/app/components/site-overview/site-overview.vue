@@ -5,34 +5,10 @@
             <v-icon v-else>mdi-star-outline</v-icon>
             {{ id }}
             <v-spacer/>
-            <v-menu offset-y>
-                <template v-slot:activator="{ on }">
-                    <v-btn
-                            icon
-                            dark
-                            v-on="on"
-                    >
-                        <v-icon>mdi-dots-vertical</v-icon>
-                    </v-btn>
-                </template>
-                <v-list>
-                    <v-list-item>
-                        <v-list-item-title>
-                            Open Page
-                        </v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="removePage">
-                        <v-list-item-title>
-                            Remove Site
-                        </v-list-item-title>
-                    </v-list-item>
-                    <v-list-item @click="runAudit">
-                        <v-list-item-title>
-                            Run New Audit
-                        </v-list-item-title>
-                    </v-list-item>
-                </v-list>
-            </v-menu>
+
+            <site-overview-menu @removePage="removePage"
+                    @runAudit="runAudit"/>
+
         </v-card-title>
         <v-card-text>
             <div ref="chart"/>
@@ -53,8 +29,13 @@
     import axios from 'axios';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
     import { CREATE_REPORT_URL, GET_REPORT_URL, REMOVE_SITE_URL } from '../../config/routes';
+    import SiteOverviewMenu from './site-overview-menu';
 
     export default {
+        components: {
+            SiteOverviewMenu,
+        },
+
         props: {
             id: {
                 type: String,

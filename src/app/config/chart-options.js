@@ -27,6 +27,15 @@ const DEFAULT_CHART = {
             // fontFamily: undefined
         },
     },
+    tooltip: {
+        x: {
+            show: true,
+        },
+        marker: {
+            show: false,
+        },
+
+    },
 };
 
 export const SPEED_OVERVIEW_CHART = {
@@ -58,6 +67,12 @@ export const SITE_OVERVIEW_CHART = {
     chart: {
         height: 200,
         type: 'line',
+        toolbar: {
+            show: true,
+            tools: {
+                download: false,
+            },
+        },
     },
 
     stroke: {
