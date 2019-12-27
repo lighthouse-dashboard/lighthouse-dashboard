@@ -12,10 +12,8 @@
 
 <script>
     import ApexCharts from 'apexcharts';
-    import { SPEED_OVERVIEW_CHART } from '../../config/chart-options';
     import axios from 'axios';
-    import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
-    import { COLORS } from '../../../../config/colors';
+    import { SPEED_OVERVIEW_CHART } from '../../config/chart-options';
     import { SPEED_OVERVIEW_URL } from '../../config/routes';
 
     export default {
@@ -55,10 +53,6 @@
                 return datasets.map((dataset) => {
                     return {
                         ...dataset,
-                        backgroundColor: COLORS[REPORT_AUDIT_KEYS.PERFORMANCE],
-                        pointRadius: 5,
-                        pointHoverRadius: 15,
-                        fill: false,
                     };
                 });
             },

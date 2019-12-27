@@ -1,11 +1,12 @@
 import promiseSeq from 'promise-sequential';
+import CONFIG from '../../../dashboard.config';
 import { getSites } from '../database/sites';
 import createLighthouseReport from '../utils/create-lighthouse-report';
 
 export default [
     {
         name: 'run-audits',
-        schedule: '*/30 * * * *',
+        schedule: CONFIG.SERVER.CRONJOB.RUN_AUDITS,
         handler: () => {
             getSites()
                 .then(

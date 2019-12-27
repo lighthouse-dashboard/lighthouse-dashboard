@@ -1,9 +1,9 @@
-import { USE_DARK_MODE } from '../../../config/ui';
+import CONFIG from '../../../dashboard.config';
 
 const DEFAULT_CHART = {
     theme: {
         palette: 'palette5',
-        mode: USE_DARK_MODE ? 'dark' : 'bright',
+        mode: CONFIG.UI.USE_DARK_MODE ? 'dark' : 'bright',
     },
     markers: {
         size: 4,

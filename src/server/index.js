@@ -1,14 +1,13 @@
 'use strict';
-require('dotenv').config();
-
 
 import Hapi from '@hapi/hapi';
 import { join } from 'path';
-import logger from './utils/logger';
-import { IS_DEV } from './utils/env';
+import  CONFIG from '../../dashboard.config';
 import setupCronjobs from './cronjobs';
 import setupPlugins from './plugins';
 import setupRouter from './routes';
+import { IS_DEV } from './utils/env';
+import logger from './utils/logger';
 
 const init = async () => {
     const server = Hapi.server({
@@ -22,7 +21,7 @@ const init = async () => {
         },
     });
 
-    if (!IS_DEV) {
+    if (!IS_DEV && CONFIG.SERVER.CRONJOB.ENABLED) {
         await setupCronjobs();
     }
     await setupPlugins(server);

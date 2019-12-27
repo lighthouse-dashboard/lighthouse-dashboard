@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
-import { SITE_OVERVIEW_REPORT_LIMIT } from '../../config/api';
 import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
+import CONFIG from '../../../../dashboard.config';
 import { getLatestReportBySiteId, getReportsBySiteId } from '../../database/reports';
 import { getFavoriteSites, getSiteConfigById } from '../../database/sites';
 import reportsToChartTransformer from '../../transformer/reports-to-chart-transformer';
@@ -21,7 +21,7 @@ export async function getRecentReportsHandler(request) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const assets = await getReportsBySiteId(id, SITE_OVERVIEW_REPORT_LIMIT);
+    const assets = await getReportsBySiteId(id, CONFIG.SERVER.API.SITE_REPORT_LIMIT);
     if (!assets || assets.length === 0) {
         return Boom.notFound('No audits found');
     }

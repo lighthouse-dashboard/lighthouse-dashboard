@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { EXPORTED_TIMINGS } from '../config/export';
+import CONFIG from '../../../dashboard.config';
 
 /**
  *
@@ -14,14 +14,14 @@ export default function reportsToChartTransformer(reports) {
 
     data.labels = reports.reduce((acc, report) => {
         if (report) {
-            acc.push(format(new Date(report.createdAt), 'dd/MM HH:mm'));
+            acc.push(format(new Date(report.createdAt), CONFIG.DATE_FORMAT));
         } else {
             acc.push(null);
         }
         return acc;
     }, []);
 
-    EXPORTED_TIMINGS.reduce((datasets, timingKey) => {
+    CONFIG.SERVER.API.REPORT_VALUES.reduce((datasets, timingKey) => {
         datasets.push(getLineDataSetForKey(reports, timingKey));
         return datasets;
     }, data.datasets);

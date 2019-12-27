@@ -11,7 +11,7 @@ export const DEVICE_DESKTOP_FLAGS = {
 
 export const DEVICE_MOBILE_FLAGS = {
     emulatedFormFactor: 'mobile',
-    // throttlingMethod: 'provided',
+    //throttlingMethod: 'provided',
 };
 
 export const DEVICE_CONFIG = {

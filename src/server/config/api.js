@@ -1,1 +1,0 @@
-export const SITE_OVERVIEW_REPORT_LIMIT = 100;
