@@ -16,9 +16,9 @@
 </template>
 
 <script>
-    import axios from 'axios';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
     import { GET_SITES_URL } from '../../config/routes';
+    import axios from '../../utils/axios';
 
     export default {
         components: {

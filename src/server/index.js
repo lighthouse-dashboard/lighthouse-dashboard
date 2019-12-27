@@ -1,8 +1,9 @@
 'use strict';
 
 import Hapi from '@hapi/hapi';
+import AuthBearer from 'hapi-auth-bearer-token';
 import { join } from 'path';
-import  CONFIG from '../../dashboard.config';
+import CONFIG from '../../dashboard.config';
 import setupCronjobs from './cronjobs';
 import setupPlugins from './plugins';
 import setupRouter from './routes';
@@ -11,8 +12,8 @@ import logger from './utils/logger';
 
 const init = async () => {
     const server = Hapi.server({
-        port: process.env.PORT || 3000,
-        host: process.env.HOST || '0.0.0.0',
+        port: CONFIG.SERVER.PORT,
+        host: CONFIG.SERVER.HOST,
         routes: {
             cors: true,
             files: {
@@ -20,6 +21,20 @@ const init = async () => {
             },
         },
     });
+
+    await server.register(AuthBearer);
+
+    server.auth.strategy('simple', 'bearer-access-token', {
+        allowQueryToken: true,
+        validate: (request, token) => {
+            const isValid = token === CONFIG.SERVER.API.AUTH_TOKEN;
+            const credentials = { token };
+            return { isValid, credentials };
+        },
+    });
+
+    server.auth.default('simple');
+
 
     if (!IS_DEV && CONFIG.SERVER.CRONJOB.ENABLED) {
         await setupCronjobs();

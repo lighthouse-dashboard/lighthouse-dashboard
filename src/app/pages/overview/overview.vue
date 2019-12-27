@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import axios from '../../utils/axios';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
     import SpeedOverview from '../../components/speed-overview/speed-overview.vue';
     import { GET_FAV_SITES_URL } from '../../config/routes';

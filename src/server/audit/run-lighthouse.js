@@ -1,5 +1,6 @@
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import CONFIG from '../../../dashboard.config';
 import { DEVICE_CONFIG } from '../config/REPORT_DEVICE_FLAGS';
 import { debug, error } from '../utils/logger';
 
@@ -41,8 +42,8 @@ export default async function runLighthouse(config, transformer) {
         pageUrl,
         {
             chromeFlags: ['--headless', '--no-sandbox'],
-            chromePath: process.env.CHROMIUM_PATH,
-            port: 9222,
+            chromePath: CONFIG.SERVER.AUDIT.CHROMIUM_PATH,
+            port: CONFIG.SERVER.AUDIT.CHROMIUM_PORT,
         },
         {
             ...DEVICE_CONFIG[device],

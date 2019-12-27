@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import axios from '../../utils/axios';
     import { CREATE_SITE_URL } from '../../config/routes';
 
     export default {

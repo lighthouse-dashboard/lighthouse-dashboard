@@ -7,8 +7,11 @@ export default {
     },
 
     SERVER: {
+        HOST: process.env.HOST || '0.0.0.0',
+        PORT: process.env.PORT || 3000,
         API: {
-            SITE_REPORT_LIMIT: 100,
+            AUTH_TOKEN: 'Foo',
+            SITE_REPORT_LIMIT: 10,
             REPORT_VALUES: [
                 'performance',
                 'seo',
@@ -16,6 +19,10 @@ export default {
                 'accessibility',
                 'best-practices',
             ],
+        },
+        AUDIT: {
+            CHROMIUM_PATH: process.env.CHROMIUM_PATH,
+            CHROMIUM_PORT: 9222,
         },
         DB: {
             MONGO_DB_URL: process.env.MONGO_DB_URL,

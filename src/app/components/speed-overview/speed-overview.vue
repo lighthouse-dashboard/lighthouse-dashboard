@@ -12,9 +12,9 @@
 
 <script>
     import ApexCharts from 'apexcharts';
-    import axios from 'axios';
     import { SPEED_OVERVIEW_CHART } from '../../config/chart-options';
     import { SPEED_OVERVIEW_URL } from '../../config/routes';
+    import axios from '../../utils/axios';
 
     export default {
         props: {},

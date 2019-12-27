@@ -27,6 +27,7 @@
     "esm": "^3.2.25",
     "fancy-log": "^1.3.3",
     "fibers": "^4.0.2",
+    "hapi-auth-bearer-token": "^6.1.2",
     "hapi-dev-errors": "^3.3.0",
     "hapi-error-page": "^1.0.0",
     "hapi-swagger": "^11.1.0",

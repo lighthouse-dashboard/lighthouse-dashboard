@@ -26,7 +26,7 @@
 
 <script>
     import ApexCharts from 'apexcharts';
-    import axios from 'axios';
+    import axios from '../../utils/axios';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
     import { CREATE_REPORT_URL, GET_REPORT_URL, REMOVE_SITE_URL } from '../../config/routes';
     import SiteOverviewMenu from './site-overview-menu';

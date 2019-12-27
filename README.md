@@ -79,3 +79,5 @@ SHOW_ERROR_PAGES=true
  - [ ] Create dashboard view which only shows favorited projects
  - [ ] Create view for all projects without speed overview
  - [ ] Add swagger API doc
+ - [ ] Add config file validator
+ - [ ] Create awesome doc
