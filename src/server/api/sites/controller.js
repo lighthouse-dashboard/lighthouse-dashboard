@@ -1,4 +1,5 @@
 import { addSite, getFavoriteSites, getSites, removeSite } from '../../database/sites';
+import uuid from 'uuid/v4';
 
 /**
  *
@@ -7,7 +8,7 @@ import { addSite, getFavoriteSites, getSites, removeSite } from '../../database/
  */
 export async function addSiteHandler(request, h) {
     const { url, id, device } = request.payload;
-    await addSite({ url, id, device, is_favorite: false, order: 0 });
+    await addSite({ url, id, device, is_favorite: false, order: 0, token: uuid() });
 
     return h.response().code(201);
 }

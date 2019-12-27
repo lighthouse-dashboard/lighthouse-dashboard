@@ -26,9 +26,9 @@
 
 <script>
     import ApexCharts from 'apexcharts';
-    import axios from '../../utils/axios';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
     import { CREATE_REPORT_URL, GET_REPORT_URL, REMOVE_SITE_URL } from '../../config/routes';
+    import axios from '../../utils/axios';
     import SiteOverviewMenu from './site-overview-menu';
 
     export default {
@@ -47,6 +47,10 @@
             },
             is_favorite: {
                 type: Boolean,
+                required: true,
+            },
+            token: {
+                type: String,
                 required: true,
             },
         },
@@ -93,7 +97,7 @@
 
             runAudit() {
                 this.isLoading = true;
-                axios.post(CREATE_REPORT_URL(this.id))
+                axios.post(CREATE_REPORT_URL(this.id), { token: this.token })
                     .then(() => {
                         return this.loadData();
                     })

@@ -11,7 +11,7 @@ export default {
         PORT: process.env.PORT || 3000,
         API: {
             AUTH_TOKEN: 'Foo',
-            SITE_REPORT_LIMIT: 10,
+            SITE_REPORT_LIMIT: 100,
             REPORT_VALUES: [
                 'performance',
                 'seo',

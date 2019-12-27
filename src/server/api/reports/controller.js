@@ -36,10 +36,16 @@ export async function getRecentReportsHandler(request) {
  */
 export async function createReportHandler(request) {
     const { id } = request.params;
+    const { token } = request.payload;
     const config = await getSiteConfigById(id);
     if (!config) {
         return Boom.notFound('Config not found');
     }
+
+    if (config.token !== token) {
+        return Boom.forbidden('Token mismatch');
+    }
+
     const data = await createLighthouseReport(config);
     return data;
 }

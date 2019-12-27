@@ -15,9 +15,7 @@
                     md="6"
                     lg="4"
                     v-for="site in sites"
-                    :key="site.id"
-
-            >
+                    :key="site.id">
                 <site-overview v-bind="site"/>
             </v-col>
         </v-row>
@@ -25,10 +23,10 @@
 </template>
 
 <script>
-    import axios from '../../utils/axios';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
     import SpeedOverview from '../../components/speed-overview/speed-overview.vue';
     import { GET_FAV_SITES_URL } from '../../config/routes';
+    import axios from '../../utils/axios';
 
     export default {
         components: {

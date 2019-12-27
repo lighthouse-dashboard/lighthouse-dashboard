@@ -28,6 +28,10 @@ export default [
         handler: createReportHandler,
         options: {
             validate: {
+                payload: joi.object({
+                    token: joi.string()
+                        .required()
+                }),
                 params: joi.object({
                     id: joi.string()
                         .required(),
