@@ -39,7 +39,7 @@ async function findSites(find, sort, limit = 100) {
  * @return {Promise<SiteConfig[]>}
  */
 export function getSites() {
-    return findSites({}, { order: 1 });
+    return findSites({}, { last_audit: -1 });
 }
 
 /**
@@ -47,7 +47,7 @@ export function getSites() {
  * @return {Promise<SiteConfig[]>}
  */
 export function getFavoriteSites() {
-    return findSites({ is_favorite: true }, { order: 1, $natural: -1 });
+    return findSites({ is_favorite: true }, { order: 1 });
 }
 
 /**
@@ -60,6 +60,20 @@ export async function addSite(config) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     siteCollection.insertOne(config);
     client.close();
+}
+
+/**
+ * Update siteconfig
+ * @param {string} id
+ * @param {Partial<SiteConfig>} delta
+ * @return {Promise<void>}
+ */
+export async function updateSite(id, delta) {
+    const { database, client } = await connectDatabase();
+    const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
+    siteCollection.updateOne({ id }, { $set: delta });
+    client.close();
+
 }
 
 /**

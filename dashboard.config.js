@@ -10,7 +10,7 @@ export default {
         HOST: process.env.HOST || '0.0.0.0',
         PORT: process.env.PORT || 3000,
         API: {
-            AUTH_TOKEN: 'Foo',
+            AUTH_TOKEN: process.env.HOST,
             SITE_REPORT_LIMIT: 100,
             REPORT_VALUES: [
                 'performance',

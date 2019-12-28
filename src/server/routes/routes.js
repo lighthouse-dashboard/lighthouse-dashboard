@@ -9,6 +9,9 @@ export default [
     {
         method: 'GET',
         path: '/',
+        options: {
+            auth: false,
+        },
         handler: {
             file: 'templates/index.html',
         },
@@ -17,6 +20,9 @@ export default [
     {
         method: 'GET',
         path: '/projects',
+        options: {
+            auth: false,
+        },
         handler: {
             file: 'templates/index.html',
         },

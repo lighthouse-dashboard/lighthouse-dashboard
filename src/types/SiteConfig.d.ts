@@ -5,4 +5,5 @@ export interface SiteConfig {
     order: number;
     is_favorite: boolean;
     token: string;
+    last_audit: string | null;
 }
