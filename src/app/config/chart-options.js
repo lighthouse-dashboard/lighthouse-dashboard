@@ -88,7 +88,7 @@ export const SITE_OVERVIEW_CHART = {
     xaxis: {
         categories: [],
         axisTicks: {
-            show: true,
+            show: false,
         },
         axisBorder: {
             show: false,

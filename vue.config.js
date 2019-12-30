@@ -11,7 +11,7 @@ module.exports = {
         config
             .plugin('html')
             .tap(args => {
-                args[0].template = resolve(__dirname, './templates/index.html')
+                args[0].template = resolve(__dirname, './templates/index.html');
                 return args;
             });
     },

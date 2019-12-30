@@ -23,6 +23,7 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
     import SpeedOverview from '../../components/speed-overview/speed-overview.vue';
     import { GET_FAV_SITES_URL } from '../../config/routes';
@@ -38,8 +39,11 @@
                 sites: [],
             };
         },
+        computed: {
+            ...mapState('login', ['jwt']),
+        },
         mounted() {
-            axios.get(GET_FAV_SITES_URL)
+            axios(this.jwt).get(GET_FAV_SITES_URL)
                 .then(({ data }) => {
                     this.sites = data;
                 });

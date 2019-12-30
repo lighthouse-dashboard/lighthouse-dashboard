@@ -54,6 +54,7 @@ SHOW_ERROR_PAGES=true
 ```
 
 # Todo
+ - [ ] Improve JWT token usage with vuex or so
  - [ ] Host somewhere
  - [ ] Add unit tests
  - [ ] Add toggle to site to indicate if it should be shown in the overview

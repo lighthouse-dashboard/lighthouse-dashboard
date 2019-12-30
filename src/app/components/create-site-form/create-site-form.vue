@@ -71,8 +71,9 @@
 </template>
 
 <script>
-    import axios from '../../utils/axios';
+    import { mapState } from 'vuex';
     import { CREATE_SITE_URL } from '../../config/routes';
+    import axios from '../../utils/axios';
 
     export default {
         props: {},
@@ -90,13 +91,15 @@
                         text: 'Mobile',
                         value: 'mobile',
                     },
-                ]
+                ],
             };
         },
-
+        computed: {
+            ...mapState('login', ['jwt']),
+        },
         methods: {
             onCreateClicked() {
-                axios
+                axios(this.jwt)
                     .post(CREATE_SITE_URL, {
                         url: this.url,
                         id: this.id,

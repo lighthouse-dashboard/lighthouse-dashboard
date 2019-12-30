@@ -5,12 +5,11 @@ services:
     depends_on:
       - database
     environment:
-      - CIRCLE_TOKEN=992df13948558e1e264c382221a4215eabce90da
+      - AUTH_TOKEN='Foo'
+      - JWT_TOKEN='Foo'
       - MONGO_DB_URL='mongodb://admin:admin@database:27017'
       - MONGO_DB_NAME=auditreports
       - PORT=5000
-      - DISPLAY=:99
-      - CHROME_BIN=/usr/bin/chromium-browser
       - SHOW_ERROR_PAGES=true
     ports:
       - '5000:5000'

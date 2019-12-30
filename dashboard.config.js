@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-export default {
+module.exports = {
     DATE_FORMAT: 'dd/MM HH:mm',
     UI: {
         USE_DARK_MODE: true,
@@ -10,7 +10,8 @@ export default {
         HOST: process.env.HOST || '0.0.0.0',
         PORT: process.env.PORT || 3000,
         API: {
-            AUTH_TOKEN: process.env.HOST,
+            AUTH_TOKEN: process.env.AUTH_TOKEN,
+            JWT_SECRET: process.env.JWT_SECRET,
             SITE_REPORT_LIMIT: 100,
             REPORT_VALUES: [
                 'performance',
@@ -31,7 +32,8 @@ export default {
         SHOW_ERROR_PAGES: process.env.SHOW_ERROR_PAGES,
         CRONJOB: {
             ENABLED: true,
-            RUN_AUDITS: '*/30 * * * *',
+            RUN_AUDITS: '* 0,6,12,18 * * *',
+            // RUN_AUDITS: '*/5 * * * *',
         },
     },
 };

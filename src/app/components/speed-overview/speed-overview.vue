@@ -12,6 +12,7 @@
 
 <script>
     import ApexCharts from 'apexcharts';
+    import { mapState } from 'vuex';
     import { SPEED_OVERVIEW_CHART } from '../../config/chart-options';
     import { SPEED_OVERVIEW_URL } from '../../config/routes';
     import axios from '../../utils/axios';
@@ -24,6 +25,9 @@
                 chart: null,
                 chartData: null,
             };
+        },
+        computed: {
+            ...mapState('login', ['jwt']),
         },
         methods: {
             buildChart() {
@@ -42,7 +46,8 @@
             },
 
             loadData() {
-                axios.get(SPEED_OVERVIEW_URL)
+                axios(this.jwt)
+                    .get(SPEED_OVERVIEW_URL)
                     .then(({ data }) => {
                         this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
                         this.updateChart();

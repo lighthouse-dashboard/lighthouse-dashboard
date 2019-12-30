@@ -41,7 +41,7 @@ export async function getReportsBySiteId(id, limit) {
             .find({ siteId: id })
             //.sort({ _id: -1 })
             .limit(limit)
-            .sort({ $natural: 1 })
+            .sort({ createdAt: -1 })
             .toArray((error, data) => {
                 if (error) {
                     return reject(error);
@@ -66,7 +66,7 @@ export async function getLatestReportBySiteId(id) {
         collection
             .find({ siteId: id })
             .limit(1)
-            .sort({ $natural: -1 })
+            .sort({ createdAt: -1 })
             .toArray((error, data) => {
                 if (error) {
                     return reject(error);

@@ -26,6 +26,7 @@
 
 <script>
     import ApexCharts from 'apexcharts';
+    import { mapState } from 'vuex';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
     import { CREATE_REPORT_URL, GET_REPORT_URL, REMOVE_SITE_URL } from '../../config/routes';
     import axios from '../../utils/axios';
@@ -66,6 +67,9 @@
                 runError: null,
             };
         },
+        computed: {
+            ...mapState('login', ['jwt']),
+        },
         methods: {
             buildChart() {
                 const options = Object.assign({}, SITE_OVERVIEW_CHART, {});
@@ -84,7 +88,8 @@
 
             loadData() {
                 this.isLoading = true;
-                return axios.get(GET_REPORT_URL(this.id))
+                return axios(this.jwt)
+                    .get(GET_REPORT_URL(this.id))
                     .then(({ data }) => {
                         this.chartData = { ...data };
                         this.updateChart();

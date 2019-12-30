@@ -4,6 +4,7 @@ import Hapi from '@hapi/hapi';
 import AuthBearer from 'hapi-auth-bearer-token';
 import { join } from 'path';
 import CONFIG from '../../dashboard.config';
+import auth from './auth';
 import setupCronjobs from './cronjobs';
 import setupPlugins from './plugins';
 import setupRouter from './routes';
@@ -22,26 +23,20 @@ const init = async () => {
         },
     });
 
-    await server.register(AuthBearer);
-
-    server.auth.strategy('simple', 'bearer-access-token', {
-        allowQueryToken: true,
-        validate: (request, token) => {
-            const isValid = token === CONFIG.SERVER.API.AUTH_TOKEN;
-            const credentials = { token };
-            return { isValid, credentials };
-        },
-    });
-
-    server.auth.default('simple');
-
 
     if (!IS_DEV && CONFIG.SERVER.CRONJOB.ENABLED) {
         await setupCronjobs();
     }
     await setupPlugins(server);
-    setupRouter(server);
 
+    server.auth.strategy('jwt', 'jwt', {
+        key: CONFIG.SERVER.API.JWT_SECRET,
+        validate: auth,
+    });
+
+    server.auth.default('jwt');
+
+    setupRouter(server);
     await server.start();
     logger('Server running on %s', server.info.uri);
 };

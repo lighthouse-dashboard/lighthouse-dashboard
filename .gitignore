@@ -6,8 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 /test/unit/coverage/
 
-.env
-
 # Editor directories and files
 .idea
 .vscode
@@ -17,3 +15,5 @@ yarn-error.log*
 *.sln
 
 assets
+
+.env

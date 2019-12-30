@@ -19,7 +19,7 @@ export default function reportsToChartTransformer(reports) {
             acc.push(null);
         }
         return acc;
-    }, []);
+    }, []).reverse();
 
     CONFIG.SERVER.API.REPORT_VALUES.reduce((datasets, timingKey) => {
         datasets.push(getLineDataSetForKey(reports, timingKey));
@@ -36,13 +36,16 @@ export default function reportsToChartTransformer(reports) {
  * @return {ChartDataDataSet}
  */
 function getLineDataSetForKey(reports, key) {
-    return reports.reduce((dataSet, report) => {
+    const result = reports.reduce((dataSet, report) => {
         dataSet.data.push(getTimingValueForKey(report.values, key));
         return dataSet;
     }, {
         name: key,
         data: [],
     });
+
+    result.data = result.data.reverse();
+    return result;
 }
 
 /**
