@@ -56,6 +56,7 @@ SHOW_ERROR_PAGES=true
 # Todo
  
  - [ ] Add feed of latest built project to the overview
+ - [ ] Add loaders
  - [ ] Host somewhere
  - [ ] Add unit tests
  - [ ] Add toggle to site to indicate if it should be shown in the overview

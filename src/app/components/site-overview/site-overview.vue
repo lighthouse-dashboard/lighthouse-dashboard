@@ -96,7 +96,7 @@
 
             async runAudit() {
                 this.isLoading = true;
-                await this.launchAuditForSite({ siteId: this.id });
+                await this.launchAuditForSite({ siteId: this.id, token: this.token });
                 return this.loadData();
             },
 
