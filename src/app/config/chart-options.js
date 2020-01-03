@@ -55,6 +55,8 @@ export const GAUGE_CHART = {
             },
         },
     },
+
+
     plotOptions: {
         radialBar: {
             startAngle: -90,
@@ -64,28 +66,30 @@ export const GAUGE_CHART = {
             },
             hollow: {
                 margin: 0,
-                size: '70%',
+                size: '50%',
                 position: 'front',
             },
             dataLabels: {
                 name: {
-                    color: '#888',
-                    fontSize: '17px',
+                    color: '#99bbef',
+                    fontSize: '12px',
                 },
                 value: {
-                    color: '#fff',
-                    fontSize: '24px',
+                    color: '#99bbef',
+                    fontSize: '18px',
+                    offsetY: -30,
                 },
             },
         },
     },
+    colors: ['#99bbef', '#7ca0d2', '#6186b6', '#466d9b', '#023e68'],
     fill: {
         type: 'gradient',
         gradient: {
-            shade: 'dark',
-            type: 'horizontal',
+            //shade: 'dark',
+            //type: 'horizontal',
             shadeIntensity: 0.5,
-            gradientToColors: ['#99bbef'],
+
             inverseColors: false,
             opacityFrom: 1,
             opacityTo: 1,

@@ -21,7 +21,7 @@ export default function reportsToChartTransformer(reports) {
         return acc;
     }, []).reverse();
 
-    CONFIG.SERVER.API.REPORT_VALUES.reduce((datasets, timingKey) => {
+    CONFIG.DASHBOARD.SITE_OVERVIEW_VALUES.reduce((datasets, timingKey) => {
         datasets.push(getLineDataSetForKey(reports, timingKey));
         return datasets;
     }, data.datasets);

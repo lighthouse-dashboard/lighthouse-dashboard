@@ -65,6 +65,7 @@ SHOW_ERROR_PAGES=true
  - [ ] Add config file validator
  - [ ] Create awesome doc
  - [ ] Add sites data to vuex state for immediate mutations & changes
+ - [ ] Add search for project list
  
  - [x] Improve JWT token usage with vuex or so
  - [x] Add swagger API doc

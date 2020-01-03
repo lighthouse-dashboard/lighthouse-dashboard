@@ -1,5 +1,4 @@
 import Boom from '@hapi/boom';
-import { REPORT_AUDIT_KEYS } from '../../../../config/audit';
 import CONFIG from '../../../../dashboard.config';
 import { getLatestReportBySiteId, getReportsBySiteId } from '../../database/reports';
 import { getFavoriteSites, getSiteConfigById } from '../../database/sites';
@@ -59,9 +58,7 @@ export async function getSpeedReportOverviewHandler() {
 
     const pages = await getFavoriteSites();
     data.labels = pages.map((p) => p.id);
-    const exportingValues = [
-        REPORT_AUDIT_KEYS.PERFORMANCE,
-    ];
+    const exportingValues = CONFIG.DASHBOARD.OVERVIEW_BAR_VALUES
 
     for (let i = 0; i < exportingValues.length; i++) {
         const values = [];
@@ -98,5 +95,13 @@ export async function getLatestReportValuesHandler(request) {
     }
 
     const report = await getLatestReportBySiteId(id, 1);
-    return report;
+    const values = CONFIG.DASHBOARD.LATEST_REPORTS_VALUES;
+    return {
+        labels: values,
+        series: values.map(vid => getValue(report.values, vid)),
+    };
 }
+
+function getValue(values, id) {
+    return values.find(v => v.id === id).value;
+};

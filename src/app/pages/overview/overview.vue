@@ -6,7 +6,6 @@
             <speed-overview/>
             <favorite-projects-overview/>
         </div>
-
     </v-container>
 </template>
 

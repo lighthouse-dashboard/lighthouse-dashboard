@@ -16,10 +16,6 @@
                 type: String,
                 required: true,
             },
-            valueId: {
-                type: String,
-                default: 'performance'
-            },
         },
 
         data() {
@@ -33,8 +29,15 @@
 
             buildChart() {
                 var options = Object.assign({}, GAUGE_CHART, {
+                    title: {
+                        text: this.id,
+                        style: {
+                            fontSize: '16px',
+                            color: '#fff',
+                        },
+                    },
                     series: [0],
-                    labels: [this.id],
+                    labels: this.valueIds,
                 });
                 this.chart = new ApexCharts(this.$refs.chart, options);
                 this.chart.render();
@@ -43,11 +46,10 @@
 
             async loadData() {
                 const data = await this.fetchLatestReportForSite({ siteId: this.id });
-                this.chart.updateSeries([this.getValue(data.values, this.valueId)]);
-            },
-
-            getValue(values, id) {
-                return values.find(v => v.id === id).value;
+                this.chart.updateOptions({
+                    labels: data.labels,
+                });
+                this.chart.updateSeries(data.series);
             },
         },
         mounted() {

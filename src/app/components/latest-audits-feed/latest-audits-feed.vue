@@ -10,7 +10,7 @@
                     xl="3"
                     v-for="site in sites"
                     :key="site.id">
-                <latest-report-gauge v-bind="site" valueId="performance"/>
+                <latest-report-gauge v-bind="site"/>
             </v-col>
         </v-row>
     </div>
