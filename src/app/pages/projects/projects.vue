@@ -17,10 +17,8 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
-    import { GET_SITES_URL } from '../../config/routes';
-    import axios from '../../utils/axios';
 
     export default {
         components: {
@@ -34,11 +32,11 @@
         computed: {
             ...mapState('login', ['jwt']),
         },
-        mounted() {
-            axios(this.jwt).get(GET_SITES_URL)
-                .then(({ data }) => {
-                    this.sites = data;
-                });
+        methods: {
+            ...mapActions('sites', ['fetchAllSites']),
+        },
+        async mounted() {
+            this.sites = await this.fetchAllSites();
         },
     };
 </script>

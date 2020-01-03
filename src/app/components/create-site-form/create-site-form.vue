@@ -66,9 +66,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
-    import { CREATE_SITE_URL } from '../../config/routes';
-    import axios from '../../utils/axios';
+    import { mapActions, mapState } from 'vuex';
 
     export default {
         props: {},
@@ -93,16 +91,15 @@
             ...mapState('login', ['jwt']),
         },
         methods: {
-            onCreateClicked() {
-                axios(this.jwt)
-                    .post(CREATE_SITE_URL, {
-                        url: this.url,
-                        id: this.id,
-                        device: this.device,
-                    })
-                    .then(() => {
-                        this.dialog = false;
-                    });
+            ...mapActions('sites', ['createSite']),
+
+            async onCreateClicked() {
+                await this.createSite({
+                    url: this.url,
+                    id: this.id,
+                    device: this.device,
+                });
+                this.dialog = false;
             },
         },
     };

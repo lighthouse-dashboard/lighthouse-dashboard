@@ -12,10 +12,8 @@
 
 <script>
     import ApexCharts from 'apexcharts';
-    import { mapState } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import { SPEED_OVERVIEW_CHART } from '../../config/chart-options';
-    import { SPEED_OVERVIEW_URL } from '../../config/routes';
-    import axios from '../../utils/axios';
 
     export default {
         props: {},
@@ -30,6 +28,8 @@
             ...mapState('login', ['jwt']),
         },
         methods: {
+            ...mapActions('reports', ['fetchReportOverview']),
+
             buildChart() {
                 var options = Object.assign({}, SPEED_OVERVIEW_CHART);
                 this.chart = new ApexCharts(this.$refs.chart, options);
@@ -45,13 +45,10 @@
                 this.chart.updateSeries(this.chartData.datasets);
             },
 
-            loadData() {
-                axios(this.jwt)
-                    .get(SPEED_OVERVIEW_URL)
-                    .then(({ data }) => {
-                        this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
-                        this.updateChart();
-                    });
+            async loadData() {
+                const data = await this.fetchReportOverview();
+                this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
+                this.updateChart();
             },
 
             modifyDataSets(datasets) {

@@ -54,7 +54,7 @@ SHOW_ERROR_PAGES=true
 ```
 
 # Todo
- - [ ] Improve JWT token usage with vuex or so
+ 
  - [ ] Add feed of latest built project to the overview
  - [ ] Host somewhere
  - [ ] Add unit tests
@@ -63,7 +63,9 @@ SHOW_ERROR_PAGES=true
  - [ ] Improve logging for development
  - [ ] Add config file validator
  - [ ] Create awesome doc
+ - [ ] Add sites data to vuex state for immediate mutations & changes
  
+ - [x] Improve JWT token usage with vuex or so
  - [x] Add swagger API doc
  - [x] Create overview for the latest n projects built
  - [x] Add Templating

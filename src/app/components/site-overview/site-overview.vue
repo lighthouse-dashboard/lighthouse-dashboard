@@ -26,10 +26,8 @@
 
 <script>
     import ApexCharts from 'apexcharts';
-    import { mapState } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
-    import { CREATE_REPORT_URL, GET_REPORT_URL, REMOVE_SITE_URL } from '../../config/routes';
-    import axios from '../../utils/axios';
     import SiteOverviewMenu from './site-overview-menu';
 
     export default {
@@ -71,6 +69,9 @@
             ...mapState('login', ['jwt']),
         },
         methods: {
+            ...mapActions('reports', ['fetchReportsForSite', 'launchAuditForSite']),
+            ...mapActions('sites', ['deleteSite']),
+
             buildChart() {
                 const options = Object.assign({}, SITE_OVERVIEW_CHART, {});
                 this.chart = new ApexCharts(this.$refs.chart, options);
@@ -86,38 +87,21 @@
                 this.chart.updateSeries(this.chartData.datasets);
             },
 
-            loadData() {
+            async loadData() {
                 this.isLoading = true;
-                return axios(this.jwt)
-                    .get(GET_REPORT_URL(this.id))
-                    .then(({ data }) => {
-                        this.chartData = { ...data };
-                        this.updateChart();
-                        this.isLoading = false;
-                    })
-                    .catch(() => {
-                        this.isLoading = false;
-                    });
+                this.chartData = await this.fetchReportsForSite({ siteId: this.id });
+                this.updateChart();
+                this.isLoading = false;
             },
 
-            runAudit() {
+            async runAudit() {
                 this.isLoading = true;
-                axios.post(CREATE_REPORT_URL(this.id), { token: this.token })
-                    .then(() => {
-                        return this.loadData();
-                    })
-                    .catch((e) => {
-                        this.isLoading = false;
-                        if (e.isAxiosError) {
-                            this.runError = e.response.data;
-                            return;
-                        }
-                        this.runError = e;
-                    });
+                await this.launchAuditForSite({ siteId: this.id });
+                return this.loadData();
             },
 
-            removePage() {
-                axios.delete(REMOVE_SITE_URL(this.id));
+            async removePage() {
+                await this.deleteSite({ siteId: this.id });
             },
         },
         mounted() {

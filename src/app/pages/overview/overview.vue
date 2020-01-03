@@ -26,8 +26,6 @@
     import { mapActions, mapState } from 'vuex';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
     import SpeedOverview from '../../components/speed-overview/speed-overview.vue';
-    import { GET_FAV_SITES_URL } from '../../config/routes';
-    import axios from '../../utils/axios';
 
     export default {
         components: {
@@ -44,12 +42,10 @@
         },
         methods: {
             ...mapActions('login', ['logout']),
+            ...mapActions('sites', ['fetchFavoriteSites']),
         },
-        mounted() {
-            axios(this.jwt).get(GET_FAV_SITES_URL)
-                .then(({ data }) => {
-                    this.sites = data;
-                });
+        async mounted() {
+            this.sites = await this.fetchFavoriteSites();
         },
     };
 </script>
