@@ -14,7 +14,7 @@
         >
             <v-card>
                 <v-card-title class="headline">
-                    Add New Project
+                    Add new project
                 </v-card-title>
 
                 <v-card-text>
@@ -44,7 +44,6 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                            color="green darken-1"
                             text
                             @click="dialog = false"
                     >
@@ -52,7 +51,6 @@
                     </v-btn>
 
                     <v-btn
-                            color="green darken-1"
                             text
                             @click="onCreateClicked"
                     >

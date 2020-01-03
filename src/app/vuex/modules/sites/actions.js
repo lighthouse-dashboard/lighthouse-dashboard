@@ -1,4 +1,4 @@
-import { CREATE_SITE_URL, GET_FAV_SITES_URL, GET_SITES_URL, REMOVE_SITE_URL } from '../../../config/routes';
+import { CREATE_SITE_URL, GET_FAV_SITES_URL, GET_SITES_URL, REMOVE_SITE_URL, GET_LATEST_AUDITED_SITES_URL } from '../../../config/routes';
 import axios from '../../../utils/axios';
 
 export async function fetchAllSites() {
@@ -22,4 +22,9 @@ export async function createSite(_, { url, id, device }) {
             id,
             device,
         });
+}
+
+export async function getLatestSites() {
+    const { data } = await axios().get(GET_LATEST_AUDITED_SITES_URL);
+    return data;
 }

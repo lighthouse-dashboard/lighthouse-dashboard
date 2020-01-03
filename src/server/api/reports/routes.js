@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { createReportHandler, getRecentReportsHandler, getSpeedReportOverviewHandler } from './controller';
+import { createReportHandler, getRecentReportsHandler, getSpeedReportOverviewHandler, getLatestReportValuesHandler } from './controller';
 
 export default [
     {
@@ -12,6 +12,22 @@ export default [
         },
     },
 
+    {
+        method: 'GET',
+        path: '/api/reports/{id}/latest',
+        handler: getLatestReportValuesHandler,
+        options: {
+            description: 'Get latest report for site',
+            tags: ['api', 'reports'],
+            validate: {
+                params: joi.object({
+                    id: joi
+                        .string()
+                        .required(),
+                }),
+            },
+        },
+    },
     {
         method: 'GET',
         path: '/api/reports/{id}/recent',

@@ -51,6 +51,14 @@ export function getFavoriteSites() {
 }
 
 /**
+ * Get latest n audited sites
+ * @return {Promise<SiteConfig[]>}
+ */
+export function getLatestSites() {
+    return findSites({}, { last_audit: -1 }, 4);
+}
+
+/**
  * Add new site to DB
  * @param {SiteConfig} config
  * @return {Promise<void>}

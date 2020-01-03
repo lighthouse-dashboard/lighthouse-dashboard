@@ -41,7 +41,56 @@ const DEFAULT_CHART = {
         marker: {
             show: false,
         },
+    },
+};
 
+export const GAUGE_CHART = {
+    chart: {
+        height: 350,
+        type: 'radialBar',
+        toolbar: {
+            show: true,
+            tools: {
+                download: false,
+            },
+        },
+    },
+    plotOptions: {
+        radialBar: {
+            startAngle: -90,
+            endAngle: 90,
+            track: {
+                background: 'rgba(0, 0, 0, 0)',
+            },
+            hollow: {
+                margin: 0,
+                size: '70%',
+                position: 'front',
+            },
+            dataLabels: {
+                name: {
+                    color: '#888',
+                    fontSize: '17px',
+                },
+                value: {
+                    color: '#fff',
+                    fontSize: '24px',
+                },
+            },
+        },
+    },
+    fill: {
+        type: 'gradient',
+        gradient: {
+            shade: 'dark',
+            type: 'horizontal',
+            shadeIntensity: 0.5,
+            gradientToColors: ['#99bbef'],
+            inverseColors: false,
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [0, 100],
+        },
     },
 };
 
@@ -50,6 +99,12 @@ export const SPEED_OVERVIEW_CHART = {
     chart: {
         height: 200,
         type: 'bar',
+        toolbar: {
+            show: true,
+            tools: {
+                download: false,
+            },
+        },
     },
     series: [],
     xaxis: {

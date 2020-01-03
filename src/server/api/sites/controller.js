@@ -1,5 +1,5 @@
-import { addSite, getFavoriteSites, getSites, removeSite } from '../../database/sites';
 import uuid from 'uuid/v4';
+import { addSite, getFavoriteSites, getLatestSites, getSites, removeSite } from '../../database/sites';
 
 /**
  *
@@ -25,7 +25,5 @@ export async function deleteSiteHandler(request) {
 }
 
 export const getSitesHandler = () => getSites();
-
-
 export const getFavSitesHandler = () => getFavoriteSites();
-
+export const getLatestSitesHandler = () => getLatestSites();

@@ -31,7 +31,7 @@ module.exports = {
         },
         SHOW_ERROR_PAGES: process.env.SHOW_ERROR_PAGES,
         CRONJOB: {
-            ENABLED: true,
+            ENABLED: false,
             RUN_AUDITS: '* 0,6,12,18 * * *',
             // RUN_AUDITS: '*/5 * * * *',
         },

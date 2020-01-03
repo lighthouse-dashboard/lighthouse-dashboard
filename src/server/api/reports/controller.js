@@ -83,3 +83,20 @@ export async function getSpeedReportOverviewHandler() {
 
     return data;
 }
+
+/**
+ *
+ * @param request
+ * @return {Promise<void>}
+ */
+export async function getLatestReportValuesHandler(request) {
+    const { id } = request.params;
+
+    const config = getSiteConfigById(id);
+    if (!config) {
+        return Boom.notFound(`Site with id not found`);
+    }
+
+    const report = await getLatestReportBySiteId(id, 1);
+    return report;
+}

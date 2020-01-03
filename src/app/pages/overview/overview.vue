@@ -1,51 +1,25 @@
 <template>
     <v-container>
-        <h1 class="display-2">Overview</h1>
+        <latest-audits-feed/>
+        <div>
+            <h2 class="display-2 mt-12 mb-6">Favorited projects</h2>
+            <speed-overview/>
+            <favorite-projects-overview/>
+        </div>
 
-        <v-row>
-            <v-col>
-                <speed-overview/>
-            </v-col>
-        </v-row>
-
-        <h1 class="display-1">Favorite Projects</h1>
-        <v-row>
-            <v-col cols="12"
-                    sm="12"
-                    md="6"
-                    lg="4"
-                    v-for="site in sites"
-                    :key="site.id">
-                <site-overview v-bind="site"/>
-            </v-col>
-        </v-row>
     </v-container>
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
-    import SiteOverview from '../../components/site-overview/site-overview.vue';
+    import FavoriteProjectsOverview from '../../components/favorite-projects-overview/favorite-projects-overview';
+    import LatestAuditsFeed from '../../components/latest-audits-feed/latest-audits-feed';
     import SpeedOverview from '../../components/speed-overview/speed-overview.vue';
 
     export default {
         components: {
+            FavoriteProjectsOverview,
+            LatestAuditsFeed,
             SpeedOverview,
-            SiteOverview,
-        },
-        data() {
-            return {
-                sites: [],
-            };
-        },
-        computed: {
-            ...mapState('login', ['jwt']),
-        },
-        methods: {
-            ...mapActions('login', ['logout']),
-            ...mapActions('sites', ['fetchFavoriteSites']),
-        },
-        async mounted() {
-            this.sites = await this.fetchFavoriteSites();
         },
     };
 </script>

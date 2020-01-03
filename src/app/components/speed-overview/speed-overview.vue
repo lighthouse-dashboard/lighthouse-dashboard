@@ -1,8 +1,6 @@
 <template>
     <div>
-        <v-card-title>
-            Performance
-        </v-card-title>
+        <h2 class="display-1">Performance comparison</h2>
 
         <v-card-text>
             <div ref="chart"/>

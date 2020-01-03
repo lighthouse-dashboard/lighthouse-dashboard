@@ -1,5 +1,11 @@
 import joi from '@hapi/joi';
-import { addSiteHandler, deleteSiteHandler, getFavSitesHandler, getSitesHandler } from './controller';
+import {
+    addSiteHandler,
+    deleteSiteHandler,
+    getFavSitesHandler,
+    getLatestSitesHandler,
+    getSitesHandler
+} from './controller';
 
 export default [
     {
@@ -8,6 +14,15 @@ export default [
         handler: getSitesHandler,
         options: {
             description: 'Get all configured sites',
+            tags: ['api', 'sites'],
+        },
+    },
+    {
+        method: 'GET',
+        path: '/api/sites/latest',
+        handler: getLatestSitesHandler,
+        options: {
+            description: 'Get latest audited sites',
             tags: ['api', 'sites'],
         },
     },
