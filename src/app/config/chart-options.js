@@ -2,8 +2,13 @@ import CONFIG from '../../../dashboard.config';
 
 const DEFAULT_CHART = {
     theme: {
-        palette: 'palette5',
         mode: CONFIG.UI.USE_DARK_MODE ? 'dark' : 'bright',
+    },
+    colors: ['#99bbef', '#7ca0d2', '#6186b6', '#466d9b', '#023e68'],
+    plotOptions: {
+        bar: {
+            horizontal: false,
+        },
     },
     markers: {
         size: 4,
@@ -13,9 +18,9 @@ const DEFAULT_CHART = {
         },
     },
     legend: {
-        position: 'top',
+        position: 'bottom',
         horizontalAlign: 'left',
-        offsetX: -10,
+        offsetX: 0,
     },
     noData: {
         text: 'No data available',
@@ -45,11 +50,6 @@ export const SPEED_OVERVIEW_CHART = {
     chart: {
         height: 200,
         type: 'bar',
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-        },
     },
     series: [],
     xaxis: {

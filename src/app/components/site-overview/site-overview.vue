@@ -1,15 +1,15 @@
 <template>
-    <v-card>
+    <div>
         <v-card-title>
             <v-icon v-if="is_favorite">mdi-star</v-icon>
             <v-icon v-else>mdi-star-outline</v-icon>
             {{ id }}
             <v-spacer/>
-
-            <site-overview-menu @removePage="removePage"
+            <site-overview-menu
+                    @removePage="removePage"
                     @runAudit="runAudit"/>
-
         </v-card-title>
+
         <v-card-text>
             <div ref="chart"/>
         </v-card-text>
@@ -21,7 +21,7 @@
                     v-if="isLoading"
             />
         </v-card-actions>
-    </v-card>
+    </div>
 </template>
 
 <script>

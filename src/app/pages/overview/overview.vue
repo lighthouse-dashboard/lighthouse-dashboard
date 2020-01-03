@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
     import SpeedOverview from '../../components/speed-overview/speed-overview.vue';
     import { GET_FAV_SITES_URL } from '../../config/routes';
@@ -41,6 +41,9 @@
         },
         computed: {
             ...mapState('login', ['jwt']),
+        },
+        methods: {
+            ...mapActions('login', ['logout']),
         },
         mounted() {
             axios(this.jwt).get(GET_FAV_SITES_URL)

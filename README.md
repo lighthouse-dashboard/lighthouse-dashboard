@@ -55,15 +55,16 @@ SHOW_ERROR_PAGES=true
 
 # Todo
  - [ ] Improve JWT token usage with vuex or so
+ - [ ] Add feed of latest built project to the overview
  - [ ] Host somewhere
  - [ ] Add unit tests
  - [ ] Add toggle to site to indicate if it should be shown in the overview
  - [ ] Add pm2 for restarts after crash
  - [ ] Improve logging for development
- - [ ] Add swagger API doc
  - [ ] Add config file validator
  - [ ] Create awesome doc
  
+ - [x] Add swagger API doc
  - [x] Create overview for the latest n projects built
  - [x] Add Templating
  - [x] Add method to get all assets

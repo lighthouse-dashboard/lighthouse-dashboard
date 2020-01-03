@@ -5,8 +5,8 @@ services:
     depends_on:
       - database
     environment:
-      - AUTH_TOKEN='Foo'
-      - JWT_TOKEN='Foo'
+      - LOGIN_PASS=Foo
+      - JWT_SECRET=Foo
       - MONGO_DB_URL='mongodb://admin:admin@database:27017'
       - MONGO_DB_NAME=auditreports
       - PORT=5000

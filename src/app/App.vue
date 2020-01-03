@@ -1,6 +1,5 @@
 <template>
-    <v-app id="inspire"
-    >
+    <v-app>
         <div v-if="isLoggedIn">
             <v-app-bar
                     app
@@ -13,37 +12,36 @@
                 <v-spacer></v-spacer>
                 <v-btn to="/"
                         text
-                        icon
-                        color="green darken-1">
+                        icon>
                     <v-icon>mdi-desktop-mac-dashboard</v-icon>
                 </v-btn>
                 <v-btn to="/projects"
                         text
-                        icon
-                        color="green darken-1">
+                        icon>
                     <v-icon>mdi-view-list</v-icon>
                 </v-btn>
+                <create-site-form/>
+
             </v-app-bar>
 
             <v-content>
                 <router-view></router-view>
-                <create-site-form/>
             </v-content>
         </div>
         <div v-else>
             <login/>
         </div>
-
-        <v-footer app/>
     </v-app>
 </template>
 
 <script>
 
-    import { mapGetters } from 'vuex';
+    import { GET_SITES_URL } from './config/routes';
+    import { mapState } from 'vuex';
     import CONFIG from '../../dashboard.config';
     import CreateSiteForm from './components/create-site-form/create-site-form';
     import Login from './pages/login/login';
+    import axios from './utils/axios';
 
     export default {
         components: {
@@ -52,11 +50,21 @@
         },
 
         computed: {
-            ...mapGetters('login', ['isLoggedIn']),
+            ...mapState('login', ['isLoggedIn', 'jwt']),
         },
 
         created() {
             this.$vuetify.theme.dark = CONFIG.UI.USE_DARK_MODE;
+            axios(this.jwt)
+                .get(GET_SITES_URL)
+                .catch((error) => {
+                    if (error.isAxiosError) {
+                        if (error.response.status === 401) {
+                            this.logout();
+                            this.$router.push('/login');
+                        }
+                    }
+                });
         },
     };
 </script>

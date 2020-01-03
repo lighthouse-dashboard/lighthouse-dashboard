@@ -10,7 +10,7 @@ module.exports = {
         HOST: process.env.HOST || '0.0.0.0',
         PORT: process.env.PORT || 3000,
         API: {
-            AUTH_TOKEN: process.env.AUTH_TOKEN,
+            LOGIN_PASS: process.env.LOGIN_PASS,
             JWT_SECRET: process.env.JWT_SECRET,
             SITE_REPORT_LIMIT: 100,
             REPORT_VALUES: [

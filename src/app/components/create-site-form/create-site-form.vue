@@ -2,11 +2,7 @@
     <div>
         <v-btn
                 fab
-                absolute
-                bottom
-                right
                 icon
-                color="pink"
                 @click.stop="dialog = true"
         >
             <v-icon>mdi-plus</v-icon>
@@ -22,7 +18,6 @@
                 </v-card-title>
 
                 <v-card-text>
-
                     <v-row>
                         <v-col cols="12"
                                 sm="12">

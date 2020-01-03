@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <div>
         <v-card-title>
             Performance
         </v-card-title>
@@ -7,7 +7,7 @@
         <v-card-text>
             <div ref="chart"/>
         </v-card-text>
-    </v-card>
+    </div>
 </template>
 
 <script>

@@ -39,8 +39,9 @@
             ...mapActions('login', ['setJwt', 'setLoggedIn']),
             async onLogin() {
                 const { data } = await axios().post(AUTH_URL, { password: this.password });
-                this.setJwt({ jwt: data.jwt });
-                this.setLoggedIn({ isLoggedIn: true });
+                await this.setJwt({ jwt: data.jwt });
+                await this.setLoggedIn({ isLoggedIn: true });
+                this.$router.push('/');
             },
         },
     };
