@@ -54,7 +54,6 @@ SHOW_ERROR_PAGES=true
 ```
 
 # Todo
- 
  - [ ] Add feed of latest built project to the overview
  - [ ] Add loaders
  - [ ] Host somewhere
@@ -66,6 +65,7 @@ SHOW_ERROR_PAGES=true
  - [ ] Create awesome doc
  - [ ] Add sites data to vuex state for immediate mutations & changes
  - [ ] Add search for project list
+ - [ ] Make project active/disabled
  
  - [x] Improve JWT token usage with vuex or so
  - [x] Add swagger API doc

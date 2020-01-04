@@ -1,5 +1,12 @@
 import uuid from 'uuid/v4';
-import { addSite, getFavoriteSites, getLatestSites, getSites, removeSite } from '../../database/sites';
+import {
+    addSite,
+    getFavoriteSites,
+    getLatestSites,
+    getSiteConfigById,
+    getSites,
+    removeSite
+} from '../../database/sites';
 
 /**
  *
@@ -24,6 +31,16 @@ export async function deleteSiteHandler(request) {
     return h.response().code(201);
 }
 
+export async function getSiteByIdHandler(request) {
+    const { id } = request.params;
+    const config = await getSiteConfigById(id);
+    if (!config) {
+        return Boom.notFound();
+    }
+    return config;
+}
+
 export const getSitesHandler = () => getSites();
+
 export const getFavSitesHandler = () => getFavoriteSites();
 export const getLatestSitesHandler = () => getLatestSites();

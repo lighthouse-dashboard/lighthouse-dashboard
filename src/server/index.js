@@ -1,14 +1,11 @@
 'use strict';
 
 import Hapi from '@hapi/hapi';
-import AuthBearer from 'hapi-auth-bearer-token';
 import { join } from 'path';
 import CONFIG from '../../dashboard.config';
 import auth from './auth';
-import setupCronjobs from './cronjobs';
 import setupPlugins from './plugins';
 import setupRouter from './routes';
-import { IS_DEV } from './utils/env';
 import logger from './utils/logger';
 
 const init = async () => {
@@ -23,10 +20,6 @@ const init = async () => {
         },
     });
 
-
-    if (!IS_DEV && CONFIG.SERVER.CRONJOB.ENABLED) {
-        await setupCronjobs();
-    }
     await setupPlugins(server);
 
     server.auth.strategy('jwt', 'jwt', {

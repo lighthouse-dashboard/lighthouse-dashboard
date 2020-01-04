@@ -1,11 +1,13 @@
 <template>
     <div>
+        <project-settings v-if="showSettings" :id="id"/>
         <v-card-title>
             <v-icon v-if="is_favorite">mdi-star</v-icon>
             <v-icon v-else>mdi-star-outline</v-icon>
             {{ id }}
             <v-spacer/>
             <site-overview-menu
+                    @openSettings="openSettings"
                     @removePage="removePage"
                     @runAudit="runAudit"/>
         </v-card-title>
@@ -26,12 +28,14 @@
 
 <script>
     import ApexCharts from 'apexcharts';
+    import ProjectSettings from '../project-settings/project-settings';
     import { mapActions, mapState } from 'vuex';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
     import SiteOverviewMenu from './site-overview-menu';
 
     export default {
         components: {
+            ProjectSettings,
             SiteOverviewMenu,
         },
 
@@ -56,6 +60,7 @@
 
         data() {
             return {
+                showSettings: false,
                 chart: null,
                 chartData: {
                     datasets: [],
@@ -103,6 +108,10 @@
             async removePage() {
                 await this.deleteSite({ siteId: this.id });
             },
+
+            openSettings() {
+                this.showSettings = !this.showSettings;
+            }
         },
         mounted() {
             this.buildChart();
@@ -112,7 +121,7 @@
 </script>
 
 <style>
-    .apexcharts-canvas.apexcharts-canvas {
+    .apexcharts-canvas.apexcharts-canvas.apexcharts-canvas {
         background-color: transparent;
     }
 </style>

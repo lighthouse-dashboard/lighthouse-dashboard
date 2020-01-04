@@ -4,7 +4,8 @@ import {
     deleteSiteHandler,
     getFavSitesHandler,
     getLatestSitesHandler,
-    getSitesHandler
+    getSiteByIdHandler,
+    getSitesHandler,
 } from './controller';
 
 export default [
@@ -42,9 +43,27 @@ export default [
         options: {
             description: 'Delete site',
             tags: ['api', 'sites'],
+            validate: {
+                params: joi.object({
+                    id: joi.string().required(),
+                }),
+            },
         },
     },
-
+    {
+        method: 'GET',
+        path: '/api/sites/{id}',
+        handler: getSiteByIdHandler,
+        options: {
+            description: 'Get project config by id',
+            tags: ['api', 'sites'],
+            validate: {
+                params: joi.object({
+                    id: joi.string().required(),
+                }),
+            },
+        },
+    },
     {
         method: 'POST',
         path: '/api/sites',

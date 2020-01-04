@@ -8,7 +8,8 @@
     "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
     "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
-    "start": "node -r esm src/server/index.js"
+    "start": "node -r esm src/server/index.js",
+    "audit": "node -r esm src/server/commands/run-audits-command.js"
   },
   "main": "src/app/main.js",
   "dependencies": {

@@ -1,5 +1,6 @@
 <template>
-    <v-menu offset-y z-index="20">
+    <v-menu offset-y
+            z-index="20">
         <template v-slot:activator="{ on }">
             <v-btn
                     icon
@@ -11,6 +12,11 @@
             <v-list-item>
                 <v-list-item-title>
                     Open Page
+                </v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="openSettings">
+                <v-list-item-title>
+                    Settings
                 </v-list-item-title>
             </v-list-item>
             <v-list-item @click="removePage">
@@ -37,7 +43,11 @@
 
             runAudit() {
                 this.$emit('runAudit');
-            }
-        }
+            },
+
+            openSettings() {
+                this.$emit('openSettings');
+            },
+        },
     };
 </script>

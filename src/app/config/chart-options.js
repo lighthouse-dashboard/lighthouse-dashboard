@@ -55,8 +55,6 @@ export const GAUGE_CHART = {
             },
         },
     },
-
-
     plotOptions: {
         radialBar: {
             startAngle: -90,
@@ -103,6 +101,7 @@ export const SPEED_OVERVIEW_CHART = {
     chart: {
         height: 200,
         type: 'bar',
+        background: 'transparent',
         toolbar: {
             show: true,
             tools: {
@@ -128,6 +127,7 @@ export const SITE_OVERVIEW_CHART = {
     chart: {
         height: 200,
         type: 'line',
+        background: 'transparent',
         toolbar: {
             show: true,
             tools: {

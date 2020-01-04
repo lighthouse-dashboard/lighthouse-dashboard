@@ -35,7 +35,7 @@ module.exports = {
         API: {
             LOGIN_PASS: process.env.LOGIN_PASS,
             JWT_SECRET: process.env.JWT_SECRET,
-            SITE_REPORT_LIMIT: 100,
+            SITE_REPORT_LIMIT: 50,
         },
         AUDIT: {
             CHROMIUM_PATH: process.env.CHROMIUM_PATH,
