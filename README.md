@@ -65,7 +65,8 @@ SHOW_ERROR_PAGES=true
  - [ ] Create awesome doc
  - [ ] Add sites data to vuex state for immediate mutations & changes
  - [ ] Add search for project list
- - [ ] Make project active/disabled
+ - [ ] Make project active/disabled in settings menu of project
+ - [ ] Add url for webhooks to settings menu of project
  
  - [x] Improve JWT token usage with vuex or so
  - [x] Add swagger API doc
