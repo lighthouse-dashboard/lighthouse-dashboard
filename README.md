@@ -54,7 +54,7 @@ SHOW_ERROR_PAGES=true
 ```
 
 # Todo
- - [ ] Add feed of latest built project to the overview
+ - [x] Add feed of latest built project to the overview
  - [ ] Add loaders
  - [ ] Host somewhere
  - [ ] Add unit tests
