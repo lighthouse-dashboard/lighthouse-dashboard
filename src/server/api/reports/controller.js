@@ -2,6 +2,7 @@ import Boom from '@hapi/boom';
 import CONFIG from '../../../../dashboard.config';
 import { getLatestReportBySiteId, getReportsBySiteId } from '../../database/reports';
 import { getFavoriteSites, getSiteConfigById } from '../../database/sites';
+import reportsToBarChart from '../../transformer/reports-to-bar-cahrt';
 import reportsToChartTransformer from '../../transformer/reports-to-chart-transformer';
 import createLighthouseReport from '../../utils/create-lighthouse-report';
 import { getTimingValueByKey } from '../../utils/get-timing-by-key';
@@ -10,7 +11,7 @@ import { getTimingValueByKey } from '../../utils/get-timing-by-key';
  *
  * @param {hapi.Request} request
  * @param h
- * @return {Promise<Report[]>}
+ * @return {Promise<ChartData>}
  */
 export async function getRecentReportsHandler(request) {
     const { id } = request.params;
@@ -45,45 +46,32 @@ export async function createReportHandler(request) {
         return Boom.forbidden('Token mismatch');
     }
 
-    const data = await createLighthouseReport(config);
-    return data;
+    return createLighthouseReport(config);
 }
 
 /**
  * Get overview over projects by specific timing id
- * @return {Promise<{datasets: [], labels: []}>}
+ * @return {Promise<ChartData>}
  */
 export async function getSpeedReportOverviewHandler() {
-    const data = { labels: [], datasets: [] };
-
     const pages = await getFavoriteSites();
-    data.labels = pages.map((p) => p.id);
-    const exportingValues = CONFIG.DASHBOARD.OVERVIEW_BAR_VALUES
+    const labels = pages.map((p) => p.id);
 
-    for (let i = 0; i < exportingValues.length; i++) {
-        const values = [];
-        for (let p = 0; p < pages.length; p++) {
-            const audit = await getLatestReportBySiteId(pages[p].id);
-            if (!audit) {
-                continue;
-            }
-
-            const value = audit ? getTimingValueByKey(audit.values, exportingValues[i]) : null;
-            values.push(value);
+    const reports = [];
+    for (let p = 0; p < pages.length; p++) {
+        const report = await getLatestReportBySiteId(pages[p].id);
+        if (!report) {
+            continue;
         }
-
-        data.datasets.push({
-            name: exportingValues[i],
-            data: values,
-        });
+        reports.push(report);
     }
 
-    return data;
+    return reportsToBarChart(reports, labels, CONFIG.DASHBOARD.OVERVIEW_BAR_VALUES);
 }
 
 /**
  *
- * @param request
+ * @param {hapi.Request} request
  * @return {Promise<void>}
  */
 export async function getLatestReportValuesHandler(request) {
@@ -94,14 +82,11 @@ export async function getLatestReportValuesHandler(request) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const report = await getLatestReportBySiteId(id, 1);
+    const report = await getLatestReportBySiteId(id);
     const values = CONFIG.DASHBOARD.LATEST_REPORTS_VALUES;
+
     return {
         labels: values,
-        series: values.map(vid => getValue(report.values, vid)),
+        series: values.map(vid => getTimingValueByKey(report.values, vid)),
     };
 }
-
-function getValue(values, id) {
-    return values.find(v => v.id === id).value;
-};

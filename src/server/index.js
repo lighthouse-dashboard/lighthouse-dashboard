@@ -2,6 +2,7 @@
 
 import Hapi from '@hapi/hapi';
 import { join } from 'path';
+import { IS_DEV } from './utils/env';
 import CONFIG from '../../dashboard.config';
 import auth from './auth';
 import setupPlugins from './plugins';
@@ -22,12 +23,14 @@ const init = async () => {
 
     await setupPlugins(server);
 
-    server.auth.strategy('jwt', 'jwt', {
-        key: CONFIG.SERVER.API.JWT_SECRET,
-        validate: auth,
-    });
+    if (!IS_DEV) {
+        server.auth.strategy('jwt', 'jwt', {
+            key: CONFIG.SERVER.API.JWT_SECRET,
+            validate: auth,
+        });
 
-    server.auth.default('jwt');
+        server.auth.default('jwt');
+    }
 
     setupRouter(server);
     await server.start();
