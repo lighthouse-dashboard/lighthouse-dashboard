@@ -4,7 +4,7 @@ const DEFAULT_CHART = {
     theme: {
         mode: CONFIG.UI.USE_DARK_MODE ? 'dark' : 'bright',
     },
-    colors: ['#99bbef', '#7ca0d2', '#6186b6', '#466d9b', '#023e68'],
+    colors: CONFIG.UI.CHART_COLORS,
     plotOptions: {
         bar: {
             horizontal: false,
@@ -69,25 +69,22 @@ export const GAUGE_CHART = {
             },
             dataLabels: {
                 name: {
-                    color: '#99bbef',
+                    color: CONFIG.UI.CHART_COLORS[0],
                     fontSize: '12px',
                 },
                 value: {
-                    color: '#99bbef',
+                    color: CONFIG.UI.CHART_COLORS[0],
                     fontSize: '18px',
                     offsetY: -30,
                 },
             },
         },
     },
-    colors: ['#99bbef', '#7ca0d2', '#6186b6', '#466d9b', '#023e68'],
+    colors: CONFIG.UI.CHART_COLORS,
     fill: {
         type: 'gradient',
         gradient: {
-            //shade: 'dark',
-            //type: 'horizontal',
-            shadeIntensity: 0.5,
-
+            shadeIntensity: 0.7,
             inverseColors: false,
             opacityFrom: 1,
             opacityTo: 1,
@@ -162,15 +159,12 @@ export const SITE_OVERVIEW_CHART = {
         tickAmount: 1,
         floating: true,
         min: 0,
-        // max: 100,
+        max: 100,
         axisTicks: {
             show: false,
         },
         axisBorder: {
             show: false,
-            color: '#78909c',
-            offsetX: 0,
-            offsetY: 0,
         },
     },
 

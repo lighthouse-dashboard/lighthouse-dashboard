@@ -18,15 +18,16 @@ module.exports = {
 
         LATEST_REPORTS_VALUES: [
             'performance',
-            //'seo',
-            //'accessibility',
-            //'pwa',
-            //'best-practices',
+            'seo',
+            // 'accessibility',
+            // 'pwa',
+            // 'best-practices',
         ],
     },
 
     UI: {
         USE_DARK_MODE: true,
+        CHART_COLORS: ['#d8db81', '#a24cef', '#7ca0d2', '#539b8d', '#023e68'],
     },
 
     SERVER: {
@@ -46,10 +47,5 @@ module.exports = {
             MONGO_DB_NAME: process.env.MONGO_DB_NAME,
         },
         SHOW_ERROR_PAGES: process.env.SHOW_ERROR_PAGES,
-        CRONJOB: {
-            ENABLED: true,
-            RUN_AUDITS: '* 0,6,12,18 * * *',
-            // RUN_AUDITS: '*/5 * * * *',
-        },
     },
 };

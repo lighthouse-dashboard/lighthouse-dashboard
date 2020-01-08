@@ -5,7 +5,7 @@ import {
     getFavSitesHandler,
     getLatestSitesHandler,
     getSiteByIdHandler,
-    getSitesHandler,
+    getSitesHandler, updateSiteConfigHandler,
 } from './controller';
 
 export default [
@@ -60,6 +60,23 @@ export default [
             validate: {
                 params: joi.object({
                     id: joi.string().required(),
+                }),
+            },
+        },
+    },
+    {
+        method: 'PUT',
+        path: '/api/sites/{id}',
+        handler: updateSiteConfigHandler,
+        options: {
+            description: 'Get project config by id',
+            tags: ['api', 'sites'],
+            validate: {
+                params: joi.object({
+                    id: joi.string().required(),
+                }),
+                payload: joi.object({
+                    is_favorite: joi.boolean().required(),
                 }),
             },
         },

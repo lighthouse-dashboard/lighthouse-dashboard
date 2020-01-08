@@ -2,12 +2,14 @@
 
 import Hapi from '@hapi/hapi';
 import { join } from 'path';
-import { IS_DEV } from './utils/env';
 import CONFIG from '../../dashboard.config';
 import auth from './auth';
 import setupPlugins from './plugins';
 import setupRouter from './routes';
+import { IS_DEV } from './utils/env';
 import logger from './utils/logger';
+import configValidator from './validator/config-validator';
+import configSchema from './validator/schemas/config-schema';
 
 const init = async () => {
     const server = Hapi.server({
@@ -16,6 +18,7 @@ const init = async () => {
         routes: {
             cors: true,
             files: {
+                // path from where the static assets should be served
                 relativeTo: join(__dirname, '../../assets'),
             },
         },
@@ -23,6 +26,7 @@ const init = async () => {
 
     await setupPlugins(server);
 
+    // Only require JWT auth in production
     if (!IS_DEV) {
         server.auth.strategy('jwt', 'jwt', {
             key: CONFIG.SERVER.API.JWT_SECRET,
@@ -42,4 +46,6 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
 });
 
-init();
+if (configValidator(configSchema, CONFIG)) {
+    init();
+}

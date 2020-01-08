@@ -5,7 +5,8 @@ import {
     getLatestSites,
     getSiteConfigById,
     getSites,
-    removeSite
+    removeSite,
+    updateSite,
 } from '../../database/sites';
 
 /**
@@ -31,6 +32,11 @@ export async function deleteSiteHandler(request) {
     return h.response().code(201);
 }
 
+/**
+ *
+ * @param {hapi.Request} request
+ * @return {Promise<SiteConfig|Boom<null>>}
+ */
 export async function getSiteByIdHandler(request) {
     const { id } = request.params;
     const config = await getSiteConfigById(id);
@@ -40,7 +46,18 @@ export async function getSiteByIdHandler(request) {
     return config;
 }
 
-export const getSitesHandler = () => getSites();
+/**
+ *
+ * @param {hapi.Request} request
+ * @return {Promise<void>}
+ */
+export async function updateSiteConfigHandler(request) {
+    const { id } = request.params;
+    const { is_favorite } = request.payload;
+    await updateSite(id, { is_favorite });
+    return h.response().code(204);
+}
 
+export const getSitesHandler = () => getSites();
 export const getFavSitesHandler = () => getFavoriteSites();
 export const getLatestSitesHandler = () => getLatestSites();

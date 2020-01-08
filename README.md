@@ -61,7 +61,7 @@ SHOW_ERROR_PAGES=true
  - [ ] Add toggle to site to indicate if it should be shown in the overview
  - [ ] Add pm2 for restarts after crash
  - [ ] Improve logging for development
- - [ ] Add config file validator
+ - [x] Add config file validator
  - [ ] Create awesome doc
  - [ ] Add sites data to vuex state for immediate mutations & changes
  - [ ] Add search for project list
