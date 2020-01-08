@@ -15,8 +15,9 @@ import {
  * @return {Promise<void>}
  */
 export async function addSiteHandler(request, h) {
-    const { url, id, device } = request.payload;
-    await addSite({ url, id, device, is_favorite: false, order: 0, token: uuid() });
+    const { url, id, device, isFavorite } = request.payload;
+    console.log(isFavorite);
+    await addSite({ url, id, device, is_favorite: isFavorite, order: 0, token: uuid() });
 
     return h.response().code(201);
 }
@@ -51,7 +52,7 @@ export async function getSiteByIdHandler(request) {
  * @param {hapi.Request} request
  * @return {Promise<void>}
  */
-export async function updateSiteConfigHandler(request) {
+export async function updateSiteConfigHandler(request, h) {
     const { id } = request.params;
     const { is_favorite } = request.payload;
     await updateSite(id, { is_favorite });

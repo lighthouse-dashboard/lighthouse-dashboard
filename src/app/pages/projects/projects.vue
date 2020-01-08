@@ -24,19 +24,18 @@
         components: {
             SiteOverview,
         },
-        data() {
-            return {
-                sites: [],
-            };
-        },
+
         computed: {
             ...mapState('login', ['jwt']),
+            ...mapState('sites', ['sites']),
         },
+
         methods: {
             ...mapActions('sites', ['fetchAllSites']),
         },
+
         async mounted() {
-            this.sites = await this.fetchAllSites();
+            await this.fetchAllSites();
         },
     };
 </script>

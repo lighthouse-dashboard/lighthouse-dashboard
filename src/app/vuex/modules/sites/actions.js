@@ -1,41 +1,72 @@
 import {
-    GET_SITE_BY_ID_URL,
     CREATE_SITE_URL,
-    GET_FAV_SITES_URL,
     GET_LATEST_AUDITED_SITES_URL,
+    GET_SITE_BY_ID_URL,
     GET_SITES_URL,
     REMOVE_SITE_URL
 } from '../../../config/routes';
 import axios from '../../../utils/axios';
+import { SET_SITES, UPDATE_SITE } from '../mutation-types';
 
-export async function fetchAllSites() {
+/**
+ * Fetch all sites
+ * @return {Promise<T>}
+ */
+export async function fetchAllSites({ commit }) {
     const { data } = await axios().get(GET_SITES_URL);
-    return data;
+    commit({ type: SET_SITES, sites: data });
 }
 
-export async function fetchFavoriteSites() {
-    const { data } = await axios().get(GET_FAV_SITES_URL);
-    return data;
-}
 
+/**
+ * Delete site by id
+ * @param _
+ * @param {string} siteId
+ */
 export function deleteSite(_, { siteId }) {
     axios().delete(REMOVE_SITE_URL(siteId));
 }
 
-export async function createSite(_, { url, id, device }) {
+/**
+ * Create a new site
+ * @param _
+ * @param {SiteConfig} siteConfig
+ * @return {Promise<void>}
+ */
+export async function createSite(_, siteConfig) {
     await axios()
-        .post(CREATE_SITE_URL, {
-            url,
-            id,
-            device,
-        });
+        .post(CREATE_SITE_URL, siteConfig);
 }
 
+/**
+ * Update a site
+ * @param _
+ * @param {string} id
+ * @param {Partial<SiteConfig>}delta
+ * @return {Promise<void>}
+ */
+export async function updateSite({ commit }, { id, delta }) {
+    await axios()
+        .put(GET_SITE_BY_ID_URL(id), delta);
+
+    commit({ type: UPDATE_SITE, id: id, delta });
+}
+
+/**
+ * Fetch latest audites sites
+ * @return {Promise<T>}
+ */
 export async function getLatestSites() {
     const { data } = await axios().get(GET_LATEST_AUDITED_SITES_URL);
     return data;
 }
 
+/**
+ * Get specific site
+ * @param _
+ * @param {string} siteId
+ * @return {Promise<T>}
+ */
 export async function getSite(_, { siteId }) {
     const { data } = await axios().get(GET_SITE_BY_ID_URL(siteId));
     return data;

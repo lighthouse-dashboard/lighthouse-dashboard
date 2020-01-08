@@ -4,11 +4,16 @@
             max-width="320">
         <v-card>
             <v-card-title class="headline">
-                Project Settings
+                Settings <small> {{ siteConfig.id }}</small>
             </v-card-title>
 
             <v-card-text>
-                <pre v-text="$attrs"/>
+                <v-checkbox v-model="siteConfig.is_favorite"
+                        label="Is Favorite"/>
+
+                <v-btn @click="save">
+                    Save
+                </v-btn>
             </v-card-text>
         </v-card>
     </v-dialog>
@@ -27,6 +32,7 @@
 
         data() {
             return {
+                /** @type {SiteConfig} */
                 siteConfig: null,
                 modal: true,
             };
@@ -34,7 +40,12 @@
 
 
         methods: {
-            ...mapActions('sites', ['getSite']),
+            ...mapActions('sites', ['getSite', 'updateSite']),
+
+            save() {
+                this.updateSite({ id: this.siteConfig.id, delta: { is_favorite: this.siteConfig.is_favorite } });
+                this.$emit('close');
+            },
         },
 
         async mounted() {

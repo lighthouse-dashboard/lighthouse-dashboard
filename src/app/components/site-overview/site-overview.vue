@@ -1,6 +1,8 @@
 <template>
     <div>
-        <project-settings v-if="showSettings" :id="id"/>
+        <project-settings v-if="showSettings"
+                :id="id"
+                @close="onSettingsClosed"/>
         <v-card-title>
             <v-icon v-if="is_favorite">mdi-star</v-icon>
             <v-icon v-else>mdi-star-outline</v-icon>
@@ -28,9 +30,9 @@
 
 <script>
     import ApexCharts from 'apexcharts';
-    import ProjectSettings from '../project-settings/project-settings';
     import { mapActions, mapState } from 'vuex';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
+    import ProjectSettings from '../project-settings/project-settings';
     import SiteOverviewMenu from './site-overview-menu';
 
     export default {
@@ -76,6 +78,10 @@
         methods: {
             ...mapActions('reports', ['fetchReportsForSite', 'launchAuditForSite']),
             ...mapActions('sites', ['deleteSite']),
+
+            onSettingsClosed() {
+                this.showSettings = false;
+            },
 
             buildChart() {
                 const options = Object.assign({}, SITE_OVERVIEW_CHART, {});

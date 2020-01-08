@@ -5,7 +5,8 @@ import {
     getFavSitesHandler,
     getLatestSitesHandler,
     getSiteByIdHandler,
-    getSitesHandler, updateSiteConfigHandler,
+    getSitesHandler,
+    updateSiteConfigHandler,
 } from './controller';
 
 export default [
@@ -100,6 +101,7 @@ export default [
                         .string()
                         .allow('desktop', 'mobile')
                         .required(),
+                    isFavorite: joi.boolean(),
                 }),
             },
         },

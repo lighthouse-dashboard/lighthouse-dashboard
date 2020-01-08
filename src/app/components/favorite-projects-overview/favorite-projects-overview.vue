@@ -8,7 +8,7 @@
                     lg="4"
                     xl="3"
                     xxl="2"
-                    v-for="site in sites"
+                    v-for="site in favoritedSites"
                     :key="site.id">
                 <site-overview v-bind="site"/>
             </v-col>
@@ -17,25 +17,22 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
 
     export default {
         components: {
             SiteOverview,
         },
-        data() {
-            return {
-                sites: [],
-            };
+        computed: {
+            ...mapGetters('sites', ['favoritedSites']),
         },
-        computed: {},
         methods: {
             ...mapActions('login', ['logout']),
-            ...mapActions('sites', ['fetchFavoriteSites']),
+            ...mapActions('sites', ['fetchAllSites']),
         },
         async mounted() {
-            this.sites = await this.fetchFavoriteSites();
+            await this.fetchAllSites();
         },
     };
 </script>

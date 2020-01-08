@@ -37,6 +37,10 @@
                                     label="Device"
                                     required
                             />
+                            <v-checkbox
+                                    v-model="isFavorite"
+                                    label="Is favorite"
+                            />
                         </v-col>
                     </v-row>
                 </v-card-text>
@@ -74,6 +78,7 @@
                 url: 'https://www.exmaple.com',
                 id: 'example.com',
                 device: 'desktop',
+                isFavorite: false,
                 items: [
                     {
                         text: 'Desktop',
@@ -96,6 +101,7 @@
                     url: this.url,
                     id: this.id,
                     device: this.device,
+                    isFavorite: this.isFavorite,
                 });
                 this.dialog = false;
             },
