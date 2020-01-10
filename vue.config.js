@@ -1,11 +1,11 @@
 const { resolve } = require('path');
 
 module.exports = {
-    outputDir: './assets',
+    outputDir: './assets/build',
     indexPath: './templates/index.html',
     publicPath: '',
     configureWebpack: {
-        entry: './src/app/main.js',
+        entry: './assets/src/app/main.js',
     },
     chainWebpack: (config) => {
         config

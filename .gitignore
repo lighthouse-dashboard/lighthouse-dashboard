@@ -14,6 +14,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-assets
+assets/build
 
 .env
