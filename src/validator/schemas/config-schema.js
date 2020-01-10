@@ -15,6 +15,16 @@ export const REPORT_VALUE_KEYS_SCHEMA = joi.array()
     .max(5)
     .required();
 
+const COLOR_THEME_CONFIG = joi.object({
+    primary: joi.string(),
+    accent: joi.string(),
+    secondary: joi.string(),
+    success: joi.string(),
+    info: joi.string(),
+    warning: joi.string(),
+    error: joi.string(),
+});
+
 export default joi.object({
     DATE_FORMAT: joi.string().required(),
     DASHBOARD: joi.object({
@@ -25,7 +35,15 @@ export default joi.object({
 
     UI: joi.object({
         USE_DARK_MODE: joi.boolean().required(),
+        THEME: joi
+            .string()
+            .allow('bright', 'dark')
+            .required(),
         CHART_COLORS: joi.array().items(joi.string()),
+        COLOR_THEME: joi.object({
+            dark: COLOR_THEME_CONFIG,
+            light: COLOR_THEME_CONFIG,
+        }),
     }).required(),
 
     SERVER: joi.object({

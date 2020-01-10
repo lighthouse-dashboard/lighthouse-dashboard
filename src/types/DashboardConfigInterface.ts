@@ -14,7 +14,7 @@ export interface DashboardConfig {
         LATEST_REPORTS_VALUES: REPORT_VALUE_KEYS[],
     };
     UI: {
-        USE_DARK_MODE: boolean;
+        THEME: string;
         CHART_COLORS: string[];
     };
     SERVER: {

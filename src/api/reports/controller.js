@@ -1,14 +1,14 @@
 import Boom from '@hapi/boom';
-import runLighthouse from 'audit/run-lighthouse';
 import curry from 'lodash.curry';
-import lighthouseTransformer from 'transformer/lighthouse-transformer';
-import { error } from 'utils/logger';
 import CONFIG from '../../../dashboard.config';
+import runLighthouse from '../../audit/run-lighthouse';
 import { getLatestReportBySiteId, getReportsBySiteId, saveReport } from '../../database/reports';
 import { getFavoriteSites, getSiteConfigById, updateSite } from '../../database/sites';
+import lighthouseTransformer from '../../transformer/lighthouse-transformer';
 import reportsToBarChart from '../../transformer/reports-to-bar-cahrt';
 import reportsToChartTransformer from '../../transformer/reports-to-chart-transformer';
 import { getTimingValueByKey } from '../../utils/get-timing-by-key';
+import { error } from '../../utils/logger';
 
 /**
  *

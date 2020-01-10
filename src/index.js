@@ -19,7 +19,7 @@ const init = async () => {
             cors: true,
             files: {
                 // path from where the static assets should be served
-                relativeTo: join(__dirname, '../../assets/build'),
+                relativeTo: join(__dirname, '../assets/build'),
             },
         },
     });

@@ -10,6 +10,8 @@
                             v-model="password"
                             label="Password"
                             type="password"
+                            :error="!!error"
+                            :error-messages="error && error.message"
                     />
                     <v-btn align="right"
                             @click="onLogin">
@@ -33,15 +35,20 @@
         data() {
             return {
                 password: '',
+                error: null,
             };
         },
         methods: {
             ...mapActions('login', ['setJwt', 'setLoggedIn']),
             async onLogin() {
-                const { data } = await axios().post(AUTH_URL, { password: this.password });
-                await this.setJwt({ jwt: data.jwt });
-                await this.setLoggedIn({ isLoggedIn: true });
-                this.$router.push('/');
+                try {
+                    const { data } = await axios().post(AUTH_URL, { password: this.password });
+                    await this.setJwt({ jwt: data.jwt });
+                    await this.setLoggedIn({ isLoggedIn: true });
+                    this.$router.push('/');
+                } catch (e) {
+                    this.error = e;
+                }
             },
         },
     };

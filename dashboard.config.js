@@ -26,8 +26,34 @@ module.exports = {
     },
 
     UI: {
-        USE_DARK_MODE: true,
-        CHART_COLORS: ['#d8db81', '#a24cef', '#7ca0d2', '#539b8d', '#023e68'],
+        THEME: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'bright',
+        CHART_COLORS: [
+            '#bfc017',
+            '#5698ef',
+            '#7ca0d2',
+            '#539b8d',
+            '#023e68',
+        ],
+        COLOR_THEME: {
+            dark: {
+                primary: '#1976d2',
+                accent: '#e91e63',
+                secondary: '#30b1dc',
+                success: '#4caf50',
+                info: '#2196f3',
+                warning: '#fb8c00',
+                error: '#ff5252',
+            },
+            light: {
+                primary: '#1976d2',
+                accent: '#e91e63',
+                secondary: '#30b1dc',
+                success: '#4caf50',
+                info: '#2196f3',
+                warning: '#fb8c00',
+                error: '#ff5252',
+            },
+        },
     },
 
     SERVER: {

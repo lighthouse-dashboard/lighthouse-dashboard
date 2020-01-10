@@ -8,13 +8,20 @@
             </v-card-title>
 
             <v-card-text>
-                <v-checkbox v-model="siteConfig.is_favorite"
+                <v-checkbox
+                        v-model="siteConfig.is_favorite"
+                        color="secondary"
                         label="Is Favorite"/>
+            </v-card-text>
 
-                <v-btn @click="save">
+            <v-card-actions>
+                <v-spacer/>
+                <v-btn text
+                        color="secondary"
+                        @click="save">
                     Save
                 </v-btn>
-            </v-card-text>
+            </v-card-actions>
         </v-card>
     </v-dialog>
 </template>

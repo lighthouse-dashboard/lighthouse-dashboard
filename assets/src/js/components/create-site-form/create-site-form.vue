@@ -1,8 +1,12 @@
 <template>
     <div>
+
         <v-btn
                 fab
-                icon
+                absolute
+                bottom
+                right
+                color="secondary"
                 @click.stop="dialog = true"
         >
             <v-icon>mdi-plus</v-icon>
@@ -24,21 +28,25 @@
                             <v-text-field
                                     v-model="id"
                                     label="ID"
+                                    color="secondary"
                                     required
                             />
                             <v-text-field
                                     v-model="url"
                                     label="URL"
+                                    color="secondary"
                                     required
                             />
                             <v-select
                                     v-model="device"
                                     :items="items"
                                     label="Device"
+                                    color="secondary"
                                     required
                             />
                             <v-checkbox
                                     v-model="isFavorite"
+                                    color="secondary"
                                     label="Is favorite"
                             />
                         </v-col>
@@ -46,18 +54,15 @@
                 </v-card-text>
 
                 <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                            text
-                            @click="dialog = false"
-                    >
+                    <v-spacer/>
+                    <v-btn text
+                            @click="dialog = false">
                         Cancel
                     </v-btn>
 
-                    <v-btn
-                            text
-                            @click="onCreateClicked"
-                    >
+                    <v-btn text
+                            color="secondary"
+                            @click="onCreateClicked">
                         Add
                     </v-btn>
                 </v-card-actions>

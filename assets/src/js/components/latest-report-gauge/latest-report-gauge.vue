@@ -1,3 +1,4 @@
+$
 <template>
     <div class="single-radial-bar">
         <div ref="chart"/>
@@ -27,8 +28,8 @@
         methods: {
             ...mapActions('reports', ['fetchLatestReportForSite']),
 
-            buildChart() {
-                var options = Object.assign({}, GAUGE_CHART, {
+            async buildChart() {
+                const options = Object.assign({}, GAUGE_CHART, {
                     title: {
                         text: this.id,
                         style: {
@@ -36,11 +37,11 @@
                             color: '#fff',
                         },
                     },
-                    series: [0],
-                    labels: this.valueIds,
+                    series: [],
+                    labels: [],
                 });
                 this.chart = new ApexCharts(this.$refs.chart, options);
-                this.chart.render();
+                await this.chart.render();
             },
 
 

@@ -58,12 +58,12 @@ SHOW_ERROR_PAGES=true
  - [ ] Add loaders
  - [ ] Host somewhere
  - [ ] Add unit tests
- - [ ] Add toggle to site to indicate if it should be shown in the overview
+ - [x] Add toggle to site to indicate if it should be shown in the overview
  - [ ] Add pm2 for restarts after crash
  - [ ] Improve logging for development
  - [x] Add config file validator
  - [ ] Create awesome doc
- - [ ] Add sites data to vuex state for immediate mutations & changes
+ - [x] Add sites data to vuex state for immediate mutations & changes
  - [ ] Add search for project list
  - [ ] Make project active/disabled in settings menu of project
  - [ ] Add url for webhooks to settings menu of project

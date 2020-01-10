@@ -5,7 +5,7 @@ module.exports = {
     indexPath: './templates/index.html',
     publicPath: '',
     configureWebpack: {
-        entry: './assets/src/app/main.js',
+        entry: './assets/src/js/main.js',
     },
     chainWebpack: (config) => {
         config
@@ -16,6 +16,6 @@ module.exports = {
             });
     },
     devServer: {
-        proxy: 'http://localhost:4000',
+        proxy: 'http://localhost:5000',
     },
 };

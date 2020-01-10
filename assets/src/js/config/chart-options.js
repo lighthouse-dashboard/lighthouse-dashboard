@@ -2,7 +2,7 @@ import CONFIG from '../../../../dashboard.config';
 
 const DEFAULT_CHART = {
     theme: {
-        mode: CONFIG.UI.USE_DARK_MODE ? 'dark' : 'bright',
+        mode: CONFIG.UI.THEME,
     },
     colors: CONFIG.UI.CHART_COLORS,
     plotOptions: {
