@@ -23,6 +23,7 @@ const COLOR_THEME_CONFIG = joi.object({
     info: joi.string(),
     warning: joi.string(),
     error: joi.string(),
+    text: joi.string(),
 });
 
 export default joi.object({
@@ -36,8 +37,6 @@ export default joi.object({
         .required(),
 
     UI: joi.object({
-        USE_DARK_MODE: joi.boolean().required(),
-
         THEME: joi
             .string()
             .allow('light', 'dark')

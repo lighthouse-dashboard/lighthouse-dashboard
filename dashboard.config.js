@@ -1,3 +1,4 @@
+const colorPreference = require('./src/utils/color-preference');
 require('dotenv').config();
 
 module.exports = {
@@ -26,7 +27,7 @@ module.exports = {
     },
 
     UI: {
-        THEME: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+        THEME: colorPreference ? 'dark' : 'light',
         // THEME: 'dark',
         CHART_COLORS: {
             dark: [

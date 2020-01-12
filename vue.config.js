@@ -3,7 +3,7 @@ const { resolve } = require('path');
 module.exports = {
     outputDir: './assets/build',
     indexPath: './templates/index.html',
-    publicPath: '',
+    publicPath: './',
     configureWebpack: {
         entry: './assets/src/js/main.js',
     },

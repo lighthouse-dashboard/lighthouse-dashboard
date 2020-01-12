@@ -67,6 +67,7 @@ SHOW_ERROR_PAGES=true
  - [ ] Add search for project list
  - [ ] Make project active/disabled in settings menu of project
  - [ ] Add url for webhooks to settings menu of project
+ - [ ] Add additional properties `message` and/or `git_commit` to the webhook api
  
  - [x] Improve JWT token usage with vuex or so
  - [x] Add swagger API doc
