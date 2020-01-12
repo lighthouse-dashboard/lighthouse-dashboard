@@ -4,7 +4,7 @@ const DEFAULT_CHART = {
     theme: {
         mode: CONFIG.UI.THEME,
     },
-    colors: CONFIG.UI.CHART_COLORS,
+    colors: CONFIG.UI.CHART_COLORS[CONFIG.UI.THEME],
     plotOptions: {
         bar: {
             horizontal: false,
@@ -69,18 +69,18 @@ export const GAUGE_CHART = {
             },
             dataLabels: {
                 name: {
-                    color: CONFIG.UI.CHART_COLORS[0],
+                    color: CONFIG.UI.CHART_COLORS[CONFIG.UI.THEME][0],
                     fontSize: '12px',
                 },
                 value: {
-                    color: CONFIG.UI.CHART_COLORS[0],
+                    color: CONFIG.UI.CHART_COLORS[CONFIG.UI.THEME][0],
                     fontSize: '18px',
                     offsetY: -30,
                 },
             },
         },
     },
-    colors: CONFIG.UI.CHART_COLORS,
+    colors: CONFIG.UI.CHART_COLORS[CONFIG.UI.THEME],
     fill: {
         type: 'gradient',
         gradient: {

@@ -26,28 +26,40 @@ module.exports = {
     },
 
     UI: {
-        THEME: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'bright',
-        CHART_COLORS: [
-            '#bfc017',
-            '#5698ef',
-            '#7ca0d2',
-            '#539b8d',
-            '#023e68',
-        ],
+        THEME: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+        // THEME: 'dark',
+        CHART_COLORS: {
+            dark: [
+                '#009888',
+                '#5698ef',
+                '#7ca0d2',
+                '#539b8d',
+                '#023e68',
+            ],
+            light: [
+                '#539b8d',
+                '#ffcc80',
+                '#7ca0d2',
+                '#539b8d',
+                '#023e68',
+            ],
+        },
         COLOR_THEME: {
             dark: {
-                primary: '#1976d2',
-                accent: '#e91e63',
-                secondary: '#30b1dc',
+                primary: '#009888',
+                text: '#f7f7f7',
+                accent: '#ff9800',
+                secondary: '#5698ef',
                 success: '#4caf50',
                 info: '#2196f3',
                 warning: '#fb8c00',
                 error: '#ff5252',
             },
             light: {
-                primary: '#1976d2',
+                primary: '#539b8d',
+                text: '#333333',
                 accent: '#e91e63',
-                secondary: '#30b1dc',
+                secondary: '#ffcc80',
                 success: '#4caf50',
                 info: '#2196f3',
                 warning: '#fb8c00',

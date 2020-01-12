@@ -9,6 +9,7 @@ $
 <script>
     import ApexCharts from 'apexcharts';
     import { mapActions } from 'vuex';
+    import CONFIG from '../../../../../dashboard.config';
     import { GAUGE_CHART } from '../../config/chart-options';
 
     export default {
@@ -34,7 +35,7 @@ $
                         text: this.id,
                         style: {
                             fontSize: '16px',
-                            color: '#fff',
+                            color: CONFIG.UI.COLOR_THEME[CONFIG.UI.THEME].text,
                         },
                     },
                     series: [],

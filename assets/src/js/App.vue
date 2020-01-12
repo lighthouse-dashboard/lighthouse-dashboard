@@ -6,6 +6,7 @@
                     flat
                     elevate-on-scroll
                     hide-on-scroll
+                    color="primary"
                     v-if="isLoggedIn">
                 <v-toolbar-title>Performance Dashboard</v-toolbar-title>
                 <v-spacer/>
@@ -14,7 +15,9 @@
                     <v-container fluid>
                         <v-tabs align-with-title
                                 background-color="transparent"
-                                color="secondary">
+                                color="text"
+                                slider-color="secondary"
+                        >
                             <v-tab to="/">Dashboard</v-tab>
                             <v-tab to="/projects">Projects</v-tab>
                         </v-tabs>

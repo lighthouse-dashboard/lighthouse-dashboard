@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <v-btn
                 fab
                 absolute
@@ -69,7 +68,6 @@
             </v-card>
         </v-dialog>
     </div>
-
 </template>
 
 <script>

@@ -4,8 +4,12 @@
                 :id="id"
                 @close="onSettingsClosed"/>
         <v-card-title>
-            <v-icon v-if="is_favorite">mdi-star</v-icon>
-            <v-icon v-else>mdi-star-outline</v-icon>
+            <v-icon color="secondary"
+                    v-if="is_favorite">mdi-star
+            </v-icon>
+            <v-icon color="secondary"
+                    v-else>mdi-star-outline
+            </v-icon>
             {{ id }}
             <v-spacer/>
             <site-overview-menu
