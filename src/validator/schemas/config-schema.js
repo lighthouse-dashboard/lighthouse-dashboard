@@ -72,8 +72,7 @@ export default joi.object({
         }).required(),
 
         DB: joi.object({
-            MONGO_DB_URL: joi.string().required(),
-            MONGO_DB_NAME: joi.string().required(),
+            MONGO_DB_URI: joi.string().required(),
         }).required(),
 
         SHOW_ERROR_PAGES: joi.boolean().required(),

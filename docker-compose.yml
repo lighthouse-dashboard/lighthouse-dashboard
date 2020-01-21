@@ -7,8 +7,7 @@ services:
     environment:
       - LOGIN_PASS=Foo
       - JWT_SECRET=Foo
-      - MONGODB_URI='mongodb://admin:admin@database:27017'
-      - MONGO_DB_NAME=auditreports
+      - MONGODB_URI=mongodb://admin:admin@database:27017/auditreports
       - PORT=5000
       - SHOW_ERROR_PAGES=true
     ports:
