@@ -2,14 +2,19 @@
 
 import Hapi from '@hapi/hapi';
 import { join } from 'path';
-import auth from './auth';
 import CONFIG from '../dashboard.config.js';
+import auth from './auth';
 import setupPlugins from './plugins';
 import setupRouter from './routes';
 import { IS_DEV } from './utils/env';
 import logger from './utils/logger';
 import configValidator from './validator/config-validator';
 import configSchema from './validator/schemas/config-schema';
+
+if (process.env.SENTRY_DSN) {
+    const Sentry = require('@sentry/node');
+    Sentry.init({ dsn: process.env.SENTRY_DSN });
+}
 
 const init = async () => {
     const server = Hapi.server({

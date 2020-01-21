@@ -25,7 +25,7 @@ async function findSites(find, sort, limit = 100) {
                 }
 
                 if (!data || data.length === 0) {
-                    return resolve({});
+                    return resolve([]);
                 }
 
                 return resolve(data);
