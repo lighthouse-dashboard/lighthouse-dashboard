@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 import CONFIG from '../../dashboard.config';
 
 /**
- *
+ * Connect to DB
  * @return {Promise<{database: unknown, client: MongoClient }>}
  */
 export default function connectDatabase() {
