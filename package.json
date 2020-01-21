@@ -23,7 +23,6 @@
     "axios": "^0.19.0",
     "chrome-launcher": "^0.12.0",
     "chrome-paths": "^1.0.1",
-    "chromium-binary": "^76.0.3809-87",
     "core-js": "^3.4.3",
     "date-fns": "^2.8.1",
     "dotenv": "^8.2.0",

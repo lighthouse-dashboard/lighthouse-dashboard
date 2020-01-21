@@ -14,6 +14,7 @@ RUN apk add --no-cache \
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV CHROMIUM_PATH /usr/bin/chromium-browser
+ENV GOOGLE_CHROME_BIN /usr/bin/chromium-browser
 
 # App Building
 WORKDIR /usr/src/app

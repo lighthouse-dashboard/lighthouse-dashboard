@@ -4,8 +4,6 @@ import CONFIG from '../../dashboard.config';
 import { DEVICE_CONFIG } from '../config/REPORT_DEVICE_FLAGS';
 import { debug, error } from '../utils/logger';
 
-const chromiumBinary = require('chromium-binary');
-
 /**
  *
  * @param {string} url
@@ -44,12 +42,12 @@ export default async function runLighthouse(config, transformer) {
         pageUrl,
         {
             chromeFlags: ['--headless', '--no-sandbox'],
-            chromePath: CONFIG.SERVER.AUDIT.CHROMIUM_PATH || chromiumBinary.path,
+            chromePath: CONFIG.SERVER.AUDIT.CHROMIUM_PATH,
             port: CONFIG.SERVER.AUDIT.CHROMIUM_PORT,
         },
         {
             ...DEVICE_CONFIG[device],
-            // hostname: '0.0.0.0',
+            hostname: '0.0.0.0',
             // throttling: null,
         },
     );

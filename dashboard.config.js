@@ -77,11 +77,11 @@ module.exports = {
             SITE_REPORT_LIMIT: 50,
         },
         AUDIT: {
-            CHROMIUM_PATH: process.env.CHROMIUM_PATH,
+            CHROMIUM_PATH: process.env.GOOGLE_CHROME_BIN,
             CHROMIUM_PORT: 9222,
         },
         DB: {
-            MONGODB_URI: process.env.MONGODB_URI,
+            MONGO_DB_URL: process.env.MONGO_DB_URL,
             MONGO_DB_NAME: process.env.MONGO_DB_NAME,
         },
         SHOW_ERROR_PAGES: process.env.SHOW_ERROR_PAGES || false,
