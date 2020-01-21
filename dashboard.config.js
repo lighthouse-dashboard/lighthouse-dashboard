@@ -82,7 +82,7 @@ module.exports = {
             CHROMIUM_PORT: 9222,
         },
         DB: {
-            MONGO_DB_URL: process.env.MONGO_DB_URL,
+            MONGODB_URI: process.env.MONGODB_URI,
             MONGO_DB_NAME: process.env.MONGO_DB_NAME,
         },
         SHOW_ERROR_PAGES: process.env.SHOW_ERROR_PAGES,

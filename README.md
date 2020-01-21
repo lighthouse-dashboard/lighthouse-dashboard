@@ -48,7 +48,7 @@ git push deis master
 ```
 PORT=4000
 API_TOKEN='foo'
-MONGO_DB_URL='mongodb://admin:admin@localhost:27017'
+MONGODB_URI='mongodb://admin:admin@localhost:27017'
 MONGO_DB_NAME='auditreports'
 SHOW_ERROR_PAGES=true
 ```

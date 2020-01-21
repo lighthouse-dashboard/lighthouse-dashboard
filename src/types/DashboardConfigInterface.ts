@@ -30,7 +30,7 @@ export interface DashboardConfig {
             CHROMIUM_PORT: number;
         };
         DB: {
-            MONGO_DB_URL: string;
+            MONGODB_URI: string;
             MONGO_DB_NAME: string;
         };
         SHOW_ERROR_PAGES: boolean;
