@@ -102,6 +102,14 @@ export async function getLatestReportValuesHandler(request) {
     const report = await getLatestReportBySiteId(id);
     const values = CONFIG.DASHBOARD.LATEST_REPORTS_VALUES;
 
+    if (!report) {
+        return {
+            labels: [],
+            series: [],
+        };
+    }
+
+
     return {
         labels: values,
         series: values.map(vid => getTimingValueByKey(report.values, vid)),
