@@ -1,4 +1,4 @@
-import { SET_SITES, UPDATE_SITE } from '../mutation-types';
+import { ADD_SITE, SET_SITES, UPDATE_SITE } from '../mutation-types';
 
 export default {
     /**
@@ -8,6 +8,15 @@ export default {
      */
     [SET_SITES](state, { sites }) {
         state.sites = sites;
+    },
+
+    /**
+     *
+     * @param state
+     * @param {SiteConfig} site
+     */
+    [ADD_SITE](state, { site }) {
+        state.sites.push(site);
     },
 
     [UPDATE_SITE](state, { id, delta }) {

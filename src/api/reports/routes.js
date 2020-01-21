@@ -1,5 +1,10 @@
 import joi from '@hapi/joi';
-import { createReportHandler, getRecentReportsHandler, getSpeedReportOverviewHandler, getLatestReportValuesHandler } from './controller';
+import {
+    createReportHandler,
+    getLatestReportValuesHandler,
+    getRecentReportsHandler,
+    getSpeedReportOverviewHandler
+} from './controller';
 
 export default [
     {
@@ -51,14 +56,14 @@ export default [
         options: {
             description: 'Execute new audit for site',
             tags: ['api', 'reports'],
+            auth: false,
             validate: {
-                payload: joi.object({
-                    token: joi.string()
-                        .required()
-                }),
                 params: joi.object({
                     id: joi.string()
                         .required(),
+                }),
+                query: joi.object({
+                    token: joi.string(),
                 }),
             },
         },

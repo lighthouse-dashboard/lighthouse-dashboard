@@ -8,6 +8,9 @@
             </v-card-title>
 
             <v-card-text>
+                <v-text-field readonly
+                        label="Web Hook Url"
+                        :value="webhookUrl"/>
                 <v-checkbox
                         v-model="siteConfig.is_favorite"
                         color="secondary"
@@ -43,6 +46,15 @@
                 siteConfig: null,
                 modal: true,
             };
+        },
+
+        computed: {
+            webhookUrl() {
+                if (!this.siteConfig) {
+                    return null;
+                }
+                return `http://localhost:5000/api/reports/${ this.id }?token=${ this.siteConfig.token }`;
+            },
         },
 
 

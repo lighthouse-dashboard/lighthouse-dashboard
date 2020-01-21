@@ -39,13 +39,16 @@ export async function getRecentReportsHandler(request) {
  */
 export async function createReportHandler(request, h) {
     const { id } = request.params;
-    const { token } = request.payload;
+    const { token } = request.query;
+    // eslint-disable-next-line camelcase
+    const payloadToken = (request.payload && request.payload.token) || null;
+    const { git_commit, message } = request.payload;
     const config = await getSiteConfigById(id);
     if (!config) {
         return Boom.notFound('Config not found');
     }
 
-    if (config.token !== token) {
+    if (config.token !== token && config.token !== payloadToken) {
         return Boom.forbidden('Token mismatch');
     }
     const { url, runs, device } = config;
@@ -53,7 +56,7 @@ export async function createReportHandler(request, h) {
     try {
         const transformAuditCurry = curry(lighthouseTransformer);
         const data = await runLighthouse({ pageUrl: url, runs, device }, transformAuditCurry(id));
-        await saveReport(data);
+        await saveReport({ ...data, git_commit, message });
         await updateSite(config.id, { last_audit: new Date().toISOString() });
     } catch (e) {
         error(e);

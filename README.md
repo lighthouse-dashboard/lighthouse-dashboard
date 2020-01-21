@@ -54,21 +54,24 @@ SHOW_ERROR_PAGES=true
 ```
 
 # Todo
- - [x] Add feed of latest built project to the overview
  - [ ] Add loaders
  - [ ] Host somewhere
  - [ ] Add unit tests
- - [x] Add toggle to site to indicate if it should be shown in the overview
  - [ ] Add pm2 for restarts after crash
- - [ ] Improve logging for development
- - [x] Add config file validator
  - [ ] Create awesome doc
- - [x] Add sites data to vuex state for immediate mutations & changes
  - [ ] Add search for project list
  - [ ] Make project active/disabled in settings menu of project
  - [ ] Add url for webhooks to settings menu of project
  - [ ] Add additional properties `message` and/or `git_commit` to the webhook api
- 
+ - [ ] Add fullscreen option of single chart, section and page
+ - [ ] Add autorefresh to all charts 
+
+## Done
+- [x] Improve logging for development
+ - [x] Add sites data to vuex state for immediate mutations & changes 
+ - [x] Add config file validator
+ - [x] Add toggle to site to indicate if it should be shown in the overview 
+ - [x] Add feed of latest built project to the overview
  - [x] Improve JWT token usage with vuex or so
  - [x] Add swagger API doc
  - [x] Create overview for the latest n projects built

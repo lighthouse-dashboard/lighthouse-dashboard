@@ -6,7 +6,7 @@ import {
     REMOVE_SITE_URL
 } from '../../../config/routes';
 import axios from '../../../utils/axios';
-import { SET_SITES, UPDATE_SITE } from '../mutation-types';
+import { ADD_SITE, SET_SITES, UPDATE_SITE } from '../mutation-types';
 
 /**
  * Fetch all sites
@@ -29,13 +29,14 @@ export function deleteSite(_, { siteId }) {
 
 /**
  * Create a new site
- * @param _
  * @param {SiteConfig} siteConfig
  * @return {Promise<void>}
  */
-export async function createSite(_, siteConfig) {
+export async function createSite({ commit }, siteConfig) {
     await axios()
         .post(CREATE_SITE_URL, siteConfig);
+
+    commit({ type: ADD_SITE, site: siteConfig });
 }
 
 /**
