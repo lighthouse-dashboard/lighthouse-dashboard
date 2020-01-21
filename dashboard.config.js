@@ -1,5 +1,4 @@
 const colorPreference = require('./src/utils/color-preference');
-const chromiumBinary = require('chromium-binary');
 require('dotenv').config();
 
 module.exports = {
@@ -78,7 +77,7 @@ module.exports = {
             SITE_REPORT_LIMIT: 50,
         },
         AUDIT: {
-            CHROMIUM_PATH: process.env.CHROMIUM_PATH || chromiumBinary.path,
+            CHROMIUM_PATH: process.env.CHROMIUM_PATH,
             CHROMIUM_PORT: 9222,
         },
         DB: {
