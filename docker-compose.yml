@@ -8,6 +8,7 @@ services:
       - LOGIN_PASS=Foo
       - JWT_SECRET=Foo
       - MONGODB_URI=mongodb://admin:admin@database:27017/auditreports
+      - SENTRY_DSN=https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421
       - PORT=5000
       - SHOW_ERROR_PAGES=true
     ports:
