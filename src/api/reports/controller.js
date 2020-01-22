@@ -7,13 +7,13 @@ import { getFavoriteSites, getSiteConfigById, updateSite } from '../../database/
 import lighthouseTransformer from '../../transformer/lighthouse-transformer';
 import reportsToBarChart from '../../transformer/reports-to-bar-cahrt';
 import reportsToChartTransformer from '../../transformer/reports-to-chart-transformer';
+import getMetaFromCommit from '../../utils/get-meta-from-commit';
 import { getTimingValueByKey } from '../../utils/get-timing-by-key';
 import { error } from '../../utils/logger';
 
 /**
- *
+ * Handler for latest created reports
  * @param {hapi.Request} request
- * @param h
  * @return {Promise<ChartData>}
  */
 export async function getRecentReportsHandler(request) {
@@ -35,6 +35,7 @@ export async function getRecentReportsHandler(request) {
 /**
  * Execute an audit
  * @param {hapi.Request} request
+ * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
 export async function createReportHandler(request, h) {
@@ -42,11 +43,12 @@ export async function createReportHandler(request, h) {
     const { token } = request.query;
     // eslint-disable-next-line camelcase
     const payloadToken = (request.payload && request.payload.token) || null;
-    const { git_commit, message } = request.payload;
+    const { head_commit } = request.payload;
     const config = await getSiteConfigById(id);
     if (!config) {
         return Boom.notFound('Config not found');
     }
+
 
     if (config.token !== token && config.token !== payloadToken) {
         return Boom.forbidden('Token mismatch');
@@ -56,7 +58,7 @@ export async function createReportHandler(request, h) {
     try {
         const transformAuditCurry = curry(lighthouseTransformer);
         const data = await runLighthouse({ pageUrl: url, runs, device }, transformAuditCurry(id));
-        await saveReport({ ...data, git_commit, message });
+        await saveReport({ ...data, ...getMetaFromCommit(head_commit) });
         await updateSite(config.id, { last_audit: new Date().toISOString() });
     } catch (e) {
         error(e);
@@ -87,7 +89,7 @@ export async function getSpeedReportOverviewHandler() {
 }
 
 /**
- *
+ * Handler to get latest latest created report values
  * @param {hapi.Request} request
  * @return {Promise<void>}
  */

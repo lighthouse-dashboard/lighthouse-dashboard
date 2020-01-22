@@ -65,7 +65,7 @@ SHOW_ERROR_PAGES=true
  - [ ] Add url for webhooks to settings menu of project
  - [ ] Add additional properties `message` and/or `git_commit` to the webhook api
  - [ ] Add fullscreen option of single chart, section and page
- - [ ] Add autorefresh to all charts 
+ - [ ] Add autorefresh to all charts
 
 ## Done
 - [x] Improve logging for development

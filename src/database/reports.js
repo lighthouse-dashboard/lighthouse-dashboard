@@ -1,10 +1,10 @@
-import connectDatabase from '../database/connect-database';
 import { AUDIT_COLLECTION } from '../config/db';
+import connectDatabase from '../database/connect-database';
 
 /**
  * Get list of recent reports
  * @param {number | null} limit
- * @returns Promise<Report[]>
+ * @return {Promise<Report[]>}
  */
 export async function getReports(limit) {
     const { database, client } = await connectDatabase();
@@ -27,7 +27,7 @@ export async function getReports(limit) {
 }
 
 /**
- *
+ * Get all reports for a site
  * @param {string} id
  * @param {number} limit
  * @return {Promise<Report[]>}
@@ -54,7 +54,7 @@ export async function getReportsBySiteId(id, limit) {
 }
 
 /**
- *
+ * Get latest report for site
  * @param {string} id
  * @return {Promise<Report>}
  */

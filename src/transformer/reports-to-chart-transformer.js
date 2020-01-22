@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import CONFIG from '../../dashboard.config';
 
 /**
- *
+ * Transform reports to chart data
  * @param {Report[]} reports
  * @return {ChartData}
  */
@@ -30,7 +30,7 @@ export default function reportsToChartTransformer(reports) {
 }
 
 /**
- *
+ * Create dataset for a line with specific value types
  * @param {Report[]} reports
  * @param {string} key
  * @return {ChartDataDataSet}
@@ -49,6 +49,7 @@ function getLineDataSetForKey(reports, key) {
 }
 
 /**
+ * Get value for a specific timing key
  * @param {ReportValue[]} timings
  * @param {string} id
  * @return {number}

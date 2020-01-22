@@ -1,5 +1,5 @@
 /**
- *
+ * Get a ReportValue by key
  * @param {ReportValue[]} values
  * @param {string} key
  * @return {ReportValue}
@@ -9,7 +9,7 @@ export default function getReportValueByKey(values, key) {
 }
 
 /**
- *
+ * Get a value by key
  * @param {ReportValue[]} values
  * @param {string} key
  * @return {number}

@@ -1,6 +1,5 @@
 import { SITES_CONFIG_COLLECTION } from '../config/db';
 import connectDatabase from '../database/connect-database';
-import getDatabase from '../database/connect-database';
 
 
 /**
@@ -11,7 +10,7 @@ import getDatabase from '../database/connect-database';
  * @return {Promise<SiteConfig[]>}
  */
 async function findSites(find, sort, limit = 100) {
-    const { database, client } = await getDatabase();
+    const { database, client } = await connectDatabase();
     const collection = database.collection(SITES_CONFIG_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -85,7 +84,7 @@ export async function updateSite(id, delta) {
 }
 
 /**
- *
+ * Remove site from DB
  * @param {string} id
  * @return {Promise<void>}
  */

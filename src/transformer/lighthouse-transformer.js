@@ -2,7 +2,7 @@
  * Transform a lighthouse report
  * @param {string} pageId
  * @param {object} audit
- * @returns {Report}
+ * @return {Report}
  */
 export default function lighthouseTransformer(pageId, audit) {
     const { categories } = audit;
