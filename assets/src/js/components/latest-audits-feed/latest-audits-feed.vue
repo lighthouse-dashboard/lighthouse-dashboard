@@ -1,13 +1,10 @@
 <template>
     <div>
-        <h1 class="display-1">Latest reports performance</h1>
-
+        <v-subheader>
+            Latest reports performance
+        </v-subheader>
         <v-row>
-            <v-col cols="12"
-                    sm="12"
-                    md="6"
-                    lg="3"
-                    xl="3"
+            <v-col :cols="cols"
                     v-for="site in sites"
                     :key="site.id">
                 <latest-report-gauge v-bind="site"/>
@@ -18,6 +15,7 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import { DASHBOARD } from '../../../../../dashboard.config';
     import LatestReportGauge from '../latest-report-gauge/latest-report-gauge';
 
     export default {
@@ -26,13 +24,33 @@
         data() {
             return {
                 sites: [],
+                interval: null
             };
+        },
+        computed: {
+            cols() {
+                return DASHBOARD.latestAudits.colSize;
+            },
         },
         methods: {
             ...mapActions('sites', ['getLatestSites']),
+            loadSites() {
+                this.getLatestSites()
+                    .then((data) => {
+                        this.sites = data;
+                    });
+            },
         },
-        async mounted() {
-            this.sites = await this.getLatestSites();
+
+        beforeDestroy() {
+            clearInterval(this.interval);
+        },
+
+        mounted() {
+            this.loadSites();
+            this.interval = setInterval(() => {
+                this.loadSites();
+            }, DASHBOARD.UPDATE_INTERVAL);
         },
     };
 </script>

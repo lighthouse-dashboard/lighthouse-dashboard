@@ -83,7 +83,7 @@ export async function getSpeedReportOverviewHandler() {
         reports.push(report);
     }
 
-    return reportsToBarChart(reports, labels, CONFIG.DASHBOARD.OVERVIEW_BAR_VALUES);
+    return reportsToBarChart(reports, labels, CONFIG.DASHBOARD.favoriteProjectsComparison.fields);
 }
 
 /**
@@ -100,7 +100,7 @@ export async function getLatestReportValuesHandler(request) {
     }
 
     const report = await getLatestReportBySiteId(siteId);
-    const values = CONFIG.DASHBOARD.LATEST_REPORTS_VALUES;
+    const values = CONFIG.DASHBOARD.latestAudits.fields;
 
     if (!report) {
         return {

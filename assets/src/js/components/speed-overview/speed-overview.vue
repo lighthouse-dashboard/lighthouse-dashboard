@@ -1,16 +1,20 @@
 <template>
     <div>
-        <h2 class="display-1">Performance comparison</h2>
-
-        <v-card-text>
-            <div ref="chart"/>
-        </v-card-text>
+        <v-subheader>
+            Performance comparison
+        </v-subheader>
+        <v-card>
+            <v-card-text>
+                <div ref="chart"/>
+            </v-card-text>
+        </v-card>
     </div>
 </template>
 
 <script>
     import ApexCharts from 'apexcharts';
     import { mapActions, mapState } from 'vuex';
+    import { DASHBOARD } from '../../../../../dashboard.config';
     import { SPEED_OVERVIEW_CHART } from '../../config/chart-options';
 
     export default {
@@ -20,11 +24,14 @@
             return {
                 chart: null,
                 chartData: null,
+                interval: null,
             };
         },
+
         computed: {
             ...mapState('login', ['jwt']),
         },
+
         methods: {
             ...mapActions('reports', ['fetchReportOverview']),
 
@@ -43,10 +50,12 @@
                 this.chart.updateSeries(this.chartData.datasets);
             },
 
-            async loadData() {
-                const data = await this.fetchReportOverview();
-                this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
-                this.updateChart();
+            loadData() {
+                this.fetchReportOverview()
+                    .then(data => {
+                        this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
+                        this.updateChart();
+                    })
             },
 
             modifyDataSets(datasets) {
@@ -57,9 +66,17 @@
                 });
             },
         },
+
+        beforeDestroy() {
+            clearInterval(this.interval);
+        },
+
         mounted() {
             this.buildChart();
             this.loadData();
+            this.interval = setInterval(() => {
+                this.loadData();
+            }, DASHBOARD.UPDATE_INTERVAL);
         },
     };
 </script>

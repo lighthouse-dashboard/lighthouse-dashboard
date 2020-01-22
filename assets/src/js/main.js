@@ -3,12 +3,19 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import App from './App.vue';
+import FavoriteProjectsOverview from './components/favorite-projects-overview/favorite-projects-overview';
+import SpeedOverview from './components/speed-overview/speed-overview';
+import LatestAuditsFeed from './components/latest-audits-feed/latest-audits-feed';
 import routes from './pages/routes';
 import vuetify from './plugins/vuetify';
 import store from './vuex';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
+
+Vue.component('favorite-projects-overview', FavoriteProjectsOverview);
+Vue.component('favorite-projects-comparison', SpeedOverview);
+Vue.component('latest-audits', LatestAuditsFeed);
 
 const router = new VueRouter({
     mode: 'history',

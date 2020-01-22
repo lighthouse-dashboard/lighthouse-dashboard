@@ -1,12 +1,8 @@
 <template>
-    <v-container>
-        <h1 class="display-1">Projects</h1>
+    <v-container fluid>
+        <v-subheader>Projects</v-subheader>
         <v-row>
-            <v-col cols="12"
-                    sm="12"
-                    md="6"
-                    lg="4"
-                    xl="3"
+            <v-col :cols="cols"
                     v-for="site in sites"
                     :key="site.id"
             >
@@ -18,6 +14,7 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
+    import { DASHBOARD } from '../../../../../dashboard.config';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
 
     export default {
@@ -28,6 +25,9 @@
         computed: {
             ...mapState('login', ['jwt']),
             ...mapState('sites', ['sites']),
+            cols() {
+                return DASHBOARD.PROJECTS.colSize;
+            },
         },
 
         methods: {

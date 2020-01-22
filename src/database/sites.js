@@ -1,3 +1,4 @@
+import { DASHBOARD } from '../../dashboard.config';
 import { SITES_CONFIG_COLLECTION } from '../config/db';
 import connectDatabase from '../database/connect-database';
 
@@ -54,7 +55,7 @@ export function getFavoriteSites() {
  * @return {Promise<SiteConfig[]>}
  */
 export function getLatestSites() {
-    return findSites({}, { last_audit: -1 }, 4);
+    return findSites({}, { last_audit: -1 }, DASHBOARD.latestAudits.limit);
 }
 
 /**

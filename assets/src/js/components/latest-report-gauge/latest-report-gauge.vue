@@ -1,8 +1,12 @@
-$
 <template>
-    <div class="single-radial-bar">
-        <div ref="chart"/>
-    </div>
+    <v-card class="single-radial-bar">
+        <v-card-title>
+            <site-title :is_favorite="is_favorite">{{ id }}</site-title>
+        </v-card-title>
+        <v-card-text>
+            <div ref="chart"/>
+        </v-card-text>
+    </v-card>
 </template>
 
 
@@ -11,11 +15,17 @@ $
     import { mapActions } from 'vuex';
     import CONFIG from '../../../../../dashboard.config';
     import { GAUGE_CHART } from '../../config/chart-options';
+    import SiteTitle from '../site-title/site-title';
 
     export default {
+        components: { SiteTitle },
         props: {
             id: {
                 type: String,
+                required: true,
+            },
+            is_favorite: {
+                type: Boolean,
                 required: true,
             },
         },
@@ -24,39 +34,49 @@ $
             return {
                 chart: null,
                 chartData: null,
+                isLoading: false,
+                interval: null,
             };
         },
         methods: {
             ...mapActions('reports', ['fetchLatestReportForSite']),
 
-            async buildChart() {
+            buildChart() {
                 const options = Object.assign({}, GAUGE_CHART, {
-                    title: {
-                        text: this.id,
-                        style: {
-                            fontSize: '16px',
-                            color: CONFIG.UI.COLOR_THEME[CONFIG.UI.THEME].text,
-                        },
-                    },
                     series: [],
                     labels: [],
                 });
                 this.chart = new ApexCharts(this.$refs.chart, options);
-                await this.chart.render();
+                this.chart.render();
             },
 
 
-            async loadData() {
-                const data = await this.fetchLatestReportForSite({ siteId: this.id });
-                this.chart.updateOptions({
-                    labels: data.labels,
-                });
-                this.chart.updateSeries(data.series);
+            loadData() {
+                this.isLoading = true;
+                this.fetchLatestReportForSite({ siteId: this.id })
+                    .then((data) => {
+                        this.chart.updateOptions({
+                            labels: data.labels,
+                        });
+                        this.chart.updateSeries(data.series);
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
             },
         },
+
+        beforeDestroy() {
+            clearInterval(this.interval);
+        },
+
         mounted() {
             this.buildChart();
             this.loadData();
+
+            this.interval = setInterval(() => {
+                this.loadData();
+            }, CONFIG.DASHBOARD.UPDATE_INTERVAL);
         },
     };
 </script>

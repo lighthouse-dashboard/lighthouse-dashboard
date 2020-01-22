@@ -15,6 +15,25 @@ export const REPORT_VALUE_KEYS_SCHEMA = joi
     .max(5)
     .required();
 
+export const AVAILABLE_CHARTS = joi
+    .array()
+    .items(
+        joi.string().valid(
+            'favorite-projects-comparison',
+            'latest-audits',
+            'favorite-projects-overview',
+        ),
+    )
+    .min(1)
+    .max(3)
+    .required();
+
+export const CHART_CONFIG = joi.object({
+    colSize: joi.number().min(1).max(12),
+    limit: joi.number().min(1),
+    fields: REPORT_VALUE_KEYS_SCHEMA,
+});
+
 const COLOR_THEME_CONFIG = joi.object({
     primary: joi.string(),
     accent: joi.string(),
@@ -30,9 +49,14 @@ export default joi.object({
     DATE_FORMAT: joi.string().required(),
 
     DASHBOARD: joi.object({
-        SITE_OVERVIEW_VALUES: REPORT_VALUE_KEYS_SCHEMA,
-        OVERVIEW_BAR_VALUES: REPORT_VALUE_KEYS_SCHEMA,
-        LATEST_REPORTS_VALUES: REPORT_VALUE_KEYS_SCHEMA,
+        UPDATE_INTERVAL: joi.number().min(1000).required(),
+        CHARTS: AVAILABLE_CHARTS,
+        PROJECTS: CHART_CONFIG,
+        latestAudits: CHART_CONFIG,
+        favoriteProjectsComparison: CHART_CONFIG,
+        favoriteProjectsOverview: joi.object({
+            colSize: joi.number().min(1).max(12),
+        }),
     })
         .required(),
 

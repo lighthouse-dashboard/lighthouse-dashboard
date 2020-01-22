@@ -1,16 +1,11 @@
 <template>
-    <div>
+    <v-card>
         <project-settings v-if="showSettings"
                 :id="id"
                 @close="onSettingsClosed"/>
+
         <v-card-title>
-            <v-icon color="secondary"
-                    v-if="is_favorite">mdi-star
-            </v-icon>
-            <v-icon color="secondary"
-                    v-else>mdi-star-outline
-            </v-icon>
-            {{ id }}
+            <site-title :is_favorite="is_favorite">{{ id }}</site-title>
             <v-spacer/>
             <site-overview-menu
                     @openSettings="openSettings"
@@ -29,18 +24,21 @@
                     v-if="isLoading"
             />
         </v-card-actions>
-    </div>
+    </v-card>
 </template>
 
 <script>
     import ApexCharts from 'apexcharts';
     import { mapActions, mapState } from 'vuex';
+    import CONFIG from '../../../../../dashboard.config';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
     import ProjectSettings from '../project-settings/project-settings';
+    import SiteTitle from '../site-title/site-title';
     import SiteOverviewMenu from './site-overview-menu';
 
     export default {
         components: {
+            SiteTitle,
             ProjectSettings,
             SiteOverviewMenu,
         },
@@ -74,6 +72,7 @@
                 },
                 isLoading: false,
                 runError: null,
+                interval: null,
             };
         },
         computed: {
@@ -102,17 +101,27 @@
                 this.chart.updateSeries(this.chartData.datasets);
             },
 
-            async loadData() {
+            loadData() {
                 this.isLoading = true;
-                this.chartData = await this.fetchReportsForSite({ siteId: this.id });
-                this.updateChart();
-                this.isLoading = false;
+                return this.fetchReportsForSite({ siteId: this.id })
+                    .then((data) => {
+                        this.chartData = data;
+                        this.updateChart();
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
             },
 
-            async runAudit() {
+            runAudit() {
                 this.isLoading = true;
-                await this.launchAuditForSite({ siteId: this.id, token: this.token });
-                return this.loadData();
+                return this.launchAuditForSite({ siteId: this.id, token: this.token })
+                    .then(() => {
+                        return this.loadData();
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
             },
 
             async removePage() {
@@ -121,11 +130,20 @@
 
             openSettings() {
                 this.showSettings = !this.showSettings;
-            }
+            },
         },
+
+        beforeDestroy() {
+            clearInterval(this.interval);
+        },
+
         mounted() {
             this.buildChart();
             this.loadData();
+
+            this.interval = setInterval(() => {
+                this.loadData();
+            }, CONFIG.DASHBOARD.UPDATE_INTERVAL);
         },
     };
 </script>

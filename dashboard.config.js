@@ -4,26 +4,44 @@ require('dotenv').config();
 module.exports = {
     DATE_FORMAT: 'dd/MM HH:mm',
     DASHBOARD: {
-        SITE_OVERVIEW_VALUES: [
-            'performance',
-            'seo',
-            'pwa',
-            'accessibility',
-            'best-practices',
+        UPDATE_INTERVAL: 30000,
+        CHARTS: [
+            'favorite-projects-comparison',
+            'latest-audits',
+            'favorite-projects-overview',
         ],
+        PROJECTS: {
+            colSize: 2,
+            fields: [
+                'performance',
+                'seo',
+                'pwa',
+                'accessibility',
+                'best-practices',
+            ],
+        },
+        latestAudits: {
+            colSize: 2,
+            limit: 12,
+            fields: [
+                'performance',
+                // 'seo',
+                // 'pwa',
+                // 'accessibility',
+                // 'best-practices',
+            ],
+        },
 
-        OVERVIEW_BAR_VALUES: [
-            'performance',
-            'best-practices',
-        ],
+        favoriteProjectsComparison: {
+            fields: [
+                'performance',
+                'best-practices',
+            ],
+        },
 
-        LATEST_REPORTS_VALUES: [
-            'performance',
-            'seo',
-            // 'accessibility',
-            // 'pwa',
-            // 'best-practices',
-        ],
+        favoriteProjectsOverview: {
+            colSize: 3,
+        },
     },
 
     UI: {

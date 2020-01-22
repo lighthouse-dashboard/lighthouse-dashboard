@@ -1,13 +1,10 @@
 <template>
     <div>
-        <h2 class="display-1">Projects</h2>
+        <v-subheader>
+            Projects
+        </v-subheader>
         <v-row>
-            <v-col cols="12"
-                    sm="12"
-                    md="6"
-                    lg="4"
-                    xl="3"
-                    xxl="2"
+            <v-col :cols="cols"
                     v-for="site in favoritedSites"
                     :key="site.id">
                 <site-overview v-bind="site"/>
@@ -18,6 +15,7 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex';
+    import { DASHBOARD } from '../../../../../dashboard.config';
     import SiteOverview from '../site-overview/site-overview.vue';
 
     export default {
@@ -26,6 +24,9 @@
         },
         computed: {
             ...mapGetters('sites', ['favoritedSites']),
+            cols() {
+                return DASHBOARD.favoriteProjectsOverview.colSize;
+            },
         },
         methods: {
             ...mapActions('login', ['logout']),
