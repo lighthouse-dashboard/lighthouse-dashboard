@@ -66,6 +66,8 @@ SHOW_ERROR_PAGES=true
  - [ ] Add additional properties `message` and/or `git_commit` to the webhook api
  - [ ] Add fullscreen option of single chart, section and page
  - [ ] Add autorefresh to all charts
+ - [ ] Add icon/logo
+ - [ ] Improve login page
 
 ## Done
 - [x] Improve logging for development

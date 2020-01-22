@@ -5,7 +5,7 @@ import { DEVICE_CONFIG } from '../config/REPORT_DEVICE_FLAGS';
 import { debug, error } from '../utils/logger';
 
 /**
- *
+ * Create new audit
  * @param {string} url
  * @param {Option} opts
  * @param {LH.Flags} flags
@@ -30,7 +30,7 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
 }
 
 /**
- *
+ * Run new lighthouse audit and transform it
  * @param {AuditConfig} config
  * @param {AuditTransformer} transformer
  * @return {Report}

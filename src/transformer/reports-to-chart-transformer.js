@@ -1,5 +1,5 @@
-import { format } from 'date-fns';
 import CONFIG from '../../dashboard.config';
+import formatReportSummaryString from '../utils/format-report-summary-string';
 
 /**
  * Transform reports to chart data
@@ -14,7 +14,7 @@ export default function reportsToChartTransformer(reports) {
 
     data.labels = reports.reduce((acc, report) => {
         if (report) {
-            acc.push(format(new Date(report.createdAt), CONFIG.DATE_FORMAT));
+            acc.push(formatReportSummaryString(report));
         } else {
             acc.push(null);
         }

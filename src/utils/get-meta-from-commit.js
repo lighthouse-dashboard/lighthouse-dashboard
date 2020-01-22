@@ -15,3 +15,17 @@ export default function getMetaFromCommit(commit) {
         git_commit: id,
     };
 }
+
+/**
+ *
+ * @param {hapi.Request} request
+ */
+export function getMetaFromGithubWebhook(request) {
+    if (!request.payload) {
+        return {};
+    }
+
+    // eslint-disable-next-line camelcase
+    const { head_commit } = request.payload;
+    return getMetaFromCommit(head_commit);
+}

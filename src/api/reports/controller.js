@@ -7,9 +7,10 @@ import { getFavoriteSites, getSiteConfigById, updateSite } from '../../database/
 import lighthouseTransformer from '../../transformer/lighthouse-transformer';
 import reportsToBarChart from '../../transformer/reports-to-bar-cahrt';
 import reportsToChartTransformer from '../../transformer/reports-to-chart-transformer';
-import getMetaFromCommit from '../../utils/get-meta-from-commit';
+import { getMetaFromGithubWebhook } from '../../utils/get-meta-from-commit';
 import { getTimingValueByKey } from '../../utils/get-timing-by-key';
 import { error } from '../../utils/logger';
+import validateSiteToken from '../../utils/validate-site-token';
 
 /**
  * Handler for latest created reports
@@ -41,16 +42,13 @@ export async function getRecentReportsHandler(request) {
 export async function createReportHandler(request, h) {
     const { id } = request.params;
     const { token } = request.query;
-    // eslint-disable-next-line camelcase
-    const payloadToken = (request.payload && request.payload.token) || null;
-    const { head_commit } = request.payload;
+
     const config = await getSiteConfigById(id);
     if (!config) {
         return Boom.notFound('Config not found');
     }
 
-
-    if (config.token !== token && config.token !== payloadToken) {
+    if (!validateSiteToken(config, token)) {
         return Boom.forbidden('Token mismatch');
     }
     const { url, runs, device } = config;
@@ -58,7 +56,7 @@ export async function createReportHandler(request, h) {
     try {
         const transformAuditCurry = curry(lighthouseTransformer);
         const data = await runLighthouse({ pageUrl: url, runs, device }, transformAuditCurry(id));
-        await saveReport({ ...data, ...getMetaFromCommit(head_commit) });
+        await saveReport({ ...data, ...getMetaFromGithubWebhook(request) });
         await updateSite(config.id, { last_audit: new Date().toISOString() });
     } catch (e) {
         error(e);
@@ -94,14 +92,14 @@ export async function getSpeedReportOverviewHandler() {
  * @return {Promise<void>}
  */
 export async function getLatestReportValuesHandler(request) {
-    const { id } = request.params;
+    const { siteId } = request.params;
 
-    const config = getSiteConfigById(id);
+    const config = getSiteConfigById(siteId);
     if (!config) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const report = await getLatestReportBySiteId(id);
+    const report = await getLatestReportBySiteId(siteId);
     const values = CONFIG.DASHBOARD.LATEST_REPORTS_VALUES;
 
     if (!report) {

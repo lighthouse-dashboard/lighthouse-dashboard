@@ -7,7 +7,7 @@ export async function fetchReportsForSite(_, { siteId }) {
 }
 
 export function launchAuditForSite(_, { siteId, token }) {
-    axios().post(CREATE_REPORT_URL(siteId), { token });
+    axios().post(`${ CREATE_REPORT_URL(siteId) }?token=${ token }`);
 }
 
 export async function fetchReportOverview() {

@@ -19,14 +19,14 @@ export default [
 
     {
         method: 'GET',
-        path: '/api/reports/{id}/latest',
+        path: '/api/reports/{siteId}/latest',
         handler: getLatestReportValuesHandler,
         options: {
             description: 'Get latest report for site',
             tags: ['api', 'reports'],
             validate: {
                 params: joi.object({
-                    id: joi
+                    siteId: joi
                         .string()
                         .required(),
                 }),
