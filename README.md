@@ -55,7 +55,7 @@ SHOW_ERROR_PAGES=true
 
 
 # Todo
- - [ ] Add loaders
+ - [ ] Use cookie instead of localstorage to store the JWT
  - [ ] Host somewhere
  - [ ] Add unit tests
  - [ ] Add pm2 for restarts after crash
@@ -63,14 +63,15 @@ SHOW_ERROR_PAGES=true
  - [ ] Add search for project list
  - [ ] Make project active/disabled in settings menu of project
  - [ ] Add url for webhooks to settings menu of project
- - [ ] Add additional properties `message` and/or `git_commit` to the webhook api
  - [ ] Add fullscreen option of single chart, section and page
- - [ ] Add autorefresh to all charts
  - [ ] Add icon/logo
- - [ ] Improve login page
 
 ## Done
-- [x] Improve logging for development
+ - [x] Add additional properties `message` and/or `git_commit` to the webhook api
+ - [x] Add autorefresh to all charts
+ - [x] Improve login page
+ - [x] Add loaders
+ - [x] Improve logging for development
  - [x] Add sites data to vuex state for immediate mutations & changes 
  - [x] Add config file validator
  - [x] Add toggle to site to indicate if it should be shown in the overview 

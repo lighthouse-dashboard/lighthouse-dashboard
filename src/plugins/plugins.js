@@ -16,12 +16,12 @@ export const prodPlugins = () => [
         },
     },
     JWT,
-];
-
-export const devPlugins = () => [
     {
         plugin: laabr,
     },
+];
+
+export const devPlugins = () => [
     Vision,
     {
         plugin: HapiSwagger,
