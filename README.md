@@ -55,6 +55,7 @@ SHOW_ERROR_PAGES=true
 
 
 # Todo
+ - [ ] Add more logging
  - [ ] Use cookie instead of localstorage to store the JWT
  - [ ] Host somewhere
  - [ ] Add unit tests
