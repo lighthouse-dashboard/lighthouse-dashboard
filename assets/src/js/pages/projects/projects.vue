@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>
+    <v-container :fluid="fluid">
         <v-subheader>Projects</v-subheader>
         <v-row>
             <v-col :cols="cols"
@@ -26,7 +26,11 @@
             ...mapState('login', ['jwt']),
             ...mapState('sites', ['sites']),
             cols() {
-                return DASHBOARD.PROJECTS.colSize;
+                return DASHBOARD.PAGE_PROJECTS.colSize;
+            },
+
+            fluid() {
+                return DASHBOARD.PAGE_PROJECTS.IS_FLUID;
             },
         },
 

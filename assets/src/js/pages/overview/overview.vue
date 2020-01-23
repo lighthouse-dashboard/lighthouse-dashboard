@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container :fluid="fluid">
         <dashboard-section
                 :type="config"
                 v-for="config in charts"
@@ -18,7 +18,10 @@
         },
         computed: {
             charts() {
-                return DASHBOARD.CHARTS;
+                return DASHBOARD.PAGE_DASHBOARD.CHARTS;
+            },
+            fluid() {
+                return DASHBOARD.PAGE_DASHBOARD.IS_FLUID;
             },
         },
     };

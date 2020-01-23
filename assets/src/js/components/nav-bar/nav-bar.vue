@@ -6,6 +6,7 @@
             elevate-on-scroll
             hide-on-scroll
             color="primary">
+        <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer/>
 
         <template v-slot:extension>
@@ -25,12 +26,17 @@
 </template>
 
 <script>
+    import { DASHBOARD } from '../../../../../dashboard.config';
     import CreateSiteForm from '../create-site-form/create-site-form';
 
     export default {
         components: {
             CreateSiteForm,
         },
-        computed: {},
+        computed: {
+            title() {
+                return DASHBOARD.TITLE;
+            },
+        },
     };
 </script>

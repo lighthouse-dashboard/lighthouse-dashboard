@@ -20,7 +20,7 @@ export async function fetchAllSites({ commit }) {
 
 /**
  * Delete site by id
- * @param _
+ * @param {any} _
  * @param {string} siteId
  */
 export function deleteSite(_, { siteId }) {

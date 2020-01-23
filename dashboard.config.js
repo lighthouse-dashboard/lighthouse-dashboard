@@ -4,14 +4,22 @@ require('dotenv').config();
 module.exports = {
     DATE_FORMAT: 'dd/MM HH:mm',
     DASHBOARD: {
+        TITLE: 'My Dashboard',
         UPDATE_INTERVAL: 30000,
-        CHARTS: [
-            'favorite-projects-comparison',
-            'latest-audits',
-            'favorite-projects-overview',
-        ],
-        PROJECTS: {
+        PAGE_DASHBOARD: {
+            IS_FLUID: false,
+            CHARTS: [
+                'favorite-projects-comparison',
+                'latest-audits',
+                'favorite-projects-overview',
+            ],
+        },
+        PAGE_PROJECTS: {
+            IS_FLUID: false,
             colSize: 2,
+        },
+
+        SITE_OVERVIEW_CHART: {
             fields: [
                 'performance',
                 'seo',
@@ -21,7 +29,7 @@ module.exports = {
             ],
         },
         latestAudits: {
-            colSize: 2,
+            colSize: 3,
             limit: 12,
             fields: [
                 'performance',

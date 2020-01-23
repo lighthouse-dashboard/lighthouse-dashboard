@@ -5,6 +5,9 @@
         </v-subheader>
         <v-row>
             <v-col :cols="cols"
+                    :lg="cols"
+                    md="6"
+                    sm="12"
                     v-for="site in favoritedSites"
                     :key="site.id">
                 <site-overview v-bind="site"/>

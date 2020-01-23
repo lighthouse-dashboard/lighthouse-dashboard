@@ -50,8 +50,19 @@ export default joi.object({
 
     DASHBOARD: joi.object({
         UPDATE_INTERVAL: joi.number().min(1000).required(),
-        CHARTS: AVAILABLE_CHARTS,
-        PROJECTS: CHART_CONFIG,
+        PAGE_DASHBOARD: joi.object({
+            IS_FLUID: joi.boolean().required(),
+            CHARTS: AVAILABLE_CHARTS,
+        }),
+        PAGE_PROJECTS: joi.object({
+            IS_FLUID: joi.boolean().required(),
+            colSize: joi.number().min(1).max(12),
+        }),
+
+        SITE_OVERVIEW_CHART: joi.object({
+            fields: REPORT_VALUE_KEYS_SCHEMA,
+        }),
+
         latestAudits: CHART_CONFIG,
         favoriteProjectsComparison: CHART_CONFIG,
         favoriteProjectsOverview: joi.object({
