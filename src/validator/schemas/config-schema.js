@@ -49,6 +49,7 @@ export default joi.object({
     DATE_FORMAT: joi.string().required(),
 
     DASHBOARD: joi.object({
+        TITLE: joi.string(),
         UPDATE_INTERVAL: joi.number().min(1000).required(),
         PAGE_DASHBOARD: joi.object({
             IS_FLUID: joi.boolean().required(),
