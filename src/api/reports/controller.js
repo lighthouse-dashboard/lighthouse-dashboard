@@ -51,12 +51,14 @@ export async function createReportHandler(request, h) {
     if (!validateSiteToken(config, token)) {
         return Boom.forbidden('Token mismatch');
     }
+
     const { url, runs, device } = config;
 
     try {
+        const meta = getMetaFromGithubWebhook(request);
         const transformAuditCurry = curry(lighthouseTransformer);
         const data = await runLighthouse({ pageUrl: url, runs, device }, transformAuditCurry(id));
-        await saveReport({ ...data, ...getMetaFromGithubWebhook(request) });
+        await saveReport({ ...data, ...meta });
         await updateSite(config.id, { last_audit: new Date().toISOString() });
     } catch (e) {
         error(e);
