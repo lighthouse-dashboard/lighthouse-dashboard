@@ -1,6 +1,7 @@
 # lighthouse-dashboard
-
-[Web](https://dreihouse.dreipol.ch/#/)
+[![CircleCI](https://circleci.com/gh/dreipol/lighthouse-dashboard.svg?style=svg&circle-token=fa73435956cf491fcc4005ad5143e00ebf6871fa)](https://circleci.com/gh/dreipol/lighthouse-dashboard)
+<a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/maintainability"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/maintainability" /></a>
+<a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/test_coverage"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/test_coverage" /></a>
 
 # Framework
 Backend: [hapi](https://hapi.dev/)
@@ -23,49 +24,22 @@ If you want to work on the UI you can start the UI with  `npm run serve`. This w
 already running local server.
 
 
-# Docker
-Inside the docker, the app is managed by [pm2](https://pm2.keymetrics.io/) in order to restart after it crashes
-## Docker Build
 
-    docker build --build-arg CIRCLE_TOKEN=<TOKEN> . -t dreipol/dreihouse-dashboard
+# Todo Future Features (v2...)
+- [ ] Add custom scripts for each project to add logins for lockdown pages(scripts will be executed in the browser)
+- [ ] Make project active/disabled in settings menu of project 
+- [ ] Add fullscreen option of single chart, section and page
+- [ ] Add different webhooks endpoints for different environments (circleCI, Gitlab, Github, others...)
 
-## Docker Run
-
-    docker run --name dashboard -p 3000:3000 -e CIRCLE_TOKEN=<TOKEN> dreipol/dreihouse-dashboard
-
-# Deployments
-## Remotes
-```bash
-git remote add deis dokku@furio.drei.io:lighthouse-dashboard
-```
-
-## deploy
-```bash
-git push deis master
-```
-
-# Env Vars
-```
-PORT=4000
-API_TOKEN='foo'
-MONGODB_URI='mongodb://admin:admin@localhost:27017'
-MONGO_DB_NAME='auditreports'
-SHOW_ERROR_PAGES=true
-```
-
-
-# Todo
- - [ ] Add more logging
- - [ ] Use cookie instead of localstorage to store the JWT
- - [ ] Host somewhere
- - [ ] Add unit tests
- - [ ] Add pm2 for restarts after crash
+# Todo v1
+ - [ ] FE: Add url for webhooks to settings menu of project
+ - [ ] FE: Add icon/logo
+ - [ ] FE: Use cookie instead of localstorage to store the JWT
+ - [ ] FE: Add search for project list
+ - [ ] BE: Add more logging 
+ - [ ] BE: Add unit tests
+ - [ ] BE: Add pm2 for restarts after crash
  - [ ] Create awesome doc
- - [ ] Add search for project list
- - [ ] Make project active/disabled in settings menu of project
- - [ ] Add url for webhooks to settings menu of project
- - [ ] Add fullscreen option of single chart, section and page
- - [ ] Add icon/logo
 
 ## Done
  - [x] Add additional properties `message` and/or `git_commit` to the webhook api
