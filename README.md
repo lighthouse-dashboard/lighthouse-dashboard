@@ -30,6 +30,10 @@ already running local server.
 - [ ] Make project active/disabled in settings menu of project 
 - [ ] Add fullscreen option of single chart, section and page
 - [ ] Add different webhooks endpoints for different environments (circleCI, Gitlab, Github, others...)
+- [ ] Add storybook 
+- [ ] Add scss files to build process
+- [ ] Add custom styling and remove Vuetify
+- [ ] Make Neumorpic UI [example](https://dribbble.com/shots/9440651-Todo-List-Neuromorphic-UI-Design)
 
 # Todo v1
  - [ ] FE: Add url for webhooks to settings menu of project
