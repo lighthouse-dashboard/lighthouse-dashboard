@@ -53,7 +53,7 @@
                 if (!this.siteConfig) {
                     return null;
                 }
-                return `http://localhost:5000/api/reports/${ this.id }?token=${ this.siteConfig.token }`;
+                return `${window.location.protocol}//${window.location.host}/api/reports/${ this.id }?token=${ this.siteConfig.token }`;
             },
         },
 

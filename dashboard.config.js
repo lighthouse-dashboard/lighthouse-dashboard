@@ -33,10 +33,10 @@ module.exports = {
             limit: 12,
             fields: [
                 'performance',
-                // 'seo',
-                // 'pwa',
-                // 'accessibility',
-                // 'best-practices',
+                'seo',
+                'pwa',
+                'accessibility',
+                'best-practices',
             ],
         },
 
@@ -57,13 +57,13 @@ module.exports = {
 
     UI: {
         // THEME: colorPreference ? 'dark' : 'light',
-        THEME: 'light',
+        THEME: 'dark',
         CHART_COLORS: {
             dark: [
                 '#C5F4C4',
                 '#97D68E',
                 '#7B9878',
-                '#42474C',
+                '#a2a7ac',
                 '#707B9A',
             ],
             light: [
