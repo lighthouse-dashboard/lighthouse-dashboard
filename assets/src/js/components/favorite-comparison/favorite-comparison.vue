@@ -3,7 +3,7 @@
         <v-subheader>
             Performance comparison
         </v-subheader>
-        <v-card>
+        <v-card flat>
             <v-card-text>
                 <div ref="chart"/>
             </v-card-text>

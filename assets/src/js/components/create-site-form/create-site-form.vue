@@ -1,10 +1,11 @@
 <template>
     <div>
         <v-btn
-                fab
-                absolute
+                dark
+                fixed
                 bottom
                 right
+                fab
                 color="secondary"
                 @click.stop="dialog = true"
         >

@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card flat>
         <project-settings v-if="showSettings"
                 :id="id"
                 @close="onSettingsClosed"/>
@@ -29,7 +29,7 @@
 
 <script>
     import ApexCharts from 'apexcharts';
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions } from 'vuex';
     import CONFIG from '../../../../../dashboard.config';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
     import ProjectSettings from '../project-settings/project-settings';
@@ -74,9 +74,6 @@
                 runError: null,
                 interval: null,
             };
-        },
-        computed: {
-            ...mapState('login', ['jwt']),
         },
         methods: {
             ...mapActions('reports', ['fetchReportsForSite', 'launchAuditForSite']),

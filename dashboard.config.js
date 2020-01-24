@@ -1,4 +1,4 @@
-const colorPreference = require('./src/utils/color-preference');
+// const colorPreference = require('./src/utils/color-preference');
 require('dotenv').config();
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
         },
         PAGE_PROJECTS: {
             IS_FLUID: false,
-            colSize: 2,
+            colSize: 3,
         },
 
         SITE_OVERVIEW_CHART: {
@@ -43,7 +43,10 @@ module.exports = {
         favoriteProjectsComparison: {
             fields: [
                 'performance',
-                'best-practices',
+                'seo',
+                // 'pwa',
+                'accessibility',
+                // 'best-practices',
             ],
         },
 
@@ -53,44 +56,36 @@ module.exports = {
     },
 
     UI: {
-        THEME: colorPreference ? 'dark' : 'light',
-        // THEME: 'dark',
+        // THEME: colorPreference ? 'dark' : 'light',
+        THEME: 'light',
         CHART_COLORS: {
             dark: [
-                '#009888',
-                '#5698ef',
-                '#7ca0d2',
-                '#539b8d',
-                '#023e68',
+                '#C5F4C4',
+                '#97D68E',
+                '#7B9878',
+                '#42474C',
+                '#707B9A',
             ],
             light: [
-                '#539b8d',
-                '#ffcc80',
-                '#7ca0d2',
-                '#539b8d',
-                '#023e68',
+                '#DE594D',
+                '#EFCB6E',
+                '#DACAAE',
+                '#5CBE9E',
+                '#546C54',
             ],
         },
         COLOR_THEME: {
             dark: {
-                primary: '#009888',
-                text: '#f7f7f7',
-                accent: '#ff9800',
-                secondary: '#5698ef',
-                success: '#4caf50',
-                info: '#2196f3',
-                warning: '#fb8c00',
-                error: '#ff5252',
+                primary: '#D37549',
+                secondary: '#bf4223',
+                text: '#d6a99d',
+                accent: '#546B8F',
             },
             light: {
-                primary: '#539b8d',
+                primary: '#DE594D',
                 text: '#333333',
-                accent: '#e91e63',
                 secondary: '#ffcc80',
-                success: '#4caf50',
-                info: '#2196f3',
-                warning: '#fb8c00',
-                error: '#ff5252',
+                accent: '#e91e63',
             },
         },
     },

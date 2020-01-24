@@ -1,10 +1,17 @@
 <template>
-    <v-card class="single-radial-bar">
+    <v-card flat>
         <v-card-title>
             <site-title :is_favorite="is_favorite">{{ id }}</site-title>
         </v-card-title>
+        <v-card-subtitle class="pb-0">
+            <span v-if="data && data.message">
+                {{ data.message }}
+            </span>
+            <span v-else>&nbsp;</span>
+        </v-card-subtitle>
         <v-card-text>
             <div ref="chart"/>
+
         </v-card-text>
     </v-card>
 </template>
@@ -32,6 +39,7 @@
 
         data() {
             return {
+                data: null,
                 chart: null,
                 chartData: null,
                 isLoading: false,
@@ -55,6 +63,7 @@
                 this.isLoading = true;
                 this.fetchLatestReportForSite({ siteId: this.id })
                     .then((data) => {
+                        this.data = data;
                         this.chart.updateOptions({
                             labels: data.labels,
                         });

@@ -21,12 +21,12 @@ export default function getMetaFromCommit(commit) {
  * @param {hapi.Request} request
  * @return {{message: string, git_commit: string}}
  */
-export function getMetaFromGithubWebhook(request) {
-    if (!request.payload) {
+export function getMetaFromGithubWebhook(payload) {
+    if (!payload) {
         return {};
     }
 
     // eslint-disable-next-line camelcase
-    const { head_commit } = request.payload;
+    const { head_commit } = payload;
     return getMetaFromCommit(head_commit);
 }

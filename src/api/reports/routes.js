@@ -1,16 +1,14 @@
 import joi from '@hapi/joi';
-import {
-    createReportHandler,
-    getLatestReportValuesHandler,
-    getRecentReportsHandler,
-    getSpeedReportOverviewHandler
-} from './controller';
+import createReport from './create-report';
+import getLatestReportValues from './get-latest-report-values';
+import getRecentReports from './get-recent-reports';
+import getSpeedReportOverview from './get-speed-report-overview';
 
 export default [
     {
         method: 'GET',
         path: '/api/reports/overview',
-        handler: getSpeedReportOverviewHandler,
+        handler: getSpeedReportOverview,
         options: {
             description: 'Get chart data for speed overview of favorited projects',
             tags: ['api', 'reports'],
@@ -20,7 +18,7 @@ export default [
     {
         method: 'GET',
         path: '/api/reports/{siteId}/latest',
-        handler: getLatestReportValuesHandler,
+        handler: getLatestReportValues,
         options: {
             description: 'Get latest report for site',
             tags: ['api', 'reports'],
@@ -36,7 +34,7 @@ export default [
     {
         method: 'GET',
         path: '/api/reports/{id}/recent',
-        handler: getRecentReportsHandler,
+        handler: getRecentReports,
         options: {
             description: 'Get recent report entries for site',
             tags: ['api', 'reports'],
@@ -52,7 +50,7 @@ export default [
     {
         method: 'POST',
         path: '/api/reports/{id}',
-        handler: createReportHandler,
+        handler: createReport,
         options: {
             description: 'Execute new audit for site',
             tags: ['api', 'reports'],

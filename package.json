@@ -1,100 +1,112 @@
 {
-  "name": "dreihouse-dashboard",
-  "version": "4.1.1",
-  "private": true,
-  "description": "A Vue.js project",
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode production",
-    "lint": "vue-cli-service lint",
-    "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
-    "start": "node -r esm src/index.js",
-    "audit": "node -r esm src/commands/run-audits-command.js"
-  },
-  "main": "assets/src/app/main.js",
-  "dependencies": {
-    "@hapi/boom": "^8.0.1",
-    "@hapi/hapi": "^18.4.0",
-    "@hapi/inert": "^5.2.2",
-    "@hapi/joi": "^16.1.8",
-    "@hapi/vision": "^5.5.4",
-    "@sentry/node": "^5.11.1",
-    "apexcharts": "^3.11.1",
-    "axios": "^0.19.0",
-    "chrome-launcher": "^0.12.0",
-    "chrome-paths": "^1.0.1",
-    "core-js": "^3.4.3",
-    "date-fns": "^2.8.1",
-    "dotenv": "^8.2.0",
-    "es6-promise": "^4.2.8",
-    "esm": "^3.2.25",
-    "fancy-log": "^1.3.3",
-    "fibers": "^4.0.2",
-    "hapi-auth-bearer-token": "^6.1.2",
-    "hapi-auth-jwt2": "^8.8.1",
-    "hapi-dev-errors": "^3.3.0",
-    "hapi-error-page": "^1.0.0",
-    "hapi-swagger": "^11.1.0",
-    "jsonwebtoken": "^8.5.1",
-    "laabr": "^5.1.5",
-    "lighthouse": "^5.6.0",
-    "lodash.chunk": "^4.2.0",
-    "lodash.curry": "^4.1.1",
-    "lodash.uniq": "^4.5.0",
-    "mongodb": "^3.4.1",
-    "node-cron": "^2.0.3",
-    "promise-sequential": "^1.1.1",
-    "puppeteer": "^2.0.0",
-    "uuid": "^3.3.3",
-    "vue": "^2.6.10",
-    "vue-router": "^3.1.3",
-    "vuetify": "^2.1.15",
-    "vuex": "^3.1.2"
-  },
-  "devDependencies": {
-    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
-    "@dreipol/eslint-config": "^6.0.4",
-    "@types/hapi": "^18.0.3",
-    "@vue/cli-plugin-babel": "^4.1.0",
-    "@vue/cli-plugin-eslint": "^4.1.0",
-    "@vue/cli-service": "^4.1.0",
-    "babel-eslint": "^10.0.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-plugin-transform-vue-jsx": "^3.7.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.13.0",
-    "nodemon": "^2.0.2",
-    "sass": "^1.24.0",
-    "sass-loader": "^8.0.0",
-    "vue-cli-plugin-vuetify": "^2.0.2",
-    "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.3.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
+    "name": "dreihouse-dashboard",
+    "version": "5.0.0",
+    "private": true,
+    "description": "App to keep track of your websites by showing their lighthouse results",
+    "author": {
+        "email": "fabio.gianini@dreipol.ch",
+        "name": "fabs",
+        "url": "https://www.fabs.io"
     },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+    "repository": {
+        "url": "https://github.com/dreipol/lighthouse-dashboard",
+        "type": "git"
+    },
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build --mode production",
+        "lint": "vue-cli-service lint",
+        "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
+        "start": "node -r esm src/index.js",
+        "audit": "node -r esm src/commands/run-audits-command.js",
+        "test": "mocha src/**/*.spec.js -r esm"
+    },
+    "main": "assets/src/app/main.js",
+    "dependencies": {
+        "@hapi/boom": "^8.0.1",
+        "@hapi/hapi": "^18.4.0",
+        "@hapi/inert": "^5.2.2",
+        "@hapi/joi": "^16.1.8",
+        "@hapi/vision": "^5.5.4",
+        "@sentry/node": "^5.11.1",
+        "apexcharts": "^3.11.1",
+        "axios": "^0.19.0",
+        "chai": "^4.2.0",
+        "chrome-launcher": "^0.12.0",
+        "chrome-paths": "^1.0.1",
+        "core-js": "^3.4.3",
+        "date-fns": "^2.8.1",
+        "dotenv": "^8.2.0",
+        "es6-promise": "^4.2.8",
+        "esm": "^3.2.25",
+        "fancy-log": "^1.3.3",
+        "fibers": "^4.0.2",
+        "hapi-auth-bearer-token": "^6.1.2",
+        "hapi-auth-jwt2": "^8.8.1",
+        "hapi-dev-errors": "^3.3.0",
+        "hapi-error-page": "^1.0.0",
+        "hapi-swagger": "^11.1.0",
+        "jsonwebtoken": "^8.5.1",
+        "laabr": "^5.1.5",
+        "lighthouse": "^5.6.0",
+        "lodash.chunk": "^4.2.0",
+        "lodash.curry": "^4.1.1",
+        "lodash.uniq": "^4.5.0",
+        "mocha": "^7.0.0",
+        "mongodb": "^3.4.1",
+        "node-cron": "^2.0.3",
+        "promise-sequential": "^1.1.1",
+        "puppeteer": "^2.0.0",
+        "uuid": "^3.3.3",
+        "vue": "^2.6.10",
+        "vue-router": "^3.1.3",
+        "vuetify": "^2.1.15",
+        "vuex": "^3.1.2"
+    },
+    "devDependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+        "@dreipol/eslint-config": "^6.0.4",
+        "@types/hapi": "^18.0.3",
+        "@vue/cli-plugin-babel": "^4.1.0",
+        "@vue/cli-plugin-eslint": "^4.1.0",
+        "@vue/cli-service": "^4.1.0",
+        "babel-eslint": "^10.0.3",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-plugin-transform-vue-jsx": "^3.7.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-2": "^6.24.1",
+        "eslint": "^5.16.0",
+        "eslint-plugin-vue": "^5.0.0",
+        "node-sass": "^4.13.0",
+        "nodemon": "^2.0.2",
+        "sass": "^1.24.0",
+        "sass-loader": "^8.0.0",
+        "vue-cli-plugin-vuetify": "^2.0.2",
+        "vue-template-compiler": "^2.6.10",
+        "vuetify-loader": "^1.3.0"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "rules": {},
+        "parserOptions": {
+            "parser": "babel-eslint"
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
     ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "engines": {
-    "node": ">= 12.0",
-    "npm": ">= 6.0.0"
-  },
-  "types": "./src/types/index.d.ts"
+    "engines": {
+        "node": ">= 12.0",
+        "npm": ">= 6.0.0"
+    },
+    "types": "./src/types/index.d.ts"
 }

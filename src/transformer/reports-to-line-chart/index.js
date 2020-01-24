@@ -1,12 +1,12 @@
-import CONFIG from '../../dashboard.config';
-import formatReportSummaryString from '../utils/format-report-summary-string';
+import CONFIG from '../../../dashboard.config';
+import formatReportSummaryString from '../../utils/format-report-summary-string';
 
 /**
  * Transform reports to chart data
  * @param {Report[]} reports
  * @return {ChartData}
  */
-export default function reportsToChartTransformer(reports) {
+export default function reportsToLineChart(reports) {
     const data = {
         labels: [],
         datasets: [],

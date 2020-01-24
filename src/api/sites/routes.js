@@ -1,13 +1,11 @@
 import joi from '@hapi/joi';
-import {
-    addSiteHandler,
-    deleteSiteHandler,
-    getFavSitesHandler,
-    getLatestSitesHandler,
-    getSiteByIdHandler,
-    getSitesHandler,
-    updateSiteConfigHandler,
-} from './controller';
+import addSiteHandler from './add-site';
+import deleteSite from './delete-site';
+import { getFavSitesHandler } from './get-fav-site';
+import { getLatestSitesHandler } from './get-latest-sites';
+import { getSiteById } from './get-site-by-id';
+import { getSitesHandler } from './get-sites';
+import { updateSiteConfigHandler } from './update-site-config';
 
 export default [
     {
@@ -40,7 +38,7 @@ export default [
     {
         method: 'DELETE',
         path: '/api/sites/{id}',
-        handler: deleteSiteHandler,
+        handler: deleteSite,
         options: {
             description: 'Delete site',
             tags: ['api', 'sites'],
@@ -54,7 +52,7 @@ export default [
     {
         method: 'GET',
         path: '/api/sites/{id}',
-        handler: getSiteByIdHandler,
+        handler: getSiteById,
         options: {
             description: 'Get project config by id',
             tags: ['api', 'sites'],

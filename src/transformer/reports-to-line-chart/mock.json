@@ -1,0 +1,301 @@
+[
+    {
+        "_id": "5e2ab79169091100041fa977",
+        "createdAt": "2020-01-24T09:23:29.575Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 98
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ],
+        "message": "Merge branch 'develop'",
+        "git_commit": "b4841a986394fde0e1ac4669960b7248b1bc0d45"
+    },
+    {
+        "_id": "5e29bb9c2eeca3000462af85",
+        "createdAt": "2020-01-23T15:28:28.317Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 96
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 58
+            }
+        ]
+    },
+    {
+        "_id": "5e298a3cc5eb0d00042207ba",
+        "createdAt": "2020-01-23T11:57:48.110Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 92
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    },
+    {
+        "_id": "5e29787dcf04b30004736a9d",
+        "createdAt": "2020-01-23T10:42:05.315Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 84
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    },
+    {
+        "_id": "5e2977cccf04b30004736a9c",
+        "createdAt": "2020-01-23T10:39:08.714Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 100
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    },
+    {
+        "_id": "5e2977a3cf04b30004736a9b",
+        "createdAt": "2020-01-23T10:38:27.957Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 96
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    },
+    {
+        "_id": "5e29751dcf04b30004736a98",
+        "createdAt": "2020-01-23T10:27:41.343Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 76
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    },
+    {
+        "_id": "5e2972fb4d7e9a0004600a97",
+        "createdAt": "2020-01-23T10:18:35.949Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 95
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    },
+    {
+        "_id": "5e29727a4d7e9a0004600a96",
+        "createdAt": "2020-01-23T10:16:26.765Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 99
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    },
+    {
+        "_id": "5e29722f4d7e9a0004600a95",
+        "createdAt": "2020-01-23T10:15:11.686Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 74
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 86
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    },
+    {
+        "_id": "5e2971264d7e9a0004600a94",
+        "createdAt": "2020-01-23T10:10:46.390Z",
+        "siteId": "example.io",
+        "values": [
+            {
+                "id": "performance",
+                "value": 91
+            },
+            {
+                "id": "accessibility",
+                "value": 95
+            },
+            {
+                "id": "best-practices",
+                "value": 93
+            },
+            {
+                "id": "seo",
+                "value": 100
+            },
+            {
+                "id": "pwa",
+                "value": 31
+            }
+        ]
+    }
+]
