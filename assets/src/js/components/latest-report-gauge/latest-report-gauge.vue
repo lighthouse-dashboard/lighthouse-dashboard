@@ -3,9 +3,6 @@
         <v-card-title>
             <site-title :is_favorite="is_favorite">{{ id }}</site-title>
         </v-card-title>
-        <v-card-subtitle class="pb-0">
-            <span v-else>&nbsp;</span>
-        </v-card-subtitle>
         <v-card-text>
             <div ref="chart"/>
 
