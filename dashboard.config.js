@@ -33,10 +33,10 @@ module.exports = {
             limit: 12,
             fields: [
                 'performance',
-                'seo',
-                'pwa',
-                'accessibility',
-                'best-practices',
+                // 'seo',
+                // 'pwa',
+                // 'accessibility',
+                // 'best-practices',
             ],
         },
 

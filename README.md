@@ -36,6 +36,7 @@ already running local server.
 - [ ] Make Neumorpic UI [example](https://dribbble.com/shots/9440651-Todo-List-Neuromorphic-UI-Design)
 
 # Todo v1
+ - [ ] FE: Show latest commit infos in seperate overlay
  - [ ] FE: Add url for webhooks to settings menu of project
  - [ ] FE: Add icon/logo
  - [ ] FE: Use cookie instead of localstorage to store the JWT
