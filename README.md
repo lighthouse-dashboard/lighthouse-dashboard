@@ -1,3 +1,4 @@
+
 # lighthouse-dashboard
 [![CircleCI](https://circleci.com/gh/dreipol/lighthouse-dashboard.svg?style=svg&circle-token=fa73435956cf491fcc4005ad5143e00ebf6871fa)](https://circleci.com/gh/dreipol/lighthouse-dashboard)
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/maintainability"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/maintainability" /></a>
