@@ -1,0 +1,15 @@
+ratings:
+  paths:
+  - "src/**.js"
+
+- plugins:
+    eslint:
+      enabled: true
+    fixme:
+      enabled: true
+    nodesecurity:
+      enabled: true
+
+exclude_paths:
+  - "test/**"
+  - "src/**/*.spec.js"
