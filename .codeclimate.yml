@@ -2,13 +2,13 @@ ratings:
   paths:
   - "src/**.js"
 
-- plugins:
-    eslint:
-      enabled: true
-    fixme:
-      enabled: true
-    nodesecurity:
-      enabled: true
+plugins:
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  nodesecurity:
+    enabled: true
 
 exclude_paths:
   - "test/**"
