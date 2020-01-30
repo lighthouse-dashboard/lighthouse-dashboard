@@ -27,25 +27,15 @@ already running local server.
 
 
 # Todo Future Features (v2...)
-- [ ] Add custom scripts for each project to add logins for lockdown pages(scripts will be executed in the browser)
-- [ ] Make project active/disabled in settings menu of project 
-- [ ] Add fullscreen option of single chart, section and page
-- [ ] Add different webhooks endpoints for different environments (circleCI, Gitlab, Github, others...)
-- [ ] Add storybook 
-- [ ] Add scss files to build process
-- [ ] Add custom styling and remove Vuetify
-- [ ] Make Neumorpic UI [example](https://dribbble.com/shots/9440651-Todo-List-Neuromorphic-UI-Design)
+- [ ] 
+- [ ]  
+- [ ] 
+- [ ] 
+- [ ]  
+- [ ] 
+- [ ] 
+- [ ] 
 
-# Todo v1
- - [ ] FE: Show latest commit infos in seperate overlay
- - [ ] FE: Add url for webhooks to settings menu of project
- - [ ] FE: Add icon/logo
- - [ ] FE: Use cookie instead of localstorage to store the JWT
- - [ ] FE: Add search for project list
- - [ ] BE: Add more logging 
- - [ ] BE: Add unit tests
- - [ ] BE: Add pm2 for restarts after crash
- - [ ] Create awesome doc
 
 ## Done
  - [x] Add additional properties `message` and/or `git_commit` to the webhook api

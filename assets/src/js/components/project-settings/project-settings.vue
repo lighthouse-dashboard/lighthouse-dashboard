@@ -9,8 +9,8 @@
 
             <v-card-text>
                 <v-text-field readonly
-                        label="Web Hook Url"
-                        :value="webhookUrl"/>
+                        label="Github Hook Url"
+                        :value="githubWebhookUrl"/>
                 <v-checkbox
                         v-model="siteConfig.is_favorite"
                         color="secondary"
@@ -49,7 +49,7 @@
         },
 
         computed: {
-            webhookUrl() {
+            githubWebhookUrl() {
                 if (!this.siteConfig) {
                     return null;
                 }
