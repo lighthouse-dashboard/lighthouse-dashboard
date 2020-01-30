@@ -1,7 +1,7 @@
 /**
  * Transform a lighthouse report
  * @param {string} pageId
- * @param {object} audit
+ * @param {LH.Result} audit
  * @return {Report}
  */
 export default function lighthouseTransformer(pageId, audit) {
