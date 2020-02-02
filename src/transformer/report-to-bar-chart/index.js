@@ -1,18 +1,19 @@
-import { getTimingValueByKey } from '../utils/get-timing-by-key';
+import { getReportValueScoreByKey } from '../../utils/get-report-value-score-by-key';
 
 /**
  * Create a bar chart
  * @param {Report[]} reports
  * @param {string[]} labels
  * @param {string[]} exportingValues
- * @return {*}
+ * @return {BarChartData}
  */
-export default function reportsToBarChart(reports, labels, exportingValues) {
+export default function(reports, labels, exportingValues) {
+    /** @type {BarChartData} */
     const data = { labels, datasets: [] };
 
     return exportingValues.reduce((acc, value, exportingValueIndex) => {
         const values = reports.reduce((reportValues, report) => {
-            const value = getTimingValueByKey(report.values, exportingValues[exportingValueIndex]);
+            const value = getReportValueScoreByKey(report.values, exportingValues[exportingValueIndex]);
             reportValues.push(value);
             return reportValues;
         }, []);

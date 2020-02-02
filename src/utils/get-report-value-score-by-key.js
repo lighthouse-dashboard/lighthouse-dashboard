@@ -5,7 +5,7 @@
  * @return {ReportValue}
  */
 export default function getReportValueByKey(values, key) {
-    return values.find(t => t.id === key);
+    return values.find(t => t.id === key) || null;
 }
 
 /**
@@ -14,7 +14,7 @@ export default function getReportValueByKey(values, key) {
  * @param {string} key
  * @return {number}
  */
-export function getTimingValueByKey(values, key) {
+export function getReportValueScoreByKey(values, key) {
     const timing = getReportValueByKey(values, key);
     if (!timing) {
         return null;

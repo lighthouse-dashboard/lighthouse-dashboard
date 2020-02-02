@@ -1,8 +1,8 @@
 import uuid from 'uuid/v4';
-import { addSite } from '../../database/sites';
+import { addSite } from '../../../database/sites';
 
 /**
- *
+ * Controller to add a new site
  * @param {hapi.Request.Payload} payload
  * @return {Promise<void>}
  */

@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { loginHandler } from './controller';
+import { loginHandler } from './handlers/login-handler';
 
 export default [
     {

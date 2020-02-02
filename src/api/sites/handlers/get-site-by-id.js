@@ -1,8 +1,8 @@
 import Boom from '@hapi/boom';
-import { getSiteConfigById } from '../../database/sites';
+import { getSiteConfigById } from '../../../database/sites';
 
 /**
- *
+ * Get site by id controller
  * @param {hapi.Request} request
  * @return {Promise<SiteConfig|Boom<null>>}
  */

@@ -1,8 +1,8 @@
 import joi from '@hapi/joi';
-import createReport from './create-report';
-import getLatestReportValues from './get-latest-report-values';
-import getRecentReports from './get-recent-reports';
-import getSpeedReportOverview from './get-speed-report-overview';
+import createReport from './handlers/create-report';
+import getLatestReportValues from './handlers/get-latest-report-values';
+import getRecentReports from './handlers/get-recent-reports';
+import getSpeedReportOverview from './handlers/get-speed-report-overview';
 
 export default [
     {

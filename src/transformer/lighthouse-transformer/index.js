@@ -1,10 +1,10 @@
 /**
  * Transform a lighthouse report
  * @param {string} pageId
- * @param {object} audit
+ * @param {LH.Result} audit
  * @return {Report}
  */
-export default function lighthouseTransformer(pageId, audit) {
+export default function(pageId, audit) {
     const { categories } = audit;
 
     const values = Object.keys(categories).reduce((acc, category) => {

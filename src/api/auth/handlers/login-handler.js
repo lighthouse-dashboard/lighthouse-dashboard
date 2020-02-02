@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 import JWT from 'jsonwebtoken';
-import CONFIG from '../../../dashboard.config';
+import CONFIG from '../../../../dashboard.config';
 
 
 export function loginHandler(request) {

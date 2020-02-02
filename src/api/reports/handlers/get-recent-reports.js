@@ -1,8 +1,8 @@
 import Boom from '@hapi/boom';
-import CONFIG from '../../../dashboard.config';
-import { getReportsBySiteId } from '../../database/reports';
-import { getSiteConfigById } from '../../database/sites';
-import reportsToLineChart from '../../transformer/reports-to-line-chart';
+import CONFIG from '../../../../dashboard.config';
+import { getReportsBySiteId } from '../../../database/reports';
+import { getSiteConfigById } from '../../../database/sites';
+import reportsToLineChart from '../../../transformer/reports-to-line-chart';
 
 /**
  * Handler for latest created reports
