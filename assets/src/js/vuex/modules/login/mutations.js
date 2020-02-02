@@ -1,19 +1,21 @@
+import { COOKIE_NAME } from '../../../config/cookie-name';
+import { eraseCookie, setCookie } from '../../../utils/cookie';
 import { SET_JWT, SET_LOGGED_IN } from '../mutation-types';
 
 export default {
     [SET_LOGGED_IN](state, { isLoggedIn }) {
         state.isLoggedIn = isLoggedIn;
         if (!isLoggedIn) {
-            localStorage.removeItem('JWT');
+            eraseCookie(COOKIE_NAME, null);
         }
     },
 
     [SET_JWT](state, { jwt }) {
         state.jwt = jwt;
         if (jwt) {
-            localStorage.setItem('JWT', jwt);
+            setCookie(COOKIE_NAME, jwt);
         } else {
-            localStorage.removeItem('JWT');
+            eraseCookie(COOKIE_NAME, null);
         }
     },
 };
