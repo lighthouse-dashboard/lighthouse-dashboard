@@ -3,10 +3,9 @@
 import Hapi from '@hapi/hapi';
 import { join } from 'path';
 import CONFIG from '../dashboard.config.js';
-import auth from './auth';
+import setupAuth from './auth/';
 import setupPlugins from './plugins';
 import setupRouter from './routes';
-import { IS_DEV } from './utils/env';
 import logger from './utils/logger';
 import configValidator from './validator/config-validator';
 import configSchema from './validator/schemas/config-schema';
@@ -30,19 +29,10 @@ const init = async () => {
     });
 
     await setupPlugins(server);
-
-    // Only require JWT auth in production
-    if (!IS_DEV) {
-        server.auth.strategy('jwt', 'jwt', {
-            key: CONFIG.SERVER.API.JWT_SECRET,
-            validate: auth,
-        });
-
-        server.auth.default('jwt');
-    }
-
+    setupAuth(server);
     setupRouter(server);
     await server.start();
+
     logger('Server running on %s', server.info.uri);
 };
 

@@ -12,6 +12,7 @@ export default [
         options: {
             description: 'Get chart data for speed overview of favorited projects',
             tags: ['api', 'reports'],
+            auth: 'jwt',
         },
     },
 
@@ -22,6 +23,7 @@ export default [
         options: {
             description: 'Get latest report for site',
             tags: ['api', 'reports'],
+            auth: 'jwt',
             validate: {
                 params: joi.object({
                     siteId: joi
@@ -38,6 +40,7 @@ export default [
         options: {
             description: 'Get recent report entries for site',
             tags: ['api', 'reports'],
+            auth: 'jwt',
             validate: {
                 params: joi.object({
                     id: joi

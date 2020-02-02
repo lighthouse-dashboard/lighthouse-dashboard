@@ -15,6 +15,7 @@ export default [
         options: {
             description: 'Get all configured sites',
             tags: ['api', 'sites'],
+            auth: 'jwt',
         },
     },
     {
@@ -24,6 +25,7 @@ export default [
         options: {
             description: 'Get latest audited sites',
             tags: ['api', 'sites'],
+            auth: 'jwt',
         },
     },
     {
@@ -33,6 +35,8 @@ export default [
         options: {
             description: 'Get favorited sites',
             tags: ['api', 'sites'],
+            auth: 'jwt',
+
         },
     },
     {
@@ -42,6 +46,7 @@ export default [
         options: {
             description: 'Delete site',
             tags: ['api', 'sites'],
+            auth: 'jwt',
             validate: {
                 params: joi.object({
                     id: joi.string().required(),
@@ -56,6 +61,7 @@ export default [
         options: {
             description: 'Get project config by id',
             tags: ['api', 'sites'],
+            auth: 'jwt',
             validate: {
                 params: joi.object({
                     id: joi.string().required(),
@@ -70,6 +76,7 @@ export default [
         options: {
             description: 'Get project config by id',
             tags: ['api', 'sites'],
+            auth: 'jwt',
             validate: {
                 params: joi.object({
                     id: joi.string().required(),
@@ -87,6 +94,7 @@ export default [
         options: {
             description: 'Add new site configuration',
             tags: ['api', 'sites'],
+            auth: 'jwt',
             validate: {
                 payload: joi.object({
                     url: joi

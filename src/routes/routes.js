@@ -11,6 +11,7 @@ export default [
         method: 'GET',
         path: '/',
         options: {
+            description: 'Main entry point',
             auth: false,
         },
         handler: {
@@ -22,7 +23,8 @@ export default [
         method: 'GET',
         path: '/projects',
         options: {
-            auth: false,
+            description: 'List of projects',
+            auth: 'jwt',
         },
         handler: {
             file: 'templates/index.html',
@@ -33,6 +35,7 @@ export default [
         method: 'GET',
         path: '/{param*}',
         options: {
+            description: 'Static assets',
             auth: false,
         },
         handler: {
