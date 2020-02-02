@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import reportsToLineChart from './index';
-import mockData from './mock.json';
+import mockData from '../mock.json';
 
 describe('reports-to-line-chart', function() {
     it('check labels', () => {

@@ -1,9 +1,9 @@
 import Boom from '@hapi/boom';
-import CONFIG from '../../../dashboard.config';
-import { getLatestReportBySiteId } from '../../database/reports';
-import { getSiteConfigById } from '../../database/sites';
-import formatReportSummaryString from '../../utils/format-report-summary-string';
-import { getReportValueScoreByKey } from '../../utils/get-report-value-score-by-key';
+import CONFIG from '../../../../dashboard.config';
+import { getLatestReportBySiteId } from '../../../database/reports';
+import { getSiteConfigById } from '../../../database/sites';
+import formatReportSummaryString from '../../../utils/format-report-summary-string';
+import { getReportValueScoreByKey } from '../../../utils/get-report-value-score-by-key';
 
 /**
  * Handler to get latest latest created report values

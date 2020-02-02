@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import lighthouseTransformer from './lighthouse-transformer';
+import lighthouseTransformer from './index';
 
 describe('transformer/lighthouse-transformer', function() {
     it('transform lighthouse audit result to report object', () => {

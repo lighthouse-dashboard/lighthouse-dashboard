@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import createReport from '../../tests/utils/create-report';
-import reportsToBarChart from './reports-to-bar-cahrt';
+import createReport from '../../../tests/utils/create-report';
+import reportsToBarChart from './index';
 
 
 describe('transformer/reports-to-bar-chart', function() {

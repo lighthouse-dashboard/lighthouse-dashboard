@@ -1,4 +1,4 @@
-import { updateSite } from '../../database/sites';
+import { updateSite } from '../../../database/sites';
 
 /**
  *

@@ -1,7 +1,7 @@
-import CONFIG from '../../../dashboard.config';
-import { getLatestReportBySiteId } from '../../database/reports';
-import { getFavoriteSites } from '../../database/sites';
-import reportsToBarChart from '../../transformer/reports-to-bar-cahrt';
+import CONFIG from '../../../../dashboard.config';
+import { getLatestReportBySiteId } from '../../../database/reports';
+import { getFavoriteSites } from '../../../database/sites';
+import reportsToBarChart from '../../../transformer/report-to-bar-chart';
 
 /**
  * Get overview over projects by specific timing id

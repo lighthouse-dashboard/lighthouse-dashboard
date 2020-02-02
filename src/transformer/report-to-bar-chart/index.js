@@ -1,4 +1,4 @@
-import { getReportValueScoreByKey } from '../utils/get-report-value-score-by-key';
+import { getReportValueScoreByKey } from '../../utils/get-report-value-score-by-key';
 
 /**
  * Create a bar chart
@@ -7,7 +7,7 @@ import { getReportValueScoreByKey } from '../utils/get-report-value-score-by-key
  * @param {string[]} exportingValues
  * @return {BarChartData}
  */
-export default function reportsToBarChart(reports, labels, exportingValues) {
+export default function(reports, labels, exportingValues) {
     /** @type {BarChartData} */
     const data = { labels, datasets: [] };
 

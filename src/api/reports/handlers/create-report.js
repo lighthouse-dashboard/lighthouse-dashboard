@@ -1,12 +1,12 @@
 import Boom from '@hapi/boom';
 import curry from 'lodash.curry';
-import runLighthouse from '../../audit/run-lighthouse';
-import { saveReport } from '../../database/reports';
-import { getSiteConfigById, updateSite } from '../../database/sites';
-import lighthouseTransformer from '../../transformer/lighthouse-transformer';
-import { getMetaFromGithubWebhook } from '../../utils/get-meta-from-commit';
-import { error } from '../../utils/logger';
-import validateSiteToken from '../../utils/validate-site-token';
+import runLighthouse from '../../../audit/run-lighthouse';
+import { saveReport } from '../../../database/reports';
+import { getSiteConfigById, updateSite } from '../../../database/sites';
+import lighthouseTransformer from '../../../transformer/lighthouse-transformer';
+import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
+import { error } from '../../../utils/logger';
+import validateSiteToken from '../../../utils/validate-site-token';
 
 /**
  * Execute an audit

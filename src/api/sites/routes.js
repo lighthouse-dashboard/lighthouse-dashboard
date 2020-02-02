@@ -1,11 +1,11 @@
 import joi from '@hapi/joi';
-import addSiteHandler from './add-site';
-import deleteSite from './delete-site';
-import { getFavSitesHandler } from './get-fav-site';
-import { getLatestSitesHandler } from './get-latest-sites';
-import { getSiteById } from './get-site-by-id';
-import { getSitesHandler } from './get-sites';
-import { updateSiteConfigHandler } from './update-site-config';
+import addSiteHandler from './handlers/add-site';
+import deleteSite from './handlers/delete-site';
+import { getFavSitesHandler } from './handlers/get-fav-site';
+import { getLatestSitesHandler } from './handlers/get-latest-sites';
+import { getSiteById } from './handlers/get-site-by-id';
+import { getSitesHandler } from './handlers/get-sites';
+import { updateSiteConfigHandler } from './handlers/update-site-config';
 
 export default [
     {
