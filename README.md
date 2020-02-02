@@ -4,6 +4,12 @@
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/maintainability"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/maintainability" /></a>
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/test_coverage"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/test_coverage" /></a>
 
+
+# Routes
+- [App](http://0.0.0.0:4000)
+- [Swagger](http://0.0.0.0:4000/documentation)
+- [Real Time Status ](http://0.0.0.0:4000/status)
+
 # Framework
 Backend: [hapi](https://hapi.dev/)
 
@@ -25,16 +31,6 @@ If you want to work on the UI you can start the UI with  `npm run serve`. This w
 already running local server.
 
 
-
-# Todo Future Features (v2...)
-- [ ] 
-- [ ]  
-- [ ] 
-- [ ] 
-- [ ]  
-- [ ] 
-- [ ] 
-- [ ] 
 
 
 ## Done
