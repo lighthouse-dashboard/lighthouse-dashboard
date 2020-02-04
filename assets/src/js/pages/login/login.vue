@@ -35,8 +35,6 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import { AUTH_URL } from '../../config/routes';
-    import axios from '../../utils/axios';
 
     export default {
         props: {},
@@ -49,13 +47,12 @@
             };
         },
         methods: {
-            ...mapActions('login', ['setJwt', 'setLoggedIn']),
+            ...mapActions('login', ['doLogin']),
+
             async onLogin() {
                 this.isLoading = true;
                 try {
-                    const { data } = await axios().post(AUTH_URL, { password: this.password });
-                    await this.setJwt({ jwt: data.jwt });
-                    await this.setLoggedIn({ isLoggedIn: true });
+                    await this.doLogin({ password: this.password });
                     this.$router.push('/');
                     this.isLoading = false;
                 } catch (e) {

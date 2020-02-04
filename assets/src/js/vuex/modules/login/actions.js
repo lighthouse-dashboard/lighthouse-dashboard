@@ -1,11 +1,11 @@
+import { AUTH_URL } from '../../../config/routes';
+import axios from '../../../utils/axios';
 import { SET_JWT, SET_LOGGED_IN } from '../mutation-types';
 
-export function setLoggedIn({ commit }, { isLoggedIn }) {
-    commit(SET_LOGGED_IN, { isLoggedIn });
-}
-
-export function setJwt({ commit }, { jwt }) {
-    commit(SET_JWT, { jwt });
+export async function doLogin({ commit }, { password }) {
+    const { data } = await axios().post(AUTH_URL, { password });
+    commit(SET_JWT, { jwt: data.jwt });
+    commit(SET_LOGGED_IN, { isLoggedIn: true });
 }
 
 export function logout({ commit }) {
