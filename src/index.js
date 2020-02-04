@@ -4,10 +4,10 @@ import Hapi from '@hapi/hapi';
 import { join } from 'path';
 import dashboardConfig from '../dashboard.config';
 import CONFIG from '../server.config.js';
-import setupAuth from './auth/';
+import setupAuth from './server/auth';
 import logger from './logger';
-import setupPlugins from './plugins';
-import setupRouter from './routes';
+import loadPlugins from './server/plugins';
+import loadRoutes from './server/routes';
 import configValidator from './validator/config-validator';
 import dashboardConfigSchema from './validator/schemas/dashboard-config-schema';
 import serverConfigSchema from './validator/schemas/server-config-schema';
@@ -30,9 +30,9 @@ const init = async () => {
         },
     });
 
-    await setupPlugins(server);
+    loadRoutes(server);
+    await loadPlugins(server);
     setupAuth(server);
-    setupRouter(server);
     await server.start();
 
     logger.info(`Server running on ${ server.info.uri }`);
