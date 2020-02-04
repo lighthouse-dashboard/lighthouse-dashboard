@@ -30,9 +30,9 @@ const init = async () => {
         },
     });
 
-    loadRoutes(server);
+    await setupAuth(server);
+    await loadRoutes(server);
     await loadPlugins(server);
-    setupAuth(server);
     await server.start();
 
     logger.info(`Server running on ${ server.info.uri }`);

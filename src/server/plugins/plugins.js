@@ -51,14 +51,12 @@ export default {
         },
     ],
     prod: [
-        Inert,
         {
             plugin: devErrors,
             options: {
                 showErrors: CONFIG.SHOW_ERROR_PAGES,
             },
         },
-        JWT,
         {
             plugin: laabr,
         },

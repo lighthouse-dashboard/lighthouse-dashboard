@@ -6,7 +6,7 @@ export default [
         path: '/health',
         handler: getHealthController,
         options: {
-            auth: 'jwt',
+            auth: false,
             description: 'Get JWT token',
             tags: ['api', 'auth'],
         },
