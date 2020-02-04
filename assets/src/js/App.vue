@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-card outlined>
-            <v-container fluid="true"
+            <v-container :fluid="true"
                     v-if="isLoggedIn">
                 <nav-bar/>
                 <create-site-form/>

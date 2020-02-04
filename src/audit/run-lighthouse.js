@@ -1,8 +1,8 @@
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
-import CONFIG from '../../dashboard.config';
+import CONFIG from '../../server.config';
 import { DEVICE_CONFIG } from '../config/REPORT_DEVICE_FLAGS';
-import { debug, error } from '../utils/logger';
+import logger from '../logger';
 
 /**
  * Create new audit
@@ -13,17 +13,17 @@ import { debug, error } from '../utils/logger';
  * @return {Promise<{}>}
  */
 async function launchChromeAndRunLighthouse(url, opts, flags) {
-    debug('Starting chrome');
+    logger.debug('Starting chrome');
     const chrome = await chromeLauncher.launch(opts);
     const port = chrome.port;
-    debug(`Chrome started in ${ port }`);
+    logger.debug(`Chrome started in ${ port }`);
     try {
-        debug(`Start lighthouse fro ${ url }`);
+        logger.info(`Start lighthouse fro ${ url }`);
         const results = await lighthouse(url, { ...flags, port });
         await chrome.kill();
         return results.lhr;
     } catch (e) {
-        error(e);
+        logger.error(e);
         await chrome.kill();
     }
     throw new Error('Lighthouse encountered an error');
@@ -42,8 +42,8 @@ export default async function runLighthouse(config, transformer) {
         pageUrl,
         {
             chromeFlags: ['--headless', '--no-sandbox'],
-            chromePath: CONFIG.SERVER.AUDIT.CHROMIUM_PATH,
-            port: CONFIG.SERVER.AUDIT.CHROMIUM_PORT,
+            chromePath: CONFIG.AUDIT.CHROMIUM_PATH,
+            port: CONFIG.AUDIT.CHROMIUM_PORT,
         },
         {
             ...DEVICE_CONFIG[device],

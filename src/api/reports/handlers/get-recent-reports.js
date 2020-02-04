@@ -1,5 +1,5 @@
 import Boom from '@hapi/boom';
-import CONFIG from '../../../../dashboard.config';
+import CONFIG from '../../../../server.config';
 import { getReportsBySiteId } from '../../../database/reports';
 import { getSiteConfigById } from '../../../database/sites';
 import reportsToLineChart from '../../../transformer/reports-to-line-chart';
@@ -17,7 +17,7 @@ export default async function getRecentReports({ params }) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const assets = await getReportsBySiteId(id, CONFIG.SERVER.API.SITE_REPORT_LIMIT);
+    const assets = await getReportsBySiteId(id, CONFIG.API.SITE_REPORT_LIMIT);
     if (!assets || assets.length === 0) {
         return Boom.notFound('No audits found');
     }

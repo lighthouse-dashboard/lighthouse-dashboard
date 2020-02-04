@@ -11,6 +11,8 @@ services:
       - SENTRY_DSN=https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421
       - PORT=5000
       - SHOW_ERROR_PAGES=true
+      - WINSTON_LOG_LEVEL=info
+      - CONSOLE_RE_CHANNEL=
     ports:
       - '5000:5000'
   database:

@@ -16,7 +16,7 @@ Backend: [hapi](https://hapi.dev/)
 Frontend: [Vue](https://vuejs.org/) & [Vuetiy](https://vuetifyjs.com/en/)
 
 # Config
-Most config should be in `/dashboard.config.js` whether it is backend or UI
+Most config should be in `/dashboard.config.js`or `./server.config.js` whether it is backend or UI
 
 # Development
 To start debugging or enhancing the app you don't have to use docker.
@@ -30,30 +30,15 @@ Now you have a local server running which will be restarted (with nodemon) after
 If you want to work on the UI you can start the UI with  `npm run serve`. This will create a new app, which is proxy you
 already running local server.
 
+# Env Variables
 
-
-
-## Done
- - [x] Add additional properties `message` and/or `git_commit` to the webhook api
- - [x] Add autorefresh to all charts
- - [x] Improve login page
- - [x] Add loaders
- - [x] Improve logging for development
- - [x] Add sites data to vuex state for immediate mutations & changes 
- - [x] Add config file validator
- - [x] Add toggle to site to indicate if it should be shown in the overview 
- - [x] Add feed of latest built project to the overview
- - [x] Improve JWT token usage with vuex or so
- - [x] Add swagger API doc
- - [x] Create overview for the latest n projects built
- - [x] Add Templating
- - [x] Add method to get all assets
- - [x] Create Chart for all assets with speed index
- - [x] Make audits run in docker 
- - [x] Make UI to add/ remove projects (stored in db)
- - [x] Add cronjobs
- - [x] Secure api requests with access token loaded from ENV
- - [x] Add order indicator to `SiteConfig` for reordering items 
- - [x] Create dashboard view which only shows favorited projects
- - [x] Create view for all projects without speed overview
-
+name | type | description | example
+---|---|---|---
+LOGIN_PASS | `string` | used for login | foobar
+JWT_SECRET | `string` | secret used for the jwt token | asdf123 
+MONGODB_URI | `string` | URI for the DB connection | mongodb://admin:admin@database:27017/auditreports
+SENTRY_DSN | `string` | sentry DSN string | https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421
+PORT | `number` | port number| 5000
+SHOW_ERROR_PAGES | `boolean` | show debug errorpages | true
+WINSTON_LOG_LEVEL | `info,debug,error` | Log level for the winston logger | info
+CONSOLE_RE_CHANNEL | `string` | channel for the console.re channel | my-lighthouse

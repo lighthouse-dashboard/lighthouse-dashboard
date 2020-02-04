@@ -3,9 +3,9 @@ import curry from 'lodash.curry';
 import runLighthouse from '../../../audit/run-lighthouse';
 import { saveReport } from '../../../database/reports';
 import { getSiteConfigById, updateSite } from '../../../database/sites';
+import logger from '../../../logger';
 import lighthouseTransformer from '../../../transformer/lighthouse-transformer';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
-import { error } from '../../../utils/logger';
 import validateSiteToken from '../../../utils/validate-site-token';
 
 /**
@@ -31,12 +31,17 @@ export default async function createReport({ params, query, payload }, h) {
 
     try {
         const meta = getMetaFromGithubWebhook(payload);
+        if (meta && meta.branch && meta.branch !== 'refs/heads/master') {
+            logger.debug(`Skip audit for branch ${ meta.branch }`);
+            return h.response().code(203);
+        }
+
         const transformAuditCurry = curry(lighthouseTransformer);
         const data = await runLighthouse({ pageUrl: url, runs, device }, transformAuditCurry(id));
         await saveReport({ ...data, ...meta });
         await updateSite(config.id, { last_audit: new Date().toISOString() });
     } catch (e) {
-        error(e);
+        logger.error(e);
         return Boom.boomify(e);
     }
 

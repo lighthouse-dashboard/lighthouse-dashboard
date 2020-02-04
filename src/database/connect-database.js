@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import CONFIG from '../../dashboard.config';
+import CONFIG from '../../server.config';
 
 /**
  * Connect to DB
@@ -8,7 +8,7 @@ import CONFIG from '../../dashboard.config';
 export default function connectDatabase() {
     return new Promise((resolve) => {
         // Use connect method to connect to the server
-        MongoClient.connect(CONFIG.SERVER.DB.MONGO_DB_URI, function(err, client) {
+        MongoClient.connect(CONFIG.DB.MONGO_DB_URI, function(err, client) {
             if (err) {
                 throw err;
             }

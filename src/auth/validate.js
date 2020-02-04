@@ -1,5 +1,5 @@
-import CONFIG from '../../dashboard.config.js';
+import CONFIG from '../../server.config';
 
 export default function validate(decoded) {
-    return { isValid: decoded.token === CONFIG.SERVER.API.LOGIN_PASS };
+    return { isValid: decoded.token === CONFIG.API.LOGIN_PASS };
 };

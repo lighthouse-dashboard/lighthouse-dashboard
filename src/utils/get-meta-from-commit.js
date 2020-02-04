@@ -27,6 +27,6 @@ export function getMetaFromGithubWebhook(payload) {
     }
 
     // eslint-disable-next-line camelcase
-    const { head_commit } = payload;
-    return getMetaFromCommit(head_commit);
+    const { head_commit, ref } = payload;
+    return { ...getMetaFromCommit(head_commit), branch: ref };
 }

@@ -5,7 +5,7 @@ import JWT from 'hapi-auth-jwt2';
 import devErrors from 'hapi-dev-errors';
 import HapiSwagger from 'hapi-swagger';
 import laabr from 'laabr';
-import CONFIG from '../../dashboard.config';
+import CONFIG from '../../server.config';
 import { name, version } from '../../package.json';
 
 export const prodPlugins = () => [
@@ -13,7 +13,7 @@ export const prodPlugins = () => [
     {
         plugin: devErrors,
         options: {
-            showErrors: CONFIG.SERVER.SHOW_ERROR_PAGES,
+            showErrors: CONFIG.SHOW_ERROR_PAGES,
         },
     },
     JWT,
