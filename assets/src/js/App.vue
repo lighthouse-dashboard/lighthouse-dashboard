@@ -13,12 +13,11 @@
                 <login/>
             </v-container>
         </v-card>
-        <footer-component/>
+        <footer-component />
     </v-app>
 </template>
 
 <script>
-
     import { mapActions, mapState } from 'vuex';
     import CreateSiteForm from './components/create-site-form/create-site-form';
     import FooterComponent from './components/footer/footer';
