@@ -39,7 +39,6 @@ const init = async () => {
 };
 
 process.on('unhandledRejection', (err) => {
-    debugger;
     logger.error(err);
     console.log(err);
     process.exit(1);
