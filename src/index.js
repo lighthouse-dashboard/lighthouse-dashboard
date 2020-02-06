@@ -4,10 +4,11 @@ import Hapi from '@hapi/hapi';
 import { join } from 'path';
 import dashboardConfig from '../dashboard.config';
 import CONFIG from '../server.config.js';
-import setupAuth from './server/auth';
 import logger from './logger';
+import setupAuth from './server/auth';
 import loadPlugins from './server/plugins';
 import loadRoutes from './server/routes';
+import checkHealth from './utils/check-health';
 import configValidator from './validator/config-validator';
 import dashboardConfigSchema from './validator/schemas/dashboard-config-schema';
 import serverConfigSchema from './validator/schemas/server-config-schema';
@@ -33,9 +34,11 @@ const init = async () => {
     await setupAuth(server);
     await loadRoutes(server);
     await loadPlugins(server);
-    await server.start();
 
-    logger.info(`Server running on ${ server.info.uri }`);
+    if (await checkHealth()) {
+        logger.info('Starting server');
+        await server.start();
+    }
 };
 
 process.on('unhandledRejection', (err) => {

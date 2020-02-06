@@ -18,6 +18,11 @@ Frontend: [Vue](https://vuejs.org/) & [Vuetiy](https://vuetifyjs.com/en/)
 # Config
 Most config should be in `/dashboard.config.js`or `./server.config.js` whether it is backend or UI
 
+# Startup
+To get a minimal version up and running locally just clone this repo. Add a `.env` file with the variables described below
+and run `docker-compose up`. After a couple of minutes you should be able to see that the server has started
+
+
 # Development
 To start debugging or enhancing the app you don't have to use docker.
 First create a `.env` file in the project root.
@@ -27,8 +32,8 @@ In addition to that, you need a mongodb. You could start the dev environment wit
 which will start the mongodb and the server on port 5000. After that, you could start your local server with 
 `npm run server-dev`. After setting the correct connection string, your local server should connect to the mongo container.
 Now you have a local server running which will be restarted (with nodemon) after every change.
-If you want to work on the UI you can start the UI with  `npm run serve`. This will create a new app, which is proxy you
-already running local server.
+If you want to work on the UI you can start the UI with  `npm run serve`. This will create a new app, which proxies your
+already running local server and always delivers the newest UI.
 
 # Env Variables
 

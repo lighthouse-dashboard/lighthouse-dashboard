@@ -13,7 +13,7 @@
                 <login/>
             </v-container>
         </v-card>
-        <footer-component />
+        <footer-component/>
     </v-app>
 </template>
 

@@ -15,7 +15,7 @@
     import ApexCharts from 'apexcharts';
     import { mapActions, mapState } from 'vuex';
     import { DASHBOARD } from '../../../../../dashboard.config';
-    import { SPEED_OVERVIEW_CHART } from '../../config/chart-options';
+    import { COMPARISON_CHART } from '../../config/chart-options';
 
     export default {
         props: {},
@@ -36,7 +36,7 @@
             ...mapActions('reports', ['fetchReportOverview']),
 
             buildChart() {
-                var options = Object.assign({}, SPEED_OVERVIEW_CHART);
+                var options = Object.assign({}, COMPARISON_CHART);
                 this.chart = new ApexCharts(this.$refs.chart, options);
                 this.chart.render();
             },
@@ -55,7 +55,7 @@
                     .then(data => {
                         this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
                         this.updateChart();
-                    })
+                    });
             },
 
             modifyDataSets(datasets) {

@@ -20,10 +20,11 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
     try {
         logger.info(`Start lighthouse for ${ url }`);
         const results = await lighthouse(url, { ...flags, port });
+        logger.info(`Report for ${ url } completed`);
         await chrome.kill();
         return results.lhr;
     } catch (e) {
-        logger.error(e);
+        logger.error(e.message);
         await chrome.kill();
     }
     throw new Error('Lighthouse encountered an error');
@@ -38,6 +39,7 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
 export default async function runLighthouse(config, transformer) {
     const { url, device } = config;
 
+    logger.debug(`Run lighthouse for ${ config.url } ${ config.device }`);
     const audit = await launchChromeAndRunLighthouse(
         url,
         {

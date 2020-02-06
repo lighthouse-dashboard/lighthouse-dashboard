@@ -5,7 +5,7 @@ const DEFAULT_CHART = {
     theme: {
         mode: CONFIG.UI.THEME,
     },
-    colors: CONFIG.UI.CHART_COLORS[CONFIG.UI.THEME],
+    colors: CONFIG.UI.CHART_COLORS[colorPreference()],
     plotOptions: {
         bar: {
             horizontal: false,
@@ -22,6 +22,9 @@ const DEFAULT_CHART = {
         position: 'bottom',
         horizontalAlign: 'left',
         offsetX: 0,
+        labels: {
+            useSeriesColors: true,
+        },
     },
     noData: {
         text: 'No data available',
@@ -94,7 +97,7 @@ export const GAUGE_CHART = {
     },
 };
 
-export const SPEED_OVERVIEW_CHART = {
+export const COMPARISON_CHART = {
     ...DEFAULT_CHART,
     chart: {
         height: 200,
@@ -108,14 +111,29 @@ export const SPEED_OVERVIEW_CHART = {
         },
     },
     series: [],
+    title: {
+        style: {
+            colors: CONFIG.UI.COLOR_THEME[colorPreference()].text,
+        },
+    },
     xaxis: {
         categories: [],
+        labels: {
+            style: {
+                colors: CONFIG.UI.COLOR_THEME[colorPreference()].text,
+            },
+        },
     },
     yaxis: {
         show: true,
         tickAmount: 2,
         min: 0,
         max: 100,
+        labels: {
+            style: {
+                colors: CONFIG.UI.COLOR_THEME[colorPreference()].text,
+            },
+        },
     },
 };
 

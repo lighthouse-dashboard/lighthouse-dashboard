@@ -1,8 +1,8 @@
 import os from 'os';
 import connectDatabase from '../../database/connect-database';
 
-export async function getHealthController(request) {
-    const { client, db } = await connectDatabase();
+export async function getHealthController() {
+    const { client } = await connectDatabase();
     client.close();
 
     return {
