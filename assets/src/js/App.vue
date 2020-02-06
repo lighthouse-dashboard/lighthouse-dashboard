@@ -20,11 +20,11 @@
 <script>
 
     import { mapActions, mapState } from 'vuex';
-    import CONFIG from '../../../dashboard.config';
     import CreateSiteForm from './components/create-site-form/create-site-form';
     import FooterComponent from './components/footer/footer';
     import NavBar from './components/nav-bar/nav-bar';
     import Login from './pages/login/login';
+    import colorPreference from './utils/color-preference';
 
     export default {
         components: {
@@ -42,7 +42,7 @@
         },
 
         created() {
-            this.$vuetify.theme.dark = CONFIG.UI.THEME === 'dark';
+            this.$vuetify.theme.dark = colorPreference() === 'dark';
         },
     };
 </script>

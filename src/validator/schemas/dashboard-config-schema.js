@@ -73,11 +73,6 @@ export default joi.object({
         .required(),
 
     UI: joi.object({
-        THEME: joi
-            .string()
-            .allow('light', 'dark')
-            .required(),
-
         CHART_COLORS: joi.object({
             dark: joi.array().items(joi.string()),
             light: joi.array().items(joi.string()),

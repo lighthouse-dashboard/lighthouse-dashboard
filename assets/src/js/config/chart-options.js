@@ -1,4 +1,5 @@
 import CONFIG from '../../../../dashboard.config';
+import colorPreference from '../utils/color-preference';
 
 const DEFAULT_CHART = {
     theme: {
@@ -69,18 +70,18 @@ export const GAUGE_CHART = {
             },
             dataLabels: {
                 name: {
-                    color: CONFIG.UI.CHART_COLORS[CONFIG.UI.THEME][0],
+                    color: CONFIG.UI.CHART_COLORS[colorPreference()][0],
                     fontSize: '12px',
                 },
                 value: {
-                    color: CONFIG.UI.CHART_COLORS[CONFIG.UI.THEME][0],
+                    color: CONFIG.UI.CHART_COLORS[colorPreference()][0],
                     fontSize: '18px',
                     offsetY: -30,
                 },
             },
         },
     },
-    colors: CONFIG.UI.CHART_COLORS[CONFIG.UI.THEME],
+    colors: CONFIG.UI.CHART_COLORS[colorPreference()],
     fill: {
         type: 'gradient',
         gradient: {

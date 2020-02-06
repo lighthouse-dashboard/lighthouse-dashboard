@@ -1,4 +1,3 @@
-const colorPreference = require('./src/utils/color-preference');
 require('dotenv').config();
 
 module.exports = {
@@ -56,33 +55,31 @@ module.exports = {
     },
 
     UI: {
-        THEME: colorPreference ? 'dark' : 'light',
-        //THEME: 'dark',
         CHART_COLORS: {
             dark: [
-                '#C5F4C4',
-                '#97D68E',
-                '#7B9878',
+                '#c5f4c4',
+                '#97d68e',
+                '#7b9878',
                 '#a2a7ac',
-                '#707B9A',
+                '#707b9a',
             ],
             light: [
-                '#DE594D',
-                '#EFCB6E',
-                '#DACAAE',
-                '#5CBE9E',
-                '#546C54',
+                '#de594d',
+                '#efcb6e',
+                '#dacaae',
+                '#5cbe9e',
+                '#546c54',
             ],
         },
         COLOR_THEME: {
             dark: {
-                primary: '#D37549',
+                primary: '#d37549',
                 secondary: '#bf4223',
                 text: '#d6a99d',
-                accent: '#546B8F',
+                accent: '#546b8f',
             },
             light: {
-                primary: '#DE594D',
+                primary: '#de594d',
                 text: '#333333',
                 secondary: '#ffcc80',
                 accent: '#e91e63',
