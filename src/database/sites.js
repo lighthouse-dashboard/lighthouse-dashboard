@@ -108,3 +108,17 @@ export async function getSiteConfigById(id) {
 
     return sites.pop();
 }
+
+/**
+ * Get config for specific site
+ * @param {string} token
+ * @return {Promise<SiteConfig | null>}
+ */
+export async function getSiteConfigByToken(token) {
+    const sites = await findSites({ token }, {}, 1);
+    if (!sites || sites.length === 0) {
+        return null;
+    }
+
+    return sites.pop();
+}

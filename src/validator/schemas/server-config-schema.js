@@ -23,4 +23,5 @@ export default joi.object({
     SHOW_ERROR_PAGES: joi.boolean().required(),
     LOGGERS: joi.array(),
     EXCEPTION_HANDLERS: joi.array(),
+    HAPI_PLUGINS: joi.array(),
 }).required();

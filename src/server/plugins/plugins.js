@@ -1,9 +1,7 @@
 /* eslint-disable global-require */
 
-import Inert from '@hapi/inert';
 import * as Vision from '@hapi/vision';
 import blipp from 'blipp';
-import JWT from 'hapi-auth-jwt2';
 import devErrors from 'hapi-dev-errors';
 import HapiSwagger from 'hapi-swagger';
 import laabr from 'laabr';
@@ -24,33 +22,10 @@ export default {
             },
         },
 
-        {
-            plugin: require('hapijs-status-monitor'),
-            options: {
-                title: 'Lighthouse Dashboard Status',
-                path: '/status',
-                spans: [
-                    {
-                        interval: 1,     // Every second
-                        retention: 60    // Keep 60 datapoints in memory
-                    },
-                    {
-                        interval: 5,     // Every 5 seconds
-                        retention: 60
-                    },
-                    {
-                        interval: 15,    // Every 15 seconds
-                        retention: 60
-                    },
-                ],
-                routeConfig: {
-                    description: 'Service health',
-                    auth: false,
-                },
-            },
-        },
+
     ],
     prod: [
+        ...CONFIG.HAPI_PLUGINS,
         {
             plugin: devErrors,
             options: {
@@ -61,7 +36,7 @@ export default {
             plugin: laabr,
         },
         {
-            plugin: blipp, options: { showAuth: true }
+            plugin: blipp, options: { showAuth: true },
         },
     ],
 };

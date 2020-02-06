@@ -19,7 +19,7 @@ export default function getMetaFromCommit(commit) {
 /**
  * Get meta info from the github webhook call
  * @param {hapi.Request} request
- * @return {{message: string, git_commit: string}}
+ * @return {ReportMeta}
  */
 export function getMetaFromGithubWebhook(payload) {
     if (!payload) {

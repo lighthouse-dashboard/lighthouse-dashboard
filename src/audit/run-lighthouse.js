@@ -18,7 +18,7 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
     const port = chrome.port;
     logger.debug(`Chrome started in ${ port }`);
     try {
-        logger.info(`Start lighthouse fro ${ url }`);
+        logger.info(`Start lighthouse for ${ url }`);
         const results = await lighthouse(url, { ...flags, port });
         await chrome.kill();
         return results.lhr;
@@ -36,10 +36,10 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
  * @return {Report}
  */
 export default async function runLighthouse(config, transformer) {
-    const { pageUrl, device } = config;
+    const { url, device } = config;
 
     const audit = await launchChromeAndRunLighthouse(
-        pageUrl,
+        url,
         {
             chromeFlags: ['--headless', '--no-sandbox'],
             chromePath: CONFIG.AUDIT.CHROMIUM_PATH,

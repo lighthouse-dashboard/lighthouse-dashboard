@@ -9,21 +9,12 @@
             </v-btn>
         </template>
         <v-list>
-            <v-list-item>
-                <v-list-item-title>
-                    Open Page
-                </v-list-item-title>
-            </v-list-item>
             <v-list-item @click="openSettings">
                 <v-list-item-title>
                     Settings
                 </v-list-item-title>
             </v-list-item>
-            <v-list-item @click="removePage">
-                <v-list-item-title>
-                    Remove Site
-                </v-list-item-title>
-            </v-list-item>
+
             <v-list-item @click="runAudit">
                 <v-list-item-title>
                     Run New Audit
@@ -47,6 +38,9 @@
 
             openSettings() {
                 this.$emit('openSettings');
+            },
+            openInfo() {
+                this.$emit('openInfo');
             },
         },
     };

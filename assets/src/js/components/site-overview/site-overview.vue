@@ -10,6 +10,7 @@
             <site-overview-menu
                     @openSettings="openSettings"
                     @removePage="removePage"
+                    @openInfo="openInfo"
                     @runAudit="runAudit"/>
         </v-card-title>
 
@@ -52,6 +53,7 @@
                 type: String,
                 required: true,
             },
+
             is_favorite: {
                 type: Boolean,
                 required: true,
@@ -65,6 +67,7 @@
         data() {
             return {
                 showSettings: false,
+                showInfo: false,
                 chart: null,
                 chartData: {
                     datasets: [],
@@ -127,6 +130,9 @@
 
             openSettings() {
                 this.showSettings = !this.showSettings;
+            },
+            openInfo() {
+                this.showInfo = !this.showInfo;
             },
         },
 

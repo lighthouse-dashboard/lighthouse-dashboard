@@ -7,11 +7,5 @@ import CONFIG from '../../dashboard.config';
  * @return {string}
  */
 export default function formatReportSummaryString(report) {
-    const formattedTime = format(new Date(report.createdAt), CONFIG.DATE_FORMAT);
-
-    if (report.message) {
-        return `${ report.message }`;
-    }
-
-    return formattedTime;
+    return format(new Date(report.createdAt), CONFIG.DATE_FORMAT);
 }

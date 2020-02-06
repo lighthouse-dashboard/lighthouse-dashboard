@@ -1,38 +1,48 @@
 <template>
-    <v-dialog
-            v-model="modal"
-            max-width="320">
-        <v-card>
-            <v-card-title class="headline">
-                Settings <small> {{ siteConfig.id }}</small>
-            </v-card-title>
+    <overlay title="Settings">
+        <template slot="content">
+            <v-text-field readonly
+                    label="ID"
+                    :value="siteConfig.id"/>
 
-            <v-card-text>
-                <v-text-field readonly
-                        label="Github Hook Url"
-                        :value="githubWebhookUrl"/>
-                <v-checkbox
-                        v-model="siteConfig.is_favorite"
-                        color="secondary"
-                        label="Is Favorite"/>
-            </v-card-text>
+            <v-text-field readonly
+                    label="Last Audit"
+                    :value="siteConfig.last_audit"/>
 
-            <v-card-actions>
-                <v-spacer/>
-                <v-btn text
-                        color="secondary"
-                        @click="save">
-                    Save
-                </v-btn>
-            </v-card-actions>
-        </v-card>
-    </v-dialog>
+            <v-text-field readonly
+                    label="Device"
+                    :value="siteConfig.device"/>
+
+            <v-text-field readonly
+                    label="Address"
+                    :value="siteConfig.url"/>
+
+            <v-text-field readonly
+                    label="Github Hook Url"
+                    :value="githubWebhookUrl"/>
+
+            <v-checkbox
+                    v-model="siteConfig.is_favorite"
+                    color="secondary"
+                    label="Is Favorite"/>
+        </template>
+
+        <template slot="actions">
+            <v-btn text
+                    color="secondary"
+                    @click="save">
+                Save
+            </v-btn>
+        </template>
+    </overlay>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
+    import Overlay from '../dialog/dialog';
 
     export default {
+        components: { Overlay },
         props: {
             id: {
                 type: String,
@@ -53,7 +63,7 @@
                 if (!this.siteConfig) {
                     return null;
                 }
-                return `${window.location.protocol}//${window.location.host}/api/reports/${ this.id }?token=${ this.siteConfig.token }`;
+                return `${ window.location.protocol }//${ window.location.host }/api/reports/${ this.id }?token=${ this.siteConfig.token }`;
             },
         },
 

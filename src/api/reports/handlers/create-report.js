@@ -1,10 +1,7 @@
 import Boom from '@hapi/boom';
-import curry from 'lodash.curry';
-import runLighthouse from '../../../audit/run-lighthouse';
-import { saveReport } from '../../../database/reports';
-import { getSiteConfigById, updateSite } from '../../../database/sites';
+import { getSiteConfigByToken } from '../../../database/sites';
 import logger from '../../../logger';
-import lighthouseTransformer from '../../../transformer/lighthouse-transformer';
+import { spawnNewAuditWorker } from '../../../utils/create-new-audit';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
 import validateSiteToken from '../../../utils/validate-site-token';
 
@@ -14,11 +11,10 @@ import validateSiteToken from '../../../utils/validate-site-token';
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-export default async function createReport({ params, query, payload }, h) {
-    const { id } = params;
+export default async function createReport({ query, payload }, h) {
     const { token } = query;
 
-    const config = await getSiteConfigById(id);
+    const config = await getSiteConfigByToken(token);
     if (!config) {
         return Boom.notFound('Config not found');
     }
@@ -27,8 +23,6 @@ export default async function createReport({ params, query, payload }, h) {
         return Boom.forbidden('Token mismatch');
     }
 
-    const { url, runs, device } = config;
-
     try {
         const meta = getMetaFromGithubWebhook(payload);
         if (meta && meta.branch && meta.branch !== 'refs/heads/master') {
@@ -36,10 +30,8 @@ export default async function createReport({ params, query, payload }, h) {
             return h.response().code(203);
         }
 
-        const transformAuditCurry = curry(lighthouseTransformer);
-        const data = await runLighthouse({ pageUrl: url, runs, device }, transformAuditCurry(id));
-        await saveReport({ ...data, ...meta });
-        await updateSite(config.id, { last_audit: new Date().toISOString() });
+        await spawnNewAuditWorker(config);
+        //await createNewAuuditForConfig(config, meta);
     } catch (e) {
         logger.error(e);
         return Boom.boomify(e);

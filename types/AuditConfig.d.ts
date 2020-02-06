@@ -1,5 +1,5 @@
 export interface AuditConfig {
-    pageUrl: string;
+    url: string;
     runs: number;
     device: 'desktop' | 'mobile';
 }
