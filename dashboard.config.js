@@ -64,11 +64,11 @@ module.exports = {
                 '#707b9a',
             ],
             light: [
-                '#de594d',
-                '#efcb6e',
-                '#dacaae',
-                '#5cbe9e',
-                '#546c54',
+                '#de6416',
+                '#efa34e',
+                '#fbcc98',
+                '#65beb1',
+                '#7b9b7b',
             ],
         },
         COLOR_THEME: {
