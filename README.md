@@ -1,19 +1,46 @@
-
 # lighthouse-dashboard
 [![CircleCI](https://circleci.com/gh/dreipol/lighthouse-dashboard.svg?style=svg&circle-token=fa73435956cf491fcc4005ad5143e00ebf6871fa)](https://circleci.com/gh/dreipol/lighthouse-dashboard)
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/maintainability"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/maintainability" /></a>
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/test_coverage"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/test_coverage" /></a>
 
+A dashboard to keep track on the performance of your sites. Keep track during development by setting up webhooks
+in github to audit your site on every push to the `master` branch
+
+# Features
+- Responsive UI & Charts
+- Password protected
+- Highly customizable colors
+- Easy to setup and host
+- Runs [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) under the hood
+- Open Source
+- Supports Webhooks to trigger audits
+- Uses [mongodb](https://www.mongodb.com/)
+- Star a project to see it on the dashboard
+- Choose between Desktop and Mobile audit settings
+- Configure what you want to see and keep track of
+- Runs in a [docker](https://www.docker.com/)
+- UI built with [Vue](https://vuejs.org/)
+- Server built with [hapi](https://hapi.dev/)
+- Customizable server config
+- [Real Time Status Monitor](https://www.npmjs.com/package/hapijs-status-monitor)
+- [Swagger](http://0.0.0.0:4000/documentation) documentation for the APIs
+
+# Screenshots
+![Dashboard Darkmode](./doc/dark_dashboard.jpg)
+![Project List Lightmode](./doc/light_projects.jpg)
+
+
+# Framework
+Datatbase: [mongodb](https://www.mongodb.com/)
+
+Backend: [hapi](https://hapi.dev/)
+
+Frontend: [Vue](https://vuejs.org/) & [Vuetiy](https://vuetifyjs.com/en/)
 
 # Routes
 - [App](http://0.0.0.0:4000)
 - [Swagger](http://0.0.0.0:4000/documentation)
 - [Real Time Status ](http://0.0.0.0:4000/status)
-
-# Framework
-Backend: [hapi](https://hapi.dev/)
-
-Frontend: [Vue](https://vuejs.org/) & [Vuetiy](https://vuetifyjs.com/en/)
 
 # Config
 Most config should be in `/dashboard.config.js`or `./server.config.js` whether it is backend or UI
