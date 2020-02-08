@@ -6,7 +6,7 @@ module.exports = {
         TITLE: 'My Dashboard',
         UPDATE_INTERVAL: 30000,
         PAGE_DASHBOARD: {
-            IS_FLUID: false,
+            IS_FLUID: true,
             CHARTS: [
                 'favorite-projects-comparison',
                 'latest-audits',
@@ -14,7 +14,7 @@ module.exports = {
             ],
         },
         PAGE_PROJECTS: {
-            IS_FLUID: false,
+            IS_FLUID: true,
             colSize: 3,
         },
 
@@ -29,7 +29,7 @@ module.exports = {
         },
         latestAudits: {
             colSize: 3,
-            limit: 12,
+            limit: 4,
             fields: [
                 'performance',
                 // 'seo',
