@@ -1,6 +1,7 @@
 import joi from '@hapi/joi';
 import addSiteHandler from './handlers/add-site';
 import createReport from './handlers/create-report';
+import createReportByWebhook from './handlers/create-report-by-webhook';
 import createReportForAll from './handlers/create-report-for-all';
 import deleteSite from './handlers/delete-site';
 import { getFavSitesHandler } from './handlers/get-fav-site';
@@ -132,15 +133,15 @@ export default [
     },
     {
         method: 'POST',
-        path: '/api/webhook/{id}',
-        handler: createReport,
+        path: '/api/webhook/{token}',
+        handler: createReportByWebhook,
         options: {
             description: 'Add new site audit',
             tags: ['api', 'sites'],
             auth: false,
             validate: {
                 params: joi.object({
-                    id: joi
+                    token: joi
                         .string()
                         .required(),
                 }),
