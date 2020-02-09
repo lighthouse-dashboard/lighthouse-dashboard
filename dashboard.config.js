@@ -5,7 +5,7 @@ module.exports = {
     DASHBOARD: {
         TITLE: 'My Dashboard',
 
-        UPDATE_INTERVAL: 5000,
+        UPDATE_INTERVAL: 30000,
 
         PAGE_DASHBOARD: {
             IS_FLUID: false,
