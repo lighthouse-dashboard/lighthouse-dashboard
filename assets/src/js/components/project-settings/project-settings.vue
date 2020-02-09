@@ -41,6 +41,7 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import { POST_WEBHOOK_URL } from '../../config/routes';
     import Overlay from '../dialog/dialog';
 
     export default {
@@ -65,7 +66,7 @@
                 if (!this.siteConfig) {
                     return null;
                 }
-                return `${ window.location.protocol }//${ window.location.host }/api/reports/${ this.siteConfig.token }`;
+                return POST_WEBHOOK_URL(this.siteConfig.token);
             },
         },
 
