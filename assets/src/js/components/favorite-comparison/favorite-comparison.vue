@@ -53,17 +53,9 @@
             loadData() {
                 this.fetchReportOverview()
                     .then(data => {
-                        this.chartData = { ...data, datasets: this.modifyDataSets(data.datasets) };
+                        this.chartData = { ...data, datasets: data.datasets };
                         this.updateChart();
                     });
-            },
-
-            modifyDataSets(datasets) {
-                return datasets.map((dataset) => {
-                    return {
-                        ...dataset,
-                    };
-                });
             },
         },
 

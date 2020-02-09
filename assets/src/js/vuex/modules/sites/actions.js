@@ -23,8 +23,8 @@ export async function fetchAllSites({ commit }) {
  * @param {any} _
  * @param {string} siteId
  */
-export function deleteSite(_, { siteId }) {
-    axios().delete(REMOVE_SITE_URL(siteId));
+export function deleteSite(_, { id }) {
+    axios().delete(REMOVE_SITE_URL(id));
 }
 
 /**

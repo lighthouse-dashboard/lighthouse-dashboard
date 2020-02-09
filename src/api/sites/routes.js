@@ -1,5 +1,6 @@
 import joi from '@hapi/joi';
 import addSiteHandler from './handlers/add-site';
+import createReport from './handlers/create-report';
 import deleteSite from './handlers/delete-site';
 import { getFavSitesHandler } from './handlers/get-fav-site';
 import { getLatestSitesHandler } from './handlers/get-latest-sites';
@@ -83,6 +84,8 @@ export default [
                 }),
                 payload: joi.object({
                     is_favorite: joi.boolean().required(),
+                    name: joi.string(),
+                    url: joi.string(),
                 }),
             },
         },
@@ -98,16 +101,30 @@ export default [
             validate: {
                 payload: joi.object({
                     url: joi
+                        .string(),
+                    name: joi
+                        .string(),
+                    device: joi
                         .string()
-                        .required(),
+                        .allow('desktop', 'mobile'),
+                    isFavorite: joi.boolean(),
+                }),
+            },
+        },
+    },
+    {
+        method: 'POST',
+        path: '/api/sites/{id}',
+        handler: createReport,
+        options: {
+            description: 'Add new site audit',
+            tags: ['api', 'sites'],
+            auth: 'jwt',
+            validate: {
+                params: joi.object({
                     id: joi
                         .string()
                         .required(),
-                    device: joi
-                        .string()
-                        .allow('desktop', 'mobile')
-                        .required(),
-                    isFavorite: joi.boolean(),
                 }),
             },
         },

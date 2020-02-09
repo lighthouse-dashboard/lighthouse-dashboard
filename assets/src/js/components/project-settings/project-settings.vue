@@ -1,9 +1,10 @@
 <template>
     <overlay title="Settings">
         <template slot="content">
-            <v-text-field readonly
-                    label="ID"
-                    :value="siteConfig.id"/>
+            <v-text-field
+                    v-model="siteConfig.name"
+                    label="Name"
+            />
 
             <v-text-field readonly
                     label="Last Audit"
@@ -13,9 +14,10 @@
                     label="Device"
                     :value="siteConfig.device"/>
 
-            <v-text-field readonly
+            <v-text-field
+                    v-model="siteConfig.url"
                     label="Address"
-                    :value="siteConfig.url"/>
+            />
 
             <v-text-field readonly
                     label="Github Hook Url"
@@ -63,7 +65,7 @@
                 if (!this.siteConfig) {
                     return null;
                 }
-                return `${ window.location.protocol }//${ window.location.host }/api/reports/${ this.id }?token=${ this.siteConfig.token }`;
+                return `${ window.location.protocol }//${ window.location.host }/api/reports/${ this.siteConfig.token }`;
             },
         },
 
@@ -72,7 +74,14 @@
             ...mapActions('sites', ['getSite', 'updateSite']),
 
             save() {
-                this.updateSite({ id: this.siteConfig.id, delta: { is_favorite: this.siteConfig.is_favorite } });
+                this.updateSite({
+                    id: this.siteConfig.id,
+                    delta: {
+                        is_favorite: this.siteConfig.is_favorite,
+                        name: this.siteConfig.name,
+                        url: this.siteConfig.url,
+                    },
+                });
                 this.$emit('close');
             },
         },

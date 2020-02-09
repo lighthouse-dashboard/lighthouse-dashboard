@@ -9,7 +9,7 @@ import reportsToLineChart from '../../../transformer/reports-to-line-chart';
  * @param {hapi.Request.params} params
  * @return {Promise<ChartData>}
  */
-export default async function getRecentReports({ params }) {
+export default async function getReports({ params }) {
     const { id } = params;
 
     const config = getSiteConfigById(id);

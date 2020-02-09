@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 import { DASHBOARD } from '../../dashboard.config';
 import { SITES_CONFIG_COLLECTION } from '../config/db';
 import connectDatabase from '../database/connect-database';
@@ -65,22 +66,22 @@ export function getLatestSites() {
 export async function addSite(config) {
     const { database, client } = await connectDatabase();
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    siteCollection.insertOne(config);
+    siteCollection.insertOne({ id: uuid(), ...config });
     client.close();
 }
 
 /**
- * Update siteconfig
+ * Update site config
  * @param {string} id
  * @param {Partial<SiteConfig>} delta
- * @return {Promise<void>}
+ * @return {Promise<SiteConfig>}
  */
 export async function updateSite(id, delta) {
     const { database, client } = await connectDatabase();
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     siteCollection.updateOne({ id }, { $set: delta });
     client.close();
-
+    return getSiteConfigById({ id });
 }
 
 /**

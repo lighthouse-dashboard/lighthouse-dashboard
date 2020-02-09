@@ -4,15 +4,18 @@ module.exports = {
     DATE_FORMAT: 'dd/MM HH:mm',
     DASHBOARD: {
         TITLE: 'My Dashboard',
-        UPDATE_INTERVAL: 30000,
+
+        UPDATE_INTERVAL: 5000,
+
         PAGE_DASHBOARD: {
-            IS_FLUID: true,
+            IS_FLUID: false,
             CHARTS: [
                 'favorite-projects-comparison',
                 'latest-audits',
                 'favorite-projects-overview',
             ],
         },
+
         PAGE_PROJECTS: {
             IS_FLUID: true,
             colSize: 3,
@@ -27,6 +30,7 @@ module.exports = {
                 'best-practices',
             ],
         },
+
         latestAudits: {
             colSize: 3,
             limit: 4,
@@ -71,6 +75,7 @@ module.exports = {
                 '#7b9b7b',
             ],
         },
+
         COLOR_THEME: {
             dark: {
                 primary: '#d37549',

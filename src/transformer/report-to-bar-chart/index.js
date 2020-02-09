@@ -7,7 +7,7 @@ import { getReportValueScoreByKey } from '../../utils/get-report-value-score-by-
  * @param {string[]} exportingValues
  * @return {BarChartData}
  */
-export default function(reports, labels, exportingValues) {
+export default function reportToBarChart(reports, labels, exportingValues) {
     /** @type {BarChartData} */
     const data = { labels, datasets: [] };
 
