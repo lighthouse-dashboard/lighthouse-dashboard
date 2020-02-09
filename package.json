@@ -19,7 +19,7 @@
         "lint-frontend": "eslint -c .eslintrc ./assets/src",
         "lint-backend": "eslint -c ./.eslintrc ./src",
         "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
-        "start": "node -r esm src/server/index.js",
+        "start": "node -r esm ./index.js",
         "audit": "node -r esm src/commands/run-audits-command.js",
         "test": "mocha src/**/*.spec.js -r esm"
     },
@@ -84,6 +84,7 @@
         "babel-preset-stage-2": "^6.24.1",
         "eslint": "^5.16.0",
         "eslint-plugin-vue": "^5.0.0",
+        "hapijs-status-monitor": "^1.0.1",
         "node-sass": "^4.13.0",
         "nodemon": "^2.0.2",
         "sass": "^1.24.0",

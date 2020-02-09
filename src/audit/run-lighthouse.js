@@ -13,17 +13,17 @@ import logger from '../logger';
  * @return {Promise<{}>}
  */
 async function launchChromeAndRunLighthouse(url, opts, flags) {
-    logger.debug('Starting chrome');
     const chrome = await chromeLauncher.launch(opts);
     const port = chrome.port;
     logger.debug(`Chrome started in ${ port }`);
     try {
-        logger.info(`Start lighthouse for ${ url }`);
+        logger.info(`Start audit for ${ url }`);
         const results = await lighthouse(url, { ...flags, port });
-        logger.info(`Report for ${ url } completed`);
+        logger.info(`Audit for ${ url } completed`);
         await chrome.kill();
         return results.lhr;
     } catch (e) {
+        logger.info(`Audit for ${ url } failed. ${ e.message }`);
         logger.error(e.message);
         await chrome.kill();
     }
@@ -39,7 +39,7 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
 export default async function runLighthouse(config, transformer) {
     const { url, device } = config;
 
-    logger.debug(`Run lighthouse for ${ config.url } ${ config.device }`);
+    logger.debug(`Run audit for ${ config.url } ${ config.device }`);
     const audit = await launchChromeAndRunLighthouse(
         url,
         {

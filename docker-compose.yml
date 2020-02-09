@@ -14,11 +14,12 @@ services:
     environment:
       - LOGIN_PASS=Foo
       - JWT_SECRET=Foo
-      - MONGODB_URI=mongodb://database:27017/auditreports
+      - MONGODB_URI=mongodb://database:27017/lhd
       - SENTRY_DSN=https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421
       - PORT=5000
       - SHOW_ERROR_PAGES=true
-      - WINSTON_LOG_LEVEL=info
+      - WINSTON_LOG_LEVEL=debug
       - CONSOLE_RE_CHANNEL=
+      - WEB_CONCURRENCY=1
     ports:
       - '5000:5000'
