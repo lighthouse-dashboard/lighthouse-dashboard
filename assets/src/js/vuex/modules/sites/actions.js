@@ -33,10 +33,10 @@ export function deleteSite(_, { id }) {
  * @return {Promise<void>}
  */
 export async function createSite({ commit }, siteConfig) {
-    await axios()
+    const { data } = await axios()
         .post(CREATE_SITE_URL, siteConfig);
 
-    commit({ type: ADD_SITE, site: siteConfig });
+    commit({ type: ADD_SITE, site: data });
 }
 
 /**

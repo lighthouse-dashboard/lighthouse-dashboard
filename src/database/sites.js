@@ -60,14 +60,16 @@ export function getLatestSites() {
 
 /**
  * Add new site to DB
- * @param {SiteConfig} config
- * @return {Promise<void>}
+ * @param {Pick<SiteConfig, "name"|"device"|"url"|"is_favorite">} config
+ * @return {Promise<SiteConfig>}
  */
 export async function addSite(config) {
     const { database, client } = await connectDatabase();
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    siteCollection.insertOne({ id: uuid(), ...config });
+    const id = uuid();
+    siteCollection.insertOne({ id, ...config });
     client.close();
+    return getSiteConfigById(id);
 }
 
 /**
