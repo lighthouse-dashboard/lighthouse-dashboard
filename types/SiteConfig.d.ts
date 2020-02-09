@@ -1,4 +1,5 @@
 export interface SiteConfig {
+    id: string;
     name: string;
     url: string;
     device: 'desktop' | 'mobile';

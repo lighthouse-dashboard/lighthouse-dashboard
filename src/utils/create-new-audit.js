@@ -11,6 +11,11 @@ export function spawnNewAuditWorker(config) {
     forked.send({ config });
 }
 
+export function spawnNewAuditsWorker(list) {
+    const forked = fork(join(__dirname, '../workers/batch-audit.js'));
+    forked.send({ list });
+}
+
 /**
  * Run new audit by id
  * @param {string} id

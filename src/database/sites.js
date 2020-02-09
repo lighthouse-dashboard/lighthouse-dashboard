@@ -38,7 +38,7 @@ async function findSites(find, sort, limit = 100) {
  * Get list of sites from DB
  * @return {Promise<SiteConfig[]>}
  */
-export function getSites() {
+export function getAllSites() {
     return findSites({}, { last_audit: -1 });
 }
 

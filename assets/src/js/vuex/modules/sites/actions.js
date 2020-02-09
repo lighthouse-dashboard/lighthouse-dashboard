@@ -2,7 +2,7 @@ import {
     CREATE_SITE_URL,
     GET_LATEST_AUDITED_SITES_URL,
     GET_SITE_BY_ID_URL,
-    GET_SITES_URL,
+    GET_SITES_URL, POST_SITE_ALL_URL,
     REMOVE_SITE_URL
 } from '../../../config/routes';
 import axios from '../../../utils/axios';
@@ -71,4 +71,13 @@ export async function getLatestSites() {
 export async function getSite(_, { siteId }) {
     const { data } = await axios().get(GET_SITE_BY_ID_URL(siteId));
     return data;
+}
+
+/**
+ * Get specific site
+ * @param _
+ * @return {Promise<T>}
+ */
+export async function createReportForAll() {
+    await axios().post(POST_SITE_ALL_URL);
 }

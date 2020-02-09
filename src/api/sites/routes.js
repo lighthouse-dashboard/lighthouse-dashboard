@@ -1,6 +1,7 @@
 import joi from '@hapi/joi';
 import addSiteHandler from './handlers/add-site';
 import createReport from './handlers/create-report';
+import createReportForAll from './handlers/create-report-for-all';
 import deleteSite from './handlers/delete-site';
 import { getFavSitesHandler } from './handlers/get-fav-site';
 import { getLatestSitesHandler } from './handlers/get-latest-sites';
@@ -127,6 +128,16 @@ export default [
                         .required(),
                 }),
             },
+        },
+    },
+    {
+        method: 'POST',
+        path: '/api/sites/all',
+        handler: createReportForAll,
+        options: {
+            description: 'Add new site audit for every site',
+            tags: ['api', 'sites'],
+            auth: 'jwt',
         },
     },
 ];
