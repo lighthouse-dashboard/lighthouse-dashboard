@@ -9,6 +9,11 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
 });
 
+
+process.on('SIGTERM', () => {
+    logger.info('SIGTERM batch audit worker');
+});
+
 process.on('message', async ({ list }) => {
     logger.debug(`Start new batch worker ${ list.length }`);
     for (let i = 0; i < list.length; i++) {

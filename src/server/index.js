@@ -39,11 +39,16 @@ async function start() {
 export default function app() {
     logger.info(`Starting server worker`);
 
-    logger.debug(`Setting up unhandledRejection listener`);
+    logger.debug(`Setting up process listener`);
     process.on('unhandledRejection', (err) => {
         logger.error(err);
         console.log(err);
         process.exit(1);
+    });
+
+
+    process.on('SIGTERM', () => {
+        logger.info('SIGTERM server worker');
     });
 
     if (process.env.SENTRY_DSN) {
