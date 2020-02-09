@@ -11,6 +11,6 @@ export default async function checkHealth() {
         logger.error(e);
         return false;
     }
-
+    logger.info('Health ok');
     return true;
 }

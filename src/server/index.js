@@ -5,13 +5,13 @@ import { join } from 'path';
 import dashboardConfig from '../../dashboard.config';
 import CONFIG from '../../server.config.js';
 import logger from '../logger';
-import setupAuth from './auth';
-import loadPlugins from './plugins';
-import loadRoutes from './routes';
 import checkHealth from '../utils/check-health';
 import configValidator from '../validator/config-validator';
 import dashboardConfigSchema from '../validator/schemas/dashboard-config-schema';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
+import setupAuth from './auth';
+import loadPlugins from './plugins';
+import loadRoutes from './routes';
 
 async function start() {
     const server = Hapi.server({
@@ -37,6 +37,9 @@ async function start() {
 }
 
 export default function app() {
+    logger.info(`Starting server worker`);
+
+    logger.debug(`Setting up unhandledRejection listener`);
     process.on('unhandledRejection', (err) => {
         logger.error(err);
         console.log(err);
@@ -44,10 +47,12 @@ export default function app() {
     });
 
     if (process.env.SENTRY_DSN) {
+        logger.debug(`Setting up sentry`);
         const Sentry = require('@sentry/node');
         Sentry.init({ dsn: process.env.SENTRY_DSN });
     }
 
+    logger.debug(`Validating config`);
     if (configValidator(dashboardConfigSchema, dashboardConfig) && configValidator(serverConfigSchema, CONFIG)) {
         start();
     }

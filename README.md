@@ -82,4 +82,4 @@ PORT | `number` | port number| 5000
 SHOW_ERROR_PAGES | `boolean` | show debug errorpages | true
 WINSTON_LOG_LEVEL | `info,debug,error` | Log level for the winston logger | info
 CONSOLE_RE_CHANNEL | `string` | channel for the console.re channel | my-lighthouse
-WEB_CONCURRENCY | `number` | the amount of workers to start | 1
+WEB_CONCURRENCY | `number` | The amount of workers to start for the web service | 1
