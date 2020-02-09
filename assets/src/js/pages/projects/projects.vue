@@ -9,16 +9,19 @@
                 <site-overview v-bind="site"/>
             </v-col>
         </v-row>
+        <audit-all-btn/>
     </v-container>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
     import { DASHBOARD } from '../../../../../dashboard.config';
+    import AuditAllBtn from '../../components/audit-all-btn/audit-all-btn';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
 
     export default {
         components: {
+            AuditAllBtn,
             SiteOverview,
         },
 

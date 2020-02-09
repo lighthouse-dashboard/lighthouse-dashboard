@@ -3,7 +3,7 @@ import { createLogger, format } from 'winston';
 import serverConfig from '../../server.config';
 
 export default createLogger({
-    format: process.env.NODE_ENV !== 'development' ? format.json() : format.simple(),
+    format: format.simple(),
     level: process.env.WINSTON_LOG_LEVEL,
     colorize: true,
 

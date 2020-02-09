@@ -9,7 +9,7 @@ import reportsToBarChart from '../../../transformer/report-to-bar-chart';
  */
 export default async function getSpeedReportOverview() {
     const pages = await getFavoriteSites();
-    const labels = pages.map((p) => p.id);
+    const labels = pages.map((p) => p.name);
 
     const reports = [];
     for (let p = 0; p < pages.length; p++) {

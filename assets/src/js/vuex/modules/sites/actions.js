@@ -2,7 +2,7 @@ import {
     CREATE_SITE_URL,
     GET_LATEST_AUDITED_SITES_URL,
     GET_SITE_BY_ID_URL,
-    GET_SITES_URL,
+    GET_SITES_URL, POST_SITE_ALL_URL,
     REMOVE_SITE_URL
 } from '../../../config/routes';
 import axios from '../../../utils/axios';
@@ -23,8 +23,8 @@ export async function fetchAllSites({ commit }) {
  * @param {any} _
  * @param {string} siteId
  */
-export function deleteSite(_, { siteId }) {
-    axios().delete(REMOVE_SITE_URL(siteId));
+export function deleteSite(_, { id }) {
+    axios().delete(REMOVE_SITE_URL(id));
 }
 
 /**
@@ -33,10 +33,10 @@ export function deleteSite(_, { siteId }) {
  * @return {Promise<void>}
  */
 export async function createSite({ commit }, siteConfig) {
-    await axios()
+    const { data } = await axios()
         .post(CREATE_SITE_URL, siteConfig);
 
-    commit({ type: ADD_SITE, site: siteConfig });
+    commit({ type: ADD_SITE, site: data });
 }
 
 /**
@@ -71,4 +71,13 @@ export async function getLatestSites() {
 export async function getSite(_, { siteId }) {
     const { data } = await axios().get(GET_SITE_BY_ID_URL(siteId));
     return data;
+}
+
+/**
+ * Get specific site
+ * @param _
+ * @return {Promise<T>}
+ */
+export async function createReportForAll() {
+    await axios().post(POST_SITE_ALL_URL);
 }

@@ -5,7 +5,7 @@
                 @close="onSettingsClosed"/>
 
         <v-card-title>
-            <site-title :is_favorite="is_favorite">{{ id }}</site-title>
+            <site-title :is_favorite="is_favorite">{{ name }}</site-title>
             <v-spacer/>
             <site-overview-menu
                     @openSettings="openSettings"
@@ -46,6 +46,10 @@
 
         props: {
             id: {
+                type: String,
+                required: true,
+            },
+            name: {
                 type: String,
                 required: true,
             },
@@ -103,7 +107,7 @@
 
             loadData() {
                 this.isLoading = true;
-                return this.fetchReportsForSite({ siteId: this.id })
+                return this.fetchReportsForSite({ id: this.id })
                     .then((data) => {
                         this.chartData = data;
                         this.updateChart();
@@ -115,7 +119,7 @@
 
             runAudit() {
                 this.isLoading = true;
-                return this.launchAuditForSite({ siteId: this.id, token: this.token })
+                return this.launchAuditForSite({ id: this.id })
                     .then(() => {
                         return this.loadData();
                     })
@@ -125,7 +129,7 @@
             },
 
             async removePage() {
-                await this.deleteSite({ siteId: this.id });
+                await this.deleteSite({ id: this.id });
             },
 
             openSettings() {

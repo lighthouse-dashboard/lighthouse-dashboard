@@ -1,9 +1,8 @@
 import Boom from '@hapi/boom';
-import { getSiteConfigByToken } from '../../../database/sites';
+import { getSiteConfigById } from '../../../database/sites';
 import logger from '../../../logger';
 import { spawnNewAuditWorker } from '../../../utils/create-new-audit';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
-import validateSiteToken from '../../../utils/validate-site-token';
 
 /**
  * Execute an audit
@@ -11,16 +10,12 @@ import validateSiteToken from '../../../utils/validate-site-token';
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-export default async function createReport({ query, payload }, h) {
-    const { token } = query;
+export default async function createReport({ params, payload }, h) {
+    const { id } = params;
 
-    const config = await getSiteConfigByToken(token);
+    const config = await getSiteConfigById(id);
     if (!config) {
         return Boom.notFound('Config not found');
-    }
-
-    if (!validateSiteToken(config, token)) {
-        return Boom.forbidden('Token mismatch');
     }
 
     try {
@@ -31,7 +26,6 @@ export default async function createReport({ query, payload }, h) {
         }
 
         await spawnNewAuditWorker(config);
-        //await createNewAuuditForConfig(config, meta);
     } catch (e) {
         logger.error(e);
         return Boom.boomify(e);

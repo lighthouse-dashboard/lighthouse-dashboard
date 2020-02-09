@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4';
 import { DASHBOARD } from '../../dashboard.config';
 import { SITES_CONFIG_COLLECTION } from '../config/db';
 import connectDatabase from '../database/connect-database';
@@ -37,7 +38,7 @@ async function findSites(find, sort, limit = 100) {
  * Get list of sites from DB
  * @return {Promise<SiteConfig[]>}
  */
-export function getSites() {
+export function getAllSites() {
     return findSites({}, { last_audit: -1 });
 }
 
@@ -59,28 +60,30 @@ export function getLatestSites() {
 
 /**
  * Add new site to DB
- * @param {SiteConfig} config
- * @return {Promise<void>}
+ * @param {Pick<SiteConfig, "name"|"device"|"url"|"is_favorite">} config
+ * @return {Promise<SiteConfig>}
  */
 export async function addSite(config) {
     const { database, client } = await connectDatabase();
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    siteCollection.insertOne(config);
+    const id = uuid();
+    siteCollection.insertOne({ id, ...config });
     client.close();
+    return getSiteConfigById(id);
 }
 
 /**
- * Update siteconfig
+ * Update site config
  * @param {string} id
  * @param {Partial<SiteConfig>} delta
- * @return {Promise<void>}
+ * @return {Promise<SiteConfig>}
  */
 export async function updateSite(id, delta) {
     const { database, client } = await connectDatabase();
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     siteCollection.updateOne({ id }, { $set: delta });
     client.close();
-
+    return getSiteConfigById({ id });
 }
 
 /**

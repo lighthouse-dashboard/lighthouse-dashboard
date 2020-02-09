@@ -1,7 +1,6 @@
 import joi from '@hapi/joi';
-import createReport from './handlers/create-report';
 import getLatestReportValues from './handlers/get-latest-report-values';
-import getRecentReports from './handlers/get-recent-reports';
+import getReports from './handlers/get-reports';
 import getSpeedReportOverview from './handlers/get-speed-report-overview';
 
 export default [
@@ -35,8 +34,8 @@ export default [
     },
     {
         method: 'GET',
-        path: '/api/reports/{id}/recent',
-        handler: getRecentReports,
+        path: '/api/reports/{id}',
+        handler: getReports,
         options: {
             description: 'Get recent report entries for site',
             tags: ['api', 'reports'],
@@ -46,25 +45,6 @@ export default [
                     id: joi
                         .string()
                         .required(),
-                }),
-            },
-        },
-    },
-    {
-        method: 'POST',
-        path: '/api/reports/{id}',
-        handler: createReport,
-        options: {
-            description: 'Execute new audit for site',
-            tags: ['api', 'reports'],
-            auth: false,
-            validate: {
-                params: joi.object({
-                    id: joi.string()
-                        .required(),
-                }),
-                query: joi.object({
-                    token: joi.string(),
                 }),
             },
         },

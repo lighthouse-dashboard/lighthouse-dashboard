@@ -1,4 +1,4 @@
-import { getSites } from '../../../database/sites';
+import { getAllSites } from '../../../database/sites';
 
-export const getSitesHandler = () => getSites();
+export const getSitesHandler = () => getAllSites();
 export default getSitesHandler;

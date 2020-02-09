@@ -1,7 +1,7 @@
 <template>
     <v-card flat>
         <v-card-title>
-            <site-title :is_favorite="is_favorite">{{ id }}</site-title>
+            <site-title :is_favorite="is_favorite">{{ name }}</site-title>
         </v-card-title>
         <v-card-text>
             <div ref="chart"/>
@@ -22,6 +22,10 @@
         components: { SiteTitle },
         props: {
             id: {
+                type: String,
+                required: true,
+            },
+            name: {
                 type: String,
                 required: true,
             },

@@ -26,8 +26,8 @@
                         <v-col cols="12"
                                 sm="12">
                             <v-text-field
-                                    v-model="id"
-                                    label="ID"
+                                    v-model="name"
+                                    label="name"
                                     color="secondary"
                                     required
                             />
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions } from 'vuex';
 
     export default {
         props: {},
@@ -80,7 +80,7 @@
             return {
                 dialog: false,
                 url: 'https://www.exmaple.com',
-                id: 'example.com',
+                name: 'example.com',
                 device: 'desktop',
                 isFavorite: false,
                 items: [
@@ -94,16 +94,13 @@
                 ],
             };
         },
-        computed: {
-            ...mapState('login', ['jwt']),
-        },
         methods: {
             ...mapActions('sites', ['createSite']),
 
             async onCreateClicked() {
                 await this.createSite({
                     url: this.url,
-                    id: this.id,
+                    name: this.name,
                     device: this.device,
                     isFavorite: this.isFavorite,
                 });

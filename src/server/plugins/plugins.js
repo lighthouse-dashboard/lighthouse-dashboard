@@ -21,8 +21,9 @@ export default {
                 },
             },
         },
-
-
+        {
+            plugin: blipp, options: { showAuth: true },
+        },
     ],
     prod: [
         ...CONFIG.HAPI_PLUGINS,
@@ -34,9 +35,6 @@ export default {
         },
         {
             plugin: laabr,
-        },
-        {
-            plugin: blipp, options: { showAuth: true },
         },
     ],
 };

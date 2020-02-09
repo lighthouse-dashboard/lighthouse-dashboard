@@ -29,6 +29,14 @@ in github to audit your site on every push to the `master` branch
 ![Dashboard Darkmode](./doc/dark_dashboard.jpg)
 ![Project List Lightmode](./doc/light_projects.jpg)
 
+# Hosting
+
+## Docker
+The only thing that you need is a hosting which supports dockerfiles. And (the same or another) one for the
+mongodb. If you have that, clone the report, and follow the setup of that hoster.
+
+## Heroku
+This app also works perfectly fine with heroku and a mlab MongoDB resource
 
 # Framework
 Datatbase: [mongodb](https://www.mongodb.com/)
@@ -74,3 +82,4 @@ PORT | `number` | port number| 5000
 SHOW_ERROR_PAGES | `boolean` | show debug errorpages | true
 WINSTON_LOG_LEVEL | `info,debug,error` | Log level for the winston logger | info
 CONSOLE_RE_CHANNEL | `string` | channel for the console.re channel | my-lighthouse
+WEB_CONCURRENCY | `number` | The amount of workers to start for the web service | 1
