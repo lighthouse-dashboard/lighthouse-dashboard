@@ -132,6 +132,23 @@ export default [
     },
     {
         method: 'POST',
+        path: '/api/webhook/{id}',
+        handler: createReport,
+        options: {
+            description: 'Add new site audit',
+            tags: ['api', 'sites'],
+            auth: false,
+            validate: {
+                params: joi.object({
+                    id: joi
+                        .string()
+                        .required(),
+                }),
+            },
+        },
+    },
+    {
+        method: 'POST',
         path: '/api/sites/all',
         handler: createReportForAll,
         options: {
