@@ -9,7 +9,6 @@ import logger from '../logger';
  * @param {string} url
  * @param {Option} opts
  * @param {LH.Flags} flags
- * @param {LH.Config.Json} config
  * @return {Promise<{}>}
  */
 async function launchChromeAndRunLighthouse(url, opts, flags) {
