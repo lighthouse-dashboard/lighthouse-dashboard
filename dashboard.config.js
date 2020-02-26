@@ -3,7 +3,7 @@ require('dotenv').config();
 module.exports = {
     DATE_FORMAT: 'dd/MM HH:mm',
     DASHBOARD: {
-        TITLE: 'My Dashboard',
+        TITLE: 'dreipol performance',
 
         UPDATE_INTERVAL: 30000,
 

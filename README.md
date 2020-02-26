@@ -36,9 +36,13 @@ The only thing that you need is a hosting which supports dockerfiles. And (the s
 mongodb. If you have that, clone the report, and follow the setup of that hoster.
 
 ## Heroku
-This app also works perfectly fine with heroku and a mlab MongoDB resource
+This app also works perfectly fine with heroku and a mlab MongoDB resource.
 
-# Framework
+In addition to the nodejs buildpack you need the following ones:
+- https://github.com/heroku/heroku-buildpack-google-chrome
+- https://github.com/heroku/heroku-buildpack-chromedriver
+
+# Frameworks
 Datatbase: [mongodb](https://www.mongodb.com/)
 
 Backend: [hapi](https://hapi.dev/)
