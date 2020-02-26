@@ -7,15 +7,13 @@
                 right
                 fab
                 color="secondary"
-                @click.stop="dialog = true"
-        >
+                @click.stop="dialog = true">
             <v-icon>mdi-plus</v-icon>
         </v-btn>
 
         <v-dialog
                 v-model="dialog"
-                max-width="320"
-        >
+                max-width="320">
             <v-card>
                 <v-card-title class="headline">
                     Add new project
@@ -29,26 +27,22 @@
                                     v-model="name"
                                     label="name"
                                     color="secondary"
-                                    required
-                            />
+                                    required/>
                             <v-text-field
                                     v-model="url"
                                     label="URL"
                                     color="secondary"
-                                    required
-                            />
+                                    required/>
                             <v-select
                                     v-model="device"
                                     :items="items"
                                     label="Device"
                                     color="secondary"
-                                    required
-                            />
+                                    required/>
                             <v-checkbox
                                     v-model="isFavorite"
                                     color="secondary"
-                                    label="Is favorite"
-                            />
+                                    label="Is favorite"/>
                         </v-col>
                     </v-row>
                 </v-card-text>
@@ -56,15 +50,13 @@
                 <v-card-actions>
                     <v-spacer/>
                     <v-btn text
-                            @click="dialog = false"
-                    >
+                            @click="dialog = false">
                         Cancel
                     </v-btn>
 
                     <v-btn text
                             color="secondary"
-                            @click="onCreateClicked"
-                    >
+                            @click="onCreateClicked">
                         Add
                     </v-btn>
                 </v-card-actions>

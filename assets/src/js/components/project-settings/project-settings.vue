@@ -3,8 +3,7 @@
         <template slot="content">
             <v-text-field
                     v-model="siteConfig.name"
-                    label="Name"
-            />
+                    label="Name"/>
 
             <v-text-field readonly
                     label="Last Audit"
@@ -16,8 +15,7 @@
 
             <v-text-field
                     v-model="siteConfig.url"
-                    label="Address"
-            />
+                    label="Address"/>
 
             <v-text-field readonly
                     label="Github Hook Url"
