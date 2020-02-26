@@ -1,6 +1,6 @@
 <template>
     <h4>
-        <site-favorite-state-icon :is_favorite="is_favorite"/>
+        <site-favorite-state-icon :is-favorite="isFavorite"/>
         <slot/>
     </h4>
 </template>
@@ -11,7 +11,7 @@
     export default {
         components: { SiteFavoriteStateIcon },
         props: {
-            is_favorite: {
+            isFavorite: {
                 type: Boolean,
                 required: true,
             },

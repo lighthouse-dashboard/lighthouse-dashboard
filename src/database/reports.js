@@ -14,15 +14,14 @@ export async function getReports(limit) {
         collection
             .find(null, { limit })
             .sort({ _id: 1 })
-            .toArray(
-                (error, audits) => {
-                    client.close();
-                    if (error) {
-                        return reject(error);
-                    }
+            .toArray((error, audits) => {
+                client.close();
+                if (error) {
+                    return reject(error);
+                }
 
-                    return resolve(audits);
-                });
+                return resolve(audits);
+            });
     });
 }
 

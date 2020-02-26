@@ -5,7 +5,7 @@
  * @return {boolean}
  */
 export default function configValidator(schema, config) {
-    const { error, } = schema.validate(config);
+    const { error } = schema.validate(config);
     if (error) {
         throw error;
     }

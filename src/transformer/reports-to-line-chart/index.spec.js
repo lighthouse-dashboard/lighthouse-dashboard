@@ -18,7 +18,7 @@ describe('reports-to-line-chart', function() {
                 '23/01 11:42',
                 '23/01 12:57',
                 '23/01 16:28',
-                'Merge branch \'develop\''
+                'Merge branch \'develop\'',
             ]
         );
     });

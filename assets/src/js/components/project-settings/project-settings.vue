@@ -24,7 +24,7 @@
                     :value="githubWebhookUrl"/>
 
             <v-checkbox
-                    v-model="siteConfig.is_favorite"
+                    v-model="siteConfig.isFavorite"
                     color="secondary"
                     label="Is Favorite"/>
         </template>
@@ -78,7 +78,7 @@
                 this.updateSite({
                     id: this.siteConfig.id,
                     delta: {
-                        is_favorite: this.siteConfig.is_favorite,
+                        isFavorite: this.siteConfig.isFavorite,
                         name: this.siteConfig.name,
                         url: this.siteConfig.url,
                     },

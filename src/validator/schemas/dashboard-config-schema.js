@@ -29,7 +29,10 @@ export const AVAILABLE_CHARTS = joi
     .required();
 
 export const CHART_CONFIG = joi.object({
-    colSize: joi.number().min(1).max(12),
+    colSize: joi
+        .number()
+        .min(1)
+        .max(12),
     limit: joi.number().min(1),
     fields: REPORT_VALUE_KEYS_SCHEMA,
 });
@@ -50,14 +53,20 @@ export default joi.object({
 
     DASHBOARD: joi.object({
         TITLE: joi.string(),
-        UPDATE_INTERVAL: joi.number().min(1000).required(),
+        UPDATE_INTERVAL: joi
+            .number()
+            .min(1000)
+            .required(),
         PAGE_DASHBOARD: joi.object({
             IS_FLUID: joi.boolean().required(),
             CHARTS: AVAILABLE_CHARTS,
         }),
         PAGE_PROJECTS: joi.object({
             IS_FLUID: joi.boolean().required(),
-            colSize: joi.number().min(1).max(12),
+            colSize: joi
+                .number()
+                .min(1)
+                .max(12),
         }),
 
         SITE_OVERVIEW_CHART: joi.object({
@@ -67,7 +76,10 @@ export default joi.object({
         latestAudits: CHART_CONFIG,
         favoriteProjectsComparison: CHART_CONFIG,
         favoriteProjectsOverview: joi.object({
-            colSize: joi.number().min(1).max(12),
+            colSize: joi
+                .number()
+                .min(1)
+                .max(12),
         }),
     })
         .required(),

@@ -13,8 +13,8 @@ export default function reportToBarChart(reports, labels, exportingValues) {
 
     return exportingValues.reduce((acc, value, exportingValueIndex) => {
         const values = reports.reduce((reportValues, report) => {
-            const value = getReportValueScoreByKey(report.values, exportingValues[exportingValueIndex]);
-            reportValues.push(value);
+            const scores = getReportValueScoreByKey(report.values, exportingValues[exportingValueIndex]);
+            reportValues.push(scores);
             return reportValues;
         }, []);
 

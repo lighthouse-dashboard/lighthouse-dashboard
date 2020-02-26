@@ -85,7 +85,7 @@ export default [
                     id: joi.string().required(),
                 }),
                 payload: joi.object({
-                    is_favorite: joi.boolean().required(),
+                    isFavorite: joi.boolean().required(),
                     name: joi.string(),
                     url: joi.string(),
                 }),

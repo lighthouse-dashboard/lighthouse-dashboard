@@ -56,13 +56,15 @@
                 <v-card-actions>
                     <v-spacer/>
                     <v-btn text
-                            @click="dialog = false">
+                            @click="dialog = false"
+                    >
                         Cancel
                     </v-btn>
 
                     <v-btn text
                             color="secondary"
-                            @click="onCreateClicked">
+                            @click="onCreateClicked"
+                    >
                         Add
                     </v-btn>
                 </v-card-actions>

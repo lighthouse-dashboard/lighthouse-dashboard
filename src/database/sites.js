@@ -47,7 +47,7 @@ export function getAllSites() {
  * @return {Promise<SiteConfig[]>}
  */
 export function getFavoriteSites() {
-    return findSites({ is_favorite: true }, { order: 1 });
+    return findSites({ isFavorite: true }, { order: 1 });
 }
 
 /**
@@ -60,7 +60,7 @@ export function getLatestSites() {
 
 /**
  * Add new site to DB
- * @param {Pick<SiteConfig, "name"|"device"|"url"|"is_favorite">} config
+ * @param {Pick<SiteConfig, "name"|"device"|"url"|"isFavorite">} config
  * @return {Promise<SiteConfig>}
  */
 export async function addSite(config) {

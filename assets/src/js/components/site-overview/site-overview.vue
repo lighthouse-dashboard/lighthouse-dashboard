@@ -5,7 +5,7 @@
                 @close="onSettingsClosed"/>
 
         <v-card-title>
-            <site-title :is_favorite="is_favorite">{{ name }}</site-title>
+            <site-title :is-favorite="isFavorite">{{ name }}</site-title>
             <v-spacer/>
             <site-overview-menu
                     @openSettings="openSettings"
@@ -58,7 +58,7 @@
                 required: true,
             },
 
-            is_favorite: {
+            isFavorite: {
                 type: Boolean,
                 required: true,
             },

@@ -2,18 +2,19 @@
     <v-app>
         <v-card outlined>
             <v-container :fluid="true"
-                    v-if="isLoggedIn">
-                <nav-bar/>
-                <create-site-form/>
+                    v-if="isLoggedIn"
+            >
+                <nav-bar />
+                <create-site-form />
                 <v-content>
-                    <router-view></router-view>
+                    <router-view />
                 </v-content>
             </v-container>
             <v-container v-else>
-                <login/>
+                <login />
             </v-container>
         </v-card>
-        <footer-component/>
+        <footer-component />
     </v-app>
 </template>
 

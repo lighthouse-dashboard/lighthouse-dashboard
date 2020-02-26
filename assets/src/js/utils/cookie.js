@@ -39,5 +39,5 @@ export function getCookie(name) {
  * @param {string} name
  */
 export function eraseCookie(name) {
-    document.cookie = name + '=; Max-Age=-99999999;';
+    document.cookie = `${ name }=; Max-Age=-99999999;`;
 }

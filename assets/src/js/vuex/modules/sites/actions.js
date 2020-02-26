@@ -2,8 +2,9 @@ import {
     CREATE_SITE_URL,
     GET_LATEST_AUDITED_SITES_URL,
     GET_SITE_BY_ID_URL,
-    GET_SITES_URL, POST_SITE_ALL_URL,
-    REMOVE_SITE_URL
+    GET_SITES_URL,
+    POST_SITE_ALL_URL,
+    REMOVE_SITE_URL,
 } from '../../../config/routes';
 import axios from '../../../utils/axios';
 import { ADD_SITE, SET_SITES, UPDATE_SITE } from '../mutation-types';
@@ -20,7 +21,7 @@ export async function fetchAllSites({ commit }) {
 
 /**
  * Delete site by id
- * @param {any} _
+ * @param {object} _
  * @param {string} siteId
  */
 export function deleteSite(_, { id }) {
@@ -41,7 +42,6 @@ export async function createSite({ commit }, siteConfig) {
 
 /**
  * Update a site
- * @param _
  * @param {string} id
  * @param {Partial<SiteConfig>}delta
  * @return {Promise<void>}
@@ -64,7 +64,7 @@ export async function getLatestSites() {
 
 /**
  * Get specific site
- * @param _
+ * @param {object} _
  * @param {string} siteId
  * @return {Promise<T>}
  */
@@ -75,7 +75,6 @@ export async function getSite(_, { siteId }) {
 
 /**
  * Get specific site
- * @param _
  * @return {Promise<T>}
  */
 export async function createReportForAll() {

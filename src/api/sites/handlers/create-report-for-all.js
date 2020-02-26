@@ -7,8 +7,7 @@ import { spawnNewAuditsWorker } from '../../../utils/create-new-audit';
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-export default async function createReportForAll(_, h) {
-
+export default async function createReportForAll(request, h) {
     const sites = await getAllSites();
     const ids = sites.map((site) => site.id);
     spawnNewAuditsWorker(ids);

@@ -1,7 +1,7 @@
 <template>
     <v-card flat>
         <v-card-title>
-            <site-title :is_favorite="is_favorite">{{ name }}</site-title>
+            <site-title :isFavorite="isFavorite">{{ name }}</site-title>
         </v-card-title>
         <v-card-text>
             <div ref="chart"/>
@@ -29,7 +29,7 @@
                 type: String,
                 required: true,
             },
-            is_favorite: {
+            isFavorite: {
                 type: Boolean,
                 required: true,
             },

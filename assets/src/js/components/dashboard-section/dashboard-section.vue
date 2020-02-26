@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard-section">
-        <component :is="componentProps.is"/>
-        <v-divider/>
+        <component :is="componentProps.is" />
+        <v-divider />
     </div>
 </template>
 
