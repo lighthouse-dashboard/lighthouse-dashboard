@@ -7,7 +7,7 @@ export default [
         handler: getHealthController,
         options: {
             auth: false,
-            description: 'Get JWT token',
+            description: 'Check system health',
             tags: ['api', 'auth'],
         },
     },

@@ -16,7 +16,7 @@ export default [
         path: '/projects',
         options: {
             description: 'List of projects',
-            auth: false,
+            auth: 'jwt',
         },
         handler: {
             file: 'templates/index.html',

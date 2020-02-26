@@ -20,6 +20,8 @@ async function registerPlugins(server, plugins) {
  * @return {Promise<void>}
  */
 export default async function loadPlugins(server) {
+    logger.info('Loading plugins');
+
     logger.debug(`Register ${ PLUGINS.prod.length } prod plugins`);
     await registerPlugins(server, PLUGINS.prod);
 

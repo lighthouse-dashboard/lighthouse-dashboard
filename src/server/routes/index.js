@@ -1,4 +1,5 @@
 import Inert from '@hapi/inert';
+import logger from '../../logger';
 import getRoutes from './routes';
 
 /**
@@ -6,6 +7,7 @@ import getRoutes from './routes';
  * @param {hapi.Server} server
  */
 export default async function loadRoutes(server) {
+    logger.info('Loading routes');
     await server.register(Inert);
     const routes = await getRoutes();
     routes.forEach((route) => {

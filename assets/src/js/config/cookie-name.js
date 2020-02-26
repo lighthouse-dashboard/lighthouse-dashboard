@@ -1,1 +1,1 @@
-export const COOKIE_NAME = 'lhd_jwt';
+export const COOKIE_NAME = 'token';

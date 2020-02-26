@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { COOKIE_NAME } from '../config/cookie-name';
+import { getCookie } from './cookie';
 
 export default () => {
-    const jwt = localStorage.getItem('JWT');
+    const jwt = getCookie(COOKIE_NAME);
     const opts = {
         timeout: 30000,
     };

@@ -51,8 +51,7 @@ Frontend: [Vue](https://vuejs.org/) & [Vuetiy](https://vuetifyjs.com/en/)
 
 # Routes
 - [App](http://0.0.0.0:4000)
-- [Swagger](http://0.0.0.0:4000/documentation)
-- [Real Time Status ](http://0.0.0.0:4000/status)
+- [Swagger](http://0.0.0.0:4000/documentation) (only for NODE_ENV=development)
 
 # Config
 Most config should be in `/dashboard.config.js`or `./server.config.js` whether it is backend or UI

@@ -1,3 +1,4 @@
+import { dirname } from 'path';
 import logger from '../../logger';
 import glob from '../../utils/glob';
 
@@ -11,7 +12,7 @@ export default async function getRoutes() {
     files.forEach((file) => {
         // eslint-disable-next-line global-require
         const { default: subRoutes } = require(file);
-        logger.debug(`Load ${ subRoutes.length } route(s) from ${ file }`);
+        logger.debug(`Load ${ subRoutes.length } route(s) from ${ dirname(file) }`);
         routes.push(...subRoutes);
     });
     return routes;
