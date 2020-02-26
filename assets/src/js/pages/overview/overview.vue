@@ -3,8 +3,7 @@
         <dashboard-section
                 :type="config"
                 v-for="config in charts"
-                :key="config"
-        />
+                :key="config"/>
     </v-container>
 </template>
 

@@ -15,8 +15,7 @@
                                         label="Password"
                                         type="password"
                                         :error="!!error"
-                                        :error-messages="error && error.message"
-                                />
+                                        :error-messages="error && error.message"/>
                             </v-card-text>
                             <v-card-actions>
                                 <v-btn align="right"
@@ -28,7 +27,6 @@
                     </v-card>
                 </v-col>
             </v-row>
-
         </v-container>
     </v-content>
 </template>
