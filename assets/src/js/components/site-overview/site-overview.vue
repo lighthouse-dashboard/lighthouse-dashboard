@@ -22,8 +22,7 @@
             <span v-if="runError">{{ runError.message }}</span>
             <v-progress-circular
                     indeterminate
-                    v-if="isLoading"
-            />
+                    v-if="isLoading"/>
         </v-card-actions>
     </v-card>
 </template>

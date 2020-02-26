@@ -15,7 +15,7 @@
             isFavorite: {
                 type: Boolean,
                 required: true,
-            }
+            },
         },
     };
 </script>

@@ -4,8 +4,7 @@
         <v-row>
             <v-col :cols="cols"
                     v-for="site in sites"
-                    :key="site.id"
-            >
+                    :key="site.id">
                 <site-overview v-bind="site"/>
             </v-col>
         </v-row>

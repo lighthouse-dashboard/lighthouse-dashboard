@@ -1,15 +1,15 @@
 <template>
     <v-card flat>
         <v-card-title>
-            <site-title :isFavorite="isFavorite">{{ name }}</site-title>
+            <site-title :isFavorite="isFavorite">
+                {{ name }}
+            </site-title>
         </v-card-title>
         <v-card-text>
             <div ref="chart"/>
-
         </v-card-text>
     </v-card>
 </template>
-
 
 <script>
     import ApexCharts from 'apexcharts';
