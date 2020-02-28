@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { COOKIE_NAME } from '../config/cookie-name';
-import { getCookie } from './cookie';
+import { eraseCookie, getCookie } from './cookie';
 
 export default () => {
     const jwt = getCookie(COOKIE_NAME);
@@ -13,10 +13,16 @@ export default () => {
     }
 
     axios.interceptors.response.use(function(response) {
+        if (response.status === 401) {
+            eraseCookie(COOKIE_NAME);
+            window.location.href = '/';
+            return null;
+        }
         // Do something with response data
         return response;
     }, function(error) {
-        console.log(error);
+        eraseCookie(COOKIE_NAME);
+        window.location.href = '/';
         return Promise.reject(error);
     });
     return axios.create(opts);

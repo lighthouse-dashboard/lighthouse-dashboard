@@ -5,8 +5,6 @@ export default joi.object({
     PORT: joi.number().required(),
 
     API: joi.object({
-        LOGIN_PASS: joi.string().required(),
-        JWT_SECRET: joi.string().required(),
         SITE_REPORT_LIMIT: joi.number().min(1)
             .required(),
     }).required(),

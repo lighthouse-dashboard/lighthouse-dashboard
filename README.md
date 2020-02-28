@@ -44,6 +44,7 @@ In addition to the nodejs buildpack you need the following ones:
 
 # Frameworks
 Datatbase: [mongodb](https://www.mongodb.com/)
+RabbitMq: [amqplib](https://www.npmjs.com/package/amqplib)
 
 Backend: [hapi](https://hapi.dev/)
 
@@ -60,7 +61,6 @@ Most config should be in `/dashboard.config.js`or `./server.config.js` whether i
 To get a minimal version up and running locally just clone this repo. Add a `.env` file with the variables described below
 and run `docker-compose up`. After a couple of minutes you should be able to see that the server has started
 
-
 # Development
 To start debugging or enhancing the app you don't have to use docker.
 First create a `.env` file in the project root.
@@ -72,6 +72,10 @@ which will start the mongodb and the server on port 5000. After that, you could 
 Now you have a local server running which will be restarted (with nodemon) after every change.
 If you want to work on the UI you can start the UI with  `npm run serve`. This will create a new app, which proxies your
 already running local server and always delivers the newest UI.
+
+# Server
+
+# Worker
 
 # Env Variables
 
@@ -86,3 +90,6 @@ SHOW_ERROR_PAGES | `boolean` | show debug errorpages | true
 WINSTON_LOG_LEVEL | `info,debug,error` | Log level for the winston logger | info
 CONSOLE_RE_CHANNEL | `string` | channel for the console.re channel | my-lighthouse
 WEB_CONCURRENCY | `number` | The amount of workers to start for the web service | 1
+MESSAGE_QUEUE_URI | `string` | uri to the RabbitMq instance | `amqp://user:password@localhost`
+RESTART_TIMEOUT | `number` | the timeout for restart retries | 5000
+IS_WORKER | `boolean` | Define if the worker should be started or the server | true

@@ -13,6 +13,8 @@ import configValidator from '../validator/config-validator';
 import dashboardConfigSchema from '../validator/schemas/dashboard-config-schema';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
 
+const RESTART_INTERVAL = process.env.RESTART_TIMEOUT;
+
 async function start() {
     const server = Hapi.server({
         port: CONFIG.PORT,
@@ -34,7 +36,7 @@ async function start() {
     logger.info('Server started');
 }
 
-export default async function app() {
+export async function setup() {
     if (!await checkHealth()) {
         return;
     }
@@ -68,3 +70,12 @@ export default async function app() {
     start();
 }
 
+export default async function boot() {
+    try {
+        await setup();
+    } catch (e) {
+        logger.error(e.message);
+        logger.debug(`Rebooting server in ${ RESTART_INTERVAL }ms`);
+        setTimeout(() => boot(), RESTART_INTERVAL);
+    }
+}

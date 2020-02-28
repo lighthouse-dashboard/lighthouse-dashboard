@@ -7,11 +7,11 @@ async function checkDatabase() {
     try {
         await connectDatabase();
         logger.info('DB connection OK');
-        return true;
     } catch (e) {
         logger.error(e);
-        return false;
+        throw e;
     }
+    return true;
 }
 
 async function checkMessageQueue() {
@@ -19,11 +19,11 @@ async function checkMessageQueue() {
     try {
         await connectMq(process.env.MESSAGE_QUEUE_URI);
         logger.info('MQ connection OK');
-        return true;
     } catch (e) {
         logger.error(e);
-        return false;
+        throw e;
     }
+    return true;
 }
 
 export default async function checkHealth() {

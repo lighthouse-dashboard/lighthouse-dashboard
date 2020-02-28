@@ -19,7 +19,7 @@
         "lint-frontend": "eslint -c .eslintrc ./assets/src",
         "lint-backend": "eslint -c .eslintrc ./src",
         "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
-        "start-": "node -r esm index.js",
+        "start": "node -r esm index.js",
         "audit": "node -r esm src/commands/run-audits-command.js",
         "test": "npm run lint && mocha src/**/*.spec.js -r esm"
     },

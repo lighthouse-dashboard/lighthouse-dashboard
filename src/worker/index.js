@@ -5,6 +5,8 @@ import { connectMq, createChannel } from '../queue';
 import checkHealth from '../utils/check-health';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
 
+const RESTART_INTERVAL = process.env.RESTART_TIMEOUT;
+
 /**
  * Start worker and connect to mq
  * @param {string} uri
@@ -55,15 +57,24 @@ async function startServer() {
     logger.debug(`Server started`);
 }
 
+async function boot() {
+    logger.info(`Start audit worker`);
+    try {
+        if (!await checkHealth()) {
+            return;
+        }
+        await start(process.env.MESSAGE_QUEUE_URI, 'audits');
+    } catch (e) {
+        logger.error(e);
+        logger.debug(`Rebooting worker in ${ RESTART_INTERVAL }ms`);
+        setTimeout(() => boot(), RESTART_INTERVAL);
+    }
+}
+
 /**
  * Booting worker
  */
 export default async function() {
-    startServer();
-    logger.info(`Start audit worker`);
-
-    if (!await checkHealth()) {
-        return;
-    }
-    start(process.env.MESSAGE_QUEUE_URI, 'audits');
+    await startServer();
+    boot();
 }
