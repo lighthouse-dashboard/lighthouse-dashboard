@@ -3,7 +3,7 @@ import axios from '../../../utils/axios';
 import { SET_JWT, SET_LOGGED_IN } from '../mutation-types';
 
 export async function doLogin({ commit }, { password }) {
-    const { data } = await axios().post(AUTH_URL, { password });
+    const { data } = await axios(true).post(AUTH_URL, { password });
     commit(SET_JWT, { jwt: data.jwt });
     commit(SET_LOGGED_IN, { isLoggedIn: true });
 }
