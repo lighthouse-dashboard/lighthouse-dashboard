@@ -1,6 +1,6 @@
 import { transports } from 'winston';
 import ConsoleReTransport from 'winston-consolere-transport';
-import SentryTransport from './src/logger/sentry-transport';
+import SentryTransport from '../src/logger/sentry-transport';
 
 export default {
     HOST: process.env.HOST || '0.0.0.0',
