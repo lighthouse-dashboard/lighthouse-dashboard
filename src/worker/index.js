@@ -1,12 +1,17 @@
+import Hapi from '@hapi/hapi';
+import healthRotues from '../api/health/routes';
 import logger from '../logger';
 import { connectMq, createChannel } from '../queue';
 import checkHealth from '../utils/check-health';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
 
-require('dotenv').config();
-
+/**
+ * Start worker and connect to mq
+ * @param {string} uri
+ * @param {string} queue
+ * @return {Promise<void>}
+ */
 async function start(uri, queue) {
-    await checkHealth();
     const connection = await connectMq(uri);
     const channel = await createChannel(connection);
     channel.assertQueue(queue, { durable: false, });
@@ -33,7 +38,32 @@ function onMessageReceived(msg, data) {
             });
 }
 
+/**
+ * Start fake server to check health
+ * @return {Promise<void>}
+ */
+async function startServer() {
+    logger.debug(`Start fake server on ${ process.env.PORT }`);
+    const server = Hapi.server({
+        port: process.env.PORT,
+        host: '0.0.0.0',
+    });
 
-export default function() {
+    healthRotues.map((route) => server.route(route));
+    await server.start();
+
+    logger.debug(`Server started`);
+}
+
+/**
+ * Booting worker
+ */
+export default async function() {
+    startServer();
+    logger.info(`Start audit worker`);
+
+    if (!await checkHealth()) {
+        return;
+    }
     start(process.env.MESSAGE_QUEUE_URI, 'audits');
 }

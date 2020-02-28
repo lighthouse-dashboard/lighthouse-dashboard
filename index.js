@@ -1,16 +1,13 @@
-import throng from 'throng';
-import app from './src/server';
-import auditsWorker from './src/workers/audits-worker';
+import logger from './src/logger';
+import server from './src/server';
+import worker from './src/worker';
+
+require('dotenv').config();
 
 if (process.env.IS_WORKER) {
-    auditsWorker();
+    logger.info(`Booting worker`);
+    worker();
+} else {
+    logger.info(`Booting server`);
+    server();
 }
-
-throng({
-    workers: process.env.WEB_CONCURRENCY || 1,
-    grace: 1000,
-    lifetime: Infinity,
-    start: () => {
-        app();
-    },
-});

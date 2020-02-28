@@ -44,13 +44,8 @@ services:
       - database
     environment:
       - IS_WORKER=true
-      - LOGIN_PASS=Foo
-      - JWT_SECRET=Foo
       - MONGODB_URI=mongodb://database:27017/lhd
       - SENTRY_DSN=https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421
-      - PORT=5000
-      - SHOW_ERROR_PAGES=true
+      - PORT=6000
       - WINSTON_LOG_LEVEL=debug
-      - CONSOLE_RE_CHANNEL=
-      - WEB_CONCURRENCY=1
       - MESSAGE_QUEUE_URI=amqp://user:password@queue

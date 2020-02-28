@@ -3,10 +3,10 @@ import logger from '../logger';
 import { connectMq } from '../queue';
 
 async function checkDatabase() {
-    logger.info('Checking DB connection');
+    logger.debug('Checking DB connection');
     try {
         await connectDatabase();
-        logger.debug('DB connection OK');
+        logger.info('DB connection OK');
         return true;
     } catch (e) {
         logger.error(e);
@@ -15,7 +15,7 @@ async function checkDatabase() {
 }
 
 async function checkMessageQueue() {
-    logger.info('Check MQ connection');
+    logger.debug('Check MQ connection');
     try {
         await connectMq(process.env.MESSAGE_QUEUE_URI);
         logger.info('MQ connection OK');

@@ -17,7 +17,7 @@ export function connectMq(uri) {
         return Promise.resolve(connection);
     }
 
-    logger.info(`Connecting to queue ${ uri }`);
+    logger.debug(`Connecting to queue ${ uri }`);
     return new Promise((resolve, reject) => {
         amqp.connect(uri, (error, conn) => {
             if (error) {
