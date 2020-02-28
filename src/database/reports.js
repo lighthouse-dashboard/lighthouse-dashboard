@@ -7,7 +7,7 @@ import connectDatabase from '../database/connect-database';
  * @return {Promise<Report[]>}
  */
 export async function getReports(limit) {
-    const { database, client } = await connectDatabase();
+    const { database } = await connectDatabase();
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -15,7 +15,6 @@ export async function getReports(limit) {
             .find(null, { limit })
             .sort({ _id: 1 })
             .toArray((error, audits) => {
-                client.close();
                 if (error) {
                     return reject(error);
                 }
@@ -32,7 +31,7 @@ export async function getReports(limit) {
  * @return {Promise<Report[]>}
  */
 export async function getReportsBySiteId(id, limit) {
-    const { database, client } = await connectDatabase();
+    const { database } = await connectDatabase();
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -48,7 +47,6 @@ export async function getReportsBySiteId(id, limit) {
 
                 return resolve(data);
             });
-        client.close();
     });
 }
 
@@ -58,7 +56,7 @@ export async function getReportsBySiteId(id, limit) {
  * @return {Promise<Report>}
  */
 export async function getLatestReportBySiteId(id) {
-    const { database, client } = await connectDatabase();
+    const { database } = await connectDatabase();
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -77,7 +75,6 @@ export async function getLatestReportBySiteId(id) {
 
                 return resolve(data.pop());
             });
-        client.close();
     });
 }
 
@@ -87,8 +84,7 @@ export async function getLatestReportBySiteId(id) {
  * @return {Promise<void>}
  */
 export async function saveReport(report) {
-    const { database, client } = await connectDatabase();
+    const { database } = await connectDatabase();
     const reportCollection = database.collection(AUDIT_COLLECTION);
     reportCollection.insertOne(report);
-    client.close();
 }

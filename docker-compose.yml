@@ -1,27 +1,27 @@
 version: '3'
 services:
+
+  queue:
+    image: 'rabbitmq'
+    container_name: 'queue'
+    ports:
+      - '5672:5672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+
   database:
     image: 'mongo'
     container_name: 'database'
     ports:
       - '27017-27019:27017-27019'
-  queue:
-    image: 'rabbitmq'
-    container_name: 'queue'
-    ports:
-      - '8080:8080'
-      - '5672:5672'
-    environment:
-      - RABBITMQ_DEFAULT_USER=user
-      - RABBITMQ_DEFAULT_PASS=password
-  server:
+
+  web:
     build: .
+    container_name: 'web'
     links:
-      - database
       - queue
-    depends_on:
       - database
-      - queue
     environment:
       - LOGIN_PASS=Foo
       - JWT_SECRET=Foo
@@ -35,14 +35,15 @@ services:
       - MESSAGE_QUEUE_URI=amqp://user:password@queue
     ports:
       - '5000:5000'
+
   worker:
-    build: worker.Dockerfile
+    container_name: 'worker'
+    build:
+      context: ./
+      dockerfile: ./worker.Dockerfile
     links:
-      - database
       - queue
-    depends_on:
       - database
-      - queue
     environment:
       - MONGODB_URI=mongodb://database:27017/lhd
       - SENTRY_DSN=https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421

@@ -5,8 +5,7 @@ import { connectMq } from '../queue';
 async function checkDatabase() {
     logger.info('Checking DB connection');
     try {
-        const { client } = await connectDatabase();
-        client.close();
+        await connectDatabase();
         logger.debug('DB connection OK');
         return true;
     } catch (e) {

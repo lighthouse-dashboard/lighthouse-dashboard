@@ -63,11 +63,10 @@ export function getLatestSites() {
  * @return {Promise<SiteConfig>}
  */
 export async function addSite(config) {
-    const { database, client } = await connectDatabase();
+    const { database } = await connectDatabase();
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     const id = uuid();
     siteCollection.insertOne({ id, ...config });
-    client.close();
     return getSiteConfigById(id);
 }
 
@@ -78,10 +77,9 @@ export async function addSite(config) {
  * @return {Promise<SiteConfig>}
  */
 export async function updateSite(id, delta) {
-    const { database, client } = await connectDatabase();
+    const { database } = await connectDatabase();
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     siteCollection.updateOne({ id }, { $set: delta });
-    client.close();
     return getSiteConfigById({ id });
 }
 
@@ -91,10 +89,9 @@ export async function updateSite(id, delta) {
  * @return {Promise<void>}
  */
 export async function removeSite(id) {
-    const { database, client } = await connectDatabase();
+    const { database } = await connectDatabase();
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     siteCollection.deleteOne({ id });
-    client.close();
 }
 
 /**

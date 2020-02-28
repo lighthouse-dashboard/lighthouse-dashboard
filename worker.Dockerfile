@@ -19,15 +19,12 @@ ENV GOOGLE_CHROME_BIN /usr/bin/chromium-browser
 # App Building
 WORKDIR /usr/src/app
 
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 COPY package*.json ./
 
 RUN npm install
 COPY . .
 
-
-ENV NODE_ENV=production
-RUN npm run build
 
 # Running
 CMD [ "npm", "run", "start-worker" ]
