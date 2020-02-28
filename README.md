@@ -4,26 +4,21 @@
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/test_coverage"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/test_coverage" /></a>
 
 A dashboard to keep track on the performance of your sites. Keep track during development by setting up webhooks
-in github to audit your site on every push to the `master` branch
+in github to audit your site on every push to the `master` branch.
 
-# Features
-- Responsive UI & Charts
-- Password protected
-- Highly customizable colors
-- Easy to setup and host
-- Runs [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) under the hood
-- Open Source
-- Supports Webhooks to trigger audits
-- Uses [mongodb](https://www.mongodb.com/)
-- Star a project to see it on the dashboard
-- Choose between Desktop and Mobile audit settings
-- Configure what you want to see and keep track of
-- Runs in a [docker](https://www.docker.com/)
-- UI built with [Vue](https://vuejs.org/)
-- Server built with [hapi](https://hapi.dev/)
-- Customizable server config
-- [Real Time Status Monitor](https://www.npmjs.com/package/hapijs-status-monitor)
-- [Swagger](http://0.0.0.0:4000/documentation) documentation for the APIs
+The application is split into several parts. The web application, a worker, a mongodb and a rabbitmq server.
+In general, the webapp creates a new message which is posted to the mq server. The worker consumes the message and
+starts a new lighthouse audit. That audit is then persisted in the mongodb.
+
+## Webapp
+This is the UI of the application. It communicates with the mongodb to fetch data and with the rabbitmq server
+to dispatch new audits which will be processed by the worker.
+ 
+## Worker
+The worker connects to the rabbitmq server and consumes messages for new audits. The worker then persists the report 
+back in the mongodb where it's read from the webapp and accessible via it's apis.
+In order to start the worker you need to set a envvar named `IS_WORKER` in order to start the app as a worker.
+This architecture simplifies hosting/deployment, since you can deploy the same application but with this additional env var.
 
 # Screenshots
 ![Dashboard Darkmode](./doc/dark_dashboard.jpg)
