@@ -29,9 +29,11 @@ function onMessageReceived(msg, data) {
     createNewAuditForConfig(data)
         .then(
             (report) => {
-                logger.debug(`${data.url} => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
+                logger.debug(`${ data.url } => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
             });
 }
 
 
-start(process.env.MESSAGE_QUEUE_URI, 'audits');
+export default function() {
+    start(process.env.MESSAGE_QUEUE_URI, 'audits');
+}
