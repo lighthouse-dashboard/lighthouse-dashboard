@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import { DASHBOARD } from '../../../../../dashboard.config';
+    import { DASHBOARD } from '../../../../../config/dashboard';
     import DashboardSection from '../../components/dashboard-section/dashboard-section';
 
     export default {

@@ -18,7 +18,7 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import { DASHBOARD } from '../../../../../dashboard.config';
+    import { DASHBOARD } from '../../../../../config/dashboard';
     import LatestReportGauge from '../latest-report-gauge/latest-report-gauge';
 
     export default {

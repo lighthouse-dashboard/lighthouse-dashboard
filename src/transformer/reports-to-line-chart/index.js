@@ -1,4 +1,4 @@
-import CONFIG from '../../../dashboard.config';
+import CONFIG from '../../../config/dashboard';
 import formatReportSummaryString from '../../utils/format-report-summary-string';
 
 /**

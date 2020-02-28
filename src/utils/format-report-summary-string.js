@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import CONFIG from '../../dashboard.config';
+import CONFIG from '../../config/dashboard';
 
 /**
  * Format label with optional webhook message

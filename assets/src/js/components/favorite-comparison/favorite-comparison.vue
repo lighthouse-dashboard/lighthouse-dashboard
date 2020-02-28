@@ -14,7 +14,7 @@
 <script>
     import ApexCharts from 'apexcharts';
     import { mapActions, mapState } from 'vuex';
-    import { DASHBOARD } from '../../../../../dashboard.config';
+    import { DASHBOARD } from '../../../../../config/dashboard';
     import { COMPARISON_CHART } from '../../config/chart-options';
 
     export default {

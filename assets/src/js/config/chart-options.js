@@ -1,4 +1,4 @@
-import CONFIG from '../../../../dashboard.config';
+import CONFIG from '../../../../config/dashboard';
 import colorPreference from '../utils/color-preference';
 
 const DEFAULT_CHART = {

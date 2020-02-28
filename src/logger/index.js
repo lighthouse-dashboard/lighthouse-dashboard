@@ -1,6 +1,6 @@
 require('dotenv').config();
 import { createLogger, format } from 'winston';
-import serverConfig from '../../server.config';
+import serverConfig from '../../config/server';
 
 export default createLogger({
     format: format.simple(),

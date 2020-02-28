@@ -6,7 +6,7 @@ import devErrors from 'hapi-dev-errors';
 import HapiSwagger from 'hapi-swagger';
 
 import { name, version } from '../../package.json';
-import CONFIG from '../../server.config';
+import CONFIG from '../../config/server';
 
 export default {
     dev: [

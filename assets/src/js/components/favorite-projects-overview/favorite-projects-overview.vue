@@ -18,7 +18,7 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex';
-    import { DASHBOARD } from '../../../../../dashboard.config';
+    import { DASHBOARD } from '../../../../../config/dashboard';
     import SiteOverview from '../site-overview/site-overview.vue';
 
     export default {

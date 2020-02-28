@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import { DASHBOARD } from '../../dashboard.config';
+import { DASHBOARD } from '../../config/dashboard';
 import { SITES_CONFIG_COLLECTION } from '../config/db';
 import connectDatabase from '../database/connect-database';
 

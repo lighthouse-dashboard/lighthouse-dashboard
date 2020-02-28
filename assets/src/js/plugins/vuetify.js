@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
-import CONFIG from '../../../../dashboard.config';
+import CONFIG from '../../../../config/dashboard';
 
 Vue.use(Vuetify);
 

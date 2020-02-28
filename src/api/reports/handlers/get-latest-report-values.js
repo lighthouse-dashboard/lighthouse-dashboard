@@ -1,5 +1,5 @@
 import Boom from '@hapi/boom';
-import CONFIG from '../../../../dashboard.config';
+import CONFIG from '../../../../config/dashboard';
 import { getLatestReportBySiteId } from '../../../database/reports';
 import { getSiteConfigById } from '../../../database/sites';
 import formatReportSummaryString from '../../../utils/format-report-summary-string';

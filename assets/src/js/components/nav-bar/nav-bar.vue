@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    import { DASHBOARD } from '../../../../../dashboard.config';
+    import { DASHBOARD } from '../../../../../config/dashboard';
 
     export default {
         computed: {

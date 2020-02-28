@@ -1,6 +1,6 @@
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
-import CONFIG from '../../server.config';
+import CONFIG from '../../config/server';
 import { DEVICE_CONFIG } from '../config/REPORT_DEVICE_FLAGS';
 import logger from '../logger';
 

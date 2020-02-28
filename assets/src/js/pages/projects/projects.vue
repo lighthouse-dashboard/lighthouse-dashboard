@@ -14,7 +14,7 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { DASHBOARD } from '../../../../../dashboard.config';
+    import { DASHBOARD } from '../../../../../config/dashboard';
     import AuditAllBtn from '../../components/audit-all-btn/audit-all-btn';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
 

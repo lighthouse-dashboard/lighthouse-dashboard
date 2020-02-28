@@ -14,7 +14,7 @@
 <script>
     import ApexCharts from 'apexcharts';
     import { mapActions } from 'vuex';
-    import CONFIG from '../../../../../dashboard.config';
+    import CONFIG from '../../../../../config/dashboard';
     import { GAUGE_CHART } from '../../config/chart-options';
     import SiteTitle from '../site-title/site-title';
 

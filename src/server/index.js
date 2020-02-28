@@ -2,8 +2,8 @@
 
 import Hapi from '@hapi/hapi';
 import { join } from 'path';
-import dashboardConfig from '../../dashboard.config';
-import CONFIG from '../../server.config.js';
+import dashboardConfig from '../../config/dashboard';
+import CONFIG from '../../config/server.js';
 import setupAuth from '../auth';
 import logger from '../logger';
 import loadPlugins from '../plugins';
