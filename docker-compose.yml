@@ -5,12 +5,23 @@ services:
     container_name: 'database'
     ports:
       - '27017-27019:27017-27019'
+  queue:
+    image: 'rabbitmq'
+    container_name: 'queue'
+    ports:
+      - '8080:8080'
+      - '5672:5672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
   server:
     build: .
     links:
       - database
+      - queue
     depends_on:
       - database
+      - queue
     environment:
       - LOGIN_PASS=Foo
       - JWT_SECRET=Foo
@@ -21,5 +32,20 @@ services:
       - WINSTON_LOG_LEVEL=debug
       - CONSOLE_RE_CHANNEL=
       - WEB_CONCURRENCY=1
+      - MESSAGE_QUEUE_URI=amqp://user:password@queue
     ports:
       - '5000:5000'
+  worker:
+    build: worker.Dockerfile
+    links:
+      - database
+      - queue
+    depends_on:
+      - database
+      - queue
+    environment:
+      - MONGODB_URI=mongodb://database:27017/lhd
+      - SENTRY_DSN=https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421
+      - WINSTON_LOG_LEVEL=debug
+      - CONSOLE_RE_CHANNEL=
+      - MESSAGE_QUEUE_URI=amqp://user:password@queue

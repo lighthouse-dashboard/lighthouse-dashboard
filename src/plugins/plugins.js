@@ -4,10 +4,9 @@ import * as Vision from '@hapi/vision';
 import blipp from 'blipp';
 import devErrors from 'hapi-dev-errors';
 import HapiSwagger from 'hapi-swagger';
-import laabr from 'laabr';
 
-import { name, version } from '../../../package.json';
-import CONFIG from '../../../server.config';
+import { name, version } from '../../package.json';
+import CONFIG from '../../server.config';
 
 export default {
     dev: [
@@ -33,8 +32,10 @@ export default {
                 showErrors: CONFIG.SHOW_ERROR_PAGES,
             },
         },
+        /*
         {
             plugin: laabr,
         },
+         */
     ],
 };

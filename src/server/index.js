@@ -4,14 +4,14 @@ import Hapi from '@hapi/hapi';
 import { join } from 'path';
 import dashboardConfig from '../../dashboard.config';
 import CONFIG from '../../server.config.js';
+import setupAuth from '../auth';
 import logger from '../logger';
+import loadPlugins from '../plugins';
+import loadRoutes from '../routes';
 import checkHealth from '../utils/check-health';
 import configValidator from '../validator/config-validator';
 import dashboardConfigSchema from '../validator/schemas/dashboard-config-schema';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
-import setupAuth from './auth';
-import loadPlugins from './plugins';
-import loadRoutes from './routes';
 
 async function start() {
     const server = Hapi.server({
@@ -30,14 +30,21 @@ async function start() {
     await loadRoutes(server);
     await loadPlugins(server);
 
-    if (await checkHealth()) {
-        logger.info('Starting server');
-        await server.start();
-    }
+    await server.start();
+    logger.info('Server started');
 }
 
-export default function app() {
-    logger.info(`Starting server worker`);
+export default async function app() {
+    if (!await checkHealth()) {
+        return;
+    }
+
+    logger.debug(`Validating config`);
+    if (!configValidator(dashboardConfigSchema, dashboardConfig) || !configValidator(serverConfigSchema, CONFIG)) {
+        return;
+    }
+    logger.debug(`Config ok`);
+
 
     logger.debug(`Setting up process listener`);
     process.on('unhandledRejection', (err) => {
@@ -45,7 +52,6 @@ export default function app() {
         console.log(err);
         process.exit(1);
     });
-
 
     process.on('SIGTERM', () => {
         logger.info('SIGTERM server worker');
@@ -58,9 +64,7 @@ export default function app() {
         Sentry.init({ dsn: process.env.SENTRY_DSN });
     }
 
-    logger.debug(`Validating config`);
-    if (configValidator(dashboardConfigSchema, dashboardConfig) && configValidator(serverConfigSchema, CONFIG)) {
-        start();
-    }
+    logger.info(`Starting server`);
+    start();
 }
 

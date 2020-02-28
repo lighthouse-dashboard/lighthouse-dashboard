@@ -30,4 +30,4 @@ ENV NODE_ENV=production
 RUN npm run build
 
 # Running
-CMD [ "npm", "run", "start-server" ]
+CMD [ "npm", "run", "start-worker" ]

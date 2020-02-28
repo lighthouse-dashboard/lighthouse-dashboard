@@ -1,6 +1,6 @@
 import { dirname } from 'path';
-import logger from '../../logger';
-import glob from '../../utils/glob';
+import logger from '../logger';
+import glob from '../utils/glob';
 
 /**
  * Load all routes

@@ -1,5 +1,5 @@
 import Inert from '@hapi/inert';
-import logger from '../../logger';
+import logger from '../logger';
 import getRoutes from './routes';
 
 /**
@@ -13,4 +13,5 @@ export default async function loadRoutes(server) {
     routes.forEach((route) => {
         server.route(route);
     });
+    logger.info('Routes complete');
 }

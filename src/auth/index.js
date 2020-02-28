@@ -1,6 +1,6 @@
 import JWT from 'hapi-auth-jwt2';
-import CONFIG from '../../../server.config';
-import logger from '../../logger';
+import CONFIG from '../../server.config';
+import logger from '../logger';
 import validate from './validate';
 
 /**
@@ -17,4 +17,5 @@ export default async function setupAuth(server) {
     });
 
     server.auth.default('jwt');
+    logger.info('Auth complete');
 };

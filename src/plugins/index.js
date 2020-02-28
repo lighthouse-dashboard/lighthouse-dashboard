@@ -1,6 +1,6 @@
-import IS_PROD from '../../utils/is-prod';
+import logger from '../logger';
+import IS_PROD from '../utils/is-prod';
 import PLUGINS from './plugins';
-import logger from '../../logger';
 
 /**
  * Install plugins
@@ -29,4 +29,6 @@ export default async function loadPlugins(server) {
         logger.debug(`Register ${ PLUGINS.dev.length } dev plugins`);
         await registerPlugins(server, PLUGINS.dev);
     }
+
+    logger.info('Plugins complete');
 }

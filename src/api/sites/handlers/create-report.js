@@ -1,7 +1,8 @@
 import Boom from '@hapi/boom';
 import { getSiteConfigById } from '../../../database/sites';
 import logger from '../../../logger';
-import { spawnNewAuditWorker } from '../../../utils/create-new-audit';
+import queue from '../../../queue';
+import sendToQueue from '../../../queue/send-to-queue';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
 
 /**
@@ -25,7 +26,9 @@ export default async function createReport({ params, payload }, h) {
             return h.response().code(203);
         }
 
-        await spawnNewAuditWorker(config);
+        // await spawnNewAuditWorker(config);
+        const channel = await queue();
+        sendToQueue(channel, config);
     } catch (e) {
         logger.error(e);
         return Boom.boomify(e);

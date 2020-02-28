@@ -11,7 +11,7 @@ import connectDatabase from '../database/connect-database';
  * @return {Promise<SiteConfig[]>}
  */
 async function findSites(find, sort, limit = 100) {
-    const { database, client } = await connectDatabase();
+    const { database } = await connectDatabase();
     const collection = database.collection(SITES_CONFIG_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -30,7 +30,6 @@ async function findSites(find, sort, limit = 100) {
 
                 return resolve(data);
             });
-        client.close();
     });
 }
 

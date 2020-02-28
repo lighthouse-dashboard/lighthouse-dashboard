@@ -14,9 +14,6 @@ export default {
         CHROMIUM_PATH: process.env.GOOGLE_CHROME_BIN,
         CHROMIUM_PORT: 9222,
     },
-    DB: {
-        MONGO_DB_URI: process.env.MONGODB_URI,
-    },
     SHOW_ERROR_PAGES: process.env.SHOW_ERROR_PAGES || false,
     LOGGERS: [
         new transports.Console(),

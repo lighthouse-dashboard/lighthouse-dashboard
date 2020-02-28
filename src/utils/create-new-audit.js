@@ -6,11 +6,19 @@ import { saveReport } from '../database/reports';
 import { getSiteConfigById, updateSite } from '../database/sites';
 import lighthouseTransformer from '../transformer/lighthouse-transformer';
 
+/**
+ * Spawns a worker and starts an audit
+ * @param {SiteCofig} config
+ */
 export function spawnNewAuditWorker(config) {
     const forked = fork(join(__dirname, '../workers/single-audit.js'));
     forked.send({ config });
 }
 
+/**
+ * Spawns a worker and starts multiple audits
+ * @param {SiteConfig[]} list
+ */
 export function spawnNewAuditsWorker(list) {
     const forked = fork(join(__dirname, '../workers/batch-audit.js'));
     forked.send({ list });
@@ -35,7 +43,7 @@ export default async function createNewAudit(id, meta) {
  * Create new audit
  * @param {SiteConfig} config
  * @param {ReportMeta} meta
- * @return {Promise<*>}
+ * @return {Promise<Report>}
  */
 export async function createNewAuditForConfig(config, meta = {}) {
     const { url, runs, device } = config;

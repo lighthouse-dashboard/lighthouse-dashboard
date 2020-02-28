@@ -16,10 +16,6 @@ export default joi.object({
         CHROMIUM_PORT: joi.number(),
     }).required(),
 
-    DB: joi.object({
-        MONGO_DB_URI: joi.string().required(),
-    }).required(),
-
     SHOW_ERROR_PAGES: joi.boolean().required(),
     LOGGERS: joi.array(),
     EXCEPTION_HANDLERS: joi.array(),
