@@ -67,7 +67,7 @@ export async function setup() {
     }
 
     logger.info(`Starting server`);
-    start();
+    await start();
 }
 
 export default async function boot() {

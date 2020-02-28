@@ -2,10 +2,19 @@ FROM alpine:edge
 
 # Installs latest Chromium (77) package.
 RUN apk add --no-cache \
+      chromium \
+      nss \
+      freetype \
+      freetype-dev \
+      harfbuzz \
+      ca-certificates \
+      ttf-freefont \
       nodejs \
       npm
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV CHROMIUM_PATH /usr/bin/chromium-browser
+ENV GOOGLE_CHROME_BIN /usr/bin/chromium-browser
 
 # App Building
 WORKDIR /usr/src/app

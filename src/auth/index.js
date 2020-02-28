@@ -1,5 +1,4 @@
-import JWT from 'hapi-auth-jwt2';
-import CONFIG from '../../server.config';
+import jwt from 'hapi-auth-jwt2';
 import logger from '../logger';
 import validate from './validate';
 
@@ -10,9 +9,9 @@ import validate from './validate';
 export default async function setupAuth(server) {
     logger.info('Loading auth');
 
-    await server.register(JWT);
+    await server.register(jwt);
     server.auth.strategy('jwt', 'jwt', {
-        key: CONFIG.API.JWT_SECRET,
+        key: process.env.JWT_SECRET,
         validate,
     });
 
