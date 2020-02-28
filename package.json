@@ -1,6 +1,6 @@
 {
     "name": "dreihouse-dashboard",
-    "version": "5.3.5",
+    "version": "5.4.0",
     "private": true,
     "description": "App to keep track of your websites by showing their lighthouse results",
     "author": {
