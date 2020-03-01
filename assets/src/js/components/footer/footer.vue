@@ -6,9 +6,9 @@
             <a :href="repository.url">
                 v{{ version }}
             </a>
-            <v-spacer></v-spacer>
+            <v-spacer/>
             <div>&copy; {{ new Date().getFullYear() }}</div>
-            <v-spacer></v-spacer>
+            <v-spacer/>
         </v-footer>
     </v-container>
 </template>

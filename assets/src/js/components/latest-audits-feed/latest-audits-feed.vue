@@ -27,7 +27,7 @@
         data() {
             return {
                 sites: [],
-                interval: null
+                interval: null,
             };
         },
         computed: {

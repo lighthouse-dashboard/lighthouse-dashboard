@@ -1,7 +1,7 @@
 <template>
     <v-card flat>
         <v-card-title>
-            <site-title :isFavorite="isFavorite">
+            <site-title :is-favorite="isFavorite">
                 {{ name }}
             </site-title>
         </v-card-title>

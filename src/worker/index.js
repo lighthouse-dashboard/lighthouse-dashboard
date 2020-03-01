@@ -16,14 +16,14 @@ const RESTART_INTERVAL = process.env.RESTART_TIMEOUT;
 async function start(uri, queue) {
     const connection = await connectMq(uri);
     const channel = await createChannel(connection);
-    channel.assertQueue(queue, { durable: false, });
+    channel.assertQueue(queue, { durable: false });
 
     logger.info(`Worker ready for consumtions of queue ${ queue }`);
 
     channel.consume(queue, (message) => {
         const data = JSON.parse(message.content.toString());
         onMessageReceived(message, data);
-    }, { noAck: true, });
+    }, { noAck: true });
 }
 
 /**
@@ -34,10 +34,9 @@ async function start(uri, queue) {
 function onMessageReceived(msg, data) {
     logger.debug(`Received message ${ msg.content.toString() }`);
     createNewAuditForConfig(data)
-        .then(
-            (report) => {
-                logger.debug(`${ data.url } => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
-            });
+        .then((report) => {
+            logger.debug(`${ data.url } => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
+        });
 }
 
 /**

@@ -14,17 +14,15 @@ export default (ignoreAuthError = false) => {
 
     const instance = axios.create(opts);
 
-    instance.interceptors.response.use(
-        (response) => {
-            return response;
-        },
-        (error) => {
-            if (!ignoreAuthError) {
-                eraseCookie(COOKIE_NAME);
-                window.location.href = '/';
-            }
-            return Promise.reject(error);
-        });
+    instance.interceptors.response.use((response) => {
+        return response;
+    }, (error) => {
+        if (!ignoreAuthError) {
+            eraseCookie(COOKIE_NAME);
+            window.location.href = '/';
+        }
+        return Promise.reject(error);
+    });
 
     return instance;
 };
