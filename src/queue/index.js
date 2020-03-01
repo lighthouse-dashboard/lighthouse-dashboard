@@ -1,4 +1,4 @@
-import amqp from 'amqplib/callback_api';
+import amqp from 'amqplib';
 import logger from '../logger';
 
 /** @type {Connection | null} */
@@ -12,23 +12,20 @@ let channel = null;
  * @param {string} uri
  * @return {Promise<Connection>}
  */
-export function connectMq(uri) {
+export async function connectMq(uri) {
     if (connection) {
-        return Promise.resolve(connection);
+        return connection;
     }
 
     logger.debug(`Connecting to queue ${ uri }`);
-    return new Promise((resolve, reject) => {
-        amqp.connect(uri, (error, conn) => {
-            if (error) {
-                logger.error(error.message);
-                return reject(error);
-            }
-            logger.debug(`Connection established`);
-            connection = conn;
-            return resolve(conn);
-        });
-    });
+    try {
+        connection = await amqp.connect(uri);
+        logger.debug(`Connection to queue established`);
+        return connection;
+    } catch (e) {
+        logger.error(e.message);
+        throw e;
+    }
 }
 
 /**
@@ -36,23 +33,20 @@ export function connectMq(uri) {
  * @param {Connection} con
  * @return {Promise<Channel>}
  */
-export function createChannel(con) {
+export async function createChannel(con) {
     if (channel) {
         return channel;
     }
 
     logger.debug(`Creating channel`);
-    return new Promise((resolve, reject) => {
-        con.createChannel((error, ch) => {
-            if (error) {
-                logger.error(error.message);
-                return reject(error);
-            }
-            logger.debug(`Channel created`);
-            channel = ch;
-            return resolve(ch);
-        });
-    });
+    try {
+        channel = await con.createChannel();
+        logger.debug(`Channel created`);
+        return channel;
+    } catch (error) {
+        logger.error(error.message);
+        throw error;
+    }
 }
 
 /**

@@ -8,5 +8,5 @@ import logger from '../logger';
 export default function sendToQueue(channel, message) {
     const queue = 'audits';
     logger.debug(`Send message to ${ queue }`);
-    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), { persistent: true });
 }

@@ -18,6 +18,7 @@ export default {
         process.env.CONSOLE_RE_CHANNEL ? new ConsoleReTransport({ channel: process.env.CONSOLE_RE_CHANNEL }) : null,
     ],
     EXCEPTION_HANDLERS: [
+        new transports.Console(),
         process.env.SENTRY_DSN ? new SentryTransport() : null,
     ],
     HAPI_PLUGINS: [

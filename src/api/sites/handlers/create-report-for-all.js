@@ -1,5 +1,6 @@
 import { getAllSites } from '../../../database/sites';
-import { spawnNewAuditsWorker } from '../../../utils/create-new-audit';
+import queue from '../../../queue';
+import sendToQueue from '../../../queue/send-to-queue';
 
 /**
  * Execute an audit
@@ -9,10 +10,8 @@ import { spawnNewAuditsWorker } from '../../../utils/create-new-audit';
  */
 export default async function createReportForAll(request, h) {
     const sites = await getAllSites();
-    const ids = sites.map((site) => site.id);
-    spawnNewAuditsWorker(ids);
-
-
+    const channel = await queue();
+    sites.forEach((site) => sendToQueue(channel, site));
     return h.response().code(201);
 }
 
