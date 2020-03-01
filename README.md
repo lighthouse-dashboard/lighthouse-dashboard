@@ -20,9 +20,11 @@ back in the mongodb where it's read from the webapp and accessible via it's apis
 In order to start the worker you need to set a envvar named `IS_WORKER` in order to start the app as a worker.
 This architecture simplifies hosting/deployment, since you can deploy the same application but with this additional env var.
 
+# [Config](doc/CONFIG.md)
+
 # Screenshots
-![Dashboard Darkmode](./doc/dark_dashboard.jpg)
-![Project List Lightmode](./doc/light_projects.jpg)
+![Dashboard Darkmode](doc/assets/dark_dashboard.jpg)
+![Project List Lightmode](doc/assets/light_projects.jpg)
 
 # Hosting
 
@@ -49,9 +51,6 @@ Frontend: [Vue](https://vuejs.org/) & [Vuetiy](https://vuetifyjs.com/en/)
 - [App](http://0.0.0.0:4000)
 - [Swagger](http://0.0.0.0:4000/documentation) (only for NODE_ENV=development)
 
-# Config
-Most config should be in `/dashboard.config.js`or `./server.config.js` whether it is backend or UI
-
 # Startup
 To get a minimal version up and running locally just clone this repo. Add a `.env` file with the variables described below
 and run `docker-compose up`. After a couple of minutes you should be able to see that the server has started
@@ -67,10 +66,6 @@ which will start the mongodb and the server on port 5000. After that, you could 
 Now you have a local server running which will be restarted (with nodemon) after every change.
 If you want to work on the UI you can start the UI with  `npm run serve`. This will create a new app, which proxies your
 already running local server and always delivers the newest UI.
-
-# Server
-
-# Worker
 
 # Env Variables
 
