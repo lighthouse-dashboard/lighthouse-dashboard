@@ -48,6 +48,11 @@ const COLOR_THEME_CONFIG = joi.object({
     text: joi.string(),
 });
 
+const CUSTOM_MENU_ENTRY = joi.object({
+    name: joi.string().required(),
+    link: joi.function().required(),
+});
+
 export default joi.object({
     DATE_FORMAT: joi.string().required(),
 
@@ -97,4 +102,6 @@ export default joi.object({
         })
             .required(),
     }).required(),
+
+    PROJECT_MENU_CUSTOM_ENTRIES: joi.array().items(CUSTOM_MENU_ENTRY),
 });

@@ -8,7 +8,7 @@
                 <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
         </template>
-        <v-list>
+        <v-list dense>
             <v-list-item @click="openSettings">
                 <v-list-item-title>
                     Settings
@@ -20,13 +20,33 @@
                     Run New Audit
                 </v-list-item-title>
             </v-list-item>
+
+            <template v-if="entries.length > 0">
+                <v-subheader>Custom menus</v-subheader>
+                <v-list-item
+                        target="_blank"
+                        :href="entry.link"
+                        v-for="entry in entries"
+                        :key="entry.name">
+                    <v-list-item-title>
+                        {{ entry.name }}
+                    </v-list-item-title>
+                </v-list-item>
+            </template>
         </v-list>
     </v-menu>
 </template>
 
 <script>
 
+
     export default {
+        props: {
+            entries: {
+                type: Array,
+                required: true,
+            },
+        },
         methods: {
             removePage() {
                 this.$emit('removePage');

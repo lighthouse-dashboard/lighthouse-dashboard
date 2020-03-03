@@ -91,4 +91,12 @@ module.exports = {
             },
         },
     },
+    PROJECT_MENU_CUSTOM_ENTRIES: [
+        {
+            name: 'CSS Stats',
+            link: function(url) {
+                return `https://cssstats.com/stats?url=${ url }`;
+            },
+        },
+    ],
 };

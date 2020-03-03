@@ -118,6 +118,24 @@ Example
         accent: '#e91e63',
     },
 
+## `PROJECT_MENU_CUSTOM_ENTRIES:array`
+This is a collection of custom menu entries shown for every project.
+This will open a new tab with the configured url
+
+![Custom Menu](./assets/custom-menu.png)
+
+Example
+
+    PROJECT_MENU_CUSTOM_ENTRIES: [
+        {
+            name: 'CSS Stats',
+            link: function(url) {
+                return `https://cssstats.com/stats?url=${ url }`;
+            },
+        },
+    ],
+
+
 ## Available fields
 These are fields, which correspond to the audit result. 
 The following fields are available:
@@ -127,4 +145,3 @@ The following fields are available:
     'pwa',
     'accessibility',
     'best-practices',
-

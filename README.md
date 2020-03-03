@@ -67,6 +67,25 @@ Now you have a local server running which will be restarted (with nodemon) after
 If you want to work on the UI you can start the UI with  `npm run serve`. This will create a new app, which proxies your
 already running local server and always delivers the newest UI.
 
+## Add custom menu entry
+There is a possibility to add additional entries to the projects menu. This is useful
+if you want to provide some quick access to 3rd party tools like [cssstats](https://cssstats.com/)
+
+![Custom menu entry](./doc/assets/custom-menu.png).
+
+To add those entries simply edit the `config/dashboard.js` and add an entry to `PROJECT_MENU_CUSTOM_ENTRIES`.
+The entry has to look like this 
+
+    {
+        name: 'CSS Stats',
+        link: function(url) {
+            return `https://cssstats.com/stats?url=${ url }`;
+        },
+    },
+    
+where name is the name printed in the UI and link is a function which will be called
+with the projects url to generate the link for the new page
+
 # Env Variables
 
 name | type | description | example

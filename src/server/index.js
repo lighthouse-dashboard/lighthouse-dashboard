@@ -41,13 +41,6 @@ export async function setup() {
         return;
     }
 
-    logger.debug(`Validating config`);
-    if (!configValidator(dashboardConfigSchema, dashboardConfig) || !configValidator(serverConfigSchema, CONFIG)) {
-        return;
-    }
-    logger.debug(`Config ok`);
-
-
     logger.debug(`Setting up process listener`);
     process.on('unhandledRejection', (err) => {
         logger.error(err);
@@ -71,6 +64,12 @@ export async function setup() {
 }
 
 export default async function boot() {
+    logger.debug(`Validating config`);
+    if (!configValidator(dashboardConfigSchema, dashboardConfig) || !configValidator(serverConfigSchema, CONFIG)) {
+        return;
+    }
+    logger.debug(`Config ok`);
+
     try {
         await setup();
     } catch (e) {

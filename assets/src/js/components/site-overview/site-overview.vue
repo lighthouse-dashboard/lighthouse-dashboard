@@ -10,6 +10,7 @@
             </site-title>
             <v-spacer/>
             <site-overview-menu
+                    :entries="menuEntries"
                     @openSettings="openSettings"
                     @removePage="removePage"
                     @openInfo="openInfo"
@@ -32,7 +33,7 @@
 <script>
     import ApexCharts from 'apexcharts';
     import { mapActions } from 'vuex';
-    import CONFIG from '../../../../../config/dashboard';
+    import CONFIG, { PROJECT_MENU_CUSTOM_ENTRIES } from '../../../../../config/dashboard';
     import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
     import ProjectSettings from '../project-settings/project-settings';
     import SiteTitle from '../site-title/site-title';
@@ -82,6 +83,16 @@
                 runError: null,
                 interval: null,
             };
+        },
+        computed: {
+            menuEntries() {
+                return PROJECT_MENU_CUSTOM_ENTRIES.map((entry) => {
+                    return {
+                        name: entry.name,
+                        link: entry.link(this.url),
+                    };
+                });
+            },
         },
         methods: {
             ...mapActions('reports', ['fetchReportsForSite', 'launchAuditForSite']),
@@ -155,9 +166,3 @@
         },
     };
 </script>
-
-<style>
-    .apexcharts-canvas.apexcharts-canvas.apexcharts-canvas {
-        background-color: transparent;
-    }
-</style>
