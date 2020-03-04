@@ -22,6 +22,7 @@ async function boot() {
         logger.debug(`Rebooting worker in ${ RESTART_INTERVAL }ms`);
         setTimeout(() => boot(), RESTART_INTERVAL);
     }
+    process.exit(0);
 }
 
 /**
