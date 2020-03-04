@@ -16,6 +16,7 @@ export default async function executeSingle(useQueue, token) {
     if (!config) {
         throw new Error(`No config found for ${ token }`);
     }
+
     if (useQueue) {
         const channel = await queue();
         await sendToQueue(channel, { config, message: 'CLI - single' });

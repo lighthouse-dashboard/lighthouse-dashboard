@@ -1,6 +1,5 @@
 FROM alpine:edge
 
-# Installs latest Chromium (77) package.
 RUN apk add --no-cache \
       chromium \
       nss \
@@ -30,4 +29,4 @@ ENV NODE_ENV=production
 RUN npm run build
 
 # Running
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "dev" ]

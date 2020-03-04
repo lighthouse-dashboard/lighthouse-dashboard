@@ -17,6 +17,8 @@ services:
   worker:
     build: .
     container_name: 'worker'
+    volumes:
+      - ./src:/usr/src/app/src
     links:
       - queue
       - database
@@ -36,6 +38,8 @@ services:
   web:
       build: .
       container_name: 'web'
+      volumes:
+        - ./src:/usr/src/app/src
       links:
         - queue
         - database
