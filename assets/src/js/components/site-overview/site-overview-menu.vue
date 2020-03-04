@@ -9,7 +9,13 @@
             </v-btn>
         </template>
         <v-list dense>
-            <v-list-item @click="openSettings">
+            <v-list-item @click="removePage">
+                <v-list-item-title>
+                    Remove
+                </v-list-item-title>
+            </v-list-item>
+
+             <v-list-item @click="openSettings">
                 <v-list-item-title>
                     Settings
                 </v-list-item-title>
