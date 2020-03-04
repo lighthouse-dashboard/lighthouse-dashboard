@@ -1,4 +1,5 @@
 import { getSiteConfigByToken } from '../database/sites';
+import logger from '../logger';
 import queue from '../queue';
 import sendToQueue from '../queue/send-to-queue';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
@@ -10,14 +11,15 @@ import { createNewAuditForConfig } from '../utils/create-new-audit';
  * @return {Promise<void>}
  */
 export default async function executeSingle(useQueue, token) {
+    logger.debug(`Execute single audit via cli`);
     const config = await getSiteConfigByToken(token);
     if (!config) {
         throw new Error(`No config found for ${ token }`);
     }
     if (useQueue) {
         const channel = await queue();
-        await sendToQueue(channel, config);
+        await sendToQueue(channel, { config, message: 'CLI - single' });
     } else {
-        await createNewAuditForConfig(config);
+        await createNewAuditForConfig(config, { message: 'CLI - single' });
     }
 }

@@ -11,7 +11,7 @@ import sendToQueue from '../../../queue/send-to-queue';
 export default async function createReportForAll(request, h) {
     const sites = await getAllSites();
     const channel = await queue();
-    sites.forEach((site) => sendToQueue(channel, site));
+    sites.forEach((site) => sendToQueue(channel, { config: site, message: 'batch audit' }));
     return h.response().code(201);
 }
 

@@ -3,7 +3,7 @@ import logger from '../logger';
 /**
  * Send message to queue
  * @param {Channel} channel
- * @param {object} message
+ * @param {QueueMessage} message
  */
 export default function sendToQueue(channel, message) {
     const queue = 'audits';

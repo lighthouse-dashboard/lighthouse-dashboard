@@ -28,7 +28,7 @@ export default async function createReport({ params, payload }, h) {
 
         // await spawnNewAuditWorker(config);
         const channel = await queue();
-        sendToQueue(channel, config);
+        sendToQueue(channel, { config });
     } catch (e) {
         logger.error(e);
         return Boom.boomify(e);

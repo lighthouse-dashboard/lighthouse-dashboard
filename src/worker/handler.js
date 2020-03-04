@@ -8,6 +8,22 @@ const localQueue = [];
 const parseMessage = (message) => JSON.parse(message.content.toString());
 
 /**
+ * Handle incoming message
+ * @param {string} msq
+ */
+function onMessageReceived(msq) {
+    const { config, message } = parseMessage(msq);
+    logger.debug(`Received message ${ msq.content.toString() }`);
+    if (isTaskRunning) {
+        localQueue.push(config);
+        logger.debug(`Push message to local queue. Local queue length ${ localQueue.length }`);
+        return;
+    }
+
+    exec(config, message);
+}
+
+/**
  * Start worker and connect to mq
  * @param {string} uri
  * @param {string} queue
@@ -20,45 +36,31 @@ export async function consumeQueue(uri, queue) {
 
     logger.info(`Worker ready for consuming queue ${ queue }`);
 
-    channel.consume(queue, (message) => {
-        logger.debug(`Received message ${ message.content.toString() }`);
-        if (isTaskRunning) {
-            localQueue.push(message);
-            logger.debug(`Push message to local queue. Local queue length ${ localQueue.length }`);
-            return;
-        }
-
-        exec(message, channel, queue);
-    }, { noAck: false });
+    channel.consume(queue, onMessageReceived, { noAck: false });
 }
 
 /**
  * Execute an audit and recheck the queue for new messages
- * @param {Message} message
- * @param {Channel} channel
- * @param {string} queue
+ * @param {SiteConfig} siteConfig
+ * @param {string | null} message
  */
-async function exec(message, channel, queue) {
+async function exec(siteConfig, message) {
     isTaskRunning = true;
     try {
-        const data = parseMessage(message);
-        await executeAudit(data);
-        await channel.ack(message);
+        await executeAudit(siteConfig, message);
     } catch (e) {
         isTaskRunning = false;
         logger.error(e.message);
     }
-    await checkForNewMessages(channel, queue);
+    await checkForNewMessagesInLocalQueue();
     isTaskRunning = false;
 }
 
 /**
  * Check for new messages and execute them
- * @param {Channel} channel
- * @param {string} queue
  * @return {Promise<void>}
  */
-function checkForNewMessages(channel, queue) {
+function checkForNewMessagesInLocalQueue() {
     logger.debug(`Check local queue for messages`);
     const msg = localQueue.shift();
     if (!msg) {
@@ -66,16 +68,17 @@ function checkForNewMessages(channel, queue) {
         return Promise.resolve();
     }
     logger.debug(`New message found in local queue`);
-    return exec(msg, channel, queue);
+    return exec(msg);
 }
 
 /**
  * Callback when a message is received
  * @param {SiteConfig} data;
+ * @param {string | null} message;
  * @return {Promise<void>}
  */
-function executeAudit(data) {
-    return createNewAuditForConfig(data)
+function executeAudit(data, message = null) {
+    return createNewAuditForConfig(data, { message, git_commit: null })
         .then((report) => {
             logger.debug(`${ data.url } => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
         });

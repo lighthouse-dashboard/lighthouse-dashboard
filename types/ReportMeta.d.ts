@@ -1,4 +1,4 @@
 export interface ReportMeta {
-    message: string,
-    git_commit: string;
+    message: string | null,
+    git_commit: string | null;
 }
