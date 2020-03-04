@@ -52,13 +52,6 @@ export async function setup() {
         logger.info('SIGTERM server worker');
     });
 
-    if (process.env.SENTRY_DSN) {
-        logger.debug(`Setting up sentry`);
-        // eslint-disable-next-line global-require
-        const Sentry = require('@sentry/node');
-        Sentry.init({ dsn: process.env.SENTRY_DSN });
-    }
-
     logger.info(`Starting server`);
     await start();
 }

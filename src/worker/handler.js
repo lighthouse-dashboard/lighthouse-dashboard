@@ -81,5 +81,8 @@ function executeAudit(data, message = null) {
     return createNewAuditForConfig(data, { message, git_commit: null })
         .then((report) => {
             logger.debug(`${ data.url } => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
+        })
+        .catch(e => {
+            logger.error(e.message);
         });
 }
