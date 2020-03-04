@@ -29,6 +29,17 @@ export async function connectMq(uri) {
 }
 
 /**
+ * Close connection
+ * @return {Promise<void>}
+ */
+export async function closeConnection() {
+    if (connection) {
+        logger.debug(`Closing queue connection`);
+        await connection.close();
+    }
+}
+
+/**
  * Create a channel
  * @param {Connection} con
  * @return {Promise<Channel>}

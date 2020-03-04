@@ -20,7 +20,7 @@
         "lint-backend": "eslint -c .eslintrc ./src",
         "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
         "start": "node -r esm index.js",
-        "audit": "node -r esm src/commands/run-audits-command.js",
+        "audit": "node -r esm src/cli/index.js -a --queue",
         "test": "npm run lint && mocha src/**/*.spec.js -r esm"
     },
     "main": "assets/src/app/main.js",
@@ -39,6 +39,7 @@
         "chai": "^4.2.0",
         "chrome-launcher": "^0.12.0",
         "chrome-paths": "^1.0.1",
+        "commander": "^4.1.1",
         "core-js": "^3.4.3",
         "date-fns": "^2.8.1",
         "dotenv": "^8.2.0",
