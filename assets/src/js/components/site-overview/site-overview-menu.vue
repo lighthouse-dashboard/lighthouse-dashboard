@@ -15,7 +15,7 @@
                 </v-list-item-title>
             </v-list-item>
 
-             <v-list-item @click="openSettings">
+            <v-list-item @click="openSettings">
                 <v-list-item-title>
                     Settings
                 </v-list-item-title>
