@@ -1,6 +1,5 @@
 import logger from './src/logger';
 import server from './src/server';
-
 require('dotenv').config();
 
 if (process.env.SENTRY_DSN) {

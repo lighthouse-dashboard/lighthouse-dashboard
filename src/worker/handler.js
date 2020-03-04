@@ -28,7 +28,7 @@ async function processMessage(channel, msg) {
 export async function consumeQueue(uri, queue) {
     const connection = await connectMq(uri);
     const channel = await createChannel(connection);
-    channel.assertQueue(queue, { durable: false });
+    await channel.assertQueue(queue, { durable: false });
 
     logger.info(`Worker ready for consuming queue ${ queue }`);
 
