@@ -20,7 +20,8 @@
         "lint-backend": "eslint -c .eslintrc ./src",
         "dev": "NODE_ENV=development node_modules/.bin/nodemon",
         "start": "node -r esm index.js",
-        "audit": "node -r esm src/cli/index.js -a --queue",
+        "audit": "node -r esm src/cli/index.js -a",
+        "worker": "node -r esm src/worker/index.js",
         "test": "npm run lint && mocha src/**/*.spec.js -r esm"
     },
     "main": "assets/src/app/main.js",

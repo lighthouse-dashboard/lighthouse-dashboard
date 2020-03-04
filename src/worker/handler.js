@@ -2,26 +2,22 @@ import logger from '../logger';
 import { connectMq, createChannel } from '../queue';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
 
-let isTaskRunning = false;
-const localQueue = [];
 
 const parseMessage = (message) => JSON.parse(message.content.toString());
 
-/**
- * Handle incoming message
- * @param {string} msq
- */
-const onMessageReceived = (msq) => {
-    const { config, message } = parseMessage(msq);
-    logger.debug(`Received message ${ msq.content.toString() }`);
-    if (isTaskRunning) {
-        localQueue.push(config);
-        logger.debug(`Push message to local queue. Local queue length ${ localQueue.length }`);
-        return;
-    }
 
-    exec(config, message);
-};
+/**
+ *
+ * @param channel
+ * @return {(Message) => void}
+ */
+async function processMessage(channel, msg) {
+    const { config, message } = parseMessage(msg);
+    logger.debug(`Received message ${ msg.content.toString() }`);
+    await exec(config, message);
+    await channel.ack(msg);
+    await checkForNewMessagesInQueue();
+}
 
 /**
  * Start worker and connect to mq
@@ -36,7 +32,7 @@ export async function consumeQueue(uri, queue) {
 
     logger.info(`Worker ready for consuming queue ${ queue }`);
 
-    channel.consume(queue, onMessageReceived);
+    await checkForNewMessagesInQueue();
 }
 
 /**
@@ -45,30 +41,26 @@ export async function consumeQueue(uri, queue) {
  * @param {string | null} message
  */
 async function exec(siteConfig, message) {
-    isTaskRunning = true;
     try {
         await executeAudit(siteConfig, message);
     } catch (e) {
-        isTaskRunning = false;
         logger.error(e.message);
     }
-    await checkForNewMessagesInLocalQueue();
-    isTaskRunning = false;
 }
 
 /**
  * Check for new messages and execute them
  * @return {Promise<void>}
  */
-function checkForNewMessagesInLocalQueue() {
-    logger.debug(`Check local queue for messages`);
-    const msg = localQueue.shift();
-    if (!msg) {
-        logger.debug(`Local queue empty`);
-        return Promise.resolve();
+async function checkForNewMessagesInQueue() {
+    logger.debug(`Check remote queue`);
+    const connection = await connectMq(process.env.MESSAGE_QUEUE_URI);
+    const channel = await createChannel(connection);
+    const message = await channel.get('audits');
+    if (message) {
+        logger.debug(`Found message in queue`);
+        await processMessage(channel, message);
     }
-    logger.debug(`New message found in local queue. Remaining: ${ localQueue.length }`);
-    return exec(msg);
 }
 
 /**
