@@ -11,7 +11,7 @@ const parseMessage = (message) => JSON.parse(message.content.toString());
  * Handle incoming message
  * @param {string} msq
  */
-function onMessageReceived(msq) {
+const onMessageReceived = (msq) => {
     const { config, message } = parseMessage(msq);
     logger.debug(`Received message ${ msq.content.toString() }`);
     if (isTaskRunning) {
@@ -21,7 +21,7 @@ function onMessageReceived(msq) {
     }
 
     exec(config, message);
-}
+};
 
 /**
  * Start worker and connect to mq
@@ -36,7 +36,7 @@ export async function consumeQueue(uri, queue) {
 
     logger.info(`Worker ready for consuming queue ${ queue }`);
 
-    channel.consume(queue, onMessageReceived, { noAck: false });
+    channel.consume(queue, onMessageReceived);
 }
 
 /**
@@ -67,7 +67,7 @@ function checkForNewMessagesInLocalQueue() {
         logger.debug(`Local queue empty`);
         return Promise.resolve();
     }
-    logger.debug(`New message found in local queue`);
+    logger.debug(`New message found in local queue. Remaining: ${ localQueue.length }`);
     return exec(msg);
 }
 
