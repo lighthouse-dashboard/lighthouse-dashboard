@@ -6,7 +6,9 @@
             </v-col>
 
             <v-col cols="3">
-                <site-config :config="siteConfig"/>
+                <site-config
+                        :config="siteConfig"
+                        v-if="siteConfig"/>
                 <v-card>
                     <v-card-title>History</v-card-title>
                     <v-card-text>

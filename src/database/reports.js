@@ -81,10 +81,11 @@ export async function getLatestReportBySiteId(id) {
 /**
  * Save a new report in DB
  * @param {Report} report
+ * @param {object} raw - raw lighthouse audit report
  * @return {Promise<void>}
  */
-export async function saveReport(report) {
+export async function saveReport(report, raw) {
     const { database } = await connectDatabase();
     const reportCollection = database.collection(AUDIT_COLLECTION);
-    reportCollection.insertOne(report);
+    reportCollection.insertOne({ ...report, raw: JSON.stringify(raw) });
 }

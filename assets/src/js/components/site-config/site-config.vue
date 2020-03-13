@@ -30,6 +30,12 @@
                         <v-list-item-subtitle>Token</v-list-item-subtitle>
                     </v-list-item-content>
                 </v-list-item>
+                <v-list-item>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ config.last_audit | date }}</v-list-item-title>
+                        <v-list-item-subtitle>Token</v-list-item-subtitle>
+                    </v-list-item-content>
+                </v-list-item>
             </v-list>
         </v-card-text>
     </v-card>

@@ -48,8 +48,8 @@ export default async function createNewAudit(id, meta) {
 export async function createNewAuditForConfig(config, meta = {}) {
     const { url, runs, device } = config;
     const transformAuditCurry = curry(lighthouseTransformer);
-    const data = await runLighthouse({ url, runs, device }, transformAuditCurry(config.id));
-    await saveReport({ ...data, ...meta });
+    const { transformed, raw } = await runLighthouse({ url, runs, device }, transformAuditCurry(config.id));
+    await saveReport({ ...transformed, ...meta }, raw);
     await updateSite(config.id, { last_audit: new Date().toISOString() });
-    return data;
+    return transformed;
 }

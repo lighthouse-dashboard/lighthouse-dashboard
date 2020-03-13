@@ -8,3 +8,4 @@ export interface SiteConfig {
     token: string;
     last_audit: string | null;
 }
+

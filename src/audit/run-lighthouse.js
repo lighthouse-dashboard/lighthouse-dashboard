@@ -53,6 +53,6 @@ export default async function runLighthouse(config, transformer) {
         },
     );
 
-    return transformer(audit);
+    return { transformed: transformer(audit), raw: audit };
 }
 

@@ -21,5 +21,9 @@ export default async function getReports({ params }) {
         return Boom.notFound('No audits found');
     }
 
-    return assets;
+    return assets.map((report) => {
+        report.hasRawData = !!report.raw;
+        report.raw = null;
+        return report;
+    });
 }

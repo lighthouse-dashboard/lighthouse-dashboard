@@ -32,7 +32,8 @@
 
                 return [
                     { text: 'Message', value: 'message' },
-                    { text: 'Created At', value: 'createdAt' }
+                    { text: 'Created At', value: 'createdAt' },
+                    { text: 'Has Raw Data', value: 'hasRawData' },
                 ].concat(scores);
             },
 

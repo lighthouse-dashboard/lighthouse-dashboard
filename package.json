@@ -42,7 +42,7 @@
         "chrome-paths": "^1.0.1",
         "commander": "^4.1.1",
         "core-js": "^3.4.3",
-        "date-fns": "^2.8.1",
+        "date-fns": "^2.10.0",
         "dotenv": "^8.2.0",
         "es6-promise": "^4.2.8",
         "esm": "^3.2.25",
