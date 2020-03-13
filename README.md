@@ -102,3 +102,4 @@ WEB_CONCURRENCY | `number` | The amount of workers to start for the web service 
 MESSAGE_QUEUE_URI | `string` | uri to the RabbitMq instance | `amqp://user:password@localhost`
 RESTART_TIMEOUT | `number` | the timeout for restart retries | 5000
 IS_WORKER | `boolean` | Define if the worker should be started or the server | true
+LHD_IGNORE_RAW | `boolean` | If this is defined, raw data from the audit wont be saved. You can't inspect the HTML of that report | false

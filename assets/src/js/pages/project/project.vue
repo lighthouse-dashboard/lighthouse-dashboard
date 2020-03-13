@@ -2,17 +2,32 @@
     <v-container>
         <v-row>
             <v-col cols="9">
-                <report-list :list="reports"/>
+                <v-row>
+                    <v-col cols="12">
+                        <report-list :list="reports"/>
+                    </v-col>
+                    <v-col cols="12">
+                        <site-audit-btn :id="id"/>
+                    </v-col>
+                </v-row>
             </v-col>
 
             <v-col cols="3">
-                <site-config
-                        :config="siteConfig"
-                        v-if="siteConfig"/>
+                <v-row>
+                    <v-col cols="12">
+                        <site-config
+                                :config="siteConfig"
+                                v-if="siteConfig"/>
+                    </v-col>
 
-                <report-history :list="reports"/>
+                    <v-col cols="12">
+                        <report-history :list="reports"/>
+                    </v-col>
 
-                <audit-report-list :list="reports"/>
+                    <v-col cols="12">
+                        <audit-report-list :list="reports"/>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
     </v-container>
@@ -22,11 +37,13 @@
     import { mapActions } from 'vuex';
     import AuditReportList from '../../components/audit-report-list/audit-report-list';
     import ReportHistory from '../../components/report-history/report-history';
-    import ReportList from '../../components/report-list/report-list';
+    import ReportList from '../../components/report-table/report-table';
+    import SiteAuditBtn from '../../components/site-audit-btn/site-audit-btn';
     import SiteConfig from '../../components/site-config/site-config';
 
     export default {
         components: {
+            SiteAuditBtn,
             ReportHistory,
             AuditReportList,
             SiteConfig,

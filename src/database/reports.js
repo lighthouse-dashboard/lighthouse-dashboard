@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { AUDIT_COLLECTION } from '../config/db';
 import connectDatabase from '../database/connect-database';
+import logger from '../logger';
 
 /**
  * Get list of recent reports
@@ -103,5 +104,9 @@ export async function getLatestReportBySiteId(id) {
 export async function saveReport(report, raw) {
     const { database } = await connectDatabase();
     const reportCollection = database.collection(AUDIT_COLLECTION);
-    reportCollection.insertOne({ ...report, raw: JSON.stringify(raw) });
+    const saveRaw = process.env.LHD_IGNORE_RAW ? null : JSON.stringify(raw);
+    if (process.env.LHD_IGNORE_RAW) {
+        logger.debug('Ignore raw data');
+    }
+    reportCollection.insertOne({ ...report, raw: saveRaw });
 }

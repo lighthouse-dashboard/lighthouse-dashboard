@@ -4,10 +4,13 @@
             background-color="transparent"
             color="text"
             slider-color="secondary">
-        <v-tab to="/">
+        <v-tab to="/"
+                exact>
             Dashboard
         </v-tab>
-        <v-tab to="/projects">
+
+        <v-tab to="/projects"
+                exact>
             Projects
         </v-tab>
     </v-tabs>

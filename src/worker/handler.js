@@ -60,6 +60,8 @@ async function checkForNewMessagesInQueue() {
     if (message) {
         logger.debug(`Found message in queue`);
         await processMessage(channel, message);
+    } else {
+        logger.debug(`No messages in queue`);
     }
 }
 
