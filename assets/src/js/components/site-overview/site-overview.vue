@@ -6,7 +6,7 @@
 
         <v-card-title>
             <site-title :is-favorite="isFavorite">
-                {{ name }}
+                <a :href="`/project/${id}`">{{ name }}</a>
             </site-title>
             <v-spacer/>
             <site-overview-menu
@@ -18,7 +18,8 @@
         </v-card-title>
 
         <v-card-text>
-            <div ref="chart"/>
+            <line-chart :data-sets="datasets"
+                    :labels="labels"/>
         </v-card-text>
 
         <v-card-actions>
@@ -31,16 +32,17 @@
 </template>
 
 <script>
-    import ApexCharts from 'apexcharts';
     import { mapActions } from 'vuex';
     import CONFIG, { PROJECT_MENU_CUSTOM_ENTRIES } from '../../../../../config/dashboard';
-    import { SITE_OVERVIEW_CHART } from '../../config/chart-options';
+    import reportsToLineChart from '../../../../../src/transformer/reports-to-line-chart';
+    import LineChart from '../charts/line-chart/line-chart';
     import ProjectSettings from '../project-settings/project-settings';
     import SiteTitle from '../site-title/site-title';
     import SiteOverviewMenu from './site-overview-menu';
 
     export default {
         components: {
+            LineChart,
             SiteTitle,
             ProjectSettings,
             SiteOverviewMenu,
@@ -75,10 +77,8 @@
                 showSettings: false,
                 showInfo: false,
                 chart: null,
-                chartData: {
-                    datasets: [],
-                    labels: [],
-                },
+                datasets: [],
+                labels: [],
                 isLoading: false,
                 runError: null,
                 interval: null,
@@ -102,27 +102,13 @@
                 this.showSettings = false;
             },
 
-            buildChart() {
-                const options = Object.assign({}, SITE_OVERVIEW_CHART, {});
-                this.chart = new ApexCharts(this.$refs.chart, options);
-                this.chart.render();
-            },
-
-            updateChart() {
-                this.chart.updateOptions({
-                    xaxis: {
-                        categories: this.chartData.labels,
-                    },
-                });
-                this.chart.updateSeries(this.chartData.datasets);
-            },
-
             loadData() {
                 this.isLoading = true;
                 return this.fetchReportsForSite({ id: this.id })
-                    .then((data) => {
-                        this.chartData = data;
-                        this.updateChart();
+                    .then(data => reportsToLineChart(data))
+                    .then(({ datasets, labels }) => {
+                        this.datasets = datasets;
+                        this.labels = labels;
                     })
                     .finally(() => {
                         this.isLoading = false;
@@ -157,7 +143,6 @@
         },
 
         mounted() {
-            this.buildChart();
             this.loadData();
 
             this.interval = setInterval(() => {

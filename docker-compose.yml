@@ -14,27 +14,6 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=password
-  worker:
-    build: .
-    container_name: 'worker'
-    volumes:
-      - ./src:/usr/src/app/src
-    links:
-      - queue
-      - database
-    depends_on:
-      - queue
-      - database
-    environment:
-      - IS_WORKER=true
-      - MONGODB_URI=mongodb://database:27017/lhd
-      - SENTRY_DSN=https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421
-      - PORT=5001
-      - WINSTON_LOG_LEVEL=debug
-      - MESSAGE_QUEUE_URI=amqp://user:password@queue
-      - RESTART_TIMEOUT=5000
-    ports:
-      - '5001:5001'
   web:
       build: .
       container_name: 'web'
@@ -43,8 +22,6 @@ services:
       links:
         - queue
         - database
-      depends_on:
-        - worker
       environment:
         - LOGIN_PASS=Foo
         - JWT_SECRET=Foo

@@ -2,7 +2,6 @@ import Boom from '@hapi/boom';
 import CONFIG from '../../../../config/server';
 import { getReportsBySiteId } from '../../../database/reports';
 import { getSiteConfigById } from '../../../database/sites';
-import reportsToLineChart from '../../../transformer/reports-to-line-chart';
 
 /**
  * Handler for latest created reports
@@ -22,5 +21,5 @@ export default async function getReports({ params }) {
         return Boom.notFound('No audits found');
     }
 
-    return reportsToLineChart(assets);
+    return assets;
 }

@@ -66,7 +66,7 @@ export async function getLatestSites() {
  * Get specific site
  * @param {object} _
  * @param {string} siteId
- * @return {Promise<T>}
+ * @return {Promise<SiteConfig>}
  */
 export async function getSite(_, { siteId }) {
     const { data } = await axios().get(GET_SITE_BY_ID_URL(siteId));

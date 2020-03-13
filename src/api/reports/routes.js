@@ -14,7 +14,6 @@ export default [
             auth: 'jwt',
         },
     },
-
     {
         method: 'GET',
         path: '/api/reports/{siteId}/latest',

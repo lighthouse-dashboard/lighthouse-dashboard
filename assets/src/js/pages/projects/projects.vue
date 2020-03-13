@@ -1,5 +1,6 @@
 <template>
     <v-container :fluid="fluid">
+        <create-site-form/>
         <v-subheader>Projects</v-subheader>
         <v-row>
             <v-col :cols="cols"
@@ -16,10 +17,12 @@
     import { mapActions, mapState } from 'vuex';
     import { DASHBOARD } from '../../../../../config/dashboard';
     import AuditAllBtn from '../../components/audit-all-btn/audit-all-btn';
+    import CreateSiteForm from '../../components/create-site-form/create-site-form';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
 
     export default {
         components: {
+            CreateSiteForm,
             AuditAllBtn,
             SiteOverview,
         },

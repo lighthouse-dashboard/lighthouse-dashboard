@@ -1,5 +1,6 @@
 <template>
     <v-container :fluid="fluid">
+        <create-site-form/>
         <dashboard-section
                 :type="config"
                 v-for="config in charts"
@@ -9,10 +10,12 @@
 
 <script>
     import { DASHBOARD } from '../../../../../config/dashboard';
+    import CreateSiteForm from '../../components/create-site-form/create-site-form';
     import DashboardSection from '../../components/dashboard-section/dashboard-section';
 
     export default {
         components: {
+            CreateSiteForm,
             DashboardSection,
         },
         computed: {
