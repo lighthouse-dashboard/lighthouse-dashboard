@@ -1,4 +1,5 @@
 import joi from '@hapi/joi';
+import getHtmlReportHandler from './handlers/get-html-report';
 import getLatestReportValues from './handlers/get-latest-report-values';
 import getReports from './handlers/get-reports';
 import getSpeedReportOverview from './handlers/get-speed-report-overview';
@@ -42,6 +43,23 @@ export default [
             validate: {
                 params: joi.object({
                     id: joi
+                        .string()
+                        .required(),
+                }),
+            },
+        },
+    },
+    {
+        method: 'GET',
+        path: '/api/reports/report/{reportId}',
+        handler: getHtmlReportHandler,
+        options: {
+            description: 'Get lighthouse html report',
+            tags: ['api', 'reports'],
+            auth: 'jwt',
+            validate: {
+                params: joi.object({
+                    reportId: joi
                         .string()
                         .required(),
                 }),

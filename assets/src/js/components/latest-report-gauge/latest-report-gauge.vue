@@ -1,5 +1,5 @@
 <template>
-    <v-card flat>
+    <v-card>
         <v-card-title>
             <site-title :is-favorite="isFavorite">
                 {{ name }}

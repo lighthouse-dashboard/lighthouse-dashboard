@@ -15,6 +15,7 @@
                         <line-chart :data-sets="lineChartData.datasets"
                                 :labels="lineChartData.labels"/>
                     </v-card-text>
+                    <audit-report-list :list="reports"/>
                 </v-card>
             </v-col>
         </v-row>
@@ -24,12 +25,14 @@
 <script>
     import { mapActions } from 'vuex';
     import reportsToLineChart from '../../../../../src/transformer/reports-to-line-chart';
+    import AuditReportList from '../../components/audit-report-list/audit-report-list';
     import LineChart from '../../components/charts/line-chart/line-chart';
     import ReportList from '../../components/report-list/report-list';
     import SiteConfig from '../../components/site-config/site-config';
 
     export default {
         components: {
+            AuditReportList,
             SiteConfig,
             LineChart,
             ReportList,

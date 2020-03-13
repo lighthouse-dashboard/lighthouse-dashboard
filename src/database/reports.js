@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { AUDIT_COLLECTION } from '../config/db';
 import connectDatabase from '../database/connect-database';
 
@@ -20,6 +21,21 @@ export async function getReports(limit) {
                 }
 
                 return resolve(audits);
+            });
+    });
+}
+
+export async function getReportById(id) {
+    const { database } = await connectDatabase();
+    const collection = database.collection(AUDIT_COLLECTION);
+
+    return new Promise((resolve, reject) => {
+        collection
+            .findOne({ _id: ObjectId(id) }, (err, data) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(data);
             });
     });
 }

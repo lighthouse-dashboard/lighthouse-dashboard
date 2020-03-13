@@ -1,5 +1,5 @@
 <template>
-    <v-card flat>
+    <v-card>
         <project-settings v-if="showSettings"
                 :id="id"
                 @close="onSettingsClosed"/>
