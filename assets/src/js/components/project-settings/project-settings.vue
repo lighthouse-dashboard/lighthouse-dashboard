@@ -7,7 +7,7 @@
 
             <v-text-field readonly
                     label="Last Audit"
-                    :value="siteConfig.last_audit"/>
+                    :value="siteConfig.last_audit | date"/>
 
             <v-text-field readonly
                     label="Device"

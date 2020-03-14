@@ -1,10 +1,8 @@
 <template>
     <v-tabs
             right
-            background-color="transparent"
-            color="text"
             slider-color="secondary">
-        <v-tab to="/"
+        <v-tab to="/dashboard"
                 exact>
             Dashboard
         </v-tab>

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
-    DATE_FORMAT: 'dd/MM HH:mm',
+    DATE_FORMAT: 'dd/MM/yy HH:mm',
     DASHBOARD: {
         TITLE: 'dreipol performance',
 
@@ -61,36 +61,41 @@ module.exports = {
     UI: {
         CHART_COLORS: {
             dark: [
-                '#c5f4c4',
-                '#97d68e',
-                '#7b9878',
-                '#a2a7ac',
-                '#707b9a',
+                '#00876c',
+                '#76ac7f',
+                '#bfd0a1',
+                '#fff6d2',
+                '#efc18d',
+                '#e5855f',
+                '#d43d51',
             ],
             light: [
-                '#de6416',
-                '#efa34e',
-                '#fbcc98',
-                '#65beb1',
-                '#7b9b7b',
+                '#00876c',
+                '#76ac7f',
+                '#bfd0a1',
+                '#fff6d2',
+                '#efc18d',
+                '#e5855f',
+                '#d43d51',
             ],
         },
 
         COLOR_THEME: {
             dark: {
-                primary: '#d37549',
-                secondary: '#bf4223',
-                text: '#fff',
-                accent: '#546b8f',
+                primary: '#5de3ff',
+                text: '#f7f7f7',
+                secondary: '#004c6d',
+                accent: '#e91e63',
             },
             light: {
-                primary: '#de594d',
+                primary: '#004c6d',
                 text: '#333333',
-                secondary: '#ffcc80',
+                secondary: '#5de3ff',
                 accent: '#e91e63',
             },
         },
     },
+
     PROJECT_MENU_CUSTOM_ENTRIES: [
         {
             name: 'CSS Stats',

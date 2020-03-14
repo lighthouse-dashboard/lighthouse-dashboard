@@ -23,7 +23,7 @@
 
             <v-list-item @click="runAudit">
                 <v-list-item-title>
-                    Run New Audit
+                    Schedule new audit
                 </v-list-item-title>
             </v-list-item>
 

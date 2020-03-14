@@ -1,6 +1,6 @@
 <template>
     <v-btn @click="runAudit">
-        Run Audit
+        Schedule new audit
     </v-btn>
 </template>
 

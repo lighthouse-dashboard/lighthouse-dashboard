@@ -19,4 +19,8 @@ export default [
         path: '/',
         component: () => import('./overview/overview'),
     },
+    {
+        path: '/dashboard',
+        component: () => import('./overview/overview'),
+    },
 ];

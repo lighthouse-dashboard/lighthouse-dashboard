@@ -10,6 +10,17 @@ export default [
             file: 'templates/index.html',
         },
     },
+    {
+        method: 'GET',
+        path: '/dashboard',
+        options: {
+            description: 'Dashboard page',
+            auth: false,
+        },
+        handler: {
+            file: 'templates/index.html',
+        },
+    },
 
     {
         method: 'GET',

@@ -6,7 +6,7 @@
 
         <v-card-title>
             <site-title :is-favorite="isFavorite">
-                <a :href="`/project/${id}`">{{ name }}</a>
+                <router-link :to="`/project/${id}`">{{ name }}</router-link>
             </site-title>
             <v-spacer/>
             <site-overview-menu

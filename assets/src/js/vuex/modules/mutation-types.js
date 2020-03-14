@@ -3,3 +3,4 @@ export const SET_JWT = 'SET_JWT';
 export const SET_SITES = 'SET_SITES';
 export const UPDATE_SITE = 'UPDATE_SITE';
 export const ADD_SITE = 'ADD_SITE';
+export const SET_CURRENT_SITE_CONFIG = 'SET_CURRENT_SITE_CONFIG';
