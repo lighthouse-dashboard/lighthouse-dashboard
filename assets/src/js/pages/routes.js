@@ -6,11 +6,6 @@ export default [
     },
 
     {
-        path: '/login',
-        component: () => import('./login/login'),
-    },
-
-    {
         path: '/projects',
         component: () => import('./projects/projects'),
     },
