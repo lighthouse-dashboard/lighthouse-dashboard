@@ -85,6 +85,10 @@ export async function getCurrentSite({ commit }, { siteId }) {
     return data;
 }
 
+export function resetCurrentSite({ commit }) {
+    commit({ type: SET_CURRENT_SITE_CONFIG, config: null });
+}
+
 /**
  * Get specific site
  * @return {Promise<T>}

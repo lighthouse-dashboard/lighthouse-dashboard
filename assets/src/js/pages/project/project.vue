@@ -100,7 +100,7 @@
 
         methods: {
             ...mapActions('reports', ['fetchReportsForSite']),
-            ...mapActions('sites', ['getCurrentSite']),
+            ...mapActions('sites', ['getCurrentSite', 'resetCurrentSite']),
 
             loadSiteInfo() {
                 return this.getCurrentSite({ siteId: this.id });
@@ -112,6 +112,10 @@
                         this.reports = data;
                     });
             },
+        },
+
+        beforeDestroy() {
+            this.resetCurrentSite();
         },
 
         mounted() {
