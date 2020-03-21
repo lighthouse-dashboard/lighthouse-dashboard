@@ -23,13 +23,13 @@
 
             <v-checkbox
                     v-model="siteConfig.isFavorite"
-                    color="secondary"
+                    color="primary"
                     label="Is Favorite"/>
         </template>
 
         <template slot="actions">
             <v-btn text
-                    color="secondary"
+                    color="primary"
                     @click="save">
                 Save
             </v-btn>

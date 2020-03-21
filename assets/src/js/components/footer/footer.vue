@@ -1,16 +1,10 @@
 <template>
-    <v-container>
-        <v-footer app
-                absolute
-                tile>
-            <a :href="repository.url">
-                v{{ version }}
-            </a>
-            <v-spacer/>
-            <div>&copy; {{ new Date().getFullYear() }}</div>
-            <v-spacer/>
-        </v-footer>
-    </v-container>
+    <v-footer app
+            color="primary">
+        <v-spacer/>
+        <div>&copy; {{ new Date().getFullYear() }}</div>
+        <v-spacer/>
+    </v-footer>
 </template>
 
 <script>

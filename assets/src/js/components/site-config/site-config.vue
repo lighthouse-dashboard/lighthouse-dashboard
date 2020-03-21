@@ -10,11 +10,15 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item>
+                <v-list-item :href="config.url"
+                        target="_blank">
                     <v-list-item-content>
                         <v-list-item-title>{{ config.url }}</v-list-item-title>
                         <v-list-item-subtitle>Url</v-list-item-subtitle>
                     </v-list-item-content>
+                    <v-list-item-icon>
+                        <v-icon>mdi-open-in-new</v-icon>
+                    </v-list-item-icon>
                 </v-list-item>
 
                 <v-list-item>
@@ -38,24 +42,14 @@
                 </v-list-item>
             </v-list>
         </v-card-text>
-
-        <v-card-actions>
-            <v-spacer/>
-            <v-btn @click="toggleEdit">Edit</v-btn>
-        </v-card-actions>
-
-        <project-settings v-if="isEdit"
-                :id="config.id"
-                @close="onCloseSettings"/>
     </v-card>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import ProjectSettings from '../project-settings/project-settings';
 
     export default {
-        components: { ProjectSettings },
+        components: {},
         props: {
             /** @type {SiteConfig} */
             config: {
@@ -64,21 +58,11 @@
             },
         },
         data() {
-            return {
-                isEdit: false,
-            };
+            return {};
         },
 
         methods: {
             ...mapActions('sites', ['getCurrentSite']),
-
-            toggleEdit() {
-                this.isEdit = !this.isEdit;
-            },
-            onCloseSettings() {
-                this.getCurrentSite({ siteId: this.config.id });
-                this.toggleEdit();
-            },
         },
     };
 </script>
