@@ -10,7 +10,7 @@ import connectDatabase from '../database/connect-database';
  * @param {number} limit
  * @return {Promise<SiteConfig[]>}
  */
-async function findSites(find, sort, limit = 100) {
+export async function findSites(find, sort = {}, limit = 100) {
     const { database } = await connectDatabase();
     const collection = database.collection(SITES_CONFIG_COLLECTION);
 

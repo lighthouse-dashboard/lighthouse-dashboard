@@ -1,4 +1,15 @@
-import { getAllSites } from '../../../database/sites';
+import { findSites, getAllSites } from '../../../database/sites';
 
-export const getSitesHandler = () => getAllSites();
-export default getSitesHandler;
+export default function getSitesHandler(request) {
+    const { query } = request.query;
+
+    if (!!query) {
+        try {
+            return findSites({ $text: { $search: query } });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    return getAllSites();
+}

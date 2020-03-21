@@ -96,3 +96,14 @@ export function resetCurrentSite({ commit }) {
 export async function createReportForAll() {
     await axios().post(POST_SITE_ALL_URL);
 }
+
+/**
+ * Search for a page
+ * @param {function} commit
+ * @param {string} query
+ * @return {Promise<void>}
+ */
+export async function searchForPages({ commit }, { query }) {
+    const { data } = await axios().get(GET_SITES_URL, { params: { query } });
+    commit({ type: SET_SITES, sites: data });
+}

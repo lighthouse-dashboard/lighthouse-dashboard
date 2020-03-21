@@ -1,3 +1,4 @@
+import devErrors from 'hapi-dev-errors';
 import { transports } from 'winston';
 import ConsoleReTransport from 'winston-consolere-transport';
 import SentryTransport from '../src/logger/sentry-transport';
@@ -22,6 +23,11 @@ export default {
         process.env.SENTRY_DSN ? new SentryTransport() : null,
     ],
     HAPI_PLUGINS: [
-
+        {
+            plugin: devErrors,
+            options: {
+                showErrors: process.env.SHOW_ERROR_PAGES,
+            },
+        },
     ],
 };

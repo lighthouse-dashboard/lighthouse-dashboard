@@ -7,7 +7,7 @@ import deleteSite from './handlers/delete-site';
 import { getFavSitesHandler } from './handlers/get-fav-site';
 import { getLatestSitesHandler } from './handlers/get-latest-sites';
 import { getSiteById } from './handlers/get-site-by-id';
-import { getSitesHandler } from './handlers/get-sites';
+import getSitesHandler from './handlers/get-sites';
 import { updateSiteConfigHandler } from './handlers/update-site-config';
 
 export default [
@@ -19,6 +19,11 @@ export default [
             description: 'Get all configured sites',
             tags: ['api', 'sites'],
             auth: 'jwt',
+            validate: {
+                query: joi.object({
+                    query: joi.string(),
+                }),
+            },
         },
     },
     {

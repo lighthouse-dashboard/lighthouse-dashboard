@@ -26,12 +26,6 @@ export default {
     ],
     prod: [
         ...CONFIG.HAPI_PLUGINS,
-        {
-            plugin: devErrors,
-            options: {
-                showErrors: CONFIG.SHOW_ERROR_PAGES,
-            },
-        },
         /*
         {
             plugin: laabr,
