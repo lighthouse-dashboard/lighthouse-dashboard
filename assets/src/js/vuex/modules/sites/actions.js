@@ -57,8 +57,9 @@ export async function updateSite({ commit }, { id, delta }) {
  * Fetch latest audites sites
  * @return {Promise<T>}
  */
-export async function getLatestSites() {
+export async function getLatestSites({ commit }) {
     const { data } = await axios().get(GET_LATEST_AUDITED_SITES_URL);
+    commit({ type: SET_SITES, sites: data });
     return data;
 }
 

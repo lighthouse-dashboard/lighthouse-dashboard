@@ -56,12 +56,12 @@
         },
 
         methods: {
-            ...mapActions('sites', ['fetchAllSites']),
+            ...mapActions('sites', ['getLatestSites']),
 
         },
 
         async mounted() {
-            await this.fetchAllSites();
+            await this.getLatestSites();
         },
     };
 </script>
