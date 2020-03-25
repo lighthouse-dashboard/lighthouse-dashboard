@@ -33,7 +33,7 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import CONFIG, { PROJECT_MENU_CUSTOM_ENTRIES } from '../../../../../config/dashboard';
+    import { PROJECT_MENU_CUSTOM_ENTRIES } from '../../../../../config/dashboard';
     import reportsToLineChart from '../../../../../src/transformer/reports-to-line-chart';
     import LineChart from '../charts/line-chart/line-chart';
     import ProjectSettings from '../project-settings/project-settings';
@@ -144,10 +144,6 @@
 
         mounted() {
             this.loadData();
-
-            this.interval = setInterval(() => {
-                this.loadData();
-            }, CONFIG.DASHBOARD.UPDATE_INTERVAL);
         },
     };
 </script>

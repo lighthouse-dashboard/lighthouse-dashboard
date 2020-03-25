@@ -1,6 +1,6 @@
 <template>
     <v-app id="inspire">
-        <nav-bar/>
+        <navigation/>
 
         <v-content>
             <router-view v-if="isLoggedIn"/>
@@ -13,7 +13,7 @@
 <script>
     import { mapActions, mapState } from 'vuex';
     import FooterComponent from './components/footer/footer';
-    import NavBar from './components/nav-bar/nav-bar';
+    import Navigation from './components/navigation/navigation';
     import Login from './pages/login/login';
     import colorPreference from './utils/color-preference';
 
@@ -21,7 +21,7 @@
         components: {
             Login,
             FooterComponent,
-            NavBar,
+            Navigation,
         },
 
         computed: {
