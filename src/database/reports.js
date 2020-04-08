@@ -123,6 +123,6 @@ export async function clearReports() {
     });
     logger.debug(`Freeing up ${ rows } rows`);
 
-    await reportCollection.update({ createdAt: date, raw: null }, { $set: { raw: null } });
+    await reportCollection.updateMany({ createdAt: date, raw: null }, { $set: { raw: null } });
     logger.debug(`Cleared ${ rows } rows raw data`);
 }
