@@ -26,6 +26,11 @@ export async function getReports(limit) {
     });
 }
 
+/**
+ * Get a report by id
+ * @param {string} id
+ * @return {Promise<Report>}
+ */
 export async function getReportById(id) {
     const { database } = await connectDatabase();
     const collection = database.collection(AUDIT_COLLECTION);
@@ -111,6 +116,10 @@ export async function saveReport(report, raw) {
     reportCollection.insertOne({ ...report, raw: saveRaw });
 }
 
+/**
+ * Free up space in DB by remove old data
+ * @return {Promise<void>}
+ */
 export async function clearReports() {
     const { database } = await connectDatabase();
     const reportCollection = database.collection(AUDIT_COLLECTION);
