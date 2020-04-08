@@ -31,7 +31,7 @@
         "@hapi/inert": "^5.2.2",
         "@hapi/joi": "^16.1.8",
         "@hapi/vision": "^5.5.4",
-        "@sentry/node": "^5.11.1",
+        "@sentry/node": "^5.15.4",
         "@types/amqplib": "^0.5.13",
         "amqplib": "^0.5.5",
         "apexcharts": "^3.11.1",

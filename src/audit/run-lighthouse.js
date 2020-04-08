@@ -46,13 +46,13 @@ export default async function runLighthouse(config, transformer) {
     const audit = await launchChromeAndRunLighthouse(
         url,
         {
-            chromeFlags: ['--disable-gpu', '--headless', '--enable-logging'],
+            chromeFlags: ['--disable-gpu', '--headless', '--enable-logging', '--no-sandbox'],
             chromePath: process.env.GOOGLE_CHROME_BIN,
             port: CONFIG.AUDIT.CHROMIUM_PORT,
         },
         {
             ...DEVICE_CONFIG[device],
-            // hostname: '0.0.0.0',
+            hostname: '0.0.0.0',
             // throttling: null,
         },
     );
