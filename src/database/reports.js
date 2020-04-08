@@ -145,7 +145,7 @@ export async function clearReports() {
 export async function removeOldReports() {
     const { database } = await connectDatabase();
     const reportCollection = database.collection(AUDIT_COLLECTION);
-    const date = new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString();
+    const date = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
     const filter = {
         createdAt: {
             $lt: date,

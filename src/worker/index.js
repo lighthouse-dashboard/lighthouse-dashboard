@@ -1,4 +1,4 @@
-import { clearReports } from '../database/reports';
+import { clearReports, removeOldReports } from '../database/reports';
 import logger from '../logger';
 import checkHealth from '../utils/check-health';
 import { consumeQueue } from './handler';
@@ -12,6 +12,7 @@ const RESTART_INTERVAL = process.env.RESTART_TIMEOUT;
  * @return {Promise<void>}
  */
 async function boot() {
+    await removeOldReports();
     await clearReports();
 
     logger.info(`Start audit worker`);
