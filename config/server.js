@@ -1,6 +1,5 @@
 import devErrors from 'hapi-dev-errors';
 import { transports } from 'winston';
-import ConsoleReTransport from 'winston-consolere-transport';
 import SentryTransport from '../src/logger/sentry-transport';
 
 export default {
@@ -16,7 +15,6 @@ export default {
     SHOW_ERROR_PAGES: process.env.SHOW_ERROR_PAGES || false,
     LOGGERS: [
         new transports.Console(),
-        process.env.CONSOLE_RE_CHANNEL ? new ConsoleReTransport({ channel: process.env.CONSOLE_RE_CHANNEL }) : null,
     ],
     EXCEPTION_HANDLERS: [
         new transports.Console(),
