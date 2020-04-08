@@ -12,21 +12,26 @@ import logger from '../logger';
  * @return {Promise<{}>}
  */
 async function launchChromeAndRunLighthouse(url, opts, flags) {
-    const chrome = await chromeLauncher.launch(opts);
-    const port = chrome.port;
-    logger.debug(`Chrome started in ${ port }`);
+    let chrome = null;
     try {
+        chrome = await chromeLauncher.launch(opts);
+
+        const port = chrome.port;
+        logger.debug(`Chrome started in ${ port }`);
         logger.info(`Start audit for ${ url }`);
+
         const results = await lighthouse(url, { ...flags, port });
         logger.info(`Audit for ${ url } completed`);
+
         await chrome.kill();
         return results.lhr;
     } catch (e) {
-        logger.info(`Audit for ${ url } failed. ${ e.message }`);
-        logger.error(e.message);
-        await chrome.kill();
+        logger.error(`Audit for ${ url } failed. ${ e.message }`);
+        if (chrome) {
+            await chrome.kill();
+        }
+        throw e;
     }
-    throw new Error('Lighthouse encountered an error');
 }
 
 /**

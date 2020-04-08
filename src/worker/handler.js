@@ -74,6 +74,10 @@ async function checkForNewMessagesInQueue() {
 function executeAudit(data, message = null) {
     return createNewAuditForConfig(data, { message, git_commit: null })
         .then((report) => {
+            if (!report) {
+                logger.warn(`No report for ${ data.url }`);
+                return;
+            }
             logger.debug(`${ data.url } => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
         })
         .catch(e => {

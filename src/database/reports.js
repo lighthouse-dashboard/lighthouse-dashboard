@@ -112,17 +112,17 @@ export async function saveReport(report, raw) {
 }
 
 export async function clearReports() {
-    logger.debug('Ignore raw data');
     const { database } = await connectDatabase();
     const reportCollection = database.collection(AUDIT_COLLECTION);
     const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
     const rows = await reportCollection.count({
+        raw: null,
         createdAt: {
             $lt: date,
         },
     });
     logger.debug(`Freeing up ${ rows } rows`);
 
-    await reportCollection.update({ createdAt: date }, { $set: { raw: null } });
+    await reportCollection.update({ createdAt: date, raw: null }, { $set: { raw: null } });
     logger.debug(`Cleared ${ rows } rows raw data`);
 }
