@@ -36,7 +36,7 @@
     import { PROJECT_MENU_CUSTOM_ENTRIES } from '../../../../../config/dashboard';
     import reportsToLineChart from '../../../../../src/transformer/reports-to-line-chart';
     import LineChart from '../charts/line-chart/line-chart';
-    import ProjectSettings from '../project-settings/project-settings';
+    import ProjectSettings from '../site-settings/site-settings';
     import SiteTitle from '../site-title/site-title';
     import SiteOverviewMenu from './site-overview-menu';
 

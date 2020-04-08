@@ -110,3 +110,19 @@ export async function saveReport(report, raw) {
     }
     reportCollection.insertOne({ ...report, raw: saveRaw });
 }
+
+export async function clearReports() {
+    logger.debug('Ignore raw data');
+    const { database } = await connectDatabase();
+    const reportCollection = database.collection(AUDIT_COLLECTION);
+    const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const rows = await reportCollection.count({
+        createdAt: {
+            $lt: date,
+        },
+    });
+    logger.debug(`Freeing up ${ rows } rows`);
+
+    await reportCollection.update({ createdAt: date }, { $set: { raw: null } });
+    logger.debug(`Cleared ${ rows } rows raw data`);
+}

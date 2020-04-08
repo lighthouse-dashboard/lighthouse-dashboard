@@ -83,7 +83,7 @@
 <script>
     import { mapActions, mapState } from 'vuex';
     import AuditReportList from '../../components/audit-report-list/audit-report-list';
-    import ProjectSettings from '../../components/project-settings/project-settings';
+    import ProjectSettings from '../../components/site-settings/site-settings';
     import ReportHistory from '../../components/report-history/report-history';
     import ReportList from '../../components/report-table/report-table';
     import ReportsAverage from '../../components/reports-average/reports-average';
