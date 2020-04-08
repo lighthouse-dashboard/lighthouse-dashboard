@@ -124,14 +124,36 @@ export async function clearReports() {
     const { database } = await connectDatabase();
     const reportCollection = database.collection(AUDIT_COLLECTION);
     const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-    const rows = await reportCollection.countDocuments({
-        raw: null,
+    const filter = {
+        raw: { $ne: false },
         createdAt: {
             $lt: date,
         },
-    });
-    logger.debug(`Freeing up ${ rows } rows`);
+    };
+    const rows = await reportCollection.countDocuments(filter);
 
-    await reportCollection.updateMany({ createdAt: date, raw: null }, { $set: { raw: null } });
-    logger.debug(`Cleared ${ rows } rows raw data`);
+    logger.debug(`Found ${ rows } rows to clear`);
+    const { modifiedCount } = await reportCollection.updateMany(filter, { $set: { raw: false } });
+    logger.debug(`Cleared ${ modifiedCount } rows raw data`);
+}
+
+
+/**
+ * Free up space in DB by remove old data
+ * @return {Promise<void>}
+ */
+export async function removeOldReports() {
+    const { database } = await connectDatabase();
+    const reportCollection = database.collection(AUDIT_COLLECTION);
+    const date = new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString();
+    const filter = {
+        createdAt: {
+            $lt: date,
+        },
+    };
+    const rows = await reportCollection.countDocuments(filter);
+
+    logger.debug(`Found ${ rows } reports to remove`);
+    const { deletedCount } = await reportCollection.deleteMany(filter);
+    logger.debug(`Removed ${ deletedCount } reports`);
 }
