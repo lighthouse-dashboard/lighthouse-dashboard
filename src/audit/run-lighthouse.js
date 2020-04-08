@@ -15,7 +15,6 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
     let chrome = null;
     try {
         chrome = await chromeLauncher.launch(opts);
-
         const port = chrome.port;
         logger.debug(`Chrome started in ${ port }`);
         logger.info(`Start audit for ${ url }`);
@@ -47,13 +46,13 @@ export default async function runLighthouse(config, transformer) {
     const audit = await launchChromeAndRunLighthouse(
         url,
         {
-            chromeFlags: ['--headless', '--no-sandbox'],
-            chromePath: CONFIG.AUDIT.CHROMIUM_PATH,
+            chromeFlags: ['--disable-gpu', '--headless', '--enable-logging'],
+            chromePath: process.env.GOOGLE_CHROME_BIN,
             port: CONFIG.AUDIT.CHROMIUM_PORT,
         },
         {
             ...DEVICE_CONFIG[device],
-            hostname: '0.0.0.0',
+            // hostname: '0.0.0.0',
             // throttling: null,
         },
     );

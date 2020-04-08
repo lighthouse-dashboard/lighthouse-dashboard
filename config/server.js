@@ -4,7 +4,7 @@ import SentryTransport from '../src/logger/sentry-transport';
 
 export default {
     HOST: process.env.HOST || '0.0.0.0',
-    PORT: process.env.PORT || 3000,
+    PORT: process.env.PORT || 4000,
     API: {
         SITE_REPORT_LIMIT: 50,
     },
