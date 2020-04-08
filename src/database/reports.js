@@ -124,7 +124,7 @@ export async function clearReports() {
     const { database } = await connectDatabase();
     const reportCollection = database.collection(AUDIT_COLLECTION);
     const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-    const rows = await reportCollection.count({
+    const rows = await reportCollection.countDocuments({
         raw: null,
         createdAt: {
             $lt: date,
