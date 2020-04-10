@@ -67,7 +67,10 @@ export async function getReportsBySiteId(id, limit) {
                     return reject(error);
                 }
 
-                return resolve(data);
+                return resolve(data.map(i => {
+                    delete i._id;
+                    return i;
+                }));
             });
     });
 }

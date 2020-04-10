@@ -5,7 +5,7 @@
                 @close="onSettingsClosed"/>
 
         <v-card-title>
-            <site-title :is-favorite="isFavorite">
+            <site-title :is_favorite="is_favorite">
                 <router-link :to="`/project/${id}`">{{ name }}</router-link>
             </site-title>
             <v-spacer/>
@@ -62,7 +62,7 @@
                 required: true,
             },
 
-            isFavorite: {
+            is_favorite: {
                 type: Boolean,
                 required: true,
             },

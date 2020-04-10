@@ -5,5 +5,5 @@ export interface BarChartData {
 
 export interface BarChartDataSet {
     name: string,
-    values: number[]
+    data: number[]
 }

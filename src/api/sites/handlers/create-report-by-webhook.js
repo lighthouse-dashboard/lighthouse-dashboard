@@ -1,5 +1,5 @@
 import Boom from '@hapi/boom';
-import { getSiteConfigByToken } from '../../../database/sites';
+import { getSiteConfigByToken } from '../db/sites';
 import logger from '../../../logger';
 import queue from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';

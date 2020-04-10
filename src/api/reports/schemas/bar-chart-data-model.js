@@ -1,11 +1,11 @@
 import joi from '@hapi/joi';
 
 export const barChartDataSetModel = joi.object({
-    label: joi
+    name: joi
         .string()
         .required(),
 
-    date: joi
+    data: joi
         .array()
         .items(joi.number()),
 }).label('reports.ChartDatasetModel');

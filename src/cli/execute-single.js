@@ -1,4 +1,4 @@
-import { getSiteConfigByToken } from '../database/sites';
+import { getSiteConfigByToken } from '../api/sites/db/sites';
 import logger from '../logger';
 import queue from '../queue';
 import sendToQueue from '../queue/send-to-queue';

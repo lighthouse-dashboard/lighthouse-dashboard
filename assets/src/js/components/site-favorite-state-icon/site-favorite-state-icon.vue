@@ -1,6 +1,6 @@
 <template>
     <v-icon color="secondary"
-            v-if="isFavorite">
+            v-if="is_favorite">
         mdi-star
     </v-icon>
     <v-icon color="secondary"
@@ -12,7 +12,7 @@
 <script>
     export default {
         props: {
-            isFavorite: {
+            is_favorite: {
                 type: Boolean,
                 required: true,
             },

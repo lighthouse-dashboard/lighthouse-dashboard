@@ -1,4 +1,4 @@
-import { getFavoriteSites } from '../../../database/sites';
+import { getFavoriteSites } from '../db/sites';
 
 export const getFavSitesHandler = () => getFavoriteSites();
 export default getFavSitesHandler;

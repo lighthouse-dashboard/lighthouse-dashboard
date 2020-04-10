@@ -1,4 +1,4 @@
-import { getAllSites } from '../database/sites';
+import { getAllSites } from '../api/sites/db/sites';
 import logger from '../logger';
 import queue, { closeConnection } from '../queue';
 import sendToQueue from '../queue/send-to-queue';

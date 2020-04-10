@@ -4,7 +4,7 @@ export interface SiteConfig {
     url: string;
     device: 'desktop' | 'mobile';
     order: number;
-    isFavorite: boolean;
+    is_favorite: boolean;
     token: string;
     last_audit: string | null;
 }

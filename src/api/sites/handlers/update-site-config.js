@@ -1,4 +1,4 @@
-import { updateSite } from '../../../database/sites';
+import { updateSite } from '../db/sites';
 
 /**
  * Update site controller
@@ -9,8 +9,8 @@ import { updateSite } from '../../../database/sites';
  */
 export async function updateSiteConfigHandler({ params, payload }, h) {
     const { id } = params;
-    const { isFavorite, url, name } = payload;
-    const config = await updateSite(id, { isFavorite, url, name });
+    const { is_favorite, url, name } = payload;
+    const config = await updateSite(id, { is_favorite, url, name });
 
     return h.response(config).code(204);
 }

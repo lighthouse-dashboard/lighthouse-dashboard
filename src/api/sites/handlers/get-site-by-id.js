@@ -1,5 +1,5 @@
 import Boom from '@hapi/boom';
-import { getSiteConfigById } from '../../../database/sites';
+import { getSiteConfigById } from '../db/sites';
 
 /**
  * Get site by id controller

@@ -39,7 +39,7 @@
                                     color="secondary"
                                     required/>
                             <v-checkbox
-                                    v-model="isFavorite"
+                                    v-model="is_favorite"
                                     color="secondary"
                                     label="Is favorite"/>
                         </v-col>
@@ -75,7 +75,7 @@
                 url: 'https://www.exmaple.com',
                 name: 'example.com',
                 device: 'desktop',
-                isFavorite: false,
+                is_favorite: false,
                 items: [
                     {
                         text: 'Desktop',
@@ -95,7 +95,7 @@
                     url: this.url,
                     name: this.name,
                     device: this.device,
-                    isFavorite: this.isFavorite,
+                    is_favorite: this.is_favorite,
                 });
                 this.dialog = false;
             },

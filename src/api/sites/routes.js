@@ -12,7 +12,6 @@ import getSitesHandler from './handlers/get-sites';
 import { updateSiteConfigHandler } from './handlers/update-site-config';
 import { siteConfigModel, siteConfigModelList } from './schemas/site-config-model';
 
-
 export default [
     {
         method: 'GET',
@@ -120,7 +119,7 @@ export default [
                     id: joi.string().required(),
                 }).label('sites.SiteId'),
                 payload: joi.object({
-                    isFavorite: joi.boolean().required(),
+                    is_favorite: joi.boolean().required(),
                     name: joi.string(),
                     url: joi.string(),
                 }).label('sites.SiteUpdateModel'),
@@ -144,7 +143,7 @@ export default [
                     device: joi
                         .string()
                         .allow('desktop', 'mobile'),
-                    isFavorite: joi.boolean(),
+                    is_favorite: joi.boolean(),
                 }).label('sites.CreateSiteModel'),
             },
         },

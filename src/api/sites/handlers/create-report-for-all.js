@@ -1,4 +1,4 @@
-import { getAllSites } from '../../../database/sites';
+import { getAllSites } from '../db/sites';
 import queue from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';
 

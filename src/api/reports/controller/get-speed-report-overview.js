@@ -1,6 +1,6 @@
 import CONFIG from '../../../../config/dashboard';
 import { getLatestReportBySiteId } from '../db/reports';
-import { getFavoriteSites } from '../../../database/sites';
+import { getFavoriteSites } from '../../sites/db/sites';
 import reportsToBarChart from '../../../transformer/report-to-bar-chart';
 
 /**

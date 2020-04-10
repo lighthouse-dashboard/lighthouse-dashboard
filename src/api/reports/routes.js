@@ -5,7 +5,7 @@ import getReports from './controller/get-reports';
 import getSpeedReportOverview from './controller/get-speed-report-overview';
 import { barChartDataModel } from './schemas/bar-chart-data-model';
 import { reportIdParamModel } from './schemas/report-id-param-model';
-import { reportModel } from './schemas/report-model';
+import { reportModelList } from './schemas/report-model';
 import { siteIdParamModel } from './schemas/siteid-param-model';
 
 export default [
@@ -59,7 +59,7 @@ export default [
                 privacy: 'private',
             },
             response: {
-                schema: reportModel,
+                schema: reportModelList,
             },
         },
     },

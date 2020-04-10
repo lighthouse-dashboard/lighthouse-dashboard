@@ -1,4 +1,4 @@
-import { removeSite } from '../../../database/sites';
+import { removeSite } from '../db/sites';
 
 /**
  * Delete site from DB

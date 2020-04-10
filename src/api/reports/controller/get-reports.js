@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
 import CONFIG from '../../../../config/server';
 import { getReportsBySiteId } from '../db/reports';
-import { getSiteConfigById } from '../../../database/sites';
+import { getSiteConfigById } from '../../sites/db/sites';
 
 /**
  * Handler for latest created reports

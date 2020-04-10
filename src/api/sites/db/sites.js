@@ -1,7 +1,7 @@
 import uuid from 'uuid/v4';
-import { DASHBOARD } from '../../config/dashboard';
-import { SITES_CONFIG_COLLECTION } from '../config/db';
-import connectDatabase from '../database/connect-database';
+import { DASHBOARD } from '../../../../config/dashboard';
+import { SITES_CONFIG_COLLECTION } from '../../../config/db';
+import connectDatabase from '../../../database/connect-database';
 
 /**
  * Find sites
@@ -28,6 +28,8 @@ export async function findSites(find, sort = {}, limit = 100) {
                     return resolve([]);
                 }
 
+                delete data._id;
+
                 return resolve(data);
             });
     });
@@ -46,7 +48,7 @@ export function getAllSites() {
  * @return {Promise<SiteConfig[]>}
  */
 export function getFavoriteSites() {
-    return findSites({ isFavorite: true }, { order: 1 });
+    return findSites({ is_favorite: true }, { order: 1 });
 }
 
 /**
@@ -59,7 +61,7 @@ export function getLatestSites() {
 
 /**
  * Add new site to DB
- * @param {Pick<SiteConfig, "name"|"device"|"url"|"isFavorite">} config
+ * @param {Pick<SiteConfig, "name"|"device"|"url"|"is_favorite">} config
  * @return {Promise<SiteConfig>}
  */
 export async function addSite(config) {

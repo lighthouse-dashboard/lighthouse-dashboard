@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import { addSite } from '../../../database/sites';
+import { addSite } from '../db/sites';
 
 /**
  * Controller to add a new site
@@ -8,8 +8,8 @@ import { addSite } from '../../../database/sites';
  * @return {Promise<SiteConfig>}
  */
 export default async function addSiteHandler({ payload }, h) {
-    const { url, name, device, isFavorite } = payload;
-    const config = await addSite({ url, name, device, isFavorite, order: 0, token: uuid() });
+    const { url, name, device, is_favorite } = payload;
+    const config = await addSite({ url, name, device, is_favorite, order: 0, token: uuid() });
 
     return h.response(config).code(201);
 }
