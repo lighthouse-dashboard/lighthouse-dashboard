@@ -17,8 +17,8 @@ const RESTART_INTERVAL = process.env.RESTART_TIMEOUT;
 
 async function start() {
     const server = Hapi.server({
-        port: CONFIG.PORT,
-        host: CONFIG.HOST,
+        port: process.env.PORT || 4000,
+        host: process.env.HOST || '0.0.0.0',
         routes: {
             cors: true,
             files: {

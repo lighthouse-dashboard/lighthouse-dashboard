@@ -2,11 +2,10 @@
 
 import * as Vision from '@hapi/vision';
 import blipp from 'blipp';
-import devErrors from 'hapi-dev-errors';
 import HapiSwagger from 'hapi-swagger';
+import laabr from 'laabr';
 
 import { name, version } from '../../package.json';
-import CONFIG from '../../config/server';
 
 export default {
     dev: [
@@ -20,16 +19,8 @@ export default {
                 },
             },
         },
-        {
-            plugin: blipp, options: { showAuth: true },
-        },
+        { plugin: blipp, options: { showAuth: true } },
+        { plugin: laabr, options: {} },
     ],
-    prod: [
-        ...CONFIG.HAPI_PLUGINS,
-        /*
-        {
-            plugin: laabr,
-        },
-         */
-    ],
+    prod: [],
 };

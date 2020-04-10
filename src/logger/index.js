@@ -1,7 +1,7 @@
 require('dotenv').config();
-import { createLogger, format } from 'winston';
-import serverConfig from '../../config/server';
+import { createLogger, format, transports } from 'winston';
 import { version } from '../../package.json';
+import SentryTransport from './sentry-transport';
 
 export default createLogger({
     format: format.simple(),
@@ -13,6 +13,10 @@ export default createLogger({
         version,
     },
 
-    transports: serverConfig.LOGGERS.filter(t => !!t),
-    exceptionHandlers: serverConfig.EXCEPTION_HANDLERS.filter(t => !!t),
+    transports: [
+        new transports.Console(),
+    ],
+    exceptionHandlers: [
+        process.env.SENTRY_DSN ? new SentryTransport() : new transports.Console(),
+    ],
 });
