@@ -1,5 +1,5 @@
-import joi from '@hapi/joi';
 import { loginHandler } from './handlers/login-handler';
+import { loginRequestModel } from './schemas/login-request-model';
 
 export default [
     {
@@ -11,9 +11,7 @@ export default [
             description: 'Get JWT token',
             tags: ['api', 'auth'],
             validate: {
-                payload: joi.object({
-                    password: joi.string().required(),
-                },),
+                payload: loginRequestModel,
             },
         },
     },

@@ -1,8 +1,11 @@
 import joi from '@hapi/joi';
-import getHtmlReportHandler from './handlers/get-html-report';
-import getLatestReportValues from './handlers/get-latest-report-values';
-import getReports from './handlers/get-reports';
-import getSpeedReportOverview from './handlers/get-speed-report-overview';
+import config from '../../../config/server';
+import getHtmlReportHandler from './controller/get-html-report';
+import getLatestReportValues from './controller/get-latest-report-values';
+import getReports from './controller/get-reports';
+import getSpeedReportOverview from './controller/get-speed-report-overview';
+import { barChartDataModel } from './schemas/bar-chart-data-model';
+import { reportModel } from './schemas/report-model';
 
 export default [
     {
@@ -13,6 +16,13 @@ export default [
             description: 'Get chart data for speed overview of favorited projects',
             tags: ['api', 'reports'],
             auth: 'jwt',
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
+            },
+            response: {
+                schema: barChartDataModel,
+            },
         },
     },
     {
@@ -27,8 +37,13 @@ export default [
                 params: joi.object({
                     siteId: joi
                         .string()
-                        .required(),
+                        .required()
+                        .label('SiteId'),
                 }),
+            },
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
             },
         },
     },
@@ -44,8 +59,16 @@ export default [
                 params: joi.object({
                     id: joi
                         .string()
-                        .required(),
+                        .required()
+                        .label('ReportId'),
                 }),
+            },
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
+            },
+            response: {
+                schema: reportModel,
             },
         },
     },
@@ -61,8 +84,13 @@ export default [
                 params: joi.object({
                     reportId: joi
                         .string()
-                        .required(),
+                        .required()
+                        .label('ReportId'),
                 }),
+            },
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
             },
         },
     },

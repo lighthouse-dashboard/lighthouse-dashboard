@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 import CONFIG from '../../../../config/dashboard';
-import { getLatestReportBySiteId } from '../../../database/reports';
+import { getLatestReportBySiteId } from '../db/reports';
 import { getSiteConfigById } from '../../../database/sites';
 import formatReportSummaryString from '../../../utils/format-report-summary-string';
 import { getReportValueScoreByKey } from '../../../utils/get-report-value-score-by-key';

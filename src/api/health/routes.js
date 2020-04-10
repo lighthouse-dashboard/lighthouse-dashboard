@@ -1,4 +1,5 @@
 import { getHealthController } from './controller';
+import { healthResponseModel } from './schemas/health-response-model';
 
 export default [
     {
@@ -8,7 +9,10 @@ export default [
         options: {
             auth: false,
             description: 'Check system health',
-            tags: ['api', 'auth'],
+            tags: ['api', 'health'],
+            response: {
+                schema: healthResponseModel,
+            },
         },
     },
 ];

@@ -1,12 +1,12 @@
 import Boom from '@hapi/boom';
 import CONFIG from '../../../../config/server';
-import { getReportsBySiteId } from '../../../database/reports';
+import { getReportsBySiteId } from '../db/reports';
 import { getSiteConfigById } from '../../../database/sites';
 
 /**
  * Handler for latest created reports
  * @param {hapi.Request.params} params
- * @return {Promise<ChartData>}
+ * @return {Promise<Report[]>}
  */
 export default async function getReports({ params }) {
     const { id } = params;

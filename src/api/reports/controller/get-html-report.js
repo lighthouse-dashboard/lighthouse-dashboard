@@ -1,6 +1,6 @@
 const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
 import { Boom } from '@hapi/boom';
-import { getReportById } from '../../../database/reports';
+import { getReportById } from '../db/reports';
 
 export default async function getHtmlReportHandler(request) {
     const { reportId } = request.params;

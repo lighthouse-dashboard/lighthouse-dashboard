@@ -17,6 +17,11 @@ export default {
                     title: name,
                     version: version,
                 },
+                tags: [
+                    { name: 'auth', description: 'Auth API' },
+                    { name: 'health', description: 'Health API' },
+                    { name: 'reports', description: 'Reports API' },
+                ],
             },
         },
         { plugin: blipp, options: { showAuth: true } },

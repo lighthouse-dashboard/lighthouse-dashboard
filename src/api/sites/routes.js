@@ -1,4 +1,6 @@
 import joi from '@hapi/joi';
+import config from '../../../config/server';
+import { SiteConfigSchema } from '../../validator/schemas/site-config';
 import addSiteHandler from './handlers/add-site';
 import createReport from './handlers/create-report';
 import createReportByWebhook from './handlers/create-report-by-webhook';
@@ -10,19 +12,27 @@ import { getSiteById } from './handlers/get-site-by-id';
 import getSitesHandler from './handlers/get-sites';
 import { updateSiteConfigHandler } from './handlers/update-site-config';
 
+
 export default [
     {
         method: 'GET',
         path: '/api/sites',
         handler: getSitesHandler,
         options: {
+            auth: 'jwt',
             description: 'Get all configured sites',
             tags: ['api', 'sites'],
-            auth: 'jwt',
             validate: {
                 query: joi.object({
                     query: joi.string(),
                 }),
+            },
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
+            },
+            response: {
+                schema: joi.array().items(SiteConfigSchema),
             },
         },
     },
@@ -34,6 +44,13 @@ export default [
             description: 'Get latest audited sites',
             tags: ['api', 'sites'],
             auth: 'jwt',
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
+            },
+            response: {
+                schema: joi.array().items(SiteConfigSchema),
+            },
         },
     },
     {
@@ -44,7 +61,13 @@ export default [
             description: 'Get favorited sites',
             tags: ['api', 'sites'],
             auth: 'jwt',
-
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
+            },
+            response: {
+                schema: joi.array().items(SiteConfigSchema),
+            },
         },
     },
     {
@@ -74,6 +97,13 @@ export default [
                 params: joi.object({
                     id: joi.string().required(),
                 }),
+            },
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
+            },
+            response: {
+                schema: SiteConfigSchema,
             },
         },
     },
@@ -124,7 +154,7 @@ export default [
         path: '/api/sites/{id}',
         handler: createReport,
         options: {
-            description: 'Add new site audit',
+            description: 'Create new report',
             tags: ['api', 'sites'],
             auth: 'jwt',
             validate: {

@@ -1,4 +1,4 @@
-import { clearReports, removeOldReports } from '../database/reports';
+import { clearReports, removeOldReports } from '../api/reports/db/reports';
 import logger from '../logger';
 import checkHealth from '../utils/check-health';
 import { consumeQueue } from './handler';

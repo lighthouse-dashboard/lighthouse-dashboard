@@ -1,11 +1,11 @@
 import CONFIG from '../../../../config/dashboard';
-import { getLatestReportBySiteId } from '../../../database/reports';
+import { getLatestReportBySiteId } from '../db/reports';
 import { getFavoriteSites } from '../../../database/sites';
 import reportsToBarChart from '../../../transformer/report-to-bar-chart';
 
 /**
  * Get overview over projects by specific timing id
- * @return {Promise<ChartData>}
+ * @return {Promise<BarChartData>}
  */
 export default async function getSpeedReportOverview() {
     const pages = await getFavoriteSites();

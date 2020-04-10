@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
-import { AUDIT_COLLECTION } from '../config/db';
-import connectDatabase from '../database/connect-database';
-import logger from '../logger';
+import { AUDIT_COLLECTION } from '../../../config/db';
+import connectDatabase from '../../../database/connect-database';
+import logger from '../../../logger';
 
 /**
  * Get list of recent reports

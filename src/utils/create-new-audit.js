@@ -1,6 +1,6 @@
 import curry from 'lodash.curry';
 import runLighthouse from '../audit/run-lighthouse';
-import { saveReport } from '../database/reports';
+import { saveReport } from '../api/reports/db/reports';
 import { updateSite } from '../database/sites';
 import logger from '../logger';
 import lighthouseTransformer from '../transformer/lighthouse-transformer';
