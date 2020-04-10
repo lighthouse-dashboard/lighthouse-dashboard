@@ -1,9 +1,9 @@
 import Boom from '@hapi/boom';
-import { getSiteConfigByToken } from '../db/sites';
 import logger from '../../../logger';
-import queue from '../../../queue';
+import queue, { closeConnection } from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
+import { getSiteConfigByToken } from '../db/sites';
 
 /**
  * Execute an audit
@@ -29,6 +29,7 @@ export default async function createReportByWebhook({ params, payload }, h) {
         // await spawnNewAuditWorker(config);
         const channel = await queue();
         sendToQueue(channel, { config, message: meta.message });
+        await closeConnection();
     } catch (e) {
         logger.error(e);
         return Boom.boomify(e);

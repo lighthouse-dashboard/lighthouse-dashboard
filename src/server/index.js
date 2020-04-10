@@ -37,10 +37,6 @@ async function start() {
 }
 
 export async function setup() {
-    if (!await checkHealth()) {
-        return;
-    }
-
     logger.debug(`Setting up process listener`);
     process.on('unhandledRejection', (err) => {
         logger.error(err);
@@ -63,12 +59,14 @@ export default async function boot() {
     }
     logger.debug(`Config ok`);
 
-    // try {
-    await setup();
-    // } catch (e) {
-    //     logger.error(e.message);
-    //
-    //     logger.debug(`Rebooting server in ${ RESTART_INTERVAL }ms`);
-    //     setTimeout(() => boot(), RESTART_INTERVAL);
-    // }
+    try {
+        await setup();
+    } catch (e) {
+        logger.error(e.message);
+
+        if (process.env.NODE_ENV !== 'development') {
+            logger.debug(`Rebooting server in ${ RESTART_INTERVAL }ms`);
+            setTimeout(() => boot(), RESTART_INTERVAL);
+        }
+    }
 }

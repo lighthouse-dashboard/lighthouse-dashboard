@@ -56,12 +56,15 @@
         },
 
         methods: {
-            ...mapActions('sites', ['getLatestSites']),
-
+            ...mapActions('sites', ['setSites', 'getLatestSites']),
         },
 
-        async mounted() {
-            await this.getLatestSites();
+        beforeDestroy() {
+            this.setSites({ sites: [] });
+        },
+
+        mounted() {
+            this.getLatestSites();
         },
     };
 </script>

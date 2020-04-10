@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
     import { DASHBOARD } from '../../../../../config/dashboard';
     import CreateSiteForm from '../../components/create-site-form/create-site-form';
     import DashboardSection from '../../components/dashboard-section/dashboard-section';
@@ -34,6 +35,14 @@
             fluid() {
                 return DASHBOARD.PAGE_DASHBOARD.IS_FLUID;
             },
+        },
+
+        methods: {
+            ...mapActions('sites', ['setSites']),
+        },
+
+        beforeDestroy() {
+            this.setSites({ sites: [] });
         },
     };
 </script>

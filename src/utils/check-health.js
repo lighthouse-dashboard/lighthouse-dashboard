@@ -1,6 +1,6 @@
 import connectDatabase from '../database/connect-database';
 import logger from '../logger';
-import { connectMq } from '../queue';
+import { closeConnection, connectMq } from '../queue';
 
 async function checkDatabase() {
     logger.debug('Checking DB connection');
@@ -19,6 +19,7 @@ async function checkMessageQueue() {
     try {
         await connectMq(process.env.MESSAGE_QUEUE_URI);
         logger.info('MQ connection OK');
+        await closeConnection();
     } catch (e) {
         logger.error(e);
         throw e;

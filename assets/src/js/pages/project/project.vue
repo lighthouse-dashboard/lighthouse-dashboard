@@ -136,9 +136,11 @@
                         this.reports = data;
                     });
             },
+
             toggleEdit() {
                 this.isEdit = !this.isEdit;
             },
+
             onCloseSettings() {
                 this.getCurrentSite({ siteId: this.config.id });
                 this.toggleEdit();

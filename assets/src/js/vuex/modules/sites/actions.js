@@ -108,3 +108,7 @@ export async function searchForPages({ commit }, { query }) {
     const { data } = await axios().get(GET_SITES_URL, { params: { query } });
     commit({ type: SET_SITES, sites: data });
 }
+
+export function setSites({ commit }, { sites }) {
+    commit({ type: SET_SITES, sites });
+}

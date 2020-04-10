@@ -1,10 +1,8 @@
 import logger from '../logger';
-import { connectMq, createChannel } from '../queue';
+import { connectMq, createChannel, closeConnection } from '../queue';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
 
-
 const parseMessage = (message) => JSON.parse(message.content.toString());
-
 
 /**
  *
@@ -14,9 +12,9 @@ const parseMessage = (message) => JSON.parse(message.content.toString());
 async function processMessage(channel, msg) {
     const { config, message } = parseMessage(msg);
     logger.debug(`Received message ${ msg.content.toString() }`);
-    await exec(config, message);
+    await executeAudit(config, message);
     await channel.ack(msg);
-    await checkForNewMessagesInQueue();
+    await checkForNewMessagesInQueue(channel);
 }
 
 /**
@@ -32,30 +30,16 @@ export async function consumeQueue(uri, queue) {
 
     logger.info(`Worker ready for consuming queue ${ queue }`);
 
-    await checkForNewMessagesInQueue();
-}
-
-/**
- * Execute an audit and recheck the queue for new messages
- * @param {SiteConfig} siteConfig
- * @param {string | null} message
- */
-async function exec(siteConfig, message) {
-    try {
-        await executeAudit(siteConfig, message);
-    } catch (e) {
-        logger.error(e.message);
-    }
+    await checkForNewMessagesInQueue(channel);
+    await closeConnection();
 }
 
 /**
  * Check for new messages and execute them
  * @return {Promise<void>}
  */
-async function checkForNewMessagesInQueue() {
+async function checkForNewMessagesInQueue(channel) {
     logger.debug(`Check remote queue`);
-    const connection = await connectMq(process.env.MESSAGE_QUEUE_URI);
-    const channel = await createChannel(connection);
     const message = await channel.get('audits');
     if (message) {
         logger.debug(`Found message in queue`);
@@ -71,16 +55,11 @@ async function checkForNewMessagesInQueue() {
  * @param {string | null} message;
  * @return {Promise<void>}
  */
-function executeAudit(data, message = null) {
-    return createNewAuditForConfig(data, { message, git_commit: null })
-        .then((report) => {
-            if (!report) {
-                logger.warn(`No report for ${ data.url }`);
-                return;
-            }
-            logger.debug(`${ data.url } => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
-        })
-        .catch(e => {
-            logger.error(e.message);
-        });
+async function executeAudit(data, message = null) {
+    const report = await createNewAuditForConfig(data, { message, git_commit: null })
+    if (!report) {
+        logger.warn(`No report for ${ data.url }`);
+        return;
+    }
+    logger.debug(`${ data.url } => ${ report.values.map(({ id, value }) => `${ id }=${ value }`).join(',') }`);
 }

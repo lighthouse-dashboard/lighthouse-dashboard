@@ -1,6 +1,6 @@
-import { getAllSites } from '../db/sites';
-import queue from '../../../queue';
+import queue, { closeConnection } from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';
+import { getAllSites } from '../db/sites';
 
 /**
  * Execute an audit
@@ -12,6 +12,7 @@ export default async function createReportForAll(request, h) {
     const sites = await getAllSites();
     const channel = await queue();
     sites.forEach((site) => sendToQueue(channel, { config: site, message: 'batch audit' }));
+    await closeConnection();
     return h.response().code(201);
 }
 

@@ -1,6 +1,6 @@
 import { getSiteConfigByToken } from '../api/sites/db/sites';
 import logger from '../logger';
-import queue from '../queue';
+import queue, { closeConnection } from '../queue';
 import sendToQueue from '../queue/send-to-queue';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
 
@@ -23,4 +23,5 @@ export default async function executeSingle(useQueue, token) {
     } else {
         await createNewAuditForConfig(config, { message: 'CLI - single' });
     }
+    await closeConnection();
 }

@@ -1,6 +1,5 @@
 import { clearReports, removeOldReports } from '../api/reports/db/reports';
 import logger from '../logger';
-import checkHealth from '../utils/check-health';
 import { consumeQueue } from './handler';
 
 require('dotenv').config();
@@ -16,17 +15,7 @@ async function boot() {
     await clearReports();
 
     logger.info(`Start audit worker`);
-    try {
-        if (!await checkHealth()) {
-            return;
-        }
-        await consumeQueue(process.env.MESSAGE_QUEUE_URI, 'audits');
-    } catch (e) {
-        logger.error(e);
-        logger.debug(`Rebooting worker in ${ RESTART_INTERVAL }ms`);
-        setTimeout(() => boot(), RESTART_INTERVAL);
-    }
-    process.exit(0);
+    await consumeQueue(process.env.MESSAGE_QUEUE_URI, 'audits');
 }
 
 /**

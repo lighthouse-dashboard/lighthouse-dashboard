@@ -1,4 +1,4 @@
-import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_SITES, UPDATE_SITE } from '../mutation-types';
+import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_SEARCH_RESULT, SET_SITES, UPDATE_SITE } from '../mutation-types';
 
 export default {
     /**
@@ -17,6 +17,15 @@ export default {
      */
     [ADD_SITE](state, { site }) {
         state.sites.push(site);
+    },
+
+    /**
+     * Set search result
+     * @param {object} state
+     * @param {SiteConfig[]} sites
+     */
+    [SET_SEARCH_RESULT](state, { sites }) {
+        state.searchResult = sites;
     },
 
     /**

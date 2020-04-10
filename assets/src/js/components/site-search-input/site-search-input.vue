@@ -5,6 +5,7 @@
                 placeholder="Search for name or url"
                 prepend-inner-icon="mdi-magnify"
                 solo/>
+        <v-btn @click="fetchAllSites">Load all</v-btn>
     </div>
 </template>
 
