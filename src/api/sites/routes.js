@@ -1,6 +1,5 @@
 import joi from '@hapi/joi';
 import config from '../../../config/server';
-import { SiteConfigSchema } from '../../validator/schemas/site-config';
 import addSiteHandler from './handlers/add-site';
 import createReport from './handlers/create-report';
 import createReportByWebhook from './handlers/create-report-by-webhook';
@@ -11,6 +10,7 @@ import { getLatestSitesHandler } from './handlers/get-latest-sites';
 import { getSiteById } from './handlers/get-site-by-id';
 import getSitesHandler from './handlers/get-sites';
 import { updateSiteConfigHandler } from './handlers/update-site-config';
+import { siteConfigModel, siteConfigModelList } from './schemas/site-config-model';
 
 
 export default [
@@ -25,14 +25,14 @@ export default [
             validate: {
                 query: joi.object({
                     query: joi.string(),
-                }),
+                }).label('sites.Query'),
             },
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
                 privacy: 'private',
             },
             response: {
-                schema: joi.array().items(SiteConfigSchema),
+                schema: siteConfigModelList,
             },
         },
     },
@@ -49,7 +49,7 @@ export default [
                 privacy: 'private',
             },
             response: {
-                schema: joi.array().items(SiteConfigSchema),
+                schema: siteConfigModelList,
             },
         },
     },
@@ -66,7 +66,7 @@ export default [
                 privacy: 'private',
             },
             response: {
-                schema: joi.array().items(SiteConfigSchema),
+                schema: siteConfigModelList,
             },
         },
     },
@@ -81,7 +81,7 @@ export default [
             validate: {
                 params: joi.object({
                     id: joi.string().required(),
-                }),
+                }).label('sites.SiteId'),
             },
         },
     },
@@ -96,14 +96,14 @@ export default [
             validate: {
                 params: joi.object({
                     id: joi.string().required(),
-                }),
+                }).label('sites.SiteId'),
             },
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
                 privacy: 'private',
             },
             response: {
-                schema: SiteConfigSchema,
+                schema: siteConfigModel,
             },
         },
     },
@@ -118,12 +118,12 @@ export default [
             validate: {
                 params: joi.object({
                     id: joi.string().required(),
-                }),
+                }).label('sites.SiteId'),
                 payload: joi.object({
                     isFavorite: joi.boolean().required(),
                     name: joi.string(),
                     url: joi.string(),
-                }),
+                }).label('sites.SiteUpdateModel'),
             },
         },
     },
@@ -145,7 +145,7 @@ export default [
                         .string()
                         .allow('desktop', 'mobile'),
                     isFavorite: joi.boolean(),
-                }),
+                }).label('sites.CreateSiteModel'),
             },
         },
     },
@@ -162,7 +162,7 @@ export default [
                     id: joi
                         .string()
                         .required(),
-                }),
+                }).label('sites.SiteId'),
             },
         },
     },
@@ -179,7 +179,7 @@ export default [
                     token: joi
                         .string()
                         .required(),
-                }),
+                }).label('sites.SiteToken'),
             },
         },
     },

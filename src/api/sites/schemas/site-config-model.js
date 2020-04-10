@@ -1,6 +1,6 @@
 import joi from '@hapi/joi';
 
-export const SiteConfigSchema = joi.object({
+export const siteConfigModel = joi.object({
     id: joi.string().required(),
     name: joi.string().required(),
     url: joi.string().required(),
@@ -9,4 +9,9 @@ export const SiteConfigSchema = joi.object({
     isFavorite: joi.boolean().required(),
     token: joi.string().required(),
     last_audit: joi.string(),
-}).label('SiteConfig');
+}).label('sites.SiteConfigModel');
+
+export const siteConfigModelList = joi
+    .array()
+    .items(siteConfigModel)
+    .label('sites.SiteConfigModelList');

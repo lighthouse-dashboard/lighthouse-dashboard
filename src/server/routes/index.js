@@ -1,5 +1,5 @@
 import Inert from '@hapi/inert';
-import logger from '../logger';
+import logger from '../../logger';
 import getRoutes from './routes';
 
 /**

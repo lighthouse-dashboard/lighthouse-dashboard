@@ -3,9 +3,9 @@ import { Boom } from '@hapi/boom';
 import { getReportById } from '../db/reports';
 
 export default async function getHtmlReportHandler(request) {
-    const { reportId } = request.params;
+    const { id } = request.params;
 
-    const report = await getReportById(reportId);
+    const report = await getReportById(id);
     if (!report) {
         throw Boom.notFound();
     }

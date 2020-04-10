@@ -1,11 +1,11 @@
-import { getHealthController } from './controller';
+import { getHealthHandler } from './controller/get-health-handler';
 import { healthResponseModel } from './schemas/health-response-model';
 
 export default [
     {
         method: 'GET',
         path: '/health',
-        handler: getHealthController,
+        handler: getHealthHandler,
         options: {
             auth: false,
             description: 'Check system health',

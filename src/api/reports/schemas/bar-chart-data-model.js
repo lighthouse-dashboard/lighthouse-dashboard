@@ -1,4 +1,4 @@
-import joi from '@hapi/hapi';
+import joi from '@hapi/joi';
 
 export const barChartDataSetModel = joi.object({
     label: joi
@@ -8,7 +8,7 @@ export const barChartDataSetModel = joi.object({
     date: joi
         .array()
         .items(joi.number()),
-}).label('reports.ChartDataSetModel');
+}).label('reports.ChartDatasetModel');
 
 export const barChartDataModel = joi.object({
     labels: joi

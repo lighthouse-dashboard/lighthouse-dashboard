@@ -1,5 +1,5 @@
 import curry from 'lodash.curry';
-import runLighthouse from '../audit/run-lighthouse';
+import runLighthouse from './run-lighthouse';
 import { saveReport } from '../api/reports/db/reports';
 import { updateSite } from '../database/sites';
 import logger from '../logger';

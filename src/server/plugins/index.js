@@ -1,5 +1,5 @@
-import logger from '../logger';
-import IS_PROD from '../utils/is-prod';
+import logger from '../../logger';
+import IS_PROD from '../../utils/is-prod';
 import PLUGINS from './plugins';
 
 /**

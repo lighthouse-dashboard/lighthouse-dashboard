@@ -1,8 +1,8 @@
 import os from 'os';
-import connectDatabase from '../../database/connect-database';
-import { connectMq } from '../../queue';
+import connectDatabase from '../../../database/connect-database';
+import { connectMq } from '../../../queue';
 
-export async function getHealthController() {
+export async function getHealthHandler() {
     const { client } = await connectDatabase();
     const connection = await connectMq(process.env.MESSAGE_QUEUE_URI);
 
