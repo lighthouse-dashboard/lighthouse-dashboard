@@ -5,7 +5,7 @@ const { resolve } = require('path');
 
 module.exports = {
     outputDir: assetDist,
-    indexPath: resolve(templates, 'index.html'),
+    indexPath: resolve(templates, 'dist/index.html'),
     publicPath: '/',
     configureWebpack: {
         entry: resolve(jsAsset, 'main.js'),
