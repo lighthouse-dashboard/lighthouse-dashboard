@@ -18,6 +18,7 @@ export default {
                     title: name,
                     version: version,
                 },
+                grouping: 'tags',
                 tags: [
                     { name: 'sites', description: 'Sites API' },
                     { name: 'auth', description: 'Auth API' },
