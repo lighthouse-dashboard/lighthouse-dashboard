@@ -50,7 +50,6 @@
         "glob": "^7.1.6",
         "hapi-auth-jwt2": "^8.8.1",
         "hapi-dev-errors": "^4.0.0",
-        "hapi-error-page": "^2.0.1",
         "hapi-swagger": "^13.0.0",
         "jsonwebtoken": "^8.5.1",
         "laabr": "^5.1.6",
@@ -88,8 +87,7 @@
         "sass-loader": "^8.0.2",
         "vue-cli-plugin-vuetify": "^2.0.5",
         "vue-template-compiler": "^2.6.10",
-        "vuetify-loader": "^1.3.0",
-        "workbox-build": "^5.1.2"
+        "vuetify-loader": "^1.3.0"
     },
     "eslintConfig": {
         "root": true,
