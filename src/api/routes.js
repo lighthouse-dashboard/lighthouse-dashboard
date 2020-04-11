@@ -12,6 +12,28 @@ export default [
     },
     {
         method: 'GET',
+        path: '/index.html',
+        options: {
+            description: 'Main entry point',
+            auth: false,
+        },
+        handler: {
+            file: 'templates/index.html',
+        },
+    },
+    {
+        method: 'GET',
+        path: '/service-worker.js',
+        options: {
+            description: 'serviceworker entrypoint',
+            auth: false,
+        },
+        handler: {
+            file: 'assets/src/service-worker.js',
+        },
+    },
+    {
+        method: 'GET',
         path: '/dashboard',
         options: {
             description: 'Dashboard page',
@@ -55,7 +77,7 @@ export default [
         },
         handler: {
             directory: {
-                path: './',
+                path: 'assets/dist',
                 redirectToSlash: true,
                 index: false,
             },

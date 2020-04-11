@@ -12,6 +12,9 @@ export const reportValueModel = joi.object({
 
 
 export const reportModel = joi.object({
+    _id: joi
+        .object(),
+
     siteId: joi
         .string()
         .required(),

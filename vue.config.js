@@ -1,17 +1,20 @@
+const { templates } = require('./src/config/path');
+const { assetDist, htmlAsset, jsAsset } = require('./src/config/path');
+
 const { resolve } = require('path');
 
 module.exports = {
-    outputDir: './assets/build',
-    indexPath: './templates/index.html',
+    outputDir: assetDist,
+    indexPath: resolve(templates, 'index.html'),
     publicPath: '/',
     configureWebpack: {
-        entry: './assets/src/js/main.js',
+        entry: resolve(jsAsset, 'main.js'),
     },
     chainWebpack: (config) => {
         config
             .plugin('html')
             .tap(args => {
-                args[0].template = resolve(__dirname, './templates/index.html');
+                args[0].template = resolve(htmlAsset, 'index.html');
                 return args;
             });
     },

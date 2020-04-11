@@ -26,6 +26,12 @@ export default {
                 ],
             },
         },
+        {
+            plugin: require('hapi-dev-errors'),
+            options: {
+                showErrors: process.env.NODE_ENV !== 'production',
+            },
+        },
     ],
     prod: [
         Inert,

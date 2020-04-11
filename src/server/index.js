@@ -1,11 +1,10 @@
 'use strict';
 
 import Hapi from '@hapi/hapi';
-import { join } from 'path';
 import dashboardConfig from '../../config/dashboard';
 import CONFIG from '../../config/server.js';
+import { root } from '../config/path';
 import logger from '../logger';
-import checkHealth from '../utils/check-health';
 import configValidator from '../validator/config-validator';
 import dashboardConfigSchema from '../validator/schemas/dashboard-config-schema';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
@@ -23,7 +22,7 @@ async function start() {
             cors: true,
             files: {
                 // path from where the static assets should be served
-                relativeTo: join(__dirname, '../../assets/build'),
+                relativeTo: root,
             },
         },
     });
