@@ -1,3 +1,4 @@
+/* eslint-disable max-nested-callbacks */
 var PAGES_CACHE_NAME = 'lighthouse-dashboard-cache--pages';
 var API_CACHE_NAME = 'lighthouse-dashboard-cache--api';
 var urlsToCache = [
@@ -24,7 +25,7 @@ function precheck(request) {
         if (!matches || request.method !== 'GET') {
             return resolve(request);
         }
-        return reject();
+        return reject(new Error('Request does not match criteria'));
     });
 }
 
@@ -67,7 +68,6 @@ self.addEventListener('fetch', function(event) {
             var responseToCache = resp.clone();
 
             caches.open(API_CACHE_NAME)
-                // eslint-disable-next-line max-nested-callbacks
                 .then(function(cache) {
                     cache.put(event.request, responseToCache);
                 });
@@ -76,6 +76,5 @@ self.addEventListener('fetch', function(event) {
         })
         .catch(function() {
             return caches.match(event.request);
-        })
-    );
+        }));
 });

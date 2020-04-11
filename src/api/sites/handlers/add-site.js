@@ -8,6 +8,7 @@ import { addSite } from '../db/sites';
  * @return {Promise<SiteConfig>}
  */
 export default async function addSiteHandler({ payload }, h) {
+    // eslint-disable-next-line camelcase
     const { url, name, device, is_favorite } = payload;
     const config = await addSite({ url, name, device, is_favorite, order: 0, token: uuid() });
 

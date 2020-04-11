@@ -1,13 +1,13 @@
 import logger from '../logger';
-import { connectMq, createChannel, closeConnection } from '../queue';
+import { closeConnection, connectMq, createChannel } from '../queue';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
 
 const parseMessage = (message) => JSON.parse(message.content.toString());
 
 /**
- *
- * @param channel
- * @return {(Message) => void}
+ * Process received message
+ * @param {Channel}channel
+ * @param {object} msg
  */
 async function processMessage(channel, msg) {
     const { config, message } = parseMessage(msg);
@@ -36,6 +36,7 @@ export async function consumeQueue(uri, queue) {
 
 /**
  * Check for new messages and execute them
+ * @param {Channel} channel
  * @return {Promise<void>}
  */
 async function checkForNewMessagesInQueue(channel) {
@@ -56,7 +57,7 @@ async function checkForNewMessagesInQueue(channel) {
  * @return {Promise<void>}
  */
 async function executeAudit(data, message = null) {
-    const report = await createNewAuditForConfig(data, { message, git_commit: null })
+    const report = await createNewAuditForConfig(data, { message, git_commit: null });
     if (!report) {
         logger.warn(`No report for ${ data.url }`);
         return;

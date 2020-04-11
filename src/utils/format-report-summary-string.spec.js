@@ -13,6 +13,6 @@ describe('utils/formatReportSummaryString', function() {
         };
         const summary = formatReportSummaryString(report);
 
-        expect(summary).to.be.equal('30/01 21:08');
+        expect(summary).to.be.equal('30/01/20 21:08');
     });
 });

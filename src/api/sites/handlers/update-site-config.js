@@ -9,6 +9,7 @@ import { updateSite } from '../db/sites';
  */
 export async function updateSiteConfigHandler({ params, payload }, h) {
     const { id } = params;
+    // eslint-disable-next-line camelcase
     const { is_favorite, url, name } = payload;
     const config = await updateSite(id, { is_favorite, url, name });
 
