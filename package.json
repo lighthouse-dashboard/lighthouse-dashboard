@@ -22,7 +22,7 @@
         "start": "node -r esm index.js",
         "audit": "node -r esm src/cli/index.js -a --queue",
         "worker": "node -r esm src/worker/index.js",
-        "test": "npm run lint && mocha src/**/*.spec.js -r esm"
+        "test": "npm run lint && TZ=Europe/Berlin mocha src/**/*.spec.js -r esm"
     },
     "main": "assets/src/app/main.js",
     "dependencies": {
@@ -88,20 +88,6 @@
         "vue-cli-plugin-vuetify": "^2.0.5",
         "vue-template-compiler": "^2.6.10",
         "vuetify-loader": "^1.3.0"
-    },
-    "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
-        ],
-        "rules": {},
-        "parserOptions": {
-            "parser": "babel-eslint"
-        }
     },
     "browserslist": [
         "> 1%",
