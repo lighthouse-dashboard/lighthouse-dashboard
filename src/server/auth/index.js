@@ -4,7 +4,7 @@ import validate from './validate';
 
 /**
  * Setup auth for server
- * @param {Hapi.Server} server
+ * @param {Server} server
  */
 export default async function setupAuth(server) {
     logger.info('Loading auth');

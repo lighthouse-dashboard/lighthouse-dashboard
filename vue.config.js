@@ -19,6 +19,6 @@ module.exports = {
             });
     },
     devServer: {
-        proxy: 'http://0.0.0.0:5000',
+        proxy: 'http://0.0.0.0:4000',
     },
 };

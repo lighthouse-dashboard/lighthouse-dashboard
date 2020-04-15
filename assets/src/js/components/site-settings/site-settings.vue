@@ -53,7 +53,7 @@
 
         data() {
             return {
-                /** @type {SiteConfig} */
+                /** @type {Sites.SiteConfig} */
                 siteConfig: null,
                 modal: true,
             };

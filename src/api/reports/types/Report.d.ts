@@ -5,7 +5,7 @@ export interface Report {
     createdAt: string;
     message: string | null;
     git_commit: string | null;
-    raw: Object | null;
+    raw: object | null;
     hasRawData?: boolean;
 }
 

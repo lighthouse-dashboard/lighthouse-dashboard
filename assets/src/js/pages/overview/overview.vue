@@ -2,47 +2,39 @@
     <div>
         <v-app-bar color="transparent"
                 flat>
-            <v-toolbar-title>Dashboard</v-toolbar-title>
-            <template v-slot:extension>
-                <create-site-form/>
-            </template>
+            <v-toolbar-title>Overview</v-toolbar-title>
         </v-app-bar>
 
-        <v-container :fluid="fluid">
-            <dashboard-section
-                    :type="config"
-                    v-for="config in charts"
-                    :key="config"/>
+        <v-container>
+            <sites-with-report-table :sites="sites"/>
+
         </v-container>
     </div>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import { DASHBOARD } from '../../../../../config/dashboard';
-    import CreateSiteForm from '../../components/create-site-form/create-site-form';
-    import DashboardSection from '../../components/dashboard-section/dashboard-section';
+    import SitesWithReportTable from '../../components/sites-with-report-table/sites-with-report-table';
 
     export default {
-        components: {
-            CreateSiteForm,
-            DashboardSection,
-        },
-        computed: {
-            charts() {
-                return DASHBOARD.PAGE_DASHBOARD.CHARTS;
-            },
-            fluid() {
-                return DASHBOARD.PAGE_DASHBOARD.IS_FLUID;
-            },
+        components: { SitesWithReportTable },
+        props: {},
+
+        data() {
+            return {
+                sites: [],
+            };
         },
 
         methods: {
-            ...mapActions('sites', ['setSites']),
-        },
+            ...mapActions('sites', ['getSitesWithLatestReport']),
 
-        beforeDestroy() {
-            this.setSites({ sites: [] });
+            async loadData() {
+                this.sites = await this.getSitesWithLatestReport();
+            },
         },
+        mounted() {
+            this.loadData();
+        }
     };
 </script>

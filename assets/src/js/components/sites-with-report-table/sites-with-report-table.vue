@@ -1,0 +1,94 @@
+<template>
+    <div class="sites-with-report-table">
+        <v-data-table
+                :headers="headers"
+                :items="items"
+                :items-per-page="10">
+
+            <template v-slot:item.name="{ item }">
+                <router-link :to="`/project/${item.id}`">{{ item.name }}</router-link>
+            </template>
+
+            <template v-slot:item.performance="{ item }">
+                <v-chip :color="getColor(item.values.performance)"
+                        dark>
+                    {{ item.values.performance }}
+                </v-chip>
+            </template>
+
+            <template v-slot:item.accessibility="{ item }">
+                {{ item.values.accessibility }}
+            </template>
+
+            <template v-slot:item.best-practices="{ item }">
+                {{ item.values['best-practices'] }}
+            </template>
+
+            <template v-slot:item.seo="{ item }">
+                {{ item.values.seo }}
+            </template>
+
+            <template v-slot:item.pwa="{ item }">
+                {{ item.values.pwa }}
+            </template>
+
+            <template v-slot:item.createdAt="{ item }">
+                {{ item.createdAt | date }}
+            </template>
+        </v-data-table>
+    </div>
+</template>
+
+<script>
+    export default {
+        props: {
+            /** @var {Sites.SiteWithReport} */
+            sites: {
+                type: Array,
+                required: true,
+            },
+        },
+
+        computed: {
+            headers() {
+                if (!this.sites[0]) {
+                    return [];
+                }
+
+                const valueHeaders = this.sites[0].report.values.map(v => ({ text: v.id, value: v.id }));
+                return [
+                    { text: 'Name', value: 'name', },
+                    { text: 'Last Report', value: 'createdAt' },
+                ]
+                    .concat(valueHeaders)
+                    .concat([
+                        { text: 'Device', value: 'device' },
+                        { text: 'URL', value: 'url' },
+                    ]);
+            },
+            items() {
+                return this.sites.map(s => {
+                    return {
+                        ...s.site,
+                        ...s.report,
+                        values: s.report.values.reduce((a, v) => {
+                            a[v.id] = v.value;
+                            return a;
+                        }, {}),
+                    };
+                });
+            },
+        },
+
+        methods: {
+            getColor(score) {
+                if (score > 90) {
+                    return 'green';
+                } else if (score > 70) {
+                    return 'orange';
+                }
+                return 'red';
+            },
+        }
+    };
+</script>

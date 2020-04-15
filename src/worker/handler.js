@@ -52,7 +52,7 @@ async function checkForNewMessagesInQueue(channel) {
 
 /**
  * Callback when a message is received
- * @param {SiteConfig} data;
+ * @param {Sites.SiteConfig} data;
  * @param {string | null} message;
  * @return {Promise<void>}
  */

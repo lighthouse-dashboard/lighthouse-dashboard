@@ -5,10 +5,10 @@ import connectDatabase from '../../../database/connect-database';
 
 /**
  * Find sites
- * @param {object} find
- * @param {sort} sort
- * @param {number} limit
- * @return {Promise<SiteConfig[]>}
+ * @param { object } find
+ * @param { object } sort
+ * @param { number } limit
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export async function findSites(find, sort = {}, limit = 100) {
     const { database } = await connectDatabase();
@@ -37,7 +37,7 @@ export async function findSites(find, sort = {}, limit = 100) {
 
 /**
  * Get list of sites from DB
- * @return {Promise<SiteConfig[]>}
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getAllSites() {
     return findSites({}, { last_audit: -1 });
@@ -45,7 +45,7 @@ export function getAllSites() {
 
 /**
  * Get list of sites from DB
- * @return {Promise<SiteConfig[]>}
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getFavoriteSites() {
     return findSites({ is_favorite: true }, { order: 1 });
@@ -53,7 +53,7 @@ export function getFavoriteSites() {
 
 /**
  * Get latest n audited sites
- * @return {Promise<SiteConfig[]>}
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getLatestSites() {
     return findSites({ last_audit: { $exists: true, $ne: null } }, { last_audit: -1 }, DASHBOARD.latestAudits.limit);
@@ -61,8 +61,8 @@ export function getLatestSites() {
 
 /**
  * Add new site to DB
- * @param {Pick<SiteConfig, "name"|"device"|"url"|"is_favorite">} config
- * @return {Promise<SiteConfig>}
+ * @param {Pick<Sites.SiteConfig, "name"|"device"|"url"|"is_favorite">} config
+ * @return {Promise<Sites.SiteConfig>}
  */
 export async function addSite(config) {
     const { database } = await connectDatabase();
@@ -75,8 +75,8 @@ export async function addSite(config) {
 /**
  * Update site config
  * @param {string} id
- * @param {Partial<SiteConfig>} delta
- * @return {Promise<SiteConfig>}
+ * @param {Partial<Sites.SiteConfig>} delta
+ * @return {Promise<Sites.SiteConfig>}
  */
 export async function updateSite(id, delta) {
     const { database } = await connectDatabase();
@@ -99,7 +99,7 @@ export async function removeSite(id) {
 /**
  * Get config for specific site
  * @param {string} id
- * @return {Promise<SiteConfig | null>}
+ * @return {Promise<Sites.SiteConfig | null>}
  */
 export async function getSiteConfigById(id) {
     const sites = await findSites({ id }, {}, 1);
@@ -113,7 +113,7 @@ export async function getSiteConfigById(id) {
 /**
  * Get config for specific site
  * @param {string} token
- * @return {Promise<SiteConfig | null>}
+ * @return {Promise<Sites.SiteConfig | null>}
  */
 export async function getSiteConfigByToken(token) {
     const sites = await findSites({ token }, {}, 1);

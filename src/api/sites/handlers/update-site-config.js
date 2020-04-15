@@ -2,7 +2,7 @@ import { updateSite } from '../db/sites';
 
 /**
  * Update site controller
- * @param {Partial<SiteConfig>} payload
+ * @param {Partial<Sites.SiteConfig>} payload
  * @param {object} h
  * @param {object} params
  * @return {Promise<void>}

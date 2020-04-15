@@ -5,7 +5,7 @@ import { addSite } from '../db/sites';
  * Controller to add a new site
  * @param {hapi.Request.Payload} payload
  * @param {object} h
- * @return {Promise<SiteConfig>}
+ * @return {Promise<Sites.SiteConfig>}
  */
 export default async function addSiteHandler({ payload }, h) {
     // eslint-disable-next-line camelcase

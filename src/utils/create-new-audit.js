@@ -7,7 +7,7 @@ import runLighthouse from './run-lighthouse';
 
 /**
  * Create new audit
- * @param {SiteConfig} config
+ * @param {Sites.SiteConfig} config
  * @param {ReportMeta} meta
  * @return {Promise<Report>}
  */
