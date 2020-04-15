@@ -4,9 +4,10 @@
                 :headers="headers"
                 :items="items"
                 :items-per-page="10">
-
             <template v-slot:item.name="{ item }">
-                <router-link :to="`/project/${item.id}`">{{ item.name }}</router-link>
+                <router-link :to="`/project/${item.id}`">
+                    {{ item.name }}
+                </router-link>
             </template>
 
             <template v-slot:item.performance="{ item }">
@@ -57,7 +58,7 @@
 
                 const valueHeaders = this.sites[0].report.values.map(v => ({ text: v.id, value: v.id }));
                 return [
-                    { text: 'Name', value: 'name', },
+                    { text: 'Name', value: 'name' },
                     { text: 'Last Report', value: 'createdAt' },
                 ]
                     .concat(valueHeaders)
@@ -89,6 +90,6 @@
                 }
                 return 'red';
             },
-        }
+        },
     };
 </script>

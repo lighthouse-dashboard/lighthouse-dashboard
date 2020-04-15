@@ -7,7 +7,6 @@
 
         <v-container>
             <sites-with-report-table :sites="sites"/>
-
         </v-container>
     </div>
 </template>
@@ -33,8 +32,9 @@
                 this.sites = await this.getSitesWithLatestReport();
             },
         },
+
         mounted() {
             this.loadData();
-        }
+        },
     };
 </script>
