@@ -10,27 +10,11 @@
                 </router-link>
             </template>
 
-            <template v-slot:item.performance="{ item }">
+            <template v-slot:item.values.performance="{ item }">
                 <v-chip :color="getColor(item.values.performance)"
                         dark>
                     {{ item.values.performance }}
                 </v-chip>
-            </template>
-
-            <template v-slot:item.accessibility="{ item }">
-                {{ item.values.accessibility }}
-            </template>
-
-            <template v-slot:item.best-practices="{ item }">
-                {{ item.values['best-practices'] }}
-            </template>
-
-            <template v-slot:item.seo="{ item }">
-                {{ item.values.seo }}
-            </template>
-
-            <template v-slot:item.pwa="{ item }">
-                {{ item.values.pwa }}
             </template>
 
             <template v-slot:item.createdAt="{ item }">
@@ -56,7 +40,7 @@
                     return [];
                 }
 
-                const valueHeaders = this.sites[0].report.values.map(v => ({ text: v.id, value: v.id }));
+                const valueHeaders = this.sites[0].report.values.map(v => ({ text: v.id, value: `values.${ v.id }` }));
                 return [
                     { text: 'Name', value: 'name' },
                     { text: 'Last Report', value: 'createdAt' },
