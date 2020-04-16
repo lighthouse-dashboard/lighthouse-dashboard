@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
-import { AUDIT_COLLECTION } from '../../../config/db';
 import config from '../../../../config/server';
+import { AUDIT_COLLECTION } from '../../../config/db';
 import logger from '../../../logger';
 
 /**
@@ -55,26 +55,10 @@ export function getReportsBySiteId(database, id, limit) {
  * @param {string} id
  * @return {Promise<Report>}
  */
-export function getLatestReportBySiteId(database, id) {
+export async function getLatestReportBySiteId(database, id) {
     const collection = database.collection(AUDIT_COLLECTION);
 
-    return new Promise((resolve, reject) => {
-        collection
-            .find({ siteId: id })
-            .limit(1)
-            .sort({ createdAt: -1 })
-            .toArray((error, data) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                if (!data || data.length === 0) {
-                    return resolve(null);
-                }
-
-                return resolve(data.pop());
-            });
-    });
+    return collection.findOne({ siteId: id })
 }
 
 /**
