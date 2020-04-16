@@ -81,7 +81,6 @@ export function getLatestReportBySiteId(database, id) {
  * @param {MongoDB} database
  * @param {Report} report
  * @param {object} raw - raw lighthouse audit report
- * @return {Promise<void>}
  */
 export function saveReport(database, report, raw) {
     const reportCollection = database.collection(AUDIT_COLLECTION);

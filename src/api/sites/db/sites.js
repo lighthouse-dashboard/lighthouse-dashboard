@@ -36,6 +36,7 @@ export function findSites(database, find, sort = {}, limit = 100) {
 
 /**
  * Get list of sites from DB
+ * @param {MongoDB} database
  * @return {Promise<SiteConfig[]>}
  */
 export function getAllSites(database) {
@@ -44,6 +45,7 @@ export function getAllSites(database) {
 
 /**
  * Get list of sites from DB
+ * @param {MongoDB} database
  * @return {Promise<SiteConfig[]>}
  */
 export function getFavoriteSites(database) {
@@ -52,19 +54,21 @@ export function getFavoriteSites(database) {
 
 /**
  * Get latest n audited sites
+ * @param {MongoDB} database
  * @return {Promise<SiteConfig[]>}
  */
 export function getLatestSites(database) {
     return findSites(database, {
         last_audit: {
             $exists: true,
-            $ne: null
-        }
+            $ne: null,
+        },
     }, { last_audit: -1 }, DASHBOARD.latestAudits.limit);
 }
 
 /**
  * Add new site to DB
+ * @param {MongoDB} database
  * @param {Pick<SiteConfig, "name"|"device"|"url"|"is_favorite">} config
  * @return {Promise<SiteConfig>}
  */
@@ -77,6 +81,7 @@ export function addSite(database, config) {
 
 /**
  * Update site config
+ * @param {MongoDB} database
  * @param {string} id
  * @param {Partial<SiteConfig>} delta
  * @return {Promise<SiteConfig>}
@@ -89,8 +94,8 @@ export function updateSite(database, id, delta) {
 
 /**
  * Remove site from DB
+ * @param {MongoDB} database
  * @param {string} id
- * @return {Promise<void>}
  */
 export function removeSite(database, id) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);

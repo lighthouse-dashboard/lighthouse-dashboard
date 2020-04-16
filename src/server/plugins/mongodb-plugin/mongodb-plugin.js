@@ -1,7 +1,7 @@
-'use strict';
 
-const Mongodb = require('mongodb');
-const Joi = require('@hapi/joi');
+import * as pkg from './package.json';
+import Joi from '@hapi/joi';
+import Mongodb from 'mongodb';
 
 const MongoClient = Mongodb.MongoClient;
 const ObjectID = Mongodb.ObjectID;
@@ -11,7 +11,7 @@ const singleOption = Joi.object({
     settings: Joi.object(),
 }).strict();
 
-const connect = async function( url, settings) {
+const connect = async function(url, settings) {
     const client = await MongoClient.connect(url, settings);
     const db = await client.db();
 
@@ -19,7 +19,6 @@ const connect = async function( url, settings) {
 };
 
 exports.plugin = {
-
     async register(server, pluginOptions) {
         const option = await singleOption.validate(pluginOptions);
         const { url, settings } = option.value;
@@ -45,7 +44,5 @@ exports.plugin = {
             }
         });
     },
-
-    pkg: require('./package.json')
-
+    pkg,
 };

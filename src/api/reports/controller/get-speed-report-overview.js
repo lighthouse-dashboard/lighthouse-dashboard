@@ -1,10 +1,11 @@
 import CONFIG from '../../../../config/dashboard';
-import { getLatestReportBySiteId } from '../db/reports';
-import { getFavoriteSites } from '../../sites/db/sites';
 import reportsToBarChart from '../../../transformer/report-to-bar-chart';
+import { getFavoriteSites } from '../../sites/db/sites';
+import { getLatestReportBySiteId } from '../db/reports';
 
 /**
  * Get overview over projects by specific timing id
+ * @param {hapi.Request} request
  * @return {Promise<BarChartData>}
  */
 export default async function getSpeedReportOverview(request) {

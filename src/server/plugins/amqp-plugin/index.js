@@ -1,5 +1,6 @@
 import joi from '@hapi/joi';
 import amqp from 'amqplib';
+import * as pkg from './package.json';
 
 
 const singleOption = joi.object({
@@ -15,13 +16,13 @@ const connect = async function(uri) {
 exports.plugin = {
     async register(server, pluginOptions) {
         const option = await singleOption.validate(pluginOptions);
-        const { uri, settings } = option.value;
+        const { uri } = option.value;
 
         const expose = {};
 
         try {
             const result = await connect(uri);
-            expose.connection = result.connection
+            expose.connection = result.connection;
             expose.channel = result.channel;
             server.decorate('request', 'amqp', expose);
         } catch (err) {
@@ -35,7 +36,5 @@ exports.plugin = {
             }
         });
     },
-
-    pkg: require('./package.json')
-
+    pkg,
 };
