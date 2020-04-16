@@ -7,6 +7,7 @@ import runLighthouse from './run-lighthouse';
 
 /**
  * Create new audit
+ * @param {MongoDB} database
  * @param {SiteConfig} config
  * @param {ReportMeta} meta
  * @return {Promise<Report>}
