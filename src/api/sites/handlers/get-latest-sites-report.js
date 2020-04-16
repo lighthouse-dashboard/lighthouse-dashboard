@@ -1,8 +1,8 @@
 import { getLatestReportBySiteId } from '../../reports/db/reports';
 import { getAllSites } from '../db/sites';
 
-export default async function getLatestSitesReport() {
-    const sites = await getAllSites();
+export default async function getLatestSitesReport(request) {
+    const sites = await getAllSites(request.mongo.db);
     const results = [];
 
     for (let i = 0; i < sites.length; i++) {
@@ -11,7 +11,7 @@ export default async function getLatestSitesReport() {
         results.push({
             site,
             report: {
-                ...(await getLatestReportBySiteId(site.id)),
+                ...(await getLatestReportBySiteId(request.mongo.db, site.id)),
                 raw: null,
             },
         });
