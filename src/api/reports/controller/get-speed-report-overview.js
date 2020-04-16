@@ -7,13 +7,13 @@ import reportsToBarChart from '../../../transformer/report-to-bar-chart';
  * Get overview over projects by specific timing id
  * @return {Promise<BarChartData>}
  */
-export default async function getSpeedReportOverview() {
-    const pages = await getFavoriteSites();
+export default async function getSpeedReportOverview(request) {
+    const pages = await getFavoriteSites(request.mongo.db);
     const labels = pages.map((p) => p.name);
 
     const reports = [];
     for (let p = 0; p < pages.length; p++) {
-        const report = await getLatestReportBySiteId(pages[p].id);
+        const report = await getLatestReportBySiteId(request.mongo.db, pages[p].id);
         if (!report) {
             continue;
         }

@@ -1,4 +1,4 @@
-import queue, { closeConnection } from '../../../queue';
+import { closeConnection } from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';
 import { getAllSites } from '../db/sites';
 
@@ -9,9 +9,8 @@ import { getAllSites } from '../db/sites';
  * @return {Promise<AuditDocument>}
  */
 export default async function createReportForAll(request, h) {
-    const sites = await getAllSites();
-    const channel = await queue();
-    sites.forEach((site) => sendToQueue(channel, { config: site, message: 'batch audit' }));
+    const sites = await getAllSites(request.mongo.db);
+    sites.forEach((site) => sendToQueue(request.amqp.channel, { config: site, message: 'batch audit' }));
     await closeConnection();
     return h.response().code(201);
 }

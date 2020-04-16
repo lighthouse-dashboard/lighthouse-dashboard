@@ -5,7 +5,7 @@ import { getReportById } from '../db/reports';
 export default async function getHtmlReportHandler(request) {
     const { id } = request.params;
 
-    const report = await getReportById(id);
+    const report = await getReportById(request.mongo.db, id);
     if (!report) {
         throw Boom.notFound();
     }

@@ -7,11 +7,11 @@ import { updateSite } from '../db/sites';
  * @param {object} params
  * @return {Promise<void>}
  */
-export async function updateSiteConfigHandler({ params, payload }, h) {
+export async function updateSiteConfigHandler({ params, payload, mongo }, h) {
     const { id } = params;
     // eslint-disable-next-line camelcase
     const { is_favorite, url, name } = payload;
-    const config = await updateSite(id, { is_favorite, url, name });
+    const config = await updateSite(mongo.db, id, { is_favorite, url, name });
 
     return h.response(config).code(204);
 }

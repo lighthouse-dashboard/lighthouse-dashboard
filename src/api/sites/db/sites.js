@@ -1,17 +1,16 @@
 import uuid from 'uuid/v4';
 import { DASHBOARD } from '../../../../config/dashboard';
 import { SITES_CONFIG_COLLECTION } from '../../../config/db';
-import connectDatabase from '../../../database/connect-database';
 
 /**
  * Find sites
+ * @param {MongoDB} database
  * @param {object} find
  * @param {sort} sort
  * @param {number} limit
  * @return {Promise<SiteConfig[]>}
  */
-export async function findSites(find, sort = {}, limit = 100) {
-    const { database } = await connectDatabase();
+export function findSites(database, find, sort = {}, limit = 100) {
     const collection = database.collection(SITES_CONFIG_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -39,24 +38,29 @@ export async function findSites(find, sort = {}, limit = 100) {
  * Get list of sites from DB
  * @return {Promise<SiteConfig[]>}
  */
-export function getAllSites() {
-    return findSites({}, { last_audit: -1 });
+export function getAllSites(database) {
+    return findSites(database, {}, { last_audit: -1 });
 }
 
 /**
  * Get list of sites from DB
  * @return {Promise<SiteConfig[]>}
  */
-export function getFavoriteSites() {
-    return findSites({ is_favorite: true }, { order: 1 });
+export function getFavoriteSites(database) {
+    return findSites(database, { is_favorite: true }, { order: 1 });
 }
 
 /**
  * Get latest n audited sites
  * @return {Promise<SiteConfig[]>}
  */
-export function getLatestSites() {
-    return findSites({ last_audit: { $exists: true, $ne: null } }, { last_audit: -1 }, DASHBOARD.latestAudits.limit);
+export function getLatestSites(database) {
+    return findSites(database, {
+        last_audit: {
+            $exists: true,
+            $ne: null
+        }
+    }, { last_audit: -1 }, DASHBOARD.latestAudits.limit);
 }
 
 /**
@@ -64,12 +68,11 @@ export function getLatestSites() {
  * @param {Pick<SiteConfig, "name"|"device"|"url"|"is_favorite">} config
  * @return {Promise<SiteConfig>}
  */
-export async function addSite(config) {
-    const { database } = await connectDatabase();
+export function addSite(database, config) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     const id = uuid();
     siteCollection.insertOne({ id, ...config });
-    return getSiteConfigById(id);
+    return getSiteConfigById(database, id);
 }
 
 /**
@@ -78,11 +81,10 @@ export async function addSite(config) {
  * @param {Partial<SiteConfig>} delta
  * @return {Promise<SiteConfig>}
  */
-export async function updateSite(id, delta) {
-    const { database } = await connectDatabase();
+export function updateSite(database, id, delta) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     siteCollection.updateOne({ id }, { $set: delta });
-    return getSiteConfigById({ id });
+    return getSiteConfigById(database, { id });
 }
 
 /**
@@ -90,19 +92,19 @@ export async function updateSite(id, delta) {
  * @param {string} id
  * @return {Promise<void>}
  */
-export async function removeSite(id) {
-    const { database } = await connectDatabase();
+export function removeSite(database, id) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     siteCollection.deleteOne({ id });
 }
 
 /**
  * Get config for specific site
+ * @param {MongoDb} database
  * @param {string} id
  * @return {Promise<SiteConfig | null>}
  */
-export async function getSiteConfigById(id) {
-    const sites = await findSites({ id }, {}, 1);
+export async function getSiteConfigById(database, id) {
+    const sites = await findSites(database, { id }, {}, 1);
     if (!sites || sites.length === 0) {
         return null;
     }
@@ -112,11 +114,12 @@ export async function getSiteConfigById(id) {
 
 /**
  * Get config for specific site
+ * @param {MongoDB} database
  * @param {string} token
  * @return {Promise<SiteConfig | null>}
  */
-export async function getSiteConfigByToken(token) {
-    const sites = await findSites({ token }, {}, 1);
+export async function getSiteConfigByToken(database, token) {
+    const sites = await findSites(database, { token }, {}, 1);
     if (!sites || sites.length === 0) {
         return null;
     }
