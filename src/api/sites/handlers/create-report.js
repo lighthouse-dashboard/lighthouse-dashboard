@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 import logger from '../../../logger';
-import queue, { closeConnection } from '../../../queue';
+import { closeConnection } from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
 import { getSiteConfigById } from '../db/sites';
@@ -11,10 +11,10 @@ import { getSiteConfigById } from '../db/sites';
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-export default async function createReport({ params, payload }, h) {
+export default async function createReport({ params, payload, mongo, amqp }, h) {
     const { id } = params;
 
-    const config = await getSiteConfigById(id);
+    const config = await getSiteConfigById(mongo.db, id);
     if (!config) {
         return Boom.notFound('Config not found');
     }
@@ -27,8 +27,7 @@ export default async function createReport({ params, payload }, h) {
         }
 
         // await spawnNewAuditWorker(config);
-        const channel = await queue();
-        sendToQueue(channel, { config });
+        sendToQueue(amqp.channel, { config });
         await closeConnection();
     } catch (e) {
         logger.error(e);

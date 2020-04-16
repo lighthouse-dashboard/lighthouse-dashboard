@@ -8,6 +8,6 @@ import { removeSite } from '../db/sites';
  */
 export default async function deleteSite(request, h) {
     const { id } = request.params;
-    await removeSite(id);
+    await removeSite(request.mongo.db, id);
     return h.response().code(201);
 }

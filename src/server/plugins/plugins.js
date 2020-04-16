@@ -6,6 +6,8 @@ import HapiSwagger from 'hapi-swagger';
 import laabr from 'laabr';
 
 import { name, version } from '../../../package.json';
+import * as MongoDb from './mongodb-plugin/mongodb-plugin';
+import * as Amqp from './amqp-plugin';
 
 export default {
     dev: [
@@ -37,5 +39,20 @@ export default {
     prod: [
         Inert,
         Vision,
+        {
+            plugin: MongoDb,
+            options: {
+                url: process.env.MONGODB_URI,
+                settings: {
+                    poolSize: 10,
+                },
+            },
+        },
+        {
+            plugin: Amqp,
+            options: {
+                uri: process.env.MESSAGE_QUEUE_URI,
+            },
+        },
     ],
 };

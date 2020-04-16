@@ -10,11 +10,11 @@ export default function getSitesHandler(request) {
 
     if (query) {
         try {
-            return findSites({ $text: { $search: query } });
+            return findSites(request.mongo.db, { $text: { $search: query } });
         } catch (e) {
             console.log(e);
         }
     }
 
-    return getAllSites();
+    return getAllSites(request.mongo.db);
 }

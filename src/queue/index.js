@@ -4,9 +4,6 @@ import logger from '../logger';
 /** @type {Connection | null} */
 let connection = null;
 
-/** @type {Channel | null} */
-let channel = null;
-
 /**
  * Connect to queue endpoint
  * @param {string} uri
@@ -45,13 +42,9 @@ export async function closeConnection() {
  * @return {Promise<Channel>}
  */
 export async function createChannel(con) {
-    if (channel) {
-        return channel;
-    }
-
     logger.debug(`Creating channel`);
     try {
-        channel = await con.createChannel();
+        const channel = await con.createChannel();
         logger.debug(`Channel created`);
         return channel;
     } catch (error) {

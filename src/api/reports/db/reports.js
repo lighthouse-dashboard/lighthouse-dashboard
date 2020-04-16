@@ -1,38 +1,14 @@
 import { ObjectId } from 'mongodb';
 import { AUDIT_COLLECTION } from '../../../config/db';
-import connectDatabase from '../../../database/connect-database';
 import logger from '../../../logger';
 
 /**
- * Get list of recent reports
- * @param {number | null} limit
- * @return {Promise<Report[]>}
- */
-export async function getReports(limit) {
-    const { database } = await connectDatabase();
-    const collection = database.collection(AUDIT_COLLECTION);
-
-    return new Promise((resolve, reject) => {
-        collection
-            .find(null, { limit })
-            .sort({ _id: 1 })
-            .toArray((error, audits) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                return resolve(audits);
-            });
-    });
-}
-
-/**
  * Get a report by id
+ * @param {MongoDB} database
  * @param {string} id
  * @return {Promise<Report>}
  */
-export async function getReportById(id) {
-    const { database } = await connectDatabase();
+export function getReportById(database, id) {
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -48,12 +24,12 @@ export async function getReportById(id) {
 
 /**
  * Get all reports for a site
+ * @param {MongoDB} database
  * @param {string} id
  * @param {number} limit
  * @return {Promise<Report[]>}
  */
-export async function getReportsBySiteId(id, limit) {
-    const { database } = await connectDatabase();
+export function getReportsBySiteId(database, id, limit) {
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -74,11 +50,11 @@ export async function getReportsBySiteId(id, limit) {
 
 /**
  * Get latest report for site
+ * @param {MongoDB} database
  * @param {string} id
  * @return {Promise<Report>}
  */
-export async function getLatestReportBySiteId(id) {
-    const { database } = await connectDatabase();
+export function getLatestReportBySiteId(database, id) {
     const collection = database.collection(AUDIT_COLLECTION);
 
     return new Promise((resolve, reject) => {
@@ -102,12 +78,11 @@ export async function getLatestReportBySiteId(id) {
 
 /**
  * Save a new report in DB
+ * @param {MongoDB} database
  * @param {Report} report
  * @param {object} raw - raw lighthouse audit report
- * @return {Promise<void>}
  */
-export async function saveReport(report, raw) {
-    const { database } = await connectDatabase();
+export function saveReport(database, report, raw) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
     const saveRaw = process.env.LHD_IGNORE_RAW ? null : JSON.stringify(raw);
     if (process.env.LHD_IGNORE_RAW) {
@@ -118,10 +93,10 @@ export async function saveReport(report, raw) {
 
 /**
  * Free up space in DB by remove old data
+ * @param {MongoDB} database
  * @return {Promise<void>}
  */
-export async function clearReports() {
-    const { database } = await connectDatabase();
+export async function clearReports(database) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
     const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
     const filter = {
@@ -140,10 +115,10 @@ export async function clearReports() {
 
 /**
  * Free up space in DB by remove old data
+ * @param {MongoDB} database
  * @return {Promise<void>}
  */
-export async function removeOldReports() {
-    const { database } = await connectDatabase();
+export async function removeOldReports(database) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
     const date = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
     const filter = {
