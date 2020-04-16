@@ -14,6 +14,18 @@ export default joi.object({
     })
         .required(),
 
+    DB: joi.object({
+        MAX_RAW_DATA_HISTORY: joi
+            .number()
+            .allow(false)
+            .required(),
+
+        MAX_REPORTS_HISTORY: joi
+            .number()
+            .allow(false)
+            .required(),
+    }),
+
     AUDIT: joi.object({
         CHROMIUM_PATH: joi
             .string(),

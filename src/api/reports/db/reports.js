@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { AUDIT_COLLECTION } from '../../../config/db';
+import config from '../../../../config/server';
 import logger from '../../../logger';
 
 /**
@@ -98,7 +99,7 @@ export function saveReport(database, report, raw) {
  */
 export async function clearReports(database) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
-    const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const date = new Date(config.DB.MAX_RAW_DATA_HISTORY).toISOString();
     const filter = {
         raw: { $ne: false },
         createdAt: {
@@ -120,7 +121,7 @@ export async function clearReports(database) {
  */
 export async function removeOldReports(database) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
-    const date = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
+    const date = new Date(config.DB.MAX_REPORTS_HISTORY).toISOString();
     const filter = {
         createdAt: {
             $lt: date,
