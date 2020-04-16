@@ -22,7 +22,7 @@
         "start": "node -r esm index.js",
         "audit": "node -r esm src/cli/index.js -a --queue",
         "worker": "node -r esm src/worker/index.js",
-        "test": "npm run lint && mocha src/**/*.spec.js -r esm"
+        "test": "npm run lint && TZ=Europe/Berlin mocha src/**/*.spec.js -r esm"
     },
     "main": "assets/src/app/main.js",
     "dependencies": {
