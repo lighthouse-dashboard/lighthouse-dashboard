@@ -32,6 +32,17 @@ export default [
             file: 'templates/dist/index.html',
         },
     },
+    {
+        method: 'GET',
+        path: '/overview',
+        options: {
+            description: 'Overview page',
+            auth: false,
+        },
+        handler: {
+            file: 'templates/dist/index.html',
+        },
+    },
 
     {
         method: 'GET',
