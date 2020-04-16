@@ -1,0 +1,110 @@
+name: CI
+
+on:
+- push
+
+env:
+  GCR_IMAGE: gcr.io/dreipol-d2329/${{github.repository}}
+  ASPECTRA_REGISTRY: registry.acp.aspectra.com
+  ASPECTRA_TAG: latest
+  PROJECT_NAME: lighthouse-dashboard
+  OPENSHIFT_HOST: https://acp-console.aspectra.com
+  OPENSHIFT_PROJECT: dre-hosting-prod
+  ASPECTRA_PROJECT_NAME_PROD: ''
+  ASPECTRA_IMAGE_PROD: registry.acp.aspectra.com/dre-hosting-prod/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: circleci/postgres:11-alpine-postgis
+        env:
+          POSTGRES_USER: dreipol
+          POSTGRES_DB: unit_test
+        ports:
+        - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dreipol/github-actions/slugify@master
+
+    - uses: dreipol/github-actions/set-logs-url@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        JOB_NAME: build
+
+    - name: Docker Build
+      uses: dreipol/github-actions/build@master
+      env:
+        GCP_SERVICEACCOUNT_KEY: ${{ secrets.GCP_SERVICEACCOUNT_KEY }}
+
+    - name: NPM Test
+      run: docker run -e DJANGO_SETTINGS_MODULE=$PROJECT_NAME.settings.local -e DATABASE_URL="postgis://dreipol@127.0.0.1:5432/unit_test"
+        $GCR_IMAGE:$GITHUB_SHA npm run test
+
+    - name: Push Image
+      uses: dreipol/github-actions/push@master
+      env:
+        GCP_SERVICEACCOUNT_KEY: ${{ secrets.GCP_SERVICEACCOUNT_KEY }}
+
+    - name: Notify build failure
+      if: failure() && (github.ref == 'refs/heads/stage' || github.ref == 'refs/heads/master')
+      uses: dreipol/github-actions/slack@master
+      env:
+        ENVIRONMENT: ${{env.GITHUB_REF_SLUG}}
+        SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+        TEXT: ':boom: Build for ${GITHUB_REPOSITORY} ${GITHUB_REF_SLUG} failed. <https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}|
+          Check the interactive logs on github>. <$DREIPOL_LOGS_URL | Or check the
+          raw logs>'
+
+  notify-slack:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: dreipol/github-actions/slugify@master
+    - name: Notify build started
+      if: github.ref == 'refs/heads/stage' || github.ref == 'refs/heads/master'
+      uses: dreipol/github-actions/slack@master
+      env:
+        SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+        TEXT: ':hourglass_flowing_sand: Build for ${GITHUB_REPOSITORY} ${GITHUB_REF_SLUG}
+          started. <https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}|
+          Check the progress on github>'
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+    - uses: dreipol/github-actions/slugify@master
+    - uses: dreipol/github-actions/deploy@master
+      env:
+        GCP_SERVICEACCOUNT_KEY: ${{ secrets.GCP_SERVICEACCOUNT_KEY }}
+        OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+        OPENSHIFT_USER: ${{ secrets.OPENSHIFT_USER }}
+        DEPLOY_IMAGE: ${{ env.ASPECTRA_IMAGE_PROD }}
+
+    - uses: dreipol/github-actions/deployment-status@master
+      env:
+        OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+        DEPLOYMENT_CONFIG: ${{ env.ASPECTRA_PROJECT_NAME_PROD }}
+
+    - name: Notify deployment success
+      if: success()
+      uses: dreipol/github-actions/slack@master
+      env:
+        ENVIRONMENT: ${{env.GITHUB_REF_SLUG}}
+        SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+        TEXT: ':rocket: Deployment for ${GITHUB_REPOSITORY} ${GITHUB_REF_SLUG} successful!'
+
+    - name: Notify deployment failure
+      if: failure()
+      uses: dreipol/github-actions/slack@master
+      env:
+        ENVIRONMENT: ${{env.GITHUB_REF_SLUG}}
+        SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+        TEXT: ':boom: Deployment for ${GITHUB_REPOSITORY} ${GITHUB_REF_SLUG} failed.
+          <${OPENSHIFT_HOST}/console/project/${OPENSHIFT_PROJECT}/browse/dc/${ASPECTRA_PROJECT_NAME_PROD}
+          | Check the logs on Openshift>'
