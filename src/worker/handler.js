@@ -1,3 +1,4 @@
+import connectDatabase from '../database/connect-database';
 import logger from '../logger';
 import { closeConnection, connectMq, createChannel } from '../queue';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
@@ -57,7 +58,8 @@ async function checkForNewMessagesInQueue(channel) {
  * @return {Promise<void>}
  */
 async function executeAudit(data, message = null) {
-    const report = await createNewAuditForConfig(data, { message, git_commit: null });
+    const { database } = await connectDatabase();
+    const report = await createNewAuditForConfig(database, data, { message, git_commit: null });
     if (!report) {
         logger.warn(`No report for ${ data.url }`);
         return;
