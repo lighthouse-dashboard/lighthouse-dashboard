@@ -1,9 +1,8 @@
 import os from 'os';
-import connectDatabase from '../../../database/connect-database';
 import { connectMq } from '../../../queue';
 
-export async function getHealthHandler() {
-    const { client } = await connectDatabase();
+export async function getHealthHandler(request) {
+    const { client } = request.mongo.client;
     const connection = await connectMq(process.env.MESSAGE_QUEUE_URI);
     const props = connection.connection.serverProperties;
     connection.close();

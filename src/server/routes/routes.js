@@ -1,19 +1,75 @@
-import { dirname } from 'path';
-import logger from '../../logger';
-import glob from '../../utils/glob';
+export default [
+    {
+        method: 'GET',
+        path: '/',
+        options: {
+            description: 'Main entry point',
+            auth: false,
+        },
+        handler: {
+            file: 'templates/dist/index.html',
+        },
+    },
+    {
+        method: 'GET',
+        path: '/service-worker.js',
+        options: {
+            description: 'serviceworker entrypoint',
+            auth: false,
+        },
+        handler: {
+            file: 'assets/src/service-worker.js',
+        },
+    },
+    {
+        method: 'GET',
+        path: '/dashboard',
+        options: {
+            description: 'Dashboard page',
+            auth: false,
+        },
+        handler: {
+            file: 'templates/dist/index.html',
+        },
+    },
 
-/**
- * Load all routes
- * @return {Promise<hapi.Route[]>}
- */
-export default async function getRoutes() {
-    const routes = [];
-    const files = await glob('src/api/**/routes.js');
-    files.forEach((file) => {
-        // eslint-disable-next-line global-require
-        const { default: subRoutes } = require(file);
-        logger.debug(`Load ${ subRoutes.length } route(s) from ${ dirname(file) }`);
-        routes.push(...subRoutes);
-    });
-    return routes;
-}
+    {
+        method: 'GET',
+        path: '/projects',
+        options: {
+            description: 'List of projects',
+            auth: false,
+        },
+        handler: {
+            file: 'templates/dist/index.html',
+        },
+    },
+
+    {
+        method: 'GET',
+        path: '/project/{id}',
+        options: {
+            description: 'Details of project',
+            auth: false,
+        },
+        handler: {
+            file: 'templates/dist/index.html',
+        },
+    },
+
+    {
+        method: 'GET',
+        path: '/{param*}',
+        options: {
+            description: 'Static assets',
+            auth: false,
+        },
+        handler: {
+            directory: {
+                path: 'assets/dist',
+                redirectToSlash: true,
+                index: false,
+            },
+        },
+    },
+];

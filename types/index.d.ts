@@ -1,1 +1,1 @@
-export * from './Audit';
+export * from '../src/api/reports/types/Audit';

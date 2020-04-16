@@ -6,6 +6,8 @@ import HapiSwagger from 'hapi-swagger';
 import laabr from 'laabr';
 
 import { name, version } from '../../../package.json';
+import * as MongoDb from './mongodb-plugin/mongodb-plugin';
+import * as Amqp from './amqp-plugin';
 
 export default {
     dev: [
@@ -18,6 +20,7 @@ export default {
                     title: name,
                     version: version,
                 },
+                grouping: 'tags',
                 tags: [
                     { name: 'sites', description: 'Sites API' },
                     { name: 'auth', description: 'Auth API' },
@@ -26,9 +29,30 @@ export default {
                 ],
             },
         },
+        {
+            plugin: require('hapi-dev-errors'),
+            options: {
+                showErrors: process.env.NODE_ENV !== 'production',
+            },
+        },
     ],
     prod: [
         Inert,
         Vision,
+        {
+            plugin: MongoDb,
+            options: {
+                url: process.env.MONGODB_URI,
+                settings: {
+                    poolSize: 10,
+                },
+            },
+        },
+        {
+            plugin: Amqp,
+            options: {
+                uri: process.env.MESSAGE_QUEUE_URI,
+            },
+        },
     ],
 };

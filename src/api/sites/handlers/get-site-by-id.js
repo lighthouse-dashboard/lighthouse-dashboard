@@ -6,9 +6,9 @@ import { getSiteConfigById } from '../db/sites';
  * @param {hapi.Request} request
  * @return {Promise<SiteConfig|Boom<null>>}
  */
-export async function getSiteById({ params }) {
+export async function getSiteById({ params, mongo }) {
     const { id } = params;
-    const config = await getSiteConfigById(id);
+    const config = await getSiteConfigById(mongo.db, id);
     if (!config) {
         return Boom.notFound();
     }

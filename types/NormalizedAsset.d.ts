@@ -1,4 +1,4 @@
-import { Timing } from './Audit';
+import { Timing } from '../src/api/reports/types/Audit';
 
 export interface NormalizedAsset {
     url: string;

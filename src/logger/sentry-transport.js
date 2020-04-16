@@ -3,7 +3,6 @@ import { Transport } from 'winston';
 import { version } from '../../package';
 
 export default class SentryTransport extends Transport {
-
     constructor(dsn) {
         super();
         Sentry.init({
