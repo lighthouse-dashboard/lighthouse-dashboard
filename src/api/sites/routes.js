@@ -12,7 +12,7 @@ import { getSiteById } from './handlers/get-site-by-id';
 import getSitesHandler from './handlers/get-sites';
 import { updateSiteConfigHandler } from './handlers/update-site-config';
 import { siteConfigModel, siteConfigModelList } from './schemas/site-config-model';
-import { siteWithReport, siteWithReportList } from './schemas/site-with-report';
+import { siteWithReportList } from './schemas/site-with-report';
 
 export default [
     {

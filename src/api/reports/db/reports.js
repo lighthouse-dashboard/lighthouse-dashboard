@@ -55,10 +55,9 @@ export function getReportsBySiteId(database, id, limit) {
  * @param {string} id
  * @return {Promise<Report>}
  */
-export async function getLatestReportBySiteId(database, id) {
+export function getLatestReportBySiteId(database, id) {
     const collection = database.collection(AUDIT_COLLECTION);
-
-    return collection.findOne({ siteId: id })
+    return collection.findOne({ siteId: id });
 }
 
 /**

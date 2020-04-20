@@ -31,7 +31,9 @@ export const reportModel = joi.object({
         .string()
         .allow(null),
 
-    raw: joi.alternatives().try(joi.boolean(), joi.object()).allow(null),
+    raw: joi.alternatives()
+        .try(joi.boolean(), joi.object())
+        .allow(null),
 
     hasRawData: joi
         .boolean(),
