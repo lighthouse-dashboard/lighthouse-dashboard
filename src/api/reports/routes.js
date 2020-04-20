@@ -1,4 +1,5 @@
 import config from '../../../config/server';
+import { LIFE_TIME } from '../../config/cache';
 import getHtmlReportHandler from './controller/get-html-report';
 import getLatestReportValues from './controller/get-latest-report-values';
 import getReports from './controller/get-reports';
@@ -55,7 +56,7 @@ export default [
                 params: reportIdParamModel,
             },
             cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
+                expiresIn: LIFE_TIME,
                 privacy: 'private',
             },
             response: {
@@ -75,8 +76,8 @@ export default [
                 params: reportIdParamModel,
             },
             cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'private',
+                expiresIn: LIFE_TIME,
+                privacy: 'public',
             },
         },
     },

@@ -7,10 +7,12 @@ import createReportForAll from './handlers/create-report-for-all';
 import deleteSite from './handlers/delete-site';
 import { getFavSitesHandler } from './handlers/get-fav-site';
 import { getLatestSitesHandler } from './handlers/get-latest-sites';
+import getLatestSitesReport from './handlers/get-latest-sites-report';
 import { getSiteById } from './handlers/get-site-by-id';
 import getSitesHandler from './handlers/get-sites';
 import { updateSiteConfigHandler } from './handlers/update-site-config';
 import { siteConfigModel, siteConfigModelList } from './schemas/site-config-model';
+import { siteWithReport, siteWithReportList } from './schemas/site-with-report';
 
 export default [
     {
@@ -49,6 +51,23 @@ export default [
             },
             response: {
                 schema: siteConfigModelList,
+            },
+        },
+    },
+    {
+        method: 'GET',
+        path: '/api/sites/latest-reports',
+        handler: getLatestSitesReport,
+        options: {
+            description: 'Get latest audited sites with report',
+            tags: ['api', 'sites'],
+            auth: 'jwt',
+            cache: {
+                expiresIn: config.API.CACHE_EXPIRES_IN,
+                privacy: 'private',
+            },
+            response: {
+                schema: siteWithReportList,
             },
         },
     },
@@ -99,7 +118,7 @@ export default [
             },
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'private',
+                privacy: 'public',
             },
             response: {
                 schema: siteConfigModel,

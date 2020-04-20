@@ -9,13 +9,17 @@ export default [
         path: '/projects',
         component: () => import('./projects/projects'),
     },
+    {
+        path: '/overview',
+        component: () => import('./overview/overview'),
+    },
 
     {
         path: '/',
-        component: () => import('./overview/overview'),
+        component: () => import('./dashboard/dashboard'),
     },
     {
         path: '/dashboard',
-        component: () => import('./overview/overview'),
+        component: () => import('./dashboard/dashboard'),
     },
 ];

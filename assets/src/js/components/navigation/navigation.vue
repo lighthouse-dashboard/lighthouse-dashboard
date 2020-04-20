@@ -26,13 +26,22 @@
                     <v-list-item-title>Dashboard</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
+            <v-list-item to="/overview"
+                    link>
+                <v-list-item-action>
+                    <v-icon>mdi-table</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>Projects Overview</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
             <v-list-item to="/projects"
                     link>
                 <v-list-item-action>
-                    <v-icon>mdi-view-dashboard</v-icon>
+                    <v-icon>mdi-file-search-outline</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
-                    <v-list-item-title>Projects</v-list-item-title>
+                    <v-list-item-title>Search</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
         </v-list>

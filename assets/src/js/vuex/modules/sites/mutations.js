@@ -3,8 +3,8 @@ import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_SEARCH_RESULT, SET_SITES, UPDATE
 export default {
     /**
      * Set sites
-     * @param {object} state
-     * @param {SiteConfig[]} sites
+     * @param {SitesState} state
+     * @param {Sites.SiteConfig[]} sites
      */
     [SET_SITES](state, { sites }) {
         state.sites = sites;
@@ -12,8 +12,8 @@ export default {
 
     /**
      * Add site
-     * @param {object} state
-     * @param {SiteConfig} site
+     * @param {SitesState} state
+     * @param {Sites.SiteConfig} site
      */
     [ADD_SITE](state, { site }) {
         state.sites.push(site);
@@ -21,8 +21,8 @@ export default {
 
     /**
      * Set search result
-     * @param {object} state
-     * @param {SiteConfig[]} sites
+     * @param {SitesState} state
+     * @param {Sites.SiteConfig[]} sites
      */
     [SET_SEARCH_RESULT](state, { sites }) {
         state.searchResult = sites;
@@ -30,8 +30,8 @@ export default {
 
     /**
      * Set current site config
-     * @param {object} state
-     * @param {SiteConfig} config
+     * @param {SitesState} state
+     * @param {Sites.SiteConfig} config
      */
     [SET_CURRENT_SITE_CONFIG](state, { config }) {
         state.currentSiteConfig = config;
@@ -39,9 +39,9 @@ export default {
 
     /**
      * Update site config
-     * @param {config} state
+     * @param {SitesState} state
      * @param {string} id
-     * @param {Partial<SiteConfig> }delta
+     * @param {Partial<Sites.SiteConfig> }delta
      */
     [UPDATE_SITE](state, { id, delta }) {
         state.sites = state.sites.map((site) => {

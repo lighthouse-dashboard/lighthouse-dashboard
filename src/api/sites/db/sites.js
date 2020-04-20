@@ -5,10 +5,10 @@ import { SITES_CONFIG_COLLECTION } from '../../../config/db';
 /**
  * Find sites
  * @param {MongoDB} database
- * @param {object} find
- * @param {sort} sort
- * @param {number} limit
- * @return {Promise<SiteConfig[]>}
+ * @param { object } find
+ * @param { object } sort
+ * @param { number } limit
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export function findSites(database, find, sort = {}, limit = 100) {
     const collection = database.collection(SITES_CONFIG_COLLECTION);
@@ -37,7 +37,7 @@ export function findSites(database, find, sort = {}, limit = 100) {
 /**
  * Get list of sites from DB
  * @param {MongoDB} database
- * @return {Promise<SiteConfig[]>}
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getAllSites(database) {
     return findSites(database, {}, { last_audit: -1 });
@@ -46,7 +46,7 @@ export function getAllSites(database) {
 /**
  * Get list of sites from DB
  * @param {MongoDB} database
- * @return {Promise<SiteConfig[]>}
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getFavoriteSites(database) {
     return findSites(database, { is_favorite: true }, { order: 1 });
@@ -55,7 +55,7 @@ export function getFavoriteSites(database) {
 /**
  * Get latest n audited sites
  * @param {MongoDB} database
- * @return {Promise<SiteConfig[]>}
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getLatestSites(database) {
     return findSites(database, {
@@ -69,8 +69,8 @@ export function getLatestSites(database) {
 /**
  * Add new site to DB
  * @param {MongoDB} database
- * @param {Pick<SiteConfig, "name"|"device"|"url"|"is_favorite">} config
- * @return {Promise<SiteConfig>}
+ * @param {Pick<Sites.SiteConfig, "name"|"device"|"url"|"is_favorite">} config
+ * @return {Promise<Sites.SiteConfig>}
  */
 export function addSite(database, config) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
@@ -83,8 +83,8 @@ export function addSite(database, config) {
  * Update site config
  * @param {MongoDB} database
  * @param {string} id
- * @param {Partial<SiteConfig>} delta
- * @return {Promise<SiteConfig>}
+ * @param {Partial<Sites.SiteConfig>} delta
+ * @return {Promise<Sites.SiteConfig>}
  */
 export function updateSite(database, id, delta) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
@@ -106,7 +106,7 @@ export function removeSite(database, id) {
  * Get config for specific site
  * @param {MongoDb} database
  * @param {string} id
- * @return {Promise<SiteConfig | null>}
+ * @return {Promise<Sites.SiteConfig | null>}
  */
 export async function getSiteConfigById(database, id) {
     const sites = await findSites(database, { id }, {}, 1);
@@ -121,7 +121,7 @@ export async function getSiteConfigById(database, id) {
  * Get config for specific site
  * @param {MongoDB} database
  * @param {string} token
- * @return {Promise<SiteConfig | null>}
+ * @return {Promise<Sites.SiteConfig | null>}
  */
 export async function getSiteConfigByToken(database, token) {
     const sites = await findSites(database, { token }, {}, 1);

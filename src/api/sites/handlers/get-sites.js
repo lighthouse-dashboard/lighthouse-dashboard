@@ -3,7 +3,7 @@ import { findSites, getAllSites } from '../db/sites';
 /**
  * Get sites
  * @param {object} request
- * @return {Promise<SiteConfig[]>}
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export default function getSitesHandler(request) {
     const { query } = request.query;

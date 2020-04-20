@@ -3,4 +3,5 @@ export default {
     sites: [],
     searchResult: [],
     currentSiteConfig: null,
+    sitesWithReport: [],
 };

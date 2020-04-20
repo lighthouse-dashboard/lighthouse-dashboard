@@ -51,7 +51,7 @@
     export default {
         components: {},
         props: {
-            /** @type {SiteConfig} */
+            /** @type {Sites.SiteConfig} */
             config: {
                 type: Object,
                 required: true,

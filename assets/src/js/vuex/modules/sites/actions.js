@@ -2,6 +2,7 @@ import {
     CREATE_SITE_URL,
     GET_LATEST_AUDITED_SITES_URL,
     GET_SITE_BY_ID_URL,
+    GET_SITE_WITH_REPORT_URL,
     GET_SITES_URL,
     POST_SITE_ALL_URL,
     REMOVE_SITE_URL,
@@ -30,7 +31,7 @@ export function deleteSite(_, { id }) {
 
 /**
  * Create a new site
- * @param {SiteConfig} siteConfig
+ * @param {Sites.SiteConfig} siteConfig
  * @return {Promise<void>}
  */
 export async function createSite({ commit }, siteConfig) {
@@ -43,7 +44,7 @@ export async function createSite({ commit }, siteConfig) {
 /**
  * Update a site
  * @param {string} id
- * @param {Partial<SiteConfig>}delta
+ * @param {Partial<Sites.SiteConfig>}delta
  * @return {Promise<void>}
  */
 export async function updateSite({ commit }, { id, delta }) {
@@ -67,7 +68,7 @@ export async function getLatestSites({ commit }) {
  * Get specific site
  * @param {object} _
  * @param {string} siteId
- * @return {Promise<SiteConfig>}
+ * @return {Promise<Sites.SiteConfig>}
  */
 export async function getSite(_, { siteId }) {
     const { data } = await axios().get(GET_SITE_BY_ID_URL(siteId));
@@ -78,11 +79,20 @@ export async function getSite(_, { siteId }) {
  * Get specific site
  * @param {function} commit
  * @param {string} siteId
- * @return {Promise<SiteConfig>}
+ * @return {Promise<Sites.SiteConfig>}
  */
 export async function getCurrentSite({ commit }, { siteId }) {
     const { data } = await axios().get(GET_SITE_BY_ID_URL(siteId));
     commit({ type: SET_CURRENT_SITE_CONFIG, config: data });
+    return data;
+}
+
+/**
+ *
+ * @return {Promise<Sites.SiteWithReport[]>}
+ */
+export async function getSitesWithLatestReport() {
+    const { data } = await axios().get(GET_SITE_WITH_REPORT_URL);
     return data;
 }
 
