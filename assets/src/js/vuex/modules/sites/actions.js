@@ -56,6 +56,7 @@ export async function updateSite({ commit }, { id, delta }) {
 
 /**
  * Fetch latest audites sites
+ * @param {function} commit
  * @return {Promise<T>}
  */
 export async function getLatestSites({ commit }) {
@@ -88,7 +89,7 @@ export async function getCurrentSite({ commit }, { siteId }) {
 }
 
 /**
- *
+ * Get sites with corresponsing latest report
  * @return {Promise<Sites.SiteWithReport[]>}
  */
 export async function getSitesWithLatestReport() {

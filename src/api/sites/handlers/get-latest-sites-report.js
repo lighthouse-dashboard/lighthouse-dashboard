@@ -7,7 +7,7 @@ export default async function getLatestSitesReport(request) {
 
     for (let i = 0; i < sites.length; i++) {
         const site = sites[i];
-        const report = await getLatestReportBySiteId(request.mongo.db, site.id)
+        const report = await getLatestReportBySiteId(request.mongo.db, site.id);
         if (!report) {
             continue;
         }
