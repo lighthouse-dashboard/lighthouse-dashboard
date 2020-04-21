@@ -12,7 +12,7 @@ import { createNewAuditForConfig } from '../utils/create-new-audit';
  */
 export default async function executeAll(useQueue) {
     logger.debug(`Execute all audits via cli`);
-    const { database, client } = connectDatabase();
+    const { database, client } = await connectDatabase();
 
     const sites = await getAllSites(database);
     const channel = await queue();
