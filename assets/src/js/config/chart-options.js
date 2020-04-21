@@ -1,11 +1,7 @@
 import CONFIG from '../../../../config/dashboard';
-import colorPreference from '../utils/color-preference';
 
 const DEFAULT_CHART = {
-    theme: {
-        mode: CONFIG.UI.THEME,
-    },
-    colors: CONFIG.UI.CHART_COLORS[colorPreference()],
+    colors: CONFIG.UI.CHART_COLORS,
     plotOptions: {
         bar: {
             horizontal: false,
@@ -39,6 +35,9 @@ const DEFAULT_CHART = {
         },
     },
     tooltip: {
+        tooltip: {
+            theme: 'dark',
+        },
         x: {
             show: true,
         },
@@ -59,6 +58,9 @@ export const GAUGE_CHART = {
             },
         },
     },
+    tooltip: {
+        theme: 'dark',
+    },
     plotOptions: {
         radialBar: {
             startAngle: -90,
@@ -73,28 +75,21 @@ export const GAUGE_CHART = {
             },
             dataLabels: {
                 name: {
-                    color: CONFIG.UI.CHART_COLORS[colorPreference()][0],
+                    color: CONFIG.UI.COLOR_THEME.primary,
                     fontSize: '12px',
                 },
                 value: {
-                    color: CONFIG.UI.CHART_COLORS[colorPreference()][0],
+                    color: CONFIG.UI.COLOR_THEME.primary,
                     fontSize: '18px',
                     offsetY: -30,
+                },
+                style: {
+                    colors: ['#333']
                 },
             },
         },
     },
-    colors: CONFIG.UI.CHART_COLORS[colorPreference()],
-    fill: {
-        type: 'gradient',
-        gradient: {
-            shadeIntensity: 0.7,
-            inverseColors: false,
-            opacityFrom: 1,
-            opacityTo: 1,
-            stops: [0, 100],
-        },
-    },
+    colors: CONFIG.UI.CHART_COLORS,
 };
 
 export const COMPARISON_CHART = {
@@ -110,17 +105,20 @@ export const COMPARISON_CHART = {
             },
         },
     },
+    tooltip: {
+        theme: 'dark',
+    },
     series: [],
     title: {
         style: {
-            colors: CONFIG.UI.COLOR_THEME[colorPreference()].text,
+            colors: CONFIG.UI.COLOR_THEME.text,
         },
     },
     xaxis: {
         categories: [],
         labels: {
             style: {
-                colors: CONFIG.UI.COLOR_THEME[colorPreference()].text,
+                colors: CONFIG.UI.COLOR_THEME.text,
             },
         },
     },
@@ -131,7 +129,7 @@ export const COMPARISON_CHART = {
         max: 100,
         labels: {
             style: {
-                colors: CONFIG.UI.COLOR_THEME[colorPreference()].text,
+                colors: CONFIG.UI.COLOR_THEME.text,
             },
         },
     },
@@ -151,7 +149,9 @@ export const SITE_OVERVIEW_CHART = {
             },
         },
     },
-
+    tooltip: {
+        theme: 'dark',
+    },
     stroke: {
         width: 2,
         curve: 'smooth',
@@ -186,5 +186,4 @@ export const SITE_OVERVIEW_CHART = {
             show: false,
         },
     },
-
 };

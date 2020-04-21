@@ -1,0 +1,11 @@
+const getTheme = () => require(`../../../../themes/${ process.env.VUE_APP_THEME }.js`);
+
+let theme = null;
+module.exports = function() {
+    if (!theme) {
+        const mod = getTheme();
+        theme = mod.default;
+    }
+
+    return theme;
+};

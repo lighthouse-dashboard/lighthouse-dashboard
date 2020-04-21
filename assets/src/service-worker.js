@@ -2,14 +2,10 @@
 var PAGES_CACHE_NAME = 'lighthouse-dashboard-cache--pages';
 var API_CACHE_NAME = 'lighthouse-dashboard-cache--api';
 var urlsToCache = [
-    '/',
-    '/dashboard',
-    '/projects',
 ];
 
 var urlRegex = [
     /\.(css|js|jpg)$/i,
-    /\/(api.+)/gi,
 ];
 
 

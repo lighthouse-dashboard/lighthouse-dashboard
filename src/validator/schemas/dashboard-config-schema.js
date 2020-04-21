@@ -90,10 +90,9 @@ export default joi.object({
         .required(),
 
     UI: joi.object({
-        CHART_COLORS: joi.object({
-            dark: joi.array().items(joi.string()),
-            light: joi.array().items(joi.string()),
-        })
+        CHART_COLORS: joi
+            .array()
+            .items(joi.string())
             .required(),
 
         COLOR_THEME: joi.object({

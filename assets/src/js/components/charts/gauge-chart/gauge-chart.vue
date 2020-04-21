@@ -1,8 +1,6 @@
-import ApexCharts from "apexcharts";
 <template>
     <div class="gauge-chart">
         <div ref="chart"/>
-
     </div>
 </template>
 

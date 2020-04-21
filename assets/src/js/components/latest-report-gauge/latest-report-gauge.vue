@@ -2,7 +2,7 @@
     <v-card>
         <v-card-title>
             <site-title :is_favorite="is_favorite">
-                {{ name }}
+                <v-btn text color="text" :to="`/project/${id}`">{{ name }}</v-btn>
             </site-title>
         </v-card-title>
         <v-card-text>
@@ -14,7 +14,6 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import CONFIG from '../../../../../config/dashboard';
     import GaugeChart from '../charts/gauge-chart/gauge-chart';
     import SiteTitle from '../site-title/site-title';
 
@@ -62,16 +61,9 @@
             },
         },
 
-        beforeDestroy() {
-            clearInterval(this.interval);
-        },
 
         mounted() {
             this.loadData();
-
-            this.interval = setInterval(() => {
-                this.loadData();
-            }, CONFIG.DASHBOARD.UPDATE_INTERVAL);
         },
     };
 </script>

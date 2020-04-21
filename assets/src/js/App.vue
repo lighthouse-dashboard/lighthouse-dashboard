@@ -15,7 +15,7 @@
     import FooterComponent from './components/footer/footer';
     import Navigation from './components/navigation/navigation';
     import Login from './pages/login/login';
-    import colorPreference from './utils/color-preference';
+    import theme from './utils/get-theme';
 
     export default {
         components: {
@@ -32,7 +32,7 @@
         },
 
         created() {
-            this.$vuetify.theme.dark = colorPreference() === 'dark';
+            this.$vuetify.theme.dark = theme().app === 'dark';
         },
     };
 </script>

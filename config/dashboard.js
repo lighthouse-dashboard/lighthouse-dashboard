@@ -1,4 +1,8 @@
+const getTheme = require('../assets/src/js/utils/get-theme');
+
 require('dotenv').config();
+
+const { charts, theme } = getTheme();
 
 module.exports = {
     DATE_FORMAT: 'dd/MM/yy HH:mm',
@@ -59,40 +63,10 @@ module.exports = {
     },
 
     UI: {
-        CHART_COLORS: {
-            dark: [
-                '#00876c',
-                '#76ac7f',
-                '#bfd0a1',
-                '#fff6d2',
-                '#efc18d',
-                '#e5855f',
-                '#d43d51',
-            ],
-            light: [
-                '#00876c',
-                '#76ac7f',
-                '#bfd0a1',
-                '#fff6d2',
-                '#efc18d',
-                '#e5855f',
-                '#d43d51',
-            ],
-        },
-
+        CHART_COLORS: charts,
         COLOR_THEME: {
-            dark: {
-                primary: '#5de3ff',
-                text: '#f7f7f7',
-                secondary: '#004c6d',
-                accent: '#e91e63',
-            },
-            light: {
-                primary: '#004c6d',
-                text: '#333333',
-                secondary: '#5de3ff',
-                accent: '#e91e63',
-            },
+            dark: theme,
+            light: theme,
         },
     },
 

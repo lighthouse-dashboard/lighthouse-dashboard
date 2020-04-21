@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { templates } = require('./src/config/path');
 const { assetDist, htmlAsset, jsAsset } = require('./src/config/path');
 

@@ -6,7 +6,7 @@
 
         <v-card-title>
             <site-title :is_favorite="is_favorite">
-                <router-link :to="`/project/${id}`">{{ name }}</router-link>
+                <v-btn text color="text" :to="`/project/${id}`">{{ name }}</v-btn>
             </site-title>
             <v-spacer/>
             <site-overview-menu
