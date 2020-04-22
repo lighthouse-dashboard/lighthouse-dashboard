@@ -1,4 +1,4 @@
-const getTheme = () => require(`../../../../themes/${ process.env.VUE_APP_THEME }.js`);
+const getTheme = () => require(`../../../../themes/${ process.env.VUE_APP_THEME || 'light' }.js`);
 
 let theme = null;
 module.exports = function() {
