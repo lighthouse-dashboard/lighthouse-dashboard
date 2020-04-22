@@ -8,7 +8,7 @@
                     :lg="cols"
                     md="6"
                     sm="12"
-                    v-for="site in favoritedSites"
+                    v-for="site in sites"
                     :key="site.id">
                 <site-overview v-bind="site"/>
             </v-col>
@@ -26,7 +26,7 @@
             SiteOverview,
         },
         computed: {
-            ...mapGetters('sites', ['favoritedSites']),
+            ...mapGetters('sites', ['sites']),
             cols() {
                 return DASHBOARD.favoriteProjectsOverview.colSize;
             },
@@ -35,8 +35,9 @@
             ...mapActions('login', ['logout']),
             ...mapActions('sites', ['fetchAllSites']),
         },
-        async mounted() {
-            await this.fetchAllSites();
+
+        mounted() {
+            this.fetchAllSites();
         },
     };
 </script>
