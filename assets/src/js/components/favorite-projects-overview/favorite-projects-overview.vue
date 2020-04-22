@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import { DASHBOARD } from '../../../../../config/dashboard';
     import SiteOverview from '../site-overview/site-overview.vue';
 
@@ -26,18 +26,18 @@
             SiteOverview,
         },
         computed: {
-            ...mapGetters('sites', ['sites']),
+            ...mapState('sites', ['sites']),
             cols() {
                 return DASHBOARD.favoriteProjectsOverview.colSize;
             },
         },
         methods: {
             ...mapActions('login', ['logout']),
-            ...mapActions('sites', ['fetchAllSites']),
+            ...mapActions('sites', ['getLatestSites']),
         },
 
-        mounted() {
-            this.fetchAllSites();
+        async mounted() {
+            await this.getLatestSites();
         },
     };
 </script>

@@ -6,7 +6,8 @@
         </v-app-bar>
 
         <v-container>
-            <sites-with-report-table :sites="sites"/>
+            <sites-with-report-table :is-loading="isLoading"
+                    :sites="sites"/>
         </v-container>
     </div>
 </template>
@@ -22,14 +23,21 @@
         data() {
             return {
                 sites: [],
+                isLoading: true,
             };
         },
 
         methods: {
             ...mapActions('sites', ['getSitesWithLatestReport']),
 
-            async loadData() {
-                this.sites = await this.getSitesWithLatestReport();
+            loadData() {
+                this.getSitesWithLatestReport()
+                    .then((sites) => {
+                        this.sites = sites;
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
             },
         },
 

@@ -1,6 +1,7 @@
 <template>
     <div class="sites-with-report-table">
         <v-data-table
+                :loading="isLoading"
                 :headers="headers"
                 :items="items"
                 :items-per-page="10">
@@ -31,6 +32,11 @@
             sites: {
                 type: Array,
                 required: true,
+            },
+
+            isLoading: {
+                type: Boolean,
+                default: false,
             },
         },
 
