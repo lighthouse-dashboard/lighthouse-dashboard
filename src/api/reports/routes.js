@@ -20,7 +20,7 @@ export default [
             auth: 'jwt',
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'private',
+                privacy: 'public',
             },
             response: {
                 schema: barChartDataModel,
@@ -40,7 +40,7 @@ export default [
             },
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'private',
+                privacy: 'public',
             },
         },
     },
@@ -57,7 +57,7 @@ export default [
             },
             cache: {
                 expiresIn: LIFE_TIME,
-                privacy: 'private',
+                privacy: 'public',
             },
             response: {
                 schema: reportModelList,

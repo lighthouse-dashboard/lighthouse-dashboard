@@ -30,7 +30,7 @@ export default [
             },
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'private',
+                privacy: 'public',
             },
             response: {
                 schema: siteConfigModelList,
@@ -47,7 +47,7 @@ export default [
             auth: 'jwt',
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'private',
+                privacy: 'public',
             },
             response: {
                 schema: siteConfigModelList,
@@ -64,7 +64,7 @@ export default [
             auth: 'jwt',
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'private',
+                privacy: 'public',
             },
             response: {
                 schema: siteWithReportList,
@@ -81,7 +81,7 @@ export default [
             auth: 'jwt',
             cache: {
                 expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'private',
+                privacy: 'public',
             },
             response: {
                 schema: siteConfigModelList,
