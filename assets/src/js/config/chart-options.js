@@ -176,6 +176,7 @@ export const SITE_OVERVIEW_CHART = {
     yaxis: {
         show: false,
         tickAmount: 1,
+
         floating: true,
         min: 0,
         max: 100,
