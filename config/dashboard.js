@@ -77,5 +77,11 @@ module.exports = {
                 return `https://cssstats.com/stats?url=${ url }`;
             },
         },
+        {
+            name: 'EverySize',
+            link: function(url) {
+                return `https://everysize-app.kibalabs.com/?url=${ url }`;
+            },
+        },
     ],
 };
