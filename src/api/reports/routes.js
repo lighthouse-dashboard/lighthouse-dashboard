@@ -18,10 +18,6 @@ export default [
             description: 'Get chart data for speed overview of favorited projects',
             tags: ['api', 'reports'],
             auth: 'jwt',
-            cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'public',
-            },
             response: {
                 schema: barChartDataModel,
             },
@@ -51,10 +47,6 @@ export default [
             validate: {
                 params: reportIdParamModel,
             },
-            cache: {
-                expiresIn: LIFE_TIME,
-                privacy: 'public',
-            },
             response: {
                 schema: reportModelList,
             },
@@ -70,10 +62,6 @@ export default [
             auth: 'jwt',
             validate: {
                 params: reportIdParamModel,
-            },
-            cache: {
-                expiresIn: LIFE_TIME,
-                privacy: 'public',
             },
         },
     },

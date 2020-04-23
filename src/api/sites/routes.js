@@ -28,10 +28,6 @@ export default [
                     query: joi.string(),
                 }).label('sites.Query'),
             },
-            cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'public',
-            },
             response: {
                 schema: siteConfigModelList,
             },
@@ -45,10 +41,6 @@ export default [
             description: 'Get latest audited sites',
             tags: ['api', 'sites'],
             auth: 'jwt',
-            cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'public',
-            },
             response: {
                 schema: siteConfigModelList,
             },
@@ -62,10 +54,6 @@ export default [
             description: 'Get latest audited sites with report',
             tags: ['api', 'sites'],
             auth: 'jwt',
-            cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'public',
-            },
             response: {
                 schema: siteWithReportList,
             },
@@ -79,10 +67,6 @@ export default [
             description: 'Get favorited sites',
             tags: ['api', 'sites'],
             auth: 'jwt',
-            cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'public',
-            },
             response: {
                 schema: siteConfigModelList,
             },
@@ -115,10 +99,6 @@ export default [
                 params: joi.object({
                     id: joi.string().required(),
                 }).label('sites.SiteId'),
-            },
-            cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'public',
             },
             response: {
                 schema: siteConfigModel,
