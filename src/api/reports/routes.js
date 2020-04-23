@@ -38,10 +38,6 @@ export default [
             validate: {
                 params: siteIdParamModel,
             },
-            cache: {
-                expiresIn: config.API.CACHE_EXPIRES_IN,
-                privacy: 'public',
-            },
         },
     },
     {
