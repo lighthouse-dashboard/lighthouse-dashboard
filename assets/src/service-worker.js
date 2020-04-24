@@ -71,6 +71,6 @@ self.addEventListener('fetch', function(event) {
             return resp;
         })
         .catch(function() {
-            return caches.match(event.request);
+            return fetch(event.request);
         }));
 });
