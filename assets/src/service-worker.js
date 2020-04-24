@@ -2,6 +2,8 @@
 var PAGES_CACHE_NAME = 'lighthouse-dashboard-cache--pages';
 var API_CACHE_NAME = 'lighthouse-dashboard-cache--api';
 var urlsToCache = [
+    'index.html',
+    'main.css'
 ];
 
 var urlRegex = [
@@ -49,9 +51,9 @@ self.addEventListener('activate', function(event) {
     );
 });
 
-/*
+
 self.addEventListener('fetch', function(event) {
-    event.respondWith(precheck(event)
+    event.respondWith(precheck(event))
         .then(function() {
             return fetch(event.request);
         })
@@ -72,6 +74,5 @@ self.addEventListener('fetch', function(event) {
         })
         .catch(function() {
             return fetch(event.request);
-        }));
+        });
 });
- */
