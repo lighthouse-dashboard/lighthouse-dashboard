@@ -21,9 +21,9 @@ function precheck(request) {
     return new Promise(function(resolve, reject) {
         const matches = matchesUrlRegex(request.url);
         if (!matches || request.method !== 'GET') {
-            return resolve(request);
+            return reject(new Error('Request does not match criteria'));
         }
-        return reject(new Error('Request does not match criteria'));
+        return resolve(request);
     });
 }
 
