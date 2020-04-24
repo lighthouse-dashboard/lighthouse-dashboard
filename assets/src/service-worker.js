@@ -49,7 +49,7 @@ self.addEventListener('activate', function(event) {
     );
 });
 
-
+/*
 self.addEventListener('fetch', function(event) {
     event.respondWith(precheck(event)
         .then(function() {
@@ -74,3 +74,4 @@ self.addEventListener('fetch', function(event) {
             return fetch(event.request);
         }));
 });
+ */
