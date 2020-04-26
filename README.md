@@ -1,5 +1,4 @@
 # lighthouse-dashboard
-[![CircleCI](https://circleci.com/gh/dreipol/lighthouse-dashboard.svg?style=svg&circle-token=fa73435956cf491fcc4005ad5143e00ebf6871fa)](https://circleci.com/gh/dreipol/lighthouse-dashboard)
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/maintainability"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/maintainability" /></a>
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/test_coverage"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/test_coverage" /></a>
 
@@ -23,8 +22,10 @@ This architecture simplifies hosting/deployment, since you can deploy the same a
 # [Config](doc/CONFIG.md)
 
 # Screenshots
-![Dashboard Darkmode](doc/assets/dark_dashboard.jpg)
-![Project List Lightmode](doc/assets/light_projects.jpg)
+![Dashboard Darkmode](doc/assets/dashboard.jpg)
+![Search](doc/assets/search.jpg)
+![Project Detail View](doc/assets/detail.jpg)
+![Projects Table](doc/assets/table.jpg)
 
 # Hosting
 
@@ -71,7 +72,7 @@ already running local server and always delivers the newest UI.
 There is a possibility to add additional entries to the projects menu. This is useful
 if you want to provide some quick access to 3rd party tools like [cssstats](https://cssstats.com/)
 
-![Custom menu entry](./doc/assets/custom-menu.png).
+![Custom menu entry](./doc/assets/custom_menu.png).
 
 To add those entries simply edit the `config/dashboard.js` and add an entry to `PROJECT_MENU_CUSTOM_ENTRIES`.
 The entry has to look like this 
