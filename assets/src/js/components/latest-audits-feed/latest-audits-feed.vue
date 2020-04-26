@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  v-inview:enter="loadSites">
         <v-subheader>
             Latest reports performance
         </v-subheader>
@@ -27,7 +27,6 @@
         data() {
             return {
                 sites: [],
-                interval: null,
             };
         },
         computed: {
@@ -43,17 +42,6 @@
                         this.sites = data;
                     });
             },
-        },
-
-        beforeDestroy() {
-            clearInterval(this.interval);
-        },
-
-        mounted() {
-            this.loadSites();
-            this.interval = setInterval(() => {
-                this.loadSites();
-            }, DASHBOARD.UPDATE_INTERVAL);
         },
     };
 </script>

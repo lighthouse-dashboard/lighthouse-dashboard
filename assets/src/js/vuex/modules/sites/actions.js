@@ -8,7 +8,7 @@ import {
     REMOVE_SITE_URL,
 } from '../../../config/routes';
 import axios from '../../../utils/axios';
-import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_SITES, UPDATE_SITE } from '../mutation-types';
+import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_LATEST_SITES, SET_SITES, UPDATE_SITE } from '../mutation-types';
 
 /**
  * Fetch all sites
@@ -61,7 +61,7 @@ export async function updateSite({ commit }, { id, delta }) {
  */
 export async function getLatestSites({ commit }) {
     const { data } = await axios().get(GET_LATEST_AUDITED_SITES_URL);
-    commit({ type: SET_SITES, sites: data });
+    commit({ type: SET_LATEST_SITES, sites: data });
     return data;
 }
 

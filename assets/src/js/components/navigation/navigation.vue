@@ -18,6 +18,7 @@
             <v-divider v-if="!mini"/>
 
             <v-list-item to="/dashboard"
+                    color="primary"
                     link>
                 <v-list-item-action>
                     <v-icon>mdi-clipboard-pulse</v-icon>
@@ -27,6 +28,7 @@
                 </v-list-item-content>
             </v-list-item>
             <v-list-item to="/overview"
+                    color="primary"
                     link>
                 <v-list-item-action>
                     <v-icon>mdi-table</v-icon>
@@ -36,6 +38,7 @@
                 </v-list-item-content>
             </v-list-item>
             <v-list-item to="/projects"
+                    color="primary"
                     link>
                 <v-list-item-action>
                     <v-icon>mdi-file-search-outline</v-icon>

@@ -1,6 +1,7 @@
 import 'es6-promise/auto';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Inview from 'vueinview';
 
 import App from './App.vue';
 import SpeedOverview from './components/favorite-comparison/favorite-comparison';
@@ -13,6 +14,7 @@ import store from './vuex';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
+Vue.use(Inview);
 
 Vue.component('favorite-projects-overview', FavoriteProjectsOverview);
 Vue.component('favorite-projects-comparison', SpeedOverview);

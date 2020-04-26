@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-inview:enter="fetchAllSites">
         <v-subheader>
             Projects
         </v-subheader>
@@ -8,7 +8,7 @@
                     :lg="cols"
                     md="6"
                     sm="12"
-                    v-for="site in sites"
+                    v-for="site in favoritedSites"
                     :key="site.id">
                 <site-overview v-bind="site"/>
             </v-col>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
     import { DASHBOARD } from '../../../../../config/dashboard';
     import SiteOverview from '../site-overview/site-overview.vue';
 
@@ -26,18 +26,14 @@
             SiteOverview,
         },
         computed: {
-            ...mapState('sites', ['sites']),
+            ...mapGetters('sites', ['favoritedSites']),
             cols() {
                 return DASHBOARD.favoriteProjectsOverview.colSize;
             },
         },
         methods: {
             ...mapActions('login', ['logout']),
-            ...mapActions('sites', ['getLatestSites']),
-        },
-
-        async mounted() {
-            await this.getLatestSites();
+            ...mapActions('sites', ['fetchAllSites']),
         },
     };
 </script>

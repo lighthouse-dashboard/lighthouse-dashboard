@@ -1,4 +1,11 @@
-import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_SEARCH_RESULT, SET_SITES, UPDATE_SITE } from '../mutation-types';
+import {
+    ADD_SITE,
+    SET_CURRENT_SITE_CONFIG,
+    SET_LATEST_SITES,
+    SET_SEARCH_RESULT,
+    SET_SITES,
+    UPDATE_SITE
+} from '../mutation-types';
 
 export default {
     /**
@@ -35,6 +42,10 @@ export default {
      */
     [SET_CURRENT_SITE_CONFIG](state, { config }) {
         state.currentSiteConfig = config;
+    },
+
+    [SET_LATEST_SITES](state, { latestSites }) {
+        state.latestSites = latestSites;
     },
 
     /**

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-inview:enter="loadData">
         <v-subheader>
             Performance comparison
         </v-subheader>
@@ -14,7 +14,6 @@
 <script>
     import ApexCharts from 'apexcharts';
     import { mapActions, mapState } from 'vuex';
-    import { DASHBOARD } from '../../../../../config/dashboard';
     import { COMPARISON_CHART } from '../../config/chart-options';
 
     export default {
@@ -65,10 +64,6 @@
 
         mounted() {
             this.buildChart();
-            this.loadData();
-            this.interval = setInterval(() => {
-                this.loadData();
-            }, DASHBOARD.UPDATE_INTERVAL);
         },
     };
 </script>

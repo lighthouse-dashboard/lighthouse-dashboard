@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card  v-inview:enter="loadData">
         <v-card-title>
             <site-title :is_favorite="is_favorite">
                 <v-btn text color="text" :to="`/project/${id}`">{{ name }}</v-btn>
@@ -59,11 +59,6 @@
                         this.isLoading = false;
                     });
             },
-        },
-
-
-        mounted() {
-            this.loadData();
         },
     };
 </script>

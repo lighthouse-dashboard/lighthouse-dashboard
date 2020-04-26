@@ -37,6 +37,5 @@
                 return this.list.filter((report) => report.hasRawData);
             },
         },
-
     };
 </script>

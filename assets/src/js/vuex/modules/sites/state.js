@@ -1,6 +1,6 @@
 export default {
-    favoritedSites: [],
     sites: [],
+    latestSites: [],
     searchResult: [],
     currentSiteConfig: null,
     sitesWithReport: [],

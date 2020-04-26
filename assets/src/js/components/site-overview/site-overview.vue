@@ -1,12 +1,15 @@
 <template>
-    <v-card>
+    <v-card v-inview:enter="loadData" loading="isLoading">
         <project-settings v-if="showSettings"
                 :id="id"
                 @close="onSettingsClosed"/>
 
         <v-card-title>
             <site-title :is_favorite="is_favorite">
-                <v-btn text color="text" :to="`/project/${id}`">{{ name }}</v-btn>
+                <v-btn text
+                        color="text"
+                        :to="`/project/${id}`">{{ name }}
+                </v-btn>
             </site-title>
             <v-spacer/>
             <site-overview-menu
@@ -24,9 +27,6 @@
 
         <v-card-actions>
             <span v-if="runError">{{ runError.message }}</span>
-            <v-progress-circular
-                    indeterminate
-                    v-if="isLoading"/>
         </v-card-actions>
     </v-card>
 </template>
@@ -136,14 +136,6 @@
             openInfo() {
                 this.showInfo = !this.showInfo;
             },
-        },
-
-        beforeDestroy() {
-            clearInterval(this.interval);
-        },
-
-        mounted() {
-            this.loadData();
         },
     };
 </script>
