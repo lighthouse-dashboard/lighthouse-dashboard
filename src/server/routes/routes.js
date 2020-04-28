@@ -10,6 +10,19 @@ export default [
             file: 'templates/dist/index.html',
         },
     },
+
+    {
+        method: 'GET',
+        path: '/index.html',
+        options: {
+            description: 'Main entry point',
+            auth: false,
+        },
+        handler: {
+            file: 'templates/dist/index.html',
+        },
+    },
+
     {
         method: 'GET',
         path: '/service-worker.js',
@@ -21,6 +34,7 @@ export default [
             file: 'assets/src/service-worker.js',
         },
     },
+
     {
         method: 'GET',
         path: '/dashboard',
@@ -32,6 +46,7 @@ export default [
             file: 'templates/dist/index.html',
         },
     },
+
     {
         method: 'GET',
         path: '/overview',
