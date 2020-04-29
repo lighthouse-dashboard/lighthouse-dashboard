@@ -19,10 +19,11 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
         logger.debug(`Chrome started in ${ port }`);
         logger.info(`Start audit for ${ url }`);
 
-        const results = await lighthouse(url, { ...flags, port });
+        const results = await lighthouse(url, { ...flags, port, skipAudits: [] });
         logger.info(`Audit for ${ url } completed`);
 
         await chrome.kill();
+        results.lhr.timing.entries = [];
         return results.lhr;
     } catch (e) {
         logger.error(`Audit for ${ url } failed. ${ e.message }`);
