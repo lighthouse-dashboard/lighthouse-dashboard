@@ -9,10 +9,10 @@ export default {
 
     DB: {
         /** @var {number|false} */
-        MAX_RAW_DATA_HISTORY: Date.now() - 7 * 24 * 60 * 60 * 1000,
+        MAX_RAW_DATA_HISTORY: Date.now() - 3 * 24 * 60 * 60 * 1000,
 
         /** @var {number|false} */
-        MAX_REPORTS_HISTORY: Date.now() - 30 * 24 * 60 * 60 * 1000,
+        MAX_REPORTS_HISTORY: Date.now() - 20 * 24 * 60 * 60 * 1000,
     },
 
     AUDIT: {
