@@ -57,7 +57,7 @@ export function getReportsBySiteId(database, id, limit) {
  */
 export function getLatestReportBySiteId(database, id) {
     const collection = database.collection(AUDIT_COLLECTION);
-    return collection.findOne({ siteId: id });
+    return collection.findOne({ siteId: id }, { sort: { createdAt: -1 }, limit: 1 });
 }
 
 /**
@@ -66,13 +66,15 @@ export function getLatestReportBySiteId(database, id) {
  * @param {Report} report
  * @param {object} raw - raw lighthouse audit report
  */
-export function saveReport(database, report, raw) {
+export async function saveReport(database, report, raw) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
     const saveRaw = process.env.LHD_IGNORE_RAW ? null : JSON.stringify(raw);
     if (process.env.LHD_IGNORE_RAW) {
         logger.debug('Ignore raw data');
+        await reportCollection.insertOne({ ...report, raw: null });
+        return;
     }
-    reportCollection.insertOne({ ...report, raw: saveRaw });
+    await reportCollection.insertOne({ ...report, raw: saveRaw });
 }
 
 /**

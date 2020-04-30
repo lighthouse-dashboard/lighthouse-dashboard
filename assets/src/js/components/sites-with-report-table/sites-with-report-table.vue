@@ -21,6 +21,15 @@
             <template v-slot:item.createdAt="{ item }">
                 {{ item.createdAt | date }}
             </template>
+
+            <template v-slot:item.hasRaw="{ item }">
+                <v-btn text
+                        target="_blank"
+                        :href="`/api/reports/report/${item._id}`"
+                        v-if="item.hasRaw">
+                    <v-icon>mdi-file-chart</v-icon>
+                </v-btn>
+            </template>
         </v-data-table>
     </div>
 </template>
@@ -55,6 +64,7 @@
                     .concat([
                         { text: 'Device', value: 'device' },
                         { text: 'URL', value: 'url' },
+                        { text: 'Report', value: 'hasRaw' },
                     ]);
             },
             items() {

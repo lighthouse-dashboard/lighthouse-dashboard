@@ -16,6 +16,7 @@ export default async function getLatestSitesReport(request) {
             site,
             report: {
                 ...report,
+                hasRaw: !!report.raw,
                 raw: null,
             },
         });

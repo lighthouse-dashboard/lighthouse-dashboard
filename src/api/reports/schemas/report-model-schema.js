@@ -11,7 +11,7 @@ export const reportValueModel = joi.object({
 }).label('reports.ReportValueModel');
 
 
-export const reportModel = joi.object({
+export const reportModel = {
     _id: joi
         .object(),
 
@@ -41,9 +41,11 @@ export const reportModel = joi.object({
     values: joi
         .array()
         .items(reportValueModel),
-}).label('reports.ReportModel');
+};
+
+export const reportModelSchema = joi.object(reportModel).label('reports.ReportModel');
 
 export const reportModelList = joi
     .array()
-    .items(reportModel)
+    .items(reportModelSchema)
     .label('reports.ReportModelList');

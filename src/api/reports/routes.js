@@ -6,7 +6,7 @@ import getReports from './controller/get-reports';
 import getSpeedReportOverview from './controller/get-speed-report-overview';
 import { barChartDataModel } from './schemas/bar-chart-data-model';
 import { reportIdParamModel } from './schemas/report-id-param-model';
-import { reportModelList } from './schemas/report-model';
+import { reportModelList } from './schemas/report-model-schema';
 import { siteIdParamModel } from './schemas/siteid-param-model';
 
 export default [
