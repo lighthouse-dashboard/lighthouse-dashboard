@@ -17,11 +17,13 @@ export default joi.object({
     DB: joi.object({
         MAX_RAW_DATA_HISTORY: joi
             .number()
+            .min(1)
             .allow(false)
             .required(),
 
         MAX_REPORTS_HISTORY: joi
             .number()
+            .min(0)
             .allow(false)
             .required(),
     }),

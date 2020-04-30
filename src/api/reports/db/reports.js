@@ -78,35 +78,42 @@ export async function saveReport(database, report, raw) {
 }
 
 /**
- * Free up space in DB by remove old data
+ * Free up space in DB by remove old raw lighthouse data
  * @param {MongoDB} database
  * @return {Promise<void>}
  */
 export async function clearReports(database) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
-    const date = new Date(config.DB.MAX_RAW_DATA_HISTORY).toISOString();
     const filter = {
-        raw: { $ne: false },
-        createdAt: {
-            $lt: date,
+        $query: {
+            raw: { $ne: false },
         },
+        $orderby: { createdAt: 1 },
     };
-    const rows = await reportCollection.countDocuments(filter);
 
-    logger.debug(`Found ${ rows } rows to clear`);
-    const { modifiedCount } = await reportCollection.updateMany(filter, { $set: { raw: false } });
+    const rows = await reportCollection.find(filter)
+        .skip(config.DB.MAX_RAW_DATA_HISTORY)
+        .toArray();
+
+    const allIds = rows.reduce((acc, row) => {
+        acc.push(row._id);
+        return acc;
+    }, []);
+
+    logger.debug(`Found ${ allIds.length } rows to clear`);
+    const { modifiedCount } = await reportCollection.updateMany({ _id: { $in: allIds } }, { $set: { raw: false } });
     logger.debug(`Cleared ${ modifiedCount } rows raw data`);
 }
 
 
 /**
- * Free up space in DB by remove old data
+ * Free up space in DB by remove old entries
  * @param {MongoDB} database
  * @return {Promise<void>}
  */
 export async function removeOldReports(database) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
-    const date = new Date(config.DB.MAX_REPORTS_HISTORY).toISOString();
+    const date = new Date(Date.now() - config.DB.MAX_REPORTS_HISTORY_AGE).toISOString();
     const filter = {
         createdAt: {
             $lt: date,

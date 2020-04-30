@@ -7,7 +7,7 @@ const { charts, theme } = getTheme();
 module.exports = {
     DATE_FORMAT: 'dd/MM/yy HH:mm',
     DASHBOARD: {
-        TITLE: 'dreipol performance',
+        TITLE: 'dreipol',
 
         UPDATE_INTERVAL: 30000,
 

@@ -12,11 +12,12 @@ require('dotenv').config();
  */
 async function boot() {
     const { database } = await connectDatabase();
-    if (config.DB.MAX_RAW_DATA_HISTORY !== false) {
+
+    if (config.DB.MAX_REPORTS_HISTORY_AGE !== false) {
         await removeOldReports(database);
     }
 
-    if (config.DB.MAX_REPORTS_HISTORY !== false) {
+    if (config.DB.MAX_RAW_DATA_HISTORY !== false) {
         await clearReports(database);
     }
 
