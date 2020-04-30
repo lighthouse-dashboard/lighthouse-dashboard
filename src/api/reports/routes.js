@@ -1,5 +1,3 @@
-import config from '../../../config/server';
-import { LIFE_TIME } from '../../config/cache';
 import getHtmlReportHandler from './controller/get-html-report';
 import getLatestReportValues from './controller/get-latest-report-values';
 import getReports from './controller/get-reports';

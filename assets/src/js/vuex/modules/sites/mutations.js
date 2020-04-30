@@ -4,7 +4,7 @@ import {
     SET_LATEST_SITES,
     SET_SEARCH_RESULT,
     SET_SITES,
-    UPDATE_SITE
+    UPDATE_SITE,
 } from '../mutation-types';
 
 export default {

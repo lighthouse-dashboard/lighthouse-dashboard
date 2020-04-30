@@ -1,5 +1,4 @@
 import joi from '@hapi/joi';
-import config from '../../../config/server';
 import addSiteHandler from './handlers/add-site';
 import createReport from './handlers/create-report';
 import createReportByWebhook from './handlers/create-report-by-webhook';

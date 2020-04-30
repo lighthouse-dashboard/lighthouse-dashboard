@@ -83,6 +83,7 @@
         "eslint-plugin-vue": "^5.0.0",
         "node-sass": "^4.13.1",
         "nodemon": "^2.0.3",
+        "pre-commit": "^1.2.2",
         "sass": "^1.26.3",
         "sass-loader": "^8.0.2",
         "size-limit": "^4.4.5",
@@ -118,5 +119,8 @@
         "node": ">= 12.0",
         "npm": ">= 6.0.0"
     },
-    "types": "./types/index.d.ts"
+    "types": "./types/index.d.ts",
+    "pre-commit": [
+        "lint"
+    ]
 }

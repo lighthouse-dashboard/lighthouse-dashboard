@@ -84,7 +84,7 @@ export const GAUGE_CHART = {
                     offsetY: -30,
                 },
                 style: {
-                    colors: ['#333']
+                    colors: ['#333'],
                 },
             },
         },
