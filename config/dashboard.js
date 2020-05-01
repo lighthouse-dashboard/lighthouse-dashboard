@@ -5,6 +5,7 @@ require('dotenv').config();
 const { charts, theme } = getTheme();
 
 module.exports = {
+    title: 'Lighthouse Dashboard',
     /**
      * Formatting used for time entries
      * @type {string}

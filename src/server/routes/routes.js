@@ -1,5 +1,14 @@
+import { title } from '../../../config/dashboard';
+import { version } from '../../../package.json';
+
 const DEFAULT_PARAMS = {
     G_ANALYTICS_ID: process.env.G_ANALYTICS_ID || false,
+    TITLE: title,
+    VERSION: version,
+};
+
+const basicViewHandler = (request, h) => {
+    return h.view('index.twig', { ...DEFAULT_PARAMS });
 };
 
 export default [
@@ -10,9 +19,7 @@ export default [
             description: 'Main entry point',
             auth: false,
         },
-        handler: (request, h) => {
-            return h.view('index.twig', { ...DEFAULT_PARAMS });
-        },
+        handler: basicViewHandler,
     },
 
     {
@@ -22,9 +29,7 @@ export default [
             description: 'Main entry point',
             auth: false,
         },
-        handler: (request, h) => {
-            return h.view('index.twig', { ...DEFAULT_PARAMS });
-        },
+        handler: basicViewHandler,
     },
 
     {
@@ -46,9 +51,7 @@ export default [
             description: 'Dashboard page',
             auth: false,
         },
-        handler: (request, h) => {
-            return h.view('index.twig', { ...DEFAULT_PARAMS });
-        },
+        handler: basicViewHandler,
     },
 
     {
@@ -58,9 +61,7 @@ export default [
             description: 'Overview page',
             auth: false,
         },
-        handler: (request, h) => {
-            return h.view('index.twig', { ...DEFAULT_PARAMS });
-        },
+        handler: basicViewHandler,
     },
 
     {
@@ -70,9 +71,7 @@ export default [
             description: 'List of projects',
             auth: false,
         },
-        handler: (request, h) => {
-            return h.view('index.twig', { ...DEFAULT_PARAMS });
-        },
+        handler: basicViewHandler,
     },
 
     {
