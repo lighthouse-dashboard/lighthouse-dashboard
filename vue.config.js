@@ -12,6 +12,7 @@ module.exports = {
     configureWebpack: {
         entry: resolve(jsAsset, 'main.js'),
         devtool: 'eval-source-map',
+        target: 'web',
     },
     chainWebpack: (config) => {
         config
