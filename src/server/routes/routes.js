@@ -81,9 +81,7 @@ export default [
             description: 'Details of project',
             auth: false,
         },
-        handler: (request, h) => {
-            return h.view('index.twig', { ...DEFAULT_PARAMS });
-        },
+        handler: basicViewHandler,
     },
 
     {
