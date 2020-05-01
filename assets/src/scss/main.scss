@@ -1,2 +1,6 @@
 @import 'base/reset';
 @import 'base/general';
+
+@import 'layout/**/_!(_|*__|*--)*';
+//@import 'assets/src/js/components/navigation/_navigation.scss';
+@import 'assets/src/js/components/**/_!(_|*__|*--)*.scss';

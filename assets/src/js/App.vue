@@ -1,13 +1,13 @@
 <template>
-    <v-app id="inspire">
+    <div class="app">
         <navigation/>
 
         <v-content>
             <router-view v-if="isLoggedIn"/>
             <login v-else/>
+            <footer-component/>
         </v-content>
-        <footer-component/>
-    </v-app>
+    </div>
 </template>
 
 <script>

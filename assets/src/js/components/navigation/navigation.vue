@@ -1,4 +1,8 @@
 <template>
+    <div class="navigation">
+
+    </div>
+    <!--
     <v-navigation-drawer v-model="drawer"
             :mini-variant.sync="mini"
             app>
@@ -49,6 +53,7 @@
             </v-list-item>
         </v-list>
     </v-navigation-drawer>
+    -->
 </template>
 
 <script>

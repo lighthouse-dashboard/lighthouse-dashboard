@@ -1,9 +1,16 @@
 const gulp = require('gulp');
 const sass = require('gulp-dart-sass');
+const sassGlob = require('gulp-sass-globi');
+const paths = require('../../config/paths');
 
 gulp.task('sass', function() {
-    return gulp.src('./assets/src/scss/main.scss')
-        .pipe(sass().on('error', sass.logError))
+    return gulp.src('src/scss/main.scss', { cwd: paths.assets })
+        .pipe(sassGlob({ includePaths: [paths.js] }))
+        .pipe(sass({
+            includePaths: [
+                paths.js,
+            ],
+        }).on('error', sass.logError))
         .pipe(gulp.dest('./assets/dist/css'));
 });
 

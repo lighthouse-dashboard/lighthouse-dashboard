@@ -54,9 +54,6 @@ html {
 /// General styles for the `body` element
 ///
 body {
-    // Make text selectable throughout the page
-    @include is-selectable(true);
-
     // Fix many `z-index` related problems on Android 2.3 Stock Browser
     z-index: 0;
 
@@ -64,7 +61,7 @@ body {
     cursor: auto;
 
     // Remove default background colors in some browsers
-    background-color: var(--root-colors-mono-50);
+    background-color: #fff;
 
     // Type legibility improvements where applicable - Use with care
     -moz-osx-font-smoothing: grayscale;
