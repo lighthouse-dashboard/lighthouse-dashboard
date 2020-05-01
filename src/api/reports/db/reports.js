@@ -94,7 +94,7 @@ export async function clearReports(database) {
     logger.debug(`Clearing older entries - Max allowed: ${ config.DB.MAX_RAW_DATA_HISTORY }`);
 
     const rows = await reportCollection.find(filter)
-        .skip(config.DB.MAX_RAW_DATA_HISTORY)
+        .skip(parseInt(config.DB.MAX_RAW_DATA_HISTORY))
         .toArray();
 
     const allIds = rows.reduce((acc, row) => {
