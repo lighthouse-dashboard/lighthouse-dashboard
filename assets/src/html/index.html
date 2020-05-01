@@ -9,9 +9,6 @@
     <meta name="viewport"
             content="width=device-width,initial-scale=1.0">
 
-    <link rel="icon"
-            href="<%= BASE_URL %>favicon.ico">
-
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
             rel="stylesheet">
 
@@ -24,35 +21,6 @@
 <noscript>
     <strong>We're sorry but app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 </noscript>
-<div id="app"></div>
-<!-- built files will be auto injected -->
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async
-        src="https://www.googletagmanager.com/gtag/js?id=<%= VUE_APP_G_ANALYTICS_ID %>"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', '<%= VUE_APP_G_ANALYTICS_ID %>');
-</script>
-
-
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, function(err) {
-                console.log('ServiceWorker registration failed: ', err);
-            });
-        });
-    }
-</script>
+{% block content %}{% endblock %}
 </body>
 </html>

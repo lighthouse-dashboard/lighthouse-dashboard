@@ -6,8 +6,8 @@ export default [
             description: 'Main entry point',
             auth: false,
         },
-        handler: {
-            file: 'templates/dist/index.html',
+        handler: (request, h) => {
+            return h.view('index.twig');
         },
     },
 
@@ -18,8 +18,8 @@ export default [
             description: 'Main entry point',
             auth: false,
         },
-        handler: {
-            file: 'templates/dist/index.html',
+        handler: (request, h) => {
+            return h.view('index.twig');
         },
     },
 

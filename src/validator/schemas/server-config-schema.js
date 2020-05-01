@@ -21,7 +21,7 @@ export default joi.object({
             .allow(false)
             .required(),
 
-        MAX_REPORTS_HISTORY: joi
+        MAX_REPORTS_HISTORY_AGE: joi
             .number()
             .min(0)
             .allow(false)

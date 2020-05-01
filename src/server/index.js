@@ -1,10 +1,12 @@
 'use strict';
 
 import Hapi from '@hapi/hapi';
+import * as twig from 'twig';
 import dashboardConfig from '../../config/dashboard';
 import CONFIG from '../../config/server.js';
 import { root } from '../config/path';
 import logger from '../logger';
+import { IS_DEV } from '../utils/env';
 import configValidator from '../validator/config-validator';
 import dashboardConfigSchema from '../validator/schemas/dashboard-config-schema';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
@@ -21,7 +23,6 @@ async function start() {
         routes: {
             cors: true,
             files: {
-                // path from where the static assets should be served
                 relativeTo: root,
             },
         },
@@ -31,23 +32,23 @@ async function start() {
     await loadPlugins(server);
     await loadRoutes(server);
 
+    twig.cache(!IS_DEV);
+
+    await server.views({
+        engines: {
+            twig: {
+                compile: (src, options) => (context) => {
+                    const template = twig.twig({ path: options.filename, data: src });
+                    return template.render(context);
+                },
+            },
+        },
+        relativeTo: root,
+        path: 'templates/.',
+    });
+
     await server.start();
     logger.info('Server started');
-}
-
-export async function setup() {
-    logger.debug(`Setting up process listener`);
-    process.on('unhandledRejection', (err) => {
-        logger.error(err);
-        process.exit(1);
-    });
-
-    process.on('SIGTERM', () => {
-        logger.info('SIGTERM server');
-    });
-
-    logger.info(`Starting server`);
-    await start();
 }
 
 export default async function boot() {
@@ -58,12 +59,22 @@ export default async function boot() {
     }
     logger.debug(`Config ok`);
 
+    process.on('unhandledRejection', (err) => {
+        logger.error(err);
+        process.exit(1);
+    });
+
+    process.on('SIGTERM', () => {
+        logger.info('SIGTERM server');
+    });
+
+    logger.info(`Starting server`);
+
     try {
-        await setup();
+        await start();
     } catch (e) {
         logger.error(e.message);
-
-        if (process.env.NODE_ENV !== 'development') {
+        if (!IS_DEV) {
             logger.debug(`Rebooting server in ${ RESTART_INTERVAL }ms`);
             setTimeout(() => boot(), RESTART_INTERVAL);
         }
