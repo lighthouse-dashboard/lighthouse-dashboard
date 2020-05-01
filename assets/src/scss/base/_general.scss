@@ -1,0 +1,103 @@
+// stylelint-disable property-no-vendor-prefix, no-duplicate-selectors, selector-max-universal, selector-no-qualifying-type, plugin/selector-bem-pattern
+
+////
+/// Support styles, that fix errors or enhance defaults - Should be valid throughout the document
+////
+
+
+/// Template or controller structures that must not be shown
+///
+.templates, .template, .controllers, .controller {
+    display: none;
+}
+
+/// Set `box-sizing: border-box` for all elements as a default behaviour
+///
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    text-decoration: none;
+}
+
+
+/// IE10 mobile and hybrid fix
+///
+* {
+    -ms-touch-action: pan-y;
+    -ms-content-zooming: none;
+}
+
+
+/// Force the outermost tags to always fill the screen
+///
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+
+/// General styles for the `html` element
+///
+html {
+    // Removes the 300ms touch delay on windows phones and Chrome/Firefox
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    // Prevent font scaling in landscape while allowing user zoom (Safari on iPhone)
+    // @link https://stackoverflow.com/q/2710764/1602864
+    -webkit-text-size-adjust: 100%;
+}
+
+
+/// General styles for the `body` element
+///
+body {
+    // Make text selectable throughout the page
+    @include is-selectable(true);
+
+    // Fix many `z-index` related problems on Android 2.3 Stock Browser
+    z-index: 0;
+
+    // Reset the cursor to auto for all browsers
+    cursor: auto;
+
+    // Remove default background colors in some browsers
+    background-color: var(--root-colors-mono-50);
+
+    // Type legibility improvements where applicable - Use with care
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+    // Improve the browser's capability to break words naturally
+    // The language is defined by the `lang` attribute on the `html` tag
+    // hyphens: auto;
+    overflow-wrap: break-word;
+
+    // IE10, 11 and Edge: Hide scrollbars when not in use
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+
+/// Chrome has a bug with the markup created in a details tag
+/// @link https://bugs.chromium.org/p/chromium/issues/detail?id=589475
+///
+details {
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+}
+
+/// Streamline `main` element's `display` property for IE10+
+///
+main {
+    display: block;
+}
+
+
+/// Remove the default context menu on longpress, use carefully - Activating this, has an impact on accessibility!
+///
+// body { -webkit-touch-callout: none; }
+// a { -webkit-user-select: none; }
