@@ -3,35 +3,54 @@
 <a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/test_coverage"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/test_coverage" /></a>
 
 A dashboard to keep track on the performance of your sites. Keep track during development by setting up webhooks
-in github to audit your site on every push to the `master` branch.
+in github to audit your site on every push to the `master` branch
 
-The application is split into several parts. The web application, a worker, a mongodb and a rabbitmq server.
-In general, the webapp creates a new message which is posted to the mq server. The worker consumes the message and
-starts a new lighthouse audit. That audit is then persisted in the mongodb.
+## Frameworks
+Datatbase: [mongodb](https://www.mongodb.com/)
 
-## Webapp
-This is the UI of the application. It communicates with the mongodb to fetch data and with the rabbitmq server
-to dispatch new audits which will be processed by the worker.
- 
-## Worker
-The worker connects to the rabbitmq server and consumes messages for new audits. The worker then persists the report 
-back in the mongodb where it's read from the webapp and accessible via it's apis.
-In order to start the worker you need to set a envvar named `IS_WORKER` in order to start the app as a worker.
-This architecture simplifies hosting/deployment, since you can deploy the same application but with this additional env var.
+RabbitMq: [amqplib](https://www.npmjs.com/package/amqplib)
 
-# [Config](doc/CONFIG.md)
+Backend: [hapi](https://hapi.dev/)
 
-# Screenshots
+Frontend: [Vue](https://vuejs.org/) & [Vuetify](https://vuetifyjs.com/en/)
+
+## Routes
+- [App](http://0.0.0.0:4000)
+- [Swagger](http://0.0.0.0:4000/documentation) (only for NODE_ENV=development)
+
+## Screenshots
 ![Dashboard Darkmode](doc/assets/dashboard.jpg)
 ![Search](doc/assets/search.jpg)
 ![Project Detail View](doc/assets/detail.jpg)
 ![Projects Table](doc/assets/table.jpg)
 
-# Hosting
+## Architecture
 
-## Docker
-The only thing that you need is a hosting which supports dockerfiles. And (the same or another) one for the
-mongodb. If you have that, clone the report, and follow the setup of that hoster.
+![Architecture](doc/assets/lhd_arch.png)
+
+The app is split into two main parts. The UI and the worker.
+The UI is responsible to provide the dashboard view via HTTP. The worker runs the audits of the projects in the background.
+The worker consumes messages stores in the message queue and runs lighthouse to create new audits. The results will be 
+stored in the mongodb. The UI will consume those messages via an API.
+
+## Config
+[Examples](doc/CONFIG.md)
+
+## Run
+
+### Run the UI
+The UI is simple to run. Simply provide all environment variables described below and run `npm run build` to build the frontend
+ and then `npm run start` to boot the server
+ 
+### Run the worker
+The worker consumes the messages in the queue and creates new audit results. 
+Run the worker via `npm run worker`. I recommend to do this via a cronjob every 10 minutes.
+So you can create new reports via the frontend and don't have to wait too long to be created.
+
+### Run new audits
+This command creates a new audit for every site configured. I recommend to do this every 6 to 12 hours.
+Run the command via `npm run audit`
+
 
 ## Heroku
 This app also works perfectly fine with heroku and a mlab MongoDB resource.
@@ -40,35 +59,24 @@ In addition to the nodejs buildpack you need the following ones:
 - https://github.com/heroku/heroku-buildpack-google-chrome
 - https://github.com/heroku/heroku-buildpack-chromedriver
 
-# Frameworks
-Datatbase: [mongodb](https://www.mongodb.com/)
-RabbitMq: [amqplib](https://www.npmjs.com/package/amqplib)
 
-Backend: [hapi](https://hapi.dev/)
-
-Frontend: [Vue](https://vuejs.org/) & [Vuetiy](https://vuetifyjs.com/en/)
-
-# Routes
-- [App](http://0.0.0.0:4000)
-- [Swagger](http://0.0.0.0:4000/documentation) (only for NODE_ENV=development)
-
-# Startup
-To get a minimal version up and running locally just clone this repo. Add a `.env` file with the variables described below
-and run `docker-compose up`. After a couple of minutes you should be able to see that the server has started
-
-# Development
-To start debugging or enhancing the app you don't have to use docker.
+## Development
 First create a `.env` file in the project root.
 It's content should be like shown below.
 
 In addition to that, you need a mongodb. You could start the dev environment with `docker-compose up`
-which will start the mongodb and the server on port 5000. After that, you could start your local server with 
-`npm run server-dev`. After setting the correct connection string, your local server should connect to the mongo container.
+which will start the mongodb and a rabbitmq. After that, you could start your local server with 
+`npm run dev`. 
+After setting the correct connection string, your local server should connect to the mongo container.
 Now you have a local server running which will be restarted (with nodemon) after every change.
-If you want to work on the UI you can start the UI with  `npm run serve`. This will create a new app, which proxies your
-already running local server and always delivers the newest UI.
+If you want to work on the UI you can start the UI with  `npm run serve`.
 
-## Add custom menu entry
+## Docker
+There is a functional `Dockerfile` in the project which you can use to host somewhere.
+And with the `docker-compose up` command, you can spin up the whole dev environment with 
+DB and message queue
+
+### Add custom menu entry
 There is a possibility to add additional entries to the projects menu. This is useful
 if you want to provide some quick access to 3rd party tools like [cssstats](https://cssstats.com/)
 
@@ -87,7 +95,7 @@ The entry has to look like this
 where name is the name printed in the UI and link is a function which will be called
 with the projects url to generate the link for the new page
 
-# Env Variables
+## Env Variables
 
 name | type | description | example
 ---|---|---|---

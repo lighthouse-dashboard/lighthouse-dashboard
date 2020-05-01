@@ -11,17 +11,18 @@ import assetRoutes from './assets-routes';
 async function getRoutes() {
     const routes = [
         ...viewRoutes,
-        ...assetRoutes
+        ...assetRoutes,
     ];
+
     const files = await glob('src/api/**/endpoints/*.js');
     logger.debug(`Loading routes ${ files.length }`);
 
-    files.forEach((file) => {
+    return files.reduce((acc, file) => {
         // eslint-disable-next-line global-require
         const { default: route } = require(file);
-        routes.push(route);
-    });
-    return routes;
+        acc.push(route);
+        return acc;
+    }, routes);
 }
 
 /**

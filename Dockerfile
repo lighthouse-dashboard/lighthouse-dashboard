@@ -1,4 +1,8 @@
-FROM alpine:edge
+FROM node:12-alpine
+
+RUN mkdir -p /app/
+
+WORKDIR /app/
 
 RUN apk add --no-cache \
       chromium \
@@ -7,26 +11,23 @@ RUN apk add --no-cache \
       freetype-dev \
       harfbuzz \
       ca-certificates \
-      ttf-freefont \
-      nodejs \
-      npm
+      ttf-freefont
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV CHROMIUM_PATH /usr/bin/chromium-browser
 ENV GOOGLE_CHROME_BIN /usr/bin/chromium-browser
 
-# App Building
-WORKDIR /usr/src/app
+ARG VUE_APP_THEME
 
-ENV NODE_ENV=development
-COPY package*.json ./
+COPY package.json package-lock.json /app/
 
-RUN npm install
-COPY . .
+COPY ./ /app/
 
+RUN npm i
 
 ENV NODE_ENV=production
+
 RUN npm run build
 
 # Running
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start" ]
