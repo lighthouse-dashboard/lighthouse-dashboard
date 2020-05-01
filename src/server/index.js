@@ -37,9 +37,16 @@ async function start() {
     await server.views({
         engines: {
             twig: {
-                compile: (src, options) => (context) => {
-                    const template = twig.twig({ path: options.filename, data: src });
-                    return template.render(context);
+                compile: (src, options) => {
+                    const template = twig.twig({
+                        path: options.filename,
+                        data: src,
+                    });
+                    return (context) => {
+                        return template.render({
+                            ...context,
+                        });
+                    };
                 },
             },
         },

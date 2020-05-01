@@ -1,3 +1,7 @@
+const DEFAULT_PARAMS = {
+    G_ANALYTICS_ID: process.env.G_ANALYTICS_ID || false,
+};
+
 export default [
     {
         method: 'GET',
@@ -7,7 +11,7 @@ export default [
             auth: false,
         },
         handler: (request, h) => {
-            return h.view('index.twig');
+            return h.view('index.twig', { ...DEFAULT_PARAMS });
         },
     },
 
@@ -19,7 +23,7 @@ export default [
             auth: false,
         },
         handler: (request, h) => {
-            return h.view('index.twig');
+            return h.view('index.twig', { ...DEFAULT_PARAMS });
         },
     },
 
@@ -42,8 +46,8 @@ export default [
             description: 'Dashboard page',
             auth: false,
         },
-        handler: {
-            file: 'templates/dist/index.html',
+        handler: (request, h) => {
+            return h.view('index.twig', { ...DEFAULT_PARAMS });
         },
     },
 
@@ -54,8 +58,8 @@ export default [
             description: 'Overview page',
             auth: false,
         },
-        handler: {
-            file: 'templates/dist/index.html',
+        handler: (request, h) => {
+            return h.view('index.twig', { ...DEFAULT_PARAMS });
         },
     },
 
@@ -66,8 +70,8 @@ export default [
             description: 'List of projects',
             auth: false,
         },
-        handler: {
-            file: 'templates/dist/index.html',
+        handler: (request, h) => {
+            return h.view('index.twig', { ...DEFAULT_PARAMS });
         },
     },
 
@@ -78,11 +82,26 @@ export default [
             description: 'Details of project',
             auth: false,
         },
-        handler: {
-            file: 'templates/dist/index.html',
+        handler: (request, h) => {
+            return h.view('index.twig', { ...DEFAULT_PARAMS });
         },
     },
 
+    {
+        method: 'GET',
+        path: '/static/{param*}',
+        options: {
+            description: 'Static assets',
+            auth: false,
+        },
+        handler: {
+            directory: {
+                path: 'assets/static',
+                redirectToSlash: true,
+                index: false,
+            },
+        },
+    },
     {
         method: 'GET',
         path: '/{param*}',
