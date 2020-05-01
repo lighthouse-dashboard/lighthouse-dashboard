@@ -1,0 +1,43 @@
+export default [
+    {
+        method: 'GET',
+        path: '/service-worker.js',
+        options: {
+            description: 'serviceworker entrypoint',
+            auth: false,
+        },
+        handler: {
+            file: 'assets/src/service-worker.js',
+        },
+    },
+    {
+        method: 'GET',
+        path: '/static/{param*}',
+        options: {
+            description: 'Static assets',
+            auth: false,
+        },
+        handler: {
+            directory: {
+                path: 'assets/static',
+                redirectToSlash: true,
+                index: false,
+            },
+        },
+    },
+    {
+        method: 'GET',
+        path: '/{param*}',
+        options: {
+            description: 'Static assets',
+            auth: false,
+        },
+        handler: {
+            directory: {
+                path: 'assets/dist',
+                redirectToSlash: true,
+                index: false,
+            },
+        },
+    },
+]
