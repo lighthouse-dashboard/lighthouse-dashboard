@@ -8,10 +8,20 @@ import { getAllSites } from '../db/sites';
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-export default async function createReportForAll(request, h) {
+async function createReportForAll(request, h) {
     const sites = await getAllSites(request.mongo.db);
     sites.forEach((site) => sendToQueue(request.amqp.channel, { config: site, message: 'batch audit' }));
     await closeConnection();
     return h.response().code(201);
 }
 
+export default {
+    method: 'POST',
+    path: '/api/sites/all',
+    handler: createReportForAll,
+    options: {
+        description: 'Add new site audit for every site',
+        tags: ['api', 'sites'],
+        auth: 'jwt',
+    },
+};

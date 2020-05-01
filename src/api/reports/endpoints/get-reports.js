@@ -2,13 +2,15 @@ import Boom from '@hapi/boom';
 import CONFIG from '../../../../config/server';
 import { getSiteConfigById } from '../../sites/db/sites';
 import { getReportsBySiteId } from '../db/reports';
+import { reportIdParamModel } from '../schemas/report-id-param-model';
+import { reportModelList } from '../schemas/report-model-schema';
 
 /**
  * Handler for latest created reports
  * @param {hapi.Request.params} params
  * @return {Promise<Report[]>}
  */
-export default async function getReports({ params, mongo }) {
+async function getReports({ params, mongo }) {
     const { id } = params;
 
     const config = getSiteConfigById(mongo.db, id);
@@ -27,3 +29,20 @@ export default async function getReports({ params, mongo }) {
         return report;
     });
 }
+
+export default {
+    method: 'GET',
+    path: '/api/reports/{id}',
+    handler: getReports,
+    options: {
+        description: 'Get recent report entries for site',
+        tags: ['api', 'reports'],
+        auth: 'jwt',
+        validate: {
+            params: reportIdParamModel,
+        },
+        response: {
+            schema: reportModelList,
+        },
+    },
+};

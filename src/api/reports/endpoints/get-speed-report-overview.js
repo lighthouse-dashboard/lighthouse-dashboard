@@ -2,13 +2,14 @@ import CONFIG from '../../../../config/dashboard';
 import reportsToBarChart from '../../../transformer/report-to-bar-chart';
 import { getFavoriteSites } from '../../sites/db/sites';
 import { getLatestReportBySiteId } from '../db/reports';
+import { barChartDataModel } from '../schemas/bar-chart-data-model';
 
 /**
  * Get overview over projects by specific timing id
  * @param {hapi.Request} request
  * @return {Promise<BarChartData>}
  */
-export default async function getSpeedReportOverview(request) {
+async function getSpeedReportOverview(request) {
     const pages = await getFavoriteSites(request.mongo.db);
     const labels = [];
 
@@ -24,3 +25,17 @@ export default async function getSpeedReportOverview(request) {
 
     return reportsToBarChart(reports, labels, CONFIG.favoriteProjectsComparison.fields);
 }
+
+export default {
+    method: 'GET',
+    path: '/api/reports/overview',
+    handler: getSpeedReportOverview,
+    options: {
+        description: 'Get chart data for speed overview of favorited projects',
+        tags: ['api', 'reports'],
+        auth: 'jwt',
+        response: {
+            schema: barChartDataModel,
+        },
+    },
+};

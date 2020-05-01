@@ -1,7 +1,8 @@
 import { getLatestReportBySiteId } from '../../reports/db/reports';
 import { getAllSites } from '../db/sites';
+import { siteWithReportList } from '../schemas/site-with-report';
 
-export default async function getLatestSitesReport(request) {
+async function getLatestSitesReport(request) {
     const sites = await getAllSites(request.mongo.db);
     const results = [];
 
@@ -24,3 +25,17 @@ export default async function getLatestSitesReport(request) {
 
     return results;
 }
+
+export default {
+    method: 'GET',
+    path: '/api/sites/latest-reports',
+    handler: getLatestSitesReport,
+    options: {
+        description: 'Get latest audited sites with report',
+        tags: ['api', 'sites'],
+        auth: 'jwt',
+        response: {
+            schema: siteWithReportList,
+        },
+    },
+};

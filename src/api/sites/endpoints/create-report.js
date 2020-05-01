@@ -1,9 +1,10 @@
 import Boom from '@hapi/boom';
+import joi from '@hapi/joi';
 import logger from '../../../logger';
 import { closeConnection } from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
-import { getSiteConfigByToken } from '../db/sites';
+import { getSiteConfigById } from '../db/sites';
 
 /**
  * Execute an audit
@@ -11,10 +12,10 @@ import { getSiteConfigByToken } from '../db/sites';
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-export default async function createReportByWebhook({ params, payload, mongo, ampq }, h) {
-    const { token } = params;
+async function createReport({ params, payload, mongo, amqp }, h) {
+    const { id } = params;
 
-    const config = await getSiteConfigByToken(mongo.db, token);
+    const config = await getSiteConfigById(mongo.db, id);
     if (!config) {
         return Boom.notFound('Config not found');
     }
@@ -27,7 +28,7 @@ export default async function createReportByWebhook({ params, payload, mongo, am
         }
 
         // await spawnNewAuditWorker(config);
-        sendToQueue(ampq.channel, { config, message: meta.message });
+        sendToQueue(amqp.channel, { config });
         await closeConnection();
     } catch (e) {
         logger.error(e);
@@ -37,3 +38,20 @@ export default async function createReportByWebhook({ params, payload, mongo, am
     return h.response().code(201);
 }
 
+export default {
+    method: 'POST',
+    path: '/api/sites/{id}',
+    handler: createReport,
+    options: {
+        description: 'Create new report',
+        tags: ['api', 'sites'],
+        auth: 'jwt',
+        validate: {
+            params: joi.object({
+                id: joi
+                    .string()
+                    .required(),
+            }).label('sites.SiteId'),
+        },
+    },
+};
