@@ -26,7 +26,7 @@ export interface DashboardConfig {
             SITE_REPORT_LIMIT: number;
         };
         AUDIT: {
-            CHROMIUM_PATH: string;
+            chromiumBinaryPath: string;
             CHROMIUM_PORT: number;
         };
         DB: {

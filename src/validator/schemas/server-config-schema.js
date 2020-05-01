@@ -1,38 +1,33 @@
 import joi from '@hapi/joi';
 
 export default joi.object({
-    API: joi.object({
-        SITE_REPORT_LIMIT: joi
+    api: joi.object({
+        siteReportLimit: joi
             .number()
             .min(1)
-            .required(),
-
-        CACHE_EXPIRES_IN: joi
-            .number()
-            .min(0)
             .required(),
     })
         .required(),
 
-    DB: joi.object({
-        MAX_RAW_DATA_HISTORY: joi
+    db: joi.object({
+        maxRawReports: joi
             .number()
             .min(1)
             .allow(false)
             .required(),
 
-        MAX_REPORTS_HISTORY_AGE: joi
+        maxReportsAge: joi
             .number()
             .min(0)
             .allow(false)
             .required(),
     }),
 
-    AUDIT: joi.object({
-        CHROMIUM_PATH: joi
+    lh: joi.object({
+        chromiumBinaryPath: joi
             .string(),
 
-        CHROMIUM_PORT: joi
+        chromiumPort: joi
             .number(),
     }).required(),
 

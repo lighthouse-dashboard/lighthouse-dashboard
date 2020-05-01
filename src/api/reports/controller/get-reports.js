@@ -16,7 +16,7 @@ export default async function getReports({ params, mongo }) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const assets = await getReportsBySiteId(mongo.db, id, CONFIG.API.SITE_REPORT_LIMIT);
+    const assets = await getReportsBySiteId(mongo.db, id, CONFIG.api.siteReportLimit);
     if (!assets || assets.length === 0) {
         return Boom.notFound('No audits found');
     }

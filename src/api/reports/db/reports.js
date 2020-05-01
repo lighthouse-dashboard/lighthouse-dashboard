@@ -89,10 +89,10 @@ export async function clearReports(database) {
         $orderby: { createdAt: 1 },
     };
 
-    logger.debug(`Clearing older entries - Max allowed: ${ config.DB.MAX_RAW_DATA_HISTORY }`);
+    logger.debug(`Clearing older entries - Max allowed: ${ config.db.maxRawReports }`);
 
     const rows = await reportCollection.find(filter)
-        .skip(parseInt(config.DB.MAX_RAW_DATA_HISTORY))
+        .skip(parseInt(config.db.maxRawReports))
         .toArray();
 
     const allIds = rows.reduce((acc, row) => {
@@ -113,7 +113,7 @@ export async function clearReports(database) {
  */
 export async function removeOldReports(database) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
-    const date = new Date(Date.now() - config.DB.MAX_REPORTS_HISTORY_AGE).toISOString();
+    const date = new Date(Date.now() - config.db.maxReportsAge).toISOString();
     const filter = {
         createdAt: {
             $lt: date,

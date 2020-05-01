@@ -48,8 +48,8 @@ export default async function runLighthouse(config, transformer) {
         url,
         {
             chromeFlags: ['--disable-gpu', '--headless', '--enable-logging', '--no-sandbox'],
-            chromePath: process.env.GOOGLE_CHROME_BIN,
-            port: CONFIG.AUDIT.CHROMIUM_PORT,
+            chromePath: CONFIG.lh.chromiumBinaryPath,
+            port: CONFIG.lh.chromiumPort,
         },
         {
             ...DEVICE_CONFIG[device],

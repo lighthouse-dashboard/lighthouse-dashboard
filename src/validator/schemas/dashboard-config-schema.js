@@ -60,6 +60,7 @@ export default joi.object({
         isFluid: joi.boolean().required(),
         charts: AVAILABLE_CHARTS,
     }),
+
     page_projects: joi.object({
         isFluid: joi.boolean().required(),
         colSize: joi
@@ -73,7 +74,9 @@ export default joi.object({
     }),
 
     latestAuditChart: CHART_CONFIG,
+
     favoriteProjectsComparison: CHART_CONFIG,
+
     favoriteProjectsOverview: joi.object({
         colSize: joi
             .number()
@@ -81,7 +84,7 @@ export default joi.object({
             .max(12),
     }),
 
-    UI: joi.object({
+    ui: joi.object({
         chartColors: joi
             .array()
             .items(joi.string())
