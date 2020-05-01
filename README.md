@@ -71,6 +71,11 @@ After setting the correct connection string, your local server should connect to
 Now you have a local server running which will be restarted (with nodemon) after every change.
 If you want to work on the UI you can start the UI with  `npm run serve`.
 
+## Docker
+There is a functional `Dockerfile` in the project which you can use to host somewhere.
+And with the `docker-compose up` command, you can spin up the whole dev environment with 
+DB and message queue
+
 ### Add custom menu entry
 There is a possibility to add additional entries to the projects menu. This is useful
 if you want to provide some quick access to 3rd party tools like [cssstats](https://cssstats.com/)
