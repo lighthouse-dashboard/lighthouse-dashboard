@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import { DASHBOARD } from '../../../../config/dashboard';
+import { latestAuditChart } from '../../../../config/dashboard';
 import { SITES_CONFIG_COLLECTION } from '../../../config/db';
 
 /**
@@ -63,7 +63,7 @@ export function getLatestSites(database) {
             $exists: true,
             $ne: null,
         },
-    }, { last_audit: -1 }, DASHBOARD.latestAudits.limit);
+    }, { last_audit: -1 }, latestAuditChart.limit);
 }
 
 /**

@@ -7,5 +7,5 @@ import CONFIG from '../../config/dashboard';
  * @return {string}
  */
 export default function formatReportSummaryString(report) {
-    return format(new Date(report.createdAt), CONFIG.DATE_FORMAT);
+    return format(new Date(report.createdAt), CONFIG.dateFormat);
 }

@@ -18,7 +18,7 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex';
-    import { DASHBOARD } from '../../../../../config/dashboard';
+    import CONFIG from '../../../../../config/dashboard';
     import SiteOverview from '../site-overview/site-overview.vue';
 
     export default {
@@ -28,7 +28,7 @@
         computed: {
             ...mapGetters('sites', ['favoritedSites']),
             cols() {
-                return DASHBOARD.favoriteProjectsOverview.colSize;
+                return CONFIG.favoriteProjectsOverview.colSize;
             },
         },
         methods: {

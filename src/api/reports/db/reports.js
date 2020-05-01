@@ -71,8 +71,6 @@ export async function saveReport(database, report, raw) {
     const saveRaw = process.env.LHD_IGNORE_RAW ? null : JSON.stringify(raw);
     if (process.env.LHD_IGNORE_RAW) {
         logger.debug('Ignore raw data');
-        await reportCollection.insertOne({ ...report, raw: null });
-        return;
     }
     await reportCollection.insertOne({ ...report, raw: saveRaw });
 }

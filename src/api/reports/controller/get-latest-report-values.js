@@ -19,7 +19,7 @@ export default async function getLatestReportValues(request) {
     }
 
     const report = await getLatestReportBySiteId(request.mongo.db, siteId);
-    const values = CONFIG.DASHBOARD.latestAudits.fields;
+    const values = CONFIG.latestAuditChart.fields;
 
     if (!report) {
         return {

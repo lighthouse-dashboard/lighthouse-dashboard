@@ -96,11 +96,8 @@ JWT_SECRET | `string` | secret used for the jwt token | asdf123
 MONGODB_URI | `string` | URI for the DB connection | mongodb://admin:admin@database:27017/auditreports
 SENTRY_DSN | `string` | sentry DSN string | https://776d9de9782447ae87ffbcc03d24f6ad@sentry.io/1890421
 PORT | `number` | port number| 5000
-SHOW_ERROR_PAGES | `boolean` | show debug errorpages | true
-WINSTON_LOG_LEVEL | `info,debug,error` | Log level for the winston logger | info
-CONSOLE_RE_CHANNEL | `string` | channel for the console.re channel | my-lighthouse
-WEB_CONCURRENCY | `number` | The amount of workers to start for the web service | 1
+WINSTON_LOG_LEVEL | `info/debug/error` | Log level for the winston logger | info
 MESSAGE_QUEUE_URI | `string` | uri to the RabbitMq instance | `amqp://user:password@localhost`
-RESTART_TIMEOUT | `number` | the timeout for restart retries | 5000
 IS_WORKER | `boolean` | Define if the worker should be started or the server | true
 LHD_IGNORE_RAW | `boolean` | If this is defined, raw data from the audit wont be saved. You can't inspect the HTML of that report | false
+G_ANALYTICS_ID | `string` | Google Analytics ID for tracking | `GA-XXXXX-X`

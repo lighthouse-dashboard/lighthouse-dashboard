@@ -122,7 +122,7 @@ Example
 This is a collection of custom menu entries shown for every project.
 This will open a new tab with the configured url
 
-![Custom Menu](./assets/custom-menu.png)
+![Custom Menu](./assets/custom_menu.png)
 
 Example
 

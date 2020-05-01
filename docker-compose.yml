@@ -27,11 +27,8 @@ services:
         - API_SECRET=Foo
         - MONGODB_URI=mongodb://database:27017/heroku_qb9h5dc7
         - PORT=5000
-        - SHOW_ERROR_PAGES=true
         - WINSTON_LOG_LEVEL=debug
-        - WEB_CONCURRENCY=1
         - MESSAGE_QUEUE_URI=amqp://user:password@queue
-        - RESTART_TIMEOUT=5000
         - SERVICE_NAME=docker
       ports:
         - '5000:5000'

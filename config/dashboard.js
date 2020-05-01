@@ -5,72 +5,94 @@ require('dotenv').config();
 const { charts, theme } = getTheme();
 
 module.exports = {
-    DATE_FORMAT: 'dd/MM/yy HH:mm',
-    DASHBOARD: {
-        TITLE: 'dreipol',
+    /**
+     * Formatting used for time entries
+     * @type {string}
+     */
+    dateFormat: 'dd/MM/yy HH:mm',
 
-        UPDATE_INTERVAL: 30000,
+    /**
+     * Config for the dashboard page
+     */
+    page_dashboard: {
+        // Is the container fluid or fixed
+        isFluid: false,
 
-        PAGE_DASHBOARD: {
-            IS_FLUID: false,
-            CHARTS: [
-                'favorite-projects-comparison',
-                'latest-audits',
-                'favorite-projects-overview',
-            ],
-        },
-
-        PAGE_PROJECTS: {
-            IS_FLUID: true,
-            colSize: 3,
-        },
-
-        SITE_OVERVIEW_CHART: {
-            fields: [
-                'performance',
-                'seo',
-                'pwa',
-                'accessibility',
-                'best-practices',
-            ],
-        },
-
-        latestAudits: {
-            colSize: 3,
-            limit: 4,
-            fields: [
-                'performance',
-                // 'seo',
-                // 'pwa',
-                // 'accessibility',
-                // 'best-practices',
-            ],
-        },
-
-        favoriteProjectsComparison: {
-            fields: [
-                'performance',
-                'seo',
-                // 'pwa',
-                'accessibility',
-                // 'best-practices',
-            ],
-        },
-
-        favoriteProjectsOverview: {
-            colSize: 3,
-        },
+        // Widgets to be visible on the landing page
+        charts: [
+            'favorite-projects-comparison',
+            'latest-audits',
+            'favorite-projects-overview',
+        ],
     },
 
-    UI: {
-        CHART_COLORS: charts,
-        COLOR_THEME: {
+    // Config for the projects page
+    page_projects: {
+        // Is the container fluid or fixed
+        isFluid: true,
+
+        // Amount of widgets per row
+        colSize: 3,
+    },
+
+    // Config for the project overview chart
+    siteOverviewChart: {
+        fields: [
+            'performance',
+            'seo',
+            'pwa',
+            'accessibility',
+            'best-practices',
+        ],
+    },
+
+    // Config for the widget which shows the latest audited projects
+    latestAuditChart: {
+        // How many widgets per row
+        colSize: 3,
+
+        // Amount of projects to be shown
+        limit: 4,
+
+        // Fields to be visible
+        fields: [
+            'performance',
+            // 'seo',
+            // 'pwa',
+            // 'accessibility',
+            // 'best-practices',
+        ],
+    },
+
+    // Bar comparison chart
+    favoriteProjectsComparison: {
+        fields: [
+            'performance',
+            'seo',
+            // 'pwa',
+            'accessibility',
+            // 'best-practices',
+        ],
+    },
+
+    // Config for the favorite projects overview widget
+    favoriteProjectsOverview: {
+        colSize: 3,
+    },
+
+    // Configuration for the theme
+    ui: {
+        // Colors used in the charts
+        chartColors: charts,
+        // Material UI theme colors
+        theme: {
             dark: theme,
             light: theme,
         },
     },
 
-    PROJECT_MENU_CUSTOM_ENTRIES: [
+    // Collection of configs for custom menu entries available for every page
+    customProjectMenuEntries: [
         {
             name: 'CSS Stats',
             link: function(url) {

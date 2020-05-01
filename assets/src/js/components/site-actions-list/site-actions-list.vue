@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import { PROJECT_MENU_CUSTOM_ENTRIES } from '../../../../../config/dashboard';
+    import { customProjectMenuEntries } from '../../../../../config/dashboard';
 
     export default {
         props: {
@@ -32,7 +32,7 @@
         },
         computed: {
             menuEntries() {
-                return PROJECT_MENU_CUSTOM_ENTRIES.map((entry) => {
+                return customProjectMenuEntries.map((entry) => {
                     return {
                         name: entry.name,
                         link: entry.link(this.url),

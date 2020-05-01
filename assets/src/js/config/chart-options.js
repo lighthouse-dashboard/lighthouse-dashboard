@@ -1,7 +1,7 @@
 import CONFIG from '../../../../config/dashboard';
 
 const DEFAULT_CHART = {
-    colors: CONFIG.UI.CHART_COLORS,
+    colors: CONFIG.ui.chartColors,
     plotOptions: {
         bar: {
             horizontal: false,
@@ -75,11 +75,11 @@ export const GAUGE_CHART = {
             },
             dataLabels: {
                 name: {
-                    color: CONFIG.UI.COLOR_THEME.primary,
+                    color: CONFIG.ui.theme.primary,
                     fontSize: '12px',
                 },
                 value: {
-                    color: CONFIG.UI.COLOR_THEME.primary,
+                    color: CONFIG.ui.theme.primary,
                     fontSize: '18px',
                     offsetY: -30,
                 },
@@ -89,7 +89,7 @@ export const GAUGE_CHART = {
             },
         },
     },
-    colors: CONFIG.UI.CHART_COLORS,
+    colors: CONFIG.ui.chartColors,
 };
 
 export const COMPARISON_CHART = {
@@ -111,14 +111,14 @@ export const COMPARISON_CHART = {
     series: [],
     title: {
         style: {
-            colors: CONFIG.UI.COLOR_THEME.text,
+            colors: CONFIG.ui.theme.text,
         },
     },
     xaxis: {
         categories: [],
         labels: {
             style: {
-                colors: CONFIG.UI.COLOR_THEME.text,
+                colors: CONFIG.ui.theme.text,
             },
         },
     },
@@ -129,7 +129,7 @@ export const COMPARISON_CHART = {
         max: 100,
         labels: {
             style: {
-                colors: CONFIG.UI.COLOR_THEME.text,
+                colors: CONFIG.ui.theme.text,
             },
         },
     },

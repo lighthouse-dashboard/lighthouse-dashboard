@@ -7,7 +7,7 @@ export enum REPORT_VALUE_KEYS {
 }
 
 export interface DashboardConfig {
-    DATE_FORMAT: string;
+    dateFormat: string;
     DASHBOARD: {
         SITE_OVERVIEW_VALUES: REPORT_VALUE_KEYS[],
         OVERVIEW_BAR_VALUES: REPORT_VALUE_KEYS[],
@@ -15,7 +15,7 @@ export interface DashboardConfig {
     };
     UI: {
         THEME: string;
-        CHART_COLORS: string[];
+        chartColors: string[];
     };
     SERVER: {
         HOST: string;
@@ -33,7 +33,6 @@ export interface DashboardConfig {
             MONGODB_URI: string;
             MONGO_DB_NAME: string;
         };
-        SHOW_ERROR_PAGES: boolean;
     }
 
 }

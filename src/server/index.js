@@ -14,7 +14,7 @@ import setupAuth from './auth';
 import loadPlugins from './plugins';
 import loadRoutes from './routes';
 
-const RESTART_INTERVAL = process.env.RESTART_TIMEOUT;
+const RESTART_INTERVAL = 5000;
 
 async function start() {
     const server = Hapi.server({

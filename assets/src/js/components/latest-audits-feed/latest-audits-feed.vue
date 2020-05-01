@@ -18,7 +18,7 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import { DASHBOARD } from '../../../../../config/dashboard';
+    import CONFIG from '../../../../../config/dashboard';
     import LatestReportGauge from '../latest-report-gauge/latest-report-gauge';
 
     export default {
@@ -31,7 +31,7 @@
         },
         computed: {
             cols() {
-                return DASHBOARD.latestAudits.colSize;
+                return CONFIG.latestAuditChart.colSize;
             },
         },
         methods: {

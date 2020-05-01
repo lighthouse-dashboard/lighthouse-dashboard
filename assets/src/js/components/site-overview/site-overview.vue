@@ -33,7 +33,7 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import { PROJECT_MENU_CUSTOM_ENTRIES } from '../../../../../config/dashboard';
+    import { customProjectMenuEntries } from '../../../../../config/dashboard';
     import reportsToLineChart from '../../../../../src/transformer/reports-to-line-chart';
     import LineChart from '../charts/line-chart/line-chart';
     import ProjectSettings from '../site-settings/site-settings';
@@ -86,7 +86,7 @@
         },
         computed: {
             menuEntries() {
-                return PROJECT_MENU_CUSTOM_ENTRIES.map((entry) => {
+                return customProjectMenuEntries.map((entry) => {
                     return {
                         name: entry.name,
                         link: entry.link(this.url),

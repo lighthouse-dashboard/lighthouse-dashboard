@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { DATE_FORMAT } from '../../../../config/dashboard';
+import { dateFormat } from '../../../../config/dashboard';
 
 /**
  * Format date
@@ -11,5 +11,5 @@ export default function formatDate(value) {
         return null;
     }
 
-    return format(new Date(value), DATE_FORMAT);
+    return format(new Date(value), dateFormat);
 };

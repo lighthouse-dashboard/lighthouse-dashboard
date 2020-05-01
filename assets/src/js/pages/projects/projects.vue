@@ -31,7 +31,7 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { DASHBOARD } from '../../../../../config/dashboard';
+    import config from '../../../../../config/dashboard';
     import CreateSiteForm from '../../components/create-site-form/create-site-form';
     import SiteOverview from '../../components/site-overview/site-overview.vue';
     import SiteSearchInput from '../../components/site-search-input/site-search-input';
@@ -47,11 +47,11 @@
             ...mapState('login', ['jwt']),
             ...mapState('sites', ['sites']),
             cols() {
-                return DASHBOARD.PAGE_PROJECTS.colSize;
+                return config.page_projects.colSize;
             },
 
             fluid() {
-                return DASHBOARD.PAGE_PROJECTS.IS_FLUID;
+                return config.page_projects.isFluid;
             },
         },
 

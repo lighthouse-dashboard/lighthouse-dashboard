@@ -19,7 +19,7 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import { DASHBOARD } from '../../../../../config/dashboard';
+    import CONFIG from '../../../../../config/dashboard';
     import CreateSiteForm from '../../components/create-site-form/create-site-form';
     import DashboardSection from '../../components/dashboard-section/dashboard-section';
 
@@ -30,10 +30,10 @@
         },
         computed: {
             charts() {
-                return DASHBOARD.PAGE_DASHBOARD.CHARTS;
+                return CONFIG.page_dashboard.charts;
             },
             fluid() {
-                return DASHBOARD.PAGE_DASHBOARD.IS_FLUID;
+                return CONFIG.page_dashboard.isFluid;
             },
         },
 

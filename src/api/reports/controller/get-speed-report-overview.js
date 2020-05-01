@@ -22,5 +22,5 @@ export default async function getSpeedReportOverview(request) {
         reports.push(report);
     }
 
-    return reportsToBarChart(reports, labels, CONFIG.DASHBOARD.favoriteProjectsComparison.fields);
+    return reportsToBarChart(reports, labels, CONFIG.favoriteProjectsComparison.fields);
 }

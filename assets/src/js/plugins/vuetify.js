@@ -7,7 +7,7 @@ Vue.use(Vuetify);
 const opts = {
     theme: {
         dark: true,
-        themes: CONFIG.UI.COLOR_THEME,
+        themes: CONFIG.ui.theme,
     },
 };
 

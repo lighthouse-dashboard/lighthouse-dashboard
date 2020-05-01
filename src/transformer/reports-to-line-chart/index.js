@@ -21,7 +21,7 @@ export default function reportsToLineChart(reports) {
         return acc;
     }, []).reverse();
 
-    CONFIG.DASHBOARD.SITE_OVERVIEW_CHART.fields.reduce((datasets, timingKey) => {
+    CONFIG.siteOverviewChart.fields.reduce((datasets, timingKey) => {
         datasets.push(getLineDataSetForKey(reports, timingKey));
         return datasets;
     }, data.datasets);

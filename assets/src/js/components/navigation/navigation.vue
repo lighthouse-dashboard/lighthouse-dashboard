@@ -52,8 +52,7 @@
 </template>
 
 <script>
-    import { DASHBOARD } from '../../../../../config/dashboard';
-    import { version } from '../../../../../package.json';
+    import { name, version } from '../../../../../package.json';
 
     export default {
         data() {
@@ -61,13 +60,8 @@
                 drawer: true,
                 mini: true,
                 version,
+                name,
             };
-        },
-
-        computed: {
-            title() {
-                return DASHBOARD.TITLE;
-            },
         },
     };
 </script>
