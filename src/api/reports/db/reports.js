@@ -91,6 +91,8 @@ export async function clearReports(database) {
         $orderby: { createdAt: 1 },
     };
 
+    logger.debug(`Clearing older entries - Max allowed: ${ config.DB.MAX_RAW_DATA_HISTORY }`);
+
     const rows = await reportCollection.find(filter)
         .skip(config.DB.MAX_RAW_DATA_HISTORY)
         .toArray();
