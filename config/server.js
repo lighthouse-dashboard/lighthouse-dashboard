@@ -9,7 +9,7 @@ export default {
 
     DB: {
         /** @var {number|false} */
-        MAX_RAW_DATA_HISTORY: process.env.MAX_RAW_DATA_HISTORY || 100,
+        MAX_RAW_DATA_HISTORY: process.env.MAX_RAW_DATA_HISTORY || false,
 
         /** @var {number|false} */
         MAX_REPORTS_HISTORY_AGE: 20 * 24 * 60 * 60 * 1000, // 20 days
