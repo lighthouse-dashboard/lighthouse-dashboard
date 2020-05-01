@@ -10,7 +10,7 @@ import { getLatestReportBySiteId } from '../db/reports';
  */
 export default async function getSpeedReportOverview(request) {
     const pages = await getFavoriteSites(request.mongo.db);
-    const labels = pages.map((p) => p.name);
+    const labels = [];
 
     const reports = [];
     for (let p = 0; p < pages.length; p++) {
@@ -18,6 +18,7 @@ export default async function getSpeedReportOverview(request) {
         if (!report) {
             continue;
         }
+        labels.push(pages[p].name);
         reports.push(report);
     }
 
