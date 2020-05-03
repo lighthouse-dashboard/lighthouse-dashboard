@@ -3,7 +3,7 @@ var PAGES_CACHE_NAME = 'lighthouse-dashboard-cache--pages';
 var API_CACHE_NAME = 'lighthouse-dashboard-cache--api';
 var urlsToCache = [
     'index.html',
-    'main.css',
+    'app.css',
 ];
 
 var urlRegex = [

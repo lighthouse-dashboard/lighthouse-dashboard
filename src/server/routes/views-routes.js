@@ -64,7 +64,7 @@ export default [
 
     {
         method: 'GET',
-        path: '/project/{id}',
+        path: '/projects/{id}',
         options: {
             description: 'Details of project',
             auth: false,

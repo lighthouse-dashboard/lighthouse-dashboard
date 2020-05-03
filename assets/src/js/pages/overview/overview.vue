@@ -1,10 +1,5 @@
 <template>
     <div>
-        <v-app-bar color="transparent"
-                flat>
-            <v-toolbar-title>Overview</v-toolbar-title>
-        </v-app-bar>
-
         <v-container>
             <sites-with-report-table :is-loading="isLoading"
                     :sites="sites"/>

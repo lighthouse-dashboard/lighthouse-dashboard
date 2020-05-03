@@ -1,11 +1,102 @@
 .navigation {
     // Vars
+    --border-radius: 20px;
+    --color-text: var(--color-text);
+    --color-background: var(--color--navigation-background);
+    --color-link-active-color: var(--color-mono-black);
+    --color-link-active-background: var(--color--app-content-background);
+    --border-radius-outer: 40px;
+    --border-radius-box-size: 80px;
+    --border-radius-transition-duration: 200ms;
 
     // Support
+    .v-navigation-drawer__border {
+        display: none !important;
+    }
 
     // Module
     & {
-        background-color: chocolate;
+        & {
+            background-color: var(--color-background);
+            height: 100%;
+        }
+
+        .navigation--title {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .navigation--version {
+            color: var(--color-primary);
+        }
+
+        .navigation--header {
+            padding: var(--root-spacing);
+            margin-bottom: calc(var(--root-spacing) * 2);
+            display: flex;
+            align-items: center;
+            align-content: center;
+        }
+
+        .navigation--list.navigation--list {
+            padding: 0 0 0 calc(var(--root-spacing) * 3);
+        }
+
+        .navigation--list-item.navigation--list-item {
+            margin-bottom: var(--root-spacing);
+            display: block;
+            position: relative;
+            padding: calc(var(--root-spacing) * 2);
+            color: var(--color-text);
+            font-size: 1.4rem;
+            line-height: 1.2;
+            transition: background-color $trs-base, color $trs-base;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            cursor: pointer;
+
+
+            &:hover {
+                color: var(--color-text);
+                background-color: var(--color-hover);
+            }
+
+            &::before, &::after {
+                content: "";
+                border-radius: 0;
+                transition: border-radius var(--border-radius-transition-duration) ease-in-out;
+            }
+
+            &.navigation--list-item__active {
+                position: relative;
+                color: var(--color-link-active-color);
+                box-shadow: inset 0 100px 0 0 var(--color-link-active-background); /* This is where the magic happens! */
+
+                &::before {
+                    position: absolute;
+                    right: 0;
+                    top: calc(var(--border-radius-box-size) * -1);
+                    z-index: 10;
+                    background-color: transparent;
+                    height: var(--border-radius-box-size);
+                    width: var(--border-radius-outer);
+                    border-radius: 0 0 var(--border-radius-outer) 0;
+                    box-shadow: 0 calc(var(--border-radius-outer)) 0 0 var(--color-link-active-background); /* This is where the magic happens! */
+                }
+
+                &::after {
+                    z-index: 10;
+                    position: absolute;
+                    right: 0;
+                    top: 100%;
+
+                    background-color: transparent;
+                    height: var(--border-radius-box-size);
+                    width: var(--border-radius-outer);
+                    border-radius: 0 var(--border-radius-outer) 0 0;
+                    box-shadow: 0 calc(var(--border-radius-outer) * -1) 0 0 var(--color-link-active-background); /* This is where the magic happens! */
+                }
+            }
+        }
     }
 
     // Facets

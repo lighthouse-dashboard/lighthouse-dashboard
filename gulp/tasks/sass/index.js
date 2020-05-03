@@ -4,7 +4,7 @@ const sassGlob = require('gulp-sass-globi');
 const paths = require('../../config/paths');
 
 gulp.task('sass', function() {
-    return gulp.src('assets/src/scss/main.scss', { cwd: paths.root })
+    return gulp.src('assets/src/scss/app.scss', { cwd: paths.root })
         .pipe(sassGlob({ includePaths: [paths.src] }))
         .pipe(sass({
             includePaths: [

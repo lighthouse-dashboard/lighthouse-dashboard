@@ -2,7 +2,7 @@
     <v-card  v-inview:enter="loadData">
         <v-card-title>
             <site-title :is_favorite="is_favorite">
-                <v-btn text color="text" :to="`/project/${id}`">{{ name }}</v-btn>
+                <v-btn text color="text" :to="`/projects/${id}`">{{ name }}</v-btn>
             </site-title>
         </v-card-title>
         <v-card-text>

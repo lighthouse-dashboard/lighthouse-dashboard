@@ -6,7 +6,7 @@
                 :items="items"
                 :items-per-page="10">
             <template v-slot:item.name="{ item }">
-                <router-link :to="`/project/${item.id}`">
+                <router-link :to="`/projects/${item.id}`">
                     {{ item.name }}
                 </router-link>
             </template>

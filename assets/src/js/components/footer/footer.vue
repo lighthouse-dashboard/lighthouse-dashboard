@@ -1,6 +1,7 @@
 <template>
     <v-footer app
             color="primary">
+        <small class="navigation--version">v{{ version }}</small>
         <v-spacer/>
         <div>&copy; {{ new Date().getFullYear() }}</div>
         <v-spacer/>

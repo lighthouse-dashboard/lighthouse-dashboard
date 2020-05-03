@@ -2,7 +2,6 @@
     <div>
         <v-app-bar color="transparent"
                 flat>
-            <v-toolbar-title>Dashboard</v-toolbar-title>
             <template v-slot:extension>
                 <create-site-form/>
             </template>

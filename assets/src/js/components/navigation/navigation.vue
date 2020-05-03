@@ -1,61 +1,36 @@
 <template>
-    <div class="navigation">
-        <router-link class="navigation--link" to="/dashboard">Dashboard</router-link>
-        <router-link class="navigation--link" to="/overview">Projects Overview</router-link>
-        <router-link class="navigation--link" to="/projects">Search</router-link>
-    </div>
-    <!--
     <v-navigation-drawer v-model="drawer"
-            :mini-variant.sync="mini"
+            tag="nav"
+            class="navigation"
+            flat
             app>
-        <v-list dense>
-            <v-list-item v-if="!mini">
-                <v-list-item-title>
-                    {{ title }}
-                    <small>v{{ version }}</small>
-                </v-list-item-title>
+        <div class="navigation--header">
+            <img class="navigation--logo" src="static/img/logo_small.png"/>
+            <p class="navigation--title">{{ title }}</p>
+        </div>
+        <ul class="navigation--list">
+            <router-link
+                    tag="li"
+                    active-class="navigation--list-item__active"
+                    class="navigation--list-item"
+                    to="/dashboard">Dashboard
+            </router-link>
 
-                <v-btn icon
-                        @click.stop="mini = !mini">
-                    <v-icon>mdi-chevron-left</v-icon>
-                </v-btn>
-            </v-list-item>
+            <router-link
+                    tag="li"
+                    active-class="navigation--list-item__active"
+                    class="navigation--list-item"
+                    to="/overview">Projects Overview
+            </router-link>
 
-            <v-divider v-if="!mini"/>
-
-            <v-list-item to="/dashboard"
-                    color="primary"
-                    link>
-                <v-list-item-action>
-                    <v-icon>mdi-clipboard-pulse</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                    <v-list-item-title>Dashboard</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-            <v-list-item to="/overview"
-                    color="primary"
-                    link>
-                <v-list-item-action>
-                    <v-icon>mdi-table</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                    <v-list-item-title>Projects Overview</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-            <v-list-item to="/projects"
-                    color="primary"
-                    link>
-                <v-list-item-action>
-                    <v-icon>mdi-file-search-outline</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                    <v-list-item-title>Search</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-        </v-list>
+            <router-link
+                    tag="li"
+                    active-class="navigation--list-item__active"
+                    class="navigation--list-item"
+                    to="/projects">Search
+            </router-link>
+        </ul>
     </v-navigation-drawer>
-    -->
 </template>
 
 <script>
@@ -67,7 +42,7 @@
                 drawer: true,
                 mini: true,
                 version,
-                name,
+                title: name,
             };
         },
     };

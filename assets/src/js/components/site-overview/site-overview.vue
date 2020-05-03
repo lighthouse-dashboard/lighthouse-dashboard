@@ -8,7 +8,7 @@
             <site-title :is_favorite="is_favorite">
                 <v-btn text
                         color="text"
-                        :to="`/project/${id}`">{{ name }}
+                        :to="`/projects/${id}`">{{ name }}
                 </v-btn>
             </site-title>
             <v-spacer/>

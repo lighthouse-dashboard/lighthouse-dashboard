@@ -1,10 +1,9 @@
 export default [
     {
-        path: '/project/:id',
+        path: '/projects/:id',
         component: () => import('./project/project'),
         props: true,
     },
-
     {
         path: '/projects',
         component: () => import('./projects/projects'),
