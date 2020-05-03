@@ -1,6 +1,8 @@
 <template>
     <div class="navigation">
-
+        <router-link class="navigation--link" to="/dashboard">Dashboard</router-link>
+        <router-link class="navigation--link" to="/overview">Projects Overview</router-link>
+        <router-link class="navigation--link" to="/projects">Search</router-link>
     </div>
     <!--
     <v-navigation-drawer v-model="drawer"

@@ -5,9 +5,15 @@
 
     // Module
     & {
-        display: grid;
-        grid-template-areas: 'navigation content';
-        grid-template-columns: 3fr 9fr;
+        & {
+            display: grid;
+            grid-template-areas: 'navigation content';
+            grid-template-columns: 1fr 11fr;
+        }
+
+        .navigation--link {
+            display: block;
+        }
     }
 
     // Facets
