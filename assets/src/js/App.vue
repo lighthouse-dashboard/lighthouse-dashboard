@@ -1,5 +1,6 @@
 <template>
-    <v-app id="inspire" class="app">
+    <v-app id="inspire"
+            class="app">
         <navigation/>
 
         <v-content class="app--content">
