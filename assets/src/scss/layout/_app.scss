@@ -8,6 +8,13 @@
 
     // Module
     & {
+        & {
+            display: grid;
+            min-height: 100%;
+            grid-template-areas: 'sidenav content';
+            grid-template-columns: 2fr 10fr;
+        }
+
         .app--content-wrapper {
             background-color: var(--app--content-background);
         }
@@ -15,7 +22,7 @@
         .app--content {
             max-width: 1440px;
             margin: 0 auto;
-            padding: var(--app--edge-gutter);
+            padding: var(--app--header-height) var(--app--edge-gutter);
 
             @include mq('xl') {
                 max-width: 1120px;

@@ -1,16 +1,17 @@
 <template>
-    <v-app class="app"
+    <div class="app"
             id="inspire">
-        <navigation/>
+        <div>
+            <navigation/>
+        </div>
 
-        <v-content class="app--content-wrapper">
+        <div class="app--content-wrapper">
             <div class='app--content'>
                 <router-view v-if="isLoggedIn"/>
                 <login v-else/>
             </div>
-            <footer-component/>
-        </v-content>
-    </v-app>
+        </div>
+    </div>
 </template>
 
 <script>

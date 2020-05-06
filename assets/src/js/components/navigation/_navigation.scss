@@ -10,15 +10,16 @@
     --border-radius-transition-duration: 200ms;
 
     // Support
-    .v-navigation-drawer__border {
-        display: none !important;
-    }
 
     // Module
     & {
         & {
             background-color: var(--color-background);
-            height: 100%;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .navigation--title {
@@ -34,11 +35,20 @@
             align-content: center;
         }
 
+        .navigation--top {
+            flex: 1 1 auto;
+        }
+
         .navigation--list.navigation--list {
             padding: 0 0 0 calc(var(--root-spacing) * 3);
         }
 
-        .navigation--list-item.navigation--list-item {
+
+        .navigation--list-item.navigation--list-item__footer {
+            padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 5) calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 2);
+        }
+
+        .navigation--list-item.navigation--list-item:not(.navigation--list-item__footer) {
             margin-bottom: var(--root-spacing);
             display: block;
             position: relative;
