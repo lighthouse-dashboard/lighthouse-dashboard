@@ -62,7 +62,7 @@ body {
 
     // Remove default background colors in some browsers
     background-color: var(--color-body);
-    color: var(--color-text);
+    color: var(--navigation--color-text);
 
     // Type legibility improvements where applicable - Use with care
     -moz-osx-font-smoothing: grayscale;

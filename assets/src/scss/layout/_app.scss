@@ -13,10 +13,18 @@
             min-height: 100%;
             grid-template-areas: 'sidenav content';
             grid-template-columns: 2fr 10fr;
+
+            @include mq('<=lg') {
+                display: flex;
+                width: 100%;
+                grid-template-areas: '. content';
+                grid-template-columns: 12fr;
+            }
         }
 
         .app--content-wrapper {
             background-color: var(--app--content-background);
+            width: 100%;
         }
 
         .app--content {
