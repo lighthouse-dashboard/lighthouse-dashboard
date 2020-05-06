@@ -3,9 +3,11 @@
             id="inspire">
         <navigation/>
 
-        <v-content class="app--content">
-            <router-view v-if="isLoggedIn"/>
-            <login v-else/>
+        <v-content class="app--content-wrapper">
+            <div class='app--content'>
+                <router-view v-if="isLoggedIn"/>
+                <login v-else/>
+            </div>
             <footer-component/>
         </v-content>
     </v-app>

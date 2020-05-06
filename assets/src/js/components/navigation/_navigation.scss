@@ -2,9 +2,9 @@
     // Vars
     --border-radius: 20px;
     --color-text: var(--color-text);
-    --color-background: var(--color--navigation-background);
+    --color-background: var(--root-color--navigation-background);
     --color-link-active-color: var(--color-mono-black);
-    --color-link-active-background: var(--color--app-content-background);
+    --color-link-active-background: var(--root-color--app-content-background);
     --border-radius-outer: 40px;
     --border-radius-box-size: 80px;
     --border-radius-transition-duration: 200ms;
@@ -42,7 +42,7 @@
             margin-bottom: var(--root-spacing);
             display: block;
             position: relative;
-            padding: calc(var(--root-spacing) * 2);
+            padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 5) calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 2);
             color: var(--color-text);
             font-size: 1.4rem;
             line-height: 1.2;

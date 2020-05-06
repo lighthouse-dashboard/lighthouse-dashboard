@@ -1,6 +1,38 @@
+$breakpoints: (
+    xs: 380px,
+    sm: 600px,
+    md: 960px,
+    lg: 1280px,
+    xl: 1920px
+);
 
-@mixin mq($width) {
-    @media (max-width: $width) {
-        @content
-    }
-}
+$screen-xs-min: map-get($breakpoints, 'xs');
+$screen-sm-min: map-get($breakpoints, 'sm');
+$screen-md-min: map-get($breakpoints, 'md');
+$screen-lg-min: map-get($breakpoints, 'lg');
+$screen-xl-min: map-get($breakpoints, 'xl');
+
+
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+$screen-lg-max: ($screen-xl-min - 1);
+
+
+$media-feature-expressions: (
+    width: (
+        xs: '(max-width: #{$screen-xs-max}px)',
+        sm: ('(min-width: #{$screen-sm-min}px) and (max-width: #{$screen-sm-max}px)'),
+        md: ('(min-width: #{$screen-md-min}px) and (max-width: #{$screen-md-max}px)'),
+        lg: ('(min-width: #{$screen-lg-min}px) and (max-width: #{$screen-lg-max}px)'),
+        xl: ('(min-width: #{$screen-xl-min}px)'),
+    ),
+    orientation: (
+        portrait: '(orientation: portrait)',
+        landscape: '(orientation: landscape)',
+    ),
+    resolution: (
+        res2x: ('(min-resolution: 2dppx)'),
+        res3x: ('(min-resolution: 3dppx)'),
+    ),
+);

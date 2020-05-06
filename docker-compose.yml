@@ -18,7 +18,7 @@ services:
       build:
         context: ./
         args:
-          - VUE_APP_THEME=light
+          - VUE_APP_THEME=dark
       links:
         - queue
         - database

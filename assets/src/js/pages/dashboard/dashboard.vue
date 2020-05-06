@@ -1,18 +1,9 @@
 <template>
     <div>
-        <v-app-bar color="transparent"
-                flat>
-            <template v-slot:extension>
-                <create-site-form/>
-            </template>
-        </v-app-bar>
-
-        <v-container :fluid="fluid">
-            <dashboard-section
-                    :type="config"
-                    v-for="config in charts"
-                    :key="config"/>
-        </v-container>
+        <dashboard-section
+                :type="config"
+                v-for="config in charts"
+                :key="config"/>
     </div>
 </template>
 

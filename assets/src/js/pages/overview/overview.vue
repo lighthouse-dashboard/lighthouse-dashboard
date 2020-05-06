@@ -1,10 +1,6 @@
 <template>
-    <div>
-        <v-container>
-            <sites-with-report-table :is-loading="isLoading"
-                    :sites="sites"/>
-        </v-container>
-    </div>
+    <sites-with-report-table :is-loading="isLoading"
+            :sites="sites"/>
 </template>
 
 <script>

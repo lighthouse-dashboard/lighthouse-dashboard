@@ -1,12 +1,33 @@
 .app.app {
     // Vars
+    --app--header-height: var(--root-sites--header-height);
+    --app--content-background: var(--root-color--app-content-background);
+    --app--edge-gutter: calc(var(--root-spacing) * 2);
 
     // Support
 
     // Module
     & {
+        .app--content-wrapper {
+            background-color: var(--app--content-background);
+        }
+
         .app--content {
-            background-color: var(--color--app-content-background);
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--app--edge-gutter);
+
+            @include mq('xl') {
+                max-width: 1120px;
+            }
+
+            @include mq('lg') {
+                max-width: 980px;
+            }
+
+            @include mq('md') {
+                max-width: 678px;
+            }
         }
     }
 

@@ -1,13 +1,13 @@
 export default {
     charts: [
-        '#ffa600',
-        '#6782b8',
-        '#8e80c4',
-        '#ba7ac3',
-        '#e472b3',
-        '#ff6e96',
-        '#ff7670',
-        '#ff8a45',
+        '#ff688c',
+        '#e9609c',
+        '#cd5da9',
+        '#ab5db2',
+        '#835eb5',
+        '#555eb2',
+        '#005da9',
+        '#006ecb',
     ],
     app: 'dark',
     theme: {
