@@ -30,11 +30,20 @@
         }
 
         .navigation--close-btn {
+            display: none;
             position: absolute;
             right: 0;
             top: 0;
             padding: var(--root-spacing);
             margin: var(--root-spacing);
+
+            @include mq('<=lg') {
+                display: block;
+            }
+        }
+
+        .navigation--mobile-toggle {
+            z-index: var(--root-index--navigation-mobile-toggle);
         }
 
         .navigation--title {

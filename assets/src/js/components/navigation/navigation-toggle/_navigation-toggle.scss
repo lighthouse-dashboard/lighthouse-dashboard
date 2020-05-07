@@ -15,21 +15,24 @@
         top: 50%;
         left: 0;
         width: 40px;
-        transition: width var(--navigation-toggle--border-radius-transition-duration) ease-in-out;
+        transition: width var(--navigation-toggle--border-radius-transition-duration) ease-in-out, border-radius var(--navigation-toggle--border-radius-transition-duration) ease-in-out;
+        transform: translateY(-50%);
+        background-color: var(--navigation-toggle--background-color);
+        border-radius: 0 var(--navigation-toggle--border-radius) var(--navigation-toggle--border-radius) 0;
+        box-shadow: 0 0 4px 0 rgba(20, 20, 20, 0.2);
+
+        @include mq('<=lg') {
+            display: block;
+        }
 
         &:hover {
             width: 80px;
+            box-shadow: 0 0 8px 0 rgba(20, 20, 20, 0.2);
 
             .navigation-toggle--toggle-btn {
                 opacity: 1;
             }
         }
-
-        transform: translateY(-50%);
-        background-color: var(--navigation-toggle--mobile-toggle-background-color);
-        border-radius: 0 var(--navigation-toggle--border-radius) var(--navigation-toggle--border-radius) 0;
-
-        box-shadow: inset 0 100px 0 0 var(--navigation-toggle--background-color); /* This is where the magic happens! */
 
         &::before, &::after {
             z-index: var(--root-index--navigation-mobile-toggle);
@@ -53,10 +56,6 @@
             top: 100%;
             border-radius: var(--navigation-toggle--border-radius-outer-mobile) 0 0 0;
             box-shadow: 0 calc(var(--navigation-toggle--border-radius-outer-mobile) * -1) 0 0 var(--navigation-toggle--background-color); /* This is where the magic happens! */
-        }
-
-        @include mq('<=lg') {
-            display: block;
         }
     }
 

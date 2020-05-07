@@ -35,6 +35,13 @@
                 ]
             }
         ],
+        "vue/html-quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": false
+            }
+        ],
         "vue/html-closing-bracket-spacing": [
             "error",
             {

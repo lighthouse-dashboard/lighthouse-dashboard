@@ -3,7 +3,7 @@
         <div class='navigation-toggle--content-wrapper'>
             <button class='navigation-toggle--toggle-btn'
                     @click='$emit("toggle")'>
-                Open
+                Menu
             </button>
         </div>
     </div>

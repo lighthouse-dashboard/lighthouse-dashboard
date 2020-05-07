@@ -3,7 +3,9 @@
     --app--header-height: var(--root-sites--header-height);
     --app--content-background: var(--root-color--app-content-background);
     --app--edge-gutter: calc(var(--root-spacing) * 2);
+    --app--edge-gutter-md: calc(var(--root-spacing) * 4);
 
+    // Support
     // Support
 
     // Module
@@ -33,15 +35,15 @@
             padding: var(--app--header-height) var(--app--edge-gutter);
 
             @include mq('xl') {
-                max-width: 1120px;
+                max-width: 1080px;
             }
 
             @include mq('lg') {
                 max-width: 980px;
             }
 
-            @include mq('md') {
-                max-width: 678px;
+            @include mq('<=md') {
+                max-width: 760px;
             }
         }
     }

@@ -1,7 +1,9 @@
 <template>
     <div class='navigation'
             :class='rootClasses'>
-        <navigation-toggle v-if='!isOpen'
+        <navigation-toggle
+                v-if='!isOpen'
+                class='navigation--mobile-toggle'
                 @toggle='toggleDrawer'/>
 
         <div class='navigation--backdrop'
@@ -72,12 +74,12 @@
                 return [
                     this.createIfFacet(this.isOpen, 'open'),
                 ];
-            }
+            },
         },
         methods: {
             toggleDrawer() {
                 this.isOpen = !this.isOpen;
-            }
-        }
+            },
+        },
     };
 </script>

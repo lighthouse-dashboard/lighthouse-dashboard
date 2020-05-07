@@ -112,8 +112,5 @@
         "node": ">= 12.0",
         "npm": ">= 6.0.0"
     },
-    "types": "./types/index.d.ts",
-    "pre-commit": [
-        "lint"
-    ]
+    "types": "./types/index.d.ts"
 }
