@@ -2,8 +2,8 @@
     <div class='navigation'
             :class='rootClasses'>
         <navigation-toggle
-                v-if='!isOpen'
                 class='navigation--mobile-toggle'
+                v-if='!isOpen'
                 @toggle='toggleDrawer'/>
 
         <div class='navigation--backdrop'
