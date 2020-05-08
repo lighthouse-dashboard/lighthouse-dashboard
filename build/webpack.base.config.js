@@ -1,3 +1,6 @@
+const { matchNodeModules } = require('./utils');
+const MinifyJsPlugin = require('terser-webpack-plugin');
+
 require('dotenv').config();
 
 const path = require('path');
@@ -7,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 const paths = require('../src/config/path');
+const config = require('./config');
 const isDist = process.env.NODE_ENV === 'production'
 
 // NOTE: Export webpack config
@@ -24,10 +28,6 @@ module.exports = {
         chunkFilename: 'chunks/[name]/index.[chunkhash].js',
         devtoolModuleFilenameTemplate: 'source-webpack:///[resourcePath]',
         devtoolFallbackModuleFilenameTemplate: 'source-webpack:///[resourcePath]?[hash]',
-    },
-
-    node: {
-        process: true,      //   set to true resolved this problem
     },
 
     module: {
@@ -74,6 +74,23 @@ module.exports = {
             UI_THEME: process.env.UI_THEME,
         }),
     ],
+
+    optimization: {
+        minimize: isDist,
+        minimizer: isDist ? [new MinifyJsPlugin(config.minify)] : [],
+        noEmitOnErrors: !isDist,
+        runtimeChunk: true,
+
+        splitChunks: {
+            cacheGroups: {
+                framework: {
+                    test: matchNodeModules(['vue', 'vue-router', 'vuex']),
+                    name: 'framework',
+                    chunks: 'all',
+                },
+            },
+        },
+    },
 
     resolve: {
         alias: {
