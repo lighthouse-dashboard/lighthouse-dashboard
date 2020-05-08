@@ -15,8 +15,7 @@
     "scripts": {
         "serve": "vue-cli-service build --watch --mode development",
         "server-dev": "NODE_ENV=development node_modules/.bin/nodemon",
-        "dev": "gulp dev",
-        "dev-frontend": "webpack-dev-server --inline --progress --config ./build/webpack.conf.js",
+        "dev": "gulp",
         "build": "gulp build",
         "lint": "npm run lint-frontend && npm run lint-backend",
         "lint-frontend": "eslint -c .eslintrc ./assets/src",
@@ -92,7 +91,6 @@
         "html-webpack-plugin": "^4.3.0",
         "node-sass": "^4.14.1",
         "nodemon": "^2.0.3",
-        "pre-commit": "^1.2.2",
         "sass": "^1.26.5",
         "sass-loader": "^7.3.1",
         "size-limit": "^4.4.5",

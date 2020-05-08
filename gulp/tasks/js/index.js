@@ -1,24 +1,26 @@
 const gulp = require('gulp');
-const webpack= require('webpack');
+const log = require('fancy-log');
+const webpack = require('webpack');
 const webpackConfig = require('../../../build/webpack.config');
-const isDist = process.env.NODE_ENV === 'production';
-let bundler = exports.bundler = {};
+
+const compiler = webpack(webpackConfig);
 
 function compileJs(resolve) {
-    if (bundler.compiler) {
-        return;
-    }
-
-    // NOTE: The flag ensures that compiler errors don't get swallowed the first time you run the project
-    let hasRunOnce = false;
-
-    bundler.compiler = webpack(webpackConfig);
-    bundler.compiler.run((error, stats) => {
-        if (!isDist && hasRunOnce) {
-            return;
-        }
+    compiler.run(() => {
         resolve();
-    });
+    })
 }
 
 gulp.task('js', compileJs);
+
+gulp.task('js:watch', function() {
+    compiler.watch({
+        // Example watchOptions
+        aggregateTimeout: 300,
+    }, (err, stats) => { // Stats Object
+        if (err) {
+            console.error(err);
+        }
+        log(`Recompile complete ${ (stats.endTime - stats.startTime) / 1000 }s`);
+    });
+});

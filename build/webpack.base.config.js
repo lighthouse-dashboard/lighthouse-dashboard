@@ -48,7 +48,10 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                options: { esModule: true },
+                options: {
+                    esModule: true,
+
+                },
             },
             {
                 test: /\.js$/,
@@ -57,6 +60,7 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
+                        cacheDirectory: true,
                     },
                 },
             },
@@ -64,7 +68,9 @@ module.exports = {
     },
 
     plugins: [
-        new VueLoaderPlugin(),
+        new VueLoaderPlugin({
+            cacheDirectory: true,
+        }),
         new VuetifyLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: path.resolve(paths.templates, 'dist/index.html'),
