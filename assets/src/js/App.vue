@@ -16,7 +16,6 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import FooterComponent from './components/footer/footer';
     import Navigation from './components/navigation/navigation';
     import Login from './pages/login/login';
     import theme from './utils/get-theme';
@@ -24,7 +23,6 @@
     export default {
         components: {
             Login,
-            FooterComponent,
             Navigation,
         },
 
