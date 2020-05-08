@@ -1,3 +1,3 @@
 const gulp = require('gulp');
 
-gulp.task('build', gulp.series('sass'));
+gulp.task('build', gulp.series('js', 'sass'));

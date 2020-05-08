@@ -1,7 +1,5 @@
 const getTheme = require('../assets/src/js/utils/get-theme');
 
-require('dotenv').config();
-
 const { charts, theme } = getTheme();
 
 module.exports = {
