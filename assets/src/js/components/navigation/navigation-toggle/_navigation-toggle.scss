@@ -10,7 +10,7 @@
 
     // Module
     & {
-        display: none;
+        display: block;
         position: fixed;
         top: 50%;
         left: 0;
@@ -20,10 +20,6 @@
         background-color: var(--navigation-toggle--background-color);
         border-radius: 0 var(--navigation-toggle--border-radius) var(--navigation-toggle--border-radius) 0;
         box-shadow: 0 0 4px 0 rgba(20, 20, 20, 0.2);
-
-        @include mq('<=lg') {
-            display: block;
-        }
 
         &:hover {
             width: 80px;
