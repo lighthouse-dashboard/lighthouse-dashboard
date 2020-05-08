@@ -24,21 +24,22 @@
                             tag="li"
                             active-class="navigation--list-item__active"
                             class="navigation--list-item"
-                            to="/dashboard">Dashboard
+                            exact
+                            :to="{name: 'home'}">Dashboard
                     </router-link>
 
                     <router-link
                             tag="li"
                             active-class="navigation--list-item__active"
                             class="navigation--list-item"
-                            to="/overview">Projects Overview
+                            :to="{name: 'overview'}">Projects Overview
                     </router-link>
 
                     <router-link
                             tag="li"
                             active-class="navigation--list-item__active"
                             class="navigation--list-item"
-                            to="/projects">Search
+                            :to="{name: 'projects'}">Search
                     </router-link>
                 </ul>
             </div>

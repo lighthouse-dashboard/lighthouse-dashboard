@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const log = require('fancy-log');
 const webpack = require('webpack');
-const webpackConfig = require('../../../build/webpack.config');
+const webpackConfig = require('./webpack.config');
 
 const compiler = webpack(webpackConfig);
 

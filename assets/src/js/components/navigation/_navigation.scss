@@ -16,10 +16,15 @@
 
     // Module
     & {
+        & {
+            height: 100%;
+        }
+
         .navigation--drawer {
             background-color: var(--navigation--color-background);
             position: sticky;
             top: 0;
+            z-index: var(--root-index--navigation);
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -136,7 +141,6 @@
             width: 320px;
             left: 0;
             top: 0;
-            z-index: var(--root-index--navigation);
             display: block;
         }
 

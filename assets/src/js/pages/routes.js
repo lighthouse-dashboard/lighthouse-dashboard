@@ -1,24 +1,24 @@
 export default [
     {
         path: '/projects/:id',
+        name: 'projects.detail',
         component: () => import('./project/project'),
         props: true,
     },
     {
         path: '/projects',
+        name: 'projects',
         component: () => import('./projects/projects'),
     },
     {
         path: '/overview',
+        name: 'overview',
         component: () => import('./overview/overview'),
     },
 
     {
         path: '/',
-        component: () => import('./dashboard/dashboard'),
-    },
-    {
-        path: '/dashboard',
+        name: 'home',
         component: () => import('./dashboard/dashboard'),
     },
 ];

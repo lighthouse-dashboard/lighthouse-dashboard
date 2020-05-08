@@ -11,16 +11,12 @@
     // Module
     & {
         & {
-            display: grid;
             min-height: 100%;
-            grid-template-areas: 'sidenav content';
-            grid-template-columns: 2fr 10fr;
+            display: flex;
 
             @include mq('<=lg') {
                 display: flex;
                 width: 100%;
-                grid-template-areas: '. content';
-                grid-template-columns: 12fr;
             }
         }
 
@@ -49,6 +45,19 @@
     }
 
     // Facets
+    &.app__logged-in {
+        & {
+            grid-template-areas: 'sidenav content';
+            grid-template-columns: 2fr 10fr;
+
+            @include mq('<=lg') {
+                display: flex;
+                width: 100%;
+                grid-template-areas: '. content';
+                grid-template-columns: 12fr;
+            }
+        }
+    }
 
     // States
 }

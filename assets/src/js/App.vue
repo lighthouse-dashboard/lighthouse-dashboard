@@ -1,8 +1,8 @@
 <template>
     <div class="app"
-            id="inspire">
+            :class='classes'>
         <div>
-            <navigation/>
+            <navigation v-if="isLoggedIn"/>
         </div>
 
         <div class="app--content-wrapper">
@@ -17,6 +17,7 @@
 <script>
     import { mapActions, mapState } from 'vuex';
     import Navigation from './components/navigation/navigation';
+    import bemMixin from './mixins/bem-mixin';
     import Login from './pages/login/login';
     import theme from './utils/get-theme';
 
@@ -25,9 +26,15 @@
             Login,
             Navigation,
         },
+        mixins: [bemMixin('app')],
 
         computed: {
             ...mapState('login', ['isLoggedIn', 'jwt']),
+            classes() {
+                return [
+                    this.createIfFacet(this.isLoggedIn, 'logged-in'),
+                ]
+            }
         },
         methods: {
             ...mapActions('login', ['logout']),

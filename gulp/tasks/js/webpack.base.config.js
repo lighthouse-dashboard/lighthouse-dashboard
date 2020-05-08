@@ -9,7 +9,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
-const paths = require('../src/config/path');
+const paths = require('../../../src/config/path');
 const config = require('./config');
 const isDist = process.env.NODE_ENV === 'production'
 
