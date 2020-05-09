@@ -5,7 +5,6 @@ import Inview from 'vueinview';
 
 import App from './App.vue';
 import SpeedOverview from './components/favorite-comparison/favorite-comparison';
-import FavoriteProjectsOverview from './components/favorite-projects-overview/favorite-projects-overview';
 import LatestAuditsFeed from './components/latest-audits-feed/latest-audits-feed';
 import formatDate from './filters/format-date';
 import routes from './pages/routes';
@@ -16,7 +15,6 @@ Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(Inview);
 
-Vue.component('favorite-projects-overview', FavoriteProjectsOverview);
 Vue.component('favorite-projects-comparison', SpeedOverview);
 Vue.component('latest-audits', LatestAuditsFeed);
 

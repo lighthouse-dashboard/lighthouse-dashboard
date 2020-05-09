@@ -1,13 +1,4 @@
-import {
-    CREATE_SITE_URL,
-    GET_LATEST_AUDITED_SITES_URL,
-    GET_SITE_BY_ID_URL,
-    GET_SITE_WITH_REPORT_URL,
-    GET_SITES_URL,
-    POST_SITE_ALL_URL,
-    REMOVE_SITE_URL,
-} from '../../../config/routes';
-import axios from '../../../utils/axios';
+import * as api from '../../../api/sites-api';
 import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_LATEST_SITES, SET_SITES, UPDATE_SITE } from '../mutation-types';
 
 /**
@@ -15,8 +6,8 @@ import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_LATEST_SITES, SET_SITES, UPDATE_
  * @return {Promise<T>}
  */
 export async function fetchAllSites({ commit }) {
-    const { data } = await axios().get(GET_SITES_URL);
-    commit({ type: SET_SITES, sites: data });
+    const sites = await api.getAllSites()
+    commit({ type: SET_SITES, sites });
 }
 
 
@@ -25,8 +16,8 @@ export async function fetchAllSites({ commit }) {
  * @param {object} _
  * @param {string} siteId
  */
-export function deleteSite(_, { id }) {
-    axios().delete(REMOVE_SITE_URL(id));
+export async function deleteSite(_, { id }) {
+    await api.deleteSite(id)
 }
 
 /**
@@ -35,9 +26,7 @@ export function deleteSite(_, { id }) {
  * @return {Promise<void>}
  */
 export async function createSite({ commit }, siteConfig) {
-    const { data } = await axios()
-        .post(CREATE_SITE_URL, siteConfig);
-
+    await api.createSite(siteConfig);
     commit({ type: ADD_SITE, site: data });
 }
 
@@ -48,9 +37,7 @@ export async function createSite({ commit }, siteConfig) {
  * @return {Promise<void>}
  */
 export async function updateSite({ commit }, { id, delta }) {
-    await axios()
-        .put(GET_SITE_BY_ID_URL(id), delta);
-
+    await api.updateSite(id, delta);
     commit({ type: UPDATE_SITE, id: id, delta });
 }
 
@@ -60,8 +47,8 @@ export async function updateSite({ commit }, { id, delta }) {
  * @return {Promise<T>}
  */
 export async function getLatestSites({ commit }) {
-    const { data } = await axios().get(GET_LATEST_AUDITED_SITES_URL);
-    commit({ type: SET_LATEST_SITES, sites: data });
+    const sites = await api.getLatestSites();
+    commit({ type: SET_LATEST_SITES, sites });
     return data;
 }
 
@@ -71,9 +58,8 @@ export async function getLatestSites({ commit }) {
  * @param {string} siteId
  * @return {Promise<Sites.SiteConfig>}
  */
-export async function getSite(_, { siteId }) {
-    const { data } = await axios().get(GET_SITE_BY_ID_URL(siteId));
-    return data;
+export function getSite(_, { siteId }) {
+    return api.getSite(siteId);
 }
 
 /**
@@ -83,30 +69,21 @@ export async function getSite(_, { siteId }) {
  * @return {Promise<Sites.SiteConfig>}
  */
 export async function getCurrentSite({ commit }, { siteId }) {
-    const { data } = await axios().get(GET_SITE_BY_ID_URL(siteId));
-    commit({ type: SET_CURRENT_SITE_CONFIG, config: data });
-    return data;
+    const site = await api.getSite(siteId);
+    commit({ type: SET_CURRENT_SITE_CONFIG, config: site });
+    return site;
 }
 
 /**
  * Get sites with corresponsing latest report
  * @return {Promise<Sites.SiteWithReport[]>}
  */
-export async function getSitesWithLatestReport() {
-    const { data } = await axios().get(GET_SITE_WITH_REPORT_URL);
-    return data;
+export function getSitesWithLatestReport() {
+    return api.getSitesWithLatestReport();
 }
 
 export function resetCurrentSite({ commit }) {
     commit({ type: SET_CURRENT_SITE_CONFIG, config: null });
-}
-
-/**
- * Get specific site
- * @return {Promise<T>}
- */
-export async function createReportForAll() {
-    await axios().post(POST_SITE_ALL_URL);
 }
 
 /**
@@ -116,8 +93,8 @@ export async function createReportForAll() {
  * @return {Promise<void>}
  */
 export async function searchForPages({ commit }, { query }) {
-    const { data } = await axios().get(GET_SITES_URL, { params: { query } });
-    commit({ type: SET_SITES, sites: data });
+    const sites = await api.search(query);
+    commit({ type: SET_SITES, sites });
 }
 
 export function setSites({ commit }, { sites }) {
