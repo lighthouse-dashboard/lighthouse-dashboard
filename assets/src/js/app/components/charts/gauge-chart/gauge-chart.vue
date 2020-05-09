@@ -37,16 +37,22 @@
                 });
                 this.chart = new ApexCharts(this.$refs.chart, options);
                 this.chart.render();
+                this.updateChart();
+            },
+
+            updateChart() {
+                this.chart.updateOptions({
+                    labels: this.labels,
+                });
+                this.chart.updateSeries(this.series);
             },
         },
         watch: {
-            labels(val) {
-                this.chart.updateOptions({
-                    labels: val,
-                });
+            labels() {
+                this.updateChart();
             },
-            series(val) {
-                this.chart.updateSeries(val);
+            series() {
+                this.updateChart();
             },
         },
         mounted() {

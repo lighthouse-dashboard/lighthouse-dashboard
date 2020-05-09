@@ -25,6 +25,7 @@
                 const options = Object.assign({}, SITE_OVERVIEW_CHART, {});
                 this.chart = new ApexCharts(this.$refs.chart, options);
                 this.chart.render();
+                this.updateChart();
             },
 
             updateChart() {

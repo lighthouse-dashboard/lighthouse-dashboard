@@ -22,7 +22,7 @@ module.exports = {
     //indexPath: path.resolve(paths.templates, 'dist/index.html'),
 
     output: {
-        publicPath: 'js/',
+        publicPath: '/js/',
         path: path.resolve(paths.assetDist, 'js'),
         filename: 'entry/[name]/index.js', // NOTE: We don't need a chunkhash as django takes care of entry modules
         chunkFilename: 'chunks/[name]/index.[chunkhash].js',
