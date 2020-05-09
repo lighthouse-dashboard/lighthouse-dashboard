@@ -1,4 +1,4 @@
-const getTheme = require('../assets/src/js/utils/get-theme');
+const getTheme = require('../assets/src/js/app/utils/get-theme');
 
 const { charts, theme } = getTheme();
 
