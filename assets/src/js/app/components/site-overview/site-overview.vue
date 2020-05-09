@@ -1,34 +1,33 @@
 <template>
-    <v-card v-inview:enter="loadData" loading="isLoading">
+    <div class='site-overview'
+            v-inview:enter="loadData">
         <project-settings v-if="showSettings"
                 :id="id"
                 @close="onSettingsClosed"/>
 
-        <v-card-title>
+        <div class='site-overview--title'>
             <site-title :is_favorite="is_favorite">
                 <v-btn text
                         color="text"
                         :to="`/projects/${id}`">{{ name }}
                 </v-btn>
             </site-title>
-            <v-spacer/>
             <site-overview-menu
                     :entries="menuEntries"
                     @openSettings="openSettings"
                     @removePage="removePage"
                     @openInfo="openInfo"
                     @runAudit="runAudit"/>
-        </v-card-title>
+        </div>
 
-        <v-card-text>
-            <line-chart :data-sets="datasets"
-                    :labels="labels"/>
-        </v-card-text>
-
-        <v-card-actions>
+        <div class='site-overview--content'>
             <span v-if="runError">{{ runError.message }}</span>
-        </v-card-actions>
-    </v-card>
+            <line-chart
+                    v-else
+                    :data-sets="datasets"
+                    :labels="labels"/>
+        </div>
+    </div>
 </template>
 
 <script>

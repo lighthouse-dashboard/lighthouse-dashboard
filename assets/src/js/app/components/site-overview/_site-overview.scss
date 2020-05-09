@@ -1,0 +1,29 @@
+.site-overview {
+    // Vars
+    --site-overview--background-color: #fff;
+    --site-overview--root-padding: calc(var(--root-spacing) * 2);
+
+    // Support
+
+    // Module
+    & {
+        & {
+            background-color: var(--site-overview--background-color);
+            padding: var(--site-overview--root-padding);
+        }
+
+        .site-overview--title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: calc(var(--root-spacing) * 2);
+        }
+
+        .site-overview--content {
+            display: block;
+        }
+    }
+
+    // Facets
+
+    // States
+}

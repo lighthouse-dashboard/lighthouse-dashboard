@@ -1,5 +1,7 @@
 .favorite-project-overview {
     // Vars
+    --favorite-project-overview--row-gap: calc(var(--root-spacing) * 2);
+    --favorite-project-overview--column-gap: calc(var(--root-spacing) * 2);
 
     // Support
 
@@ -7,8 +9,8 @@
     & {
         .favorite-project-overview--content {
             display: grid;
-            row-gap: var(--root-spacing);
-            column-gap: var(--root-spacing);
+            row-gap: var(--favorite-project-overview--row-gap);
+            column-gap: var(--favorite-project-overview--column-gap);
             grid-template-areas: '. . . .';
             grid-template-columns: 3fr 3fr 3fr 3fr;
 
