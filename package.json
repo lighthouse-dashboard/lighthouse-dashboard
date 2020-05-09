@@ -1,6 +1,6 @@
 {
     "name": "lighthouse-dashboard",
-    "version": "5.10.6",
+    "version": "5.10.7",
     "private": true,
     "description": "App to keep track of your websites by showing their lighthouse results",
     "author": {
@@ -15,14 +15,11 @@
     "scripts": {
         "dev-server": "NODE_ENV=development node_modules/.bin/nodemon",
         "dev": "gulp",
-        
         "storybook": "start-storybook -s ./assets -p 8000",
-        
         "test": "npm run lint && TZ=Europe/Berlin mocha src/**/*.spec.js -r esm",
         "lint": "npm run lint-frontend && npm run lint-backend",
         "lint-frontend": "eslint -c .eslintrc ./assets/src",
         "lint-backend": "eslint -c .eslintrc ./src",
-        
         "start": "node -r esm index.js",
         "build": "gulp build && npm run build-storybook",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
