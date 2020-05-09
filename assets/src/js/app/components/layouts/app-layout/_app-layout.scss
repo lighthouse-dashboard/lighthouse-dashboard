@@ -1,9 +1,9 @@
-.app.app {
+.app-layout.app-layout {
     // Vars
-    --app--header-height: var(--root-sites--header-height);
-    --app--content-background: var(--root-color--app-content-background);
-    --app--edge-gutter: calc(var(--root-spacing) * 2);
-    --app--edge-gutter-md: calc(var(--root-spacing) * 4);
+    --app-layout--header-height: var(--root-sites--header-height);
+    --app-layout--content-background: var(--root-color--app-content-background);
+    --app-layout--edge-gutter: calc(var(--root-spacing) * 2);
+    --app-layout--edge-gutter-md: calc(var(--root-spacing) * 4);
 
     // Support
     // Support
@@ -20,15 +20,15 @@
             }
         }
 
-        .app--content-wrapper {
-            background-color: var(--app--content-background);
+        .app-layout--content-wrapper {
+            background-color: var(--app-layout--content-background);
             width: 100%;
         }
 
-        .app--content {
+        .app-layout--content {
             max-width: 1440px;
             margin: 0 auto;
-            padding: var(--app--header-height) var(--app--edge-gutter);
+            padding: var(--app-layout--header-height) var(--app-layout--edge-gutter);
 
             @include mq('xl') {
                 max-width: 1080px;
@@ -45,7 +45,7 @@
     }
 
     // Facets
-    &.app__logged-in {
+    &.app-layout__logged-in {
         & {
             grid-template-areas: 'sidenav content';
             grid-template-columns: 2fr 10fr;
