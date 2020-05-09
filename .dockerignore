@@ -5,4 +5,5 @@ node_modules
 .gitignore
 
 assets/build
+assets/storybook
 .env

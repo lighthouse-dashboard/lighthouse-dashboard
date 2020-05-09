@@ -27,6 +27,21 @@ export default [
     },
     {
         method: 'GET',
+        path: '/storybook/{param*}',
+        options: {
+            description: 'Stroybook',
+            auth: false,
+        },
+        handler: {
+            directory: {
+                path: 'assets/storybook/',
+                redirectToSlash: true,
+                index: false,
+            },
+        },
+    },
+    {
+        method: 'GET',
         path: '/{param*}',
         options: {
             description: 'Static assets',

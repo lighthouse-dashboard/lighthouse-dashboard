@@ -16,7 +16,7 @@
                 </button>
                 <div class="navigation--header">
                     <img class="navigation--logo"
-                            src="static/img/logo_small.png"/>
+                            src="/static/img/logo_small.png"/>
                     <p class="navigation--title">
                         {{ title }}
                     </p>
@@ -58,7 +58,6 @@
 </template>
 
 <script>
-    import { name, version } from '../../../../../../package.json';
     import bemMixin from '../../mixins/bem-mixin';
     import NavigationToggle from './navigation-toggle/navigation-toggle';
 
@@ -70,11 +69,15 @@
                 type: String,
                 required: true,
             },
+
+            version: {
+                type: String,
+                required: true,
+            },
         },
         data() {
             return {
                 isOpen: false,
-                version,
             };
         },
         computed: {

@@ -15,6 +15,7 @@ yarn-error.log*
 *.sln
 
 assets/dist
+assets/storybook
 templates/dist
 
 .env

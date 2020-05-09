@@ -3,6 +3,7 @@
             :class='classes'>
         <div>
             <navigation :title='name'
+                    :version='version'
                     v-if="isLoggedIn"/>
         </div>
 
@@ -17,7 +18,7 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { name } from '../../../../package.json';
+    import { name, version } from '../../../../package.json';
     import Navigation from './components/navigation/navigation';
     import bemMixin from './mixins/bem-mixin';
     import Login from './pages/login/login';
@@ -32,6 +33,7 @@
         data() {
             return {
                 name,
+                version
             };
         },
 
@@ -40,9 +42,10 @@
             classes() {
                 return [
                     this.createIfFacet(this.isLoggedIn, 'logged-in'),
-                ]
-            }
+                ];
+            },
         },
+
         methods: {
             ...mapActions('login', ['logout']),
         },
