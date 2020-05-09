@@ -1,0 +1,34 @@
+.favorite-project-overview {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        .favorite-project-overview--content {
+            display: grid;
+            row-gap: var(--root-spacing);
+            column-gap: var(--root-spacing);
+            grid-template-areas: '. . . .';
+            grid-template-columns: 3fr 3fr 3fr 3fr;
+
+            @include mq('<=xl') {
+                grid-template-areas: '. . .';
+                grid-template-columns: 3fr 3fr 3fr;
+            }
+
+            @include mq('<=md') {
+                grid-template-areas: '. .';
+                grid-template-columns: 6fr 6fr;
+            }
+            @include mq('<=sm') {
+                grid-template-areas: '.';
+                grid-template-columns: 12fr;
+            }
+        }
+    }
+
+    // Facets
+
+    // States
+}
