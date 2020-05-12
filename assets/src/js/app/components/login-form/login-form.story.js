@@ -1,7 +1,7 @@
 import { text } from '@storybook/addon-knobs';
 import LoginForm from './login-form.vue';
 
-export default { title: 'Login Form' };
+export default { title: 'Components / Login Form' };
 
 export const component = () => ({
     components: { LoginForm },

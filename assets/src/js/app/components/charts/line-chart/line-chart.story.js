@@ -1,6 +1,6 @@
 import LineChart from './line-chart.vue';
 
-export default { title: 'Charts / Line Chart' };
+export default { title: 'Components / Charts / Line Chart' };
 
 export const component = () => ({
     components: { LineChart },

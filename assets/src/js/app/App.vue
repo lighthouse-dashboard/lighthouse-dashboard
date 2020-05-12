@@ -1,7 +1,7 @@
 <template>
     <app-layout :class='classes'>
         <template slot='sidebar'>
-            <navigation :title='name'
+            <side-nav :title='name'
                     :version='version'
                     v-if="isLoggedIn"/>
         </template>
@@ -17,7 +17,7 @@
     import { mapActions, mapState } from 'vuex';
     import { name, version } from '../../../../package.json';
     import AppLayout from './components/layouts/app-layout/app-layout';
-    import Navigation from './components/navigation/navigation';
+    import SideNav from './components/side-nav/side-nav';
     import bemMixin from './mixins/bem-mixin';
     import Login from './pages/login/login';
     import theme from './utils/get-theme';
@@ -26,7 +26,7 @@
         components: {
             AppLayout,
             Login,
-            Navigation,
+            SideNav,
         },
         mixins: [bemMixin('app')],
         data() {

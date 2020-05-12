@@ -1,9 +1,11 @@
+@import './design-system/breakpoints.json';
+
 $breakpoints: (
-    xs: 380px,
-    sm: 600px,
-    md: 960px,
-    lg: 1280px,
-    xl: 1920px
+    xs: map_get($_breakpoints, 'xs'),
+    sm: map_get($_breakpoints, 'sm'),
+    md: map_get($_breakpoints, 'md'),
+    lg: map_get($_breakpoints, 'lg'),
+    xl: map_get($_breakpoints, 'xl')
 );
 
 $screen-xs-min: map-get($breakpoints, 'xs');
@@ -11,7 +13,6 @@ $screen-sm-min: map-get($breakpoints, 'sm');
 $screen-md-min: map-get($breakpoints, 'md');
 $screen-lg-min: map-get($breakpoints, 'lg');
 $screen-xl-min: map-get($breakpoints, 'xl');
-
 
 $screen-xs-max: ($screen-sm-min - 1);
 $screen-sm-max: ($screen-md-min - 1);

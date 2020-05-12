@@ -1,0 +1,75 @@
+.side-nav-toggle {
+    // Vars
+    --side-nav-toggle--border-radius: 20px;
+    --side-nav-toggle--border-radius-box-size: 80px;
+    --side-nav-toggle--border-radius-outer-mobile: 20px;
+    --side-nav-toggle--background-color: var(--root-color--navigation-mobile-toggle-background);
+    --side-nav-toggle--border-radius-transition-duration: 400ms;
+
+    // Support
+
+    // Module
+    & {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 0;
+        width: 40px;
+        transition: width var(--side-nav-toggle--border-radius-transition-duration) ease-in-out, border-radius var(--side-nav-toggle--border-radius-transition-duration) ease-in-out;
+        transform: translateY(-50%);
+        background-color: var(--side-nav-toggle--background-color);
+        border-radius: 0 var(--side-nav-toggle--border-radius) var(--side-nav-toggle--border-radius) 0;
+        box-shadow: 0 0 4px 0 rgba(20, 20, 20, 0.2);
+
+        &:hover {
+            width: 80px;
+            box-shadow: 0 0 8px 0 rgba(20, 20, 20, 0.2);
+
+            .side-nav-toggle--toggle-btn {
+                opacity: 1;
+            }
+        }
+
+        &::before, &::after {
+            z-index: var(--root-index--navigation-mobile-toggle);
+            content: "";
+            position: absolute;
+            background-color: transparent;
+            height: var(--side-nav-toggle--border-radius-box-size);
+            width: var(--side-nav-toggle--border-radius-outer-mobile);
+            left: 0;
+            border-radius: 0;
+            transition: width var(--side-nav-toggle--border-radius-transition-duration) ease-in-out;
+        }
+
+        &::before {
+            top: calc(var(--side-nav-toggle--border-radius-box-size) * -1);
+            border-bottom-left-radius: var(--side-nav-toggle--border-radius-outer-mobile);
+            box-shadow: 0 calc(var(--side-nav-toggle--border-radius-outer-mobile)) 0 0 var(--side-nav-toggle--background-color); /* This is where the magic happens! */
+        }
+
+        &::after {
+            top: 100%;
+            border-radius: var(--side-nav-toggle--border-radius-outer-mobile) 0 0 0;
+            box-shadow: 0 calc(var(--side-nav-toggle--border-radius-outer-mobile) * -1) 0 0 var(--side-nav-toggle--background-color); /* This is where the magic happens! */
+        }
+    }
+
+    .side-nav-toggle--content-wrapper {
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .side-nav-toggle--toggle-btn {
+        padding: calc(var(--root-spacing) * 2);
+        position: relative;
+        z-index: var(--root-index--navigation-mobile-toggle-btn);
+        text-overflow: ellipsis;
+        opacity: 0;
+        transition: opacity var(--side-nav-toggle--border-radius-transition-duration) ease-in;
+    }
+
+    // Facets
+
+    // States
+}

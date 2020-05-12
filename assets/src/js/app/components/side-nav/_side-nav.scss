@@ -1,15 +1,15 @@
-.navigation {
+.side-nav {
     // Vars
-    --navigation--border-radius: 20px;
-    --navigation--color-text: var(--navigation--color-text);
-    --navigation--color-background: var(--root-color--navigation-background);
-    --navigation--color-link-active-color: var(--color-mono-black);
-    --navigation--color-link-active-background: var(--root-color--app-content-background);
-    --navigation--border-radius-outer: 40px;
-    --navigation--border-radius-box-size: 80px;
-    --navigation-toggle--border-radius-transition-duration: 400ms;
-    --navigation--border-radius-transition-delay: 200ms;
-    --navigation--backdrop-color: rgba(20, 20, 20, 0.4);
+    --side-nav--border-radius: 20px;
+    --side-nav--color-text: var(--navigation--color-text);
+    --side-nav--color-background: var(--root-color--navigation-background);
+    --side-nav--color-link-active-color: var(--color-mono-black);
+    --side-nav--color-link-active-background: var(--root-color--app-content-background);
+    --side-nav--border-radius-outer: 40px;
+    --side-nav--border-radius-box-size: 80px;
+    --side-nav-toggle--border-radius-transition-duration: 400ms;
+    --side-nav--border-radius-transition-delay: 200ms;
+    --side-nav--backdrop-color: rgba(20, 20, 20, 0.4);
 
 
     // Support
@@ -20,8 +20,8 @@
             height: 100%;
         }
 
-        .navigation--drawer {
-            background-color: var(--navigation--color-background);
+        .side-nav--drawer {
+            background-color: var(--side-nav--color-background);
             position: sticky;
             top: 0;
             z-index: var(--root-index--navigation);
@@ -34,7 +34,7 @@
             }
         }
 
-        .navigation--close-btn {
+        .side-nav--close-btn {
             display: none;
             position: absolute;
             right: 0;
@@ -47,16 +47,16 @@
             }
         }
 
-        .navigation--mobile-toggle {
+        .side-nav--mobile-toggle {
             z-index: var(--root-index--navigation-mobile-toggle);
         }
 
-        .navigation--title {
+        .side-nav--title {
             font-size: 1rem;
             margin: 0;
         }
 
-        .navigation--header {
+        .side-nav--header {
             padding: var(--root-spacing);
             margin-bottom: calc(var(--root-spacing) * 2);
             display: flex;
@@ -64,58 +64,58 @@
             align-content: center;
         }
 
-        .navigation--top {
+        .side-nav--top {
             flex: 1 1 auto;
             position: relative;
             padding-top: 24px;
         }
 
-        .navigation--list.navigation--list {
+        .side-nav--list.side-nav--list {
             padding: 0 0 0 calc(var(--root-spacing) * 3);
         }
 
-        .navigation--list-item.navigation--list-item__footer {
+        .side-nav--list-item.side-nav--list-item__footer {
             padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 5) calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 2);
         }
 
-        .navigation--list-item.navigation--list-item:not(.navigation--list-item__footer) {
+        .side-nav--list-item.side-nav--list-item:not(.side-nav--list-item__footer) {
             margin-bottom: var(--root-spacing);
             display: block;
             position: relative;
             padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 5) calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 2);
-            color: var(--navigation--color-text);
+            color: var(--side-nav--color-text);
             font-size: 1.4rem;
             line-height: 1.2;
             transition: background-color $trs-base, color $trs-base;
-            border-radius: var(--navigation--border-radius) 0 0 var(--navigation--border-radius);
+            border-radius: var(--side-nav--border-radius) 0 0 var(--side-nav--border-radius);
             cursor: pointer;
 
             &:hover {
-                color: var(--navigation--color-text);
+                color: var(--side-nav--color-text);
                 background-color: var(--color-hover);
             }
 
             &::before, &::after {
                 content: "";
                 border-radius: 0;
-                transition: border-radius var(--navigation-toggle--border-radius-transition-duration) ease-in-out;
+                transition: border-radius var(--side-nav-toggle--border-radius-transition-duration) ease-in-out;
             }
 
-            &.navigation--list-item__active {
+            &.side-nav--list-item__active {
                 position: relative;
-                color: var(--navigation--color-link-active-color);
-                box-shadow: inset 0 100px 0 0 var(--navigation--color-link-active-background); /* This is where the magic happens! */
+                color: var(--side-nav--color-link-active-color);
+                box-shadow: inset 0 100px 0 0 var(--side-nav--color-link-active-background); /* This is where the magic happens! */
 
                 &::before {
                     position: absolute;
                     right: 0;
-                    top: calc(var(--navigation--border-radius-box-size) * -1);
+                    top: calc(var(--side-nav--border-radius-box-size) * -1);
                     z-index: 10;
                     background-color: transparent;
-                    height: var(--navigation--border-radius-box-size);
-                    width: var(--navigation--border-radius-outer);
-                    border-radius: 0 0 var(--navigation--border-radius-outer) 0;
-                    box-shadow: 0 calc(var(--navigation--border-radius-outer)) 0 0 var(--navigation--color-link-active-background); /* This is where the magic happens! */
+                    height: var(--side-nav--border-radius-box-size);
+                    width: var(--side-nav--border-radius-outer);
+                    border-radius: 0 0 var(--side-nav--border-radius-outer) 0;
+                    box-shadow: 0 calc(var(--side-nav--border-radius-outer)) 0 0 var(--side-nav--color-link-active-background); /* This is where the magic happens! */
                 }
 
                 &::after {
@@ -125,18 +125,18 @@
                     top: 100%;
 
                     background-color: transparent;
-                    height: var(--navigation--border-radius-box-size);
-                    width: var(--navigation--border-radius-outer);
-                    border-radius: 0 var(--navigation--border-radius-outer) 0 0;
-                    box-shadow: 0 calc(var(--navigation--border-radius-outer) * -1) 0 0 var(--navigation--color-link-active-background); /* This is where the magic happens! */
+                    height: var(--side-nav--border-radius-box-size);
+                    width: var(--side-nav--border-radius-outer);
+                    border-radius: 0 var(--side-nav--border-radius-outer) 0 0;
+                    box-shadow: 0 calc(var(--side-nav--border-radius-outer) * -1) 0 0 var(--side-nav--color-link-active-background); /* This is where the magic happens! */
                 }
             }
         }
     }
 
     // Facets
-    &.navigation__open {
-        .navigation--drawer {
+    &.side-nav__open {
+        .side-nav--drawer {
             position: fixed;
             width: 320px;
             left: 0;
@@ -145,9 +145,9 @@
         }
 
         @include mq('<=lg') {
-            .navigation--backdrop {
+            .side-nav--backdrop {
                 z-index: var(--root-index--navigation-backdrop);
-                background-color: var(--navigation--backdrop-color);
+                background-color: var(--side-nav--backdrop-color);
                 position: fixed;
                 top: 0;
                 left: 0;

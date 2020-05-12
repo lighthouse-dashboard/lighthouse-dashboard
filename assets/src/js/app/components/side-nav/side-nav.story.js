@@ -1,10 +1,10 @@
 import { text } from '@storybook/addon-knobs';
-import Navigation from './navigation.vue';
+import SideNav from './side-nav.vue';
 
-export default { title: 'Navigation' };
+export default { title: 'Components / Side Nav' };
 
 export const component = () => ({
-    components: { Navigation },
+    components: { SideNav },
     props: {
         title: {
             default: text('Title', 'Lighthouse Dashboard'),
@@ -13,5 +13,5 @@ export const component = () => ({
             default: text('Version', '1.0.0'),
         },
     },
-    template: '<navigation :title="title" :version="version"/>'
+    template: '<side-nav :title="title" :version="version"/>'
 });
