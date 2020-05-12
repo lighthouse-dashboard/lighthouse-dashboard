@@ -8,7 +8,6 @@ import SpeedOverview from './components/favorite-comparison/favorite-comparison'
 import LatestAuditsFeed from './components/latest-audits-feed/latest-audits-feed';
 import formatDate from './filters/format-date';
 import routes from './pages/routes';
-import vuetify from './plugins/vuetify';
 import store from './vuex';
 
 Vue.config.productionTip = false;
