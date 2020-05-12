@@ -33,6 +33,16 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.story\.js?$/,
+                loaders: [
+                    {
+                        loader: require.resolve('@storybook/source-loader'),
+                        options: { parser: 'javascript' },
+                    },
+                ],
+                enforce: 'pre',
+            },
+            {
                 test: /\.s(c|a)ss$/,
                 use: [
                     'vue-style-loader',

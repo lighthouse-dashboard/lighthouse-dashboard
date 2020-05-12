@@ -1,3 +1,12 @@
+html {
+    font-size: 62.5%; /* Sets up the Base 10 stuff */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+}
+
 h1, .h1 {
     @include Headline1;
     margin-bottom: var(--root-spacing);

@@ -15,13 +15,14 @@
 
 <script>
     import CONFIG from '../../../../../../config/dashboard';
+    import withReports from '../../containers/with-reports';
     import SectionHeader from '../section-header/section-header';
     import SiteOverview from '../site-overview/site-overview.vue';
 
     export default {
         components: {
             SectionHeader,
-            SiteOverview,
+            SiteOverview: withReports(SiteOverview),
         },
         props: {
             sites: {

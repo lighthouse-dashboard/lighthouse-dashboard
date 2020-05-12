@@ -9,6 +9,15 @@ import { _breakpoints } from '../design-system/breakpoints.json'
 
 registry(Vue);
 
+addParameters({
+    options: {
+        // display panel that shows addon configurations
+        showPanel: true,
+        // where to show the addon panel --- @type {('bottom'|'right')}
+        panelPosition: 'bottom',
+    }
+});
+
 addDecorator(withKnobs);
 addDecorator(jsxDecorator);
 addDecorator(StoryRouter({
@@ -30,6 +39,6 @@ const customViewports = Object.entries(_breakpoints).reduce((acc, [key, value]) 
 addParameters({
     viewport: {
         viewports: customViewports,
-        defaultViewport: 'XL',
+        defaultViewport: 'xl',
     },
 });

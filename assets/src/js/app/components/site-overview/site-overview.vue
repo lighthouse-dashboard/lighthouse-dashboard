@@ -6,18 +6,16 @@
                 @close="onSettingsClosed"/>
 
         <div class='site-overview--title'>
-            <site-title :is_favorite="is_favorite">
-                <v-btn text
-                        color="text"
-                        :to="`/projects/${id}`">{{ name }}
-                </v-btn>
-            </site-title>
+            <router-link to="`/projects/${id}`">
+                <btn>
+                    {{ name }}
+                </btn>
+            </router-link>
             <site-overview-menu
                     :entries="menuEntries"
                     @openSettings="openSettings"
                     @removePage="removePage"
-                    @openInfo="openInfo"
-                    @runAudit="runAudit"/>
+                    @openInfo="openInfo"/>
         </div>
 
         <div class='site-overview--content'>
@@ -33,7 +31,7 @@
 <script>
     import { mapActions } from 'vuex';
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
-    import reportsToLineChart from '../../../../../../src/transformer/reports-to-line-chart';
+    import Btn from '../base/btn/btn';
     import LineChart from '../charts/line-chart/line-chart';
     import ProjectSettings from '../site-settings/site-settings';
     import SiteTitle from '../site-title/site-title';
@@ -41,6 +39,7 @@
 
     export default {
         components: {
+            Btn,
             LineChart,
             SiteTitle,
             ProjectSettings,
@@ -65,8 +64,13 @@
                 type: Boolean,
                 required: true,
             },
-            token: {
-                type: String,
+
+            datasets: {
+                type: Array,
+                required: true,
+            },
+            labels: {
+                type: Array,
                 required: true,
             },
         },
@@ -76,8 +80,7 @@
                 showSettings: false,
                 showInfo: false,
                 chart: null,
-                datasets: [],
-                labels: [],
+
                 isLoading: false,
                 runError: null,
                 interval: null,
@@ -103,26 +106,7 @@
 
             loadData() {
                 this.isLoading = true;
-                return this.fetchReportsForSite({ id: this.id })
-                    .then(data => reportsToLineChart(data))
-                    .then(({ datasets, labels }) => {
-                        this.datasets = datasets;
-                        this.labels = labels;
-                    })
-                    .finally(() => {
-                        this.isLoading = false;
-                    });
-            },
 
-            runAudit() {
-                this.isLoading = true;
-                return this.launchAuditForSite({ id: this.id })
-                    .then(() => {
-                        return this.loadData();
-                    })
-                    .finally(() => {
-                        this.isLoading = false;
-                    });
             },
 
             async removePage() {
