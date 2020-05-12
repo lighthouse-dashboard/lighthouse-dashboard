@@ -1,11 +1,32 @@
 .login-form {
     // Vars
+    --login-form--bezel: calc(var(--root-spacing) * 2);
+    --login-form--background: var(--root-color--app-content-background);
 
     // Support
 
     // Module
     & {
-        //
+        & {
+            display: flex;
+            flex-direction: column;
+            padding: var(--login-form--bezel);
+            background-color: var(--login-form--background);
+        }
+
+        .login-form--content {
+            display: flex;
+            margin-top: var(--root-spacing);
+            align-content: flex-start;
+        }
+
+        .login-form--input-wrapper {
+            width: 100%;
+            max-width: 280px;
+            margin-right: 12px;
+            display: flex;
+            flex-direction: column;
+        }
     }
 
     // Facets

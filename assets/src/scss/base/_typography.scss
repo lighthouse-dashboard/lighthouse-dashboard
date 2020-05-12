@@ -1,0 +1,63 @@
+h1, .h1 {
+    @include Headline1;
+    margin-bottom: var(--root-spacing);
+}
+
+h2, .h2 {
+    @include Headline2;
+    margin-bottom: var(--root-spacing);
+}
+
+h3, .h3 {
+    @include Headline3;
+    margin-bottom: var(--root-spacing);
+}
+
+h4, .h4 {
+    @include Headline4;
+    margin-bottom: var(--root-spacing);
+}
+
+h5, .h5 {
+    @include Headline5;
+    margin-bottom: var(--root-spacing);
+}
+
+h6, .h6 {
+    @include Headline6;
+    margin-bottom: var(--root-spacing);
+}
+
+.subtitle1 {
+    @include Subtitle1;
+    margin-bottom: var(--root-spacing);
+}
+
+.subtitle2 {
+    @include Subtitle2;
+    margin-bottom: var(--root-spacing);
+}
+
+p, span, .body1 {
+    @include Body1;
+    margin-bottom: var(--root-spacing);
+}
+
+.body2 {
+    @include Body2;
+    margin-bottom: var(--root-spacing);
+}
+
+button, .button {
+    @include Button;
+}
+
+.caption {
+    @include Caption;
+    margin-bottom: var(--root-spacing);
+}
+
+.overline {
+    @include Overline;
+    margin-bottom: var(--root-spacing);
+}

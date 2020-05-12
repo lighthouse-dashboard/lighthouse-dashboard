@@ -1,0 +1,43 @@
+.input-field {
+    // Vars
+    --input-field--border-color: var(--root-color--divider);
+    --input-field--background-active: var(--root-color--input-active-background);
+    --input-field--vert-input-bezel: calc(var(--root-spacing));
+    --input-field--horiz-input-bezel: calc(var(--root-spacing) * 0.5);
+    --input-field--input-border-radius: 2px;
+    --input-field--vert-main-margin: calc(var(--root-spacing) * 0.5);
+
+    // Support
+
+    // Module
+    & {
+        & {
+            margin: 0 var(--input-field--vert-main-margin);
+            width: 100%;
+        }
+
+        .input-field--input {
+            @include Caption;
+            display: block;
+            width: 100%;
+            border: solid 1px var(--input-field--border-color);
+            border-radius: var(--input-field--input-border-radius);
+            padding: var(--input-field--vert-input-bezel) var(--input-field--horiz-input-bezel);
+            transition: background-color 200ms;
+
+            &:focus {
+                background-color: var(--input-field--background-active);
+            }
+        }
+
+        .input-field--error {
+            @include Caption;
+            color: var(--root-color--signal-error);
+        }
+
+    }
+
+    // Facets
+
+    // States
+}

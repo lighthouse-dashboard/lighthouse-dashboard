@@ -1,29 +1,35 @@
 <template>
     <form class="login-form"
             @submit.prevent="onLogin">
-        <v-card-title>
+        <h4>
             {{ title }}
-        </v-card-title>
-        <v-card-text>
-            <input
-                    v-model="password"
-                    type="password"
-                    :error="!!error"
-                    :error-messages="error && error.message"/>
-        </v-card-text>
-        <v-card-actions>
-            <v-btn align="right"
-                    @click="onLogin">
-                Login
-            </v-btn>
-        </v-card-actions>
+        </h4>
+
+        <div class='login-form--content'>
+            <div class='login-form--input-wrapper'>
+                <input-field
+                        v-model="password"
+                        placeholder='Password'
+                        type="password"
+                        :error='errorMessage'
+                />
+            </div>
+            <div>
+                <btn @click="onLogin">
+                    Login
+                </btn>
+            </div>
+        </div>
     </form>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
+    import Btn from '../base/btn/btn';
+    import InputField from '../base/input-field/input-field';
 
     export default {
+        components: { InputField, Btn },
         props: {
             title: {
                 type: String,
@@ -38,6 +44,13 @@
                 isLoading: false,
             };
         },
+
+        computed: {
+            errorMessage() {
+                return this.error?.message;
+            },
+        },
+
         methods: {
             ...mapActions('login', ['doLogin']),
 

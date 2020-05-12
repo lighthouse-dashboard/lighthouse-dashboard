@@ -1,0 +1,60 @@
+.btn {
+    // Vars
+    --button--vert-bezel: calc(var(--root-spacing));
+    --button--horiz-bezel: calc(var(--root-spacing) * 2);
+    --button--primary-color: var(--root-color--button-background-primary);
+    --button--primary-color-accent: var(--root-color--button-background-accent-primary);
+    --button--text-color: var(--root-color--button-text-primary);
+    --button--text-color-accent: var(--root-color--button-text-accent-primary);
+    --button--border-radius: 2px;
+    --button--vert-main-margin: calc(var(--root-spacing) * 0.5);
+    --button--underline-height: 4px;
+
+    // Support
+
+    // Module
+    & {
+        & {
+            margin: 0 var(--button--vert-main-margin);
+            overflow: hidden;
+        }
+
+        .btn--content {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    // Facets
+    &.btn__primary {
+        & {
+            padding: var(--button--vert-bezel) var(--button--horiz-bezel);
+            background-color: var(--button--primary-color);
+            color: var(--button--text-color);
+            border-radius: var(--button--border-radius);
+            position: relative;
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0;
+                background-color: var(--button--primary-color-accent);
+                transition: width 200ms ease-in-out, height 200ms ease-in-out;
+            }
+
+            &:hover {
+                color: var(--button--text-color-accent);
+
+                &:after {
+                    width: 100%;
+                    height: calc(100% - var(--button--underline-height));
+                }
+            }
+        }
+    }
+
+    // States
+}

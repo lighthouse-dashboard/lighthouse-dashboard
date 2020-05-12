@@ -1,0 +1,90 @@
+@mixin Headline1() {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 9.6rem;
+    letter-spacing: -1.5px;
+}
+
+@mixin Headline2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 6.0rem;
+    letter-spacing: -0.5px;
+}
+
+@mixin Headline3 {
+    font-family: "Roboto", sans-serif;
+    font-size: 4.8rem;
+    font-weight: 500;
+    letter-spacing: -0px;
+}
+
+@mixin Headline4 {
+    font-family: "Roboto", sans-serif;
+    font-size: 3.4rem;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+}
+
+@mixin Headline5 {
+    font-family: "Roboto", sans-serif;
+    font-size: 2.4rem;
+    font-weight: 500;
+    letter-spacing: 0px;
+}
+
+@mixin Headline6 {
+    font-family: "Roboto", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.15px;
+}
+
+@mixin Subtitle1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15px;
+}
+
+@mixin Subtitle2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+}
+
+@mixin Body1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+@mixin Body2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+}
+
+@mixin Button {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1.25px;
+}
+
+@mixin Caption {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+}
+
+@mixin Overline {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+}

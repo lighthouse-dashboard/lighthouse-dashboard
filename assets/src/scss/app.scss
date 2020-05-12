@@ -1,10 +1,12 @@
 @import 'node_modules/@dreipol/scss-mq/index';
 
-@import 'base/reset';
-@import 'base/general';
-
 @import 'vars/**/_!(_|*__|*--)*';
 @import 'helpers/**/_!(_|*__|*--)*';
+
+@import 'base/reset';
+@import 'base/general';
+@import 'base/typography';
+
 
 @import 'layout/**/_!(_|*__|*--)*';
 @import 'js/app/components/**/_!(_|*__|*--)*';

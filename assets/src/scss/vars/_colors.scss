@@ -9,7 +9,21 @@
     --navigation--color-text: var(----color-mono-black);
     --color-divider: #c9c9c9;
 
-    --color-primary: #ff0000;
+    --root-color--primary: rgb(191, 78, 255);
+
+    --root-color--divider: #6c6c6c;
+
+    // Signal
+    --root-color--signal-error: #f66363;
+
+    //Buttons
+    --root-color--button-text-primary: #fff;
+    --root-color--button-background-primary: var(--root-color--primary);
+    --root-color--button-background-accent-primary: var(--root-color--button-text-primary);
+    --root-color--button-text-accent-primary: var(--root-color--button-background-primary);
+
+    // Inputs
+    --root-color--input-active-background: #fff;
 
     --root-color--navigation-background: #ffffff;
     --root-color--navigation-mobile-toggle-background: #ffffff;
