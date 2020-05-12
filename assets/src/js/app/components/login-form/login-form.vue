@@ -7,7 +7,6 @@
 
         <div class='login-form--content'>
             <div class='login-form--input-wrapper'>
-                {{ password }}
                 <input-field
                         placeholder='Password'
                         type="password"
