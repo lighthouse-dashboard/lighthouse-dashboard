@@ -6,7 +6,7 @@
                 @close="onSettingsClosed"/>
 
         <div class='site-overview--title'>
-            <router-link to="`/projects/${id}`">
+            <router-link :to="`/projects/${id}`">
                 <btn>
                     {{ name }}
                 </btn>
