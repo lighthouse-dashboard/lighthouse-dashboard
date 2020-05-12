@@ -39,8 +39,7 @@
 
         methods: {
             onChange(e) {
-                console.log(e);
-                this.$emit('input', e.target.val);
+                this.$emit('input', e.target.value);
             },
         },
 

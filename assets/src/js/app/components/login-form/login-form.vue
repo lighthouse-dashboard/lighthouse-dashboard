@@ -7,11 +7,13 @@
 
         <div class='login-form--content'>
             <div class='login-form--input-wrapper'>
+                {{ password }}
                 <input-field
-                        v-model="password"
                         placeholder='Password'
                         type="password"
+                        :value="password"
                         :error='errorMessage'
+                        @input='onChange'
                 />
             </div>
             <div>
@@ -53,6 +55,10 @@
 
         methods: {
             ...mapActions('login', ['doLogin']),
+
+            onChange(val) {
+                this.password = val;
+            },
 
             async onLogin() {
                 this.isLoading = true;
