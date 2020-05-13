@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <div>
         <v-card-title>
             {{ scoreId }}
         </v-card-title>
@@ -12,7 +12,7 @@
             <gauge-chart :labels="['']"
                     :series="[avg]"/>
         </v-card-text>
-    </v-card>
+    </div>
 </template>
 
 <script>

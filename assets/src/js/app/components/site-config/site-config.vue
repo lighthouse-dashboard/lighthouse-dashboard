@@ -1,5 +1,5 @@
 <template>
-    <v-card class="site-config">
+    <div class="site-config">
         <v-card-title>Settings</v-card-title>
         <v-card-text>
             <v-list>
@@ -42,7 +42,7 @@
                 </v-list-item>
             </v-list>
         </v-card-text>
-    </v-card>
+    </div>
 </template>
 
 <script>

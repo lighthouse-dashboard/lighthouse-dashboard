@@ -1,4 +1,6 @@
 :root {
+    // App
+    --root-color--app-content-background: #e2eafa;
 
     //Buttons
     --root-color--button-text-primary: #fff;
@@ -18,13 +20,13 @@
     --root-color--link-hover-background: var(--root-color--primary);
 
     // Site Overview
-    --root-color--site-overview-background: rgba(255, 255, 255, 0.8);
+    --root-color--site-overview-background: var(--root-color--tile-background);
 
     // Navigation
     --root-color--navigation-background: #ffffff;
     --root-color--navigation-mobile-toggle-background: #ffffff;
     --root-color--navigation--color-text: var(--color-mono-black);
-    --root-color--app-content-background: #e2eafa;
+
 
     //--root-color--app-content-background: #333;
 }

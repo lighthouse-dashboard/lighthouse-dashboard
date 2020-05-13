@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <div>
         <v-card-title>Tools</v-card-title>
         <v-card-text>
             <v-list class="site-actions-list">
@@ -17,7 +17,7 @@
                 </v-list-item>
             </v-list>
         </v-card-text>
-    </v-card>
+    </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <div>
         <v-card-title>Available HTML Reports</v-card-title>
         <v-card-text>
             <v-list class="audit-report-list">
@@ -19,7 +19,7 @@
                 </v-list-item>
             </v-list>
         </v-card-text>
-    </v-card>
+    </div>
 </template>
 
 <script>

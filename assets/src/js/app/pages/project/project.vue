@@ -1,78 +1,47 @@
 <template>
-    <div>
-        <v-toolbar color="transparent"
-                flat
-                dense
+    <div class='project'>
+        <p class='h4'>{{ currentSiteConfig.name }}</p>
+
+        <div class='project--content'
                 v-if="currentSiteConfig">
-            <v-toolbar-title>
-                {{ currentSiteConfig.name }}
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
+            <div>
+                <div class='project--averages'>
+                    <reports-average class='project--average-item'
+                            :list="reports"
+                            score-id="performance"/>
 
-            <v-btn icon
-                    title="Schedule new audit"
-                    @click="runAudit">
-                <v-icon>mdi-plus</v-icon>
-            </v-btn>
+                    <reports-average
+                            class='project--average-item'
+                            :list="reports"
+                            score-id="seo"/>
 
-            <v-btn icon
-                    title="Edit settings"
-                    @click="toggleEdit">
-                <v-icon>mdi-tune</v-icon>
-            </v-btn>
-        </v-toolbar>
+                    <reports-average
+                            class='project--average-item'
+                            :list="reports"
+                            score-id="accessibility"/>
+                </div>
+                <report-list :list="reports"/>
+            </div>
 
-        <v-container fluid>
-            <v-row>
-                <v-col cols="9">
-                    <v-row>
-                        <v-col>
-                            <reports-average :list="reports"
-                                    score-id="performance"/>
-                        </v-col>
-                        <v-col>
-                            <reports-average :list="reports"
-                                    score-id="seo"/>
-                        </v-col>
-                        <v-col>
-                            <reports-average :list="reports"
-                                    score-id="accessibility"/>
-                        </v-col>
-                    </v-row>
+            <div class='project--sidebar'>
+                <site-config
+                        class='project--sidebar-item'
+                        :config="currentSiteConfig"/>
 
-                    <v-row>
-                        <v-col cols="12">
-                            <report-list :list="reports"/>
-                        </v-col>
-                    </v-row>
-                </v-col>
+                <report-history
+                        class='project--sidebar-item'
+                        :list="reports"/>
 
-                <v-col cols="3">
-                    <v-row>
-                        <v-col cols="12"
-                                v-if="currentSiteConfig">
-                            <site-config
-                                    :config="currentSiteConfig"/>
-                        </v-col>
+                <site-actions-list
+                        class='project--sidebar-item'
+                        :url="currentSiteConfig.url"/>
 
-                        <v-col cols="12">
-                            <report-history :list="reports"/>
-                        </v-col>
+                <audit-report-list
+                        class='project--sidebar-item'
+                        :list="reports"/>
 
-
-                        <v-col cols="12"
-                                v-if="currentSiteConfig">
-                            <site-actions-list :url="currentSiteConfig.url"/>
-                        </v-col>
-
-
-                        <v-col cols="12">
-                            <audit-report-list :list="reports"/>
-                        </v-col>
-                    </v-row>
-                </v-col>
-            </v-row>
-        </v-container>
+            </div>
+        </div>
 
         <project-settings v-if="isEdit"
                 :id="id"
@@ -83,12 +52,12 @@
 <script>
     import { mapActions, mapState } from 'vuex';
     import AuditReportList from '../../components/audit-report-list/audit-report-list';
-    import ProjectSettings from '../../components/site-settings/site-settings';
     import ReportHistory from '../../components/report-history/report-history';
     import ReportList from '../../components/report-table/report-table';
     import ReportsAverage from '../../components/reports-average/reports-average';
     import SiteActionsList from '../../components/site-actions-list/site-actions-list';
     import SiteConfig from '../../components/site-config/site-config';
+    import ProjectSettings from '../../components/site-settings/site-settings';
 
     export default {
         components: {
@@ -122,6 +91,7 @@
         methods: {
             ...mapActions('sites', ['getCurrentSite', 'resetCurrentSite']),
             ...mapActions('reports', ['fetchReportsForSite', 'launchAuditForSite']),
+
             runAudit() {
                 return this.launchAuditForSite({ id: this.id });
             },

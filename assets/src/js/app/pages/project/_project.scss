@@ -1,0 +1,40 @@
+.project {
+    // Vars
+    --project--tile-background: var(--root-color--tile-background);
+
+    // Support
+
+    // Module
+    & {
+        .project--content {
+            display: grid;
+            grid-template-areas: 'content sidebar';
+            grid-template-columns: 8fr 4fr;
+            grid-column-gap: var(--root-spacing);
+            grid-row-gap: var(--root-spacing);
+        }
+
+        .project--averages {
+            display: flex;
+            margin-bottom: var(--root-spacing);
+        }
+
+        .project--average-item {
+            flex: 0 0 auto;
+            background-color: var(--project--tile-background);
+
+            & + .project--average-item {
+                margin-left: var(--root-spacing);
+            }
+        }
+
+        .project--sidebar-item {
+            background-color: var(--project--tile-background);
+            margin-bottom: var(--root-spacing);
+        }
+    }
+
+    // Facets
+
+    // States
+}

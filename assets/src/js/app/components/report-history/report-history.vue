@@ -1,11 +1,11 @@
 <template>
-    <v-card>
+    <div>
         <v-card-title>History</v-card-title>
         <v-card-text>
             <line-chart :data-sets="lineChartData.datasets"
                     :labels="lineChartData.labels"/>
         </v-card-text>
-    </v-card>
+    </div>
 </template>
 
 <script>
