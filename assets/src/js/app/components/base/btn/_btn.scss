@@ -9,6 +9,7 @@
     --button--border-radius: 2px;
     --button--vert-main-margin: calc(var(--root-spacing) * 0.5);
     --button--underline-height: 4px;
+    --button--disabled-background: var(--root-color--button-disabled-background);
 
     // Support
 
@@ -17,6 +18,7 @@
         & {
             margin: 0 var(--button--vert-main-margin);
             overflow: hidden;
+            cursor: pointer;
         }
 
         .btn--content {
@@ -54,6 +56,11 @@
                 }
             }
         }
+    }
+
+    &.btn__disabled {
+        pointer-events: none;
+        background-color: var(--button--disabled-background);
     }
 
     // States

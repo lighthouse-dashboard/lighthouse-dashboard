@@ -1,6 +1,7 @@
 <template>
     <button class='btn button'
-            :class='classes'>
+            :class='classes'
+            :disabled='disabled'>
         <span class='btn--content'>
             <slot/>
         </span>
@@ -15,6 +16,10 @@
             facet: {
                 type: String,
                 default: 'primary'
+            },
+            disabled: {
+                type: Boolean,
+                default: false,
             }
         },
 
@@ -23,6 +28,7 @@
             classes() {
                 return [
                     this.createFacet(this.facet),
+                    this.createIfFacet(this.disabled, 'disabled')
                 ];
             },
         },

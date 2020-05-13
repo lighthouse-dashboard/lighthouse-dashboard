@@ -8,6 +8,7 @@
         <div class='login-form--content'>
             <div class='login-form--input-wrapper'>
                 <input-field
+                        :disabled='isLoading'
                         placeholder='Password'
                         type="password"
                         :value="password"
@@ -16,7 +17,8 @@
                 />
             </div>
             <div>
-                <btn @click="onLogin">
+                <btn :disabled='isLoading || !isSubmittable'
+                        @click="onLogin">
                     Login
                 </btn>
             </div>
@@ -50,6 +52,10 @@
             errorMessage() {
                 return this.error?.message;
             },
+
+            isSubmittable() {
+                return this.password.length > 0;
+            },
         },
 
         methods: {
@@ -61,9 +67,10 @@
 
             async onLogin() {
                 this.isLoading = true;
+                this.error = null;
                 try {
                     await this.doLogin({ password: this.password });
-                    this.$router.push('/');
+                    this.$router.push({ name: 'dashboard' });
                     this.isLoading = false;
                 } catch (e) {
                     this.error = e;

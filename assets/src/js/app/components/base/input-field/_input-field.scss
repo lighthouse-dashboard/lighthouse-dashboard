@@ -6,18 +6,20 @@
     --input-field--horiz-input-bezel: calc(var(--root-spacing) * 0.5);
     --input-field--input-border-radius: 2px;
     --input-field--vert-main-margin: calc(var(--root-spacing) * 0.5);
+    --input-field--error-text-color: var(--root-color--signal-error);
+    --input-field--error-input-background: var(--root-color--input-error-background);
+    --input-field--disabled-input-background: var(--root-color--input-disabled-background);
 
     // Support
 
     // Module
     & {
         & {
-            margin: 0 var(--input-field--vert-main-margin);
             width: 100%;
         }
 
         .input-field--input {
-            @include Caption;
+            @include Body1;
             display: block;
             width: 100%;
             border: solid 1px var(--input-field--border-color);
@@ -31,13 +33,31 @@
         }
 
         .input-field--error {
+            display: block;
             @include Caption;
-            color: var(--root-color--signal-error);
+            color: var(--input-field--error-text-color);
+            padding-left: var(--input-field--horiz-input-bezel);
+            margin-top: var(--root-spacing);
         }
 
     }
 
     // Facets
+
+    &.input-field__has-error {
+        .input-field--input {
+            background-color: var(--input-field--error-input-background);
+            border-color: var(--input-field--error-text-color);
+        }
+    }
+
+    &.input-field__disabled {
+        .input-field--input {
+            pointer-events: none;
+            background-color: var(--input-field--disabled-input-background);
+            border: none;
+        }
+    }
 
     // States
 }

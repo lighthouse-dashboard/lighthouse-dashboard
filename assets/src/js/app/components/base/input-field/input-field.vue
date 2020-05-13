@@ -1,17 +1,23 @@
 <template>
-    <label class="input-field">
+    <label class="input-field"
+            :class='classes'>
         <input class='input-field--input'
+                :disabled='disabled'
                 :placeholder='placeholder'
                 :type='type'
                 :value='model'
                 @input='onChange'>
-        <span class='input-field--error' v-if='error'>{{ error }}</span>
+        <span class='input-field--error'
+                v-if='error'>{{ error }}</span>
         <slot/>
     </label>
 </template>
 
 <script>
+    import bemMixin from '../../../mixins/bem-mixin';
+
     export default {
+        mixins: [bemMixin('input-field')],
         props: {
             value: {
                 type: String,
@@ -29,12 +35,25 @@
                 type: String,
                 default: null,
             },
+            disabled: {
+                type: Boolean,
+                default: false,
+            }
         },
 
         data() {
             return {
                 model: '',
             };
+        },
+
+        computed: {
+            classes() {
+                return [
+                    this.createFacet(this.error ? 'has-error' : ''),
+                    this.createFacet(this.disabled ? 'disabled' : ''),
+                ];
+            },
         },
 
         methods: {

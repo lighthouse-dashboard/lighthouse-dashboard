@@ -55,7 +55,7 @@
         "es6-promise": "^4.2.8",
         "esm": "^3.2.25",
         "glob": "^7.1.6",
-        "hapi-auth-jwt2": "^8.8.1",
+        "hapi-auth-jwt2": "^10.1.0",
         "hapi-dev-errors": "^3.3.0",
         "hapi-swagger": "^13.0.0",
         "jsonwebtoken": "^8.5.1",

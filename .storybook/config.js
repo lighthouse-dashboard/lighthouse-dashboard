@@ -39,6 +39,5 @@ const customViewports = Object.entries(_breakpoints).reduce((acc, [key, value]) 
 addParameters({
     viewport: {
         viewports: customViewports,
-        defaultViewport: 'xl',
     },
 });

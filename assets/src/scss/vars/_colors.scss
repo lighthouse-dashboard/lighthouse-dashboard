@@ -2,6 +2,7 @@
     --color-mono-white: #ffffff;
     --color-mono-black: #333;
     --color-mono-gray: #6c6c6c;
+    --color-mono-light-gray: #c1c1c1;
 
 
     --color-body: #fff;
@@ -18,12 +19,15 @@
 
     //Buttons
     --root-color--button-text-primary: #fff;
+    --root-color--button-disabled-background: var(--color-mono-light-gray);
     --root-color--button-background-primary: var(--root-color--primary);
     --root-color--button-background-accent-primary: var(--root-color--button-text-primary);
     --root-color--button-text-accent-primary: var(--root-color--button-background-primary);
 
     // Inputs
     --root-color--input-active-background: #fff;
+    --root-color--input-error-background: #ffb5b5;
+    --root-color--input-disabled-background: var(--color-mono-light-gray);
 
     --root-color--navigation-background: #ffffff;
     --root-color--navigation-mobile-toggle-background: #ffffff;
