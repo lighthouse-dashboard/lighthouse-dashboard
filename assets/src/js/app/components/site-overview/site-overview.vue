@@ -1,6 +1,5 @@
 <template>
-    <div class='site-overview'
-            v-inview:enter="loadData">
+    <div class='site-overview'>
         <project-settings v-if="showSettings"
                 :id="id"
                 @close="onSettingsClosed"/>
@@ -11,11 +10,6 @@
                     {{ name }}
                 </btn>
             </router-link>
-            <site-overview-menu
-                    :entries="menuEntries"
-                    @openSettings="openSettings"
-                    @removePage="removePage"
-                    @openInfo="openInfo"/>
         </div>
 
         <div class='site-overview--content'>

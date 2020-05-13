@@ -1,8 +1,8 @@
 <template>
     <div class='favorite-project-overview'>
-        <section-header>
+        <p class='overline'>
             Projects
-        </section-header>
+        </p>
 
         <div class='favorite-project-overview--content'>
             <site-overview

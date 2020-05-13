@@ -1,7 +1,7 @@
 .side-nav {
     // Vars
     --side-nav--border-radius: 20px;
-    --side-nav--color-text: var(--navigation--color-text);
+    --side-nav--color-text: var(--root-color--navigation--color-text);
     --side-nav--color-background: var(--root-color--navigation-background);
     --side-nav--color-link-active-color: var(--color-mono-black);
     --side-nav--color-link-active-background: var(--root-color--app-content-background);
@@ -10,7 +10,7 @@
     --side-nav-toggle--border-radius-transition-duration: 400ms;
     --side-nav--border-radius-transition-delay: 200ms;
     --side-nav--backdrop-color: rgba(20, 20, 20, 0.4);
-
+    --side-nav--item-hover-background: rgba(20, 20, 20, 0.4);
 
     // Support
 
@@ -92,7 +92,7 @@
 
             &:hover {
                 color: var(--side-nav--color-text);
-                background-color: var(--color-hover);
+                background-color: var(--side-nav--item-hover-background);
             }
 
             &::before, &::after {
