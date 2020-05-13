@@ -1,11 +1,16 @@
 .reports-average {
     // Vars
+    --reports-average--bezel: calc(var(--root-spacing) * 2);
+    --reports-average--background: var(--root-color--tile-background);
 
     // Support
 
     // Module
     & {
-        //
+        & {
+            background-color: var(--project--tile-background);
+            padding: var(--reports-average--bezel);
+        }
     }
 
     // Facets

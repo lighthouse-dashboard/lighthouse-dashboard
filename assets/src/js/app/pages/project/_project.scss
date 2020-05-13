@@ -21,7 +21,6 @@
 
         .project--average-item {
             flex: 0 0 auto;
-            background-color: var(--project--tile-background);
 
             & + .project--average-item {
                 margin-left: var(--root-spacing);

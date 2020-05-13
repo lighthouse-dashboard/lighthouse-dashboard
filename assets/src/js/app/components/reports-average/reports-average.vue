@@ -1,42 +1,32 @@
 <template>
-    <div>
-        <v-card-title>
-            {{ scoreId }}
-        </v-card-title>
+    <div class='reports-average'>
+        <p class='subtitle-1'>
+            {{ title }}
+        </p>
 
-        <v-card-subtitle>
+        <p class='caption'>
             Average
-        </v-card-subtitle>
+        </p>
 
-        <v-card-text>
-            <gauge-chart :labels="['']"
-                    :series="[avg]"/>
-        </v-card-text>
+        <gauge-chart :labels="['']"
+                :series="[score]"/>
     </div>
 </template>
 
 <script>
-    import getAverageForScore from '../../utils/get-average-for-score';
     import GaugeChart from '../charts/gauge-chart/gauge-chart';
 
     export default {
         components: { GaugeChart },
         props: {
-            scoreId: {
+            title: {
                 type: String,
                 required: true,
             },
 
-            /** @type {Report[]} */
-            list: {
-                type: Array,
+            score: {
+                type: Number,
                 required: true,
-            },
-        },
-
-        computed: {
-            avg() {
-                return Math.round(getAverageForScore(this.list, this.scoreId) * 100) / 100;
             },
         },
     };

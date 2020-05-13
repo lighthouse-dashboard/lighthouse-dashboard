@@ -7,18 +7,18 @@
             <div>
                 <div class='project--averages'>
                     <reports-average class='project--average-item'
-                            :list="reports"
-                            score-id="performance"/>
+                            title='Performance'
+                            :score='getAvg("performance")'/>
 
                     <reports-average
                             class='project--average-item'
-                            :list="reports"
-                            score-id="seo"/>
+                            title='SEO'
+                            :score='getAvg("seo")'/>
 
                     <reports-average
                             class='project--average-item'
-                            :list="reports"
-                            score-id="accessibility"/>
+                            title='Accessibility'
+                            :score='getAvg("accessibility")'/>
                 </div>
                 <report-list :list="reports"/>
             </div>
@@ -58,6 +58,7 @@
     import SiteActionsList from '../../components/site-actions-list/site-actions-list';
     import SiteConfig from '../../components/site-config/site-config';
     import ProjectSettings from '../../components/site-settings/site-settings';
+    import getAverageForScore from '../../utils/get-average-for-score';
 
     export default {
         components: {
@@ -91,6 +92,10 @@
         methods: {
             ...mapActions('sites', ['getCurrentSite', 'resetCurrentSite']),
             ...mapActions('reports', ['fetchReportsForSite', 'launchAuditForSite']),
+
+            getAvg(scoreId) {
+                return Math.round(getAverageForScore(this.reports, scoreId) * 100) / 100;
+            },
 
             runAudit() {
                 return this.launchAuditForSite({ id: this.id });
