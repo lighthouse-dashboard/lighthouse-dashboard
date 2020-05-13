@@ -3,6 +3,7 @@
     font-weight: 400;
     font-size: 9.6rem;
     letter-spacing: -1.5px;
+    line-height: 1.2;
 }
 
 @mixin Headline2 {
@@ -10,6 +11,7 @@
     font-weight: 400;
     font-size: 6.0rem;
     letter-spacing: -0.5px;
+    line-height: 1.2;
 }
 
 @mixin Headline3 {
@@ -17,6 +19,7 @@
     font-size: 4.8rem;
     font-weight: 500;
     letter-spacing: -0px;
+    line-height: 1.2;
 }
 
 @mixin Headline4 {
@@ -24,6 +27,7 @@
     font-size: 3.4rem;
     font-weight: 500;
     letter-spacing: 0.25px;
+    line-height: 1.2;
 }
 
 @mixin Headline5 {
@@ -31,6 +35,7 @@
     font-size: 2.4rem;
     font-weight: 500;
     letter-spacing: 0px;
+    line-height: 1.2;
 }
 
 @mixin Headline6 {
@@ -38,6 +43,7 @@
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 0.15px;
+    line-height: 1.2;
 }
 
 @mixin Subtitle1 {
@@ -45,6 +51,7 @@
     font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: 0.15px;
+    line-height: 1.2;
 }
 
 @mixin Subtitle2 {
@@ -52,6 +59,7 @@
     font-size: 1.4rem;
     font-weight: 700;
     letter-spacing: 0.1px;
+    line-height: 1.2;
 }
 
 @mixin Body1 {
@@ -59,6 +67,7 @@
     font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: 0.5px;
+    line-height: 1.2;
 }
 
 @mixin Body2 {
@@ -66,6 +75,7 @@
     font-size: 1.4rem;
     font-weight: 500;
     letter-spacing: 0.25px;
+    line-height: 1.2;
 }
 
 @mixin Button {
@@ -73,6 +83,8 @@
     font-size: 1.4rem;
     font-weight: 700;
     letter-spacing: 1.25px;
+    line-height: 1.2;
+    text-transform: uppercase;
 }
 
 @mixin Caption {
@@ -80,6 +92,7 @@
     font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 0.4px;
+    line-height: 1.2;
 }
 
 @mixin Overline {
@@ -87,4 +100,6 @@
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 1.5px;
+    line-height: 1.2;
+    text-transform: uppercase;
 }

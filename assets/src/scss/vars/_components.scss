@@ -12,6 +12,10 @@
     --root-color--input-error-background: #ffb5b5;
     --root-color--input-disabled-background: var(--color-mono-light-gray);
 
+    // Links
+    --root-color--link-text-color: var(--root-color--primary);
+    --root-color--link-focus-text-color: #fff;
+    --root-color--link-hover-background: var(--root-color--primary);
 
     // Site Overview
     --root-color--site-overview-background: rgba(255, 255, 255, 0.8);

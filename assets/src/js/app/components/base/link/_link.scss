@@ -1,0 +1,42 @@
+.link {
+    // Vars
+    --link--color: var(--root-color--link-text-color);
+    --link--focus-color: var(--root-color--link-focus-text-color);
+    --link--background-color: var(--root-color--link-hover-background);
+    --link--root-bezel: 8px 16px;
+    --link--line-width: 2px;
+
+    // Support
+
+    // Module
+    & {
+        & {
+            color: var(--link--color);
+            position: relative;
+
+            &:before {
+                content: '';
+                position: absolute;
+                background: var(--link--color);
+                width: 0;
+                height: var(--link--line-width);
+                left: 0;
+                bottom: calc((var(--link--line-width) + 3px) * -1);
+                opacity: 0;
+
+                transition: width 200ms ease-in-out, opacity 200ms ease-in-out;
+            }
+
+            &:hover {
+                &:before {
+                    opacity: 1;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    // Facets
+
+    // States
+}

@@ -1,0 +1,21 @@
+.typography {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        & {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .typography--entry {
+            margin: 24px;
+        }
+    }
+
+    // Facets
+
+    // States
+}
