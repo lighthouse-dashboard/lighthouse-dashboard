@@ -13,5 +13,5 @@ export const component = () => ({
             default: text('Version', '1.0.0'),
         },
     },
-    template: '<side-nav :title="title" :version="version"/>'
+    template: '<side-nav :title="title" :version="version"/>',
 });

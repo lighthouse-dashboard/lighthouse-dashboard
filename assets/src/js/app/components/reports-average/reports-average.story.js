@@ -1,4 +1,4 @@
-import { number } from '@storybook/addon-knobs';
+import { number, text } from '@storybook/addon-knobs';
 import ReportsAverage from './reports-average.vue';
 
 export default { title: 'Components / Reports Average' };
@@ -10,11 +10,11 @@ export const component = () => ({
             default: number('Score', 77),
         },
         title: {
-            default: string('Title', 'Title'),
+            default: text('Title', 'Title'),
         },
     },
     data() {
         return {};
     },
-    template: '<reports-average :score="score"  :title="title" />'
+    template: '<reports-average :score="score"  :title="title" />',
 });

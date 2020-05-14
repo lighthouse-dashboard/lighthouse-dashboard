@@ -15,5 +15,5 @@ export const component = () => ({
             default: [text('Label', 'Label')],
         },
     },
-    template: '<gauge-chart :series="series" :labels="labels" />'
+    template: '<gauge-chart :series="series" :labels="labels" />',
 });

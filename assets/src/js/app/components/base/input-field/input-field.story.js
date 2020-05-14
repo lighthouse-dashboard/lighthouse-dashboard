@@ -11,7 +11,7 @@ export const component = () => ({
         },
         disabled: {
             default: boolean('Disabled', false),
-        }
+        },
     },
-    template: '<input-field :error="error" :disabled="disabled"/>'
+    template: '<input-field :error="error" :disabled="disabled"/>',
 });

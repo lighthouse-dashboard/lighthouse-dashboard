@@ -16,5 +16,5 @@ export const component = () => ({
             default: ['1', '2', '3', '4'],
         },
     },
-    template: '<line-chart :dataSets="dataSets" :labels="labels"/>'
+    template: '<line-chart :dataSets="dataSets" :labels="labels"/>',
 });

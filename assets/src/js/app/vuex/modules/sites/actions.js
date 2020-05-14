@@ -6,7 +6,7 @@ import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_LATEST_SITES, SET_SITES, UPDATE_
  * @return {Promise<T>}
  */
 export async function fetchAllSites({ commit }) {
-    const sites = await api.getAllSites()
+    const sites = await api.getAllSites();
     commit({ type: SET_SITES, sites });
 }
 
@@ -17,7 +17,7 @@ export async function fetchAllSites({ commit }) {
  * @param {string} siteId
  */
 export async function deleteSite(_, { id }) {
-    await api.deleteSite(id)
+    await api.deleteSite(id);
 }
 
 /**
@@ -26,7 +26,7 @@ export async function deleteSite(_, { id }) {
  * @return {Promise<void>}
  */
 export async function createSite({ commit }, siteConfig) {
-    await api.createSite(siteConfig);
+    const { data } = await api.createSite(siteConfig);
     commit({ type: ADD_SITE, site: data });
 }
 
@@ -42,14 +42,14 @@ export async function updateSite({ commit }, { id, delta }) {
 }
 
 /**
- * Fetch latest audites sites
+ * Fetch latest audited sites
  * @param {function} commit
  * @return {Promise<T>}
  */
 export async function getLatestSites({ commit }) {
     const sites = await api.getLatestSites();
     commit({ type: SET_LATEST_SITES, sites });
-    return data;
+    return sites;
 }
 
 /**
@@ -82,6 +82,10 @@ export function getSitesWithLatestReport() {
     return api.getSitesWithLatestReport();
 }
 
+/**
+ * Reset current page in state
+ * @param {function} commit
+ */
 export function resetCurrentSite({ commit }) {
     commit({ type: SET_CURRENT_SITE_CONFIG, config: null });
 }
@@ -97,6 +101,11 @@ export async function searchForPages({ commit }, { query }) {
     commit({ type: SET_SITES, sites });
 }
 
+/**
+ * Set collection of sites in store
+ * @param {function} commit
+ * @param {Sites.SiteConfig[]} sites
+ */
 export function setSites({ commit }, { sites }) {
     commit({ type: SET_SITES, sites });
 }

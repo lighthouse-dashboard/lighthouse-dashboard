@@ -1,5 +1,5 @@
-import camelCase from 'lodash/camelCase'
-import upperFirst from 'lodash/upperFirst'
+import camelCase from 'lodash/camelCase';
+import upperFirst from 'lodash/upperFirst';
 
 export default function registry(Vue) {
     const requireComponent = require.context(
@@ -9,11 +9,11 @@ export default function registry(Vue) {
         true,
         // The regular expression used to match base component filenames
         /[a-zA-Z0-9-]+\.vue$/
-    )
+    );
 
     requireComponent.keys().forEach(fileName => {
         // Get component config
-        const componentConfig = requireComponent(fileName)
+        const componentConfig = requireComponent(fileName);
 
         // Get PascalCase name of component
         const componentName = upperFirst(
@@ -24,7 +24,7 @@ export default function registry(Vue) {
                     .pop()
                     .replace(/\.\w+$/, '')
             )
-        )
+        );
 
 
         // Register component globally
@@ -34,6 +34,6 @@ export default function registry(Vue) {
             // exist if the component was exported with `export default`,
             // otherwise fall back to module's root.
             componentConfig.default || componentConfig
-        )
+        );
     });
 };
