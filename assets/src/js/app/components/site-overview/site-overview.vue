@@ -6,7 +6,7 @@
 
         <div class='site-overview--title'>
             <router-link class='link'
-                    :to="`/projects/${id}`">
+                    :to="{name: 'project.detail', params: {id}}">
                 {{ name }}
             </router-link>
         </div>

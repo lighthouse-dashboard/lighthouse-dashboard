@@ -24,7 +24,7 @@ export default [
 
     {
         method: 'GET',
-        path: '/index.html',
+        path: '/login',
         options: {
             description: 'Main entry point',
             auth: false,
@@ -34,7 +34,17 @@ export default [
 
     {
         method: 'GET',
-        path: '/dashboard',
+        path: '/app/',
+        options: {
+            description: 'Main entry point',
+            auth: false,
+        },
+        handler: basicViewHandler,
+    },
+
+    {
+        method: 'GET',
+        path: '/app/dashboard',
         options: {
             description: 'Dashboard page',
             auth: false,
@@ -44,7 +54,7 @@ export default [
 
     {
         method: 'GET',
-        path: '/overview',
+        path: '/app/overview',
         options: {
             description: 'Overview page',
             auth: false,
@@ -54,7 +64,7 @@ export default [
 
     {
         method: 'GET',
-        path: '/projects',
+        path: '/app/projects',
         options: {
             description: 'List of projects',
             auth: false,
@@ -64,7 +74,7 @@ export default [
 
     {
         method: 'GET',
-        path: '/projects/{id}',
+        path: '/app/projects/{id}',
         options: {
             description: 'Details of project',
             auth: false,

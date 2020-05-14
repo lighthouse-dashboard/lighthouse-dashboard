@@ -1,24 +1,42 @@
 export default [
     {
-        path: '/projects/:id',
-        name: 'projects.detail',
-        component: () => import('./project/project'),
-        props: true,
+        path: '/login',
+        name: 'login',
+        component: () => import('./login/login'),
+        meta: { requiresAuth: false },
     },
+    { path: '/', redirect: '/app' },
     {
-        path: '/projects',
-        name: 'projects',
-        component: () => import('./projects/projects'),
-    },
-    {
-        path: '/overview',
-        name: 'overview',
-        component: () => import('./overview/overview'),
-    },
-
-    {
-        path: '/',
-        name: 'home',
-        component: () => import('./dashboard/dashboard'),
+        path: '/app',
+        name: 'app',
+        component: () => import('./app/app'),
+        meta: { requiresAuth: true },
+        children: [
+            {
+                path: '',
+                name: 'dashboard',
+                component: () => import('./dashboard/dashboard'),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: 'projects/:id',
+                name: 'project.detail',
+                component: () => import('./project/project'),
+                props: true,
+                meta: { requiresAuth: true },
+            },
+            {
+                path: 'projects',
+                name: 'projects',
+                component: () => import('./projects/projects'),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: 'overview',
+                name: 'overview',
+                component: () => import('./overview/overview'),
+                meta: { requiresAuth: true },
+            },
+        ],
     },
 ];

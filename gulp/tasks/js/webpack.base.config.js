@@ -7,7 +7,7 @@ const path = require('path');
 const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+//const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 const paths = require('../../../src/config/path');
 const config = require('./config');
@@ -81,7 +81,7 @@ module.exports = {
         new VueLoaderPlugin({
             cacheDirectory: true,
         }),
-        new VuetifyLoaderPlugin(),
+      //  new VuetifyLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: path.resolve(paths.templates, 'dist/index.html'),
             template: path.resolve(paths.htmlAsset, 'index.html'),

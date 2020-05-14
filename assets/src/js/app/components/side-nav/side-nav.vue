@@ -25,7 +25,7 @@
                             active-class="side-nav--list-item__active"
                             class="side-nav--list-item"
                             exact
-                            :to="{name: 'home'}">Dashboard
+                            :to="{name: 'dashboard'}">Dashboard
                     </router-link>
 
                     <router-link

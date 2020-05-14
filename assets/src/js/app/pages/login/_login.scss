@@ -1,0 +1,18 @@
+.login {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        & {
+            display: grid;
+            grid-template-areas: '. login';
+            grid-template-columns: 4fr 4fr;
+        }
+    }
+
+    // Facets
+
+    // States
+}

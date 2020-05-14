@@ -1,5 +1,8 @@
 <template>
-    <login-form title='Login'/>
+    <div class="login">
+        <div/>
+        <login-form title='Login'/>
+    </div>
 </template>
 
 <script>
