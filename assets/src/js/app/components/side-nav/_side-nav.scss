@@ -10,7 +10,7 @@
     --side-nav-toggle--border-radius-transition-duration: 400ms;
     --side-nav--border-radius-transition-delay: 200ms;
     --side-nav--backdrop-color: rgba(20, 20, 20, 0.4);
-    --side-nav--item-hover-background: rgba(20, 20, 20, 0.4);
+    --side-nav--item-hover-background: var(--root-color-navigation--item-hover-background);
 
     // Support
 

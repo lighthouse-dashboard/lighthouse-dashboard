@@ -1,11 +1,22 @@
 .site-config {
     // Vars
+    --site-config--bezel: calc(var(--root-spacing) * 2);
 
     // Support
 
     // Module
     & {
-        //
+        & {
+            padding: var(--site-config--bezel);
+        }
+
+        .site-config--list {
+            display: block;
+        }
+
+        .site-config--list-item {
+            margin-bottom: calc(var(--root-spacing) * 2);
+        }
     }
 
     // Facets

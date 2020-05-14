@@ -5,7 +5,7 @@
                 @close="onSettingsClosed"/>
 
         <div class='site-overview--title'>
-            <router-link class='link'
+            <router-link class='link subtitle1'
                     :to="{name: 'project.detail', params: {id}}">
                 {{ name }}
             </router-link>
@@ -14,7 +14,6 @@
         <div class='site-overview--content'>
             <span v-if="runError">{{ runError.message }}</span>
             <line-chart
-                    v-else
                     :data-sets="datasets"
                     :labels="labels"/>
         </div>
@@ -24,19 +23,13 @@
 <script>
     import { mapActions } from 'vuex';
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
-    import Btn from '../base/btn/btn';
     import LineChart from '../charts/line-chart/line-chart';
     import ProjectSettings from '../site-settings/site-settings';
-    import SiteTitle from '../site-title/site-title';
-    import SiteOverviewMenu from './site-overview-menu';
 
     export default {
         components: {
-            Btn,
             LineChart,
-            SiteTitle,
             ProjectSettings,
-            SiteOverviewMenu,
         },
 
         props: {
