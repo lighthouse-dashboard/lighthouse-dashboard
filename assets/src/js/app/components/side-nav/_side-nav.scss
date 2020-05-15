@@ -11,6 +11,7 @@
     --side-nav--border-radius-transition-delay: 200ms;
     --side-nav--backdrop-color: rgba(20, 20, 20, 0.4);
     --side-nav--item-hover-background: var(--root-color-navigation--item-hover-background);
+    --side-nav--item-hover-text: var(--root-color-navigation--item-hover-text);
 
     // Support
 
@@ -91,7 +92,7 @@
             cursor: pointer;
 
             &:hover {
-                color: var(--side-nav--color-text);
+                color: var(--side-nav--item-hover-text);
                 background-color: var(--side-nav--item-hover-background);
             }
 

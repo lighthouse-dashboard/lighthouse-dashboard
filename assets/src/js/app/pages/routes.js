@@ -5,7 +5,9 @@ export default [
         component: () => import('./login/login'),
         meta: { requiresAuth: false },
     },
+
     { path: '/', redirect: '/app' },
+
     {
         path: '/app',
         name: 'app',
