@@ -4,7 +4,8 @@
             :class='classes'
             :to="to"
             :disabled='disabled'
-            :is="component">
+            :is="component"
+            v-on="$listeners">
         <span class='btn--content'>
             <slot/>
         </span>
@@ -34,6 +35,10 @@
                 default: null,
             },
 
+            isActive: {
+                type: Boolean,
+                default: false,
+            },
         },
 
         computed: {
@@ -51,6 +56,7 @@
             classes() {
                 return [
                     this.createFacet(this.facet),
+                    this.createIfFacet(this.isActive, 'active'),
                     this.createIfFacet(this.disabled, 'disabled'),
                 ];
             },

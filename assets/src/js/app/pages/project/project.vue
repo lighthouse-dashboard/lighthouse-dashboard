@@ -3,65 +3,53 @@
         <h4 class='h4 project--title'
                 v-if="currentSiteConfig">{{ currentSiteConfig.name }}</h4>
 
-        <div class="project--overview">
-            <report-history :list="reports"/>
-
-            <site-config
-                    :config="currentSiteConfig"/>
-        </div>
-
-        <div class='project--content'
+        <div class='project--overview'
                 v-if="currentSiteConfig">
             <div>
-                <report-list :list="reports"/>
-            </div>
-
-            <div class='project--sidebar'>
-
-                <tile title="Averages"
-                        class='project--sidebar-item'>
-                    <gauge-chart :labels="['Performance', 'SEO', 'Accessibility']"
-                            :series='[getAvg("performance"), getAvg("seo"), getAvg("accessibility")]'/>
+                <tile title="Latest Report"
+                        v-if="latestReport">
+                    <radar-chart :series="latestReportRadarData.series"
+                            :labels="latestReportRadarData.labels"/>
                 </tile>
-                <site-actions-list
-                        class='project--sidebar-item'
-                        :url="currentSiteConfig.url"/>
-
-                <audit-report-list
-                        class='project--sidebar-item'
-                        :list="reports"/>
             </div>
+
+            <tile title="Averages">
+                <gauge-chart :labels="['Performance', 'SEO', 'Accessibility']"
+                        :series='[getAvg("performance"), getAvg("seo"), getAvg("accessibility")]'/>
+            </tile>
+
+            <tile title="Settings">
+                <site-config :config="currentSiteConfig"/>
+            </tile>
         </div>
 
-        <project-settings v-if="isEdit"
-                :id="id"
-                @close="onCloseSettings"/>
+        <div class="project--content">
+            <report-history :list="reports"/>
+            <report-table :list="reports"/>
+        </div>
     </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import AuditReportList from '../../components/audit-report-list/audit-report-list';
     import GaugeChart from '../../components/charts/gauge-chart/gauge-chart';
+    import RadarChart from '../../components/charts/radar-chart/radar-chart';
     import ReportHistory from '../../components/report-history/report-history';
-    import ReportList from '../../components/report-table/report-table';
-    import ReportsAverage from '../../components/reports-average/reports-average';
-    import SiteActionsList from '../../components/site-actions-list/site-actions-list';
+    import ReportTable from '../../components/report-table/report-table';
     import SiteConfig from '../../components/site-config/site-config';
     import ProjectSettings from '../../components/site-settings/site-settings';
     import Tile from '../../components/tile/tile';
     import getAverageForScore from '../../utils/get-average-for-score';
+    import reportToRadarChart from '../../utils/report-to-radar-chart';
 
     export default {
         components: {
+            ReportTable,
+            RadarChart,
             Tile,
             GaugeChart,
-            SiteActionsList,
-            ReportsAverage,
             ReportHistory,
-            AuditReportList,
             SiteConfig,
-            ReportList,
             ProjectSettings,
         },
 
@@ -81,6 +69,12 @@
 
         computed: {
             ...mapState('sites', ['currentSiteConfig']),
+            latestReport() {
+                return this.reports[0];
+            },
+            latestReportRadarData() {
+                return reportToRadarChart(this.latestReport);
+            },
         },
 
         methods: {
@@ -104,15 +98,6 @@
                     .then((data) => {
                         this.reports = data;
                     });
-            },
-
-            toggleEdit() {
-                this.isEdit = !this.isEdit;
-            },
-
-            onCloseSettings() {
-                this.getCurrentSite({ siteId: this.config.id });
-                this.toggleEdit();
             },
         },
 

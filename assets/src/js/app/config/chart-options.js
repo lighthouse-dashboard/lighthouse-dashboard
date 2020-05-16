@@ -1,6 +1,6 @@
 import CONFIG from '../../../../../config/dashboard';
 
-const DEFAULT_CHART = {
+export const DEFAULT_CHART = {
     colors: CONFIG.ui.chartColors,
     plotOptions: {
         bar: {
@@ -49,7 +49,7 @@ const DEFAULT_CHART = {
 
 export const GAUGE_CHART = {
     chart: {
-        height: 350,
+        height: 300,
         type: 'radialBar',
         toolbar: {
             show: true,
@@ -63,31 +63,28 @@ export const GAUGE_CHART = {
     },
     plotOptions: {
         radialBar: {
-            startAngle: -90,
-            endAngle: 90,
-            track: {
-                background: 'rgba(0, 0, 0, 0)',
-            },
-            hollow: {
-                margin: 0,
-                size: '50%',
-                position: 'front',
-            },
             dataLabels: {
                 name: {
-                    color: CONFIG.ui.theme.primary,
-                    fontSize: '12px',
+                    fontSize: '22px',
                 },
                 value: {
-                    color: CONFIG.ui.theme.primary,
-                    fontSize: '18px',
-                    offsetY: -30,
+                    fontSize: '16px',
                 },
-                style: {
-                    colors: ['#333'],
-                },
-            },
-        },
+
+            }
+        }
+    },
+    colors: CONFIG.ui.chartColors,
+};
+
+export const RADAR_CHART = {
+    series: [],
+    chart: {
+        height: 350,
+        type: 'radar',
+    },
+    xaxis: {
+        categories: [],
     },
     colors: CONFIG.ui.chartColors,
 };

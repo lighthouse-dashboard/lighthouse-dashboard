@@ -10,13 +10,13 @@
             margin-bottom: 24px;
         }
 
-        .project--content {
+        .project--overview {
             display: grid;
-            grid-template-areas: 'content sidebar';
-            grid-template-columns: 8fr 4fr;
+            grid-template-areas: '. . .';
+            grid-template-columns: 4fr 4fr 2fr;
             grid-column-gap: var(--root-spacing);
             grid-row-gap: var(--root-spacing);
-            margin-top: var(--root-spacing);
+            margin: var(--root-spacing) 0;
         }
 
         .project--averages {
@@ -24,10 +24,10 @@
             margin-bottom: var(--root-spacing);
         }
 
-        .project--overview {
+        .project--content {
             display: grid;
-            grid-template-areas: 'content sidebar';
-            grid-template-columns: 8fr 4fr;
+            grid-template-areas: 'history audits';
+            grid-template-columns: 8fr 2fr;
             grid-column-gap: var(--root-spacing);
             grid-row-gap: var(--root-spacing);
         }

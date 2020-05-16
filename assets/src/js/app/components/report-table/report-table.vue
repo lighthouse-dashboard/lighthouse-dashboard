@@ -1,37 +1,33 @@
 <template>
-    <tile title="Audits">
-        <v-data-table
-                :headers="headers"
-                :items="items"
-                :items-per-page="10">
-
-            <template v-slot:item.performance="{ item }">
-                <v-chip :color="getColor(item.performance)"
-                        dark>{{ item.performance }}
-                </v-chip>
-            </template>
-            <template v-slot:item.hasRawData="{ item }">
-                <v-btn text
-                        target="_blank"
-                        :href="`/api/reports/report/${item._id}`"
-                        v-if="item.hasRawData">
-                    <v-icon>mdi-file-chart</v-icon>
-                </v-btn>
-            </template>
-
-            <template v-slot:item.createdAt="{ item }">
-                {{ item.createdAt | date }}
-            </template>
-        </v-data-table>
-
+    <tile title="Audits"
+            class="report-table">
+        <div class="report-table--content">
+            <list>
+                <list-item v-for="item in reportsWithHtml"
+                        :key="item._id">
+                    <btn facet="flat"
+                            target="_blank"
+                            :href="`/api/reports/report/${item._id}`">
+                        {{ item.createdAt|date }}
+                    </btn>
+                </list-item>
+            </list>
+            <div v-if="selectedReport">
+                <report-detail :report="selectedReport"/>
+            </div>
+        </div>
     </tile>
 </template>
 
 <script>
+    import Btn from '../base/btn/btn';
+    import List from '../base/list/list';
+    import ListItem from '../base/list/list-item/list-item';
+    import ReportDetail from '../report-detail/report-detail';
     import Tile from '../tile/tile';
 
     export default {
-        components: { Tile },
+        components: { ReportDetail, Btn, ListItem, List, Tile },
         props: {
             /** @type {Report[]} */
             list: {
@@ -40,35 +36,27 @@
             },
         },
 
-        computed: {
-            headers() {
+        data() {
+            return {
                 /** @type {Report} */
-                const firstReport = this.list[0];
-                if (!firstReport) {
-                    return [];
-                }
-                const scores = firstReport.values.map(v => ({ text: v.id, value: v.id }));
+                selectedReport: null,
+            };
+        },
 
-                return [
-                    { text: 'Created At', value: 'createdAt' },
-                ]
-                    .concat(scores)
-                    .concat([
-                        { text: 'Message', value: 'message' },
-                        { text: 'HTML Report', value: 'hasRawData' },
-                    ]);
-            },
-
-            items() {
-                return this.list.map((report) => {
-                    return report.values.reduce((acc, value) => {
-                        acc[value.id] = value.value;
-                        return acc;
-                    }, { ...report });
-                });
+        computed: {
+            reportsWithHtml() {
+                return this.list.filter((report) => report.hasRawData);
             },
         },
         methods: {
+            /**
+             *
+             * @param {Report} item
+             */
+            onItemClicked(item) {
+                this.selectedReport = item;
+            },
+
             getColor(score) {
                 if (score > 90) {
                     return 'green';

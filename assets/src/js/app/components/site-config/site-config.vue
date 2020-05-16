@@ -1,6 +1,5 @@
 <template>
-    <tile class="site-config"
-            title="Settings">
+    <div class="site-config">
         <list class="site-config--list">
             <list-item class="site-config--list-item">
                 <p class="caption">Name</p>
@@ -21,7 +20,7 @@
                 <p>{{ config.last_audit | date }}</p>
             </list-item>
         </list>
-    </tile>
+    </div>
 </template>
 
 <script>
