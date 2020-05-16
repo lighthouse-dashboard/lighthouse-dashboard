@@ -1,34 +1,49 @@
 <template>
-    <button class='btn button'
+    <component class='btn button'
+            v-bind="$attrs"
             :class='classes'
-            :disabled='disabled'>
+            :to="to"
+            :disabled='disabled'
+            :is="component">
         <span class='btn--content'>
             <slot/>
         </span>
-    </button>
+    </component>
 </template>
 
 <script>
     import bemMixin from '../../../mixins/bem-mixin';
 
     export default {
+        mixins: [bemMixin('btn')],
+
         props: {
             facet: {
                 type: String,
-                default: 'primary'
+                default: 'primary',
             },
+
             disabled: {
                 type: Boolean,
                 default: false,
-            }
+            },
+
+            to: {
+                type: Object,
+                required: false,
+                default: null,
+            },
         },
 
-        mixins: [bemMixin('btn')],
         computed: {
+            component() {
+                return this.to ? 'router-link' : 'button';
+            },
+
             classes() {
                 return [
                     this.createFacet(this.facet),
-                    this.createIfFacet(this.disabled, 'disabled')
+                    this.createIfFacet(this.disabled, 'disabled'),
                 ];
             },
         },

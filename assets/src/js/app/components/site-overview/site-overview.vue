@@ -5,10 +5,11 @@
                 @close="onSettingsClosed"/>
 
         <div class='site-overview--title'>
-            <router-link class='link subtitle1'
-                    :to="{name: 'project.detail', params: {id}}">
+            <btn :to="{name: 'project.detail', params: {id}}"
+                    class="subtitle1"
+                    facet="flat">
                 {{ name }}
-            </router-link>
+            </btn>
         </div>
 
         <div class='site-overview--content'>
@@ -23,11 +24,13 @@
 <script>
     import { mapActions } from 'vuex';
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
+    import Btn from '../base/btn/btn';
     import LineChart from '../charts/line-chart/line-chart';
     import ProjectSettings from '../site-settings/site-settings';
 
     export default {
         components: {
+            Btn,
             LineChart,
             ProjectSettings,
         },

@@ -5,6 +5,8 @@
     --button--primary-color: var(--root-color--button-background-primary);
     --button--primary-color-accent: var(--root-color--button-background-accent-primary);
     --button--text-color: var(--root-color--button-text-primary);
+    --button--secondary-text-color: var(--root-color--button-text-secondarry);
+    --button--flat-text-color: var(--root-color--button-text-flat);
     --button--text-color-accent: var(--root-color--button-text-accent-primary);
     --button--border-radius: 2px;
     --button--vert-main-margin: calc(var(--root-spacing) * 0.5);
@@ -20,6 +22,9 @@
             overflow: hidden;
             cursor: pointer;
             border: none;
+            padding: var(--button--vert-bezel) var(--button--horiz-bezel);
+            transition: background-color 200ms ease-in-out;
+            border-radius: var(--button--border-radius);
         }
 
         .btn--content {
@@ -31,10 +36,8 @@
     // Facets
     &.btn__primary {
         & {
-            padding: var(--button--vert-bezel) var(--button--horiz-bezel);
             background-color: var(--button--primary-color);
             color: var(--button--text-color);
-            border-radius: var(--button--border-radius);
             position: relative;
 
             &:after {
@@ -48,7 +51,7 @@
                 transition: width 200ms ease-in-out, height 200ms ease-in-out;
             }
 
-            &:hover {
+            &:hover, &:focus {
                 color: var(--button--text-color-accent);
 
                 &:after {
@@ -57,11 +60,44 @@
                 }
             }
         }
+
+        &.btn__disabled {
+            pointer-events: none;
+            background-color: var(--button--disabled-background);
+            color: var(--button--text-color);
+        }
     }
 
-    &.btn__disabled {
-        pointer-events: none;
-        background-color: var(--button--disabled-background);
+    &.btn__secondary {
+        & {
+            border: solid 1px var(--button--primary-color);
+            color: var(--button--secondary-text-color);
+
+            &:hover, &:focus {
+                background-color: var(--root-color--primary-light);
+            }
+        }
+
+        &.btn__disabled {
+            pointer-events: none;
+            border: solid 1px var(--button--disabled-background);
+            color: var(--button--disabled-background);
+        }
+    }
+
+
+    &.btn__flat {
+        color: var(--button--flat-text-color);
+
+        &:hover, &:focus {
+            background-color: var(--root-color--primary-light);
+        }
+
+
+        &.btn__disabled {
+            pointer-events: none;
+            color: var(--button--disabled-background);
+        }
     }
 
     // States

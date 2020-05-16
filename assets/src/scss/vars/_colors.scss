@@ -8,8 +8,7 @@
     --color-hover: #e0e0e0;
 
     --root-color--primary: #1A936F;
-    --root-color--primary-light: #5ec1a5;
-    --root-color--primary-dark: #15614b;
+    --root-color--primary-light: rgba(33, 193, 144, 0.2);
     --root-color--divider: #114b5f;
 
     --root-color--tile-background: #fff;
@@ -22,10 +21,14 @@
 
     //Buttons
     --root-color--button-text-primary: #fff;
+
+    --root-color--button-text-flat: var(--root-color--primary);
     --root-color--button-disabled-background: var(--color-mono-light-gray);
     --root-color--button-background-primary: var(--root-color--primary);
     --root-color--button-background-accent-primary: var(--root-color--button-text-primary);
     --root-color--button-text-accent-primary: var(--root-color--button-background-primary);
+
+    --root-color--button-text-secondarry: var(--root-color--primary);
 
     // Inputs
     --root-color--input-active-background: #fff;
@@ -41,10 +44,10 @@
     --root-color--site-overview-background: var(--root-color--tile-background);
 
     // Navigation
-    --root-color--navigation-background: var(--root-color--primary-light);
-    --root-color--navigation--color-text: var(--color-mono-black);
-    --root-color-navigation--item-hover-background: var(--root-color--primary);
-    --root-color-navigation--item-hover-text: var(--root-color--primary-dark);
+    --root-color--navigation-background: #55828B;
+    --root-color--navigation--color-text: var(--color-mono-white);
+    --root-color-navigation--item-hover-background: #6a9eaa;
+    --root-color-navigation--item-hover-text: var(--color-mono-white);
 
     --root-color--navigation-mobile-toggle-background: #ffffff;
 
