@@ -1,36 +1,38 @@
 <template>
     <tile class="site-config"
             title="Settings">
-        <ul class="site-config--list">
-            <li class="site-config--list-item">
+        <list class="site-config--list">
+            <list-item class="site-config--list-item">
                 <p class="caption">Name</p>
                 <p>{{ config.name }}</p>
-            </li>
+            </list-item>
 
-            <li class="site-config--list-item">
+            <list-item class="site-config--list-item">
                 <p class="caption">URL</p>
                 <p>
                     <btn facet="flat"
                             :href="config.url">{{config.name}}
                     </btn>
                 </p>
-            </li>
+            </list-item>
 
-            <li class="site-config--list-item">
+            <list-item class="site-config--list-item">
                 <p class="caption">Last Audit</p>
                 <p>{{ config.last_audit | date }}</p>
-            </li>
-        </ul>
+            </list-item>
+        </list>
     </tile>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
     import Btn from '../base/btn/btn';
+    import List from '../base/list/list';
+    import ListItem from '../base/list/list-item/list-item';
     import Tile from '../tile/tile';
 
     export default {
-        components: { Btn, Tile },
+        components: { ListItem, List, Btn, Tile },
         props: {
             /** @type {Sites.SiteConfig} */
             config: {

@@ -2,11 +2,13 @@
     // Vars
     --tile--background-color: var(--root-color--tile-background);
     --tile--root-padding: calc(var(--root-spacing) * 2);
+    --tile--border-radius: 2px;
     // Support
 
     // Module
     & {
         & {
+            border-radius: var(--tile--border-radius);
             background-color: var(--tile--background-color);
             padding: var(--tile--root-padding);
         }
@@ -19,6 +21,7 @@
 
         .tile--content {
             display: block;
+            padding: var(--root-spacing);
         }
     }
 
