@@ -4,14 +4,10 @@
                 v-if="currentSiteConfig">{{ currentSiteConfig.name }}</h4>
 
         <div class="project--overview">
-            <report-history
-                    class='project--sidebar-item'
-                    :list="reports"/>
+            <report-history :list="reports"/>
 
-            <tile title="Averages">
-                <gauge-chart :labels="['Performance', 'SEO', 'Accessibility']"
-                        :series='[getAvg("performance"), getAvg("seo"), getAvg("accessibility")]'/>
-            </tile>
+            <site-config
+                    :config="currentSiteConfig"/>
         </div>
 
         <div class='project--content'
@@ -21,10 +17,12 @@
             </div>
 
             <div class='project--sidebar'>
-                <site-config
-                        class='project--sidebar-item'
-                        :config="currentSiteConfig"/>
 
+                <tile title="Averages"
+                        class='project--sidebar-item'>
+                    <gauge-chart :labels="['Performance', 'SEO', 'Accessibility']"
+                            :series='[getAvg("performance"), getAvg("seo"), getAvg("accessibility")]'/>
+                </tile>
                 <site-actions-list
                         class='project--sidebar-item'
                         :url="currentSiteConfig.url"/>

@@ -47,7 +47,10 @@
             <div class='side-nav--bottom'>
                 <ul class='side-nav--list'>
                     <li class='side-nav--list-item side-nav--list-item__footer'>
-                        <small>v{{ version }}</small>
+                        <btn href="https://github.com/faebeee/lighthouse-dashboard"
+                                target="_blank">
+                            v{{ version }}
+                        </btn>
                     </li>
                 </ul>
             </div>
@@ -57,10 +60,11 @@
 
 <script>
     import bemMixin from '../../mixins/bem-mixin';
+    import Btn from '../base/btn/btn';
     import SideNavToggle from './side-nav-toggle/side-nav-toggle';
 
     export default {
-        components: { SideNavToggle },
+        components: { Btn, SideNavToggle },
         mixins: [bemMixin('side-nav')],
         props: {
             title: {
