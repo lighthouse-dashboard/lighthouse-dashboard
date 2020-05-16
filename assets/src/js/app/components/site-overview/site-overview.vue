@@ -1,10 +1,7 @@
 <template>
-    <div class='site-overview'>
-        <project-settings v-if="showSettings"
-                :id="id"
-                @close="onSettingsClosed"/>
-
-        <div class='site-overview--title'>
+    <tile class='site-overview'>
+        <div class='site-overview--title'
+                slot="title">
             <btn :to="{name: 'project.detail', params: {id}}"
                     class="subtitle1"
                     facet="flat">
@@ -12,13 +9,17 @@
             </btn>
         </div>
 
+        <project-settings v-if="showSettings"
+                :id="id"
+                @close="onSettingsClosed"/>
+
         <div class='site-overview--content'>
             <span v-if="runError">{{ runError.message }}</span>
             <line-chart
                     :data-sets="datasets"
                     :labels="labels"/>
         </div>
-    </div>
+    </tile>
 </template>
 
 <script>
@@ -27,9 +28,11 @@
     import Btn from '../base/btn/btn';
     import LineChart from '../charts/line-chart/line-chart';
     import ProjectSettings from '../site-settings/site-settings';
+    import Tile from '../tile/tile';
 
     export default {
         components: {
+            Tile,
             Btn,
             LineChart,
             ProjectSettings,

@@ -1,19 +1,17 @@
 <template>
-    <div>
-        <v-card-title>History</v-card-title>
-        <v-card-text>
-            <line-chart :data-sets="lineChartData.datasets"
-                    :labels="lineChartData.labels"/>
-        </v-card-text>
-    </div>
+    <tile title="History">
+        <line-chart :data-sets="lineChartData.datasets"
+                :labels="lineChartData.labels"/>
+    </tile>
 </template>
 
 <script>
     import reportsToLineChart from '../../../../../../src/transformer/reports-to-line-chart';
     import LineChart from '../charts/line-chart/line-chart';
+    import Tile from '../tile/tile';
 
     export default {
-        components: { LineChart },
+        components: { Tile, LineChart },
         props: {
             /** @type {Report[]} */
             list: {

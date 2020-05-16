@@ -33,11 +33,19 @@
                 required: false,
                 default: null,
             },
+
         },
 
         computed: {
             component() {
-                return this.to ? 'router-link' : 'button';
+                switch (true) {
+                    case !!this.$attrs.href :
+                        return 'a';
+                    case !!this.to:
+                        return 'router-link';
+                    default:
+                        return 'button';
+                }
             },
 
             classes() {

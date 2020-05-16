@@ -5,7 +5,9 @@
 
     // Module
     & {
-        //
+        .site-actions-list--list-item {
+            margin: var(--root-spacing) 0;
+        }
     }
 
     // Facets

@@ -1,6 +1,6 @@
 <template>
-    <div class="site-config">
-        <p class="subtitle1">Settings</p>
+    <tile class="site-config"
+            title="Settings">
         <ul class="site-config--list">
             <li class="site-config--list-item">
                 <p class="caption">Name</p>
@@ -9,8 +9,11 @@
 
             <li class="site-config--list-item">
                 <p class="caption">URL</p>
-                <p><a class="link"
-                        :href="config.url">{{config.name}}</a></p>
+                <p>
+                    <btn facet="flat"
+                            :href="config.url">{{config.name}}
+                    </btn>
+                </p>
             </li>
 
             <li class="site-config--list-item">
@@ -18,14 +21,16 @@
                 <p>{{ config.last_audit | date }}</p>
             </li>
         </ul>
-    </div>
+    </tile>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
+    import Btn from '../base/btn/btn';
+    import Tile from '../tile/tile';
 
     export default {
-        components: {},
+        components: { Btn, Tile },
         props: {
             /** @type {Sites.SiteConfig} */
             config: {

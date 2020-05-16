@@ -1,36 +1,37 @@
 <template>
-    <v-card>
-        <v-card-title>Audits</v-card-title>
-        <v-card-text>
-            <v-data-table
-                    :headers="headers"
-                    :items="items"
-                    :items-per-page="10">
+    <tile title="Audits">
+        <v-data-table
+                :headers="headers"
+                :items="items"
+                :items-per-page="10">
 
-                <template v-slot:item.performance="{ item }">
-                    <v-chip :color="getColor(item.performance)"
-                            dark>{{ item.performance }}
-                    </v-chip>
-                </template>
-                <template v-slot:item.hasRawData="{ item }">
-                    <v-btn text
-                            target="_blank"
-                            :href="`/api/reports/report/${item._id}`"
-                            v-if="item.hasRawData">
-                        <v-icon>mdi-file-chart</v-icon>
-                    </v-btn>
-                </template>
+            <template v-slot:item.performance="{ item }">
+                <v-chip :color="getColor(item.performance)"
+                        dark>{{ item.performance }}
+                </v-chip>
+            </template>
+            <template v-slot:item.hasRawData="{ item }">
+                <v-btn text
+                        target="_blank"
+                        :href="`/api/reports/report/${item._id}`"
+                        v-if="item.hasRawData">
+                    <v-icon>mdi-file-chart</v-icon>
+                </v-btn>
+            </template>
 
-                <template v-slot:item.createdAt="{ item }">
-                    {{ item.createdAt | date }}
-                </template>
-            </v-data-table>
-        </v-card-text>
-    </v-card>
+            <template v-slot:item.createdAt="{ item }">
+                {{ item.createdAt | date }}
+            </template>
+        </v-data-table>
+
+    </tile>
 </template>
 
 <script>
+    import Tile from '../tile/tile';
+
     export default {
+        components: { Tile },
         props: {
             /** @type {Report[]} */
             list: {

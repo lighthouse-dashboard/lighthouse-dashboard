@@ -1,29 +1,27 @@
 <template>
-    <div>
-        <v-card-title>Tools</v-card-title>
-        <v-card-text>
-            <v-list class="site-actions-list">
-                <v-list-item
-                        target="_blank"
-                        :href="entry.link"
-                        v-for="entry in menuEntries"
-                        :key="entry.name">
-                    <v-list-item-title>
-                        {{ entry.name }}
-                    </v-list-item-title>
-                    <v-list-item-icon>
-                        <v-icon>mdi-open-in-new</v-icon>
-                    </v-list-item-icon>
-                </v-list-item>
-            </v-list>
-        </v-card-text>
-    </div>
+    <tile title="Tools"
+            class="site-actions-list">
+        <ul class="site-actions-list--list">
+            <li class="site-actions-list--list-item"
+                    v-for="entry in menuEntries"
+                    :key="entry.name">
+                <btn target="_blank"
+                        facet="flat"
+                        :href="entry.link">
+                    {{ entry.name }}
+                </btn>
+            </li>
+        </ul>
+    </tile>
 </template>
 
 <script>
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
+    import Btn from '../base/btn/btn';
+    import Tile from '../tile/tile';
 
     export default {
+        components: { Btn, Tile },
         props: {
             url: {
                 type: String,

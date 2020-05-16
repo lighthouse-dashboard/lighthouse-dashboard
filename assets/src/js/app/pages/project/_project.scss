@@ -6,6 +6,11 @@
 
     // Module
     & {
+
+        .project--title {
+            margin-bottom: 24px;
+        }
+
         .project--content {
             display: grid;
             grid-template-areas: 'content sidebar';
@@ -17,6 +22,14 @@
         .project--averages {
             display: flex;
             margin-bottom: var(--root-spacing);
+        }
+
+        .project--overview {
+            display: grid;
+            grid-template-areas: 'content sidebar';
+            grid-template-columns: 8fr 4fr;
+            grid-column-gap: var(--root-spacing);
+            grid-row-gap: var(--root-spacing);
         }
 
         .project--average-item {
