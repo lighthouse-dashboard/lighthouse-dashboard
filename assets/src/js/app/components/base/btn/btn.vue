@@ -22,7 +22,7 @@
             /** @type {string[]} */
             facets: {
                 type: Array,
-                default: () => [],
+                default: () => ['primary'],
             },
 
             disabled: {
