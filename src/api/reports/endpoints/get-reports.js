@@ -20,7 +20,7 @@ async function getReports({ params, mongo }) {
 
     const assets = await getReportsBySiteId(mongo.db, id, CONFIG.api.siteReportLimit);
     if (!assets || assets.length === 0) {
-        return Boom.notFound('No audits found');
+        return [];
     }
 
     return assets.map((report) => {

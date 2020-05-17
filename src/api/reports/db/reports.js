@@ -36,9 +36,8 @@ export function getReportsBySiteId(database, id, limit) {
     return new Promise((resolve, reject) => {
         collection
             .find({ siteId: id })
-            //.sort({ _id: -1 })
-            .limit(limit)
             .sort({ createdAt: -1 })
+            .limit(limit)
             .toArray((error, data) => {
                 if (error) {
                     return reject(error);

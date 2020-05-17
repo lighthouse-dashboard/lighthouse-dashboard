@@ -41,6 +41,15 @@ export default [
         },
         handler: basicViewHandler,
     },
+    {
+        method: 'GET',
+        path: '/app',
+        options: {
+            description: 'Main entry point',
+            auth: false,
+        },
+        handler: basicViewHandler,
+    },
 
     {
         method: 'GET',

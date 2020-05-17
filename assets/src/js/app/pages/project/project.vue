@@ -1,26 +1,33 @@
 <template>
     <div class='project'>
         <h4 class='h4 project--title'
-                v-if="currentSiteConfig">{{ currentSiteConfig.name }}</h4>
+                v-if="currentSiteConfig">
+            {{ currentSiteConfig.name }}
+        </h4>
+
 
         <div class='project--overview'
                 v-if="currentSiteConfig">
             <tile title="Latest Report"
-                    class="project--last-report-radar"
-                    v-if="latestReport">
+                    class="project--last-report-radar">
                 <radar-chart :series="latestReportRadarData.series"
-                        :labels="latestReportRadarData.labels"/>
+                        :labels="latestReportRadarData.labels"
+                        v-if="latestReport"/>
             </tile>
+
             <tile title="Averages"
                     class="project--average">
                 <gauge-chart :labels="['Performance', 'SEO', 'Accessibility']"
                         :series='[getAvg("performance"), getAvg("seo"), getAvg("accessibility")]'/>
             </tile>
 
-            <tile title="Settings"
-                    class="project--settings">
-                <site-config :config="currentSiteConfig"/>
-            </tile>
+            <div>
+                <tile title="Settings"
+                        class="project--settings">
+                    <site-config :config="currentSiteConfig"/>
+                </tile>
+                <btn @click="runAudit">New audit</btn>
+            </div>
         </div>
 
         <div class="project--content">
@@ -32,6 +39,7 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
+    import Btn from '../../components/base/btn/btn';
     import GaugeChart from '../../components/charts/gauge-chart/gauge-chart';
     import RadarChart from '../../components/charts/radar-chart/radar-chart';
     import ReportHistory from '../../components/report-history/report-history';
@@ -43,6 +51,7 @@
 
     export default {
         components: {
+            Btn,
             ReportTable,
             RadarChart,
             Tile,
