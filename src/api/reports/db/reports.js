@@ -86,7 +86,7 @@ export async function clearReports(database) {
         $query: {
             raw: { $ne: false },
         },
-        $orderby: { createdAt: 1 },
+        $orderby: { createdAt: -1 },
     };
 
     logger.debug(`Clearing older entries - Max allowed: ${ config.db.maxRawReports }`);
