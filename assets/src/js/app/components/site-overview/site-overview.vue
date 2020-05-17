@@ -4,7 +4,7 @@
                 slot="title">
             <btn :to="{name: 'project.detail', params: {id}}"
                     class="subtitle1"
-                    facet="flat">
+                    facets="flat">
                 {{ name }}
             </btn>
         </div>

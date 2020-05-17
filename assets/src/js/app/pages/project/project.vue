@@ -26,7 +26,12 @@
                         class="project--settings">
                     <site-config :config="currentSiteConfig"/>
                 </tile>
-                <btn @click="runAudit">New audit</btn>
+
+                <btn
+                        class="project--audit-btn"
+                        :facets="['secondary', 'full-width']"
+                        @click="runAudit">New audit
+                </btn>
             </div>
         </div>
 

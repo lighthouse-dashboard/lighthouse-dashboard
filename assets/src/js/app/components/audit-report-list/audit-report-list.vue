@@ -4,7 +4,7 @@
             <list-item v-for="report in reports"
                     :key="report._id">
                 <btn :to="`/api/reports/report/${report._id}`"
-                        facet="flat"
+                        facets="flat"
                         target="_blank">
                     {{ report.createdAt | date }}
                 </btn>

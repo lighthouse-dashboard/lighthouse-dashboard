@@ -8,7 +8,7 @@
             <tile
                     v-for="site in sites"
                     :key="site.id">
-                <btn facet="flat"
+                <btn facets="flat"
                         :to="{name: 'project.detail', params: {id: site.id}}"
                         slot="title">
                     {{ site.name }}

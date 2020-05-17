@@ -82,15 +82,13 @@ export async function saveReport(database, report, raw) {
 export async function clearReports(database) {
     const reportCollection = database.collection(AUDIT_COLLECTION);
     const filter = {
-        $query: {
-            raw: { $ne: false },
-        },
-        $orderby: { createdAt: -1 },
+        raw: { $ne: false },
     };
 
     logger.debug(`Clearing older entries - Max allowed: ${ config.db.maxRawReports }`);
 
     const rows = await reportCollection.find(filter)
+        .sort({ createdAt: -1 })
         .skip(parseInt(config.db.maxRawReports))
         .toArray();
 

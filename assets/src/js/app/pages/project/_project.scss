@@ -42,7 +42,6 @@
             }
         }
 
-
         .project--content {
             display: grid;
             grid-template-areas: 'history audits';
@@ -56,24 +55,8 @@
             }
         }
 
-        .project--average-item {
-            flex: 0 0 auto;
-
-            & + .project--average-item {
-                margin-left: var(--root-spacing);
-            }
-        }
-
-        .project--sidebar-item {
-            margin: var(--root-spacing) 0;
-
-            &:first-child {
-                margin-top: 0;
-            }
-
-            &:last-child {
-                margin-bottom: 0;
-            }
+        .project--audit-btn {
+            margin-top: var(--root-spacing);
         }
     }
 

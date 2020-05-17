@@ -19,9 +19,10 @@
         mixins: [bemMixin('btn')],
 
         props: {
-            facet: {
-                type: String,
-                default: 'primary',
+            /** @type {string[]} */
+            facets: {
+                type: Array,
+                default: () => [],
             },
 
             disabled: {
@@ -55,7 +56,7 @@
 
             classes() {
                 return [
-                    this.createFacet(this.facet),
+                    this.mapFacets(Array.isArray(this.facets) ? this.facets : [this.facets]),
                     this.createIfFacet(this.isActive, 'active'),
                     this.createIfFacet(this.disabled, 'disabled'),
                 ];

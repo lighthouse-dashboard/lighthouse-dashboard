@@ -7,7 +7,7 @@
                     :key="site.site.id">
                 <template slot="title">
                     <btn
-                            facet="flat"
+                            facets="flat"
                             :to="{name: 'project.detail', params: {id: site.site.id}}">
                         {{ site.site.name }}
                     </btn>

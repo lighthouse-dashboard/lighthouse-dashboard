@@ -6,7 +6,7 @@
                     v-for="entry in menuEntries"
                     :key="entry.name">
                 <btn target="_blank"
-                        facet="flat"
+                        facets="flat"
                         :href="entry.link">
                     {{ entry.name }}
                 </btn>

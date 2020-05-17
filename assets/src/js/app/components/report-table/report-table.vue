@@ -1,21 +1,16 @@
 <template>
     <tile title="Audits"
             class="report-table">
-        <div class="report-table--content">
-            <list>
-                <list-item v-for="item in reportsWithHtml"
-                        :key="item._id">
-                    <btn facet="flat"
-                            target="_blank"
-                            :href="`/api/reports/report/${item._id}`">
-                        {{ item.createdAt|date }}
-                    </btn>
-                </list-item>
-            </list>
-            <div v-if="selectedReport">
-                <report-detail :report="selectedReport"/>
-            </div>
-        </div>
+        <list>
+            <list-item v-for="item in reportsWithHtml"
+                    :key="item._id">
+                <btn target="_blank"
+                        :facets="['flat', 'full-width']"
+                        :href="`/api/reports/report/${item._id}`">
+                    {{ item.createdAt|date }}
+                </btn>
+            </list-item>
+        </list>
     </tile>
 </template>
 
@@ -23,11 +18,10 @@
     import Btn from '../base/btn/btn';
     import List from '../base/list/list';
     import ListItem from '../base/list/list-item/list-item';
-    import ReportDetail from '../report-detail/report-detail';
     import Tile from '../tile/tile';
 
     export default {
-        components: { ReportDetail, Btn, ListItem, List, Tile },
+        components: { Btn, ListItem, List, Tile },
         props: {
             /** @type {Report[]} */
             list: {

@@ -5,11 +5,6 @@
 
     // Module
     & {
-        .report-table--content {
-            display: grid;
-            grid-template-areas: 'list detail';
-            grid-template-columns: 4fr 8fr;
-        }
     }
 
     // Facets

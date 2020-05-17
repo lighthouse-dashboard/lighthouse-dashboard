@@ -9,7 +9,7 @@
             <list-item class="site-config--list-item">
                 <p class="caption">URL</p>
                 <p>
-                    <btn facet="flat"
+                    <btn facets="flat"
                             :href="config.url">{{config.name}}
                     </btn>
                 </p>
