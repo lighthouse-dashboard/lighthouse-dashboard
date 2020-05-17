@@ -1,0 +1,22 @@
+.latest-audits-feed {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+
+        .latest-audits-feed--content {
+            display: grid;
+            grid-template-areas: '. . . .';
+            grid-template-columns: 3fr 3fr 3fr 3fr;
+            column-gap: calc(var(--root-spacing) * 2);
+            row-gap: calc(var(--root-spacing) * 2);
+        }
+
+    }
+
+    // Facets
+
+    // States
+}

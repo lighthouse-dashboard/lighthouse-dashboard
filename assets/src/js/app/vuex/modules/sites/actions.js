@@ -1,5 +1,5 @@
 import * as api from '../../../api/sites-api';
-import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_LATEST_SITES, SET_SITES, UPDATE_SITE } from '../mutation-types';
+import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_SITES, UPDATE_SITE } from '../mutation-types';
 
 /**
  * Fetch all sites
@@ -46,9 +46,8 @@ export async function updateSite({ commit }, { id, delta }) {
  * @param {function} commit
  * @return {Promise<T>}
  */
-export async function getLatestSites({ commit }) {
+export async function getLatestSites() {
     const sites = await api.getLatestSites();
-    commit({ type: SET_LATEST_SITES, sites });
     return sites;
 }
 

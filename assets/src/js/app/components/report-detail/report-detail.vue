@@ -1,5 +1,5 @@
 <template>
-    <div class="report-detail">
+    <div class="report-detail" v-if="report">
         <radar-chart :series="chartData.series"
                 :labels="chartData.labels"/>
     </div>

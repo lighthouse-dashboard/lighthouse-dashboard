@@ -1,46 +1,49 @@
 <template>
-    <div  v-inview:enter="loadSites">
-        <v-subheader>
+    <div class="latest-audits-feed">
+        <p class="overline">
             Latest reports performance
-        </v-subheader>
-        <v-row>
-            <v-col :cols="cols"
-                    :lg="cols"
-                    md="6"
-                    sm="12"
+        </p>
+
+        <div class="latest-audits-feed--content">
+            <tile
                     v-for="site in sites"
                     :key="site.id">
-                <latest-report-gauge v-bind="site"/>
-            </v-col>
-        </v-row>
+                <btn facet="flat"
+                        :to="{name: 'project.detail', params: {id: site.id}}"
+                        slot="title">
+                    {{ site.name }}
+                </btn>
+                <report-detail :site-id="site.id"/>
+                {{ site.last_audit | date }}
+            </tile>
+        </div>
     </div>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import CONFIG from '../../../../../../config/dashboard';
-    import LatestReportGauge from '../latest-report-gauge/latest-report-gauge';
+    import withLatestReport from '../../containers/with-latest-report';
+    import Btn from '../base/btn/btn';
+    import ReportDetail from '../report-detail/report-detail';
+    import Tile from '../tile/tile';
 
     export default {
-        components: { LatestReportGauge },
-        props: {},
-        data() {
-            return {
-                sites: [],
-            };
+        components: {
+            Btn,
+            Tile,
+            ReportDetail: withLatestReport(ReportDetail),
         },
+
+        props: {
+            sites: {
+                type: Array,
+                required: true,
+            },
+        },
+
         computed: {
             cols() {
                 return CONFIG.latestAuditChart.colSize;
-            },
-        },
-        methods: {
-            ...mapActions('sites', ['getLatestSites']),
-            loadSites() {
-                this.getLatestSites()
-                    .then((data) => {
-                        this.sites = data;
-                    });
             },
         },
     };

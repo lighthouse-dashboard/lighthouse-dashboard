@@ -70,18 +70,24 @@ export const GAUGE_CHART = {
                 value: {
                     fontSize: '16px',
                 },
-
-            }
-        }
+            },
+        },
     },
     colors: CONFIG.ui.chartColors,
 };
 
 export const RADAR_CHART = {
+    ...DEFAULT_CHART,
     series: [],
     chart: {
         height: 350,
         type: 'radar',
+        toolbar: {
+            show: true,
+            tools: {
+                download: false,
+            },
+        },
     },
     xaxis: {
         categories: [],

@@ -1,7 +1,5 @@
 import Boom from '@hapi/boom';
 import CONFIG from '../../../../config/dashboard';
-import formatReportSummaryString from '../../../utils/format-report-summary-string';
-import { getReportValueScoreByKey } from '../../../utils/get-report-value-score-by-key';
 import { getSiteConfigById } from '../../sites/db/sites';
 import { getLatestReportBySiteId } from '../db/reports';
 import { siteIdParamModel } from '../schemas/siteid-param-model';
@@ -9,7 +7,7 @@ import { siteIdParamModel } from '../schemas/siteid-param-model';
 /**
  * Handler to get latest latest created report values
  * @param {hapi.Request} request
- * @return {Promise<void>}
+ * @return {Promise<Report>}
  */
 async function getLatestReportValues(request) {
     const { siteId } = request.params;
@@ -30,11 +28,7 @@ async function getLatestReportValues(request) {
     }
 
 
-    return {
-        message: formatReportSummaryString(report),
-        labels: values,
-        series: values.map(vid => getReportValueScoreByKey(report.values, vid)),
-    };
+    return report;
 }
 
 export default {
