@@ -5,20 +5,19 @@
 
         <div class='project--overview'
                 v-if="currentSiteConfig">
-            <div>
-                <tile title="Latest Report"
-                        v-if="latestReport">
-                    <radar-chart :series="latestReportRadarData.series"
-                            :labels="latestReportRadarData.labels"/>
-                </tile>
-            </div>
-
-            <tile title="Averages">
+            <tile title="Latest Report" class="project--last-report-radar"
+                    v-if="latestReport">
+                <radar-chart :series="latestReportRadarData.series"
+                        :labels="latestReportRadarData.labels"/>
+            </tile>
+            <tile title="Averages"
+                    class="project--average">
                 <gauge-chart :labels="['Performance', 'SEO', 'Accessibility']"
                         :series='[getAvg("performance"), getAvg("seo"), getAvg("accessibility")]'/>
             </tile>
 
-            <tile title="Settings">
+            <tile title="Settings"
+                    class="project--settings">
                 <site-config :config="currentSiteConfig"/>
             </tile>
         </div>

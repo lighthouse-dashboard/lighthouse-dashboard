@@ -17,12 +17,31 @@
             grid-column-gap: var(--root-spacing);
             grid-row-gap: var(--root-spacing);
             margin: var(--root-spacing) 0;
+
+            @include mq('<=md') {
+                grid-template-areas: '.';
+                grid-template-columns: 12fr;
+            }
         }
 
-        .project--averages {
-            display: flex;
-            margin-bottom: var(--root-spacing);
+        .project--settings {
+            @include mq('<=md') {
+                order: 1;
+            }
         }
+
+        .project--average {
+            @include mq('<=md') {
+                order: 2;
+            }
+        }
+
+        .project--last-report-radar {
+            @include mq('<=md') {
+                order: 3;
+            }
+        }
+
 
         .project--content {
             display: grid;
@@ -30,6 +49,11 @@
             grid-template-columns: 8fr 2fr;
             grid-column-gap: var(--root-spacing);
             grid-row-gap: var(--root-spacing);
+
+            @include mq('md') {
+                grid-template-areas: '.';
+                grid-template-columns: 12fr;
+            }
         }
 
         .project--average-item {

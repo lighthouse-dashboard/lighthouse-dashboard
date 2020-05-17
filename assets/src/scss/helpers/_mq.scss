@@ -1,23 +1,26 @@
 @import './design-system/breakpoints.json';
 
-$breakpoints: (
-    xs: map_get($_breakpoints, 'xs'),
-    sm: map_get($_breakpoints, 'sm'),
-    md: map_get($_breakpoints, 'md'),
-    lg: map_get($_breakpoints, 'lg'),
-    xl: map_get($_breakpoints, 'xl')
-);
 
-$screen-xs-min: map-get($breakpoints, 'xs');
-$screen-sm-min: map-get($breakpoints, 'sm');
-$screen-md-min: map-get($breakpoints, 'md');
-$screen-lg-min: map-get($breakpoints, 'lg');
-$screen-xl-min: map-get($breakpoints, 'xl');
+$screen-xs-min: map-get($_breakpoints, 'xs') * 1px;
+$screen-sm-min: map-get($_breakpoints, 'sm') * 1px;
+$screen-md-min: map-get($_breakpoints, 'md') * 1px;
+$screen-lg-min: map-get($_breakpoints, 'lg') * 1px;
+$screen-xl-min: map-get($_breakpoints, 'xl') * 1px;
+$screen-xxl-min: map-get($_breakpoints, 'xxl') * 1px;
 
 $screen-xs-max: ($screen-sm-min - 1);
 $screen-sm-max: ($screen-md-min - 1);
 $screen-md-max: ($screen-lg-min - 1);
 $screen-lg-max: ($screen-xl-min - 1);
+$screen-xl-max: ($screen-xxl-min - 1);
+
+$breakpoints: (
+    xs: $screen-xs-max,
+    sm: $screen-sm-max,
+    md: $screen-md-max,
+    lg: $screen-lg-max,
+    xl: $screen-xl-max,
+);
 
 
 $media-feature-expressions: (
@@ -26,7 +29,8 @@ $media-feature-expressions: (
         sm: ('(min-width: #{$screen-sm-min}px) and (max-width: #{$screen-sm-max}px)'),
         md: ('(min-width: #{$screen-md-min}px) and (max-width: #{$screen-md-max}px)'),
         lg: ('(min-width: #{$screen-lg-min}px) and (max-width: #{$screen-lg-max}px)'),
-        xl: ('(min-width: #{$screen-xl-min}px)'),
+        xl: ('(min-width: #{$screen-xl-min}) and (max-width: #{$screen-xl-max})'),
+        xxl: '(min-width: #{$screen-xxl-min})',
     ),
     orientation: (
         portrait: '(orientation: portrait)',
