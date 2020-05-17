@@ -18,6 +18,10 @@
                 type: Array,
                 required: true,
             },
+            options: {
+                type: Object,
+                default: () => ({}),
+            },
         },
 
         data() {
@@ -28,7 +32,7 @@
 
         methods: {
             buildChart() {
-                const options = Object.assign({}, SITE_OVERVIEW_CHART, {});
+                const options = Object.assign({}, SITE_OVERVIEW_CHART, this.options);
                 this.chart = new ApexCharts(this.$refs.chart, options);
                 this.chart.render();
                 this.updateChart();

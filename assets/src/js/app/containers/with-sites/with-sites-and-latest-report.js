@@ -1,27 +1,25 @@
 import Vue from 'vue';
 import { mapActions } from 'vuex';
 
-const withReports = (component) => {
-    return Vue.component('WithReportsContainer', {
-        props: {
-            id: {
-                type: String,
-                required: true,
-            },
-        },
+export default function withSitesAndLatestReport(component) {
+    return Vue.component('WithSitesAndLatestReportContainer', {
+        props: {},
 
         data() {
             return {
-                reports: [],
+                /** @type {Sites.SiteWithReport[]} */
+                sites: [],
+                isLoading: false,
             };
         },
 
         methods: {
-            ...mapActions('reports', ['fetchReportsForSite']),
+            ...mapActions('sites', ['getSitesWithLatestReport']),
             loadData() {
-                return this.fetchReportsForSite({ id: this.id })
+                this.isLoading = true;
+                return this.getSitesWithLatestReport()
                     .then((reports) => {
-                        this.reports = reports;
+                        this.sites = reports;
                     })
                     .finally(() => {
                         this.isLoading = false;
@@ -36,13 +34,11 @@ const withReports = (component) => {
         render(createElement) {
             return createElement(component, {
                 props: {
-                    id: this.id,
-                    reports: this.reports,
+                    sites: this.sites,
+                    isLoading: this.isLoading,
                     ...this.$attrs,
                 },
             });
         },
     });
-};
-
-export default withReports;
+}

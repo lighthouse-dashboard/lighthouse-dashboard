@@ -1,69 +1,92 @@
 <template>
-    <div>
-        <v-app-bar color="transparent"
-                flat>
-            <template v-slot:extension>
-                <create-site-form/>
-            </template>
-        </v-app-bar>
+    <div class="projects">
+        <p class="overline">All Projects</p>
+        <div class="projects--list">
+            <tile
+                    v-for="site in sites"
+                    :key="site.site.id">
+                <template slot="title">
+                    <btn
+                            facet="flat"
+                            :to="{name: 'project.detail', params: {id: site.site.id}}">
+                        {{ site.site.name }}
+                    </btn>
+                </template>
 
-        <v-container>
-            <v-row cols="12">
-                <v-col cols="3"
-                        offset="4">
-                    <site-search-input/>
-                </v-col>
-            </v-row>
-        </v-container>
-
-        <v-container :fluid="fluid">
-            <v-row>
-                <v-col :cols="cols"
-                        v-for="site in sites"
-                        :key="site.id">
-                    <site-overview v-bind="site"/>
-                </v-col>
-            </v-row>
-        </v-container>
+                <report-detail :report="site.report"/>
+            </tile>
+        </div>
     </div>
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
-    import config from '../../../../../../config/dashboard';
-    import CreateSiteForm from '../../components/create-site-form/create-site-form';
-    import SiteOverview from '../../components/site-overview/site-overview.vue';
-    import SiteSearchInput from '../../components/site-search-input/site-search-input';
+    import { mapActions } from 'vuex';
+    import Btn from '../../components/base/btn/btn';
+    import ReportDetail from '../../components/report-detail/report-detail';
+    import Tile from '../../components/tile/tile';
+    import formatDate from '../../filters/format-date';
 
     export default {
         components: {
-            SiteSearchInput,
-            CreateSiteForm,
-            SiteOverview,
+            Tile,
+            ReportDetail,
+            Btn,
+        },
+
+        props: {
+            /** @type {Sites.SiteConfig[]} */
+            sites: {
+                type: Array,
+                required: true,
+            },
         },
 
         computed: {
-            ...mapState('login', ['jwt']),
-            ...mapState('sites', ['sites']),
-            cols() {
-                return config.page_projects.colSize;
+            flattenSites() {
+                return this.sites.map(({ site, report }) => {
+                    return {
+                        name: site.name,
+                        last_audit: site.last_audit,
+                        device: site.device,
+                        hasRaw: site.hasRaw,
+                        ...report.values.reduce((acc, val) => {
+                            acc[val.id] = val.value;
+                            return acc;
+                        }, []),
+                    };
+                });
             },
+            columns() {
+                return [
+                    { label: 'Name', field: 'name' },
+                    {
+                        label: 'Last Audit',
+                        field: 'last_audit',
+                        representedAs: ({ last_audit }) => formatDate(last_audit),
+                    },
 
-            fluid() {
-                return config.page_projects.isFluid;
+                    { label: 'Device', field: 'device' },
+                    { label: 'Performance', field: 'performance' },
+                    { label: 'SEO', field: 'seo' },
+                    { label: 'Accessibility', field: 'accessibility' },
+                    { label: 'Best Practices', field: 'best-practices' },
+                    { label: 'PWA', field: 'pwa' },
+                    { label: 'PWA', field: 'pwa' },
+
+                    {
+                        label: 'HTML Report',
+                        field: 'hasRaw',
+                        representedAs: ({ hasRaw }) => hasRaw ? `TRUE` : `FALSE`,
+                    },
+                ];
             },
         },
 
         methods: {
-            ...mapActions('sites', ['setSites', 'getLatestSites']),
-        },
-
-        beforeDestroy() {
-            this.setSites({ sites: [] });
+            ...mapActions('sites', ['setSites', 'fetchAllSites']),
         },
 
         mounted() {
-            this.getLatestSites();
         },
     };
 </script>

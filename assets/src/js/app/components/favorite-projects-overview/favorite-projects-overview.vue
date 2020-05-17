@@ -6,9 +6,9 @@
 
         <div class='favorite-project-overview--content'>
             <site-overview
+                    v-bind="site"
                     v-for="site in sites"
-                    :key="site.id"
-                    v-bind="site"/>
+                    :key="site.id"/>
         </div>
     </div>
 </template>
@@ -16,12 +16,10 @@
 <script>
     import CONFIG from '../../../../../../config/dashboard';
     import withReports from '../../containers/with-reports';
-    import SectionHeader from '../section-header/section-header';
     import SiteOverview from '../site-overview/site-overview.vue';
 
     export default {
         components: {
-            SectionHeader,
             SiteOverview: withReports(SiteOverview),
         },
         props: {

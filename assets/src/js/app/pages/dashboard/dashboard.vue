@@ -7,14 +7,12 @@
 <script>
     import { mapActions } from 'vuex';
     import CONFIG from '../../../../../../config/dashboard';
-    import DashboardSection from '../../components/dashboard-section/dashboard-section';
     import FavoriteProjectsOverview from '../../components/favorite-projects-overview/favorite-projects-overview';
     import withFavoritedSites from '../../containers/with-sites/with-favorited-sites';
 
     export default {
         components: {
             FavoriteProjectsOverview: withFavoritedSites(FavoriteProjectsOverview),
-            DashboardSection,
         },
         computed: {
             charts() {

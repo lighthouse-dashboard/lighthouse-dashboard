@@ -1,3 +1,6 @@
+import withSitesAndLatestReport from '../containers/with-sites/with-sites-and-latest-report';
+import Projects from './projects/projects';
+
 export default [
     {
         path: '/login',
@@ -30,7 +33,7 @@ export default [
             {
                 path: 'projects',
                 name: 'projects',
-                component: () => import('./projects/projects'),
+                component: withSitesAndLatestReport(Projects),
                 meta: { requiresAuth: true },
             },
             {

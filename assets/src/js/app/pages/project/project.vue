@@ -5,7 +5,8 @@
 
         <div class='project--overview'
                 v-if="currentSiteConfig">
-            <tile title="Latest Report" class="project--last-report-radar"
+            <tile title="Latest Report"
+                    class="project--last-report-radar"
                     v-if="latestReport">
                 <radar-chart :series="latestReportRadarData.series"
                         :labels="latestReportRadarData.labels"/>
@@ -36,7 +37,6 @@
     import ReportHistory from '../../components/report-history/report-history';
     import ReportTable from '../../components/report-table/report-table';
     import SiteConfig from '../../components/site-config/site-config';
-    import ProjectSettings from '../../components/site-settings/site-settings';
     import Tile from '../../components/tile/tile';
     import getAverageForScore from '../../utils/get-average-for-score';
     import reportToRadarChart from '../../utils/report-to-radar-chart';
@@ -49,7 +49,6 @@
             GaugeChart,
             ReportHistory,
             SiteConfig,
-            ProjectSettings,
         },
 
         props: {

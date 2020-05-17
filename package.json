@@ -70,6 +70,7 @@
         "puppeteer": "^2.1.1",
         "twig": "^1.15.1",
         "uuid": "^3.4.0",
+        "vuejs-datatable": "^2.0.0-alpha.7",
         "winston": "^3.2.1"
     },
     "devDependencies": {

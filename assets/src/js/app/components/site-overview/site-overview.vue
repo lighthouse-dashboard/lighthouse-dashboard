@@ -16,8 +16,8 @@
         <div class='site-overview--content'>
             <span v-if="runError">{{ runError.message }}</span>
             <line-chart
-                    :data-sets="datasets"
-                    :labels="labels"/>
+                    :data-sets="lineChartData.datasets"
+                    :labels="lineChartData.labels"/>
         </div>
     </tile>
 </template>
@@ -25,6 +25,7 @@
 <script>
     import { mapActions } from 'vuex';
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
+    import reportsToLineChart from '../../../../../../src/transformer/reports-to-line-chart';
     import Btn from '../base/btn/btn';
     import LineChart from '../charts/line-chart/line-chart';
     import ProjectSettings from '../site-settings/site-settings';
@@ -57,11 +58,8 @@
                 required: true,
             },
 
-            datasets: {
-                type: Array,
-                required: true,
-            },
-            labels: {
+            /** @type {Report[]} */
+            reports: {
                 type: Array,
                 required: true,
             },
@@ -87,6 +85,9 @@
                     };
                 });
             },
+            lineChartData() {
+                return reportsToLineChart(this.reports);
+            },
         },
         methods: {
             ...mapActions('reports', ['fetchReportsForSite', 'launchAuditForSite']),
@@ -98,7 +99,6 @@
 
             loadData() {
                 this.isLoading = true;
-
             },
 
             async removePage() {
@@ -108,6 +108,7 @@
             openSettings() {
                 this.showSettings = !this.showSettings;
             },
+
             openInfo() {
                 this.showInfo = !this.showInfo;
             },

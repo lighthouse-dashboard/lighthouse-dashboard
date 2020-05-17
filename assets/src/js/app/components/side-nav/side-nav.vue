@@ -27,6 +27,14 @@
                             exact
                             :to="{name: 'dashboard'}">Dashboard
                     </router-link>
+
+                    <router-link
+                            tag="li"
+                            active-class="side-nav--list-item__active"
+                            class="side-nav--list-item"
+                            :to="{name: 'projects'}">
+                        Projects
+                    </router-link>
                 </ul>
             </div>
 
