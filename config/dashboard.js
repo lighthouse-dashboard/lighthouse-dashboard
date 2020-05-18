@@ -1,6 +1,6 @@
 const getTheme = require('../assets/src/js/app/utils/get-theme');
 
-const { charts, theme } = getTheme();
+const { charts } = getTheme();
 
 module.exports = {
     title: 'Lighthouse Dashboard',
@@ -85,8 +85,8 @@ module.exports = {
         chartColors: charts,
         // Material UI theme colors
         theme: {
-            dark: theme,
-            light: theme,
+            dark: null,
+            light: null,
         },
     },
 

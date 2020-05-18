@@ -1,5 +1,5 @@
 // eslint-disable-next-line global-require
-const getTheme = () => require(`../../../../../themes/${ process.env.UI_THEME || 'light' }.js`);
+const getTheme = () => require(`../../../../../themes/light.js`);
 
 let theme = null;
 module.exports = function() {
