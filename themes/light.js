@@ -9,4 +9,11 @@ export default {
         '#005da9',
         '#006ecb',
     ],
+    app: 'light',
+    theme: {
+        primary: '#6782b8',
+        text: '#333',
+        secondary: '#ff8a45',
+        accent: '#e91e63',
+    },
 };

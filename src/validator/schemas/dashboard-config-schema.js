@@ -90,6 +90,12 @@ export default joi.object({
             .array()
             .items(joi.string())
             .required(),
+
+        theme: joi.object({
+            dark: COLOR_THEME_CONFIG,
+            light: COLOR_THEME_CONFIG,
+        })
+            .required(),
     }).required(),
 
     customProjectMenuEntries: joi.array().items(CUSTOM_MENU_ENTRY),

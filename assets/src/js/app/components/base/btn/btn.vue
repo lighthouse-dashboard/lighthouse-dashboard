@@ -21,7 +21,7 @@
         props: {
             /** @type {string[]} */
             facets: {
-                type: Array,
+                type: [Array, String],
                 default: () => ['primary'],
             },
 
