@@ -84,10 +84,6 @@ module.exports = {
         // Colors used in the charts
         chartColors: charts,
         // Material UI theme colors
-        theme: {
-            dark: null,
-            light: null,
-        },
     },
 
     // Collection of configs for custom menu entries available for every page
