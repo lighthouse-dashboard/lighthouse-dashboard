@@ -1,12 +1,11 @@
 <template>
-    <div>
-        <latest-audits-feed/>
-        <favorite-projects-overview/>
+    <div class='dashboard'>
+        <latest-audits-feed class='dashboard--section'/>
+        <favorite-projects-overview class='dashboard--section'/>
     </div>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import CONFIG from '../../../../../../config/dashboard';
     import FavoriteProjectsOverview from '../../components/favorite-projects-overview/favorite-projects-overview';
     import LatestAuditsFeed from '../../components/latest-audits-feed/latest-audits-feed';

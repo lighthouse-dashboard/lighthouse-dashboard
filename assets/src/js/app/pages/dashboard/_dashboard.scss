@@ -1,0 +1,20 @@
+.dashboard {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        & {
+            display: grid;
+            grid-template-areas: 'content';
+            grid-template-columns: 12fr;
+            grid-template-rows: 1fr;
+            row-gap: calc(var(--root-spacing) * 2);
+        }
+    }
+
+    // Facets
+
+    // States
+}
