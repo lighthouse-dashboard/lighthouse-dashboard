@@ -2,9 +2,10 @@ import { compose } from 'lodash/fp';
 import withReports from '../containers/with-reports';
 import withSiteInfo from '../containers/with-site-info';
 import withSitesAndLatestReport from '../containers/with-sites/with-sites-and-latest-report';
-import Project from './project/project';
-import Projects from './projects/projects';
 
+const Project = () => import('./project/project');
+const Projects = () => import('./projects/projects');
+const Dashboard = () => import('./dashboard/dashboard');
 
 
 export default [
@@ -41,7 +42,7 @@ export default [
                 name: 'projects',
                 component: withSitesAndLatestReport(Projects),
                 meta: { requiresAuth: true },
-            }
+            },
         ],
     },
 ];
