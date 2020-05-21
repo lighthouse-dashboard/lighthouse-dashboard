@@ -5,6 +5,8 @@ import withSitesAndLatestReport from '../containers/with-sites/with-sites-and-la
 import Project from './project/project';
 import Projects from './projects/projects';
 
+
+
 export default [
     {
         path: '/login',
@@ -24,7 +26,7 @@ export default [
             {
                 path: '',
                 name: 'dashboard',
-                component: () => import('./dashboard/dashboard'),
+                component: Dashboard,
                 meta: { requiresAuth: true },
             },
             {
@@ -39,13 +41,7 @@ export default [
                 name: 'projects',
                 component: withSitesAndLatestReport(Projects),
                 meta: { requiresAuth: true },
-            },
-            {
-                path: 'overview',
-                name: 'overview',
-                component: () => import('./overview/overview'),
-                meta: { requiresAuth: true },
-            },
+            }
         ],
     },
 ];

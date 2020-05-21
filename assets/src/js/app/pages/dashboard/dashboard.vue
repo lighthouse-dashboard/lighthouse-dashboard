@@ -22,17 +22,6 @@
             charts() {
                 return CONFIG.page_dashboard.charts;
             },
-            fluid() {
-                return CONFIG.page_dashboard.isFluid;
-            },
-        },
-
-        methods: {
-            ...mapActions('sites', ['setSites']),
-        },
-
-        beforeDestroy() {
-            this.setSites({ sites: [] });
         },
     };
 </script>

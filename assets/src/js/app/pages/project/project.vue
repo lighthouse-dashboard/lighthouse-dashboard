@@ -112,14 +112,8 @@
         },
 
         methods: {
-            ...mapActions('sites', ['getCurrentSite', 'resetCurrentSite']),
             ...mapActions('reports', ['launchAuditForSite']),
 
-            /**
-             *
-             * @param {string} scoreId
-             * @return {number}
-             */
             getAvg(scoreId) {
                 return Math.round(getAverageForScore(this.reports, scoreId.toLocaleLowerCase()) * 100) / 100;
             },
@@ -127,10 +121,6 @@
             runAudit() {
                 return this.launchAuditForSite({ id: this.id });
             },
-        },
-
-        beforeDestroy() {
-            this.resetCurrentSite();
         },
     };
 </script>
