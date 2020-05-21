@@ -1,18 +1,15 @@
 <template>
-    <tile title="Tools"
-            class="site-actions-list">
-        <list class="site-actions-list--list">
-            <list-item class="site-actions-list--list-item"
-                    v-for="entry in menuEntries"
-                    :key="entry.name">
-                <btn target="_blank"
-                        facets="flat"
-                        :href="entry.link">
-                    {{ entry.name }}
-                </btn>
-            </list-item>
-        </list>
-    </tile>
+    <list class="site-actions-list">
+        <list-item class="site-actions-list--list-item"
+                v-for="entry in menuEntries"
+                :key="entry.name">
+            <btn target="_blank"
+                    facets="flat"
+                    :href="entry.link">
+                {{ entry.name }}
+            </btn>
+        </list-item>
+    </list>
 </template>
 
 <script>
@@ -20,10 +17,9 @@
     import Btn from '../base/btn/btn';
     import List from '../base/list/list';
     import ListItem from '../base/list/list-item/list-item';
-    import Tile from '../tile/tile';
 
     export default {
-        components: { ListItem, List, Btn, Tile },
+        components: { ListItem, List, Btn },
         props: {
             url: {
                 type: String,

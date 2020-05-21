@@ -12,6 +12,16 @@
             row-gap: var(--root-spacing);
             column-gap: var(--root-spacing);
             margin: var(--root-spacing) 0;
+
+            @include mq('md') {
+                grid-template-areas: '. .';
+                grid-template-columns: 6fr 6fr;
+            }
+
+            @include mq('<=md') {
+                grid-template-areas: '.';
+                grid-template-columns: 12fr;
+            }
         }
     }
 

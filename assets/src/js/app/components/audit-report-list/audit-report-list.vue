@@ -1,17 +1,16 @@
 <template>
-    <tile title="Available HTML Reports">
-        <list class="audit-report-list">
-            <span class='caption' v-if='list.length === 0'>No Items</span>
-            <list-item v-for="report in list"
-                    :key="report._id">
-                <btn :to="`/api/reports/report/${report._id}`"
-                        facets="flat"
-                        target="_blank">
-                    {{ report.createdAt | format-date }}
-                </btn>
-            </list-item>
-        </list>
-    </tile>
+    <list class="audit-report-list">
+        <span class='caption'
+                v-if='list.length === 0'>No Items</span>
+        <list-item v-for="report in list"
+                :key="report._id">
+            <btn :to="`/api/reports/report/${report._id}`"
+                    facets="flat"
+                    target="_blank">
+                {{ report.createdAt | format-date }}
+            </btn>
+        </list-item>
+    </list>
 </template>
 
 <script>

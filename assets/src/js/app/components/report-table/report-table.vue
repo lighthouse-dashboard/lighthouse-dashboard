@@ -1,5 +1,5 @@
 <template>
-    <tile title="Audits"
+    <div
             class="report-table">
         <loading-indicator v-if='isLoading'/>
         <list v-else>
@@ -12,7 +12,7 @@
                 </btn>
             </list-item>
         </list>
-    </tile>
+    </div>
 </template>
 
 <script>

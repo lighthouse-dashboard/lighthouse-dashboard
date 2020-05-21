@@ -12,15 +12,40 @@
 
         .project--overview {
             display: grid;
-            grid-template-areas: '. . .';
-            grid-template-columns: 4fr 4fr 2fr;
-            grid-column-gap: var(--root-spacing);
-            grid-row-gap: var(--root-spacing);
-            margin: var(--root-spacing) 0;
+            grid-template-areas: '. .';
+            grid-template-columns: 6fr 6fr;
+            grid-template-rows: 12fr;
+            column-gap: var(--root-spacing);
+            row-gap: var(--root-spacing);
 
             @include mq('<=md') {
                 grid-template-areas: '.';
                 grid-template-columns: 12fr;
+            }
+        }
+
+        .project--insights {
+            display: grid;
+            grid-template-areas: '.';
+            grid-template-columns: 12fr;
+            column-gap: var(--root-spacing);
+            row-gap: var(--root-spacing);
+
+            @include mq('<=md') {
+                order: 2;
+            }
+        }
+
+        .project--sidebar {
+            display: grid;
+            grid-template-areas: '.';
+            grid-template-columns: 12fr;
+            grid-template-rows: 12fr;
+            column-gap: var(--root-spacing);
+            row-gap: var(--root-spacing);
+
+            @include mq('<=md') {
+                order: 1;
             }
         }
 
@@ -44,19 +69,15 @@
 
         .project--content {
             display: grid;
-            grid-template-areas: 'history audits';
+            grid-template-areas: 'content sidebar';
             grid-template-columns: 8fr 2fr;
             grid-column-gap: var(--root-spacing);
             grid-row-gap: var(--root-spacing);
 
-            @include mq('md') {
+            @include mq('<=md') {
                 grid-template-areas: '.';
                 grid-template-columns: 12fr;
             }
-        }
-
-        .project--audit-btn {
-            margin-top: var(--root-spacing);
         }
     }
 

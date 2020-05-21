@@ -21,6 +21,7 @@
                 type: Array,
                 required: true,
             },
+
             isLoading: {
                 type: Boolean,
                 default: false,

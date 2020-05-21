@@ -5,70 +5,78 @@
             {{ site.name }}
         </h4>
 
-        <div class='project--overview'
-                v-if='site'>
-            <tile title="Latest Report"
-                    class="project--last-report-radar">
-                <loading-indicator v-if='isLoading'/>
-                <radar-chart :series="latestReportRadarData.series"
-                        :labels="latestReportRadarData.labels"
-                        v-if='latestReportRadarData'/>
-            </tile>
+        <div class='project--content'>
+            <div class='project--insights'>
+                <div class='project--overview'>
+                    <tile title="Latest Report"
+                            class="project--last-report-radar">
+                        <loading-indicator v-if='isLoading'/>
+                        <radar-chart :series="latestReportRadarData.series"
+                                :labels="latestReportRadarData.labels"
+                                v-if='latestReportRadarData'/>
+                    </tile>
 
-            <tile title="Averages"
-                    class="project--average">
-                <loading-indicator v-if='isLoading'/>
-                <gauge-chart :labels="avgFields"
-                        :series='avgFields.map(field => getAvg(field))'
-                        v-else/>
-            </tile>
+                    <tile title="Averages"
+                            class="project--average">
+                        <loading-indicator v-if='isLoading'/>
+                        <gauge-chart :labels="avgFields"
+                                :series='avgFields.map(field => getAvg(field))'
+                                v-else/>
+                    </tile>
+                </div>
 
-            <div>
-                <tile title="Settings"
-                        class="project--settings">
+                <tile>
+                    <report-history :reports='reports'/>
+                </tile>
+            </div>
+            <div class='project--sidebar'>
+                <tile title="Settings">
                     <loading-indicator v-if='isLoading'/>
                     <site-config :config="site"
                             v-if='site'/>
                 </tile>
 
-                <btn
-                        class="project--audit-btn"
-                        :facets="['secondary', 'full-width']"
+                <btn :facets="['secondary', 'full-width']"
                         @click="runAudit">New audit
                 </btn>
-            </div>
-        </div>
 
-        <div class="project--content">
-            <report-history :id='id'/>
-            <report-table :id='id'/>
+                <tile title='Tools'>
+                    <site-actions-list v-if='site'
+                            :url='site.url'/>
+                </tile>
+
+                <tile title='HTML Reports'>
+                    <audit-report-list :reports='reports'/>
+                </tile>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
+    import AuditReportList from '../../components/audit-report-list/audit-report-list';
     import Btn from '../../components/base/btn/btn';
     import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
     import GaugeChart from '../../components/charts/gauge-chart/gauge-chart';
     import RadarChart from '../../components/charts/radar-chart/radar-chart';
     import ReportHistory from '../../components/report-history/report-history';
-    import ReportTable from '../../components/report-table/report-table';
+    import SiteActionsList from '../../components/site-actions-list/site-actions-list';
     import SiteConfig from '../../components/site-config/site-config';
     import Tile from '../../components/tile/tile';
-    import withReports from '../../containers/with-reports';
     import getAverageForScore from '../../utils/get-average-for-score';
     import reportToRadarChart from '../../utils/report-to-radar-chart';
 
     export default {
         components: {
+            AuditReportList,
+            SiteActionsList,
             LoadingIndicator,
             Btn,
-            ReportTable: withReports(ReportTable),
             RadarChart,
             Tile,
             GaugeChart,
-            ReportHistory: withReports(ReportHistory),
+            ReportHistory,
             SiteConfig,
         },
 
