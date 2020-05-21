@@ -1,10 +1,8 @@
 import Vue from 'vue';
 import { mapActions } from 'vuex';
 
-const withReports = (Component) => {
-    return Vue.component('WithReportsContainer', {
-        inheritAttrs: true,
-
+const withSiteInfo = (Component) => {
+    return Vue.component('WithSiteInfoContainer', {
         props: {
             id: {
                 type: String,
@@ -14,19 +12,19 @@ const withReports = (Component) => {
 
         data() {
             return {
-                reports: [],
-                isLoading: false,
+                site: null,
+                isLoading: true,
             };
         },
 
         methods: {
-            ...mapActions('reports', ['fetchReportsForSite']),
+            ...mapActions('sites', ['getCurrentSite']),
 
-            loadData() {
+            load() {
                 this.isLoading = true;
-                return this.fetchReportsForSite({ id: this.id })
-                    .then((reports) => {
-                        this.reports = reports;
+                this.getCurrentSite({ siteId: this.id })
+                    .then((site) => {
+                        this.site = site;
                     })
                     .finally(() => {
                         this.isLoading = false;
@@ -35,12 +33,12 @@ const withReports = (Component) => {
         },
 
         mounted() {
-            this.loadData();
+            this.load();
         },
 
-        render(h,) {
+        render(h) {
             const props = {
-                reports: this.reports,
+                site: this.site,
                 isLoading: this.isLoading,
             };
 
@@ -55,11 +53,10 @@ const withReports = (Component) => {
                         ...this.$props,
                         ...props,
                     },
-
                     on: this.$listeners,
                 });
         },
     });
 };
 
-export default withReports;
+export default withSiteInfo;

@@ -1,4 +1,8 @@
+import { compose } from 'lodash/fp';
+import withReports from '../containers/with-reports';
+import withSiteInfo from '../containers/with-site-info';
 import withSitesAndLatestReport from '../containers/with-sites/with-sites-and-latest-report';
+import Project from './project/project';
 import Projects from './projects/projects';
 
 export default [
@@ -26,7 +30,7 @@ export default [
             {
                 path: 'projects/:id',
                 name: 'project.detail',
-                component: () => import('./project/project'),
+                component: compose(withReports, withSiteInfo)(Project),
                 props: true,
                 meta: { requiresAuth: true },
             },

@@ -1,13 +1,14 @@
 <template>
     <tile title="Audits"
             class="report-table">
-        <list>
+        <loading-indicator v-if='isLoading'/>
+        <list v-else>
             <list-item v-for="item in reportsWithHtml"
                     :key="item._id">
                 <btn target="_blank"
                         :facets="['flat', 'full-width']"
                         :href="`/api/reports/report/${item._id}`">
-                    {{ item.createdAt|date }}
+                    {{ item.createdAt | format-date }}
                 </btn>
             </list-item>
         </list>
@@ -18,16 +19,21 @@
     import Btn from '../base/btn/btn';
     import List from '../base/list/list';
     import ListItem from '../base/list/list-item/list-item';
+    import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import Tile from '../tile/tile';
 
     export default {
-        components: { Btn, ListItem, List, Tile },
+        components: { LoadingIndicator, Btn, ListItem, List, Tile },
         props: {
             /** @type {Report[]} */
-            list: {
+            reports: {
                 type: Array,
                 required: true,
             },
+            isLoading: {
+                type: Boolean,
+                default: false,
+            }
         },
 
         data() {
@@ -39,7 +45,7 @@
 
         computed: {
             reportsWithHtml() {
-                return this.list.filter((report) => report.hasRawData);
+                return this.reports.filter((report) => report.hasRawData);
             },
         },
         methods: {

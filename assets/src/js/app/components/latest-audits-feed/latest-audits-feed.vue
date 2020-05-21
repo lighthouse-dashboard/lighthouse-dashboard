@@ -4,7 +4,9 @@
             Latest reports performance
         </p>
 
-        <div class="latest-audits-feed--content">
+        <loading-indicator v-if='isLoading'/>
+        <div class="latest-audits-feed--content"
+                v-else>
             <tile
                     v-for="site in sites"
                     :key="site.id">
@@ -24,11 +26,13 @@
     import CONFIG from '../../../../../../config/dashboard';
     import withLatestReport from '../../containers/with-latest-report';
     import Btn from '../base/btn/btn';
+    import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import ReportDetail from '../report-detail/report-detail';
     import Tile from '../tile/tile';
 
     export default {
         components: {
+            LoadingIndicator,
             Btn,
             Tile,
             ReportDetail: withLatestReport(ReportDetail),
@@ -38,6 +42,10 @@
             sites: {
                 type: Array,
                 required: true,
+            },
+            isLoading: {
+                type: Boolean,
+                default: false,
             },
         },
 

@@ -18,6 +18,17 @@ gulp.task('js:watch', function() {
         // Example watchOptions
         aggregateTimeout: 300,
     }, (err, stats) => { // Stats Object
+        if (stats.compilation.errors) {
+            stats.compilation.errors.forEach((e) => {
+                console.error(e.stack);
+            });
+        }
+
+        if (stats.compilation.warnings) {
+            stats.compilation.warnings.forEach((e) => {
+                console.warn(e.stack);
+            });
+        }
         if (err) {
             console.error(err);
         }

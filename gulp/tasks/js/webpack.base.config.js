@@ -21,6 +21,7 @@ module.exports = {
     context: path.resolve(paths.jsAsset),
     //indexPath: path.resolve(paths.templates, 'dist/index.html'),
 
+    stats: 'detailed',
     output: {
         publicPath: '/js/',
         path: path.resolve(paths.assetDist, 'js'),
@@ -64,12 +65,17 @@ module.exports = {
                 },
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env'],
+                        presets: [
+                            '@babel/preset-env',
+                            ['@vue/babel-preset-jsx', {
+                                injectH: false,
+                            }],
+                        ],
                         cacheDirectory: true,
                     },
                 },
@@ -81,7 +87,7 @@ module.exports = {
         new VueLoaderPlugin({
             cacheDirectory: true,
         }),
-      //  new VuetifyLoaderPlugin(),
+        //  new VuetifyLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: path.resolve(paths.templates, 'dist/index.html'),
             template: path.resolve(paths.htmlAsset, 'index.html'),
@@ -116,6 +122,6 @@ module.exports = {
             'node_modules',
             path.relative(paths.root, path.resolve(paths.jsAsset)),
         ],
-        extensions: ['*', '.js', '.ts', '.tsx', '.vue'],
+        extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.vue'],
     },
 };

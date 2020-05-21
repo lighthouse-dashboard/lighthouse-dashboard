@@ -1,7 +1,9 @@
 <template>
     <div class="projects">
         <p class="overline">All Projects</p>
-        <div class="projects--list">
+        <loading-indicator v-if='isLoading'/>
+        <div class="projects--list"
+                v-else>
             <tile
                     v-for="site in sites"
                     :key="site.site.id">
@@ -22,12 +24,14 @@
 <script>
     import { mapActions } from 'vuex';
     import Btn from '../../components/base/btn/btn';
+    import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
     import ReportDetail from '../../components/report-detail/report-detail';
     import Tile from '../../components/tile/tile';
     import formatDate from '../../filters/format-date';
 
     export default {
         components: {
+            LoadingIndicator,
             Tile,
             ReportDetail,
             Btn,
@@ -39,6 +43,10 @@
                 type: Array,
                 required: true,
             },
+            isLoading: {
+                type: Boolean,
+                default: false,
+            }
         },
 
         computed: {
