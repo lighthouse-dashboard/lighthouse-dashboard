@@ -18,6 +18,11 @@
             width: 100%;
         }
 
+        .input-field--label {
+            display: block;
+            margin-bottom: var(--root-spacing);
+        }
+
         .input-field--input {
             @include Body1;
             display: block;
@@ -52,6 +57,10 @@
     }
 
     &.input-field__disabled {
+        .input-field--label {
+            color: var(--input-field--disabled-input-background);
+        }
+
         .input-field--input {
             pointer-events: none;
             background-color: var(--input-field--disabled-input-background);

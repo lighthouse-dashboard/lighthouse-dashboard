@@ -1,4 +1,6 @@
-export default { title: 'Styleguide / Buttons' };
+import withLayout from '../../../../storybook/decorators/withLayout';
+
+export default { title: 'Styleguide / Buttons', decorators: [withLayout] };
 
 export const primary = () => '<btn>Primary</btn>';
 export const primaryDisabled = () => '<btn :disabled="true">Disabled</btn>';

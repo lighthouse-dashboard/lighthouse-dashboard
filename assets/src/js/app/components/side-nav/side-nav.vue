@@ -5,13 +5,17 @@
                 class='side-nav--mobile-toggle'
                 v-if='!isOpen'
                 @toggle='toggleDrawer'/>
+
         <div class='side-nav--backdrop'
                 @click='toggleDrawer'/>
+
         <nav class='side-nav--drawer'>
             <div class='side-nav--top'>
-                <button class='side-nav--close-btn'
-                        @click='toggleDrawer'>Close
-                </button>
+                <btn class='side-nav--close-btn'
+                        facets='flat'
+                        @click='toggleDrawer'>
+                    Close
+                </btn>
                 <div class="side-nav--header">
                     <img class="side-nav--logo"
                             src="/static/img/logo_small.png"/>
@@ -37,6 +41,9 @@
                     </router-link>
                 </ul>
             </div>
+            <div>
+                <create-site-form/>
+            </div>
 
             <div class='side-nav--bottom'>
                 <ul class='side-nav--list'>
@@ -55,10 +62,11 @@
 <script>
     import bemMixin from '../../mixins/bem-mixin';
     import Btn from '../base/btn/btn';
+    import CreateSiteForm from '../create-site-form/create-site-form';
     import SideNavToggle from './side-nav-toggle/side-nav-toggle';
 
     export default {
-        components: { Btn, SideNavToggle },
+        components: { CreateSiteForm, Btn, SideNavToggle },
         mixins: [bemMixin('side-nav')],
         props: {
             title: {

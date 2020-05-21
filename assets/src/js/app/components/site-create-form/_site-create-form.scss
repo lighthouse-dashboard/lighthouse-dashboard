@@ -1,0 +1,16 @@
+.site-create-form {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        .site-create-form--field-set {
+            margin: calc(var(--root-spacing) * 2) 0;
+        }
+    }
+
+    // Facets
+
+    // States
+}

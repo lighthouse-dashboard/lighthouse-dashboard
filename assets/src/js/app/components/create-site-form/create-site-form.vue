@@ -1,14 +1,8 @@
 <template>
     <div>
-        <v-btn
-                absolute
-                top
-                right
-                fab
-                color="primary"
-                @click.stop="dialog = true">
-            <v-icon>mdi-plus</v-icon>
-        </v-btn>
+        <btn facets='primary'
+                @click.stop="dialog = true">Add
+        </btn>
 
         <v-dialog
                 v-model="dialog"
@@ -66,8 +60,10 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import Btn from '../base/btn/btn';
 
     export default {
+        components: { Btn },
         props: {},
         data() {
             return {

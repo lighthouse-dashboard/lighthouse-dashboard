@@ -1,15 +1,12 @@
 import { boolean, text } from '@storybook/addon-knobs';
 import withLayout from '../../../../storybook/decorators/withLayout';
-import InputField from './input-field.vue';
+import InputSelect from './input-select.vue';
 
-export default { title: 'Styleguide / Inputs / Field', decorators: [withLayout] };
+export default { title: 'Styleguide / Inputs / Select', decorators: [withLayout] };
 
 export const component = () => ({
-    components: { InputField },
+    components: { InputSelect },
     props: {
-        error: {
-            default: text('Error', ''),
-        },
         label: {
             default: text('Label', 'Foo'),
         },
@@ -17,5 +14,5 @@ export const component = () => ({
             default: boolean('Disabled', false),
         },
     },
-    template: '<input-field :label="label" :error="error" :disabled="disabled"/>',
+    template: '<input-select :label="label" :disabled="disabled" value="bar"><option value="foo">Foo</option><option value="bar">Bar</option></input-select>',
 });

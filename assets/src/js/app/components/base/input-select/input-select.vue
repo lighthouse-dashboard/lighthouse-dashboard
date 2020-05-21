@@ -1,62 +1,49 @@
 <template>
-    <label class="input-field"
+    <div class="input-select"
             :class='classes'>
-        <span class='input-field--label'
-                v-if='label'>{{ label }}</span>
-        <input class='input-field--input'
-                :disabled='disabled'
-                :placeholder='placeholder'
-                :type='type'
-                :value='model'
-                @input='onChange'>
-        <span class='input-field--error'
-                v-if='error'>{{ error }}</span>
-        <slot/>
-    </label>
+        <label>
+            <span class="input-select--label" v-if='label'>{{ label }}</span>
+            <select class="input-select--select"
+                    :disabled='disabled'
+                    :value='value'
+                    @change='onChange'>
+                <slot/>
+            </select>
+        </label>
+    </div>
 </template>
 
 <script>
     import bemMixin from '../../../mixins/bem-mixin';
 
     export default {
-        mixins: [bemMixin('input-field')],
+        mixins: [bemMixin('input-select')],
+
         props: {
             value: {
                 type: String,
                 default: '',
             },
-            placeholder: {
+
+            label: {
                 type: String,
                 default: '',
-            },
-            type: {
-                type: String,
-                default: 'text',
-            },
-            error: {
-                type: String,
-                default: null,
             },
             disabled: {
                 type: Boolean,
                 default: false,
             },
-            label: {
-                type: String,
-                default: '',
-            },
         },
 
         data() {
             return {
-                model: '',
+                model: null,
             };
         },
 
         computed: {
             classes() {
                 return [
-                    this.createFacet(this.error ? 'has-error' : ''),
                     this.createFacet(this.disabled ? 'disabled' : ''),
                 ];
             },
@@ -64,6 +51,7 @@
 
         methods: {
             onChange(e) {
+                debugger;
                 this.$emit('input', e.target.value);
             },
         },
@@ -76,6 +64,6 @@
 
         mounted() {
             this.model = this.value;
-        }
+        },
     };
 </script>
