@@ -3,21 +3,21 @@
         <list class="site-config--list">
             <list-item class="site-config--list-item">
                 <p class="caption">Name</p>
-                <p>{{ config.name }}</p>
+                <p>{{ site.name }}</p>
             </list-item>
 
             <list-item class="site-config--list-item">
                 <p class="caption">URL</p>
                 <p>
                     <btn facets="flat"
-                            :href="config.url">{{config.name}}
+                            :href="site.url">{{site.name}}
                     </btn>
                 </p>
             </list-item>
 
             <list-item class="site-config--list-item">
                 <p class="caption">Last Audit</p>
-                <p>{{ config.last_audit | format-date }}</p>
+                <p>{{ site.last_audit | format-date }}</p>
             </list-item>
         </list>
     </div>
@@ -28,13 +28,12 @@
     import Btn from '../base/btn/btn';
     import List from '../base/list/list';
     import ListItem from '../base/list/list-item/list-item';
-    import Tile from '../tile/tile';
 
     export default {
-        components: { ListItem, List, Btn, Tile },
+        components: { ListItem, List, Btn },
         props: {
             /** @type {Sites.SiteConfig} */
-            config: {
+            site:{
                 type: Object,
                 required: true,
             },

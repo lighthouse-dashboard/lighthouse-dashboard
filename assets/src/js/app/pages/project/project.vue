@@ -32,7 +32,7 @@
             <div class='project--sidebar'>
                 <tile title="Settings">
                     <loading-indicator v-if='isLoading'/>
-                    <site-config :config="site"
+                    <site-config :site="site"
                             v-if='site'/>
                 </tile>
 
