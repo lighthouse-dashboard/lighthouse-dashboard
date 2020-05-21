@@ -1,12 +1,13 @@
 <template>
     <tile title="Available HTML Reports">
         <list class="audit-report-list">
-            <list-item v-for="report in reports"
+            <span class='caption' v-if='list.length === 0'>No Items</span>
+            <list-item v-for="report in list"
                     :key="report._id">
                 <btn :to="`/api/reports/report/${report._id}`"
                         facets="flat"
                         target="_blank">
-                    {{ report.createdAt | date }}
+                    {{ report.createdAt | format-date }}
                 </btn>
             </list-item>
         </list>
@@ -23,15 +24,15 @@
         components: { ListItem, List, Btn, Tile },
         props: {
             /** @type {Report[]} */
-            list: {
+            reports: {
                 type: Array,
                 required: true,
             },
         },
 
         computed: {
-            reports() {
-                return this.list.filter((report) => report.hasRawData);
+            list() {
+                return this.reports.filter((report) => report.hasRawData);
             },
         },
     };

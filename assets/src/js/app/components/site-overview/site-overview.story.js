@@ -1,8 +1,12 @@
 import { text } from '@storybook/addon-knobs';
 import createFakeReport from '../../../../../../src/utils/create-fake-report';
+import withLayout from '../../../storybook/decorators/withLayout';
 import SiteOverview from './site-overview.vue';
 
-export default { title: 'Components / Site Overview' };
+export default {
+    title: 'Components / Site Overview',
+    decorators: [withLayout],
+};
 
 export const component = () => ({
     components: { SiteOverview },

@@ -1,7 +1,11 @@
 import { number, text } from '@storybook/addon-knobs';
+import withLayout from '../../../../storybook/decorators/withLayout';
 import GaugeChart from './gauge-chart.vue';
 
-export default { title: 'Components / Charts / Gauge Chart' };
+export default {
+    title: 'Components / Charts / Gauge Chart',
+    decorators: [withLayout],
+};
 
 export const component = () => ({
     components: { GaugeChart },

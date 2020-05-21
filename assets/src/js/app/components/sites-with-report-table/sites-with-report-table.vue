@@ -19,7 +19,7 @@
             </template>
 
             <template v-slot:item.createdAt="{ item }">
-                {{ item.createdAt | date }}
+                {{ item.createdAt | format-date }}
             </template>
 
             <template v-slot:item.hasRaw="{ item }">

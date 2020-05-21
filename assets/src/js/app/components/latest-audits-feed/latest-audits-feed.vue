@@ -14,7 +14,7 @@
                     {{ site.name }}
                 </btn>
                 <report-detail :site-id="site.id"/>
-                {{ site.last_audit | date }}
+                {{ site.last_audit | format-date }}
             </tile>
         </div>
     </div>

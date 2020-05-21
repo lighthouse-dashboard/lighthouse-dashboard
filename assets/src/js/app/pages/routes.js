@@ -9,7 +9,7 @@ export default [
         meta: { requiresAuth: false },
     },
 
-    { path: '/', redirect: '/app' },
+    { path: '/', redirect: '/app/' },
 
     {
         path: '/app',

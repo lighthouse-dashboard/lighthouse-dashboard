@@ -10,7 +10,7 @@ export default function createFakeReport() {
         message: 'Fake Report',
         git_commit: 'Fake report',
         raw: null,
-        hasRawData: false,
+        hasRawData: true,
         values: [
             {
                 id: 'performance',

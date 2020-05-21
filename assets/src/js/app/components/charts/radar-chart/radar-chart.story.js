@@ -1,6 +1,10 @@
+import withLayout from '../../../../storybook/decorators/withLayout';
 import RadarChart from './radar-chart.vue';
 
-export default { title: 'Components / Charts / Radar Chart' };
+export default {
+    title: 'Components / Charts / Radar Chart',
+    decorators: [withLayout],
+};
 
 export const component = () => ({
     components: { RadarChart },

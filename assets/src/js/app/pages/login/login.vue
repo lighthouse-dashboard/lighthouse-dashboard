@@ -1,6 +1,5 @@
 <template>
     <div class="login">
-        <div/>
         <login-form title='Login'/>
     </div>
 </template>

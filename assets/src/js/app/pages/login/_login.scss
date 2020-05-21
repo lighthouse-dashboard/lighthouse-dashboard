@@ -6,9 +6,12 @@
     // Module
     & {
         & {
-            display: grid;
-            grid-template-areas: '. login';
-            grid-template-columns: 4fr 4fr;
+            background-color: var(--root-color--app-content-background);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
     }
 

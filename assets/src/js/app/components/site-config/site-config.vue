@@ -17,7 +17,7 @@
 
             <list-item class="site-config--list-item">
                 <p class="caption">Last Audit</p>
-                <p>{{ config.last_audit | date }}</p>
+                <p>{{ config.last_audit | format-date }}</p>
             </list-item>
         </list>
     </div>

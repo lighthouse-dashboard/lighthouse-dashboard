@@ -3,10 +3,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Inview from 'vueinview';
 import { VuejsDatatableFactory } from 'vuejs-datatable';
+import registry from '../framework/registry';
 
 
 import App from './App.vue';
-import formatDate from './filters/format-date';
 import routes from './pages/routes';
 import { authRouteGuard } from './utils/auth-route-guard';
 import store from './vuex';
@@ -16,6 +16,8 @@ Vue.use(VueRouter);
 Vue.use(Inview);
 Vue.use(VuejsDatatableFactory);
 
+registry(Vue);
+
 VuejsDatatableFactory.useDefaultType(false)
     .registerTableType('datatable', tableType => tableType.mergeSettings({
         table: {
@@ -23,7 +25,6 @@ VuejsDatatableFactory.useDefaultType(false)
         },
     }));
 
-Vue.filter('date', formatDate);
 
 const router = new VueRouter({
     mode: 'history',

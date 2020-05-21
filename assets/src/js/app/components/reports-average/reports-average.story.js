@@ -1,7 +1,11 @@
 import { number, text } from '@storybook/addon-knobs';
+import withLayout from '../../../storybook/decorators/withLayout';
 import ReportsAverage from './reports-average.vue';
 
-export default { title: 'Components / Reports Average' };
+export default {
+    title: 'Components / Reports Average',
+    decorators: [withLayout],
+};
 
 export const component = () => ({
     components: { ReportsAverage },

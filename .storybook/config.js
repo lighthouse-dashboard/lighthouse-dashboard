@@ -24,7 +24,6 @@ addDecorator(StoryRouter({
     initialEntry: '/'
 }, { routes }))
 
-
 const customViewports = Object.entries(_breakpoints).reduce((acc, [key, value]) => {
     acc[key] = {
         name: key.toUpperCase(),

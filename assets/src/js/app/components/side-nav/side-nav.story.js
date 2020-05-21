@@ -1,7 +1,11 @@
 import { text } from '@storybook/addon-knobs';
+import withLayout from '../../../storybook/decorators/withLayout';
 import SideNav from './side-nav.vue';
 
-export default { title: 'Components / Side Nav' };
+export default {
+    title: 'Components / Side Nav',
+    decorators: [withLayout],
+};
 
 export const component = () => ({
     components: { SideNav },
