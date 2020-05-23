@@ -23,21 +23,16 @@
         <div class='site-create-form--field-set'>
             <input-checkbox label='Is Favorite'/>
         </div>
-
-        <div class='site-create-form--field-set'>
-            <btn>Create</btn>
-        </div>
     </div>
 </template>
 
 <script>
-    import Btn from '../base/btn/btn';
     import InputCheckbox from '../base/input-checkbox/input-checkbox';
     import InputField from '../base/input-field/input-field';
     import InputSelect from '../base/input-select/input-select';
 
     export default {
-        components: { InputCheckbox, InputSelect, Btn, InputField },
+        components: { InputCheckbox, InputSelect, InputField },
         props: {},
         data() {
             return {

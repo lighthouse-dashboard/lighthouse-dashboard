@@ -1,0 +1,70 @@
+.overlay {
+    // Vars
+    --overlay--backdrop-color: rgba(20, 20, 20, 0.2);
+    --overlay--content-background: #fff;
+    --overlay--border-radius: 2px;
+
+    // Support
+
+    // Module
+    & {
+        & {
+            z-index: var(--root-index--overlay-backdrop);
+            background-color: var(--overlay--backdrop-color);
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .overlay--backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .overlay--title {
+            @include Headline5;
+            margin-bottom: var(--root-spacing);
+            padding: calc(var(--root-spacing) * 2);
+            border-bottom: solid 1px var(--root-color--divider);
+        }
+
+        .overlay--content-wrapper {
+            z-index: var(--root-index--overlay-content);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            min-width: 320px;
+            min-height: 320px;
+            border-radius: var(--overlay--border-radius);
+            background-color: var(--overlay--content-background);
+        }
+
+        .overlay--content {
+            padding: var(--root-spacing) calc(var(--root-spacing) * 2);
+        }
+
+        .overlay--actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            padding: var(--root-spacing) calc(var(--root-spacing) * 2);
+        }
+
+        .overlay--action {
+            margin-left: var(--root-spacing);
+        }
+    }
+
+    // Facets
+
+    // States
+}

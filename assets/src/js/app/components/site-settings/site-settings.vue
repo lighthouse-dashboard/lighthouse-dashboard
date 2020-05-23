@@ -40,7 +40,7 @@
 <script>
     import { mapActions } from 'vuex';
     import { POST_WEBHOOK_URL } from '../../config/routes';
-    import Overlay from '../dialog/dialog';
+    import Overlay from '../overlay/overlay';
 
     export default {
         components: { Overlay },

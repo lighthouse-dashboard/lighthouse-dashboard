@@ -41,9 +41,13 @@
                     </router-link>
                 </ul>
             </div>
-            <div>
-                <create-site-form/>
-            </div>
+
+            <btn @click='toggleCreateOverlay'>
+                Create
+            </btn>
+            <site-create-overlay v-if='isCreateOverlayOpen'
+                    @close='toggleCreateOverlay'/>
+
 
             <div class='side-nav--bottom'>
                 <ul class='side-nav--list'>
@@ -62,11 +66,11 @@
 <script>
     import bemMixin from '../../mixins/bem-mixin';
     import Btn from '../base/btn/btn';
-    import CreateSiteForm from '../create-site-form/create-site-form';
+    import SiteCreateOverlay from '../overlay/site-create-overlay/site-create-overlay';
     import SideNavToggle from './side-nav-toggle/side-nav-toggle';
 
     export default {
-        components: { CreateSiteForm, Btn, SideNavToggle },
+        components: { SiteCreateOverlay, Btn, SideNavToggle },
         mixins: [bemMixin('side-nav')],
         props: {
             title: {
@@ -82,6 +86,7 @@
         data() {
             return {
                 isOpen: false,
+                isCreateOverlayOpen: false,
             };
         },
         computed: {
@@ -92,6 +97,10 @@
             },
         },
         methods: {
+            toggleCreateOverlay() {
+                this.isCreateOverlayOpen = !this.isCreateOverlayOpen;
+            },
+
             toggleDrawer() {
                 this.isOpen = !this.isOpen;
             },

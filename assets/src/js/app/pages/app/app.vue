@@ -13,11 +13,11 @@
 </template>
 
 <script>
+    import { mapActions, mapState } from 'vuex';
     import { name, version } from '../../../../../../package.json';
     import AppLayout from '../../components/layouts/app-layout/app-layout';
     import SideNav from '../../components/side-nav/side-nav';
     import bemMixin from '../../mixins/bem-mixin';
-    import { mapActions, mapState } from 'vuex';
 
     export default {
         components: {
