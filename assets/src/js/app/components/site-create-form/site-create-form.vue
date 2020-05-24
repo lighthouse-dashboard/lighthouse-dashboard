@@ -1,19 +1,19 @@
 <template>
     <div class="site-create-form">
         <div class='site-create-form--field-set'>
-            <input-field v-model='name'
+            <input-field v-model='value.name'
                     placeholder='foo.io'
                     label='Name'/>
         </div>
 
         <div class='site-create-form--field-set'>
-            <input-field v-model='url'
+            <input-field v-model='value.url'
                     placeholder='https://www.foo.io'
                     label='URL'/>
         </div>
 
         <div class='site-create-form--field-set'>
-            <input-select v-model='device'
+            <input-select v-model='value.device'
                     label='Device'>
                 <option value='desktop'>Desktop</option>
                 <option value='mobile'>Mobile</option>
@@ -21,7 +21,8 @@
         </div>
 
         <div class='site-create-form--field-set'>
-            <input-checkbox label='Is Favorite'/>
+            <input-checkbox v-model='value.is_favorite'
+                    label='Is Favorite'/>
         </div>
     </div>
 </template>
@@ -33,13 +34,26 @@
 
     export default {
         components: { InputCheckbox, InputSelect, InputField },
-        props: {},
+        props: {
+            value: {
+                type: Object,
+                required: true,
+            },
+        },
         data() {
             return {
-                name: '',
-                url: '',
-                device: 'desktop',
+                model: null,
             };
+        },
+
+        watch: {
+            model(m) {
+                this.$emit('input', m);
+            },
+        },
+
+        mounted() {
+            this.model = this.value;
         },
     };
 </script>

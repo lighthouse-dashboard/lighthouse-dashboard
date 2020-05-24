@@ -50,6 +50,14 @@
                 </tile>
             </div>
         </div>
+
+        <div>
+            <h5>Danger Zone</h5>
+            <btn :facets='["danger"]'
+                    @click='onDeleteClicked'>
+                Delete
+            </btn>
+        </div>
     </div>
 </template>
 
@@ -121,6 +129,7 @@
 
         methods: {
             ...mapActions('reports', ['launchAuditForSite']),
+            ...mapActions('sites', ['deleteSite']),
 
             getAvg(scoreId) {
                 return Math.round(getAverageForScore(this.reports, scoreId.toLocaleLowerCase()) * 100) / 100;
@@ -128,6 +137,13 @@
 
             runAudit() {
                 return this.launchAuditForSite({ id: this.id });
+            },
+
+            onDeleteClicked() {
+                this.deleteSite({ id: this.id })
+                    .then(() => {
+                        this.$router.push({ name: 'dashboard' });
+                    });
             },
         },
     };

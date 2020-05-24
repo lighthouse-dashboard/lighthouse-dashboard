@@ -22,6 +22,9 @@
     //Buttons
     --root-color--button-text-primary: #fff;
 
+    --root-color--button-danger-text: var(--root-color--signal-error);
+    --root-color--button-danger-background: var(--root-color--signal-error);
+
     --root-color--button-text-flat: var(--root-color--primary);
     --root-color--button-disabled-background: var(--color-mono-light-gray);
     --root-color--button-background-primary: var(--root-color--primary);

@@ -7,6 +7,8 @@
     --button--text-color: var(--root-color--button-text-primary);
     --button--secondary-text-color: var(--root-color--button-text-secondarry);
     --button--flat-text-color: var(--root-color--button-text-flat);
+    --button--danger-text-color: var(--root-color--button-danger-text);
+    --button--danger-background-color: var(--root-color--button-danger-background);
     --button--text-color-accent: var(--root-color--button-text-accent-primary);
     --button--border-radius: 2px;
     --button--vert-main-margin: calc(var(--root-spacing) * 0.5);
@@ -85,6 +87,14 @@
         }
     }
 
+    &.btn__danger {
+        color: var(--button--danger-text-color);
+
+        &:hover, &:focus, &.btn__active {
+            color: var(--root-color--button-text-primary);
+            background-color: var(--button--danger-background-color);
+        }
+    }
 
     &.btn__flat {
         color: var(--button--flat-text-color);

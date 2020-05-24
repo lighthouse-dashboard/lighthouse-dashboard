@@ -2,6 +2,7 @@
     <label class='input-checkbox'>
         <span class='input-checkbox--wrapper'>
             <input type="checkbox"
+                    v-model='model'
                     class='input-checkbox--input'/>
             <svg class='input-checkbox--svg'
                     viewBox="0,0,50,50">
@@ -19,6 +20,29 @@
                 type: String,
                 default: '',
             },
+            value: {
+                type: Boolean,
+                default: false,
+            },
         },
+
+        data() {
+            return {
+                model: false,
+            };
+        },
+
+        watch: {
+            value(v) {
+                this.model = v;
+            },
+            model(m) {
+                this.$emit('input', m);
+            },
+        },
+
+        mounted() {
+            this.model = this.value;
+        }
     };
 </script>

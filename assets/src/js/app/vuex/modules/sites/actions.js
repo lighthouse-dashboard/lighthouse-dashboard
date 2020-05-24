@@ -25,7 +25,7 @@ export async function deleteSite(_, { id }) {
  * @param {Sites.SiteConfig} siteConfig
  * @return {Promise<void>}
  */
-export async function createSite({ commit }, siteConfig) {
+export async function createSite({ commit }, { siteConfig }) {
     const { data } = await api.createSite(siteConfig);
     commit({ type: ADD_SITE, site: data });
 }
