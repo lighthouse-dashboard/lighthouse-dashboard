@@ -42,11 +42,11 @@ export const updateSite = async (id, delta) => {
  * @param {Sites.SiteConfig} config
  * @return {Promise<Sites.SiteConfig>}
  */
-export const createSite = async (config) => {
+export async function createSite(config) {
     const { data } = await axios()
         .post(CREATE_SITE_URL, config);
     return data;
-};
+}
 
 /**
  * Get latest audited sites *

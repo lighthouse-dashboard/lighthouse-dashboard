@@ -1,5 +1,5 @@
 import * as api from '../../../api/sites-api';
-import { ADD_SITE, SET_CURRENT_SITE_CONFIG, SET_SITES, UPDATE_SITE } from '../mutation-types';
+import { SET_CURRENT_SITE_CONFIG, SET_SITES, UPDATE_SITE } from '../mutation-types';
 
 /**
  * Fetch all sites
@@ -22,12 +22,12 @@ export async function deleteSite(_, { id }) {
 
 /**
  * Create a new site
+ * @param {object} _
  * @param {Sites.SiteConfig} siteConfig
  * @return {Promise<void>}
  */
-export async function createSite({ commit }, { siteConfig }) {
-    const { data } = await api.createSite(siteConfig);
-    commit({ type: ADD_SITE, site: data });
+export function createSite(_, { siteConfig }) {
+    return api.createSite(siteConfig);
 }
 
 /**

@@ -18,6 +18,9 @@
     // Signal
     --root-color--signal-error: #f66363;
 
+    // Error Message
+    --root-color--error-background: #efb8b8;
+    --root-color--error-text: var(--root-color--signal-error);
 
     //Buttons
     --root-color--button-text-primary: #fff;
