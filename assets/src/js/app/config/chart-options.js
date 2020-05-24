@@ -52,10 +52,7 @@ export const GAUGE_CHART = {
         height: 300,
         type: 'radialBar',
         toolbar: {
-            show: true,
-            tools: {
-                download: false,
-            },
+            show: false,
         },
     },
     tooltip: {
@@ -102,10 +99,7 @@ export const COMPARISON_CHART = {
         type: 'bar',
         background: 'transparent',
         toolbar: {
-            show: true,
-            tools: {
-                download: false,
-            },
+            show: false,
         },
     },
     tooltip: {
@@ -146,10 +140,7 @@ export const SITE_OVERVIEW_CHART = {
         type: 'line',
         background: 'transparent',
         toolbar: {
-            show: true,
-            tools: {
-                download: false,
-            },
+            show: false,
         },
     },
     tooltip: {
