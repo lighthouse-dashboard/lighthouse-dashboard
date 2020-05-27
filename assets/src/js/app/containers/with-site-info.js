@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 const withSiteInfo = (Component) => {
     return Vue.component('WithSiteInfoContainer', {
@@ -17,15 +17,16 @@ const withSiteInfo = (Component) => {
             };
         },
 
+        computed: {
+            ...mapState('sites', ['currentSiteConfig']),
+        },
+
         methods: {
             ...mapActions('sites', ['getCurrentSite']),
 
             load() {
                 this.isLoading = true;
                 this.getCurrentSite({ siteId: this.id })
-                    .then((site) => {
-                        this.site = site;
-                    })
                     .finally(() => {
                         this.isLoading = false;
                     });
@@ -38,7 +39,7 @@ const withSiteInfo = (Component) => {
 
         render(h) {
             const props = {
-                site: this.site,
+                site: this.currentSiteConfig,
                 isLoading: this.isLoading,
             };
 

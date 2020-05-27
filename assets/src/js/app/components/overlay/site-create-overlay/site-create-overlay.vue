@@ -5,7 +5,12 @@
         <site-create-form v-model='siteConfig'/>
         <error-message :error='errorMessage'/>
         <template slot='additional'>
-            <btn @click='onCreateClicked'>
+            <btn v-if='isEdit'
+                    @click='onSaveClicked'>
+                Save
+            </btn>
+            <btn v-else
+                    @click='onCreateClicked'>
                 Create
             </btn>
         </template>
@@ -22,21 +27,29 @@
 
     export default {
         components: { ErrorMessage, Btn, SiteCreateForm, Overlay },
+        props: {
+            config: {
+                type: Object,
+                default: null,
+            },
+        },
         data() {
             return {
                 errorMessage: null,
                 isOverlayOpen: true,
-                siteConfig: {
-                    name: '',
-                    url: '',
-                    device: 'desktop',
-                    is_favorite: true,
-                },
+                /** @type {Sites.SiteConfig} */
+                siteConfig: null,
             };
         },
 
+        computed: {
+            isEdit() {
+                return !!this.config;
+            },
+        },
+
         methods: {
-            ...mapActions('sites', ['createSite']),
+            ...mapActions('sites', ['createSite', 'updateSite']),
 
             onCreateClicked() {
                 this.createSite({ siteConfig: this.siteConfig })
@@ -48,6 +61,33 @@
                         this.errorMessage = e;
                     });
             },
+
+            onSaveClicked() {
+                this.updateSite({
+                    id: this.siteConfig.id,
+                    delta: {
+                        name: this.siteConfig.name,
+                        url: this.siteConfig.url,
+                        is_favorite: this.siteConfig.is_favorite,
+                    },
+                })
+                    .then(() => {
+                        this.isOverlayOpen = false;
+                        this.$emit('updated');
+                    })
+                    .catch(e => {
+                        this.errorMessage = e;
+                    });
+            },
+        },
+
+        mounted() {
+            this.siteConfig = this.isEdit ? { ...this.config } : {
+                name: '',
+                url: '',
+                device: 'desktop',
+                is_favorite: true,
+            };
         },
     };
 </script>

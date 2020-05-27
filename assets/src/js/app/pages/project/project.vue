@@ -5,6 +5,11 @@
             {{ site.name }}
         </h4>
 
+        <site-create-overlay :config='site'
+                @updated='reload'
+                @close='toggleEdit'
+                v-if='site && isEdit'/>
+
         <div class='project--content'>
             <div class='project--insights'>
                 <div class='project--overview'>
@@ -29,34 +34,44 @@
                     <report-history :reports='reports'/>
                 </tile>
             </div>
+
             <div class='project--sidebar'>
-                <tile title="Settings">
+                <tile title="Settings"
+                        class='project--sidebar-section'>
                     <loading-indicator v-if='isLoading'/>
                     <site-config :site="site"
                             v-if='site'/>
                 </tile>
 
-                <btn :facets="['secondary', 'full-width']"
-                        @click="runAudit">New audit
-                </btn>
+                <div class='project--sidebar-section'>
+                    <btn :facets="['secondary', 'full-width']"
+                            @click="toggleEdit">Edit
+                    </btn>
+                </div>
 
-                <tile title='Tools'>
+                <div class='project--sidebar-section'>
+                    <btn :facets="['secondary', 'full-width']"
+                            @click="runAudit">New audit
+                    </btn>
+                </div>
+                <div class='project--sidebar-section'>
+                    <btn :facets='["danger", "full-width"]'
+                            @click='onDeleteClicked'>
+                        Delete
+                    </btn>
+                </div>
+
+                <tile title='Tools'
+                        class='project--sidebar-section'>
                     <site-actions-list v-if='site'
                             :url='site.url'/>
                 </tile>
 
-                <tile title='HTML Reports'>
+                <tile title='HTML Reports'
+                        class='project--sidebar-section'>
                     <audit-report-list :reports='reports'/>
                 </tile>
             </div>
-        </div>
-
-        <div>
-            <h5>Danger Zone</h5>
-            <btn :facets='["danger"]'
-                    @click='onDeleteClicked'>
-                Delete
-            </btn>
         </div>
     </div>
 </template>
@@ -68,6 +83,7 @@
     import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
     import GaugeChart from '../../components/charts/gauge-chart/gauge-chart';
     import RadarChart from '../../components/charts/radar-chart/radar-chart';
+    import SiteCreateOverlay from '../../components/overlay/site-create-overlay/site-create-overlay';
     import ReportHistory from '../../components/report-history/report-history';
     import SiteActionsList from '../../components/site-actions-list/site-actions-list';
     import SiteConfig from '../../components/site-config/site-config';
@@ -77,6 +93,7 @@
 
     export default {
         components: {
+            SiteCreateOverlay,
             AuditReportList,
             SiteActionsList,
             LoadingIndicator,
@@ -129,7 +146,7 @@
 
         methods: {
             ...mapActions('reports', ['launchAuditForSite']),
-            ...mapActions('sites', ['deleteSite']),
+            ...mapActions('sites', ['deleteSite', 'getCurrentSite']),
 
             getAvg(scoreId) {
                 return Math.round(getAverageForScore(this.reports, scoreId.toLocaleLowerCase()) * 100) / 100;
@@ -144,6 +161,12 @@
                     .then(() => {
                         this.$router.push({ name: 'dashboard' });
                     });
+            },
+            reload() {
+                this.getCurrentSite({ siteId: this.id });
+            },
+            toggleEdit() {
+                this.isEdit = !this.isEdit;
             },
         },
     };
