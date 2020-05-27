@@ -5,12 +5,8 @@
 
     // Module
     & {
-        & {
-            display: grid;
-            grid-template-areas: 'content';
-            grid-template-columns: 12fr;
-            grid-template-rows: 1fr;
-            row-gap: calc(var(--root-spacing) * 2);
+        .dashboard--section {
+            margin-bottom: calc(var(--root-spacing) * 5);
         }
     }
 

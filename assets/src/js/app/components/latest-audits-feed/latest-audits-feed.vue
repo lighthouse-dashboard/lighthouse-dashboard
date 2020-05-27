@@ -10,13 +10,17 @@
             <tile
                     v-for="site in sites"
                     :key="site.id">
-                <btn facets="flat"
-                        :to="{name: 'project.detail', params: {id: site.id}}"
+                <template
                         slot="title">
-                    {{ site.name }}
-                </btn>
+                    <btn facets="flat"
+                            :to="{name: 'project.detail', params: {id: site.id}}">
+                        {{ site.name }}
+                    </btn>
+                    <small class='caption'>
+                        {{ site.last_audit | format-date }}
+                    </small>
+                </template>
                 <report-detail :site-id="site.id"/>
-                {{ site.last_audit | format-date }}
             </tile>
         </div>
     </div>

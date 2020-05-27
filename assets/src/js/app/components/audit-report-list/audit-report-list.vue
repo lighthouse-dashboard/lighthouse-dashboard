@@ -27,11 +27,15 @@
                 type: Array,
                 required: true,
             },
+            max: {
+                type: Number,
+                default: 5,
+            },
         },
 
         computed: {
             list() {
-                return this.reports.filter((report) => report.hasRawData);
+                return this.reports.filter((report) => report.hasRawData).slice(0, this.max);
             },
         },
     };

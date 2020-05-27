@@ -30,9 +30,7 @@
                     </tile>
                 </div>
 
-                <tile>
-                    <report-history :reports='reports'/>
-                </tile>
+                <report-history class='project--history' :reports='reports'/>
             </div>
 
             <div class='project--sidebar'>

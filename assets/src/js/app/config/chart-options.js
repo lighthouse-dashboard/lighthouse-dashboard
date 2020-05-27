@@ -77,7 +77,7 @@ export const RADAR_CHART = {
     ...DEFAULT_CHART,
     series: [],
     chart: {
-        height: 350,
+        height: 300,
         type: 'radar',
         toolbar: {
             show: true,

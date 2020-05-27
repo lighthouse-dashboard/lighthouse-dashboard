@@ -24,18 +24,18 @@
             }
         }
 
+        .project--history {
+            margin-top: var(--root-spacing);
+        }
+
         .project--insights {
             flex: 0 0 80%;
-            display: grid;
-            grid-template-areas: '.';
-            grid-template-columns: 12fr;
-            column-gap: var(--root-spacing);
-            row-gap: var(--root-spacing);
             padding-right: calc(var(--root-spacing) * 0.5);
 
             @include mq('<=md') {
                 order: 2;
                 flex: 0 0 100%;
+                padding-right: 0;
             }
         }
 
@@ -46,6 +46,8 @@
             @include mq('<=md') {
                 order: 1;
                 flex: 0 0 100%;
+                padding-left: 0;
+                padding-bottom: var(--root-spacing);
             }
         }
 
@@ -80,8 +82,7 @@
             width: 100%;
 
             @include mq('<=md') {
-                grid-template-areas: '.';
-                grid-template-columns: 12fr;
+                flex-direction: column;
             }
         }
     }
