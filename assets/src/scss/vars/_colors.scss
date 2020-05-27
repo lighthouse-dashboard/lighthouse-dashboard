@@ -7,8 +7,9 @@
     --color-body: #fff;
     --color-hover: #e0e0e0;
 
-    --root-color--primary: #1A936F;
-    --root-color--primary-light: rgba(33, 193, 144, 0.2);
+    --root-color--primary: #0077b6;
+    --root-color--primary-light: rgba(0, 119, 182, 0.16);
+    --root-color--primary-dark: #004763;
     --root-color--divider: #114b5f;
 
     --root-color--tile-background: #f6f6f6;
@@ -50,9 +51,9 @@
     --root-color--site-overview-background: var(--root-color--tile-background);
 
     // Navigation
-    --root-color--navigation-background: #55828B;
+    --root-color--navigation-background: rgba(0, 119, 182, 0.75);
     --root-color--navigation--color-text: var(--color-mono-white);
-    --root-color-navigation--item-hover-background: #6a9eaa;
+    --root-color-navigation--item-hover-background: rgb(61, 133, 172);
     --root-color-navigation--item-hover-text: var(--color-mono-white);
 
     --root-color--navigation-mobile-toggle-background: #ffffff;
