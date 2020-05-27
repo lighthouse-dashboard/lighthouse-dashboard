@@ -57,7 +57,8 @@ const withReports = (Component) => {
                     },
 
                     on: this.$listeners,
-                });
+                }
+            );
         },
     });
 };

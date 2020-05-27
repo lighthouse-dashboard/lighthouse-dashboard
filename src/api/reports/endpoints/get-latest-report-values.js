@@ -1,5 +1,4 @@
 import Boom from '@hapi/boom';
-import CONFIG from '../../../../config/dashboard';
 import { getSiteConfigById } from '../../sites/db/sites';
 import { getLatestReportBySiteId } from '../db/reports';
 import { siteIdParamModel } from '../schemas/siteid-param-model';
@@ -18,7 +17,6 @@ async function getLatestReportValues(request) {
     }
 
     const report = await getLatestReportBySiteId(request.mongo.db, siteId);
-    const values = CONFIG.latestAuditChart.fields;
 
     if (!report) {
         return {
@@ -26,7 +24,6 @@ async function getLatestReportValues(request) {
             series: [],
         };
     }
-
 
     return report;
 }

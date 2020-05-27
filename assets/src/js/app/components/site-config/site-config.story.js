@@ -11,7 +11,7 @@ export const component = () => ({
     components: { SiteConfig },
     props: {
         site: {
-            default: createFakeSite()
+            default: createFakeSite(),
         },
     },
     data() {

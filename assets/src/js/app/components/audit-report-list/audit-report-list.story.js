@@ -36,5 +36,5 @@ export const emptyList = () => ({
             ],
         },
     },
-    template: '<audit-report-list :reports="reports" />'
+    template: '<audit-report-list :reports="reports" />',
 });

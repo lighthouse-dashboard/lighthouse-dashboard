@@ -3,6 +3,7 @@ import formatDate from '../filters/format-date';
 /**
  * Transform a report to data which can be used with radar charts
  * @param {Report} report
+ * @return {{series: {name: string, data: number[]}[], labels: string[]}}
  */
 export default function reportToRadarChart(report) {
     return {

@@ -55,7 +55,8 @@ const withSiteInfo = (Component) => {
                         ...props,
                     },
                     on: this.$listeners,
-                });
+                }
+            );
         },
     });
 };
