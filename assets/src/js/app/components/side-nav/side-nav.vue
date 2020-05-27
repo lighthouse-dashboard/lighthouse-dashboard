@@ -11,18 +11,16 @@
 
         <nav class='side-nav--drawer'>
             <div class='side-nav--top'>
-                <btn class='side-nav--close-btn'
-                        facets='flat'
-                        @click='toggleDrawer'>
-                    Close
-                </btn>
                 <div class="side-nav--header">
                     <img class="side-nav--logo"
                             src="/static/img/logo_small.png"/>
                     <p class="side-nav--title">
-                        {{ title }}
+                        {{ title }} <small>v{{ version }}</small>
                     </p>
+                    <close-btn class='side-nav--close-btn' @click='toggleDrawer'/>
                 </div>
+
+
                 <ul class="side-nav--list">
                     <router-link
                             tag="li"
@@ -43,23 +41,18 @@
                 </ul>
             </div>
 
-            <btn @click='toggleCreateOverlay'>
-                Create
-            </btn>
+            <div class='side-nav--secondary'>
+                <btn
+                        class='side-nav--action'
+                        @click='toggleCreateOverlay'
+                        :facets='["primary", "full-width"]'>
+                    New Site
+                </btn>
+            </div>
+
             <site-create-overlay v-if='isCreateOverlayOpen'
                     @close='toggleCreateOverlay'/>
 
-
-            <div class='side-nav--bottom'>
-                <ul class='side-nav--list'>
-                    <li class='side-nav--list-item side-nav--list-item__footer'>
-                        <btn href="https://github.com/faebeee/lighthouse-dashboard"
-                                target="_blank">
-                            v{{ version }}
-                        </btn>
-                    </li>
-                </ul>
-            </div>
         </nav>
     </div>
 </template>
@@ -67,11 +60,12 @@
 <script>
     import bemMixin from '../../mixins/bem-mixin';
     import Btn from '../base/btn/btn';
+    import CloseBtn from '../close-btn/close-btn';
     import SiteCreateOverlay from '../overlay/site-create-overlay/site-create-overlay';
     import SideNavToggle from './side-nav-toggle/side-nav-toggle';
 
     export default {
-        components: { SiteCreateOverlay, Btn, SideNavToggle },
+        components: { CloseBtn, SiteCreateOverlay, Btn, SideNavToggle },
         mixins: [bemMixin('side-nav')],
         props: {
             title: {

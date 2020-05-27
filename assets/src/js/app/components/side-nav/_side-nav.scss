@@ -37,15 +37,11 @@
         }
 
         .side-nav--close-btn {
-            display: none;
             position: absolute;
-            right: 0;
-            top: 0;
-            padding: var(--root-spacing);
-            margin: var(--root-spacing);
+            right: 24px;
 
-            @include mq('<=lg') {
-                display: block;
+            @include mq('>md') {
+                display: none;
             }
         }
 
@@ -70,6 +66,21 @@
             flex: 1 1 auto;
             position: relative;
             padding-top: 24px;
+        }
+
+        .side-nav--secondary {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .side-nav--action {
+            & + .side-nav--action {
+                margin-top: var(--root-spacing);
+            }
         }
 
         .side-nav--list.side-nav--list {

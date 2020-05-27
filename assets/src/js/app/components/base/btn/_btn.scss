@@ -27,6 +27,7 @@
             padding: var(--button--vert-bezel) var(--button--horiz-bezel);
             transition: background-color 200ms ease-in-out;
             border-radius: var(--button--border-radius);
+            text-align: center;
         }
 
         .btn--content {
