@@ -29,7 +29,8 @@
                             active-class="side-nav--list-item__active"
                             class="side-nav--list-item"
                             exact
-                            :to="{name: 'dashboard'}">Dashboard
+                            :to="{name: 'dashboard'}">
+                        Dashboard
                     </router-link>
 
                     <router-link
@@ -103,6 +104,16 @@
 
             toggleDrawer() {
                 this.isOpen = !this.isOpen;
+            },
+
+            closeDrawer() {
+                this.isOpen = false;
+            },
+        },
+
+        watch: {
+            $route() {
+                this.closeDrawer();
             },
         },
     };

@@ -29,6 +29,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            transform: translate3d(0, 0, 0);
 
             @include mq('<=lg') {
                 display: none;
@@ -143,6 +144,10 @@
             left: 0;
             top: 0;
             display: block;
+
+            @include mq('<=md') {
+                width: 100%;
+            }
         }
 
         @include mq('<=lg') {

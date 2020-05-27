@@ -20,6 +20,8 @@
         background-color: var(--side-nav-toggle--background-color);
         border-radius: 0 var(--side-nav-toggle--border-radius) var(--side-nav-toggle--border-radius) 0;
         box-shadow: 0 0 4px 0 rgba(20, 20, 20, 0.2);
+        cursor: pointer;
+        overflow: hidden;
 
         &:hover {
             width: 80px;
@@ -43,7 +45,7 @@
         }
 
         &::before {
-            top: calc(var(--side-nav-toggle--border-radius-box-size) * -1);
+            top: calc(var(--side-nav-toggle--border-radius-box-size) * 1);
             border-bottom-left-radius: var(--side-nav-toggle--border-radius-outer-mobile);
             box-shadow: 0 calc(var(--side-nav-toggle--border-radius-outer-mobile)) 0 0 var(--side-nav-toggle--background-color); /* This is where the magic happens! */
         }
@@ -51,7 +53,11 @@
         &::after {
             top: 100%;
             border-radius: var(--side-nav-toggle--border-radius-outer-mobile) 0 0 0;
-            box-shadow: 0 calc(var(--side-nav-toggle--border-radius-outer-mobile) * -1) 0 0 var(--side-nav-toggle--background-color); /* This is where the magic happens! */
+            box-shadow: 0 calc(var(--side-nav-toggle--border-radius-outer-mobile) * 1) 0 0 var(--side-nav-toggle--background-color); /* This is where the magic happens! */
+        }
+
+        @include mq('<=md') {
+            top: 36px;
         }
     }
 
@@ -61,12 +67,17 @@
     }
 
     .side-nav-toggle--toggle-btn {
+        border: none;
+        background: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
         padding: calc(var(--root-spacing) * 2);
         position: relative;
         z-index: var(--root-index--navigation-mobile-toggle-btn);
         text-overflow: ellipsis;
         opacity: 0;
         transition: opacity var(--side-nav-toggle--border-radius-transition-duration) ease-in;
+        cursor: pointer;
     }
 
     // Facets
