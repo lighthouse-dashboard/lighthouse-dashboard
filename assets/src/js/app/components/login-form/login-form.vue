@@ -70,7 +70,7 @@
                 this.error = null;
                 try {
                     await this.doLogin({ password: this.password });
-                    this.$router.push({ name: 'app' });
+                    this.$router.push({ name: 'dashboard' });
                     this.isLoading = false;
                 } catch (e) {
                     this.error = e;
