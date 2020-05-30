@@ -1,6 +1,6 @@
 # lighthouse-dashboard
-<a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/maintainability"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/maintainability" /></a>
-<a href="https://codeclimate.com/repos/5e130cad7a81c501b700c473/test_coverage"><img src="https://api.codeclimate.com/v1/badges/d151a3e60f81d7afcb6b/test_coverage" /></a>
+<a href="https://codeclimate.com/github/faebeee/lighthouse-dashboard/maintainability"><img src="https://api.codeclimate.com/v1/badges/1f3c7d59113ed99772a5/maintainability" /></a>
+<a href="https://codeclimate.com/github/faebeee/lighthouse-dashboard/test_coverage"><img src="https://api.codeclimate.com/v1/badges/1f3c7d59113ed99772a5/test_coverage" /></a>
 
 A dashboard to keep track on the performance of your sites. Keep track during development by setting up webhooks
 in github to audit your site on every push to the `master` branch
