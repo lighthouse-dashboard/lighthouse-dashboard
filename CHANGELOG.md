@@ -1,3 +1,10 @@
+# 5.11
+0. Fix eslint settings & error
+0. Added styleguide and storybook
+0. Remove vuetify
+0. Redesign of UI
+0. Improve data clearance to minimize DB size
+
 # 5.10
 
 0. [#19 Lazyload Chartdata](https://github.com/dreipol/lighthouse-dashboard/issues/19)
