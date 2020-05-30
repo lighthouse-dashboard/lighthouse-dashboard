@@ -8,7 +8,7 @@
         .projects--list {
             display: grid;
             grid-template-areas: '. . . .';
-            grid-template-columns: 3fr 3fr 3fr;
+            grid-template-columns: 3fr 3fr 3fr 3fr;
             row-gap: var(--root-spacing);
             column-gap: var(--root-spacing);
             margin: var(--root-spacing) 0;
