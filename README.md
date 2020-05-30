@@ -19,9 +19,9 @@ Frontend: [Vue](https://vuejs.org/) & [Vuetify](https://vuetifyjs.com/en/)
 - [Swagger](http://0.0.0.0:4000/documentation) (only for NODE_ENV=development)
 
 ## Screenshots
-![Dashboard](doc/assets/dashboard.jpg)
-![Projects Overview](doc/assets/overview.jpg)
-![Project Detail View](doc/assets/detail.jpg)
+![Dashboard](doc/assets/dashboard.png)
+![Projects Overview](doc/assets/projects.png)
+![Project Detail View](doc/assets/detail.png)
 
 ## Architecture
 
