@@ -17,7 +17,8 @@
                     <p class="side-nav--title">
                         {{ title }} <small>v{{ version }}</small>
                     </p>
-                    <close-btn class='side-nav--close-btn' @click='toggleDrawer'/>
+                    <close-btn class='side-nav--close-btn'
+                            @click='toggleDrawer'/>
                 </div>
 
 
@@ -49,11 +50,9 @@
                     New Site
                 </btn>
             </div>
-
-            <site-create-overlay v-if='isCreateOverlayOpen'
-                    @close='toggleCreateOverlay'/>
-
         </nav>
+        <site-create-overlay v-if='isCreateOverlayOpen'
+                @close='toggleCreateOverlay'/>
     </div>
 </template>
 

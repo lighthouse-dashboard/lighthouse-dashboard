@@ -1,6 +1,6 @@
 <template>
     <div class="latest-audits-feed">
-        <p class="overline">
+        <p class="u-reset overline">
             Latest reports performance
         </p>
 
@@ -13,13 +13,17 @@
                 <template
                         slot="title">
                     <btn facets="flat"
+                            class="latest-audits-feed--title-btn"
+                            :title="site.name"
                             :to="{name: 'project.detail', params: {id: site.id}}">
                         {{ site.name }}
                     </btn>
-                    <small class='caption'>
-                        {{ site.last_audit | format-date }}
-                    </small>
                 </template>
+                <span
+                        class="u-reset caption latest-audits-feed--caption"
+                        slot="caption">
+                    {{ site.last_audit | format-date }}
+                </span>
                 <report-detail :site-id="site.id"/>
             </tile>
         </div>

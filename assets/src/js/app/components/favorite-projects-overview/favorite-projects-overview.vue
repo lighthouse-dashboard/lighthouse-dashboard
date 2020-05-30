@@ -1,6 +1,6 @@
 <template>
     <div class='favorite-project-overview'>
-        <p class='overline'>
+        <p class='u-reset overline'>
             Projects
         </p>
 
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-    import CONFIG from '../../../../../../config/dashboard';
     import withReports from '../../containers/with-reports';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import SiteOverview from '../site-overview/site-overview.vue';
@@ -34,11 +33,6 @@
             isLoading: {
                 type: Boolean,
                 default: false,
-            },
-        },
-        computed: {
-            cols() {
-                return CONFIG.favoriteProjectsOverview.colSize;
             },
         },
     };

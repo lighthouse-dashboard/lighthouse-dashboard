@@ -5,79 +5,70 @@
     --side-nav-toggle--border-radius-outer-mobile: 20px;
     --side-nav-toggle--background-color: var(--root-color--navigation-mobile-toggle-background);
     --side-nav-toggle--border-radius-transition-duration: 400ms;
+    --side-nav-toggle--stripe-color: rgba(20, 20, 20, 0.2);
+    --side-nav-toggle--stripe-color-active: rgba(20, 20, 20, 0.8);
 
     // Support
 
     // Module
     & {
-        display: block;
-        position: fixed;
-        top: 50%;
-        left: 0;
-        width: 40px;
-        transition: width var(--side-nav-toggle--border-radius-transition-duration) ease-in-out, border-radius var(--side-nav-toggle--border-radius-transition-duration) ease-in-out;
-        transform: translateY(-50%);
-        background-color: var(--side-nav-toggle--background-color);
-        border-radius: 0 var(--side-nav-toggle--border-radius) var(--side-nav-toggle--border-radius) 0;
-        box-shadow: 0 0 4px 0 rgba(20, 20, 20, 0.2);
-        cursor: pointer;
-        overflow: hidden;
+        & {
+            display: block;
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 60px;
+            transition: width var(--side-nav-toggle--border-radius-transition-duration) ease-in-out, border-radius var(--side-nav-toggle--border-radius-transition-duration) ease-in-out;
+            transform: translateY(-50%);
+            background-color: var(--side-nav-toggle--background-color);
+            border-radius: 0 var(--side-nav-toggle--border-radius) var(--side-nav-toggle--border-radius) 0;
+            box-shadow: 0 0 4px 0 rgba(20, 20, 20, 0.2);
+            cursor: pointer;
+            overflow: hidden;
 
-        &:hover {
-            width: 80px;
-            box-shadow: 0 0 8px 0 rgba(20, 20, 20, 0.2);
+            @include mq('<=md') {
+                top: 36px;
+            }
 
-            .side-nav-toggle--toggle-btn {
-                opacity: 1;
+            &:hover, &:active {
+                .side-nav-toggle--stripe {
+                    background-color: var(--side-nav-toggle--stripe-color-active);
+                }
             }
         }
 
-        &::before, &::after {
-            z-index: var(--root-index--navigation-mobile-toggle);
-            content: "";
-            position: absolute;
-            background-color: transparent;
-            height: var(--side-nav-toggle--border-radius-box-size);
-            width: var(--side-nav-toggle--border-radius-outer-mobile);
-            left: 0;
-            border-radius: 0;
-            transition: width var(--side-nav-toggle--border-radius-transition-duration) ease-in-out;
+        .side-nav-toggle--content-wrapper {
+            overflow: hidden;
+            max-width: 100%;
         }
 
-        &::before {
-            top: calc(var(--side-nav-toggle--border-radius-box-size) * 1);
-            border-bottom-left-radius: var(--side-nav-toggle--border-radius-outer-mobile);
-            box-shadow: 0 calc(var(--side-nav-toggle--border-radius-outer-mobile)) 0 0 var(--side-nav-toggle--background-color); /* This is where the magic happens! */
+        .side-nav-toggle--toggle-btn {
+            border: none;
+            background: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            box-shadow: none;
+            padding: calc(var(--root-spacing) * 2);
+            position: relative;
+            z-index: var(--root-index--navigation-mobile-toggle-btn);
+            text-overflow: ellipsis;
+            transition: opacity var(--side-nav-toggle--border-radius-transition-duration) ease-in;
+            cursor: pointer;
+
+            &:active {
+                border: none;
+                box-shadow: none;
+            }
+
         }
 
-        &::after {
-            top: 100%;
-            border-radius: var(--side-nav-toggle--border-radius-outer-mobile) 0 0 0;
-            box-shadow: 0 calc(var(--side-nav-toggle--border-radius-outer-mobile) * 1) 0 0 var(--side-nav-toggle--background-color); /* This is where the magic happens! */
+        .side-nav-toggle--stripe {
+            width: 20px;
+            height: 2px;
+            transition: background-color 200ms ease-in-out;
+            background-color: var(--side-nav-toggle--stripe-color);
+            margin: 4px 0;
         }
-
-        @include mq('<=md') {
-            top: 36px;
-        }
-    }
-
-    .side-nav-toggle--content-wrapper {
-        overflow: hidden;
-        max-width: 100%;
-    }
-
-    .side-nav-toggle--toggle-btn {
-        border: none;
-        background: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        padding: calc(var(--root-spacing) * 2);
-        position: relative;
-        z-index: var(--root-index--navigation-mobile-toggle-btn);
-        text-overflow: ellipsis;
-        opacity: 0;
-        transition: opacity var(--side-nav-toggle--border-radius-transition-duration) ease-in;
-        cursor: pointer;
     }
 
     // Facets

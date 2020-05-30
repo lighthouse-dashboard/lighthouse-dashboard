@@ -1,12 +1,12 @@
 <template>
-    <component class='btn button'
+    <component class='u-reset btn button'
             v-bind="$attrs"
             :class='classes'
             :to="to"
             :disabled='disabled'
             :is="component"
             v-on="$listeners">
-        <span class='btn--content'>
+        <span class='u-reset btn--content'>
             <slot/>
         </span>
     </component>

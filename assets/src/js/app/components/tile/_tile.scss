@@ -23,6 +23,11 @@
             display: block;
             padding: var(--root-spacing);
         }
+
+        .tile--caption {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 
     // Facets

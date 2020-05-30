@@ -19,6 +19,13 @@
             }
         }
 
+        .latest-audits-feed--title-btn {
+            max-width: 200px;
+        }
+
+        .latest-audits-feed--caption {
+            margin-top: var(--root-spacing);
+        }
     }
 
     // Facets

@@ -1,6 +1,6 @@
 <template>
     <div class="projects">
-        <p class="overline">
+        <p class="u-reset overline">
             All Projects
         </p>
 
@@ -12,6 +12,7 @@
                     :key="site.site.id">
                 <template slot="title">
                     <btn
+                            class="projects--title-btn"
                             facets="flat"
                             :to="{name: 'project.detail', params: {id: site.site.id}}">
                         {{ site.site.name }}

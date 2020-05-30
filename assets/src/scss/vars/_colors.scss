@@ -13,7 +13,7 @@
     --root-color--divider: #114b5f;
 
     --root-color--tile-background: rgba(111, 139, 156, 0.1);
-    --root-color--app-content-background: rgba(0, 119, 182, 0.04);
+    --root-color--app-content-background: rgb(248, 251, 253);
 
 
     // Signal
@@ -55,7 +55,7 @@
     --root-color--navigation--color-text: var(--color-mono-white);
     --root-color-navigation--item-hover-background: rgb(61, 133, 172);
     --root-color-navigation--item-hover-text: var(--color-mono-white);
-    --root-color-navigation--item-active-background: var(--color-mono-white);
+    --root-color-navigation--item-active-background: var(--root-color--app-content-background);
 
     --root-color--navigation-mobile-toggle-background: #ffffff;
 
