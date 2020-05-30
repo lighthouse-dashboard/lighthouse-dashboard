@@ -36,7 +36,7 @@
             }
         ],
         "vue/html-quotes": [
-            "warning",
+            "warn",
             "single",
             {
                 "avoidEscape": false
