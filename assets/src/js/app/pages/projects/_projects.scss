@@ -1,0 +1,39 @@
+.projects {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        .projects--list {
+            display: grid;
+            grid-template-areas: '. . . .';
+            grid-template-columns: 3fr 3fr 3fr 3fr;
+            row-gap: var(--root-spacing);
+            column-gap: var(--root-spacing);
+            margin: var(--root-spacing) 0;
+
+            @include mq('lg') {
+                grid-template-areas: '. . .';
+                grid-template-columns: 4fr 4fr 4fr;
+            }
+            @include mq('md') {
+                grid-template-areas: '. .';
+                grid-template-columns: 6fr 6fr;
+            }
+
+            @include mq('<=md') {
+                grid-template-areas: '.';
+                grid-template-columns: 12fr;
+            }
+        }
+
+        .projects--title-btn {
+            max-width: 200px;
+        }
+    }
+
+    // Facets
+
+    // States
+}

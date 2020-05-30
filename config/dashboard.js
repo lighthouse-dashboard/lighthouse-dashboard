@@ -1,10 +1,9 @@
-const getTheme = require('../assets/src/js/utils/get-theme');
-
-require('dotenv').config();
+const getTheme = require('../assets/src/js/app/utils/get-theme');
 
 const { charts, theme } = getTheme();
 
 module.exports = {
+    title: 'Lighthouse Dashboard',
     /**
      * Formatting used for time entries
      * @type {string}

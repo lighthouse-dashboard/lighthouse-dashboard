@@ -1,0 +1,16 @@
+.dashboard {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        .dashboard--section {
+            margin-bottom: calc(var(--root-spacing) * 5);
+        }
+    }
+
+    // Facets
+
+    // States
+}

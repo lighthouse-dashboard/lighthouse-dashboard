@@ -1,0 +1,77 @@
+.side-nav-toggle {
+    // Vars
+    --side-nav-toggle--border-radius: 20px;
+    --side-nav-toggle--border-radius-box-size: 80px;
+    --side-nav-toggle--border-radius-outer-mobile: 20px;
+    --side-nav-toggle--background-color: var(--root-color--navigation-mobile-toggle-background);
+    --side-nav-toggle--border-radius-transition-duration: 400ms;
+    --side-nav-toggle--stripe-color: rgba(20, 20, 20, 0.2);
+    --side-nav-toggle--stripe-color-active: rgba(20, 20, 20, 0.8);
+
+    // Support
+
+    // Module
+    & {
+        & {
+            display: block;
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 60px;
+            transition: width var(--side-nav-toggle--border-radius-transition-duration) ease-in-out, border-radius var(--side-nav-toggle--border-radius-transition-duration) ease-in-out;
+            transform: translateY(-50%);
+            background-color: var(--side-nav-toggle--background-color);
+            border-radius: 0 var(--side-nav-toggle--border-radius) var(--side-nav-toggle--border-radius) 0;
+            box-shadow: 0 0 4px 0 rgba(20, 20, 20, 0.2);
+            cursor: pointer;
+            overflow: hidden;
+
+            @include mq('<=md') {
+                top: 36px;
+            }
+
+            &:hover, &:active {
+                .side-nav-toggle--stripe {
+                    background-color: var(--side-nav-toggle--stripe-color-active);
+                }
+            }
+        }
+
+        .side-nav-toggle--content-wrapper {
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .side-nav-toggle--toggle-btn {
+            border: none;
+            background: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            box-shadow: none;
+            padding: calc(var(--root-spacing) * 2);
+            position: relative;
+            z-index: var(--root-index--navigation-mobile-toggle-btn);
+            text-overflow: ellipsis;
+            transition: opacity var(--side-nav-toggle--border-radius-transition-duration) ease-in;
+            cursor: pointer;
+
+            &:active {
+                border: none;
+                box-shadow: none;
+            }
+
+        }
+
+        .side-nav-toggle--stripe {
+            width: 20px;
+            height: 2px;
+            transition: background-color 200ms ease-in-out;
+            background-color: var(--side-nav-toggle--stripe-color);
+            margin: 4px 0;
+        }
+    }
+
+    // Facets
+
+    // States
+}

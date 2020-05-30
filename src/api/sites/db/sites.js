@@ -72,10 +72,10 @@ export function getLatestSites(database) {
  * @param {Pick<Sites.SiteConfig, "name"|"device"|"url"|"is_favorite">} config
  * @return {Promise<Sites.SiteConfig>}
  */
-export function addSite(database, config) {
+export async function addSite(database, config) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     const id = uuid();
-    siteCollection.insertOne({ id, ...config });
+    await siteCollection.insertOne({ id, ...config });
     return getSiteConfigById(database, id);
 }
 

@@ -1,0 +1,34 @@
+.latest-audits-feed {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+
+        .latest-audits-feed--content {
+            display: grid;
+            grid-template-areas: '. . . .';
+            grid-template-columns: 3fr 3fr 3fr 3fr;
+            column-gap: calc(var(--root-spacing) * 2);
+            row-gap: calc(var(--root-spacing) * 2);
+
+            @include mq('<=md') {
+                grid-template-areas: '.';
+                grid-template-columns: 12fr;
+            }
+        }
+
+        .latest-audits-feed--title-btn {
+            max-width: 200px;
+        }
+
+        .latest-audits-feed--caption {
+            margin-top: var(--root-spacing);
+        }
+    }
+
+    // Facets
+
+    // States
+}

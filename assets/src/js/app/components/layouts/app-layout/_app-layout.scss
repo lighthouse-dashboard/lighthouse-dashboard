@@ -1,0 +1,63 @@
+.app-layout.app-layout {
+    // Vars
+    --app-layout--header-height: var(--root-sites--header-height);
+    --app-layout--content-background: var(--root-color--app-content-background);
+    --app-layout--edge-gutter: calc(var(--root-spacing) * 2);
+    --app-layout--edge-gutter-md: calc(var(--root-spacing) * 4);
+
+    // Support
+    // Support
+
+    // Module
+    & {
+        & {
+            min-height: 100%;
+            display: flex;
+
+            @include mq('<=lg') {
+                display: flex;
+                width: 100%;
+            }
+        }
+
+        .app-layout--content-wrapper {
+            background-color: var(--app-layout--content-background);
+            width: 100%;
+        }
+
+        .app-layout--content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--app-layout--header-height) var(--app-layout--edge-gutter);
+
+            @include mq('xl') {
+                max-width: 1080px;
+            }
+
+            @include mq('lg') {
+                max-width: 980px;
+            }
+
+            @include mq('<=md') {
+                max-width: 760px;
+            }
+        }
+    }
+
+    // Facets
+    &.app-layout__logged-in {
+        & {
+            grid-template-areas: 'sidenav content';
+            grid-template-columns: 2fr 10fr;
+
+            @include mq('<=lg') {
+                display: flex;
+                width: 100%;
+                grid-template-areas: '. content';
+                grid-template-columns: 12fr;
+            }
+        }
+    }
+
+    // States
+}

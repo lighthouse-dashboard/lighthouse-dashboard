@@ -1,0 +1,72 @@
+html {
+    font-size: 62.5%; /* Sets up the Base 10 stuff */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+}
+
+h1:not(.u-reset), .h1 {
+    @include Headline1;
+    margin-bottom: var(--root-spacing);
+}
+
+h2:not(.u-reset), .h2 {
+    @include Headline2;
+    margin-bottom: var(--root-spacing);
+}
+
+h3:not(.u-reset), .h3 {
+    @include Headline3;
+    margin-bottom: var(--root-spacing);
+}
+
+h4:not(.u-reset), .h4 {
+    @include Headline4;
+    margin-bottom: var(--root-spacing);
+}
+
+h5:not(.u-reset), .h5 {
+    @include Headline5;
+    margin-bottom: var(--root-spacing);
+}
+
+h6:not(.u-reset), .h6 {
+    @include Headline6;
+    margin-bottom: var(--root-spacing);
+}
+
+.subtitle1 {
+    @include Subtitle1;
+    margin-bottom: var(--root-spacing);
+}
+
+.subtitle2 {
+    @include Subtitle2;
+    margin-bottom: var(--root-spacing);
+}
+
+p:not(.u-reset), span:not(.u-reset), .body1 {
+    @include Body1;
+    margin-bottom: var(--root-spacing);
+}
+
+.body2 {
+    @include Body2;
+    margin-bottom: var(--root-spacing);
+}
+
+button:not(.u-reset), .button {
+    @include Button;
+}
+
+.caption {
+    @include Caption;
+    margin-bottom: var(--root-spacing);
+}
+
+.overline {
+    @include Overline;
+    margin-bottom: var(--root-spacing);
+}

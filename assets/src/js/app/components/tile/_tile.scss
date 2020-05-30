@@ -1,0 +1,36 @@
+.tile {
+    // Vars
+    --tile--background-color: var(--root-color--tile-background);
+    --tile--root-padding: calc(var(--root-spacing) * 2);
+    --tile--border-radius: 2px;
+    // Support
+
+    // Module
+    & {
+        & {
+            border-radius: var(--tile--border-radius);
+            background-color: var(--tile--background-color);
+            padding: var(--tile--root-padding);
+        }
+
+        .tile--title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: calc(var(--root-spacing) * 2);
+        }
+
+        .tile--content {
+            display: block;
+            padding: var(--root-spacing);
+        }
+
+        .tile--caption {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+    // Facets
+
+    // States
+}

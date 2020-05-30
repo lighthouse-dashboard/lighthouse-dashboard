@@ -1,0 +1,36 @@
+.favorite-project-overview {
+    // Vars
+    --favorite-project-overview--row-gap: calc(var(--root-spacing) * 2);
+    --favorite-project-overview--column-gap: calc(var(--root-spacing) * 2);
+
+    // Support
+
+    // Module
+    & {
+        .favorite-project-overview--content {
+            display: grid;
+            row-gap: var(--favorite-project-overview--row-gap);
+            column-gap: var(--favorite-project-overview--column-gap);
+            grid-template-areas: '. . . .';
+            grid-template-columns: 3fr 3fr 3fr 3fr;
+
+            @include mq('<=xl') {
+                grid-template-areas: '. . .';
+                grid-template-columns: 3fr 3fr 3fr;
+            }
+
+            @include mq('<=md') {
+                grid-template-areas: '. .';
+                grid-template-columns: 6fr 6fr;
+            }
+            @include mq('<=sm') {
+                grid-template-areas: '.';
+                grid-template-columns: 12fr;
+            }
+        }
+    }
+
+    // Facets
+
+    // States
+}

@@ -1,0 +1,65 @@
+.close-btn {
+    // Vars
+    --close-btn--size: 32px;
+
+    // Support
+
+    // Module
+    & {
+        // COLORS
+        $softorange: #F4A259;
+        $tomatored: #F25C66;
+        $mediumblu: #1E272D;
+
+        & {
+            background: transparent;
+            border: transparent;
+            position: relative;
+            width: var(--close-btn--size);
+            height: var(--close-btn--size);
+            cursor: pointer;
+
+
+            &:hover {
+                .close-btn--leftright {
+                    transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+                    background-color: $tomatored;
+                }
+
+                .close-btn--rightleft {
+                    transform: translate3d(-50%, -50%, 0) rotate(45deg);
+                    background-color: $tomatored;
+                }
+            }
+        }
+
+        .close-btn--leftright {
+            height: 4px;
+            width: var(--close-btn--size);
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            background-color: $softorange;
+            border-radius: 2px;
+            transform: translate3d(-50%, -50%, 0) rotate(45deg);
+            transition: all .3s ease-in;
+
+        }
+
+        .close-btn--rightleft {
+            height: 4px;
+            width: var(--close-btn--size);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background-color: $softorange;
+            border-radius: 2px;
+            transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+            transition: all .3s ease-in;
+        }
+    }
+
+    // Facets
+
+    // States
+}

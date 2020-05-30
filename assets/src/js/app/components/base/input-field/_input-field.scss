@@ -1,0 +1,72 @@
+.input-field {
+    // Vars
+    --input-field--border-color: var(--root-color--divider);
+    --input-field--background-active: var(--root-color--input-active-background);
+    --input-field--vert-input-bezel: calc(var(--root-spacing));
+    --input-field--horiz-input-bezel: calc(var(--root-spacing) * 0.5);
+    --input-field--input-border-radius: 2px;
+    --input-field--vert-main-margin: calc(var(--root-spacing) * 0.5);
+    --input-field--error-text-color: var(--root-color--signal-error);
+    --input-field--error-input-background: var(--root-color--input-error-background);
+    --input-field--disabled-input-background: var(--root-color--input-disabled-background);
+
+    // Support
+
+    // Module
+    & {
+        & {
+            width: 100%;
+        }
+
+        .input-field--label {
+            display: block;
+            margin-bottom: var(--root-spacing);
+        }
+
+        .input-field--input {
+            @include Body1;
+            display: block;
+            width: 100%;
+            border: solid 1px var(--input-field--border-color);
+            border-radius: var(--input-field--input-border-radius);
+            padding: var(--input-field--vert-input-bezel) var(--input-field--horiz-input-bezel);
+            transition: background-color 200ms;
+
+            &:focus {
+                background-color: var(--input-field--background-active);
+            }
+        }
+
+        .input-field--error {
+            display: block;
+            @include Caption;
+            color: var(--input-field--error-text-color);
+            padding-left: var(--input-field--horiz-input-bezel);
+            margin-top: var(--root-spacing);
+        }
+
+    }
+
+    // Facets
+
+    &.input-field__has-error {
+        .input-field--input {
+            background-color: var(--input-field--error-input-background);
+            border-color: var(--input-field--error-text-color);
+        }
+    }
+
+    &.input-field__disabled {
+        .input-field--label {
+            color: var(--input-field--disabled-input-background);
+        }
+
+        .input-field--input {
+            pointer-events: none;
+            background-color: var(--input-field--disabled-input-background);
+            border: none;
+        }
+    }
+
+    // States
+}

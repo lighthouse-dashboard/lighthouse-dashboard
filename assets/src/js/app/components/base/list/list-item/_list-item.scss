@@ -1,0 +1,24 @@
+.list-item {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        & {
+            margin: var(--root-spacing) 0;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // Facets
+
+    // States
+}

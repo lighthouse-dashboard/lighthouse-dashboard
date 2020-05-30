@@ -54,6 +54,7 @@ const CUSTOM_MENU_ENTRY = joi.object({
 });
 
 export default joi.object({
+    title: joi.string().required(),
     dateFormat: joi.string().required(),
 
     page_dashboard: joi.object({

@@ -14,10 +14,11 @@ services:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=password
   web:
-      build: .
       container_name: 'web'
-      volumes:
-        - ./src:/usr/src/app/src
+      build:
+        context: ./
+        args:
+          - UI_THEME=dark
       links:
         - queue
         - database

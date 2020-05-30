@@ -1,0 +1,29 @@
+.storybook-layout {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        & {
+            padding: 80px;
+            display: grid;
+            grid-template-areas: '. content .';
+            grid-template-columns: 4fr 4fr 4fr;
+
+            @include mq('lg') {
+                grid-template-areas: '. content .';
+                grid-template-columns: 2fr 8fr 2fr;
+            }
+            @include mq('<=md') {
+                grid-template-areas: 'content';
+                grid-template-columns: 12fr;
+            }
+        }
+
+    }
+
+    // Facets
+
+    // States
+}

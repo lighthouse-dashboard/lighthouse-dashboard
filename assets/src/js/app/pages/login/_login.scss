@@ -1,0 +1,21 @@
+.login {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        & {
+            background-color: var(--root-color--app-content-background);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    }
+
+    // Facets
+
+    // States
+}

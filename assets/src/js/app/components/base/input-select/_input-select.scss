@@ -1,0 +1,49 @@
+.input-select {
+    // Vars
+    --input-select--border-color: var(--root-color--divider);
+    --input-select--input-border-radius: 2px;
+    --input-select--vert-input-bezel: calc(var(--root-spacing));
+    --input-select--horiz-input-bezel: calc(var(--root-spacing) * 0.5);
+    --input-select--background-active: var(--root-color--input-active-background);
+    --input-select--disabled-input-background: var(--root-color--input-disabled-background);
+    // Support
+    // Module
+    & {
+
+        .input-select--label {
+            display: block;
+            margin-bottom: var(--root-spacing);
+        }
+
+        .input-select--select {
+            @include Body1;
+            display: block;
+            width: 100%;
+            height: 37px;
+            border: solid 1px var(--input-select--border-color);
+            border-radius: var(--input-select--input-border-radius);
+            padding: var(--input-select--vert-input-bezel) var(--input-select--horiz-input-bezel);
+            transition: background-color 200ms;
+
+            &:focus {
+                background-color: var(--input-select--background-active);
+            }
+        }
+    }
+
+    // Facets
+
+    &.input-select__disabled {
+        .input-select--label {
+            color: var(--input-select--disabled-input-background);
+        }
+
+        .input-select--select {
+            pointer-events: none;
+            background-color: var(--input-select--disabled-input-background);
+            border: none;
+        }
+    }
+
+    // States
+}

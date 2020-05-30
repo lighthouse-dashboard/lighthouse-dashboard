@@ -1,0 +1,13 @@
+{
+    "name": "Lighthouse Dashboard",
+    "description": "Lighthouse Dashboard Server and UI",
+    "repository": "https://github.com/faebeee/lighthouse-dashboard",
+    "logo": "https://github.com/faebeee/lighthouse-dashboard/raw/master/assets/static/ico/ms-icon-310x310.png",
+    "keywords": [
+        "node",
+        "hapi",
+        "lighthouse",
+        "audit",
+        "performance"
+    ]
+}

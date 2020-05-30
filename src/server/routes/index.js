@@ -1,8 +1,8 @@
 import Inert from '@hapi/inert';
-import { dirname } from 'path';
 import logger from '../../logger';
 import glob from '../../utils/glob';
-import defaultRoutes from './routes';
+import viewRoutes from './views-routes';
+import assetRoutes from './assets-routes';
 
 /**
  * Load all routes
@@ -10,16 +10,19 @@ import defaultRoutes from './routes';
  */
 async function getRoutes() {
     const routes = [
-        ...defaultRoutes,
+        ...viewRoutes,
+        ...assetRoutes,
     ];
-    const files = await glob('src/api/**/routes.js');
-    files.forEach((file) => {
+
+    const files = await glob('src/api/**/endpoints/*.js');
+    logger.debug(`Loading routes ${ files.length }`);
+
+    return files.reduce((acc, file) => {
         // eslint-disable-next-line global-require
-        const { default: subRoutes } = require(file);
-        logger.debug(`Load ${ subRoutes.length } route(s) from ${ dirname(file) }`);
-        routes.push(...subRoutes);
-    });
-    return routes;
+        const { default: route } = require(file);
+        acc.push(route);
+        return acc;
+    }, routes);
 }
 
 /**
@@ -33,5 +36,5 @@ export default async function loadRoutes(server) {
     routes.forEach((route) => {
         server.route(route);
     });
-    logger.info('Routes complete');
+    logger.info('Loading routes complete');
 }
