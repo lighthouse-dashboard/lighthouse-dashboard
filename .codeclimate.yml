@@ -1,0 +1,17 @@
+plugins:
+  stylelint:
+    enabled: true
+  nodesecurity:
+    enabled: true
+  eslint:
+    enabled: true
+    channel: "eslint-6"
+
+exclude_patterns:
+  - "spec/"
+  - "config/"
+  - "db/"
+  - "assets/dist/"
+  - "**/node_modules/"
+  - "**/*.spec.*/"
+  - "**/*.d.ts"
