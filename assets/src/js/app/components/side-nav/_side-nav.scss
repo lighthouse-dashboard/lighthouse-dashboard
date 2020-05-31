@@ -37,6 +37,7 @@
         }
 
         .side-nav--close-btn {
+            z-index: var(--root-index--navigation--mobile-close-btn);
             position: absolute;
             right: 24px;
 

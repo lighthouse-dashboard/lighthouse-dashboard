@@ -2,8 +2,8 @@
     // Vars
     --input-field--border-color: var(--root-color--divider);
     --input-field--background-active: var(--root-color--input-active-background);
-    --input-field--vert-input-bezel: calc(var(--root-spacing));
-    --input-field--horiz-input-bezel: calc(var(--root-spacing) * 0.5);
+    --input-field--vert-input-bezel: 12px;
+    --input-field--horiz-input-bezel: 16px;
     --input-field--input-border-radius: 2px;
     --input-field--vert-main-margin: calc(var(--root-spacing) * 0.5);
     --input-field--error-text-color: var(--root-color--signal-error);
@@ -24,12 +24,12 @@
         }
 
         .input-field--input {
-            @include Body1;
+            @include Button;
             display: block;
             width: 100%;
             border: solid 1px var(--input-field--border-color);
             border-radius: var(--input-field--input-border-radius);
-            padding: var(--input-field--vert-input-bezel) var(--input-field--horiz-input-bezel);
+            padding: calc(var(--input-field--vert-input-bezel) - 1px) var(--input-field--horiz-input-bezel);
             transition: background-color 200ms;
 
             &:focus {
@@ -41,7 +41,7 @@
             display: block;
             @include Caption;
             color: var(--input-field--error-text-color);
-            padding-left: var(--input-field--horiz-input-bezel);
+            padding-left: calc(var(--input-field--horiz-input-bezel) + 1px);
             margin-top: var(--root-spacing);
         }
 

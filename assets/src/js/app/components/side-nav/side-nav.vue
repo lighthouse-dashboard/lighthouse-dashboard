@@ -45,9 +45,16 @@
             <div class='side-nav--secondary'>
                 <btn
                         class='side-nav--action'
-                        @click='toggleCreateOverlay'
-                        :facets='["primary", "full-width"]'>
+                        :facets='["primary", "full-width"]'
+                        @click='toggleCreateOverlay'>
                     New Site
+                </btn>
+
+                <btn
+                        class='side-nav--action'
+                        :facets='["danger", "full-width"]'
+                        @click='onLogoutClicked'>
+                    Logout
                 </btn>
             </div>
         </nav>
@@ -57,6 +64,7 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
     import bemMixin from '../../mixins/bem-mixin';
     import Btn from '../base/btn/btn';
     import CloseBtn from '../close-btn/close-btn';
@@ -91,6 +99,8 @@
             },
         },
         methods: {
+            ...mapActions('login', ['logout']),
+
             toggleCreateOverlay() {
                 this.isCreateOverlayOpen = !this.isCreateOverlayOpen;
             },
@@ -101,6 +111,11 @@
 
             closeDrawer() {
                 this.isOpen = false;
+            },
+
+            onLogoutClicked() {
+                this.logout();
+                this.$router.push({ name: 'login' });
             },
         },
 

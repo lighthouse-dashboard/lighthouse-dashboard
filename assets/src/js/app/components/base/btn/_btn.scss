@@ -1,7 +1,7 @@
 .btn {
     // Vars
-    --button--vert-bezel: calc(var(--root-spacing));
-    --button--horiz-bezel: calc(var(--root-spacing) * 2);
+    --button--vert-bezel: 12px;
+    --button--horiz-bezel: 16px;
     --button--primary-color: var(--root-color--button-background-primary);
     --button--primary-color-accent: var(--root-color--button-background-accent-primary);
     --button--text-color: var(--root-color--button-text-primary);
@@ -20,7 +20,6 @@
     // Module
     & {
         & {
-            display: block;
             overflow: hidden;
             cursor: pointer;
             border: none;
@@ -33,9 +32,10 @@
         }
 
         .btn--content {
+            @include Button;
             position: relative;
             z-index: 2;
-
+            text-transform: uppercase;
         }
     }
 
@@ -78,6 +78,7 @@
         & {
             border: solid 1px var(--button--primary-color);
             color: var(--button--secondary-text-color);
+            padding: calc((var(--button--vert-bezel) * 1.5) - 1px) var(--button--horiz-bezel);
 
             &:hover, &:focus, &.btn__active {
                 background-color: var(--root-color--primary-light);
