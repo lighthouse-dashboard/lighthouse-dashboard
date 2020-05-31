@@ -18,7 +18,7 @@
         "storybook": "start-storybook -s ./assets -p 8000",
         "test": "npm run lint && TZ=Europe/Berlin mocha src/**/*.spec.js -r esm",
         "lint": "npm run lint-frontend && npm run lint-backend",
-        "lint-frontend": "eslint -c .eslintrc ./assets/src",
+        "lint-frontend": "eslint -c .eslintrc ./assets/src && npx stylelint **/*.scss --config .stylelintrc.js",
         "lint-backend": "eslint -c .eslintrc ./src",
         "start": "node -r esm index.js",
         "build": "gulp build && npm run build-storybook",
