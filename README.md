@@ -12,11 +12,15 @@ RabbitMq: [amqplib](https://www.npmjs.com/package/amqplib)
 
 Backend: [hapi](https://hapi.dev/)
 
-Frontend: [Vue](https://vuejs.org/) & [Vuetify](https://vuetifyjs.com/en/)
+Frontend: [Vue](https://vuejs.org/)
 
 ## Routes
-- [App](http://0.0.0.0:4000)
-- [Swagger](http://0.0.0.0:4000/documentation) (only for NODE_ENV=development)
+
+[App](http://0.0.0.0:4000)
+
+[Storybook](http://0.0.0.0:8000)
+
+[Swagger](http://0.0.0.0:4000/documentation) (only for NODE_ENV=development)
 
 ## Screenshots
 ![Dashboard](doc/assets/dashboard.png)

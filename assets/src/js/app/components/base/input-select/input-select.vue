@@ -51,7 +51,6 @@
 
         methods: {
             onChange(e) {
-                debugger;
                 this.$emit('input', e.target.value);
             },
         },
