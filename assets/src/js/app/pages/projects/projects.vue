@@ -10,6 +10,11 @@
             <tile
                     v-for="site in sites"
                     :key="site.site.id">
+                <span title="Created At"
+                        class="u-reset caption"
+                        slot="caption">
+                    {{ site.report.createdAt | format-date }}
+                </span>
                 <template slot="title">
                     <btn
                             class="projects--title-btn"

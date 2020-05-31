@@ -9,6 +9,13 @@
             </btn>
         </div>
 
+        <span title="Created At"
+                class="u-reset caption"
+                v-if="latestReport"
+                slot="caption">
+            {{ latestReport | format-date }}
+        </span>
+
         <project-settings v-if="showSettings"
                 :id="id"
                 @close="onSettingsClosed"/>
@@ -77,6 +84,14 @@
             };
         },
         computed: {
+            latestReport() {
+                if (!this.reports || this.reports.length === 0) {
+                    return null;
+                }
+
+                return [...this.reports].shift().createdAt;
+            },
+
             menuEntries() {
                 return customProjectMenuEntries.map((entry) => {
                     return {
