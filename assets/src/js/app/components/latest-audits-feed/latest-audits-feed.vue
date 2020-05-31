@@ -20,6 +20,7 @@
                     </btn>
                 </template>
                 <span
+                        title="Created At"
                         class="u-reset caption latest-audits-feed--caption"
                         slot="caption">
                     {{ site.last_audit | format-date }}
