@@ -1,8 +1,0 @@
-plugins:
-  stylelint:
-    enabled: true
-  nodesecurity:
-    enabled: true
-  eslint:
-    enabled: true
-    channel: "eslint-6"

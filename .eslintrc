@@ -37,10 +37,7 @@
         ],
         "vue/html-quotes": [
             "warn",
-            "single",
-            {
-                "avoidEscape": false
-            }
+            "single"
         ],
         "vue/html-closing-bracket-spacing": [
             "error",
