@@ -1,5 +1,5 @@
 module.exports = {
-  "extends": "./lint/config.js",
+  "extends": "@dreipol/stylelint-config",
   "plugins": [
     "stylelint-order",
     "stylelint-selector-bem-pattern"

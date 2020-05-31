@@ -1,6 +1,4 @@
 plugins:
-  stylelint:
-    enabled: true
   nodesecurity:
     enabled: true
   eslint:
