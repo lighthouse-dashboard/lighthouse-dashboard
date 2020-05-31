@@ -78,6 +78,7 @@
     "devDependencies": {
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
         "@dreipol/eslint-config": "^6.0.5",
+        "@dreipol/stylelint-config": "^6.0.0",
         "@size-limit/preset-app": "^4.4.5",
         "@storybook/addon-actions": "^5.3.18",
         "@storybook/addon-knobs": "^5.3.18",
