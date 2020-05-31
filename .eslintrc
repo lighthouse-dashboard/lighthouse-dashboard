@@ -1,5 +1,5 @@
 {
-    "root": true,
+    "root": false,
     "parserOptions": {
         "parser": "babel-eslint",
         "sourceType": "module"
@@ -33,6 +33,25 @@
                     "EVENTS",
                     "CONTENT"
                 ]
+            }
+        ],
+        "vue/html-quotes": [
+            "warn",
+            "single"
+        ],
+        "vue/html-closing-bracket-spacing": [
+            "error",
+            {
+                "startTag": "never",
+                "endTag": "never",
+                "selfClosingTag": "never"
+            }
+        ],
+        "vue/html-closing-bracket-newline": [
+            "error",
+            {
+                "singleline": "never",
+                "multiline": "never"
             }
         ],
         "vue/html-indent": [
@@ -88,6 +107,19 @@
         ]
     },
     "overrides": [
+        {
+            "env": {
+                "mocha": true
+            },
+            "files": [
+                "*.spec.js"
+            ],
+            "rules": {
+                "max-lines-per-function": "off",
+                "no-unused-expressions": "off",
+                "max-nested-callbacks": "off"
+            }
+        },
         {
             "files": [
                 "*.vue"
