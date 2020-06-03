@@ -1,3 +1,6 @@
+# 5.12
+0. [Add logout button](https://github.com/faebeee/lighthouse-dashboard/issues/22)
+
 # 5.11
 0. Fix eslint settings & error
 0. Added styleguide and storybook
