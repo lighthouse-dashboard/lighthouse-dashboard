@@ -5,7 +5,10 @@ const paths = require('../../config/paths');
 const jsonImporter = require('node-sass-json-importer');
 
 gulp.task('sass', function() {
-    return gulp.src('assets/src/scss/app.scss', { cwd: paths.root })
+    return gulp.src([
+        'assets/src/scss/app.scss',
+        'assets/src/scss/theme/*.scss',
+    ], { cwd: paths.root })
         .pipe(sassGlob({ includePaths: [paths.src] }))
         .pipe(sass({
             importer: [jsonImporter()],

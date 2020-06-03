@@ -28,6 +28,8 @@ async function start() {
         },
     });
 
+    server.events.on('log', (event) => logger.info(event.data));
+
     await setupAuth(server);
     await loadPlugins(server);
     await loadRoutes(server);

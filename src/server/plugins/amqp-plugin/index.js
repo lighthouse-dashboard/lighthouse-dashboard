@@ -21,13 +21,13 @@ exports.plugin = {
         const expose = {};
 
         try {
+            server.log(['hapi-amqp'], 'Connect to ampq');
             const result = await connect(uri);
             expose.connection = result.connection;
             expose.channel = result.channel;
             server.decorate('request', 'amqp', expose);
         } catch (err) {
             server.log(['hapi-amqp', 'error'], err);
-            throw err;
         }
 
         server.events.on('stop', async () => {

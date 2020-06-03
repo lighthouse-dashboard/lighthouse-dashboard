@@ -10,7 +10,6 @@ export default {
         '#3a8ed5',
         '#0f2538',
     ],
-    app: 'light',
     theme: {
         primary: '#0077b6',
         text: '#333',

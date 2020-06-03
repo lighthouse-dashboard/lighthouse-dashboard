@@ -18,6 +18,8 @@ Vue.use(VuejsDatatableFactory);
 
 registry(Vue);
 
+cssVarEditor();
+
 VuejsDatatableFactory.useDefaultType(false)
     .registerTableType('datatable', tableType => tableType.mergeSettings({
         table: {
