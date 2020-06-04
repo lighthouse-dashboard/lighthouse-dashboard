@@ -4,7 +4,7 @@
                 v-if='list.length === 0'>No Items</span>
         <list-item v-for="report in list"
                 :key="report._id">
-            <btn :to="`/api/reports/report/${report._id}`"
+            <btn :href="`/api/reports/report/${report._id}`"
                     facets="flat"
                     target="_blank">
                 {{ report.createdAt | format-date }}

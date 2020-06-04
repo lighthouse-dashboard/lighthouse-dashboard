@@ -1,0 +1,10 @@
+.toastify {
+    &.info {
+        background: var(--root-color--signal-success);
+    }
+
+
+    &.error {
+        background: var(--root-color--signal-error);
+    }
+}

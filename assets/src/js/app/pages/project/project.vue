@@ -30,7 +30,8 @@
                     </tile>
                 </div>
 
-                <report-history class='project--history' :reports='reports'/>
+                <report-history class='project--history'
+                        :reports='reports'/>
             </div>
 
             <div class='project--sidebar'>
@@ -75,6 +76,7 @@
 </template>
 
 <script>
+    import Toastify from 'toastify-js';
     import { mapActions } from 'vuex';
     import AuditReportList from '../../components/audit-report-list/audit-report-list';
     import Btn from '../../components/base/btn/btn';
@@ -151,7 +153,21 @@
             },
 
             runAudit() {
-                return this.launchAuditForSite({ id: this.id });
+                this.launchAuditForSite({ id: this.id })
+                    .then(() => {
+                        Toastify({
+                            text: 'New audit scheduled',
+                            className: 'info',
+                        })
+                            .showToast();
+                    })
+                    .catch((e) => {
+                        Toastify({
+                            text: e.message,
+                            className: 'error',
+                        })
+                            .showToast();
+                    });
             },
 
             onDeleteClicked() {
@@ -166,6 +182,10 @@
             toggleEdit() {
                 this.isEdit = !this.isEdit;
             },
+        },
+
+        mounted() {
+
         },
     };
 </script>

@@ -19,6 +19,7 @@
 
 
 <script>
+    import Toastify from 'toastify-js';
     import { mapActions } from 'vuex';
     import Btn from '../../base/btn/btn';
     import ErrorMessage from '../../error-message/error-message';
@@ -56,6 +57,10 @@
                     .then((result) => {
                         this.isOverlayOpen = false;
                         this.$router.push({ name: 'project.detail', params: { id: result.id } });
+                        Toastify({
+                            text: 'New site created scheduled',
+                            className: 'info',
+                        }).showToast();
                     })
                     .catch(e => {
                         this.errorMessage = e;
@@ -74,6 +79,10 @@
                     .then(() => {
                         this.isOverlayOpen = false;
                         this.$emit('updated');
+                        Toastify({
+                            text: 'Site updated',
+                            className: 'info',
+                        }).showToast();
                     })
                     .catch(e => {
                         this.errorMessage = e;
