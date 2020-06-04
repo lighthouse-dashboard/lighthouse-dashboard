@@ -16,6 +16,7 @@ Vue.use(Inview);
 registry(Vue);
 
 if (process.env.NODE_ENV === 'develop') {
+    // eslint-disable-next-line no-undef
     cssVarEditor();
 }
 
