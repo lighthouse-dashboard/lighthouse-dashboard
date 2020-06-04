@@ -58,7 +58,7 @@
                         this.isOverlayOpen = false;
                         this.$router.push({ name: 'project.detail', params: { id: result.id } });
                         Toastify({
-                            text: 'New site created scheduled',
+                            text: 'Site created',
                             className: 'info',
                         }).showToast();
                     })

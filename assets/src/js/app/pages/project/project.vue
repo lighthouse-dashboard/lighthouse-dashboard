@@ -54,10 +54,11 @@
                     </btn>
                 </div>
                 <div class='project--sidebar-section'>
-                    <btn :facets='["danger", "full-width"]'
+                    <confirm-button :facets='["danger", "full-width"]'
+                            confirm="Click to confirm"
                             @click='onDeleteClicked'>
                         Delete
-                    </btn>
+                    </confirm-button>
                 </div>
 
                 <tile title='Tools'
@@ -80,6 +81,7 @@
     import { mapActions } from 'vuex';
     import AuditReportList from '../../components/audit-report-list/audit-report-list';
     import Btn from '../../components/base/btn/btn';
+    import ConfirmButton from '../../components/base/confirm-button/confirm-button';
     import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
     import GaugeChart from '../../components/charts/gauge-chart/gauge-chart';
     import RadarChart from '../../components/charts/radar-chart/radar-chart';
@@ -88,11 +90,13 @@
     import SiteActionsList from '../../components/site-actions-list/site-actions-list';
     import SiteConfig from '../../components/site-config/site-config';
     import Tile from '../../components/tile/tile';
+    import catchError from '../../utils/catch-error';
     import getAverageForScore from '../../utils/get-average-for-score';
     import reportToRadarChart from '../../utils/report-to-radar-chart';
 
     export default {
         components: {
+            ConfirmButton,
             SiteCreateOverlay,
             AuditReportList,
             SiteActionsList,
@@ -161,20 +165,21 @@
                         })
                             .showToast();
                     })
-                    .catch((e) => {
-                        Toastify({
-                            text: e.message,
-                            className: 'error',
-                        })
-                            .showToast();
-                    });
+                    .catch(catchError);
             },
 
             onDeleteClicked() {
                 this.deleteSite({ id: this.id })
                     .then(() => {
                         this.$router.push({ name: 'dashboard' });
-                    });
+                        Toastify({
+                            text: 'Page deleted',
+                            className: 'info',
+                        })
+                            .showToast();
+                    })
+                    .catch(catchError);
+                ;
             },
             reload() {
                 this.getCurrentSite({ siteId: this.id });

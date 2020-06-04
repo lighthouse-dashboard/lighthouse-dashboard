@@ -1,0 +1,41 @@
+.confirm-button {
+    // Vars
+    --confirm-button--countdown-background: rgba(255, 255, 255, 0.4);
+
+    // Support
+
+    // Module
+    & {
+        & {
+            position: relative;
+        }
+    }
+
+    // Facets
+    &.confirm-button__is-clicked {
+        &:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background-color: var(--confirm-button--countdown-background);
+            left: 0;
+            bottom: 0;
+            animation: confirm-button--countdown;
+            animation-duration: 2000ms;
+            animation-fill-mode: forwards;
+        }
+    }
+
+    // States
+}
+
+@keyframes confirm-button--countdown {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0;
+    }
+}
