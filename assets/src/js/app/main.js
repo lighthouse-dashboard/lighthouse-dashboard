@@ -5,7 +5,6 @@ import Inview from 'vueinview';
 import { VuejsDatatableFactory } from 'vuejs-datatable';
 import registry from '../framework/registry';
 
-
 import App from './App.vue';
 import routes from './pages/routes';
 import { authRouteGuard } from './utils/auth-route-guard';
@@ -18,7 +17,9 @@ Vue.use(VuejsDatatableFactory);
 
 registry(Vue);
 
-cssVarEditor();
+if (process.env.NODE_ENV === 'develop') {
+    cssVarEditor();
+}
 
 VuejsDatatableFactory.useDefaultType(false)
     .registerTableType('datatable', tableType => tableType.mergeSettings({
@@ -36,7 +37,6 @@ const router = new VueRouter({
 router.beforeEach(authRouteGuard);
 
 new Vue({
-    //vuetify,
     store,
     router,
     render: h => h(App),
