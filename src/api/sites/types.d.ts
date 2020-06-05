@@ -10,6 +10,7 @@ declare namespace Sites {
         is_favorite: boolean;
         token: string;
         last_audit: string | null;
+        scheduled_jobs?: number;
     }
 
     export interface SiteWithReport {

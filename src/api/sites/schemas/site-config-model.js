@@ -10,6 +10,7 @@ export const siteConfigModel = joi.object({
     is_favorite: joi.boolean().required(),
     token: joi.string().required(),
     last_audit: joi.string(),
+    scheduled_jobs: joi.number(),
 }).label('sites.SiteConfigModel');
 
 export const siteConfigModelList = joi

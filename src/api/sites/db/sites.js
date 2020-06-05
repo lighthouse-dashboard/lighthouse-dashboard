@@ -131,3 +131,15 @@ export async function getSiteConfigByToken(database, token) {
 
     return sites.pop();
 }
+
+/**
+ * Update the amount of scheduled jobs
+ * @param {MongoDB} database
+ * @param {Sites.SiteConfig} config
+ * @param {number} count
+ * @return {Promise<Sites.SiteConfig|null>}
+ */
+export async function setScheduledAuditForSite(database, config, increase) {
+    const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
+    await siteCollection.updateOne({ id: config.id }, { $set: { scheduled_jobs: config.scheduled_jobs ? config.scheduled_jobs + increase : increase } });
+}

@@ -1,3 +1,4 @@
+import { setScheduledAuditForSite } from '../api/sites/db/sites';
 import connectDatabase from '../database/connect-database';
 import logger from '../logger';
 import { closeConnection, connectMq, createChannel } from '../queue';
@@ -60,6 +61,7 @@ async function checkForNewMessagesInQueue(channel) {
 async function executeAudit(data, message = null) {
     const { database } = await connectDatabase();
     const report = await createNewAuditForConfig(database, data, { message, git_commit: null });
+    await setScheduledAuditForSite(database, data, -1);
     if (!report) {
         logger.warn(`No report for ${ data.url }`);
         return;

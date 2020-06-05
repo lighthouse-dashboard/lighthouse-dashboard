@@ -4,7 +4,7 @@ import logger from '../../../logger';
 import { closeConnection } from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
-import { getSiteConfigById } from '../db/sites';
+import { getSiteConfigById, setScheduledAuditForSite } from '../db/sites';
 
 /**
  * Execute an audit
@@ -28,7 +28,13 @@ async function createReport({ params, payload, mongo, amqp }, h) {
         }
 
         // await spawnNewAuditWorker(config);
-        sendToQueue(amqp.channel, { config });
+        if (process.env.MESSAGE_QUEUE_URI) {
+            sendToQueue(amqp.channel, { config });
+        } else {
+            logger.warn('No MESSAGE_QUEUE_URI found in env. Skipping queue message');
+        }
+
+        await setScheduledAuditForSite(mongo.db, config, 1);
         await closeConnection();
     } catch (e) {
         logger.error(e);
