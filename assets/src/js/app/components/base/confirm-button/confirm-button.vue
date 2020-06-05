@@ -1,9 +1,11 @@
 <template>
     <btn class="confirm-button"
             :class="rootClasses"
+            :facets="facets"
             v-bind="$attrs"
             v-on="{...$listeners, click: onClicked}">
-        <span class="u-reset" v-if="isClicked">{{ confirm }}</span>
+        <span class="u-reset"
+                v-if="isClicked">{{ confirm }}</span>
         <slot v-else/>
     </btn>
 </template>

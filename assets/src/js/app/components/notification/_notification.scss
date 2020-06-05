@@ -1,0 +1,38 @@
+.notification {
+    // Vars
+    --notification--vert-bezel: 24px;
+    --notification--horiz-bezel: 16px;
+    --notification--border-radius: 2px;
+
+    // Support
+
+    // Module
+    & {
+        & {
+            display: block;
+            background: none;
+            overflow: hidden;
+            border: none;
+            padding: var(--notification--vert-bezel) var(--notification--horiz-bezel);
+            transition: background-color 200ms ease-in-out;
+            border-radius: var(--notification--border-radius);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            margin: 4px 0;
+        }
+
+        .notification--content {
+            @include Body1;
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    // Facets
+    &.notification__success {
+        background-color: var(--root-color--signal-success);
+        color: var(--color-mono-white)
+    }
+
+    // States
+}

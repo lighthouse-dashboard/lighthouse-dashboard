@@ -1,5 +1,6 @@
 <template>
     <tile class='site-overview'>
+        <scheduled-job-indicator v-if="scheduled_jobs > 0"/>
         <div class='site-overview--title'
                 slot="title">
             <btn :to="{name: 'project.detail', params: {id}}"
@@ -33,13 +34,17 @@
     import { mapActions } from 'vuex';
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
     import reportsToLineChart from '../../../../../../src/transformer/reports-to-line-chart';
+    import bemMixin from '../../mixins/bem-mixin';
     import Btn from '../base/btn/btn';
     import LineChart from '../charts/line-chart/line-chart';
+    import ScheduledJobIndicator from '../scheduled-job-indicator/scheduled-job-indicator';
     import ProjectSettings from '../site-settings/site-settings';
     import Tile from '../tile/tile';
 
     export default {
+        mixins: [bemMixin('site-overview')],
         components: {
+            ScheduledJobIndicator,
             Tile,
             Btn,
             LineChart,
@@ -65,6 +70,11 @@
                 required: true,
             },
 
+            scheduled_jobs: {
+                type: Number,
+                default: 0,
+            },
+
             /** @type {Report[]} */
             reports: {
                 type: Array,
@@ -84,6 +94,11 @@
             };
         },
         computed: {
+            rootClasses() {
+                return [
+                    this.createIfFacet(this.scheduled_jobs, 'has-scheduled-jobs'),
+                ];
+            },
             latestReport() {
                 if (!this.reports || this.reports.length === 0) {
                     return null;

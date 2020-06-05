@@ -5,6 +5,10 @@
 
     // Module
     & {
+        & {
+            position: relative;
+        }
+
         .site-overview--title {
             display: flex;
             justify-content: space-between;

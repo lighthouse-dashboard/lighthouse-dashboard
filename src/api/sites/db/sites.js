@@ -136,8 +136,7 @@ export async function getSiteConfigByToken(database, token) {
  * Update the amount of scheduled jobs
  * @param {MongoDB} database
  * @param {Sites.SiteConfig} config
- * @param {number} count
- * @return {Promise<Sites.SiteConfig|null>}
+ * @param {number} increase
  */
 export async function setScheduledAuditForSite(database, config, increase) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);

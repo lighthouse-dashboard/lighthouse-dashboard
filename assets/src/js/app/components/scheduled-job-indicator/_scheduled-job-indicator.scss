@@ -1,0 +1,39 @@
+.scheduled-job-indicator {
+    // Vars
+    --scheduled-job-indicator--size: 8px;
+
+    // Support
+
+    // Module
+    & {
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate3d(50%, -50%, 0);
+            width: var(--scheduled-job-indicator--size);
+            height: var(--scheduled-job-indicator--size);
+            background-color: var(--root-color--signal-success);
+            border-radius: 100%;
+            animation: scheduled-job-indicator--pulsate 2s ease-out infinite;
+        }
+    }
+
+    // Facets
+
+    // States
+}
+
+
+@-webkit-keyframes scheduled-job-indicator--pulsate {
+    0% {
+        box-shadow: var(--root-shadow--0);
+    }
+    50% {
+        box-shadow: var(--root-shadow--2);
+    }
+    100% {
+        box-shadow: var(--root-shadow--0);
+    }
+}

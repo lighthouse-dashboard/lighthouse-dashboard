@@ -10,6 +10,11 @@
                 @close='toggleEdit'
                 v-if='site && isEdit'/>
 
+        <notification :facets="['success']"
+                v-if="hasScheduledJobs">
+            Audits are scheduled for this project
+        </notification>
+
         <div class='project--content'>
             <div class='project--insights'>
                 <div class='project--overview'>
@@ -49,8 +54,10 @@
                 </div>
 
                 <div class='project--sidebar-section'>
-                    <btn :facets="['secondary', 'full-width']"
-                            @click="runAudit">New audit
+                    <btn :facets="['secondary', 'full-width', ...auditBtnFacet]"
+                            @click="runAudit">
+                        <template v-if="hasScheduledJobs">Audits already scheduled</template>
+                        <template v-else>New audit</template>
                     </btn>
                 </div>
                 <div class='project--sidebar-section'>
@@ -85,6 +92,7 @@
     import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
     import GaugeChart from '../../components/charts/gauge-chart/gauge-chart';
     import RadarChart from '../../components/charts/radar-chart/radar-chart';
+    import Notification from '../../components/notification/notification';
     import SiteCreateOverlay from '../../components/overlay/site-create-overlay/site-create-overlay';
     import ReportHistory from '../../components/report-history/report-history';
     import SiteActionsList from '../../components/site-actions-list/site-actions-list';
@@ -96,6 +104,7 @@
 
     export default {
         components: {
+            Notification,
             ConfirmButton,
             SiteCreateOverlay,
             AuditReportList,
@@ -122,6 +131,8 @@
                 type: Boolean,
                 default: false,
             },
+
+            /** @type {Sites.SiteConfig | null} */
             site: {
                 type: Object,
                 default: null,
@@ -131,6 +142,7 @@
         data() {
             return {
                 isEdit: false,
+                isAuditScheduled: false,
                 avgFields: ['Performance', 'SEO', 'Accessibility'],
             };
         },
@@ -138,6 +150,16 @@
         computed: {
             latestReport() {
                 return this.reports[0];
+            },
+
+            hasScheduledJobs() {
+                return (this.site && this.site.scheduled_jobs > 0) || this.isAuditScheduled;
+            },
+
+            auditBtnFacet() {
+                return [
+                    this.hasScheduledJobs ? 'disabled' : 'base',
+                ];
             },
 
             latestReportRadarData() {
@@ -164,6 +186,7 @@
                             className: 'info',
                         })
                             .showToast();
+                        this.isAuditScheduled = true;
                     })
                     .catch(catchError);
             },

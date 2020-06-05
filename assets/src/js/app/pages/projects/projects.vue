@@ -7,41 +7,21 @@
         <loading-indicator v-if='isLoading'/>
         <div class="projects--list"
                 v-else>
-            <tile
+            <site-report-tile :site="site"
                     v-for="site in sites"
-                    :key="site.site.id">
-                <span title="Created At"
-                        class="u-reset caption"
-                        slot="caption">
-                    {{ site.report.createdAt | format-date }}
-                </span>
-                <template slot="title">
-                    <btn
-                            class="projects--title-btn"
-                            facets="flat"
-                            :to="{name: 'project.detail', params: {id: site.site.id}}">
-                        {{ site.site.name }}
-                    </btn>
-                </template>
-
-                <report-detail :report="site.report"/>
-            </tile>
+                    :key="site.id"/>
         </div>
     </div>
 </template>
 
 <script>
-    import Btn from '../../components/base/btn/btn';
     import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
-    import ReportDetail from '../../components/report-detail/report-detail';
-    import Tile from '../../components/tile/tile';
+    import SiteReportTile from '../../components/site-report-tile/site-report-tile';
 
     export default {
         components: {
+            SiteReportTile,
             LoadingIndicator,
-            Tile,
-            ReportDetail,
-            Btn,
         },
 
         props: {
