@@ -12,7 +12,7 @@ import dashboardConfigSchema from '../validator/schemas/dashboard-config-schema'
 import serverConfigSchema from '../validator/schemas/server-config-schema';
 import setupAuth from './auth';
 import loadPlugins from './plugins';
-import loadRoutes from './routes';
+import loadRoutes from '../routes';
 
 const RESTART_INTERVAL = 5000;
 

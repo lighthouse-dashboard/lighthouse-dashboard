@@ -1,5 +1,5 @@
 {
   "watch": ["src", "templates", "config"],
-  "ext": "js,hbs",
+  "ext": "js,hbs,twig",
   "exec": "node -r esm ./index.js"
 }

@@ -67,7 +67,10 @@
     <script src="https://unpkg.com/css-var-editor"></script>
 {% endblock %}
 {% block content %}
-    <div id="app"></div>
+    <div id="app">
+        {% block app_content %}
+        {% endblock %}
+    </div>
 
     <script>
         if ('serviceWorker' in navigator) {

@@ -7,3 +7,4 @@ export const SET_SEARCH_RESULT = 'SET_SEARCH_RESULT';
 export const UPDATE_SITE = 'UPDATE_SITE';
 export const ADD_SITE = 'ADD_SITE';
 export const SET_CURRENT_SITE_CONFIG = 'SET_CURRENT_SITE_CONFIG';
+export const SET_INFO = 'system/SET_INFO';

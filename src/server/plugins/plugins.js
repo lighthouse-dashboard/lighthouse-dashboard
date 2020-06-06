@@ -12,7 +12,6 @@ import * as Amqp from './amqp-plugin';
 export default {
     dev: [
         { plugin: blipp, options: { showAuth: true } },
-        { plugin: laabr, options: {} },
         {
             plugin: HapiSwagger,
             options: {

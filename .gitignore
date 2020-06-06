@@ -20,3 +20,4 @@ templates/dist
 
 .env
 dump
+logs

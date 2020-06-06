@@ -1,0 +1,33 @@
+.system {
+    // Vars
+    --system--row-vert-bezel: 12px;
+    --system--row-horiz-bezel: 8px;
+    --system--row-background: rgba(0, 0, 0, 0.13);
+
+    // Support
+
+    // Module
+    & {
+        & {
+            display: grid;
+            grid-template-areas: '. content .';
+            grid-template-columns: 2fr 8fr 2fr;
+        }
+
+        .system--row {
+            display: grid;
+            grid-template-areas: 'label value';
+            grid-template-columns: 8fr 4fr;
+            align-content: center;
+            padding: var(--system--row-vert-bezel) var(--system--row-horiz-bezel);
+
+            &:nth-child(even) {
+                background-color: var(--system--row-background);
+            }
+        }
+    }
+
+    // Facets
+
+    // States
+}

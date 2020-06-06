@@ -3,6 +3,10 @@ import { createLogger, format, transports } from 'winston';
 import { version } from '../../package.json';
 import SentryTransport from './sentry-transport';
 
+require('winston-daily-rotate-file');
+
+const myFormat = format.printf(({ level, version: v, service, message, timestamp }) => `${ timestamp } [${ service } - ${ v }] ${ level }: ${ message }`);
+
 export default createLogger({
     format: format.simple(),
     level: process.env.WINSTON_LOG_LEVEL,
@@ -15,7 +19,19 @@ export default createLogger({
 
     transports: [
         new transports.Console(),
+        new transports.DailyRotateFile({
+            filename: 'logs/application-%DATE%.log',
+            datePattern: 'YYYY-MM-DD-HH',
+            zippedArchive: true,
+            maxSize: '20m',
+            maxFiles: '5d',
+            format: format.combine(
+                format.timestamp(),
+                myFormat
+            ),
+        }),
     ],
+
     exceptionHandlers: [
         process.env.SENTRY_DSN ? new SentryTransport() : new transports.Console(),
     ],

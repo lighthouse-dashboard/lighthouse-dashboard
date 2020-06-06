@@ -1,6 +1,6 @@
 import Inert from '@hapi/inert';
-import logger from '../../logger';
-import glob from '../../utils/glob';
+import logger from '../logger';
+import glob from '../utils/glob';
 import viewRoutes from './views-routes';
 import assetRoutes from './assets-routes';
 

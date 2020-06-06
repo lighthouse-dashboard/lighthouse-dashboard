@@ -1,5 +1,5 @@
-import { title } from '../../../config/dashboard';
-import { version } from '../../../package.json';
+import { title } from '../../config/dashboard';
+import { version } from '../../package.json';
 
 const DEFAULT_PARAMS = {
     G_ANALYTICS_ID: process.env.G_ANALYTICS_ID || false,
@@ -8,7 +8,10 @@ const DEFAULT_PARAMS = {
 };
 
 const basicViewHandler = (request, h) => {
-    return h.view('index.twig', { ...DEFAULT_PARAMS });
+    return h.view('views/index.twig', { ...DEFAULT_PARAMS });
+};
+const createViewHandler = (template) => (request, h) => {
+    return h.view(template, { ...DEFAULT_PARAMS });
 };
 
 export default [
@@ -86,6 +89,16 @@ export default [
         path: '/app/projects/{id}',
         options: {
             description: 'Details of project',
+            auth: false,
+        },
+        handler: basicViewHandler,
+    },
+
+    {
+        method: 'GET',
+        path: '/app/system',
+        options: {
+            description: 'Show system infos',
             auth: false,
         },
         handler: basicViewHandler,
