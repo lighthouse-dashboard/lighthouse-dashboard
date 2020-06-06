@@ -1,5 +1,6 @@
 import config from '../../config/server';
 import { clearReports, removeOldReports } from '../api/reports/db/reports';
+import { updateSystemObject } from '../api/system/db/system';
 import connectDatabase from '../database/connect-database';
 import logger from '../logger';
 import { consumeQueue } from './handler';
@@ -23,6 +24,7 @@ async function boot() {
 
     logger.info(`Start audit worker`);
     await consumeQueue(process.env.MESSAGE_QUEUE_URI, 'audits');
+    await updateSystemObject(database, new Date());
 }
 
 boot();

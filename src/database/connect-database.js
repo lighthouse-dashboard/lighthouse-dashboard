@@ -28,7 +28,7 @@ function connect(uri) {
 
 /**
  * Connect to DB
- * @return {Promise<{database: unknown, client: MongoClient }>}
+ * @return {Promise<{database: Db, client: MongoClient }>}
  */
 export default async function connectDatabase() {
     const uri = process.env.MONGODB_URI;

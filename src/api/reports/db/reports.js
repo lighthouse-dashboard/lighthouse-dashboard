@@ -5,7 +5,7 @@ import logger from '../../../logger';
 
 /**
  * Get a report by id
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {string} id
  * @return {Promise<Report>}
  */
@@ -25,7 +25,7 @@ export function getReportById(database, id) {
 
 /**
  * Get all reports for a site
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {string} id
  * @param {number} limit
  * @return {Promise<Report[]>}
@@ -50,7 +50,7 @@ export function getReportsBySiteId(database, id, limit) {
 
 /**
  * Get latest report for site
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {string} id
  * @return {Promise<Report>}
  */
@@ -61,7 +61,7 @@ export function getLatestReportBySiteId(database, id) {
 
 /**
  * Save a new report in DB
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {Report} report
  * @param {object} raw - raw lighthouse audit report
  */
@@ -76,7 +76,7 @@ export async function saveReport(database, report, raw) {
 
 /**
  * Free up space in DB by remove old raw lighthouse data
- * @param {MongoDB} database
+ * @param {Db} database
  * @return {Promise<void>}
  */
 export async function clearReports(database) {
@@ -105,7 +105,7 @@ export async function clearReports(database) {
 
 /**
  * Free up space in DB by remove old entries
- * @param {MongoDB} database
+ * @param {Db} database
  * @return {Promise<void>}
  */
 export async function removeOldReports(database) {

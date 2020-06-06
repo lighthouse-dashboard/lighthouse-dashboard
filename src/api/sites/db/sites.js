@@ -4,7 +4,7 @@ import { SITES_CONFIG_COLLECTION } from '../../../config/db';
 
 /**
  * Find sites
- * @param {MongoDB} database
+ * @param {Db} database
  * @param { object } find
  * @param { object } sort
  * @param { number } limit
@@ -36,7 +36,7 @@ export function findSites(database, find, sort = {}, limit = 100) {
 
 /**
  * Get list of sites from DB
- * @param {MongoDB} database
+ * @param {Db} database
  * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getAllSites(database) {
@@ -45,7 +45,7 @@ export function getAllSites(database) {
 
 /**
  * Get list of sites from DB
- * @param {MongoDB} database
+ * @param {Db} database
  * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getFavoriteSites(database) {
@@ -54,7 +54,7 @@ export function getFavoriteSites(database) {
 
 /**
  * Get latest n audited sites
- * @param {MongoDB} database
+ * @param {Db} database
  * @return {Promise<Sites.SiteConfig[]>}
  */
 export function getLatestSites(database) {
@@ -68,7 +68,7 @@ export function getLatestSites(database) {
 
 /**
  * Add new site to DB
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {Pick<Sites.SiteConfig, "name"|"device"|"url"|"is_favorite">} config
  * @return {Promise<Sites.SiteConfig>}
  */
@@ -81,7 +81,7 @@ export async function addSite(database, config) {
 
 /**
  * Update site config
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {string} id
  * @param {Partial<Sites.SiteConfig>} delta
  * @return {Promise<Sites.SiteConfig>}
@@ -94,7 +94,7 @@ export function updateSite(database, id, delta) {
 
 /**
  * Remove site from DB
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {string} id
  */
 export function removeSite(database, id) {
@@ -104,7 +104,7 @@ export function removeSite(database, id) {
 
 /**
  * Get config for specific site
- * @param {MongoDb} database
+ * @param {Db} database
  * @param {string} id
  * @return {Promise<Sites.SiteConfig | null>}
  */
@@ -119,7 +119,7 @@ export async function getSiteConfigById(database, id) {
 
 /**
  * Get config for specific site
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {string} token
  * @return {Promise<Sites.SiteConfig | null>}
  */
@@ -134,7 +134,7 @@ export async function getSiteConfigByToken(database, token) {
 
 /**
  * Update the amount of scheduled jobs
- * @param {MongoDB} database
+ * @param {Db} database
  * @param {Sites.SiteConfig} config
  * @param {number} increase
  */
