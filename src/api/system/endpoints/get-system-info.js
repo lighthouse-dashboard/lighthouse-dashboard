@@ -11,8 +11,7 @@ export default {
     handler: getSystemInfo,
     options: {
         description: 'Get system info',
-        tags: ['api', 'sites'],
+        tags: ['api', 'system'],
         auth: 'jwt',
-        validate: {},
     },
 };
