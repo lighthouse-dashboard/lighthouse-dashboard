@@ -15,10 +15,8 @@ const getMQSettings = async () => {
 
 async function getHealthHandler(request) {
     const { client } = request.mongo;
-    const props = await getMQSettings();
-
     return {
-        rabbitmq: props,
+        rabbitmq: null,
         db_connection: !!client,
         uptime: os.uptime(),
     };
