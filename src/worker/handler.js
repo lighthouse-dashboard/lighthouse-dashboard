@@ -12,11 +12,15 @@ const parseMessage = (message) => JSON.parse(message.content.toString());
  * @param {object} msg
  */
 async function processMessage(channel, msg) {
-    const { config, message } = parseMessage(msg);
-    logger.debug(`Received message ${ msg.content.toString() }`);
-    await executeAudit(config, message);
-    await channel.ack(msg);
-    await checkForNewMessagesInQueue(channel);
+    try {
+        const { config, message } = parseMessage(msg);
+        logger.debug(`Received message ${ msg.content.toString() }`);
+        await executeAudit(config, message);
+        await channel.ack(msg);
+        await checkForNewMessagesInQueue(channel);
+    } catch (e) {
+        logger.error(e.message);
+    }
 }
 
 /**

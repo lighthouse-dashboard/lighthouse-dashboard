@@ -12,7 +12,7 @@ require('dotenv').config();
  * @return {Promise<void>}
  */
 async function boot() {
-    const { database } = await connectDatabase();
+    const { database, client } = await connectDatabase();
     await setWorkerIsRunning(database, true);
 
     if (config.db.maxReportsAge !== false) {
@@ -27,6 +27,8 @@ async function boot() {
     await consumeQueue(process.env.MESSAGE_QUEUE_URI, 'audits');
     await setWorkerLastRunDate(database, new Date());
     await setWorkerIsRunning(database, false);
+    logger.debug(`Worker complete`);
+    client.close();
 }
 
 boot();
