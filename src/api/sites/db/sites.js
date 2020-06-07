@@ -1,6 +1,7 @@
 import uuid from 'uuid/v4';
 import { latestAuditChart } from '../../../../config/dashboard';
 import { SITES_CONFIG_COLLECTION } from '../../../config/db';
+import logger from '../../../logger';
 
 /**
  * Find sites
@@ -140,5 +141,7 @@ export async function getSiteConfigByToken(database, token) {
  */
 export async function setScheduledAuditForSite(database, config, increase) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    await siteCollection.updateOne({ id: config.id }, { $set: { scheduled_jobs: config.scheduled_jobs ? config.scheduled_jobs + increase : increase } });
+    const scheduledJobs = config.scheduled_jobs ? config.scheduled_jobs + increase : increase;
+    logger.debug(`Update scheduled_jobs of ${ config.name } to ${ scheduledJobs }`);
+    await siteCollection.updateOne({ id: config.id }, { $set: { scheduled_jobs: scheduledJobs < 0 ? 0 : scheduledJobs } });
 }
