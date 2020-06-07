@@ -13,6 +13,16 @@
                 <span class="u-reset">Worker last run</span>
                 <span class="u-reset">{{ info.worker_last_run | format-date }}</span>
             </div>
+
+            <div class="system--row">
+                <span class="u-reset">DB Collections</span>
+                <span class="u-reset">{{ info.db.collections }}</span>
+            </div>
+
+            <div class="system--row">
+                <span class="u-reset">DB Data Size</span>
+                <span class="u-reset">{{ info.db.dataSize }}</span>
+            </div>
         </div>
         <div/>
     </div>
@@ -29,6 +39,7 @@
                 default: false,
             },
 
+            /** @type {System.Info} */
             info: {
                 type: Object,
                 required: true,

@@ -1,9 +1,19 @@
+import filesize from 'filesize.js';
 import { getSystemObject } from '../db/system';
 import { systemInfoModel } from '../schemas/system-info-model';
 
 async function getSystemInfo({ mongo }, h) {
-    const config = await getSystemObject(mongo.db);
-    return h.response(config);
+    /** @type {Db} */
+    const db = mongo.db;
+    const config = await getSystemObject(db);
+    const dbStats = await db.stats();
+    return h.response({
+        ...config,
+        db: {
+            collections: dbStats.collections,
+            dataSize: filesize(dbStats.dataSize),
+        },
+    });
 }
 
 export default {
@@ -18,5 +28,4 @@ export default {
             schema: systemInfoModel,
         },
     },
-
 };
