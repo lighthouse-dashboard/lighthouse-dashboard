@@ -36,14 +36,14 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
 
 /**
  * Run new lighthouse audit and transform it
- * @param {{runs: number, device: "desktop" | "mobile", url: string}} config
+ * @param {Pick<Reports.Report, 'url' | 'device'>} config
  * @param {AuditTransformer} transformer
- * @return {Report}
+ * @return {Reports.Report}
  */
 export default async function runLighthouse(config, transformer) {
     const { url, device } = config;
 
-    logger.debug(`Run audit for ${ config.url } ${ config.device }`);
+    logger.debug(`Run audit for ${ url } ${ device }`);
     const audit = await launchChromeAndRunLighthouse(
         url,
         {

@@ -6,7 +6,7 @@ import { systemInfoModel } from '../schemas/system-info-model';
  * Get system info
  * @param {MongodbDecoration} mongo
  * @param {object} h
- * @return {Promise<{db: {collection: number, dataSize: string}}&System.Info>}
+ * @return {Promise<SystemAPI.Info>}
  */
 async function getSystemInfo({ mongo }, h) {
     /** @type {Db} */

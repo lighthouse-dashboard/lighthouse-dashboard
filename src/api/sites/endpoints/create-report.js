@@ -3,7 +3,6 @@ import joi from '@hapi/joi';
 import logger from '../../../logger';
 import { closeConnection } from '../../../queue';
 import sendToQueue from '../../../queue/send-to-queue';
-import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
 import { getSiteConfigById, setScheduledAuditForSite } from '../db/sites';
 
 /**
@@ -12,7 +11,7 @@ import { getSiteConfigById, setScheduledAuditForSite } from '../db/sites';
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-async function createReport({ params, payload, mongo, amqp }, h) {
+async function createReport({ params, mongo, amqp }, h) {
     const { id } = params;
 
     const config = await getSiteConfigById(mongo.db, id);

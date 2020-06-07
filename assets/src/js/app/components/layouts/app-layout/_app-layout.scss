@@ -11,8 +11,8 @@
     // Module
     & {
         & {
-            min-height: 100%;
             display: flex;
+            min-height: 100%;
 
             @include mq('<=lg') {
                 display: flex;

@@ -39,12 +39,12 @@
 
         .input-field--error {
             display: block;
+
             @include Caption;
             color: var(--input-field--error-text-color);
             padding-left: calc(var(--input-field--horiz-input-bezel) + 1px);
             margin-top: var(--root-spacing);
         }
-
     }
 
     // Facets

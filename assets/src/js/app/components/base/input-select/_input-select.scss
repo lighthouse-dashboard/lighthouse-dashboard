@@ -9,15 +9,17 @@
 
     // Module
     & {
-
         .input-select--label {
             display: block;
             margin-bottom: var(--root-spacing);
         }
 
         .input-select--select {
+            // stylelint-disable-next-line property-no-vendor-prefix
             -webkit-appearance: none;
+            // stylelint-disable-next-line property-no-vendor-prefix
             -moz-appearance: none;
+
             @include Button;
             display: block;
             width: 100%;

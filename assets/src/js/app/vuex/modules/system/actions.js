@@ -2,7 +2,7 @@ import { fetchSystemInfo } from '../../../api/system-api';
 import { SET_INFO } from '../mutation-types';
 
 /**
- *
+ * Fetch system info
  * @param { function } commit
  * @return { System.Info }
  */

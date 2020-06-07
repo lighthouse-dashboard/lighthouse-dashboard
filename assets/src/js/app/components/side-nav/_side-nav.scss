@@ -22,12 +22,12 @@
         }
 
         .side-nav--drawer {
-            background-color: var(--side-nav--color-background);
+            z-index: var(--root-index--navigation);
             position: sticky;
             top: 0;
-            z-index: var(--root-index--navigation);
-            height: 100vh;
             display: flex;
+            background-color: var(--side-nav--color-background);
+            height: 100vh;
             flex-direction: column;
             transform: translate3d(0, 0, 0);
 
@@ -57,16 +57,16 @@
         }
 
         .side-nav--header {
-            padding: var(--root-spacing);
-            margin-bottom: calc(var(--root-spacing) * 2);
             display: flex;
             align-items: center;
             align-content: center;
+            padding: var(--root-spacing);
+            margin-bottom: calc(var(--root-spacing) * 2);
         }
 
         .side-nav--top {
-            flex: 1 1 auto;
             position: relative;
+            flex: 1 1 auto;
             padding-top: 24px;
         }
 
@@ -94,9 +94,9 @@
         }
 
         .side-nav--list-item.side-nav--list-item:not(.side-nav--list-item__footer) {
-            margin-bottom: var(--root-spacing);
-            display: block;
             position: relative;
+            display: block;
+            margin-bottom: var(--root-spacing);
             padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 5) calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 2);
             color: var(--side-nav--color-text);
             font-size: 1.4rem;
@@ -111,7 +111,7 @@
             }
 
             &::before, &::after {
-                content: "";
+                content: '';
                 border-radius: 0;
                 transition: border-radius var(--side-nav-toggle--border-radius-transition-duration) ease-in-out;
             }
@@ -122,10 +122,10 @@
                 box-shadow: inset 0 100px 0 0 var(--side-nav--color-link-active-background); /* This is where the magic happens! */
 
                 &::before {
+                    z-index: 10;
                     position: absolute;
                     right: 0;
                     top: calc(var(--side-nav--border-radius-box-size) * -1);
-                    z-index: 10;
                     background-color: transparent;
                     height: var(--side-nav--border-radius-box-size);
                     width: var(--side-nav--border-radius-outer);
@@ -153,10 +153,10 @@
     &.side-nav__open {
         .side-nav--drawer {
             position: fixed;
-            width: 320px;
             left: 0;
             top: 0;
             display: block;
+            width: 320px;
 
             @include mq('<=md') {
                 width: 100%;

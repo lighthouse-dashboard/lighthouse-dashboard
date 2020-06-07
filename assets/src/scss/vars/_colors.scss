@@ -1,11 +1,11 @@
 :root {
     --color-mono-white: #ffffff;
-    --color-mono-black: #333;
+    --color-mono-black: #333333;
     --color-mono-gray: #6c6c6c;
     --color-mono-light-gray: #c1c1c1;
 
     --root--background-color: rgb(248, 251, 253);
-    --root--text-color: #333;
+    --root--text-color: #333333;
 
     --root-color--primary: #0077b6;
     --root-color--primary-light: rgba(0, 119, 182, 0.16);
@@ -25,7 +25,7 @@
     --root-color--error-text: var(--root-color--signal-error);
 
     //Buttons
-    --root-color--button-text-primary: #fff;
+    --root-color--button-text-primary: #ffffff;
 
     --root-color--button-danger-text: var(--root-color--signal-error);
     --root-color--button-danger-background: var(--root-color--signal-error);
@@ -39,13 +39,13 @@
     --root-color--button-text-secondarry: var(--root-color--primary);
 
     // Inputs
-    --root-color--input-active-background: #fff;
+    --root-color--input-active-background: #ffffff;
     --root-color--input-error-background: #ffb5b5;
     --root-color--input-disabled-background: var(--color-mono-light-gray);
 
     // Links
     --root-color--link-text-color: var(--root-color--primary);
-    --root-color--link-focus-text-color: #fff;
+    --root-color--link-focus-text-color: #ffffff;
     --root-color--link-hover-background: var(--root-color--primary);
 
     // Site Overview

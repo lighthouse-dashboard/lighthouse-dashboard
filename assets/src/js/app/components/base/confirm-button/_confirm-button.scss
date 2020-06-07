@@ -13,14 +13,14 @@
 
     // Facets
     &.confirm-button__is-clicked {
-        &:before {
+        &::before {
             content: '';
             position: absolute;
+            left: 0;
+            bottom: 0;
             width: 100%;
             height: 4px;
             background-color: var(--confirm-button--countdown-background);
-            left: 0;
-            bottom: 0;
             animation: confirm-button--countdown;
             animation-duration: 2000ms;
             animation-fill-mode: forwards;

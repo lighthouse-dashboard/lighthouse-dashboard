@@ -22,16 +22,17 @@
         }
 
         .notification--content {
+            z-index: 2;
+
             @include Body1;
             position: relative;
-            z-index: 2;
         }
     }
 
     // Facets
     &.notification__success {
         background-color: var(--root-color--signal-success);
-        color: var(--color-mono-white)
+        color: var(--color-mono-white);
     }
 
     // States

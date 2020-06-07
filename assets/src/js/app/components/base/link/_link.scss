@@ -14,21 +14,21 @@
             color: var(--link--color);
             position: relative;
 
-            &:before {
+            &::before {
                 content: '';
                 position: absolute;
+                left: 0;
+                bottom: calc((var(--link--line-width) + 3px) * -1);
                 background: var(--link--color);
                 width: 0;
                 height: var(--link--line-width);
-                left: 0;
-                bottom: calc((var(--link--line-width) + 3px) * -1);
                 opacity: 0;
 
                 transition: width 200ms ease-in-out, opacity 200ms ease-in-out;
             }
 
             &:hover {
-                &:before {
+                &::before {
                     opacity: 1;
                     width: 100%;
                 }

@@ -4,8 +4,8 @@ import { removeSite } from '../db/sites';
 /**
  * Delete site from DB
  * @param {object} params
- * @param {MongodbDecoration} mongo
  * @param {object} h
+ * @param {MongodbDecoration} mongo
  * @return {Promise<void>}
  */
 async function deleteSite({ params, mongo }, h) {

@@ -34,9 +34,10 @@
         }
 
         .btn--content {
+            z-index: 2;
+
             @include Button;
             position: relative;
-            z-index: 2;
             text-transform: uppercase;
         }
     }
@@ -48,7 +49,7 @@
             color: var(--button--text-color);
             position: relative;
 
-            &:after {
+            &::after {
                 content: '';
                 position: absolute;
                 top: 0;
@@ -62,7 +63,7 @@
             &:hover, &:focus, &.btn__active {
                 color: var(--button--text-color-accent);
 
-                &:after {
+                &::after {
                     width: 100%;
                     height: calc(100% - var(--button--underline-height));
                 }
