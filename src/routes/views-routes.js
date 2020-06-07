@@ -7,12 +7,7 @@ const DEFAULT_PARAMS = {
     VERSION: version,
 };
 
-const basicViewHandler = (request, h) => {
-    return h.view('views/index.twig', { ...DEFAULT_PARAMS });
-};
-const createViewHandler = (template) => (request, h) => {
-    return h.view(template, { ...DEFAULT_PARAMS });
-};
+const basicViewHandler = (request, h) => h.view('views/index.twig', { ...DEFAULT_PARAMS });
 
 export default [
     {

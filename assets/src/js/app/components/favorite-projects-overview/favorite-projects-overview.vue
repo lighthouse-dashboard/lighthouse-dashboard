@@ -26,10 +26,14 @@
             SiteOverview: withReports(SiteOverview),
         },
         props: {
+            /**
+             * @type {Sites.SiteConfig[]}
+             */
             sites: {
                 type: Array,
                 required: true,
             },
+
             isLoading: {
                 type: Boolean,
                 default: false,

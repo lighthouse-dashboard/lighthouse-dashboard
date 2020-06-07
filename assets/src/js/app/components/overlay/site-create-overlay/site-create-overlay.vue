@@ -29,6 +29,7 @@
     export default {
         components: { ErrorMessage, Btn, SiteCreateForm, Overlay },
         props: {
+            /** @type {Sites.SiteConfig | null} */
             config: {
                 type: Object,
                 default: null,

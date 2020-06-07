@@ -6,7 +6,7 @@ let _client = null;
 /**
  * Connect to mongo. Recycle connection if available
  * @param {string} uri
- * @return {Promise<unknown>|null}
+ * @return {Promise<MongoClient>}
  */
 function connect(uri) {
     if (_client) {

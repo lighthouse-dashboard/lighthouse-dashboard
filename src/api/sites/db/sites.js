@@ -87,9 +87,9 @@ export async function addSite(database, config) {
  * @param {Partial<Sites.SiteConfig>} delta
  * @return {Promise<Sites.SiteConfig>}
  */
-export function updateSite(database, id, delta) {
+export async function updateSite(database, id, delta) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    siteCollection.updateOne({ id }, { $set: delta });
+    await siteCollection.updateOne({ id }, { $set: delta });
     return getSiteConfigById(database, { id });
 }
 
@@ -98,9 +98,9 @@ export function updateSite(database, id, delta) {
  * @param {Db} database
  * @param {string} id
  */
-export function removeSite(database, id) {
+export async function removeSite(database, id) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    siteCollection.deleteOne({ id });
+    await siteCollection.deleteOne({ id });
 }
 
 /**

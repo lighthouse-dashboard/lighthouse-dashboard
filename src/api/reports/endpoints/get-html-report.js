@@ -3,10 +3,16 @@ import { Boom } from '@hapi/boom';
 import { getReportById } from '../db/reports';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 
-async function getHtmlReportHandler(request) {
-    const { id } = request.params;
+/**
+ * Get html report handler
+ * @param {object} params
+ * @param {MongodbDecoration} mongo
+ * @return {Promise<string|string[]>}
+ */
+async function getHtmlReportHandler({ params, mongo }) {
+    const { id } = params;
 
-    const report = await getReportById(request.mongo.db, id);
+    const report = await getReportById(mongo.db, id);
     if (!report) {
         throw Boom.notFound();
     }

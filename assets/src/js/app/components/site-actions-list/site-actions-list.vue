@@ -26,14 +26,13 @@
                 required: true,
             },
         },
+
         computed: {
             menuEntries() {
-                return customProjectMenuEntries.map((entry) => {
-                    return {
-                        name: entry.name,
-                        link: entry.link(this.url),
-                    };
-                });
+                return customProjectMenuEntries.map((entry) => ({
+                    name: entry.name,
+                    link: entry.link(this.url),
+                }));
             },
         },
     };

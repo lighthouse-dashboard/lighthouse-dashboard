@@ -3,11 +3,10 @@ import * as Inert from '@hapi/inert';
 import * as Vision from '@hapi/vision';
 import blipp from 'blipp';
 import HapiSwagger from 'hapi-swagger';
-import laabr from 'laabr';
 
 import { name, version } from '../../../package.json';
-import * as MongoDb from './mongodb-plugin/mongodb-plugin';
 import * as Amqp from './amqp-plugin';
+import * as MongoDb from './mongodb-plugin/mongodb-plugin';
 
 export default {
     dev: [

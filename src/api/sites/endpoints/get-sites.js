@@ -4,21 +4,22 @@ import { siteConfigModelList } from '../schemas/site-config-model';
 
 /**
  * Get sites
- * @param {object} request
+ * @param {object} query
+ * @param {MongodbDecoration} mongo
  * @return {Promise<Sites.SiteConfig[]>}
  */
-function getSitesHandler(request) {
-    const { query } = request.query;
+function getSitesHandler({ query, mongo }) {
+    const { query: searchQuery } = query;
 
-    if (query) {
+    if (searchQuery) {
         try {
-            return findSites(request.mongo.db, { $text: { $search: query } });
+            return findSites(mongo.db, { $text: { $search: searchQuery } });
         } catch (e) {
             console.log(e);
         }
     }
 
-    return getAllSites(request.mongo.db);
+    return getAllSites(mongo.db);
 }
 
 export default {

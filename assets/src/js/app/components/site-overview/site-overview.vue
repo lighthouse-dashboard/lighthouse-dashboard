@@ -42,7 +42,6 @@
     import Tile from '../tile/tile';
 
     export default {
-        mixins: [bemMixin('site-overview')],
         components: {
             ScheduledJobIndicator,
             Tile,
@@ -50,6 +49,8 @@
             LineChart,
             ProjectSettings,
         },
+
+        mixins: [bemMixin('site-overview')],
 
         props: {
             id: {
@@ -75,7 +76,7 @@
                 default: 0,
             },
 
-            /** @type {Report[]} */
+            /** @type {Reports.Report[]} */
             reports: {
                 type: Array,
                 required: true,
@@ -89,6 +90,7 @@
                 chart: null,
 
                 isLoading: false,
+                /** @type {Error | null} */
                 runError: null,
                 interval: null,
             };
@@ -99,6 +101,7 @@
                     this.createIfFacet(this.scheduled_jobs, 'has-scheduled-jobs'),
                 ];
             },
+
             latestReport() {
                 if (!this.reports || this.reports.length === 0) {
                     return null;
@@ -115,6 +118,7 @@
                     };
                 });
             },
+
             lineChartData() {
                 return reportsToLineChart(this.reports);
             },

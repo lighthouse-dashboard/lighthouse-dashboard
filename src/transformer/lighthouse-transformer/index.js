@@ -2,7 +2,7 @@
  * Transform a lighthouse report
  * @param {string} pageId
  * @param {LH.Result} audit
- * @return {Report}
+ * @return {Pick<Reports.Report, 'createdAt' | 'siteId' | "values">}
  */
 export default function(pageId, audit) {
     const { categories } = audit;

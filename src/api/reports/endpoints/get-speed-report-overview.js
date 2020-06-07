@@ -6,16 +6,16 @@ import { barChartDataModel } from '../schemas/bar-chart-data-model';
 
 /**
  * Get overview over projects by specific timing id
- * @param {hapi.Request} request
+ * @param {MongodbDecoration} mongo
  * @return {Promise<BarChartData>}
  */
-async function getSpeedReportOverview(request) {
-    const pages = await getFavoriteSites(request.mongo.db);
+async function getSpeedReportOverview({ mongo }) {
+    const pages = await getFavoriteSites(mongo.db);
     const labels = [];
 
     const reports = [];
     for (let p = 0; p < pages.length; p++) {
-        const report = await getLatestReportBySiteId(request.mongo.db, pages[p].id);
+        const report = await getLatestReportBySiteId(mongo.db, pages[p].id);
         if (!report) {
             continue;
         }

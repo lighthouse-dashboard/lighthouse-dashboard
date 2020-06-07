@@ -21,7 +21,7 @@ export default async function executeSingle(useQueue, token) {
 
     if (useQueue) {
         const channel = await queue();
-        await sendToQueue(channel, { config, message: 'CLI - single' });
+        await sendToQueue(channel, config, 'CLI - single');
     } else {
         await createNewAuditForConfig(database, config, { message: 'CLI - single' });
     }

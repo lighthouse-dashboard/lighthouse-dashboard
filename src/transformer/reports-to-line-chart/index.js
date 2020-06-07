@@ -3,10 +3,11 @@ import formatReportSummaryString from '../../utils/format-report-summary-string'
 
 /**
  * Transform reports to chart data
- * @param {Report[]} reports
+ * @param {Reports.Report[]} reports
  * @return {ChartData}
  */
 export default function reportsToLineChart(reports) {
+    /** @type {ChartData} */
     const data = {
         labels: [],
         datasets: [],
@@ -31,16 +32,17 @@ export default function reportsToLineChart(reports) {
 
 /**
  * Create dataset for a line with specific value types
- * @param {Report[]} reports
+ * @param {Reports.Report[]} reports
  * @param {string} key
  * @return {ChartDataDataSet}
  */
 function getLineDataSetForKey(reports, key) {
+    /** @type {ChartDataDataSet} */
     const result = reports.reduce((dataSet, report) => {
         dataSet.data.push(getTimingValueForKey(report.values, key));
         return dataSet;
     }, {
-        name: key,
+        label: key,
         data: [],
     });
 
@@ -50,7 +52,7 @@ function getLineDataSetForKey(reports, key) {
 
 /**
  * Get value for a specific timing key
- * @param {ReportValue[]} timings
+ * @param {Reports.ReportValue[]} timings
  * @param {string} id
  * @return {number}
  */

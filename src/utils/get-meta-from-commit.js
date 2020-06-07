@@ -23,7 +23,7 @@ export default function getMetaFromCommit(commit) {
  */
 export function getMetaFromGithubWebhook(payload) {
     if (!payload) {
-        return {};
+        return null;
     }
 
     // eslint-disable-next-line camelcase

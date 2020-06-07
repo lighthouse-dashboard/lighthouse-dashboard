@@ -1,13 +1,13 @@
 import amqp from 'amqplib';
 import logger from '../logger';
 
-/** @type {Connection | null} */
+/** @type {amqp.Connection | null} */
 let connection = null;
 
 /**
  * Connect to queue endpoint
  * @param {string} uri
- * @return {Promise<Connection>}
+ * @return {Promise<amqp.Connection>}
  */
 export async function connectMq(uri) {
     if (connection) {
@@ -38,7 +38,7 @@ export async function closeConnection() {
 
 /**
  * Create a channel
- * @param {Connection} con
+ * @param {amqp.Connection} con
  * @return {Promise<Channel>}
  */
 export async function createChannel(con) {

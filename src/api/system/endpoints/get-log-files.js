@@ -2,6 +2,11 @@ import joi from '@hapi/joi';
 import glob from 'glob';
 import path from 'path';
 
+/**
+ *
+ * Get logfiles
+ * @return {Promise<string[]>}
+ */
 function getLogFiles() {
     return new Promise((resolve, reject) => {
         glob(path.resolve(__dirname, '../../../../logs/*.log'), {}, (er, files) => {

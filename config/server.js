@@ -12,9 +12,9 @@ export default {
         /**
          * Amount of raw lighthouse reports to store in DB
          * The higher the value, the more space will be required
-         * @var {number|false}
+         * @type {null | number}
          */
-        maxRawReports: process.env.MAX_RAW_DATA_HISTORY || false,
+        maxRawReports: process.env.MAX_RAW_DATA_HISTORY || null,
 
         /**
          * Delete reports which are older than this timestamp

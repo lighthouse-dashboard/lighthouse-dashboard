@@ -1,5 +1,6 @@
 <template>
-    <div class="report-detail" v-if="report">
+    <div class="report-detail"
+            v-if="report">
         <radar-chart :series="chartData.series"
                 :labels="chartData.labels"/>
     </div>
@@ -12,7 +13,7 @@
     export default {
         components: { RadarChart },
         props: {
-            /** @type {Report} */
+            /** @type {Reports.Report} */
             report: {
                 type: Object,
                 default: null,

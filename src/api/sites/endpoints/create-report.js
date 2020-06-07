@@ -21,15 +21,9 @@ async function createReport({ params, payload, mongo, amqp }, h) {
     }
 
     try {
-        const meta = getMetaFromGithubWebhook(payload);
-        if (meta && meta.branch && meta.branch !== 'refs/heads/master') {
-            logger.debug(`Skip audit for branch ${ meta.branch }`);
-            return h.response().code(203);
-        }
-
         // await spawnNewAuditWorker(config);
         if (process.env.MESSAGE_QUEUE_URI) {
-            sendToQueue(amqp.channel, { config });
+            sendToQueue(amqp.channel, config);
         } else {
             logger.warn('No MESSAGE_QUEUE_URI found in env. Skipping queue message');
         }

@@ -9,10 +9,10 @@ import runLighthouse from './run-lighthouse';
  * Create new audit
  * @param {Db} database
  * @param {Sites.SiteConfig} config
- * @param {ReportMeta} meta
- * @return {Promise<Report>}
+ * @param {ReportMeta | {}} meta
+ * @return {Promise<Reports.Report>}
  */
-export async function createNewAuditForConfig(database, config, meta = { message: null, git_commit: null }) {
+export async function createNewAuditForConfig(database, config, meta = {}) {
     const { url, device } = config;
     const transformAuditCurry = curry(lighthouseTransformer);
     try {

@@ -3,7 +3,7 @@ import CONFIG from '../../config/dashboard';
 
 /**
  * Format label with optional webhook message
- * @param {Report} report
+ * @param {Reports.Report} report
  * @return {string}
  */
 export default function formatReportSummaryString(report) {

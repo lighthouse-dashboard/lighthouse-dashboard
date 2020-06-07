@@ -36,7 +36,7 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
 
 /**
  * Run new lighthouse audit and transform it
- * @param {AuditConfig} config
+ * @param {{runs: number, device: "desktop" | "mobile", url: string}} config
  * @param {AuditTransformer} transformer
  * @return {Report}
  */

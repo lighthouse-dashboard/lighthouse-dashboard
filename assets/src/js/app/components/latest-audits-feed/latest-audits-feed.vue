@@ -16,7 +16,6 @@
 </template>
 
 <script>
-    import CONFIG from '../../../../../../config/dashboard';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import SiteReportTile from '../site-report-tile/site-report-tile';
 
@@ -27,19 +26,17 @@
         },
 
         props: {
+            /**
+             * @type {Sites.SiteConfig}
+             */
             sites: {
                 type: Array,
                 required: true,
             },
+
             isLoading: {
                 type: Boolean,
                 default: false,
-            },
-        },
-
-        computed: {
-            cols() {
-                return CONFIG.latestAuditChart.colSize;
             },
         },
     };

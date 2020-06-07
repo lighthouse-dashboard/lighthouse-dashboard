@@ -2,15 +2,20 @@
     <div class="site-config">
         <list class="site-config--list">
             <list-item class="site-config--list-item">
-                <p class="caption">Name</p>
+                <p class="caption">
+                    Name
+                </p>
                 <p>{{ site.name }}</p>
             </list-item>
 
             <list-item class="site-config--list-item">
-                <p class="caption">URL</p>
+                <p class="caption">
+                    URL
+                </p>
                 <p>
                     <btn facets="flat"
-                            :href="site.url">{{site.name}}
+                            :href="site.url">
+                        {{site.name}}
                     </btn>
                 </p>
             </list-item>
@@ -33,13 +38,10 @@
         components: { ListItem, List, Btn },
         props: {
             /** @type {Sites.SiteConfig} */
-            site:{
+            site: {
                 type: Object,
                 required: true,
             },
-        },
-        data() {
-            return {};
         },
 
         methods: {

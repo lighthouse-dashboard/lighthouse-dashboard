@@ -2,7 +2,7 @@ import { getReportValueScoreByKey } from '../../utils/get-report-value-score-by-
 
 /**
  * Create a bar chart
- * @param {Report[]} reports
+ * @param {Reports.Report[]} reports
  * @param {string[]} labels
  * @param {string[]} exportingValues
  * @return {BarChartData}

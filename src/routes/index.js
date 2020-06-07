@@ -1,14 +1,15 @@
 import Inert from '@hapi/inert';
 import logger from '../logger';
 import glob from '../utils/glob';
-import viewRoutes from './views-routes';
 import assetRoutes from './assets-routes';
+import viewRoutes from './views-routes';
 
 /**
  * Load all routes
  * @return {Promise<hapi.Route[]>}
  */
 async function getRoutes() {
+    /** @type {hapi.Route[]} */
     const routes = [
         ...viewRoutes,
         ...assetRoutes,

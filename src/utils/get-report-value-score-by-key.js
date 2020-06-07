@@ -1,8 +1,8 @@
 /**
  * Get a ReportValue by key
- * @param {ReportValue[]} values
+ * @param {Reports.ReportValue[]} values
  * @param {string} key
- * @return {ReportValue}
+ * @return {Reports.ReportValue}
  */
 export default function getReportValueByKey(values, key) {
     return values.find(t => t.id === key) || null;
@@ -10,9 +10,9 @@ export default function getReportValueByKey(values, key) {
 
 /**
  * Get a value by key
- * @param {ReportValue[]} values
+ * @param {Reports.ReportValue[]} values
  * @param {string} key
- * @return {number}
+ * @return {number | null}
  */
 export function getReportValueScoreByKey(values, key) {
     const timing = getReportValueByKey(values, key);

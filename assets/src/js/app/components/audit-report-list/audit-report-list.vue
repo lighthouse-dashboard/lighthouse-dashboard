@@ -4,7 +4,7 @@
                 v-if='list.length === 0'>No Items</span>
         <list-item v-for="report in list"
                 :key="report._id">
-            <btn :href="`/api/reports/report/${report._id}`"
+            <btn :href="`/api/reports/report/${ report._id }`"
                     facets="flat"
                     target="_blank">
                 {{ report.createdAt | format-date }}
@@ -17,12 +17,11 @@
     import Btn from '../base/btn/btn';
     import List from '../base/list/list';
     import ListItem from '../base/list/list-item/list-item';
-    import Tile from '../tile/tile';
 
     export default {
-        components: { ListItem, List, Btn, Tile },
+        components: { ListItem, List, Btn },
         props: {
-            /** @type {Report[]} */
+            /** @type {Reports.Report[]} */
             reports: {
                 type: Array,
                 required: true,
@@ -34,8 +33,14 @@
         },
 
         computed: {
+            /**
+             * Get reports which contain raw LH data
+             * @return {Reports.Report[]}
+             */
             list() {
-                return this.reports.filter((report) => report.hasRawData).slice(0, this.max);
+                return this.reports
+                    .filter((report) => report.hasRawData)
+                    .slice(0, this.max);
             },
         },
     };

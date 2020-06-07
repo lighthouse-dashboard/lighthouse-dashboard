@@ -8,7 +8,8 @@ import { reportModelList } from '../schemas/report-model-schema';
 /**
  * Handler for latest created reports
  * @param {hapi.Request.params} params
- * @return {Promise<Report[]>}
+ * @param {MongodbDecoration} mongo
+ * @return {Report[]}
  */
 async function getReports({ params, mongo }) {
     const { id } = params;

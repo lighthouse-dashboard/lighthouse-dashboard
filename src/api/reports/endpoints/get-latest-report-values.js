@@ -5,24 +5,22 @@ import { siteIdParamModel } from '../schemas/siteid-param-model';
 
 /**
  * Handler to get latest latest created report values
- * @param {hapi.Request} request
- * @return {Promise<Report>}
+ * @param {object} params
+ * @param {MongodbDecoration} mongo
+ * @return {Promise<Reports.Report | null>}
  */
-async function getLatestReportValues(request) {
-    const { siteId } = request.params;
+async function getLatestReportValues({ params, mongo }) {
+    const { siteId } = params;
 
-    const config = getSiteConfigById(request.mongo.db, siteId);
+    const config = getSiteConfigById(mongo.db, siteId);
     if (!config) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const report = await getLatestReportBySiteId(request.mongo.db, siteId);
+    const report = await getLatestReportBySiteId(mongo.db, siteId);
 
     if (!report) {
-        return {
-            labels: [],
-            series: [],
-        };
+        return null;
     }
 
     return report;

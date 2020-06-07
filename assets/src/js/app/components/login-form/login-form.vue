@@ -43,7 +43,10 @@
         data() {
             return {
                 password: '',
+
+                /** @type {Error | null}*/
                 error: null,
+
                 isLoading: false,
             };
         },

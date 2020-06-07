@@ -6,6 +6,7 @@ import { updateSite } from '../db/sites';
  * @param {Partial<Sites.SiteConfig>} payload
  * @param {object} h
  * @param {object} params
+ * @param {MongodbDecoration} mongo
  * @return {Promise<void>}
  */
 async function updateSiteConfigHandler({ params, payload, mongo }, h) {

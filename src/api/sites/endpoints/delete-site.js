@@ -3,13 +3,14 @@ import { removeSite } from '../db/sites';
 
 /**
  * Delete site from DB
- * @param {hapi.Request} request
+ * @param {object} params
+ * @param {MongodbDecoration} mongo
  * @param {object} h
  * @return {Promise<void>}
  */
-async function deleteSite(request, h) {
-    const { id } = request.params;
-    await removeSite(request.mongo.db, id);
+async function deleteSite({ params, mongo }, h) {
+    const { id } = params;
+    await removeSite(mongo.db, id);
     return h.response().code(201);
 }
 

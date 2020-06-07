@@ -81,7 +81,9 @@
 
     export default {
         components: { CloseBtn, SiteCreateOverlay, Btn, SideNavToggle },
+
         mixins: [bemMixin('side-nav')],
+
         props: {
             title: {
                 type: String,
@@ -93,12 +95,14 @@
                 required: true,
             },
         },
+
         data() {
             return {
                 isOpen: false,
                 isCreateOverlayOpen: false,
             };
         },
+
         computed: {
             rootClasses() {
                 return [
@@ -106,6 +110,7 @@
                 ];
             },
         },
+
         methods: {
             ...mapActions('login', ['logout']),
 

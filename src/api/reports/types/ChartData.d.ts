@@ -5,5 +5,5 @@ export interface ChartData {
 
 export interface ChartDataDataSet {
     label: string;
-    date: number[];
+    data: number[];
 }

@@ -27,8 +27,7 @@ async function createReportByWebhook({ params, payload, mongo, ampq }, h) {
             return h.response().code(203);
         }
 
-        // await spawnNewAuditWorker(config);
-        sendToQueue(ampq.channel, { config, message: meta.message });
+        sendToQueue(ampq.channel, config);
         await closeConnection();
     } catch (e) {
         logger.error(e);

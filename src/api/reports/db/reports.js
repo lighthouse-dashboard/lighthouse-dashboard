@@ -7,7 +7,7 @@ import logger from '../../../logger';
  * Get a report by id
  * @param {Db} database
  * @param {string} id
- * @return {Promise<Report>}
+ * @return {Promise<Reports.Report>}
  */
 export function getReportById(database, id) {
     const collection = database.collection(AUDIT_COLLECTION);
@@ -28,7 +28,7 @@ export function getReportById(database, id) {
  * @param {Db} database
  * @param {string} id
  * @param {number} limit
- * @return {Promise<Report[]>}
+ * @return {Promise<Reports.Report[]>}
  */
 export function getReportsBySiteId(database, id, limit) {
     const collection = database.collection(AUDIT_COLLECTION);
@@ -52,7 +52,7 @@ export function getReportsBySiteId(database, id, limit) {
  * Get latest report for site
  * @param {Db} database
  * @param {string} id
- * @return {Promise<Report>}
+ * @return {Promise<Reports.Report>}
  */
 export function getLatestReportBySiteId(database, id) {
     const collection = database.collection(AUDIT_COLLECTION);
@@ -62,7 +62,7 @@ export function getLatestReportBySiteId(database, id) {
 /**
  * Save a new report in DB
  * @param {Db} database
- * @param {Report} report
+ * @param {Reports.Report} report
  * @param {object} raw - raw lighthouse audit report
  */
 export async function saveReport(database, report, raw) {
@@ -89,7 +89,7 @@ export async function clearReports(database) {
 
     const rows = await reportCollection.find(filter)
         .sort({ createdAt: -1 })
-        .skip(parseInt(config.db.maxRawReports))
+        .skip(config.db.maxRawReports ? parseInt(config.db.maxRawReports) : 0)
         .toArray();
 
     const allIds = rows.reduce((acc, row) => {

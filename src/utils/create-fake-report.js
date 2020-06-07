@@ -1,6 +1,6 @@
 /**
  * Create new faked report
- * @return {Report}
+ * @return {Reports.Report}
  */
 export default function createFakeReport() {
     return {

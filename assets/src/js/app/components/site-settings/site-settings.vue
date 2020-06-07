@@ -68,7 +68,6 @@
             },
         },
 
-
         methods: {
             ...mapActions('sites', ['getSite', 'updateSite']),
 

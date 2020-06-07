@@ -1,7 +1,7 @@
 /**
  * Validate object against schema
- * @param {joi.AnySchema} schema
- * @param {DashboardConfig} config
+ * @param {object} schema
+ * @param {object} config
  * @return {boolean}
  */
 export default function configValidator(schema, config) {

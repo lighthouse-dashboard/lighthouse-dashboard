@@ -4,14 +4,15 @@ import { addSite } from '../db/sites';
 
 /**
  * Controller to add a new site
- * @param {hapi.Request} request
+ * @param {object} payload
  * @param {object} h
+ * @param {MongodbDecoration} mongo
  * @return {Promise<Sites.SiteConfig>}
  */
-async function addSiteHandler(request, h) {
+async function addSiteHandler({ payload, mongo }, h) {
     // eslint-disable-next-line camelcase
-    const { url, name, device, is_favorite } = request.payload;
-    const config = await addSite(request.mongo.db, { url, name, device, is_favorite, order: 0, token: uuid() });
+    const { url, name, device, is_favorite } = payload;
+    const config = await addSite(mongo.db, { url, name, device, is_favorite, order: 0, token: uuid() });
 
     return h.response(config).code(201);
 }

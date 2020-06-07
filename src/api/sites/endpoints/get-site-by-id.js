@@ -5,8 +5,9 @@ import { siteConfigModel } from '../schemas/site-config-model';
 
 /**
  * Get site by id controller
- * @param {hapi.Request} request
- * @return {Promise<SiteConfig|Boom<null>>}
+ * @param {object} params
+ * @param {MongodbDecoration} mongo
+ * @return {Promise<Sites.SiteConfig|Boom<null>>}
  */
 async function getSiteById({ params, mongo }) {
     const { id } = params;

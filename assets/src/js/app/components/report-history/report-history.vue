@@ -16,7 +16,7 @@
     export default {
         components: { LoadingIndicator, Tile, LineChart },
         props: {
-            /** @type {Report[]} */
+            /** @type {Reports.Report[]} */
             reports: {
                 type: Array,
                 required: true,
