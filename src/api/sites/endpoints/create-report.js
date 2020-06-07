@@ -20,14 +20,7 @@ async function createReport({ params, mongo, amqp }, h) {
     }
 
     try {
-        // await spawnNewAuditWorker(config);
-        if (process.env.MESSAGE_QUEUE_URI) {
-            sendToQueue(amqp.channel, config);
-        } else {
-            logger.warn('No MESSAGE_QUEUE_URI found in env. Skipping queue message');
-        }
-
-        await setScheduledAuditForSite(mongo.db, config, 1);
+        await setScheduledAuditForSite(mongo.db, config, true);
         await closeConnection();
     } catch (e) {
         logger.error(e);

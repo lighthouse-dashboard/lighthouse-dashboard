@@ -1,6 +1,6 @@
 <template>
     <tile class='site-overview'>
-        <scheduled-job-indicator v-if="scheduled_jobs > 0"/>
+        <scheduled-job-indicator v-if="is_scheduled"/>
         <div class='site-overview--title'
                 slot="title">
             <btn :to="{name: 'project.detail', params: {id}}"
@@ -71,9 +71,9 @@
                 required: true,
             },
 
-            scheduled_jobs: {
-                type: Number,
-                default: 0,
+            is_scheduled: {
+                type: Boolean,
+                default: false,
             },
 
             /** @type {Reports.Report[]} */

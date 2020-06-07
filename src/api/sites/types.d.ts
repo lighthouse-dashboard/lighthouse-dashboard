@@ -1,5 +1,3 @@
-import { Report } from '../reports/types/Report';
-
 declare namespace Sites {
     export interface SiteConfig {
         id: string;
@@ -10,11 +8,11 @@ declare namespace Sites {
         is_favorite: boolean;
         token: string;
         last_audit: string | null;
-        scheduled_jobs?: number;
+        is_scheduled?: boolean;
     }
 
     export interface SiteWithReport {
         site: SiteConfig;
-        report: Report;
+        report: Reports.Report;
     }
 }

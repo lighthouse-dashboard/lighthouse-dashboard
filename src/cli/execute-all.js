@@ -21,7 +21,7 @@ export default async function executeAll(useQueue) {
         const config = sites[i];
         if (useQueue) {
             await sendToQueue(channel, config, 'CLI - all');
-            await setScheduledAuditForSite(database, config, 1);
+            await setScheduledAuditForSite(database, config, true);
         } else {
             await createNewAuditForConfig(database, config, { message: 'CLI - all' });
         }

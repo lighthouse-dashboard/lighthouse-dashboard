@@ -6,9 +6,9 @@
         </h4>
 
         <site-create-overlay :config='site'
+                v-if='site && isEdit'
                 @updated='reload'
-                @close='toggleEdit'
-                v-if='site && isEdit'/>
+                @close='toggleEdit'/>
 
         <notification :facets="['success']"
                 v-if="hasScheduledJobs">
@@ -70,8 +70,9 @@
 
                 <tile title='Tools'
                         class='project--sidebar-section'>
-                    <site-actions-list v-if='site'
-                            :url='site.url'/>
+                    <site-actions-list
+                            :url='site.url'
+                            v-if='site'/>
                 </tile>
 
                 <tile title='HTML Reports'
@@ -153,7 +154,7 @@
             },
 
             hasScheduledJobs() {
-                return (this.site && this.site.scheduled_jobs > 0) || this.isAuditScheduled;
+                return (this.site && this.site.is_scheduled) || this.isAuditScheduled;
             },
 
             auditBtnFacet() {

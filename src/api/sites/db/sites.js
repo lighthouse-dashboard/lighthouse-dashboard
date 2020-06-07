@@ -30,7 +30,10 @@ export function findSites(database, find, sort = {}, limit = 100) {
 
                 delete data._id;
 
-                return resolve(data);
+                return resolve(data.map(d => {
+                    delete d.scheduled_jobs;
+                    return d;
+                }));
             });
     });
 }
@@ -137,11 +140,19 @@ export async function getSiteConfigByToken(database, token) {
  * Update the amount of scheduled jobs
  * @param {Db} database
  * @param {Sites.SiteConfig} config
- * @param {number} increase
+ * @param {boolean} isScheduled
  */
-export async function setScheduledAuditForSite(database, config, increase) {
+export async function setScheduledAuditForSite(database, config, isScheduled) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    const scheduledJobs = config.scheduled_jobs ? config.scheduled_jobs + increase : increase;
-    logger.debug(`Update scheduled_jobs of ${ config.name } to ${ scheduledJobs }`);
-    await siteCollection.updateOne({ id: config.id }, { $set: { scheduled_jobs: scheduledJobs < 0 ? 0 : scheduledJobs } });
+    logger.debug(`Update scheduled_jobs of ${ config.name } to ${ isScheduled }`);
+    await siteCollection.updateOne({ id: config.id }, { $set: { is_scheduled: isScheduled } });
+}
+
+/**
+ * Get list of scheduled sites
+ * @param {Db} database
+ * @return {Promise<Sites.SiteConfig[]>}
+ */
+export function getScheduledSites(database) {
+    return findSites(database, { is_scheduled: true });
 }

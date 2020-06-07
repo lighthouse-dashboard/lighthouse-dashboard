@@ -5,7 +5,6 @@ import blipp from 'blipp';
 import HapiSwagger from 'hapi-swagger';
 
 import { name, version } from '../../../package.json';
-import * as Amqp from './amqp-plugin';
 import * as MongoDb from './mongodb-plugin/mongodb-plugin';
 
 export default {
@@ -44,12 +43,6 @@ export default {
                 settings: {
                     poolSize: 10,
                 },
-            },
-        },
-        {
-            plugin: Amqp,
-            options: {
-                uri: process.env.MESSAGE_QUEUE_URI,
             },
         },
     ],

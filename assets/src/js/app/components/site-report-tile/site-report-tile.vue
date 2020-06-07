@@ -1,6 +1,6 @@
 <template>
     <tile class="site-report-tile">
-        <scheduled-job-indicator v-if="site && site.scheduled_jobs > 0"/>
+        <scheduled-job-indicator v-if="site && site.is_scheduled"/>
         <template
                 slot="title">
             <btn facets="flat"

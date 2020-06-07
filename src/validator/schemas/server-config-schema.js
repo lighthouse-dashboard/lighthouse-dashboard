@@ -13,7 +13,7 @@ export default joi.object({
         maxRawReports: joi
             .number()
             .min(1)
-            .allow(false)
+            .allow(null)
             .required(),
 
         maxReportsAge: joi

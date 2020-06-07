@@ -1,71 +1,31 @@
-import { setScheduledAuditForSite } from '../api/sites/db/sites';
+import { getScheduledSites, setScheduledAuditForSite } from '../api/sites/db/sites';
 import connectDatabase from '../database/connect-database';
 import logger from '../logger';
-import { closeConnection, connectMq, createChannel } from '../queue';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
-
-const parseMessage = (message) => JSON.parse(message.content.toString());
-
-/**
- * Process received message
- * @param {Channel}channel
- * @param {object} msg
- */
-async function processMessage(channel, msg) {
-    try {
-        const { config, message } = parseMessage(msg);
-        logger.debug(`Received message ${ msg.content.toString() }`);
-        await executeAudit(config, message);
-        await channel.ack(msg);
-        await checkForNewMessagesInQueue(channel);
-    } catch (e) {
-        logger.error(e.message);
-    }
-}
 
 /**
  * Start worker and connect to mq
- * @param {string} uri
- * @param {string} queue
+ * @param {Db} database
  * @return {Promise<void>}
  */
-export async function consumeQueue(uri, queue) {
-    const connection = await connectMq(uri);
-    const channel = await createChannel(connection);
-    await channel.assertQueue(queue, { durable: false });
+export async function consumeQueue(database) {
+    const sites = await getScheduledSites(database);
+    logger.info(`Found ${ sites.length } scheduled jobs`);
 
-    logger.info(`Worker ready for consuming queue ${ queue }`);
-
-    await checkForNewMessagesInQueue(channel);
-    await closeConnection();
-}
-
-/**
- * Check for new messages and execute them
- * @param {Channel} channel
- * @return {Promise<void>}
- */
-async function checkForNewMessagesInQueue(channel) {
-    logger.debug(`Check remote queue`);
-    const message = await channel.get('audits');
-    if (message) {
-        logger.debug(`Found message in queue`);
-        await processMessage(channel, message);
-    } else {
-        logger.debug(`No messages in queue`);
+    for (let i = 0; i < sites.length; i++) {
+        await executeAudit(sites[i]);
     }
 }
 
 /**
  * Callback when a message is received
  * @param {Sites.SiteConfig} data;
- * @param {string | null} message;
  * @return {Promise<void>}
  */
-async function executeAudit(data, message = null) {
+async function executeAudit(data) {
     const { database } = await connectDatabase();
-    const report = await createNewAuditForConfig(database, data, { message, git_commit: null });
-    await setScheduledAuditForSite(database, data, -1);
+    const report = await createNewAuditForConfig(database, data);
+    await setScheduledAuditForSite(database, data, false);
     if (!report) {
         logger.warn(`No report for ${ data.url }`);
         return;

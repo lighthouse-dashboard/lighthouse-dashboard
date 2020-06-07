@@ -24,11 +24,11 @@ async function boot() {
     }
 
     logger.info(`Start audit worker`);
-    await consumeQueue(process.env.MESSAGE_QUEUE_URI, 'audits');
+    await consumeQueue(database);
     await setWorkerLastRunDate(database, new Date());
     await setWorkerIsRunning(database, false);
     logger.debug(`Worker complete`);
-    client.close();
+    await client.close();
 }
 
 boot();
