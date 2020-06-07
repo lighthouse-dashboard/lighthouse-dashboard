@@ -1,4 +1,5 @@
 import { compose } from 'lodash/fp';
+import withHealth from '../containers/with-health';
 import withReports from '../containers/with-reports';
 import withSiteInfo from '../containers/with-site-info';
 import withSites from '../containers/with-sites/with-sites';
@@ -48,7 +49,7 @@ export default [
             {
                 path: 'system',
                 name: 'system',
-                component: withSystemInfo(System),
+                component: compose(withSystemInfo, withHealth)(System),
                 meta: { requiresAuth: true },
             },
         ],

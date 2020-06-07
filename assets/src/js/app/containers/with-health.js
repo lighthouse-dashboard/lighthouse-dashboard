@@ -1,20 +1,20 @@
 import Vue from 'vue';
-import { mapActions } from 'vuex';
+import { fetchHealth } from '../api/health-api';
 
-const withSystemInfo = (component) => {
-    return Vue.component('WithSystemInfo', {
+const withHealth = (component) => {
+    return Vue.component('WithHealth', {
         data() {
             return {
-                info: null,
+                health: null,
             };
         },
 
         methods: {
-            ...mapActions('system', ['fetchInfo']),
+
             loadData() {
-                return this.fetchInfo()
-                    .then((info) => {
-                        this.info = info;
+                return fetchHealth()
+                    .then((health) => {
+                        this.health = health;
                     })
                     .finally(() => {
                         this.isLoading = false;
@@ -28,7 +28,7 @@ const withSystemInfo = (component) => {
 
         render(createElement) {
             const props = {
-                info: this.info,
+                health: this.health,
             };
 
             return createElement(component, {
@@ -45,4 +45,4 @@ const withSystemInfo = (component) => {
     });
 };
 
-export default withSystemInfo;
+export default withHealth;

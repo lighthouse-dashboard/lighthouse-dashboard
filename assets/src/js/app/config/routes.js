@@ -12,4 +12,5 @@ export const CREATE_SITE_URL = `/api/sites`;
 export const AUTH_URL = `/api/auth`;
 export const REMOVE_SITE_URL = (id) => `/api/sites/${ id }`;
 export const GET_SYSTEM_INFO_URL = `/api/system`;
+export const GET_HEALTH_API = `/api/health`;
 export const POST_WEBHOOK_URL = (token) => `${ window.location.protocol }//${ window.location.host }/api/webhook/${ token }`;

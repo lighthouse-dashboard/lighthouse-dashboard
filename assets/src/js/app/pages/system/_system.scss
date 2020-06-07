@@ -12,6 +12,28 @@
             display: grid;
             grid-template-areas: '. content .';
             grid-template-columns: 2fr 8fr 2fr;
+
+            @include mq('<=md') {
+                grid-template-areas: 'content';
+                grid-template-columns: 12fr;
+            }
+        }
+
+        .system--section {
+            margin-bottom: 24px;
+        }
+
+        .system--content {
+            display: grid;
+            grid-template-areas: 'tile tile';
+            grid-template-columns: repeat(2, 6fr);
+            grid-column-gap: var(--root-spacing);
+            grid-row-gap: var(--root-spacing);
+
+            @include mq('<=md') {
+                grid-template-areas: 'tile';
+                grid-template-columns: 12fr;
+            }
         }
 
         .system--row {
@@ -20,6 +42,7 @@
             grid-template-columns: 8fr 4fr;
             align-content: center;
             padding: var(--system--row-vert-bezel) var(--system--row-horiz-bezel);
+
 
             &:nth-child(even) {
                 background-color: var(--system--row-background);

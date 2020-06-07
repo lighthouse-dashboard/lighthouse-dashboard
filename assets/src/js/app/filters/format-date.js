@@ -3,7 +3,7 @@ import { dateFormat } from '../../../../../config/dashboard';
 
 /**
  * Format date
- * @param {string|null} value
+ * @param {string|null|date} value
  * @return {string|null}
  */
 export default function formatDate(value) {
