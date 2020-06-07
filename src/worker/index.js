@@ -1,6 +1,6 @@
 import config from '../../config/server';
 import { clearReports, removeOldReports } from '../api/reports/db/reports';
-import { setWorkerLastRunDate } from '../api/system/db/system';
+import { setWorkerIsRunning, setWorkerLastRunDate } from '../api/system/db/system';
 import connectDatabase from '../database/connect-database';
 import logger from '../logger';
 import { consumeQueue } from './handler';
@@ -13,6 +13,7 @@ require('dotenv').config();
  */
 async function boot() {
     const { database } = await connectDatabase();
+    await setWorkerIsRunning(database, true);
 
     if (config.db.maxReportsAge !== false) {
         await removeOldReports(database);
@@ -25,6 +26,7 @@ async function boot() {
     logger.info(`Start audit worker`);
     await consumeQueue(process.env.MESSAGE_QUEUE_URI, 'audits');
     await setWorkerLastRunDate(database, new Date());
+    await setWorkerIsRunning(database, false);
 }
 
 boot();

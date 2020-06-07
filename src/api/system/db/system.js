@@ -37,3 +37,13 @@ const updateSystemObject = async (database, delta) => {
 export const setWorkerLastRunDate = async (database, date) => {
     await updateSystemObject(database, { worker_last_run: date });
 };
+
+/**
+ * Set status of running worker
+ * @param {Db} database
+ * @param {boolean}isRunning
+ * @return {Promise<void>}
+ */
+export const setWorkerIsRunning = async (database, isRunning) => {
+    await updateSystemObject(database, { worker_is_running: isRunning });
+};

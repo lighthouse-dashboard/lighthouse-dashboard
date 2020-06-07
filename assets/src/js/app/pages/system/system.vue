@@ -4,12 +4,16 @@
         <loading-indicator v-if="isLoading"/>
         <div class="system--content"
                 v-else>
-
             <tile title="System"
                     class="system--section">
                 <div class="system--row">
                     <span class="u-reset">Worker last run</span>
                     <span class="u-reset">{{ formattedDate }}</span>
+                </div>
+
+                <div class="system--row">
+                    <span class="u-reset">Worker is running</span>
+                    <span class="u-reset">{{ info.worker_is_running }}</span>
                 </div>
 
                 <div class="system--row">
