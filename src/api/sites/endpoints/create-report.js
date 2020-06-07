@@ -2,7 +2,6 @@ import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import logger from '../../../logger';
 import { closeConnection } from '../../../queue';
-import sendToQueue from '../../../queue/send-to-queue';
 import { getSiteConfigById, setScheduledAuditForSite } from '../db/sites';
 
 /**
@@ -11,7 +10,7 @@ import { getSiteConfigById, setScheduledAuditForSite } from '../db/sites';
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-async function createReport({ params, mongo, amqp }, h) {
+async function createReport({ params, mongo }, h) {
     const { id } = params;
 
     const config = await getSiteConfigById(mongo.db, id);
