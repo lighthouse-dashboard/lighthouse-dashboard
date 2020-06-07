@@ -1,4 +1,5 @@
 import { SYSTEM_COLLECTION } from '../../../config/db';
+import logger from '../../../logger';
 
 const SYSTEM_INFO_ENTRY_ID = 1;
 /**
@@ -35,6 +36,7 @@ const updateSystemObject = async (database, delta) => {
  * @return {Promise<void>}
  */
 export const setWorkerLastRunDate = async (database, date) => {
+    logger.debug(`Set worker_last_run to ${ date.toISOString() }`);
     await updateSystemObject(database, { worker_last_run: date });
 };
 
@@ -45,5 +47,6 @@ export const setWorkerLastRunDate = async (database, date) => {
  * @return {Promise<void>}
  */
 export const setWorkerIsRunning = async (database, isRunning) => {
+    logger.debug(`Set worker_is_running to ${ isRunning }`);
     await updateSystemObject(database, { worker_is_running: isRunning });
 };
