@@ -11,7 +11,7 @@
 
             <div class="system--row">
                 <span class="u-reset">Worker last run</span>
-                <span class="u-reset">{{ info.worker_last_run | format-date }}</span>
+                <span class="u-reset">{{ formattedDate }}</span>
             </div>
 
             <div class="system--row">
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+    import { formatDistanceToNow } from 'date-fns';
     import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
 
     export default {
@@ -39,10 +40,19 @@
                 default: false,
             },
 
-            /** @type {System.Info} */
+            /** @type {SystemAPI.Info} */
             info: {
                 type: Object,
                 required: true,
+            },
+        },
+        computed: {
+            formattedDate() {
+                if (!this.info) {
+                    return null;
+                }
+
+                return formatDistanceToNow(new Date(this.info.worker_last_run), { addSuffix: true });
             },
         },
     };

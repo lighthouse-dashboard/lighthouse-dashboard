@@ -14,16 +14,26 @@ export const getSystemObject = async (database) => {
 };
 
 /**
- *
+ * Update the system info object in DB
  * @param {Db} database
- * @param {Database} date
+ * @param {Partial<System.Info>} delta
  * @return {Promise<void>}
  */
-export const updateSystemObject = async (database, date) => {
+const updateSystemObject = async (database, delta) => {
     const collection = database.collection(SYSTEM_COLLECTION);
     await collection.updateOne(
         { _id: SYSTEM_INFO_ENTRY_ID },
-        { $set: { worker_last_run: date } },
+        { $set: delta },
         { upsert: true }
     );
+};
+
+/**
+ * Update the timestamp of the worker last run info
+ * @param {Db} database
+ * @param {Date} date
+ * @return {Promise<void>}
+ */
+export const setWorkerLastRunDate = async (database, date) => {
+    await updateSystemObject(database, { worker_last_run: date });
 };
