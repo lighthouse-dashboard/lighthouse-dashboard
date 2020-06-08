@@ -1,8 +1,6 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import logger from '../../../logger';
-import { closeConnection } from '../../../queue';
-import sendToQueue from '../../../queue/send-to-queue';
 import { getMetaFromGithubWebhook } from '../../../utils/get-meta-from-commit';
 import { getSiteConfigByToken } from '../db/sites';
 
@@ -27,8 +25,7 @@ async function createReportByWebhook({ params, payload, mongo, ampq }, h) {
             return h.response().code(203);
         }
 
-        sendToQueue(ampq.channel, config);
-        await closeConnection();
+        //sendToQueue(ampq.channel, config);
     } catch (e) {
         logger.error(e);
         return Boom.boomify(e);

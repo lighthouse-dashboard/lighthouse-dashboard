@@ -1,8 +1,6 @@
 import { getAllSites, setScheduledAuditForSite } from '../api/sites/db/sites';
 import connectDatabase from '../database/connect-database';
 import logger from '../logger';
-import queue, { closeConnection } from '../queue';
-import sendToQueue from '../queue/send-to-queue';
 import { createNewAuditForConfig } from '../utils/create-new-audit';
 
 /**
@@ -15,18 +13,14 @@ export default async function executeAll(useQueue) {
     const { database, client } = await connectDatabase();
 
     const sites = await getAllSites(database);
-    const channel = await queue();
 
     for (let i = 0; i < sites.length; i++) {
         const config = sites[i];
         if (useQueue) {
-            await sendToQueue(channel, config, 'CLI - all');
             await setScheduledAuditForSite(database, config, true);
         } else {
             await createNewAuditForConfig(database, config, { message: 'CLI - all' });
         }
     }
-    await channel.close();
     await client.close();
-    await closeConnection();
 }

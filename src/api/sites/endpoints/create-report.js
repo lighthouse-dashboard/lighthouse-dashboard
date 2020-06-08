@@ -1,7 +1,6 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import logger from '../../../logger';
-import { closeConnection } from '../../../queue';
 import { getSiteConfigById, setScheduledAuditForSite } from '../db/sites';
 
 /**
@@ -20,7 +19,6 @@ async function createReport({ params, mongo }, h) {
 
     try {
         await setScheduledAuditForSite(mongo.db, config, true);
-        await closeConnection();
     } catch (e) {
         logger.error(e);
         return Boom.boomify(e);
