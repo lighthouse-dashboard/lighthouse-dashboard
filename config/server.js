@@ -12,7 +12,7 @@ export default {
         /**
          * Amount of raw lighthouse reports to store in DB
          * The higher the value, the more space will be required
-         * @type {null | number}
+         * @type {null | string}
          */
         maxRawReports: process.env.MAX_RAW_DATA_HISTORY || null,
 

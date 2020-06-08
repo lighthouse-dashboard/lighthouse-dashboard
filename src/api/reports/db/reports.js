@@ -89,7 +89,7 @@ export async function clearReports(database) {
 
     const rows = await reportCollection.find(filter)
         .sort({ createdAt: -1 })
-        .skip(config.db.maxRawReports ? parseInt(config.db.maxRawReports) : 0)
+        .skip(config.db.maxRawReports ? parseInt(config.db.maxRawReports) : 1000)
         .toArray();
 
     const allIds = rows.reduce((acc, row) => {
