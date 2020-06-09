@@ -45,6 +45,25 @@ export const DEFAULT_CHART = {
             show: false,
         },
     },
+    responsive: [
+
+        {
+            breakpoint: 400,
+            options: {
+                chart: {
+                    height: 300,
+                },
+            },
+        },
+        {
+            breakpoint: 1000,
+            options: {
+                chart: {
+                    height: 200,
+                },
+            },
+        },
+    ],
 };
 
 export const GAUGE_CHART = {

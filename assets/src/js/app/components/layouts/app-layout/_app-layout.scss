@@ -13,11 +13,6 @@
         & {
             display: flex;
             min-height: 100%;
-
-            @include mq('<=lg') {
-                display: flex;
-                width: 100%;
-            }
         }
 
         .app-layout--content-wrapper {
@@ -29,18 +24,6 @@
             max-width: 1440px;
             margin: 0 auto;
             padding: var(--app-layout--header-height) var(--app-layout--edge-gutter);
-
-            @include mq('xl') {
-                max-width: 1080px;
-            }
-
-            @include mq('lg') {
-                max-width: 980px;
-            }
-
-            @include mq('<=md') {
-                max-width: 760px;
-            }
         }
     }
 
