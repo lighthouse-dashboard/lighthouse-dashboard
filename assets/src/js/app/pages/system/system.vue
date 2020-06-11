@@ -6,6 +6,21 @@
             <tile title="System"
                     class="system--section">
                 <div class="system--row">
+                    <span class="u-reset">Version</span>
+                    <span class="u-reset">v{{ version }}</span>
+                </div>
+
+
+                <div class="system--row">
+                    <span class="u-reset">Uptime</span>
+                    <span class="u-reset"
+                            v-if="info">{{ formattedUptime }}</span>
+                </div>
+            </tile>
+
+            <tile title="Worker"
+                    class="system--section">
+                <div class="system--row">
                     <span class="u-reset">Worker last run</span>
                     <span class="u-reset">{{ formattedDate }}</span>
                 </div>
@@ -14,12 +29,6 @@
                     <span class="u-reset">Worker is running</span>
                     <span class="u-reset"
                             v-if="info">{{ info.worker_is_running }}</span>
-                </div>
-
-                <div class="system--row">
-                    <span class="u-reset">Uptime</span>
-                    <span class="u-reset"
-                            v-if="info">{{ formattedUptime }}</span>
                 </div>
             </tile>
 
@@ -51,6 +60,7 @@
 
 <script>
     import { formatDistanceToNow, subSeconds } from 'date-fns';
+    import { version } from '../../../../../../package.json';
     import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
     import Tile from '../../components/tile/tile';
     import formatRelativeDate from '../../filters/format-relative-date';
@@ -74,6 +84,13 @@
                 required: true,
             },
         },
+
+        data() {
+            return {
+                version
+            };
+        },
+
         computed: {
             formattedDate() {
                 if (!this.info) {
