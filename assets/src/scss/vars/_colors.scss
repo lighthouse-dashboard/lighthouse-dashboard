@@ -1,20 +1,20 @@
 :root {
-    --color-mono-white: #ffffff;
-    --color-mono-black: #333333;
+    --color-mono-white: rgba(255, 255, 255, 0.8);
+    --color-mono-black: rgba(51, 51, 51, 0.8);
     --color-mono-gray: #6c6c6c;
     --color-mono-light-gray: #c1c1c1;
 
-    --root--background-color: rgb(248, 251, 253);
-    --root--text-color: #333333;
+    --color--medium-emphasis: rgba(0, 0, 0, 0.6);
+    --color--high-emphasis: rgba(0, 0, 0, 0.8);
+    --color--disabled: rgba(0, 0, 0, 0.4);
 
-    --root-color--primary: #0077b6;
-    --root-color--primary-light: rgba(0, 119, 182, 0.16);
-    --root-color--primary-dark: #004763;
-    --root-color--divider: #114b5f;
+    --root--text-color: var(--color-mono-black);
+    --root-color--divider: var(--color-mono-black);
+    --root--background-color: #ebf1f4;
 
-    --root-color--tile-background: rgba(111, 139, 156, 0.1);
-    --root-color--app-content-background: var(--root--background-color);
-
+    --root-color--primary: #5c9ca3;
+    --root-color--primary-light: #8CB9BE;
+    --root-color--primary-dark: #497C82;
 
     // Signal
     --root-color--signal-error: #f66363;
@@ -25,18 +25,23 @@
     --root-color--error-text: var(--root-color--signal-error);
 
     //Buttons
-    --root-color--button-text-primary: #ffffff;
+    --root-color--primary-background: var(--root-color--primary);
+    --root-color--primary-text: var(--color-mono-white);
 
-    --root-color--button-danger-text: var(--root-color--signal-error);
-    --root-color--button-danger-background: var(--root-color--signal-error);
+    --root-color--secondary-color: var(--root-color--primary-light);
+    --root-color--secondary-text: var(--color-mono-white);
 
-    --root-color--button-text-flat: var(--root-color--primary);
+    --root-color--button-text-primary: var(--color--medium-emphasis);
+
+    --root-color--button-danger-color: var(--root-color--signal-error);
+    --root-color--button-danger-text-color: var(--color-mono-white);
+
+    --root-color--button-flat-color: var(--root-color--primary-light);
+    --root-color--button-flat-text-color: var(--color-mono-white);
     --root-color--button-disabled-background: var(--color-mono-light-gray);
-    --root-color--button-background-primary: var(--root-color--primary);
-    --root-color--button-background-accent-primary: var(--root-color--button-text-primary);
-    --root-color--button-text-accent-primary: var(--root-color--button-background-primary);
 
-    --root-color--button-text-secondarry: var(--root-color--primary);
+    // Tiles
+    --root-color--tile-background: rgba(255, 255, 255, 0.2);
 
     // Inputs
     --root-color--input-active-background: #ffffff;
@@ -44,19 +49,18 @@
     --root-color--input-disabled-background: var(--color-mono-light-gray);
 
     // Links
-    --root-color--link-text-color: var(--root-color--primary);
-    --root-color--link-focus-text-color: #ffffff;
-    --root-color--link-hover-background: var(--root-color--primary);
+    --root-color--link-text-color: var(--color--medium-emphasis);
+    --root-color--link-focus-text-color: var(--color--high-emphasis);
 
     // Site Overview
     --root-color--site-overview-background: var(--root-color--tile-background);
 
     // Navigation
-    --root-color--navigation-background: #003249;
+    --root-color--navigation-background: #122736;
     --root-color--navigation--color-text: var(--color-mono-white);
     --root-color-navigation--item-hover-background: var(--root-color--primary-dark);
     --root-color-navigation--item-hover-text: var(--color-mono-white);
-    --root-color-navigation--item-active-background: var(--root-color--app-content-background);
+    --root-color-navigation--item-active-background: var(--root--background-color);
 
     --root-color--navigation-mobile-toggle-background: #ffffff;
 

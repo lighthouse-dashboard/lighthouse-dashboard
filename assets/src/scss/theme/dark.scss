@@ -1,39 +1,3 @@
 :root {
-    --root--background-color: rgb(35, 40, 40);
-    --root--text-color: #e0e0e0;
 
-    --root-color--primary: #ce4db4;
-    --root-color--primary-light: rgb(255, 208, 244);
-    --root-color--primary-dark: #712862;
-    --root-color--divider: #4b424a;
-
-    --root-color--tile-background: rgba(59, 79, 67, 0.1);
-    --root-color--app-content-background: var(--root--background-color);
-
-    //Buttons
-    --root-color--button-text-primary: #ffffff;
-
-    --root-color--button-danger-text: var(--root-color--signal-error);
-    --root-color--button-danger-background: var(--root-color--signal-error);
-
-    --root-color--button-text-flat: var(--root-color--primary);
-    --root-color--button-disabled-background: var(--color-mono-light-gray);
-    --root-color--button-background-primary: var(--root-color--primary);
-    --root-color--button-background-accent-primary: var(--root-color--button-text-primary);
-    --root-color--button-text-accent-primary: var(--root-color--button-background-primary);
-
-    --root-color--button-text-secondarry: var(--root-color--primary);
-
-    // Navigation
-    --root-color--navigation-background: #030707;
-    --root-color--navigation--color-text: var(--color-mono-white);
-    --root-color--navigation--color-text-active: var(--color-mono-white);
-    --root-color-navigation--item-hover-background: var(--root-color--primary-dark);
-    --root-color-navigation--item-hover-text: var(--color-mono-white);
-    --root-color-navigation--item-active-background: var(--root-color--app-content-background);
-
-    --root-color--navigation-mobile-toggle-background: #ffffff;
-
-
-    //--root-color--app-content-background: #333;
 }

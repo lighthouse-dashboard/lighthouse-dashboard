@@ -48,24 +48,21 @@
                 </tile>
 
                 <div class='project--sidebar-section'>
-                    <btn :facets="['secondary', 'full-width']"
-                            @click="toggleEdit">Edit
-                    </btn>
-                </div>
-
-                <div class='project--sidebar-section'>
-                    <btn :facets="['secondary', 'full-width', ...auditBtnFacet]"
-                            @click="runAudit">
-                        <template v-if="hasScheduledJobs">Audits already scheduled</template>
-                        <template v-else>New audit</template>
-                    </btn>
-                </div>
-                <div class='project--sidebar-section'>
-                    <confirm-button :facets='["danger", "full-width"]'
-                            confirm="Click to confirm"
-                            @click='onDeleteClicked'>
-                        Delete
-                    </confirm-button>
+                    <tile title="Actions">
+                        <btn :facets="['secondary', 'full-width']"
+                                @click="toggleEdit">Edit
+                        </btn>
+                        <btn :facets="['secondary', 'full-width', ...auditBtnFacet]"
+                                @click="runAudit">
+                            <template v-if="hasScheduledJobs">Audits already scheduled</template>
+                            <template v-else>New audit</template>
+                        </btn>
+                        <confirm-button :facets='["danger", "full-width"]'
+                                confirm="Click to confirm"
+                                @click='onDeleteClicked'>
+                            Delete
+                        </confirm-button>
+                    </tile>
                 </div>
 
                 <tile title='Tools'

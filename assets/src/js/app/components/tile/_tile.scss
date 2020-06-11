@@ -11,6 +11,7 @@
             border-radius: var(--tile--border-radius);
             background-color: var(--tile--background-color);
             padding: var(--tile--root-padding);
+            box-shadow: var(--root-shadow--1);
         }
 
         .tile--title {

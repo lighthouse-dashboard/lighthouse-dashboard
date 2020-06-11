@@ -3,23 +3,22 @@
         <list-item class="site-actions-list--list-item"
                 v-for="entry in menuEntries"
                 :key="entry.name">
-            <btn target="_blank"
-                    facets="flat"
+            <a target="_blank"
+                    class="link"
                     :href="entry.link">
                 {{ entry.name }}
-            </btn>
+            </a>
         </list-item>
     </list>
 </template>
 
 <script>
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
-    import Btn from '../base/btn/btn';
     import List from '../base/list/list';
     import ListItem from '../base/list/list-item/list-item';
 
     export default {
-        components: { ListItem, List, Btn },
+        components: { ListItem, List },
         props: {
             url: {
                 type: String,

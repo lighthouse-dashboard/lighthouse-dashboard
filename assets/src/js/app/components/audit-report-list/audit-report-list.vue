@@ -1,25 +1,24 @@
 <template>
     <list class="audit-report-list">
-        <span class='caption'
-                v-if='list.length === 0'>No Items</span>
+        <span class="caption"
+                v-if="list.length === 0">No Items</span>
         <list-item v-for="report in list"
                 :key="report._id">
-            <btn :href="`/api/reports/report/${ report._id }`"
-                    facets="flat"
-                    target="_blank">
+            <a class="link"
+                    target="_blank"
+                    :href="`/api/reports/report/${ report._id }`">
                 {{ report.createdAt | format-date }}
-            </btn>
+            </a>
         </list-item>
     </list>
 </template>
 
 <script>
-    import Btn from '../base/btn/btn';
     import List from '../base/list/list';
     import ListItem from '../base/list/list-item/list-item';
 
     export default {
-        components: { ListItem, List, Btn },
+        components: { ListItem, List },
         props: {
             /** @type {Reports.Report[]} */
             reports: {

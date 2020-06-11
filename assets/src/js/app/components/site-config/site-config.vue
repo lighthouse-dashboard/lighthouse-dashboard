@@ -13,10 +13,10 @@
                     URL
                 </p>
                 <p>
-                    <btn facets="flat"
+                    <a class="link"
                             :href="site.url">
                         {{site.name}}
-                    </btn>
+                    </a>
                 </p>
             </list-item>
 
