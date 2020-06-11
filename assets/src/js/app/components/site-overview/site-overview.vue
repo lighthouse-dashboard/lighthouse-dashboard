@@ -31,7 +31,6 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
     import reportsToLineChart from '../../../../../../src/transformer/reports-to-line-chart';
     import bemMixin from '../../mixins/bem-mixin';
@@ -124,27 +123,8 @@
             },
         },
         methods: {
-            ...mapActions('reports', ['fetchReportsForSite', 'launchAuditForSite']),
-            ...mapActions('sites', ['deleteSite']),
-
-            onSettingsClosed() {
-                this.showSettings = false;
-            },
-
             loadData() {
                 this.isLoading = true;
-            },
-
-            async removePage() {
-                await this.deleteSite({ id: this.id });
-            },
-
-            openSettings() {
-                this.showSettings = !this.showSettings;
-            },
-
-            openInfo() {
-                this.showInfo = !this.showInfo;
             },
         },
     };

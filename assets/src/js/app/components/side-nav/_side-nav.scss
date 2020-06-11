@@ -1,5 +1,6 @@
 .side-nav {
     // Vars
+    --side-nav--width: 240px;
     --side-nav--border-radius: 20px;
     --side-nav--color-text: var(--root-color--navigation--color-text);
     --side-nav--color-background: var(--root-color--navigation-background);
@@ -28,6 +29,7 @@
             display: flex;
             background-color: var(--side-nav--color-background);
             height: 100vh;
+            width: var(--side-nav--width);
             flex-direction: column;
             transform: translate3d(0, 0, 0);
 

@@ -37,12 +37,11 @@ export default function reportsToLineChart(reports) {
  * @return {ChartDataDataSet}
  */
 function getLineDataSetForKey(reports, key) {
-    /** @type {ChartDataDataSet} */
     const result = reports.reduce((dataSet, report) => {
         dataSet.data.push(getTimingValueForKey(report.values, key));
         return dataSet;
     }, {
-        label: key,
+        name: key,
         data: [],
     });
 

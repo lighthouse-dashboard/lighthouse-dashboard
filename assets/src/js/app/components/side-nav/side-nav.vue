@@ -14,9 +14,6 @@
                 <div class="side-nav--header">
                     <img class="side-nav--logo"
                             src="/static/img/logo_small.png"/>
-                    <p class="side-nav--title">
-                        {{ title }} <small>v{{ version }}</small>
-                    </p>
                     <close-btn class='side-nav--close-btn'
                             @click='toggleDrawer'/>
                 </div>
