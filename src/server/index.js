@@ -75,6 +75,7 @@ export default async function boot() {
 
     process.on('SIGTERM', () => {
         logger.info('SIGTERM server');
+        process.exit(0);
     });
 
     logger.info(`Starting server`);
