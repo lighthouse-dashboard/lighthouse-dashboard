@@ -9,6 +9,7 @@
 0. [Add notification if a new audit is queued #26](https://github.com/faebeee/lighthouse-dashboard/issues/#26)
 0. [Show latest report timestamp on site overview #21](https://github.com/faebeee/lighthouse-dashboard/issues/#21)
 0. [Add confirmation to delete button #20](https://github.com/faebeee/lighthouse-dashboard/issues/#20)
+0. [Add a changelog to frontend #43](https://github.com/faebeee/lighthouse-dashboard/issues/#43)
 
 # 5.11
 - Fix eslint settings & error
