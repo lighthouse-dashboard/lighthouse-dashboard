@@ -9,6 +9,7 @@ const Project = () => import('./project/project');
 const Projects = () => import('./projects/projects');
 const Dashboard = () => import('./dashboard/dashboard');
 const System = () => import('./system/system');
+const Changelog = () => import('./system/changelog/changelog');
 
 
 export default [
@@ -50,6 +51,12 @@ export default [
                 path: 'system',
                 name: 'system',
                 component: compose(withSystemInfo, withHealth)(System),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: 'system/changelog',
+                name: 'changelog',
+                component: Changelog,
                 meta: { requiresAuth: true },
             },
         ],

@@ -2,7 +2,6 @@
     // Vars
     --link--color: var(--root-color--link-text-color);
     --link--focus-color: var(--root-color--link-focus-text-color);
-    --link--root-bezel: 8px 16px;
     --link--line-width: 2px;
 
     // Support
@@ -14,8 +13,6 @@
             position: relative;
             text-decoration: underline;
             font-weight: bold;
-            padding: var(--link--root-bezel);
-
 
             &:hover {
                 color: var(--link--focus-color);

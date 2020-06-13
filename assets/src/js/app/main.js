@@ -2,6 +2,7 @@ import 'es6-promise/auto';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Inview from 'vueinview';
+
 import registry from '../framework/registry';
 
 import App from './App.vue';
@@ -12,6 +13,7 @@ import store from './vuex';
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(Inview);
+
 
 registry(Vue);
 

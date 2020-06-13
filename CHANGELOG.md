@@ -1,15 +1,23 @@
 # 5.12
-0. [Add logout button](https://github.com/faebeee/lighthouse-dashboard/issues/22)
+0. [Add logout button #22](https://github.com/faebeee/lighthouse-dashboard/issues/22)
+0. [Remove rabbitmq and access mongodb for scheduled jobs #38](https://github.com/faebeee/lighthouse-dashboard/issues/38)
+0. [Fix responsive UI #30](https://github.com/faebeee/lighthouse-dashboard/issues/30)
+0. [Fix typings #5](https://github.com/faebeee/lighthouse-dashboard/issues/5)
+0. [Add status is the worker is currently running #14](https://github.com/faebeee/lighthouse-dashboard/issues/#14)
+0. [Add timestamp when the worker was last run #13](https://github.com/faebeee/lighthouse-dashboard/issues/#13)
+0. [Add hint to page, if a audit is already queued #29](https://github.com/faebeee/lighthouse-dashboard/issues/#29)
+0. [Add notification if a new audit is queued #26](https://github.com/faebeee/lighthouse-dashboard/issues/#26)
+0. [Show latest report timestamp on site overview #21](https://github.com/faebeee/lighthouse-dashboard/issues/#21)
+0. [Add confirmation to delete button #20](https://github.com/faebeee/lighthouse-dashboard/issues/#20)
 
 # 5.11
-0. Fix eslint settings & error
-0. Added styleguide and storybook
-0. Remove vuetify
-0. Redesign of UI
-0. Improve data clearance to minimize DB size
+- Fix eslint settings & error
+- Added styleguide and storybook
+- Remove vuetify
+- Redesign of UI
+- Improve data clearance to minimize DB size
 
 # 5.10
-
 0. [#19 Lazyload Chartdata](https://github.com/dreipol/lighthouse-dashboard/issues/19)
 0. [#21 Add Projects overview table](https://github.com/dreipol/lighthouse-dashboard/issues/21)
 0. [#23 Add Serviceworker to precache assets](https://github.com/dreipol/lighthouse-dashboard/issues/23)

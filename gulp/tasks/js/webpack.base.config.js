@@ -44,14 +44,15 @@ module.exports = {
                 enforce: 'pre',
             },
             {
-                test: /\.s(c|a)ss$/,
+                test: /\.md$/,
                 use: [
-                    'vue-style-loader',
-                    'css-loader',
                     {
-                        loader: 'sass-loader',
+                        loader: 'html-loader'
+                    },
+                    {
+                        loader: 'markdown-loader',
                         options: {
-                            implementation: require('sass'),
+                            /* your options here */
                         }
                     }
                 ]

@@ -53,6 +53,14 @@
                             v-if="health">{{ health.db_connection }}</span>
                 </div>
             </tile>
+
+            <tile title="Changelog">
+                <router-link
+                        class="link"
+                        :to="{name: 'changelog'}">
+                    Open changelog
+                </router-link>
+            </tile>
         </div>
         <div/>
     </div>
@@ -87,7 +95,8 @@
 
         data() {
             return {
-                version
+                version,
+                markdown: null,
             };
         },
 
