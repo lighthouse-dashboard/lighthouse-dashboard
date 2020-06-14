@@ -31,16 +31,7 @@ const withSystemInfo = (component) => {
                 info: this.info,
             };
 
-            return createElement(component, {
-                attrs: {
-                    ...this.$attrs,
-                    ...props,
-                },
-                props: {
-                    ...this.$props,
-                    ...props,
-                },
-            });
+            return createElement(component, createElement(props, this));
         },
     });
 };

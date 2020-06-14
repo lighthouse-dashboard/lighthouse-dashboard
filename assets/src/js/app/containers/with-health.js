@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { fetchHealth } from '../api/health-api';
+import { createElementProps } from './utils/create-element-props';
 
 const withHealth = (component) => {
     return Vue.component('WithHealth', {
@@ -31,16 +32,7 @@ const withHealth = (component) => {
                 health: this.health,
             };
 
-            return createElement(component, {
-                attrs: {
-                    ...this.$attrs,
-                    ...props,
-                },
-                props: {
-                    ...this.$props,
-                    ...props,
-                },
-            });
+            return createElement(component, createElementProps(props, this));
         },
     });
 };

@@ -1,6 +1,6 @@
 import CloseBtn from './close-btn.vue';
 
-export default { title: 'close-btn' };
+export default { title: 'Components / close-btn' };
 
 export const component = () => ({
     components: { CloseBtn },

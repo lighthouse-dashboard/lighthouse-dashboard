@@ -49,15 +49,23 @@
 
                 <div class='project--sidebar-section'>
                     <tile title="Actions">
-                        <btn :facets="['secondary', 'full-width']"
+                        <btn
+                                class="project--action-btn"
+                                :facets="['secondary', 'full-width']"
                                 @click="toggleEdit">Edit
                         </btn>
-                        <btn :facets="['secondary', 'full-width', ...auditBtnFacet]"
+
+                        <btn
+                                class="project--action-btn"
+                                :facets="['secondary', 'full-width', ...auditBtnFacet]"
                                 @click="runAudit">
                             <template v-if="hasScheduledJobs">Audits already scheduled</template>
                             <template v-else>New audit</template>
                         </btn>
-                        <confirm-button :facets='["danger", "full-width"]'
+
+                        <confirm-button
+                                class="project--action-btn"
+                                :facets='["danger", "full-width"]'
                                 confirm="Click to confirm"
                                 @click='onDeleteClicked'>
                             Delete

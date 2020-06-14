@@ -2,17 +2,17 @@
     <div class="site-config">
         <list class="site-config--list">
             <list-item class="site-config--list-item">
-                <p class="caption">
+                <p class="u-reset caption">
                     Name
                 </p>
-                <p>{{ site.name }}</p>
+                <p class="u-reset subtitle1">{{ site.name }}</p>
             </list-item>
 
             <list-item class="site-config--list-item">
-                <p class="caption">
+                <p class="u-reset caption">
                     URL
                 </p>
-                <p>
+                <p class="u-reset subtitle1">
                     <a class="link"
                             :href="site.url">
                         {{site.name}}
@@ -21,8 +21,8 @@
             </list-item>
 
             <list-item class="site-config--list-item">
-                <p class="caption">Last Audit</p>
-                <p>{{ site.last_audit | format-date }}</p>
+                <p class="u-reset caption">Last Audit</p>
+                <p class="u-reset subtitle1">{{ site.last_audit | format-date }}</p>
             </list-item>
         </list>
     </div>

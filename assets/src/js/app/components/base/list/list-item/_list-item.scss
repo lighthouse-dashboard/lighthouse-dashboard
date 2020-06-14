@@ -7,6 +7,11 @@
     & {
         & {
             margin: var(--root-spacing) 0;
+            padding: var(--root-spacing) var(--root-spacing);
+
+            &:nth-child(even) {
+                background-color: var(--color--list--item-even);
+            }
 
             &:first-child {
                 margin-top: 0;

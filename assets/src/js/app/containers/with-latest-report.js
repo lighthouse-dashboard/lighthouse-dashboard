@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { mapActions } from 'vuex';
+import { createElementProps } from './utils/create-element-props';
 
 const withLatestReport = (component) => {
     return Vue.component('WithLatestReportContainer', {
@@ -34,12 +35,10 @@ const withLatestReport = (component) => {
         },
 
         render(createElement) {
-            return createElement(component, {
-                props: {
-                    report: this.report,
-                    ...this.$attrs,
-                },
-            });
+            return createElement(component, createElementProps({
+                report: this.report,
+                isLoading: this.isLoading,
+            }, this));
         },
     });
 };

@@ -17,11 +17,10 @@
             {{ latestReport | format-date }}
         </span>
 
-        <project-settings v-if="showSettings"
-                :id="id"
-                @close="onSettingsClosed"/>
+        <loading-indicator v-if="isLoading"/>
 
-        <div class='site-overview--content'>
+        <div class='site-overview--content'
+                v-else>
             <span v-if="runError">{{ runError.message }}</span>
             <line-chart
                     :data-sets="lineChartData.datasets"
@@ -35,18 +34,18 @@
     import reportsToLineChart from '../../../../../../src/transformer/reports-to-line-chart';
     import bemMixin from '../../mixins/bem-mixin';
     import Btn from '../base/btn/btn';
+    import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import LineChart from '../charts/line-chart/line-chart';
     import ScheduledJobIndicator from '../scheduled-job-indicator/scheduled-job-indicator';
-    import ProjectSettings from '../site-settings/site-settings';
     import Tile from '../tile/tile';
 
     export default {
         components: {
+            LoadingIndicator,
             ScheduledJobIndicator,
             Tile,
             Btn,
             LineChart,
-            ProjectSettings,
         },
 
         mixins: [bemMixin('site-overview')],
@@ -80,18 +79,19 @@
                 type: Array,
                 required: true,
             },
+
+            isLoading: {
+                type: Boolean,
+                default: false,
+            },
         },
 
         data() {
             return {
-                showSettings: false,
-                showInfo: false,
                 chart: null,
 
-                isLoading: false,
                 /** @type {Error | null} */
                 runError: null,
-                interval: null,
             };
         },
         computed: {
@@ -120,11 +120,6 @@
 
             lineChartData() {
                 return reportsToLineChart(this.reports);
-            },
-        },
-        methods: {
-            loadData() {
-                this.isLoading = true;
             },
         },
     };

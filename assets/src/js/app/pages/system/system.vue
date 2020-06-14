@@ -54,12 +54,24 @@
                 </div>
             </tile>
 
-            <tile title="Changelog">
-                <router-link
-                        class="link"
-                        :to="{name: 'changelog'}">
-                    Open changelog
-                </router-link>
+            <tile title="Links">
+                <list>
+                    <list-item>
+                        <router-link
+                                class="link"
+                                :to="{name: 'changelog'}">
+                            Changelog
+                        </router-link>
+                    </list-item>
+
+                    <list-item>
+                        <a class="link"
+                                target="_blank"
+                                href="/storybook/index.html">
+                            Storybook
+                        </a>
+                    </list-item>
+                </list>
             </tile>
         </div>
         <div/>
@@ -69,12 +81,14 @@
 <script>
     import { formatDistanceToNow, subSeconds } from 'date-fns';
     import { version } from '../../../../../../package.json';
+    import List from '../../components/base/list/list';
+    import ListItem from '../../components/base/list/list-item/list-item';
     import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
     import Tile from '../../components/tile/tile';
     import formatRelativeDate from '../../filters/format-relative-date';
 
     export default {
-        components: { Tile, LoadingIndicator },
+        components: { ListItem, List, Tile, LoadingIndicator },
         props: {
             isLoading: {
                 type: Boolean,

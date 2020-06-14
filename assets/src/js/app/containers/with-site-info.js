@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { mapActions, mapState } from 'vuex';
+import { createElementProps } from './utils/create-element-props';
 
 const withSiteInfo = (Component) => {
     return Vue.component('WithSiteInfoContainer', {
@@ -43,20 +44,7 @@ const withSiteInfo = (Component) => {
                 isLoading: this.isLoading,
             };
 
-            return h(
-                Component,
-                {
-                    attrs: {
-                        ...this.$attrs,
-                        ...props,
-                    },
-                    props: {
-                        ...this.$props,
-                        ...props,
-                    },
-                    on: this.$listeners,
-                }
-            );
+            return h(Component, createElementProps(props, this));
         },
     });
 };
