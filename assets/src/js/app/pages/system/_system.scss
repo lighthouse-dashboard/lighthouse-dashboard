@@ -2,7 +2,7 @@
     // Vars
     --system--row-vert-bezel: 12px;
     --system--row-horiz-bezel: 8px;
-    --system--row-background: rgba(0, 0, 0, 0.05);
+    --system--row-background: var(--color--list--item-even);
 
     // Support
 

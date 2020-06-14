@@ -1,6 +1,4 @@
-const getTheme = require('../assets/src/js/app/utils/get-theme');
-
-const { charts, theme } = getTheme();
+const getCssVar = require('../assets/src/js/app/utils/get-css-var');
 
 module.exports = {
     title: 'Lighthouse Dashboard',
@@ -9,30 +7,6 @@ module.exports = {
      * @type {string}
      */
     dateFormat: 'dd/MM/yy HH:mm',
-
-    /**
-     * Config for the dashboard page
-     */
-    page_dashboard: {
-        // Is the container fluid or fixed
-        isFluid: false,
-
-        // Widgets to be visible on the landing page
-        charts: [
-            'favorite-projects-comparison',
-            'latest-audits',
-            'favorite-projects-overview',
-        ],
-    },
-
-    // Config for the projects page
-    page_projects: {
-        // Is the container fluid or fixed
-        isFluid: true,
-
-        // Amount of widgets per row
-        colSize: 3,
-    },
 
     // Config for the project overview chart
     siteOverviewChart: {
@@ -47,12 +21,8 @@ module.exports = {
 
     // Config for the widget which shows the latest audited projects
     latestAuditChart: {
-        // How many widgets per row
-        colSize: 3,
-
         // Amount of projects to be shown
         limit: 4,
-
         // Fields to be visible
         fields: [
             'performance',
@@ -79,16 +49,15 @@ module.exports = {
         colSize: 3,
     },
 
-    // Configuration for the theme
-    ui: {
-        // Colors used in the charts
-        chartColors: charts,
-        // Material UI theme colors
-        theme: {
-            dark: theme,
-            light: theme,
-        },
-    },
+    // Colors used in the charts
+    chartColors: [
+        getCssVar('--color--chart-color-1'),
+        getCssVar('--color--chart-color-2'),
+        getCssVar('--color--chart-color-3'),
+        getCssVar('--color--chart-color-4'),
+        getCssVar('--color--chart-color-5'),
+        getCssVar('--color--chart-color-6'),
+    ],
 
     // Collection of configs for custom menu entries available for every page
     customProjectMenuEntries: [

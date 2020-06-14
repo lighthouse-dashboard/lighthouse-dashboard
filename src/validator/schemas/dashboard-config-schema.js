@@ -57,19 +57,6 @@ export default joi.object({
     title: joi.string().required(),
     dateFormat: joi.string().required(),
 
-    page_dashboard: joi.object({
-        isFluid: joi.boolean().required(),
-        charts: AVAILABLE_CHARTS,
-    }),
-
-    page_projects: joi.object({
-        isFluid: joi.boolean().required(),
-        colSize: joi
-            .number()
-            .min(1)
-            .max(12),
-    }),
-
     siteOverviewChart: joi.object({
         fields: REPORT_VALUE_KEYS_SCHEMA,
     }),
@@ -91,11 +78,6 @@ export default joi.object({
             .items(joi.string())
             .required(),
 
-        theme: joi.object({
-            dark: COLOR_THEME_CONFIG,
-            light: COLOR_THEME_CONFIG,
-        })
-            .required(),
     }).required(),
 
     customProjectMenuEntries: joi.array().items(CUSTOM_MENU_ENTRY),

@@ -14,7 +14,7 @@
             transform: translate3d(50%, -50%, 0);
             width: var(--scheduled-job-indicator--size);
             height: var(--scheduled-job-indicator--size);
-            background-color: var(--root-color--signal-success);
+            background-color: var(--color--signal-success);
             border-radius: 100%;
             animation: scheduled-job-indicator--pulsate 2000ms ease-out infinite;
         }

@@ -2,17 +2,17 @@
     // Vars
     --side-nav--width: 240px;
     --side-nav--border-radius: 20px;
-    --side-nav--color-text: var(--root-color--navigation--color-text);
-    --side-nav--color-background: var(--root-color--navigation-background);
+    --side-nav--color-text: var(--color--navigation--color-text);
+    --side-nav--color-background: var(--color--navigation-background);
     --side-nav--color-link-active-color: var(--root-color--navigation--color-text-active);
-    --side-nav--color-link-active-background: var(--root-color-navigation--item-active-background);
+    --side-nav--color-link-active-background: var(--color--navigation--item-active-background);
     --side-nav--border-radius-outer: 40px;
     --side-nav--border-radius-box-size: 80px;
     --side-nav-toggle--border-radius-transition-duration: 400ms;
     --side-nav--border-radius-transition-delay: 200ms;
     --side-nav--backdrop-color: rgba(20, 20, 20, 0.4);
-    --side-nav--item-hover-background: var(--root-color-navigation--item-hover-background);
-    --side-nav--item-hover-text: var(--root-color-navigation--item-hover-text);
+    --side-nav--item-hover-background: var(--color--navigation--item-hover-background);
+    --side-nav--item-hover-text: var(--color--navigation--item-hover-text);
 
     // Support
 

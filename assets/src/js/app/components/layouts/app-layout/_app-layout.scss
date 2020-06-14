@@ -1,7 +1,7 @@
 .app-layout.app-layout {
     // Vars
     --app-layout--header-height: var(--root-sites--header-height);
-    --app-layout--content-background: var(--root--background-color);
+    --app-layout--content-background: var(--color--background-color);
     --app-layout--edge-gutter: calc(var(--root-spacing) * 2);
     --app-layout--edge-gutter-md: calc(var(--root-spacing) * 4);
 

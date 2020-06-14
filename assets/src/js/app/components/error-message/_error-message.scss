@@ -1,7 +1,7 @@
 .error-message {
     // Vars
-    --error-message--text: var(--root-color--error-text);
-    --error-message--background: var(--root-color--error-background);
+    --error-message--text: var(--color--error-text);
+    --error-message--background: var(--color--error-background);
     --error-message--border-radius: var(--root-border-radius);
 
     // Support

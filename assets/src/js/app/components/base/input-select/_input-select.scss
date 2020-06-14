@@ -1,11 +1,11 @@
 .input-select {
     // Vars
-    --input-select--border-color: var(--root-color--divider);
+    --input-select--border-color: var(--color--divider);
     --input-select--input-border-radius: 2px;
     --input-select--vert-input-bezel: 12px;
     --input-select--horiz-input-bezel: 16px;
-    --input-select--background-active: var(--root-color--input-active-background);
-    --input-select--disabled-input-background: var(--root-color--input-disabled-background);
+    --input-select--background-active: var(--color--input-active-background);
+    --input-select--disabled-input-background: var(--color--input-disabled-background);
 
     // Module
     & {

@@ -8,62 +8,67 @@
     --color--high-emphasis: rgba(0, 0, 0, 0.8);
     --color--disabled: rgba(0, 0, 0, 0.4);
 
-    --root--text-color: var(--color-mono-black);
-    --root-color--divider: var(--color-mono-black);
-    --root--background-color: #ebf1f4;
+    --color--text-color: var(--color-mono-black);
+    --color--divider: var(--color-mono-black);
+    --color--background-color: #fff;
 
-    --root-color--primary: #5c9ca3;
-    --root-color--primary-light: #8CB9BE;
-    --root-color--primary-dark: #497C82;
+    --color--primary: #1a936f;
+    --color--primary-light: #88d498;
+    --color--primary-dark: #114b5f;
 
     // Signal
-    --root-color--signal-error: #f66363;
-    --root-color--signal-success: #48ad67;
+    --color--signal-error: #f66363;
+    --color--signal-success: #48ad67;
 
     // Error Message
-    --root-color--error-background: #efb8b8;
-    --root-color--error-text: var(--root-color--signal-error);
+    --color--error-background: #efb8b8;
+    --color--error-text: var(--color--signal-error);
 
     //Buttons
-    --root-color--primary-background: var(--root-color--primary);
-    --root-color--primary-text: var(--color-mono-white);
-
-    --root-color--secondary-color: var(--root-color--primary-light);
-    --root-color--secondary-text: var(--color-mono-white);
-
-    --root-color--button-text-primary: var(--color--medium-emphasis);
-
-    --root-color--button-danger-color: var(--root-color--signal-error);
-    --root-color--button-danger-text-color: var(--color-mono-white);
-
-    --root-color--button-flat-color: var(--root-color--primary-light);
-    --root-color--button-flat-text-color: var(--color-mono-white);
-    --root-color--button-disabled-background: var(--color-mono-light-gray);
+    --color--primary-background: var(--color--primary);
+    --color--primary-text: var(--color-mono-white);
+    --color--secondary-color: var(--color--primary-light);
+    --color--secondary-text: var(--color-mono-white);
+    --color--button-text-primary: var(--color--medium-emphasis);
+    --color--button-danger-color: var(--color--signal-error);
+    --color--button-danger-text-color: var(--color-mono-white);
+    --color--button-flat-color: var(--color--primary-light);
+    --color--button-flat-text-color: var(--color-mono-white);
+    --color--button-disabled-background: var(--color-mono-light-gray);
 
     // Tiles
-    --root-color--tile-background: rgba(255, 255, 255, 0.2);
+    --color--tile-background: rgba(255, 255, 255, 0.2);
 
     // Inputs
-    --root-color--input-active-background: #ffffff;
-    --root-color--input-error-background: #ffb5b5;
-    --root-color--input-disabled-background: var(--color-mono-light-gray);
+    --color--input-active-background: #ffffff;
+    --color--input-error-background: #ffb5b5;
+    --color--input-disabled-background: var(--color-mono-light-gray);
 
     // Links
-    --root-color--link-text-color: var(--color--medium-emphasis);
-    --root-color--link-focus-text-color: var(--color--high-emphasis);
+    --color--link-text-color: var(--color--medium-emphasis);
+    --color--link-focus-text-color: var(--color--high-emphasis);
 
     // Site Overview
-    --root-color--site-overview-background: var(--root-color--tile-background);
+    --color--site-overview-background: var(--color--tile-background);
 
     // Navigation
-    --root-color--navigation-background: #122736;
-    --root-color--navigation--color-text: var(--color-mono-white);
-    --root-color-navigation--item-hover-background: var(--root-color--primary-dark);
-    --root-color-navigation--item-hover-text: var(--color-mono-white);
-    --root-color-navigation--item-active-background: var(--root--background-color);
+    --color--navigation-background: var(--color--primary-dark);
+    --color--navigation--color-text: var(--color-mono-white);
+    --color--navigation--item-hover-background: var(--color--primary-light);
+    --color--navigation--item-hover-text: var(--color-mono-white);
+    --color--navigation--item-active-background: var(--color--background-color);
 
-    --root-color--navigation-mobile-toggle-background: #ffffff;
+    --color--navigation--mobile-toggle-background: #ffffff;
 
 
-    //--root-color--app-content-background: #333;
+    // Lists
+    --color--list--item-even: rgba(136, 212, 152, 0.1);
+
+    // CHARTS
+    --color--chart-color-1: var(--color--primary);
+    --color--chart-color-2: var(--color--primary-light);
+    --color--chart-color-3: var(--color--primary-dark);
+    --color--chart-color-4: #92D8B3;
+    --color--chart-color-5: #98D993;
+    --color--chart-color-6: #ddd8c4;
 }

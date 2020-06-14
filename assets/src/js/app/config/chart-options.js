@@ -1,7 +1,6 @@
 import CONFIG from '../../../../../config/dashboard';
 
 export const DEFAULT_CHART = {
-    colors: CONFIG.ui.chartColors,
     plotOptions: {
         bar: {
             horizontal: false,
@@ -35,9 +34,7 @@ export const DEFAULT_CHART = {
         },
     },
     tooltip: {
-        tooltip: {
-            theme: 'dark',
-        },
+        theme: 'dark',
         x: {
             show: true,
         },
@@ -64,18 +61,17 @@ export const DEFAULT_CHART = {
             },
         },
     ],
+    colors: CONFIG.chartColors,
 };
 
 export const GAUGE_CHART = {
+    ...DEFAULT_CHART,
     chart: {
         height: 300,
         type: 'radialBar',
         toolbar: {
             show: false,
         },
-    },
-    tooltip: {
-        theme: 'dark',
     },
     plotOptions: {
         radialBar: {
@@ -89,7 +85,6 @@ export const GAUGE_CHART = {
             },
         },
     },
-    colors: CONFIG.ui.chartColors,
 };
 
 export const RADAR_CHART = {
@@ -108,7 +103,10 @@ export const RADAR_CHART = {
     xaxis: {
         categories: [],
     },
-    colors: CONFIG.ui.chartColors,
+    fill: {
+        opacity: 0.2,
+        colors: CONFIG.chartColors,
+    },
 };
 
 export const COMPARISON_CHART = {
@@ -121,20 +119,17 @@ export const COMPARISON_CHART = {
             show: false,
         },
     },
-    tooltip: {
-        theme: 'dark',
-    },
     series: [],
     title: {
         style: {
-            colors: CONFIG.ui.theme.text,
+            colors: 'var(--color--text-color)',
         },
     },
     xaxis: {
         categories: [],
         labels: {
             style: {
-                colors: CONFIG.ui.theme.text,
+                colors: 'var(--color--text-color)',
             },
         },
     },
@@ -145,7 +140,7 @@ export const COMPARISON_CHART = {
         max: 100,
         labels: {
             style: {
-                colors: CONFIG.ui.theme.text,
+                colors: 'var(--color--text-color)',
             },
         },
     },
@@ -162,9 +157,7 @@ export const SITE_OVERVIEW_CHART = {
             show: false,
         },
     },
-    tooltip: {
-        theme: 'dark',
-    },
+
     stroke: {
         width: 2,
         curve: 'smooth',
