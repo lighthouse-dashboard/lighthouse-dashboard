@@ -6,6 +6,10 @@ export default joi.object({
             .number()
             .min(1)
             .required(),
+        entriesLimit: joi
+            .number()
+            .min(1)
+            .required(),
     })
         .required(),
 

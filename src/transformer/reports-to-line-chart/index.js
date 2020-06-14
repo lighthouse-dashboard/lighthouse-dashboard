@@ -1,5 +1,5 @@
-import CONFIG from '../../../config/dashboard';
 import formatReportSummaryString from '../../utils/format-report-summary-string';
+import { getFieldsFromReport } from '../../utils/get-fields-form-reports';
 
 /**
  * Transform reports to chart data
@@ -22,10 +22,11 @@ export default function reportsToLineChart(reports) {
         return acc;
     }, []).reverse();
 
-    CONFIG.siteOverviewChart.fields.reduce((datasets, timingKey) => {
-        datasets.push(getLineDataSetForKey(reports, timingKey));
-        return datasets;
-    }, data.datasets);
+    getFieldsFromReport(reports[0])
+        .reduce((datasets, timingKey) => {
+            datasets.push(getLineDataSetForKey(reports, timingKey));
+            return datasets;
+        }, data.datasets);
 
     return data;
 }

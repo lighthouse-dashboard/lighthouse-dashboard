@@ -6,7 +6,7 @@ module.exports = {
      * Formatting used for time entries
      * @type {string}
      */
-    dateFormat: 'dd/MM/yy HH:mm',
+
 
     // Config for the project overview chart
     siteOverviewChart: {

@@ -1,7 +1,7 @@
-import CONFIG from '../../../../config/dashboard';
-import reportsToBarChart from '../../../transformer/report-to-bar-chart';
-import { getFavoriteSites } from '../../../../lib/core/db/models/sites';
 import { getLatestReportBySiteId } from '../../../../lib/core/db/models/reports';
+import { getFavoriteSites } from '../../../../lib/core/db/models/sites';
+import reportsToBarChart from '../../../transformer/report-to-bar-chart';
+import { getFieldsFromReport } from '../../../utils/get-fields-form-reports';
 import { barChartDataModel } from '../schemas/bar-chart-data-model';
 
 /**
@@ -23,7 +23,7 @@ async function getSpeedReportOverview({ mongo }) {
         reports.push(report);
     }
 
-    return reportsToBarChart(reports, labels, CONFIG.favoriteProjectsComparison.fields);
+    return reportsToBarChart(reports, labels, getFieldsFromReport(reports[0]));
 }
 
 export default {

@@ -10,6 +10,7 @@
 0. [Show latest report timestamp on site overview #21](https://github.com/faebeee/lighthouse-dashboard/issues/#21)
 0. [Add confirmation to delete button #20](https://github.com/faebeee/lighthouse-dashboard/issues/#20)
 0. [Add a changelog to frontend #43](https://github.com/faebeee/lighthouse-dashboard/issues/#43)
+0. [Update theming functionality #19](https://github.com/faebeee/lighthouse-dashboard/issues/#19)
 
 # 5.11
 - Fix eslint settings & error

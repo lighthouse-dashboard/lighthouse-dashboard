@@ -5,7 +5,7 @@ export default {
          * @var {number}
          */
         siteReportLimit: 50,
-
+        entriesLimit: 50,
     },
 
     db: {

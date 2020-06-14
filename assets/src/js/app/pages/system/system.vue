@@ -2,7 +2,7 @@
     <div class="system">
         <div/>
         <loading-indicator v-if="isLoading"/>
-        <div class="system--content">
+        <div class="system--content" v-else>
             <tile title="System"
                     class="system--section">
                 <div class="system--row">

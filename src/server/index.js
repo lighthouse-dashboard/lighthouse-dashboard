@@ -2,7 +2,6 @@
 
 import Hapi from '@hapi/hapi';
 import * as twig from 'twig';
-import dashboardConfig from '../../config/dashboard';
 import CONFIG from '../../config/server.js';
 import { root } from '../config/path';
 import logger from '../../lib/core/logger';
@@ -63,7 +62,7 @@ async function start() {
 export default async function boot() {
     logger.debug(`Validating config`);
 
-    if (!configValidator(dashboardConfigSchema, dashboardConfig) || !configValidator(serverConfigSchema, CONFIG)) {
+    if (!configValidator(serverConfigSchema, CONFIG)) {
         return;
     }
     logger.debug(`Config ok`);

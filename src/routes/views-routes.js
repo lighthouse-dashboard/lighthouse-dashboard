@@ -1,9 +1,8 @@
-import { title } from '../../config/dashboard';
-import { version } from '../../package.json';
+import { version, name } from '../../package.json';
 
 const DEFAULT_PARAMS = {
     G_ANALYTICS_ID: process.env.G_ANALYTICS_ID || false,
-    TITLE: title,
+    TITLE: name,
     VERSION: version,
 };
 
