@@ -4,6 +4,7 @@ export const createElementProps = (data, comp) => ({
         ...data,
     },
     props: {
+        ...comp.$attrs,
         ...comp.$props,
         ...data,
     },

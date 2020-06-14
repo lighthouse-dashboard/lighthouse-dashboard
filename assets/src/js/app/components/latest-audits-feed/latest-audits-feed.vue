@@ -9,7 +9,7 @@
                 v-else>
             <site-report-tile
                     :site="site"
-                    v-for="site in sites"
+                    v-for="site in latestSites"
                     :key="site.id"/>
         </div>
     </div>
@@ -27,7 +27,7 @@
 
         props: {
             /**
-             * @type {Sites.SiteConfig}
+             * @type {Sites.SiteConfig[]}
              */
             sites: {
                 type: Array,
@@ -37,6 +37,12 @@
             isLoading: {
                 type: Boolean,
                 default: false,
+            },
+        },
+
+        computed: {
+            latestSites(){
+                return this.sites.slice(0, 4);
             },
         },
     };

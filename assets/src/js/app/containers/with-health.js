@@ -7,12 +7,13 @@ const withHealth = (component) => {
         data() {
             return {
                 health: null,
+                isLoading: false,
             };
         },
 
         methods: {
-
             loadData() {
+                this.isLoading = true;
                 return fetchHealth()
                     .then((health) => {
                         this.health = health;
@@ -30,6 +31,7 @@ const withHealth = (component) => {
         render(createElement) {
             const props = {
                 health: this.health,
+                isLoading: this.isLoading,
             };
 
             return createElement(component, createElementProps(props, this));

@@ -50,7 +50,7 @@ export default [
             {
                 path: 'system',
                 name: 'system',
-                component: compose(withSystemInfo, withHealth)(System),
+                component: compose(withHealth, withSystemInfo)(System),
                 meta: { requiresAuth: true },
             },
             {
