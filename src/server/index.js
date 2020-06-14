@@ -5,7 +5,7 @@ import * as twig from 'twig';
 import dashboardConfig from '../../config/dashboard';
 import CONFIG from '../../config/server.js';
 import { root } from '../config/path';
-import logger from '../logger';
+import logger from '../../lib/core/logger';
 import loadRoutes from '../routes';
 import { IS_DEV } from '../utils/env';
 import configValidator from '../validator/config-validator';

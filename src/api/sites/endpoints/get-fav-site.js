@@ -1,4 +1,4 @@
-import { getFavoriteSites } from '../db/sites';
+import { getFavoriteSites } from '../../../../lib/core/db/models/sites';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 export default {

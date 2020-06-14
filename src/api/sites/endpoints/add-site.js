@@ -1,6 +1,6 @@
 import joi from '@hapi/joi';
 import uuid from 'uuid/v4';
-import { addSite } from '../db/sites';
+import { addSite } from '../../../../lib/core/db/models/sites';
 
 /**
  * Controller to add a new site

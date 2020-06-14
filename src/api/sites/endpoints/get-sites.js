@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { findSites, getAllSites } from '../db/sites';
+import { findSites, getAllSites } from '../../../../lib/core/db/models/sites';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 /**

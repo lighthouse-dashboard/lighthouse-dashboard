@@ -1,5 +1,5 @@
-import logger from '../../logger';
-import IS_PROD from '../../utils/is-prod';
+import logger from '../../../lib/core/logger';
+import { IS_DEV } from '../../utils/env';
 import PLUGINS from './plugins';
 
 /**
@@ -25,7 +25,7 @@ export default async function loadPlugins(server) {
     logger.debug(`Register ${ PLUGINS.prod.length } prod plugins`);
     await registerPlugins(server, PLUGINS.prod);
 
-    if (!IS_PROD()) {
+    if (IS_DEV) {
         logger.debug(`Register ${ PLUGINS.dev.length } dev plugins`);
         await registerPlugins(server, PLUGINS.dev);
     }

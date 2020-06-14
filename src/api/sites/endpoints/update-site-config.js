@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { updateSite } from '../db/sites';
+import { updateSite } from '../../../../lib/core/db/models/sites';
 
 /**
  * Update site controller

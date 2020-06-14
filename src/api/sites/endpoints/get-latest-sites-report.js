@@ -1,5 +1,5 @@
-import { getLatestReportBySiteId } from '../../reports/db/reports';
-import { getAllSites } from '../db/sites';
+import { getLatestReportBySiteId } from '../../../../lib/core/db/models/reports';
+import { getAllSites } from '../../../../lib/core/db/models/sites';
 import { siteWithReportList } from '../schemas/site-with-report';
 
 /**

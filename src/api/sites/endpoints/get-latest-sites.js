@@ -1,4 +1,4 @@
-import { getLatestSites } from '../db/sites';
+import { getLatestSites } from '../../../../lib/core/db/models/sites';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 export const getLatestSitesHandler = (request) => getLatestSites(request.mongo.db);

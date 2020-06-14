@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
-import { getSiteConfigById } from '../db/sites';
+import { getSiteConfigById } from '../../../../lib/core/db/models/sites';
 import { siteConfigModel } from '../schemas/site-config-model';
 
 /**
