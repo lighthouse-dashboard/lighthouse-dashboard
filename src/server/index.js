@@ -8,7 +8,6 @@ import logger from '../../lib/core/logger';
 import loadRoutes from '../routes';
 import { IS_DEV } from '../utils/env';
 import configValidator from '../validator/config-validator';
-import dashboardConfigSchema from '../validator/schemas/dashboard-config-schema';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
 import setupAuth from './auth';
 import loadPlugins from './plugins';

@@ -37,17 +37,6 @@ export const CHART_CONFIG = joi.object({
     fields: REPORT_VALUE_KEYS_SCHEMA,
 });
 
-const COLOR_THEME_CONFIG = joi.object({
-    primary: joi.string(),
-    accent: joi.string(),
-    secondary: joi.string(),
-    success: joi.string(),
-    info: joi.string(),
-    warning: joi.string(),
-    error: joi.string(),
-    text: joi.string(),
-});
-
 const CUSTOM_MENU_ENTRY = joi.object({
     name: joi.string().required(),
     link: joi.function().required(),
