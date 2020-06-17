@@ -1,6 +1,6 @@
 {
     "name": "@lighthouse-dashboard/lighthouse-dashboard",
-    "version": "5.11.31",
+    "version": "5.12.0",
     "private": true,
     "description": "App to keep track of your websites by showing their lighthouse results",
     "author": {
