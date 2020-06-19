@@ -1,5 +1,5 @@
 {
-    "name": "@lighthouse-dashboard/lighthouse-dashboard",
+    "name": "lighthouse-dashboard",
     "version": "5.12.2",
     "private": true,
     "description": "App to keep track of your websites by showing their lighthouse results",
