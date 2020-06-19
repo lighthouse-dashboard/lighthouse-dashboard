@@ -1,6 +1,5 @@
-import logger from '../../../lib/core/logger';
-import { IS_DEV } from '../../utils/env';
-import PLUGINS from './plugins';
+import logger from '../../../lib/core/src/logger';
+import getPlugins from './plugins';
 
 /**
  * Install plugins
@@ -10,7 +9,9 @@ import PLUGINS from './plugins';
  */
 async function registerPlugins(server, plugins) {
     for (let i = 0; i < plugins.length; i++) {
+        logger.debug(`Registering plugin ${ i }`);
         await server.register(plugins[i]);
+        logger.debug(`Registering complete`);
     }
 }
 
@@ -22,12 +23,14 @@ async function registerPlugins(server, plugins) {
 export default async function loadPlugins(server) {
     logger.info('Loading plugins');
 
-    logger.debug(`Register ${ PLUGINS.prod.length } prod plugins`);
-    await registerPlugins(server, PLUGINS.prod);
+    const { prod, dev } = getPlugins();
 
-    if (IS_DEV) {
-        logger.debug(`Register ${ PLUGINS.dev.length } dev plugins`);
-        await registerPlugins(server, PLUGINS.dev);
+    logger.debug(`Register ${ prod.length } prod plugins`);
+    await registerPlugins(server, prod);
+
+    if (process.env.NODE_ENV === 'development') {
+        logger.debug(`Register ${ dev.length } dev plugins`);
+        await registerPlugins(server, dev);
     }
 
     logger.info('Plugins complete');

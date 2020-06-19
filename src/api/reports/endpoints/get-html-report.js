@@ -1,6 +1,6 @@
 const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
 import { Boom } from '@hapi/boom';
-import { getReportById } from '../../../../lib/core/db/models/reports';
+import { getReportById } from '../../../../lib/core/src/db/models/reports';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 
 /**

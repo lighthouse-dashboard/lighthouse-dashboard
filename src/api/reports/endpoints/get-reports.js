@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
 import CONFIG from '../../../../config/server';
-import { getSiteConfigById } from '../../../../lib/core/db/models/sites';
-import { getReportsBySiteId } from '../../../../lib/core/db/models/reports';
+import { getSiteConfigById } from '../../../../lib/core/src/db/models/sites';
+import { getReportsBySiteId } from '../../../../lib/core/src/db/models/reports';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 import { reportModelList } from '../schemas/report-model-schema';
 

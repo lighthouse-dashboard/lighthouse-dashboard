@@ -3,16 +3,16 @@
 import Hapi from '@hapi/hapi';
 import * as twig from 'twig';
 import CONFIG from '../../config/server.js';
+import logger from '../../lib/core/src/logger';
 import { root } from '../config/path';
-import logger from '../../lib/core/logger';
 import loadRoutes from '../routes';
-import { IS_DEV } from '../utils/env';
 import configValidator from '../validator/config-validator';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
 import setupAuth from './auth';
 import loadPlugins from './plugins';
 
 const RESTART_INTERVAL = 5000;
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 async function start() {
     const server = Hapi.server({

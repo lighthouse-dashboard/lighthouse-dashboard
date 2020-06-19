@@ -1,5 +1,5 @@
 import jwt from 'hapi-auth-jwt2';
-import logger from '../../../lib/core/logger';
+import logger from '../../../lib/core/src/logger';
 import validate from './validate';
 
 /**

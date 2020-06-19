@@ -5,9 +5,9 @@ import blipp from 'blipp';
 import HapiSwagger from 'hapi-swagger';
 
 import { name, version } from '../../../package.json';
-import * as MongoDb from './mongodb-plugin/mongodb-plugin';
+import * as mongoDecoratrorPlugin from 'hapi-mongodb-decorator';
 
-export default {
+export default () => ({
     dev: [
         { plugin: blipp, options: { showAuth: true } },
         {
@@ -37,7 +37,7 @@ export default {
         Inert,
         Vision,
         {
-            plugin: MongoDb,
+            plugin: mongoDecoratrorPlugin,
             options: {
                 url: process.env.MONGODB_URI,
                 settings: {
@@ -46,4 +46,4 @@ export default {
             },
         },
     ],
-};
+});

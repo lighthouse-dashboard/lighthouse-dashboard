@@ -27,12 +27,4 @@ export default joi.object({
             .required(),
     }),
 
-    lh: joi.object({
-        chromiumBinaryPath: joi
-            .string(),
-
-        chromiumPort: joi
-            .number(),
-    }).required(),
-
 }).required();

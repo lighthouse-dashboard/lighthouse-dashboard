@@ -114,3 +114,5 @@ IS_WORKER | `boolean` | Define if the worker should be started or the server | t
 LHD_IGNORE_RAW | `boolean` | If this is defined, raw data from the audit wont be saved. You can't inspect the HTML of that report | false
 G_ANALYTICS_ID | `string` | Google Analytics ID for tracking | `GA-XXXXX-X`
 WINSTON_LOG_FILES | `boolean` | Wether or not to store the logs into files | `true`
+GOOGLE_CHROME_BIN | `string` | Point to the chromium binary | is set by the buildpack
+GOOGLE_CHROME_PORT | `number` | Define the port used for remote debugging | `9222`

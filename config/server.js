@@ -23,17 +23,4 @@ export default {
         maxReportsAge: 20 * 24 * 60 * 60 * 1000, // 20 days
     },
 
-    lh: {
-        /**
-         * Path to the chromium binary
-         * @var {string}
-         */
-        chromiumBinaryPath: process.env.GOOGLE_CHROME_BIN,
-
-        /**
-         * Port to use for the debug connection
-         * @var {number}
-         */
-        chromiumPort: 9222,
-    },
 };

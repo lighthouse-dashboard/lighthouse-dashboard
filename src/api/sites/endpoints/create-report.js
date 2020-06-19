@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
-import logger from '../../../../lib/core/logger';
-import { getSiteConfigById, setScheduledAuditForSite } from '../../../../lib/core/db/models/sites';
+import logger from '../../../../lib/core/src/logger';
+import { getSiteConfigById, setScheduledAuditForSite } from '../../../../lib/core/src/db/models/sites';
 
 /**
  * Execute an audit

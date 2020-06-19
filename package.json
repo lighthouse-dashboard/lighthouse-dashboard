@@ -24,7 +24,7 @@
         "build": "gulp build && npm run build-storybook",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
         "audit": "node -r esm lib/cli/index.js -a --queue",
-        "worker": "node -r esm lib/worker/index.js"
+        "worker": "node -r esm src/worker/index.js"
     },
     "size-limit": [
         {
@@ -52,13 +52,14 @@
         "glob": "^7.1.6",
         "hapi-auth-jwt2": "^10.1.0",
         "hapi-dev-errors": "^3.3.0",
+        "hapi-mongodb-decorator": "^0.1.0",
         "hapi-swagger": "^13.0.0",
         "jsonwebtoken": "^8.5.1",
         "laabr": "^5.1.6",
-        "lighthouse": "^5.6.0",
+        "lighthouse-dashboard-core": "^0.1.0",
+        "lighthouse-dashboard-worker": "^0.1.1",
         "lodash": "^4.17.15",
         "mongodb": "^3.5.5",
-        "puppeteer": "^2.1.1",
         "twig": "^1.15.1",
         "uuid": "^3.4.0",
         "winston": "^3.2.1",
