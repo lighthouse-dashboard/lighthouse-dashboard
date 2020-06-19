@@ -23,7 +23,7 @@
                 grid-template-columns: 6fr 6fr;
             }
 
-            @include mq('<=md') {
+            @include mq('<=sm') {
                 grid-template-areas: '.';
                 grid-template-columns: 12fr;
             }
