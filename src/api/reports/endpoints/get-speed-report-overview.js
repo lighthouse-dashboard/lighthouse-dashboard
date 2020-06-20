@@ -1,5 +1,5 @@
-import { getLatestReportBySiteId } from '../../../models/reports';
-import { getFavoriteSites } from '../../../models/sites';
+import { getLatestReportBySiteId } from '../../../services/models/reports';
+import { getFavoriteSites } from '../../../services/models/sites';
 import reportsToBarChart from '../../../transformer/report-to-bar-chart';
 import { getFieldsFromReport } from '../../../utils/get-fields-form-reports';
 import { barChartDataModel } from '../schemas/bar-chart-data-model';

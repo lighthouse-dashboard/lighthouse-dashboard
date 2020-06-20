@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
-import { getSiteConfigById } from '../../../models/sites';
-import { getLatestReportBySiteId } from '../../../models/reports';
+import { getSiteConfigById } from '../../../services/models/sites';
+import { getLatestReportBySiteId } from '../../../services/models/reports';
 import { siteIdParamModel } from '../schemas/siteid-param-model';
 
 /**

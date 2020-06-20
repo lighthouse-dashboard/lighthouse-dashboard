@@ -1,7 +1,7 @@
 import curry from 'lodash.curry';
 import logger from '../../lib/logger';
-import { saveReport } from '../models/reports';
-import { updateSite } from '../models/sites';
+import { saveReport } from '../services/models/reports';
+import { updateSite } from '../services/models/sites';
 import lighthouseTransformer from './lighthouse-transformer';
 import runLighthouse from './run-lighthouse';
 

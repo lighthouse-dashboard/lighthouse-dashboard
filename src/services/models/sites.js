@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4';
-import logger from '../../lib/logger';
-import { SITES_CONFIG_COLLECTION } from '../config/collections';
+import logger from '../../../lib/logger';
+import { SITES_CONFIG_COLLECTION } from '../../config/collections';
 
 /**
  * Find sites

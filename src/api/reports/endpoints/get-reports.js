@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
+import ServiceContainer from 'servicecontainer';
 import CONFIG from '../../../../config/server';
-import { getSiteConfigById } from '../../../models/sites';
-import { getReportsBySiteId } from '../../../models/reports';
+import { getSiteConfigById } from '../../../services/models/sites';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 import { reportModelList } from '../schemas/report-model-schema';
 
@@ -13,13 +13,14 @@ import { reportModelList } from '../schemas/report-model-schema';
  */
 async function getReports({ params, mongo }) {
     const { id } = params;
+    const reportService = ServiceContainer.get().get('reports');
 
     const config = getSiteConfigById(mongo.db, id);
     if (!config) {
         return Boom.notFound(`Site with id not found`);
     }
 
-    const assets = await getReportsBySiteId(mongo.db, id, CONFIG.api.siteReportLimit);
+    const assets = await reportService.getReportsBySiteId(mongo.db, id, CONFIG.api.siteReportLimit);
     if (!assets || assets.length === 0) {
         return [];
     }

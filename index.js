@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-import logger from 'lighthouse-dashboard-core/src/logger';
+import logger from './lib/logger';
 import server from './src/server';
 
 logger.info(`Booting server`);

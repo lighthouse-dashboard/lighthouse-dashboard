@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { removeSite } from '../../../models/sites';
+import { removeSite } from '../../../services/models/sites';
 
 /**
  * Delete site from DB

@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
-import logger from '../../lib/logger';
-import { AUDIT_COLLECTION } from '../config/collections';
+import logger from '../../../lib/logger';
+import { AUDIT_COLLECTION } from '../../config/collections';
 
 /**
  * Get a report by id
