@@ -1,5 +1,5 @@
-import logger from '../../../lib/logger';
-import { SYSTEM_COLLECTION } from '../../config/collections';
+import logger from '../../lib/logger';
+import { SYSTEM_COLLECTION } from '../config/collections';
 
 const SYSTEM_INFO_ENTRY_ID = 1;
 /**

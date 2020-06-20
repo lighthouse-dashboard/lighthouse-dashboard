@@ -1,15 +1,15 @@
 import Boom from '@hapi/boom';
-import JWT from 'jsonwebtoken';
+import loginService from '../../../services/login-service';
 import { loginRequestModel } from '../schemas/login-request-model';
 
 function handler(request) {
     const { password } = request.payload;
-    const { LOGIN_PASS, API_SECRET, JWT_SECRET } = process.env;
-    if (password === LOGIN_PASS) {
-        const jwt = JWT.sign({ token: API_SECRET }, JWT_SECRET);
-        return { jwt };
+    const result = loginService(password);
+    if (!result) {
+        return Boom.forbidden('Tokens do not match');
     }
-    return Boom.forbidden('Tokens do not match');
+
+    return result;
 }
 
 export default {

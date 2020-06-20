@@ -1,5 +1,5 @@
 import filesize from 'filesize.js';
-import { getSystemObject } from '../../../services/models/system';
+import { getSystemObject } from '../../../models/system';
 import { systemInfoModel } from '../schemas/system-info-model';
 
 /**

@@ -1,6 +1,5 @@
 import Boom from '@hapi/boom';
-import { getSiteConfigById } from '../../../services/models/sites';
-import { getLatestReportBySiteId } from '../../../services/models/reports';
+import { getLatestReportBySiteId } from '../../../services/report-service';
 import { siteIdParamModel } from '../schemas/siteid-param-model';
 
 /**
@@ -12,17 +11,10 @@ import { siteIdParamModel } from '../schemas/siteid-param-model';
 async function getLatestReportValues({ params, mongo }) {
     const { siteId } = params;
 
-    const config = getSiteConfigById(mongo.db, siteId);
-    if (!config) {
-        return Boom.notFound(`Site with id not found`);
-    }
-
     const report = await getLatestReportBySiteId(mongo.db, siteId);
-
     if (!report) {
-        return null;
+        return Boom.notFound();
     }
-
     return report;
 }
 
