@@ -8,7 +8,6 @@ export const siteConfigModel = joi.object({
     device: joi.string().required(),
     order: joi.number(),
     is_favorite: joi.boolean().required(),
-    token: joi.string().required(),
     last_audit: joi.string(),
     is_scheduled: joi.boolean(),
 }).label('sites.SiteConfigModel');

@@ -6,7 +6,6 @@ declare namespace Sites {
         device: 'desktop' | 'mobile';
         order: number;
         is_favorite: boolean;
-        token: string;
         last_audit: string | null;
         is_scheduled?: boolean;
     }

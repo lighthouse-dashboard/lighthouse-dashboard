@@ -12,7 +12,7 @@ import { addSite } from '../../../models/sites';
 async function addSiteHandler({ payload, mongo }, h) {
     // eslint-disable-next-line camelcase
     const { url, name, device, is_favorite } = payload;
-    const config = await addSite(mongo.db, { url, name, device, is_favorite, order: 0, token: uuid() });
+    const config = await addSite(mongo.db, { url, name, device, is_favorite, order: 0 });
 
     return h.response(config).code(201);
 }

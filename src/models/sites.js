@@ -31,6 +31,7 @@ export function findSites(database, find, sort = {}, limit = 100) {
 
                 return resolve(data.map(d => {
                     delete d.scheduled_jobs;
+                    delete d.token;
                     return d;
                 }));
             });
@@ -93,7 +94,7 @@ export async function addSite(database, config) {
 export async function updateSite(database, id, delta) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     await siteCollection.updateOne({ id }, { $set: delta });
-    return getSiteConfigById(database, { id });
+    return getSiteConfigById(database, id);
 }
 
 /**
@@ -114,21 +115,6 @@ export async function removeSite(database, id) {
  */
 export async function getSiteConfigById(database, id) {
     const sites = await findSites(database, { id }, {}, 1);
-    if (!sites || sites.length === 0) {
-        return null;
-    }
-
-    return sites.pop();
-}
-
-/**
- * Get config for specific site
- * @param {Db} database
- * @param {string} token
- * @return {Promise<Sites.SiteConfig | null>}
- */
-export async function getSiteConfigByToken(database, token) {
-    const sites = await findSites(database, { token }, {}, 1);
     if (!sites || sites.length === 0) {
         return null;
     }

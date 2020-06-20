@@ -6,7 +6,6 @@ export default function createFakeSite() {
         device: 'desktop',
         order: 0,
         is_favorite: true,
-        token: 'foo',
         last_audit: (new Date()).toISOString(),
     };
 }

@@ -1,3 +1,7 @@
+# 5.13
+0. [Split application into seperate projects (Core, Worker, UI) #47](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/47)
+0. [Remove webhooks logic #50](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/50)
+
 # 5.12
 0. [Add logout button #22](https://github.com/faebeee/lighthouse-dashboard/issues/22)
 0. [Remove rabbitmq and access mongodb for scheduled jobs #38](https://github.com/faebeee/lighthouse-dashboard/issues/38)
