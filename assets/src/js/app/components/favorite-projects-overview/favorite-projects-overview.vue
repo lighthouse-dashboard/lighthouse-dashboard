@@ -1,7 +1,7 @@
 <template>
     <div class='favorite-project-overview'>
         <p class='u-reset overline'>
-            Projects
+            Favorite Projects
         </p>
 
         <loading-indicator v-if='isLoading'/>

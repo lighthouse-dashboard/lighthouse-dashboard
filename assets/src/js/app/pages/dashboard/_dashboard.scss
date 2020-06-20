@@ -8,6 +8,12 @@
         .dashboard--section {
             margin-bottom: calc(var(--root-spacing) * 5);
         }
+
+        .dashboard--overview {
+            display: grid;
+            grid-template-areas: 'scheduled_jobs . . .';
+            grid-template-columns: repeat(4, 3fr);
+        }
     }
 
     // Facets

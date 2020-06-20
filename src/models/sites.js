@@ -62,7 +62,7 @@ export function getFavoriteSites(database) {
  * @param {number} limit
  * @return {Promise<Sites.SiteConfig[]>}
  */
-export function getLatestSites(database, limit=50) {
+export function getLatestSites(database, limit = 50) {
     return findSites(database, {
         last_audit: {
             $exists: true,
@@ -132,13 +132,4 @@ export async function setScheduledAuditForSite(database, config, isScheduled) {
     const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     logger.debug(`Update scheduled_jobs of ${ config.name } to ${ isScheduled }`);
     await siteCollection.updateOne({ id: config.id }, { $set: { is_scheduled: isScheduled } });
-}
-
-/**
- * Get list of scheduled sites
- * @param {Db} database
- * @return {Promise<Sites.SiteConfig[]>}
- */
-export function getScheduledSites(database) {
-    return findSites(database, { is_scheduled: true });
 }
