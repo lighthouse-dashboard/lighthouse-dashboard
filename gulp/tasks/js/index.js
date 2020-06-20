@@ -8,7 +8,7 @@ const compiler = webpack(webpackConfig);
 function compileJs(resolve) {
     compiler.run(() => {
         resolve();
-    })
+    });
 }
 
 gulp.task('js', compileJs);

@@ -1,3 +1,4 @@
+import { MEDIUM } from '../../../config/cache';
 import { getReportsBySiteId } from '../../../services/report-service';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 import { reportModelList } from '../schemas/report-model-schema';
@@ -26,6 +27,10 @@ export default {
         },
         response: {
             schema: reportModelList,
+        },
+        cache: {
+            expiresIn: MEDIUM,
+            privacy: 'private',
         },
     },
 };

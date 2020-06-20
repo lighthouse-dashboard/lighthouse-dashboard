@@ -5,13 +5,13 @@ require('dotenv').config();
 
 const path = require('path');
 const webpack = require('webpack');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 const paths = require('../../../src/config/path');
 const config = require('./config');
-const isDist = process.env.NODE_ENV === 'production'
+const isDist = process.env.NODE_ENV === 'production';
 
 // NOTE: Export webpack config
 module.exports = {
@@ -53,9 +53,9 @@ module.exports = {
                         loader: 'markdown-loader',
                         options: {
                             /* your options here */
-                        }
-                    }
-                ]
+                        },
+                    },
+                ],
             },
             {
                 test: /\.vue$/,

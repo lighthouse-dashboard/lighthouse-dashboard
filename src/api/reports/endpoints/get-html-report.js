@@ -1,4 +1,5 @@
 import { Boom } from '@hapi/boom';
+import { LIFE_TIME } from '../../../config/cache';
 import { createHTMLReportById } from '../../../services/report-service';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 
@@ -29,6 +30,10 @@ export default {
         auth: 'jwt',
         validate: {
             params: reportIdParamModel,
+        },
+        cache: {
+            expiresIn: LIFE_TIME,
+            privacy: 'public',
         },
     },
 };

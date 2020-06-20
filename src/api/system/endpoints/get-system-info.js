@@ -1,4 +1,5 @@
 import filesize from 'filesize.js';
+import { MEDIUM } from '../../../config/cache';
 import { getSystemObject } from '../../../models/system';
 import { systemInfoModel } from '../schemas/system-info-model';
 
@@ -32,6 +33,10 @@ export default {
         auth: 'jwt',
         response: {
             schema: systemInfoModel,
+        },
+        cache: {
+            expiresIn: MEDIUM,
+            privacy: 'private',
         },
     },
 };

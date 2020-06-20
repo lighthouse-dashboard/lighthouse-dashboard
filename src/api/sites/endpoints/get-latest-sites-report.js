@@ -1,3 +1,4 @@
+import { MEDIUM } from '../../../config/cache';
 import { getLatestReportBySiteId } from '../../../models/reports';
 import { getAllSites } from '../../../models/sites';
 import { siteWithReportList } from '../schemas/site-with-report';
@@ -41,6 +42,10 @@ export default {
         auth: 'jwt',
         response: {
             schema: siteWithReportList,
+        },
+        cache: {
+            expiresIn: MEDIUM,
+            privacy: 'private',
         },
     },
 };
