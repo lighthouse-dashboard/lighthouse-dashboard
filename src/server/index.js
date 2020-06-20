@@ -1,9 +1,9 @@
 'use strict';
 
 import Hapi from '@hapi/hapi';
+import logger from 'lighthouse-dashboard-core/src/logger';
 import * as twig from 'twig';
 import CONFIG from '../../config/server.js';
-import logger from '../../lib/core/src/logger';
 import { root } from '../config/path';
 import loadRoutes from '../routes';
 import configValidator from '../validator/config-validator';

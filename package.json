@@ -56,10 +56,8 @@
         "hapi-swagger": "^13.0.0",
         "jsonwebtoken": "^8.5.1",
         "laabr": "^5.1.6",
-        "lighthouse-dashboard-core": "^0.1.0",
-        "lighthouse-dashboard-worker": "^0.1.1",
         "lodash": "^4.17.15",
-        "mongodb": "^3.5.5",
+        "mongodb": "^3.5.9",
         "twig": "^1.15.1",
         "uuid": "^3.4.0",
         "winston": "^3.2.1",
@@ -140,5 +138,8 @@
         "node": ">= 12.0",
         "npm": ">= 6.0.0"
     },
-    "types": "./types/index.d.ts"
+    "types": "./types/index.d.ts",
+    "_moduleAliases": {
+        "@": "./src"
+    }
 }

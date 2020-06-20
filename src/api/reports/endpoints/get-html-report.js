@@ -1,6 +1,7 @@
-const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
+
 import { Boom } from '@hapi/boom';
-import { getReportById } from '../../../../lib/core/src/db/models/reports';
+import createHTMLReport from '../../../utils/create-html-report';
+import { getReportById } from '../../../models/reports';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 
 /**
@@ -21,7 +22,7 @@ async function getHtmlReportHandler({ params, mongo }) {
         throw Boom.notFound('Report does not have raw data');
     }
 
-    return ReportGenerator.generateReport(JSON.parse(report.raw), 'html');
+    return createHTMLReport(report);
 }
 
 export default {

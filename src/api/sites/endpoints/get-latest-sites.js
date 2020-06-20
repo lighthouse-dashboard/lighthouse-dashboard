@@ -1,7 +1,8 @@
-import { getLatestSites } from '../../../../lib/core/src/db/models/sites';
+import { getLatestSites } from '../../../models/sites';
+import CONFIG from '../../../../config/server';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
-export const getLatestSitesHandler = (request) => getLatestSites(request.mongo.db);
+export const getLatestSitesHandler = (request) => getLatestSites(request.mongo.db, CONFIG.api.entriesLimit);
 
 export default {
     method: 'GET',

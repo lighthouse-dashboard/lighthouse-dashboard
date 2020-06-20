@@ -1,4 +1,4 @@
-import logger from '../../../lib/core/src/logger';
+import logger from '../../../lib/logger';
 import getPlugins from './plugins';
 
 /**

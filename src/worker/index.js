@@ -1,4 +1,4 @@
-import worker from 'lighthouse-dashboard-worker';
+import worker from '../../lib/worker/worker';
 
 require('dotenv').config();
 

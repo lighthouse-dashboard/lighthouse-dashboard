@@ -2,10 +2,10 @@
 import * as Inert from '@hapi/inert';
 import * as Vision from '@hapi/vision';
 import blipp from 'blipp';
+import * as mongoDecoratrorPlugin from 'hapi-mongodb-decorator';
 import HapiSwagger from 'hapi-swagger';
 
 import { name, version } from '../../../package.json';
-import * as mongoDecoratrorPlugin from 'hapi-mongodb-decorator';
 
 export default () => ({
     dev: [
