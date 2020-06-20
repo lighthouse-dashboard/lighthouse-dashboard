@@ -1,5 +1,8 @@
 <template>
     <div class='dashboard'>
+        <div class='dashboard--overview dashboard--section'>
+            <sites-list/>
+        </div>
         <latest-audits-feed class='dashboard--section'/>
         <favorite-projects-overview class='dashboard--section'/>
     </div>
@@ -8,6 +11,8 @@
 <script>
     import FavoriteProjectsOverview from '../../components/favorite-projects-overview/favorite-projects-overview';
     import LatestAuditsFeed from '../../components/latest-audits-feed/latest-audits-feed';
+    import SitesList from '../../components/sites-list/sites-list';
+    import withScheduledSites from '../../containers/with-scheduled-sites';
     import withFavoritedSites from '../../containers/with-sites/with-favorited-sites';
     import withLatestSites from '../../containers/with-sites/with-latest-sites';
 
@@ -15,6 +20,7 @@
         components: {
             LatestAuditsFeed: withLatestSites(LatestAuditsFeed),
             FavoriteProjectsOverview: withFavoritedSites(FavoriteProjectsOverview),
+            SitesList: withScheduledSites(SitesList),
         },
     };
 </script>
