@@ -1,5 +1,4 @@
 import joi from '@hapi/joi';
-import uuid from 'uuid/v4';
 import { addSite } from '../../../models/sites';
 
 /**

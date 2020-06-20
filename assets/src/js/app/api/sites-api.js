@@ -1,6 +1,6 @@
 import {
     CREATE_SITE_URL,
-    GET_LATEST_AUDITED_SITES_URL,
+    GET_LATEST_AUDITED_SITES_URL, GET_SCHEDULED_SITES_URL,
     GET_SITE_BY_ID_URL,
     GET_SITE_WITH_REPORT_URL,
     GET_SITES_URL,
@@ -14,6 +14,11 @@ import axios from '../utils/axios';
  */
 export const getAllSites = async () => {
     const { data } = await axios().get(GET_SITES_URL);
+    return data;
+};
+
+export const getScheduledSites = async () => {
+    const { data } = await axios().get(GET_SCHEDULED_SITES_URL);
     return data;
 };
 

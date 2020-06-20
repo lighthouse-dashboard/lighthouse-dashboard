@@ -1,6 +1,7 @@
 # 5.13
 0. [Split application into seperate projects (Core, Worker, UI) #47](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/47)
 0. [Remove webhooks logic #50](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/50)
+0. [Create list to see scheduled sites #35](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/35)
 
 # 5.12
 0. [Add logout button #22](https://github.com/faebeee/lighthouse-dashboard/issues/22)

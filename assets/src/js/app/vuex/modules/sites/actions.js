@@ -10,6 +10,13 @@ export async function fetchAllSites({ commit }) {
     commit({ type: SET_SITES, sites });
 }
 
+/**
+ * Get list of scheduled sites
+ * @return {Promise<Sites.SiteConfig[]>}
+ */
+export function fetchScheduledSites() {
+    return api.getScheduledSites();
+}
 
 /**
  * Delete site by id
