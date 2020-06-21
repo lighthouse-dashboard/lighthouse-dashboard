@@ -32,22 +32,11 @@ export default [
         handler: basicViewHandler,
     },
 
-
     {
         method: 'GET',
         path: '/app/overview',
         options: {
             description: 'Overview page',
-            auth: false,
-        },
-        handler: basicViewHandler,
-    },
-
-    {
-        method: 'GET',
-        path: '/app/projects/{id}',
-        options: {
-            description: 'Details of project',
             auth: false,
         },
         handler: basicViewHandler,

@@ -20,6 +20,11 @@
     export default {
         components: { ListItem, List },
         props: {
+            isLoading: {
+                type: Boolean,
+                default: false,
+            },
+
             /** @type {Reports.Report[]} */
             reports: {
                 type: Array,

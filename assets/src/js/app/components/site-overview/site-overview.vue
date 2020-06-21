@@ -3,7 +3,7 @@
         <scheduled-job-indicator v-if="is_scheduled"/>
         <div class='site-overview--title'
                 slot="title">
-            <btn :to="{name: 'project.detail', params: {id}}"
+            <btn :to="`/app/projects/${id}`"
                     class="subtitle1"
                     facets="flat">
                 {{ name }}

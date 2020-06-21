@@ -1,0 +1,56 @@
+{% extends '../layout.twig' %}
+
+{% block app_content %}
+    <div class="project">
+        <h4 class='h4 project--title'>
+            {{ site.name }}
+        </h4>
+
+        <component is="reports-provider"
+                id="{{ site.id }}">
+            <template v-slot="reportsProps">
+                <div class='project--content'>
+                    <div class='project--insights'>
+                        <div class='project--overview'>
+                            <component is="tile"
+                                    title="Latest Report"
+                                    class="project--last-report-radar">
+                            </component>
+
+                            <component is="tile"
+                                    title="Averages"
+                                    class="project--average">
+                            </component>
+                        </div>
+
+                        <component is="report-history"
+                                class='project--history'
+                                :is-loading="reportsProps.isLoading"
+                                :reports='reportsProps.reports'>
+                        </component>
+                    </div>
+
+                    <div class='project--sidebar'>
+                        <component is="tile"
+                                title='Tools'
+                                class='project--sidebar-section'>
+                            <component is="site-actions-list"
+                                    url='{{ site.url }}'></component>
+                        </component>
+
+                        <component is="tile"
+                                title='HTML Reports'
+                                class='project--sidebar-section'>
+                            <component is="loading-indicator"
+                                    v-if="reportsProps.isLoading"></component>
+                            <component v-else
+                                    is="audit-report-list"
+                                    :reports='reportsProps.reports'></component>
+                        </component>
+                    </div>
+                </div>
+            </template>
+        </component>
+
+    </div>
+{% endblock %}
