@@ -1,0 +1,37 @@
+{% extends '../layout.twig' %}
+
+{% block app_content %}
+    <div class="system">
+        <div></div>
+
+        <component is="health-provider">
+            <template v-slot="healthProps">
+                <component is="system-info-provider">
+                    <template v-slot="systemProps">
+                        <div class="system--content">
+                            <component is="system-info-tile"
+                                    class="system--section"
+                                    :health="healthProps.health"
+                                    version="{{ VERSION }}"
+                                    :is-loading="healthProps.isLoading">
+                            </component>
+
+                            <component is="worker-info-tile"
+                                    :info="systemProps.info"
+                                    :is-loading="systemProps.isLoading">
+                            </component>
+
+                            <component is="db-info-tile"
+                                    :is-loading="systemProps.isLoading || healthProps.isLoading"
+                                    :info="systemProps.info"
+                                    :health="healthProps.health"></component>
+
+                            <component is="project-links-tile"></component>
+                        </div>
+                    </template>
+                </component>
+            </template>
+        </component>
+        <div></div>
+    </div>
+{% endblock %}

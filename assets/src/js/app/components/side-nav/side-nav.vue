@@ -20,10 +20,23 @@
 
 
                 <ul class="side-nav--list">
-                    <li class="side-nav--list-item">
-                        <a href="/app/dashboard">
+                    <li>
+                        <a href="/app/dashboard"
+                                class="side-nav--list-item">
                             Dashboard
 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/app/projects"
+                                class="side-nav--list-item">
+                            Projects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/app/system"
+                                class="side-nav--list-item">
+                            System
                         </a>
                     </li>
                 </ul>

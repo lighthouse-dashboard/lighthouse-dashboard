@@ -71,7 +71,7 @@ const loaders = [
         true,
         // The regular expression used to match base component filenames
         /[a-zA-Z0-9-]+\.vue$/
-    )
+    ),
 ];
 
 export default function registry(Vue, context) {

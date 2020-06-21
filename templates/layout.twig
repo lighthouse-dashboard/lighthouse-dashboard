@@ -3,10 +3,12 @@
 {% block content %}
     <component is="app-layout">
         {% block sidebar %}
-            {% if isAuthenticated %}
-                <component is="side-nav"
-                        title="{{ TITLE }}"></component>
-            {% endif %}
+            <template slot="sidebar">
+                {% if isAuthenticated %}
+                    <component is="side-nav"
+                            title="{{ TITLE }}"></component>
+                {% endif %}
+            </template>
         {% endblock %}
 
         <template slot="content">

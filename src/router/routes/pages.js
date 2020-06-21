@@ -52,14 +52,4 @@ export default [
         },
         handler: basicViewHandler,
     },
-
-    {
-        method: 'GET',
-        path: '/app/system',
-        options: {
-            description: 'Show system infos',
-            auth: false,
-        },
-        handler: basicViewHandler,
-    },
 ];
