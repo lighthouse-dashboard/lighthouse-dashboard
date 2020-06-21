@@ -52,6 +52,7 @@
         "glob": "^7.1.6",
         "hapi-auth-jwt2": "^10.1.0",
         "hapi-dev-errors": "^3.3.0",
+        "hapi-error": "^2.3.0",
         "hapi-mongodb-decorator": "^0.1.0",
         "hapi-swagger": "^13.0.0",
         "jsonwebtoken": "^8.5.1",

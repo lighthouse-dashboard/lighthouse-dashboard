@@ -43,7 +43,7 @@
         data() {
             return {
                 password: '',
-
+                redirectUrl: '/app/dashboard',
                 /** @type {Error | null}*/
                 error: null,
 
@@ -71,7 +71,7 @@
             },
 
             loginUser() {
-                window.location.href = '/app/dashboard';
+                window.location.href = this.redirectUrl;
             },
 
             async onLogin() {
@@ -89,6 +89,12 @@
         },
 
         mounted() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('redirect');
+            if (redirectUrl) {
+                this.redirectUrl = redirectUrl;
+            }
+
             if (this.isLoggedIn) {
                 this.loginUser();
             }

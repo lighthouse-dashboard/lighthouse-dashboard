@@ -2,6 +2,7 @@
 import * as Inert from '@hapi/inert';
 import * as Vision from '@hapi/vision';
 import blipp from 'blipp';
+import hapiError from 'hapi-error';
 import * as mongoDecoratrorPlugin from 'hapi-mongodb-decorator';
 import HapiSwagger from 'hapi-swagger';
 
@@ -42,6 +43,16 @@ export default () => ({
                 url: process.env.MONGODB_URI,
                 settings: {
                     poolSize: 10,
+                },
+            },
+        },
+        {
+            plugin: hapiError,
+            options: {
+                statusCodes: {
+                    401: { // if the statusCode is 401
+                        redirect: '/login',
+                    },
                 },
             },
         },
