@@ -18,7 +18,6 @@
                             @click='toggleDrawer'/>
                 </div>
 
-
                 <ul class="side-nav--list">
                     <li>
                         <a href="/app/dashboard"
@@ -115,7 +114,7 @@
 
             onLogoutClicked() {
                 this.logout();
-                this.$router.push({ name: 'login' });
+                window.location.href = '/login';
             },
         },
 

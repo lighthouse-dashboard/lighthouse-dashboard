@@ -6,7 +6,7 @@
             <btn facets="flat"
                     class="latest-audits-feed--title-btn"
                     :title="site.name"
-                    :to="{name: 'project.detail', params: {id: site.id}}">
+                    :to="`/app/projects/${site.id}`">
                 {{ site.name }}
             </btn>
         </template>

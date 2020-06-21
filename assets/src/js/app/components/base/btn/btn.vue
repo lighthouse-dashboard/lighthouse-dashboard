@@ -31,7 +31,7 @@
             },
 
             to: {
-                type: Object,
+                type: String,
                 required: false,
                 default: null,
             },
