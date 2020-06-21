@@ -2,11 +2,10 @@
     <tile title="Links">
         <list>
             <list-item>
-                <router-link
-                        class="link"
-                        :to="{name: 'changelog'}">
+                <a class="link"
+                        href="/app/system/changelog">
                     Changelog
-                </router-link>
+                </a>
             </list-item>
 
             <list-item>

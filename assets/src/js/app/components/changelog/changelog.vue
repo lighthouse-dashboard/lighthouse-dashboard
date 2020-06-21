@@ -8,8 +8,8 @@
 
 <script>
     import MarkdownIt from 'markdown-it';
-    import markdown from '../../../../../../../CHANGELOG.md';
-    import Tile from '../../../components/tile/tile';
+    import markdown from '../../../../../../CHANGELOG.md';
+    import Tile from '../tile/tile';
 
     export default {
         components: { Tile },
