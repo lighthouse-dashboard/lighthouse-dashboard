@@ -1,4 +1,5 @@
 import os from 'os';
+import { MEDIUM } from '../../../config/cache';
 import { healthResponseModel } from '../schemas/health-response-model';
 
 function getHealthHandler(request) {
@@ -20,6 +21,10 @@ export default {
         tags: ['api', 'health'],
         response: {
             schema: healthResponseModel,
+        },
+        cache: {
+            expiresIn: MEDIUM,
+            privacy: 'private',
         },
     },
 };

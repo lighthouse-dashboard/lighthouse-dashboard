@@ -1,5 +1,6 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
+import { MEDIUM } from '../../../config/cache';
 import { getSiteConfigById } from '../../../models/sites';
 import { siteConfigModel } from '../schemas/site-config-model';
 
@@ -33,6 +34,10 @@ export default {
         },
         response: {
             schema: siteConfigModel,
+        },
+        cache: {
+            expiresIn: MEDIUM,
+            privacy: 'private',
         },
     },
 };

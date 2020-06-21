@@ -1,6 +1,13 @@
 {% extends 'dist/index.html' %}
 
 {% block head %}
+    <link rel="dns-prefetch"
+            href="//fonts.googleapis.com">
+
+    <link href="//fonts.googleapis.com"
+            rel="preconnect"
+            crossorigin>
+
     <link rel="apple-touch-icon"
             sizes="57x57"
             href="/static/ico/apple-icon-57x57.png">
@@ -53,18 +60,14 @@
     <meta name="theme-color"
             content="#ffffff">
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-            rel="stylesheet">
+    <link rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            as="style">
 
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css"
-            rel="stylesheet">
-
-    <link href="/css/app.css"
-            rel="stylesheet">
+    <link rel="stylesheet"
+            href="/css/app.css">
 
     <title>{{ TITLE }}</title>
-
-    <script src="https://unpkg.com/css-var-editor"></script>
 {% endblock %}
 {% block content %}
     <div id="app">
@@ -86,8 +89,9 @@
 
     {% if G_ANALYTICS_ID %}
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id={{ G_ANALYTICS_ID }}"></script>
+        <link rel="preload"
+                href="https://www.googletagmanager.com/gtag/js?id={{ G_ANALYTICS_ID }}"
+                as="script">
         <script>
             window.dataLayer = window.dataLayer || [];
 

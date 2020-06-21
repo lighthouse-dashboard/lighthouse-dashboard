@@ -1,3 +1,4 @@
+import { MEDIUM } from '../../../config/cache';
 import { getFavoriteSites } from '../../../models/sites';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
@@ -11,6 +12,10 @@ export default {
         auth: 'jwt',
         response: {
             schema: siteConfigModelList,
+        },
+        cache: {
+            expiresIn: MEDIUM,
+            privacy: 'private',
         },
     },
 };

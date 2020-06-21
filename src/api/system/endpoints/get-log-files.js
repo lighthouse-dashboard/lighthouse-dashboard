@@ -1,6 +1,7 @@
 import joi from '@hapi/joi';
 import glob from 'glob';
 import path from 'path';
+import { MEDIUM } from '../../../config/cache';
 
 /**
  *
@@ -30,6 +31,10 @@ export default {
         auth: 'jwt',
         response: {
             schema: joi.array().items(joi.string()),
+        },
+        cache: {
+            expiresIn: MEDIUM,
+            privacy: 'private',
         },
     },
 };
