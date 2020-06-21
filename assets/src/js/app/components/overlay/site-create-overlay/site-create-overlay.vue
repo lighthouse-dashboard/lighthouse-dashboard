@@ -1,8 +1,9 @@
 <template>
     <overlay title='Create Site'
-            :active='isOverlayOpen'
+            :active='true'
             v-on='$listeners'>
-        <site-create-form v-model='siteConfig'/>
+        <site-create-form v-model='siteConfig'
+                v-if="siteConfig"/>
         <error-message :error='errorMessage'/>
         <template slot='additional'>
             <btn v-if='isEdit'
@@ -35,6 +36,7 @@
                 default: null,
             },
         },
+
         data() {
             return {
                 errorMessage: null,
@@ -55,9 +57,8 @@
 
             onCreateClicked() {
                 this.createSite({ siteConfig: this.siteConfig })
-                    .then((result) => {
-                        this.isOverlayOpen = false;
-                        this.$router.push({ name: 'project.detail', params: { id: result.id } });
+                    .then(() => {
+                        this.$emit('done');
                         Toastify({
                             text: 'Site created',
                             className: 'info',
@@ -78,8 +79,8 @@
                     },
                 })
                     .then(() => {
-                        this.isOverlayOpen = false;
                         this.$emit('updated');
+                        this.$emit('done');
                         Toastify({
                             text: 'Site updated',
                             className: 'info',

@@ -1,6 +1,7 @@
 export const SET_LOGGED_IN = 'SET_LOGGED_IN';
 export const SET_JWT = 'SET_JWT';
 export const SET_SITES = 'SET_SITES';
+export const MARK_SITE_AS_SCHEDULED = 'MARK_SITE_AS_SCHEDULED';
 export const SET_LATEST_SITES = 'SET_LATEST_SITES';
 export const SET_FAV_SITES = 'SET_FAV_SITES';
 export const SET_SEARCH_RESULT = 'SET_SEARCH_RESULT';

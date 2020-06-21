@@ -33,9 +33,10 @@
     import Btn from '../base/btn/btn';
     import List from '../base/list/list';
     import ListItem from '../base/list/list-item/list-item';
+    import SiteCreateOverlay from '../overlay/site-create-overlay/site-create-overlay';
 
     export default {
-        components: { ListItem, List, Btn },
+        components: { SiteCreateOverlay, ListItem, List, Btn },
         props: {
             /** @type {Sites.SiteConfig} */
             site: {

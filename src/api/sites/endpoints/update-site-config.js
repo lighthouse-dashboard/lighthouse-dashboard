@@ -15,7 +15,7 @@ async function updateSiteConfigHandler({ params, payload, mongo }, h) {
     const { is_favorite, url, name } = payload;
     const config = await updateSite(mongo.db, id, { is_favorite, url, name });
 
-    return h.response(config).code(204);
+    return h.response(config);
 }
 
 export default {

@@ -3,7 +3,7 @@ import { SET_CURRENT_SITE_CONFIG, SET_SITES, UPDATE_SITE } from '../mutation-typ
 
 /**
  * Fetch all sites
- * @return {Promise<T>}
+ * @return {Promise<Sites.SiteConfig[]>}
  */
 export async function fetchAllSites({ commit }) {
     const sites = await api.getAllSites();
@@ -45,8 +45,9 @@ export function createSite(_, { siteConfig }) {
  * @return {Promise<void>}
  */
 export async function updateSite({ commit }, { id, delta }) {
-    await api.updateSite(id, delta);
+    const newSite = await api.updateSite(id, delta);
     commit({ type: UPDATE_SITE, id: id, delta });
+    commit({ type: SET_CURRENT_SITE_CONFIG, config: newSite });
 }
 
 /**
@@ -90,29 +91,10 @@ export function getSitesWithLatestReport() {
 }
 
 /**
- * Reset current page in state
+ * Set current site data
  * @param {function} commit
+ * @param {Sites.SiteConfig} site
  */
-export function resetCurrentSite({ commit }) {
-    commit({ type: SET_CURRENT_SITE_CONFIG, config: null });
-}
-
-/**
- * Search for a page
- * @param {function} commit
- * @param {string} query
- * @return {Promise<void>}
- */
-export async function searchForPages({ commit }, { query }) {
-    const sites = await api.search(query);
-    commit({ type: SET_SITES, sites });
-}
-
-/**
- * Set collection of sites in store
- * @param {function} commit
- * @param {Sites.SiteConfig[]} sites
- */
-export function setSites({ commit }, { sites }) {
-    commit({ type: SET_SITES, sites });
+export function setCurrentSite({ commit }, { site }) {
+    commit({ type: SET_CURRENT_SITE_CONFIG, config: site });
 }

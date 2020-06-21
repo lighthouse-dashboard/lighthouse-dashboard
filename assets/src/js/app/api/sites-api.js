@@ -1,6 +1,7 @@
 import {
     CREATE_SITE_URL,
-    GET_LATEST_AUDITED_SITES_URL, GET_SCHEDULED_SITES_URL,
+    GET_LATEST_AUDITED_SITES_URL,
+    GET_SCHEDULED_SITES_URL,
     GET_SITE_BY_ID_URL,
     GET_SITE_WITH_REPORT_URL,
     GET_SITES_URL,
@@ -35,11 +36,12 @@ export const deleteSite = async (id) => {
  * Update a site
  * @param {string} id
  * @param {Partial<Sites.SiteConfig>}delta
- * @return {Promise<void>}
+ * @return {Promise<Sites.SiteConfig>}
  */
 export const updateSite = async (id, delta) => {
-    await axios()
+    const { data } = await axios()
         .put(GET_SITE_BY_ID_URL(id), delta);
+    return data;
 };
 
 /**
