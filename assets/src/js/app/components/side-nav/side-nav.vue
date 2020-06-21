@@ -20,30 +20,12 @@
 
 
                 <ul class="side-nav--list">
-                    <router-link
-                            tag="li"
-                            active-class="side-nav--list-item__active"
-                            class="side-nav--list-item"
-                            exact
-                            :to="{name: 'dashboard'}">
-                        Dashboard
-                    </router-link>
+                    <li class="side-nav--list-item">
+                        <a href="/app/dashboard">
+                            Dashboard
 
-                    <router-link
-                            tag="li"
-                            active-class="side-nav--list-item__active"
-                            class="side-nav--list-item"
-                            :to="{name: 'projects'}">
-                        Projects
-                    </router-link>
-
-                    <router-link
-                            tag="li"
-                            active-class="side-nav--list-item__active"
-                            class="side-nav--list-item"
-                            :to="{name: 'system'}">
-                        System
-                    </router-link>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -83,11 +65,6 @@
 
         props: {
             title: {
-                type: String,
-                required: true,
-            },
-
-            version: {
                 type: String,
                 required: true,
             },

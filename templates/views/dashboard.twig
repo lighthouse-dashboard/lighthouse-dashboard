@@ -1,6 +1,34 @@
 {% extends '../layout.twig' %}
 
-
  {% block app_content %}
-  Dashboard
+     <div class="dashboard">
+         <div class="dashboard--section">
+             <component is="scheduled-sites-provider">
+                 <template v-slot="{ sites, isLoading }">
+                     <component is="sites-list"
+                             :sites="sites"></component>
+                 </template>
+             </component>
+         </div>
+         <div class="dashboard--section">
+             <component is="latest-sites-provider">
+                 <template v-slot="{ sites, isLoading }">
+                     <component
+                             is="latest-audits-feed"
+                             :sites="sites"
+                             :is-loading="isLoading"></component>
+                 </template>
+             </component>
+         </div>
+
+         <div class="dashboard--section">
+             <component is="favorite-sites-provider">
+                 <template v-slot="{ sites }">
+                     <component
+                             is="favorite-projects-overview"
+                             :sites="sites"></component>
+                 </template>
+             </component>
+         </div>
+     </div>
  {% endblock %}

@@ -2,7 +2,7 @@
     <component class='u-reset btn button'
             v-bind="$attrs"
             :class='classes'
-            :to="to"
+            :href="to"
             :disabled='disabled'
             :is="component"
             v-on="$listeners">
@@ -48,7 +48,7 @@
                     case !!this.$attrs.href :
                         return 'a';
                     case !!this.to:
-                        return 'router-link';
+                        return 'a';
                     default:
                         return 'button';
                 }

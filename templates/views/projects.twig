@@ -1,0 +1,21 @@
+{% extends '../layout.twig' %}
+
+{% block app_content %}
+    <div class="projects">
+        <p class="u-reset overline">
+            All Projects
+        </p>
+
+        <component is="sites-provider">
+            <template v-slot="{sites, isLoading}">
+                <div class="projects--list">
+                    <component is="site-report-tile"
+                            :site="site"
+                            v-for="site in sites"
+                            :key="site.id"></component>
+                </div>
+            </template>
+        </component>
+
+    </div>
+{% endblock %}

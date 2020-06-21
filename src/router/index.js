@@ -1,21 +1,16 @@
 import Inert from '@hapi/inert';
 import logger from '../../lib/logger';
 import glob from '../utils/glob';
-import assetRoutes from './assets-routes';
-import viewRoutes from './views-routes';
+import assetRoutes from './routes/assets';
+import viewRoutes from './routes/pages';
 
 /**
- * Load all routes
- * @return {Promise<hapi.Route[]>}
+ * Load all route objects form given file pattern
+ * @param {string} pattern
+ * @return {Promise<*[]>}
  */
-async function getRoutes() {
-    /** @type {hapi.Route[]} */
-    const routes = [
-        ...viewRoutes,
-        ...assetRoutes,
-    ];
-
-    const files = await glob('src/api/**/endpoints/*.js');
+async function loadAllRoutesFor(pattern) {
+    const files = await glob(pattern);
     logger.debug(`Loading routes ${ files.length }`);
 
     return files.reduce((acc, file) => {
@@ -23,7 +18,21 @@ async function getRoutes() {
         const { default: route } = require(file);
         acc.push(route);
         return acc;
-    }, routes);
+    }, []);
+}
+
+/**
+ * Load all routes
+ * @return {Promise<hapi.Route[]>}
+ */
+async function getRoutes() {
+    /** @type {hapi.Route[]} */
+    return [
+        ...viewRoutes,
+        ...assetRoutes,
+        ...(await loadAllRoutesFor('src/api/**/endpoints/*.js')),
+        ...(await loadAllRoutesFor('src/routes/**/*.js')),
+    ];
 }
 
 /**

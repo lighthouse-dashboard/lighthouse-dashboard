@@ -8,6 +8,7 @@ import { SET_CURRENT_SITE_CONFIG, SET_SITES, UPDATE_SITE } from '../mutation-typ
 export async function fetchAllSites({ commit }) {
     const sites = await api.getAllSites();
     commit({ type: SET_SITES, sites });
+    return sites;
 }
 
 /**

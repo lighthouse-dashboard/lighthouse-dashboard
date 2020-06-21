@@ -34,7 +34,7 @@
         },
 
         computed: {
-            ...mapState('login', ['isLoggedIn', 'jwt']),
+            ...mapState('login', ['isLoggedIn']),
             classes() {
                 return [
                     this.createIfFacet(this.isLoggedIn, 'logged-in'),

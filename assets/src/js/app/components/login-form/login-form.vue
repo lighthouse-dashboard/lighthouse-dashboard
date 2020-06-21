@@ -1,5 +1,6 @@
 <template>
     <form class="login-form"
+            v-if="!isLoggedIn"
             @submit.prevent="onLogin">
         <h4>
             {{ title }}
@@ -13,8 +14,7 @@
                         type="password"
                         :value="password"
                         :error='errorMessage'
-                        @input='onChange'
-                />
+                        @input='onChange'/>
             </div>
             <div>
                 <btn :disabled='isLoading || !isSubmittable'
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import Btn from '../base/btn/btn';
     import InputField from '../base/input-field/input-field';
 
@@ -52,6 +52,8 @@
         },
 
         computed: {
+            ...mapState('login', ['isLoggedIn']),
+
             errorMessage() {
                 return this.error?.message;
             },
@@ -68,18 +70,28 @@
                 this.password = val;
             },
 
+            loginUser() {
+                window.location.href = '/app/dashboard';
+            },
+
             async onLogin() {
                 this.isLoading = true;
                 this.error = null;
                 try {
                     await this.doLogin({ password: this.password });
-                    this.$router.push({ name: 'dashboard' });
+                    this.loginUser();
                     this.isLoading = false;
                 } catch (e) {
                     this.error = e;
                 }
                 this.isLoading = false;
             },
+        },
+
+        mounted() {
+            if (this.isLoggedIn) {
+                this.loginUser();
+            }
         },
     };
 </script>

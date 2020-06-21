@@ -8,19 +8,10 @@ const getComponentNameFromFileName = (fileName) => upperFirst(
         .replace(/\.\w+$/, ''))
 );
 
-function loadComponents(Vue) {
-    const requireComponent = require.context(
-        // The relative path of the components folder
-        '../app/components',
-        // Whether or not to look in subfolders
-        true,
-        // The regular expression used to match base component filenames
-        /[a-zA-Z0-9-]+\.vue$/
-    );
-
-    requireComponent.keys().forEach(fileName => {
+function loadComponentsByPattern(Vue, context, component) {
+    component.keys().forEach(fileName => {
         // Get component config
-        const componentConfig = requireComponent(fileName);
+        const componentConfig = component(fileName);
 
         // Get PascalCase name of component
         const componentName = getComponentNameFromFileName(fileName);
@@ -31,10 +22,11 @@ function loadComponents(Vue) {
             // Look for the component options on `.default`, which will
             // exist if the component was exported with `export default`,
             // otherwise fall back to module's root.
-            componentConfig.default || componentConfig
+            { ...(componentConfig.default || componentConfig), ...context }
         );
     });
 }
+
 function loadFilters(Vue) {
     const requireComponent = require.context(
         // The relative path of the components folder
@@ -63,7 +55,26 @@ function loadFilters(Vue) {
     });
 }
 
-export default function registry(Vue) {
+const loaders = [
+    require.context(
+        // The relative path of the components folder
+        '../app/components',
+        // Whether or not to look in subfolders
+        true,
+        // The regular expression used to match base component filenames
+        /[a-zA-Z0-9-]+\.vue$/
+    ),
+    require.context(
+        // The relative path of the components folder
+        '../app/providers',
+        // Whether or not to look in subfolders
+        true,
+        // The regular expression used to match base component filenames
+        /[a-zA-Z0-9-]+\.vue$/
+    )
+];
+
+export default function registry(Vue, context) {
     loadFilters(Vue);
-    loadComponents(Vue);
+    loaders.map((c) => loadComponentsByPattern(Vue, context, c));
 };

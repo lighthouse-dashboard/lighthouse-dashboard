@@ -31,7 +31,7 @@
              */
             sites: {
                 type: Array,
-                required: true,
+                default: () => [],
             },
 
             isLoading: {
@@ -41,7 +41,7 @@
         },
 
         computed: {
-            latestSites(){
+            latestSites() {
                 return this.sites.slice(0, 4);
             },
         },

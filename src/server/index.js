@@ -5,7 +5,7 @@ import logger from '../../lib/logger';
 import * as twig from 'twig';
 import CONFIG from '../../config/server.js';
 import { root } from '../config/path';
-import loadRoutes from '../routes';
+import loadRoutes from '../router';
 import configValidator from '../validator/config-validator';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
 import setupAuth from './auth';
