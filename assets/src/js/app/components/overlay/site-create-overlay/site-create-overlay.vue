@@ -57,8 +57,8 @@
 
             onCreateClicked() {
                 this.createSite({ siteConfig: this.siteConfig })
-                    .then(() => {
-                        this.$emit('done');
+                    .then((site) => {
+                        this.$emit('done', { site });
                         Toastify({
                             text: 'Site created',
                             className: 'info',

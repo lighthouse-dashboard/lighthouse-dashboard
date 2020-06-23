@@ -49,9 +49,15 @@ export default () => ({
         {
             plugin: hapiError,
             options: {
+                templateName: 'views/error',
                 statusCodes: {
                     401: { // if the statusCode is 401
-                        redirect: '/login',
+                        redirect: '/login', // redirect to /login page/endpoint
+                    },
+                    403: { // if the statusCode is 403
+                        redirect: function(request) {
+                            return '/login?redirect=' + request.url.pathname;
+                        },
                     },
                 },
             },

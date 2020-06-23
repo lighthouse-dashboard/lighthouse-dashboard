@@ -6,16 +6,16 @@ export default {
     [SET_LOGGED_IN](state, { isLoggedIn }) {
         state.isLoggedIn = isLoggedIn;
         if (!isLoggedIn) {
-            eraseCookie(COOKIE_NAME, null);
+            eraseCookie(COOKIE_NAME);
         }
     },
 
     [SET_JWT](state, { jwt }) {
         state.jwt = jwt;
         if (jwt) {
-            setCookie(COOKIE_NAME, jwt);
+            setCookie(COOKIE_NAME, jwt, 30);
         } else {
-            eraseCookie(COOKIE_NAME, null);
+            eraseCookie(COOKIE_NAME);
         }
     },
 };

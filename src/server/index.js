@@ -1,9 +1,9 @@
 'use strict';
 
 import Hapi from '@hapi/hapi';
-import logger from '../../lib/logger';
 import * as twig from 'twig';
 import CONFIG from '../../config/server.js';
+import logger from '../../lib/logger';
 import { root } from '../config/path';
 import loadRoutes from '../router';
 import configValidator from '../validator/config-validator';
@@ -26,7 +26,13 @@ async function start() {
         },
     });
 
-    server.events.on('log', (event) => logger.info(event.data));
+    server.state('token', {
+        isHttpOnly: false,
+        isSecure: false,
+        ttl: 1000 * 60 * 60 * 24,    // 1 day lifetime
+    });
+
+    server.events.on('log', (event) => console.log(event));
 
     await setupAuth(server);
     await loadPlugins(server);

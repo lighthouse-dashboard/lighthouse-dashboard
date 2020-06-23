@@ -6,6 +6,7 @@
         </a>
     </div>
 
+    {% if isAuthenticated %}
     <ul class="nav-bar--list">
         <li class="nav-bar--list-item">
             <a class="nav-bar--list-item-link u-reset {% if route == '/app/dashboard' %}nav-bar--list-item-link__active{% endif %}"
@@ -22,4 +23,10 @@
                     href="/app/system">System</a>
         </li>
     </ul>
+
+    <ul class="nav-bar--list">
+        <component is="create-site-btn"></component>
+        <component is="logout-btn"></component>
+    </ul>
+    {% endif %}
 </nav>

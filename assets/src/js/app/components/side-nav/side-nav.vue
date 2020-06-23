@@ -42,23 +42,10 @@
             </div>
 
             <div class='side-nav--secondary'>
-                <btn
-                        class='side-nav--action'
-                        :facets='["primary", "full-width"]'
-                        @click='toggleCreateOverlay'>
-                    New Site
-                </btn>
 
-                <btn
-                        class='side-nav--action'
-                        :facets='["danger", "full-width"]'
-                        @click='onLogoutClicked'>
-                    Logout
-                </btn>
             </div>
         </nav>
-        <site-create-overlay v-if='isCreateOverlayOpen'
-                @close='toggleCreateOverlay'/>
+
     </div>
 </template>
 
@@ -98,23 +85,12 @@
         },
 
         methods: {
-            ...mapActions('login', ['logout']),
-
-            toggleCreateOverlay() {
-                this.isCreateOverlayOpen = !this.isCreateOverlayOpen;
-            },
-
             toggleDrawer() {
                 this.isOpen = !this.isOpen;
             },
 
             closeDrawer() {
                 this.isOpen = false;
-            },
-
-            onLogoutClicked() {
-                this.logout();
-                window.location.href = '/login';
             },
         },
 
