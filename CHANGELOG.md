@@ -5,6 +5,7 @@
 0. [Remove Vue router and handle routing from backend #31](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/31)
 0. [Update navigation concept #53](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/53)
 0. [Optimize performance and caching #32](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/32)
+0. [Show thumbnail of LH audit for each page #49](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/49)
 
 # 5.12
 0. [Add logout button #22](https://github.com/faebeee/lighthouse-dashboard/issues/22)
