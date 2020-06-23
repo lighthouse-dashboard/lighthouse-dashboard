@@ -48,6 +48,7 @@ html {
     // Prevent font scaling in landscape while allowing user zoom (Safari on iPhone)
     // @link https://stackoverflow.com/q/2710764/1602864
     -webkit-text-size-adjust: 100%;
+    background-color: var(--color-body);
 }
 
 
