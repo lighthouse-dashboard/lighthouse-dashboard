@@ -1,8 +1,6 @@
 <template>
     <div class="app-layout">
-        <div>
-            <slot name='sidebar'/>
-        </div>
+        <slot name='navigation'/>
 
         <div class="app-layout--content-wrapper">
             <div class='app-layout--content'>

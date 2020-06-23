@@ -1,0 +1,25 @@
+<nav class="nav-bar">
+    <div class="nav-bar--title-wrapper">
+        <a href="/"
+                class="u-reset nav-bar--title">
+            Lighthouse
+        </a>
+    </div>
+
+    <ul class="nav-bar--list">
+        <li class="nav-bar--list-item">
+            <a class="nav-bar--list-item-link u-reset {% if route == '/app/dashboard' %}nav-bar--list-item-link__active{% endif %}"
+                    href="/app/dashboard">Dashboard</a>
+        </li>
+
+        <li class="nav-bar--list-item">
+            <a class="nav-bar--list-item-link u-reset {% if route == '/app/projects' or route == '/app/projects/?' %}nav-bar--list-item-link__active{% endif %}"
+                    href="/app/projects">Projects</a>
+        </li>
+
+        <li class="nav-bar--list-item">
+            <a class="nav-bar--list-item-link u-reset {% if route == '/app/system' %}nav-bar--list-item-link__active{% endif %}"
+                    href="/app/system">System</a>
+        </li>
+    </ul>
+</nav>

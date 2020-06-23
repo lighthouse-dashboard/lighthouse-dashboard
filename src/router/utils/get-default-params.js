@@ -7,7 +7,9 @@ export const DEFAULT_PARAMS = {
 };
 
 export const getDefaultParams = (request) => {
-    return { ...DEFAULT_PARAMS, isAuthenticated: request.auth.isAuthenticated };
+    return {
+        ...DEFAULT_PARAMS, isAuthenticated: request.auth.isAuthenticated, route: request.route.fingerprint || request.route.path,
+    };
 };
 
 export default getDefaultParams;

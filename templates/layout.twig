@@ -3,11 +3,8 @@
 {% block content %}
     <component is="app-layout">
         {% block sidebar %}
-            <template slot="sidebar">
-                {% if isAuthenticated %}
-                    <component is="side-nav"
-                            title="{{ TITLE }}"></component>
-                {% endif %}
+            <template slot="navigation">
+                {% include 'components/nav-bar/nav-bar.twig' %}
             </template>
         {% endblock %}
 

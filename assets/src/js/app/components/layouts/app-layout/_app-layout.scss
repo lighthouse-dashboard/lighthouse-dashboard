@@ -11,7 +11,7 @@
     // Module
     & {
         & {
-            display: flex;
+            //display: flex;
             min-height: 100%;
         }
 
@@ -30,15 +30,15 @@
     // Facets
     &.app-layout__logged-in {
         & {
-            grid-template-areas: 'sidenav content';
-            grid-template-columns: 2fr 10fr;
-
-            @include mq('<=lg') {
-                display: flex;
-                width: 100%;
-                grid-template-areas: '. content';
-                grid-template-columns: 12fr;
-            }
+            //grid-template-areas: 'sidenav content';
+            //grid-template-columns: 2fr 10fr;
+            //
+            //@include mq('<=lg') {
+            //    display: flex;
+            //    width: 100%;
+            //    grid-template-areas: '. content';
+            //    grid-template-columns: 12fr;
+            //}
         }
     }
 

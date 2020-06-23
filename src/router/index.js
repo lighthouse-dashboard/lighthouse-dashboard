@@ -2,7 +2,6 @@ import Inert from '@hapi/inert';
 import logger from '../../lib/logger';
 import glob from '../utils/glob';
 import assetRoutes from './routes/assets';
-import viewRoutes from './routes/pages';
 
 /**
  * Load all route objects form given file pattern
@@ -28,7 +27,6 @@ async function loadAllRoutesFor(pattern) {
 async function getRoutes() {
     /** @type {hapi.Route[]} */
     return [
-        ...viewRoutes,
         ...assetRoutes,
         ...(await loadAllRoutesFor('src/api/**/endpoints/*.js')),
         ...(await loadAllRoutesFor('src/routes/**/*.js')),
