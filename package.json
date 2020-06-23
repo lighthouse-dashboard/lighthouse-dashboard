@@ -21,7 +21,7 @@
         "lint-frontend": "eslint -c .eslintrc ./assets/src && npx stylelint **/*.scss --config .stylelintrc.js",
         "lint-backend": "eslint -c .eslintrc ./src",
         "start": "node -r esm index.js",
-        "build": "gulp build && npm run build-storybook",
+        "build": "gulp build",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
         "audit": "node -r esm lib/cli/index.js -a --queue",
         "worker": "node -r esm src/worker/index.js"
