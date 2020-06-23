@@ -2,6 +2,9 @@
 0. [Split application into seperate projects (Core, Worker, UI) #47](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/47)
 0. [Remove webhooks logic #50](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/50)
 0. [Create list to see scheduled sites #35](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/35)
+0. [Remove Vue router and handle routing from backend #31](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/31)
+0. [Update navigation concept #53](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/53)
+0. [Optimize performance and caching #32](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/32)
 
 # 5.12
 0. [Add logout button #22](https://github.com/faebeee/lighthouse-dashboard/issues/22)
