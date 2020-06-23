@@ -8,6 +8,7 @@ declare namespace Sites {
         is_favorite: boolean;
         last_audit: string | null;
         is_scheduled?: boolean;
+        thumbnail?: string;
     }
 
     export interface SiteWithReport {

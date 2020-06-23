@@ -21,10 +21,12 @@ export async function createNewAuditForConfig(database, config, meta = {}) {
             transformer: transformAuditCurry(config.id),
             chromePath: process.env.GOOGLE_CHROME_BIN,
             port: process.env.GOOGLE_CHROME_PORT,
-
         });
+
+        const thumbnail = (raw.audits && raw.audits['screenshot-thumbnails']) ? [...raw.audits['screenshot-thumbnails'].details.items].pop().data : config.thumbnail;
+
         await saveReport(database, { ...transformed, ...meta }, raw);
-        await updateSite(database, config.id, { last_audit: new Date().toISOString() });
+        await updateSite(database, config.id, { last_audit: new Date().toISOString(), thumbnail });
         return transformed;
     } catch (e) {
         logger.error(e.message);

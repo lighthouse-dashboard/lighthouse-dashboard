@@ -44,6 +44,14 @@
                             </div>
 
                             <div class='project--sidebar'>
+                                {% if site.thumbnail %}
+                                    <component is="tile"
+                                            title="Thumbnail"
+                                            class='project--sidebar-section'>
+                                        <img src="{{ site.thumbnail }}" alt="{{ site.name }}">
+                                    </component>
+                                {% endif %}
+
                                 <component is="tile"
                                         title="Settings"
                                         class='project--sidebar-section'>

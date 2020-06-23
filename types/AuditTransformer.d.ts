@@ -1,5 +1,1 @@
-import { Report } from '../src/api/reports/types/Report';
-
-export interface AuditTransformer<T> {
-    (audit: T): Report;
-}
+export type AuditTransformer = (audit: LH.Result) => Reports.Report;

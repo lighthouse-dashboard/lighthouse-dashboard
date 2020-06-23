@@ -8,7 +8,7 @@ import logger from '../../lib/logger';
  * @param {string} url
  * @param {Option} opts
  * @param {LH.Flags} flags
- * @return {Promise<{}>}
+ * @return {LH.Result}
  */
 async function launchChromeAndRunLighthouse(url, opts, flags) {
     let chrome = null;
@@ -39,7 +39,7 @@ async function launchChromeAndRunLighthouse(url, opts, flags) {
  * @param {string} chromePath Path to the chrome binary
  * @param {number} port Port used fo rdebugging
  * @param {AuditTransformer} transformer
- * @return {Reports.Report}
+ * @return {Promise<{transformed: Reports.Report, raw: LH.Result}>}
  */
 export default async function runLighthouse({ config, chromePath, port, transformer }) {
     const { url, device } = config;
@@ -58,6 +58,8 @@ export default async function runLighthouse({ config, chromePath, port, transfor
             // throttling: null,
         },
     );
+
+
 
     return { transformed: transformer(audit), raw: audit };
 }
