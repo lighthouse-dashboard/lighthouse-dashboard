@@ -26,7 +26,30 @@
                                     :info="systemProps.info"
                                     :health="healthProps.health"></component>
 
-                            <component is="project-links-tile"></component>
+                            <component is="tile"
+                                    title="Links">
+                                <component is="list">
+                                    <component is="list-item">
+                                        <a class="link"
+                                                href="/app/system/changelog">
+                                            Changelog
+                                        </a>
+                                    </component>
+                                    <component is="list-item">
+                                        <a class="link"
+                                                target="_blank"
+                                                href="/storybook/index.html">
+                                            Storybook
+                                        </a>
+                                    </component>
+                                    <component is="list-item">
+                                        <a class="link"
+                                                href="/app/system/licenses">
+                                            Licenses
+                                        </a>
+                                    </component>
+                                </component>
+                            </component>
                         </div>
                     </template>
                 </component>
