@@ -1,20 +1,19 @@
 import { MEDIUM } from '../../../config/cache';
-import { getLatestReportBySiteId } from '../../../models/reports';
 import { getAllSites } from '../../../models/sites';
+import * as ReportService from '../../../services/report-service';
 import { siteWithReportList } from '../schemas/site-with-report';
 
 /**
  * Get latest sites
- * @param {MongodbDecoration} mongo
  * @return {Promise<{site: Sites.SiteModel, report: Reports.Report}[]>}
  */
-async function getLatestSitesReport({ mongo }) {
-    const sites = await getAllSites(mongo.db);
+async function getLatestSitesReport() {
+    const sites = await getAllSites();
     const results = [];
 
     for (let i = 0; i < sites.length; i++) {
         const site = sites[i];
-        const report = await getLatestReportBySiteId(site.id);
+        const report = await ReportService.getLatestReportBySiteId(site.id);
         if (!report) {
             continue;
         }

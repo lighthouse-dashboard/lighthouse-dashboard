@@ -14,7 +14,7 @@ function getSitesHandler({ query, mongo }) {
 
     if (searchQuery) {
         try {
-            return findSites(mongo.db, { $text: { $search: searchQuery } });
+            return findSites({ $text: { $search: searchQuery } });
         } catch (e) {
             console.log(e);
         }

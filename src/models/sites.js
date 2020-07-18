@@ -4,13 +4,12 @@ import Sites from './sites/sites-model';
 
 /**
  * Find sites
- * @param {Db} database
  * @param { object } find
  * @param { object } sort
  * @param { number } limit
  * @return {Promise<Sites.SiteModel[]>}
  */
-export async function findSites(database, find, sort = {}, limit = 100) {
+export async function findSites(find, sort = {}, limit = 100) {
     const sites = await Sites
         .find(find)
         .sort(sort)
@@ -24,8 +23,8 @@ export async function findSites(database, find, sort = {}, limit = 100) {
  * @param {Db} database
  * @return {Promise<Sites.SiteModel[]>}
  */
-export function getAllSites(database) {
-    return findSites(database, {}, { last_audit: -1 });
+export function getAllSites() {
+    return findSites({}, { last_audit: -1 });
 }
 
 /**
@@ -109,3 +108,12 @@ export async function setScheduledAuditForSite(database, config, isScheduled) {
     logger.debug(`Update scheduled_jobs of ${ config.name } to ${ isScheduled }`);
     await updateSite(config.id, { is_scheduled: isScheduled });
 }
+
+/**
+ * Get list of scheduled sites
+ * @param {number} limit
+ * @return {Promise<Sites.SiteModel[]>}
+ */
+export const getScheduledSites = (limit = 50) => {
+    return findSites({ is_scheduled: true, disabled: false }, {}, limit);
+};

@@ -1,4 +1,4 @@
-import { getScheduledSites } from '../../../services/sites-service';
+import { getScheduledSites } from '../../../models/sites';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 /**
@@ -7,8 +7,8 @@ import { siteConfigModelList } from '../schemas/site-config-model';
  * @param {MongodbDecoration} mongo
  * @return {Promise<Sites.SiteModel[]>}
  */
-function getScheduledSitesHandler({ mongo }) {
-    return getScheduledSites(mongo.db);
+function getScheduledSitesHandler() {
+    return getScheduledSites();
 }
 
 export default {

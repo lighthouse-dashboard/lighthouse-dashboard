@@ -6,6 +6,8 @@
  */
 import { findSites } from '../models/sites';
 
-export const getScheduledSites = (db, limit = 50) => {
-    return findSites(db, { is_scheduled: true, disabled: false }, {}, limit);
+
+
+export const getAllSites = () => {
+    return findSites({}, { last_audit: -1 });
 };

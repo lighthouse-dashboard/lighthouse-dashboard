@@ -30,6 +30,5 @@ export async function createNewAuditForConfig(database, config, meta = {}) {
         return transformed;
     } catch (e) {
         logger.error(e.message);
-        throw e;
     }
 }

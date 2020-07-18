@@ -2,41 +2,6 @@ import logger from '../../lib/logger';
 import { AUDIT_COLLECTION } from '../config/collections';
 import { ReportModel } from './reports/report-model';
 
-/**
- * Get a report by id
- * @param {Db} database
- * @param {string} id
- * @return {Promise<Reports.Report>}
- */
-export async function getReportById(database, id) {
-    const report = await ReportModel.findOne({ id });
-    return report.toJSON();
-}
-
-/**
- * Get all reports for a site
- * @param {Db} database
- * @param {string} id
- * @param {number} limit
- * @return {Promise<Reports.Report[]>}
- */
-export function getReportsBySiteId(database, id, limit) {
-    const collection = database.collection(AUDIT_COLLECTION);
-
-    return new Promise((resolve, reject) => {
-        collection
-            .find({ siteId: id })
-            .sort({ createdAt: -1 })
-            .limit(limit)
-            .toArray((error, data) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                return resolve(data);
-            });
-    });
-}
 
 /**
  * Get latest report for site
