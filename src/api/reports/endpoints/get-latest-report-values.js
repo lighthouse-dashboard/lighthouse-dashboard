@@ -12,7 +12,7 @@ import { siteIdParamModel } from '../schemas/siteid-param-model';
 async function getLatestReportValues({ params, mongo }) {
     const { siteId } = params;
 
-    const report = await getLatestReportBySiteId(mongo.db, siteId);
+    const report = await getLatestReportBySiteId(siteId);
     if (!report) {
         return Boom.notFound();
     }

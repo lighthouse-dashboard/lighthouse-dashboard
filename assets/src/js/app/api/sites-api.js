@@ -11,7 +11,7 @@ import axios from '../utils/axios';
 
 /**
  * Get all available sites
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
 export const getAllSites = async () => {
     const { data } = await axios().get(GET_SITES_URL);
@@ -35,8 +35,8 @@ export const deleteSite = async (id) => {
 /**
  * Update a site
  * @param {string} id
- * @param {Partial<Sites.SiteConfig>}delta
- * @return {Promise<Sites.SiteConfig>}
+ * @param {Partial<Sites.SiteModel>}delta
+ * @return {Promise<Sites.SiteModel>}
  */
 export const updateSite = async (id, delta) => {
     const { data } = await axios()
@@ -46,8 +46,8 @@ export const updateSite = async (id, delta) => {
 
 /**
  * Create a new site
- * @param {Sites.SiteConfig} config
- * @return {Promise<Sites.SiteConfig>}
+ * @param {Sites.SiteModel} config
+ * @return {Promise<Sites.SiteModel>}
  */
 export async function createSite(config) {
     const { data } = await axios()
@@ -57,7 +57,7 @@ export async function createSite(config) {
 
 /**
  * Get latest audited sites *
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
 export const getLatestSites = async () => {
     const { data } = await axios().get(GET_LATEST_AUDITED_SITES_URL);
@@ -67,7 +67,7 @@ export const getLatestSites = async () => {
 /**
  * Get specific site
  * @param {string} id
- * @return {Promise<Sites.SiteConfig>}
+ * @return {Promise<Sites.SiteModel>}
  */
 export const getSite = async (id) => {
     const { data } = await axios().get(GET_SITE_BY_ID_URL(id));
@@ -86,7 +86,7 @@ export const getSitesWithLatestReport = async () => {
 /**
  * Search for site
  * @param {string} query
- * @return { Promise<Sites.SiteConfig[]> }
+ * @return { Promise<Sites.SiteModel[]> }
  */
 export async function search(query) {
     const { data } = await axios().get(GET_SITES_URL, { params: { query } });

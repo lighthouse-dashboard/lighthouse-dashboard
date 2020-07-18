@@ -1,6 +1,7 @@
-import mongoose from '../mongoose';
+import { Schema } from 'mongoose';
+import database from '../database';
 
-export default mongoose.model('sites', {
+export default database.model('sites', new Schema({
     id: String,
     name: String,
     url: String,
@@ -11,4 +12,4 @@ export default mongoose.model('sites', {
     is_scheduled: Boolean,
     thumbmail: String,
     disabled: { type: Boolean, default: false },
-});
+}));

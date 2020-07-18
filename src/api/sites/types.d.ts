@@ -1,5 +1,5 @@
 declare namespace Sites {
-    export interface SiteConfig {
+    export interface SiteModel {
         id: string;
         name: string;
         url: string;
@@ -9,10 +9,11 @@ declare namespace Sites {
         last_audit: string | null;
         is_scheduled?: boolean;
         thumbnail?: string;
+        disabled?: boolean;
     }
 
     export interface SiteWithReport {
-        site: SiteConfig;
+        site: SiteModel;
         report: Reports.Report;
     }
 }

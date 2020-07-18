@@ -7,7 +7,7 @@ import { siteConfigModelList } from '../schemas/site-config-model';
  * Get sites
  * @param {object} query
  * @param {MongodbDecoration} mongo
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
 function getSitesHandler({ query, mongo }) {
     const { query: searchQuery } = query;

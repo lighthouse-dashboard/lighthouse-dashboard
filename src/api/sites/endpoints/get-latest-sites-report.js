@@ -6,7 +6,7 @@ import { siteWithReportList } from '../schemas/site-with-report';
 /**
  * Get latest sites
  * @param {MongodbDecoration} mongo
- * @return {Promise<{site: Sites.SiteConfig, report: Reports.Report}[]>}
+ * @return {Promise<{site: Sites.SiteModel, report: Reports.Report}[]>}
  */
 async function getLatestSitesReport({ mongo }) {
     const sites = await getAllSites(mongo.db);
@@ -14,7 +14,7 @@ async function getLatestSitesReport({ mongo }) {
 
     for (let i = 0; i < sites.length; i++) {
         const site = sites[i];
-        const report = await getLatestReportBySiteId(mongo.db, site.id);
+        const report = await getLatestReportBySiteId(site.id);
         if (!report) {
             continue;
         }

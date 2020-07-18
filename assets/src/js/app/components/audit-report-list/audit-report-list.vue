@@ -43,7 +43,7 @@
              */
             list() {
                 return this.reports
-                    .filter((report) => report.hasRawData)
+                    .filter((report) => !!report.raw)
                     .slice(0, this.max);
             },
         },

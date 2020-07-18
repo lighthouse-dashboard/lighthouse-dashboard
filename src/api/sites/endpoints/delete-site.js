@@ -10,7 +10,7 @@ import { removeSite } from '../../../models/sites';
  */
 async function deleteSite({ params, mongo }, h) {
     const { id } = params;
-    await removeSite(mongo.db, id);
+    await removeSite(id);
     return h.response().code(201);
 }
 

@@ -1,5 +1,6 @@
 import CONFIG from '../../config/server';
 import * as reports from '../models/reports';
+import { ReportModel } from '../models/reports/report-model';
 
 const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
 
@@ -22,8 +23,8 @@ export function getHtmlReport(report) {
  * @return {Promise<null|string|string[]>}
  */
 export async function createHTMLReportById(db, id) {
-    const report = await reports.getReportById(db, id);
-    return getHtmlReport(report);
+    const report = await ReportModel.findById(id);
+    return getHtmlReport(report.toJSON());
 }
 
 /**
@@ -32,8 +33,8 @@ export async function createHTMLReportById(db, id) {
  * @param {string} siteId
  * @return {Promise<null> | Reports.Report}
  */
-export async function getLatestReportBySiteId(db, siteId) {
-    const report = await reports.getLatestReportBySiteId(db, siteId);
+export async function getLatestReportBySiteId(siteId) {
+    const report = await reports.getLatestReportBySiteId(siteId);
 
     if (!report) {
         return null;
@@ -50,15 +51,9 @@ export async function getLatestReportBySiteId(db, siteId) {
  * @return {Promise<Reports.Report[]>}
  */
 export async function getReportsBySiteId(db, id) {
-    const assets = await reports.getReportsBySiteId(db, id, CONFIG.api.siteReportLimit);
-
-    if (!assets || assets.length === 0) {
-        return [];
-    }
-
-    return assets.map((report) => {
-        report.hasRawData = !!report.raw;
-        report.raw = null;
-        return report;
-    });
+    const models = await ReportModel.find({ siteId: id }).limit(CONFIG.api.siteReportLimit);
+    return models.map(report => ({
+        ...report.toJSON(),
+        raw: JSON.parse(report.raw),
+    }));
 }

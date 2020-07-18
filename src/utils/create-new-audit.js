@@ -8,7 +8,7 @@ import runLighthouse from './run-lighthouse';
 /**
  * Create new audit
  * @param {Db} database
- * @param {Sites.SiteConfig} config
+ * @param {Sites.SiteModel} config
  * @param {ReportMeta | {}} meta
  * @return {Promise<Reports.Report>}
  */
@@ -26,10 +26,10 @@ export async function createNewAuditForConfig(database, config, meta = {}) {
         const thumbnail = (raw.audits && raw.audits['screenshot-thumbnails']) ? [...raw.audits['screenshot-thumbnails'].details.items].pop().data : config.thumbnail;
 
         await saveReport(database, { ...transformed, ...meta }, raw);
-        await updateSite(database, config.id, { last_audit: new Date().toISOString(), thumbnail });
+        await updateSite(config.id, { last_audit: new Date().toISOString(), thumbnail });
         return transformed;
     } catch (e) {
         logger.error(e.message);
+        throw e;
     }
-    return null;
 }

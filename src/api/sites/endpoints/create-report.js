@@ -12,7 +12,7 @@ import { getSiteConfigById, setScheduledAuditForSite } from '../../../models/sit
 async function createReport({ params, mongo }, h) {
     const { id } = params;
 
-    const config = await getSiteConfigById(mongo.db, id);
+    const config = await getSiteConfigById(id);
     if (!config) {
         return Boom.notFound('Config not found');
     }

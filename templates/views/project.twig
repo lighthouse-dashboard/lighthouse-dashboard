@@ -66,10 +66,16 @@
                                             class="project--action-btn"
                                             :site='siteProps.site'></component>
 
+                                    {% if not site.disabled %}
                                     <component is="schedule-audit-btn"
                                             id="{{ site.id }}"
                                             class="project--action-btn"
                                             :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
+                                    {% else %}
+                                        <component>
+                                            Site is disabled
+                                        </component>
+                                    {% endif %}
 
                                     <component is="site-delete-btn"
                                             class="project--action-btn"

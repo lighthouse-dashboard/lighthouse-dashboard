@@ -3,7 +3,7 @@ import { SET_CURRENT_SITE_CONFIG, SET_SITES, UPDATE_SITE } from '../mutation-typ
 
 /**
  * Fetch all sites
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
 export async function fetchAllSites({ commit }) {
     const sites = await api.getAllSites();
@@ -13,7 +13,7 @@ export async function fetchAllSites({ commit }) {
 
 /**
  * Get list of scheduled sites
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
 export function fetchScheduledSites() {
     return api.getScheduledSites();
@@ -31,7 +31,7 @@ export async function deleteSite(_, { id }) {
 /**
  * Create a new site
  * @param {object} _
- * @param {Sites.SiteConfig} siteConfig
+ * @param {Sites.SiteModel} siteConfig
  * @return {Promise<void>}
  */
 export function createSite(_, { siteConfig }) {
@@ -41,7 +41,7 @@ export function createSite(_, { siteConfig }) {
 /**
  * Update a site
  * @param {string} id
- * @param {Partial<Sites.SiteConfig>}delta
+ * @param {Partial<Sites.SiteModel>}delta
  * @return {Promise<void>}
  */
 export async function updateSite({ commit }, { id, delta }) {
@@ -64,7 +64,7 @@ export async function getLatestSites() {
  * Get specific site
  * @param {object} _
  * @param {string} siteId
- * @return {Promise<Sites.SiteConfig>}
+ * @return {Promise<Sites.SiteModel>}
  */
 export function getSite(_, { siteId }) {
     return api.getSite(siteId);
@@ -74,7 +74,7 @@ export function getSite(_, { siteId }) {
  * Get specific site
  * @param {function} commit
  * @param {string} siteId
- * @return {Promise<Sites.SiteConfig>}
+ * @return {Promise<Sites.SiteModel>}
  */
 export async function getCurrentSite({ commit }, { siteId }) {
     const site = await api.getSite(siteId);
@@ -93,7 +93,7 @@ export function getSitesWithLatestReport() {
 /**
  * Set current site data
  * @param {function} commit
- * @param {Sites.SiteConfig} site
+ * @param {Sites.SiteModel} site
  */
 export function setCurrentSite({ commit }, { site }) {
     commit({ type: SET_CURRENT_SITE_CONFIG, config: site });

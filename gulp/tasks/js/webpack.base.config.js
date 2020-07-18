@@ -93,9 +93,6 @@ module.exports = {
             filename: path.resolve(paths.templates, 'dist/index.html'),
             template: path.resolve(paths.htmlAsset, 'index.html'),
         }),
-        new webpack.EnvironmentPlugin({
-            UI_THEME: process.env.UI_THEME,
-        }),
     ],
 
     optimization: {

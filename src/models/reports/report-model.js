@@ -1,9 +1,10 @@
-import mongoose from '../mongoose';
+import { Schema } from 'mongoose';
+import database from '../database';
 
-export default mongoose.model('reports', {
+export const ReportModel = database.model('reports', new Schema({
     id: String,
     siteId: String,
     createdAt: Date,
     raw: { type: String, default: null },
     values: [{ id: String, value: Number }],
-});
+}));

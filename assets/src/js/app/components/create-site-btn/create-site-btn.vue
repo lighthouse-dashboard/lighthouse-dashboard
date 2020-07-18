@@ -30,7 +30,7 @@
         methods: {
             /**
              * Handle done
-             * @param {Sites.SiteConfig} site
+             * @param {Sites.SiteModel} site
              */
             onDone({ site }) {
                 debugger;

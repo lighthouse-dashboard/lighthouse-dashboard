@@ -1,6 +1,7 @@
 import joi from '@hapi/joi';
 
 export const siteConfigModel = joi.object({
+    __v: joi.optional(),
     _id: joi.any(),
     id: joi.string(),
     name: joi.string().required(),
@@ -11,6 +12,7 @@ export const siteConfigModel = joi.object({
     last_audit: joi.string(),
     is_scheduled: joi.boolean(),
     thumbnail: joi.optional(),
+    disabled: joi.boolean(),
 }).label('sites.SiteConfigModel');
 
 export const siteConfigModelList = joi

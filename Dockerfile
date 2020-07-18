@@ -17,8 +17,6 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV CHROMIUM_PATH /usr/bin/chromium-browser
 ENV GOOGLE_CHROME_BIN /usr/bin/chromium-browser
 
-ARG UI_THEME
-
 COPY package.json package-lock.json /app/
 
 COPY ./ /app/

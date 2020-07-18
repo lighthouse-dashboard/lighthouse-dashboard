@@ -1,28 +1,33 @@
 <template>
     <div class="site-create-form">
-        <div class='site-create-form--field-set'>
-            <input-field v-model='value.name'
-                    placeholder='foo.io'
-                    label='Name'/>
+        <div class="site-create-form--field-set">
+            <input-field v-model="value.name"
+                    placeholder="foo.io"
+                    label="Name"/>
         </div>
 
-        <div class='site-create-form--field-set'>
-            <input-field v-model='value.url'
-                    placeholder='https://www.foo.io'
-                    label='URL'/>
+        <div class="site-create-form--field-set">
+            <input-field v-model="value.url"
+                    placeholder="https://www.foo.io"
+                    label="URL"/>
         </div>
 
-        <div class='site-create-form--field-set'>
-            <input-select v-model='value.device'
-                    label='Device'>
-                <option value='desktop'>Desktop</option>
-                <option value='mobile'>Mobile</option>
+        <div class="site-create-form--field-set">
+            <input-select v-model="value.device"
+                    label="Device">
+                <option value="desktop">Desktop</option>
+                <option value="mobile">Mobile</option>
             </input-select>
         </div>
 
-        <div class='site-create-form--field-set'>
-            <input-checkbox v-model='value.is_favorite'
-                    label='Is Favorite'/>
+        <div class="site-create-form--field-set">
+            <input-checkbox v-model="value.disabled"
+                    label="Is Disabled"/>
+        </div>
+
+        <div class="site-create-form--field-set">
+            <input-checkbox v-model="value.is_favorite"
+                    label="Is Favorite"/>
         </div>
     </div>
 </template>

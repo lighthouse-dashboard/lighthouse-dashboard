@@ -17,8 +17,6 @@ services:
       container_name: 'web'
       build:
         context: ./
-        args:
-          - UI_THEME=dark
       links:
         - queue
         - database

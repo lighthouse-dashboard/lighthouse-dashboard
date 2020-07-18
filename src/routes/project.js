@@ -10,7 +10,7 @@ export default {
     },
     handler: async (request, h) => {
         const { id } = request.params;
-        const site = await getSiteConfigById(request.mongo.db, id);
+        const site = await getSiteConfigById(id);
         return h.view('views/project.twig', { ...getDefaultParams(request), site });
     },
 };

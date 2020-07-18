@@ -27,7 +27,7 @@
 
         props: {
             /**
-             * @type {Sites.SiteConfig[]}
+             * @type {Sites.SiteModel[]}
              */
             sites: {
                 type: Array,

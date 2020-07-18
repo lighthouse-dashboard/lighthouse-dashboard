@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4';
 import logger from '../../lib/logger';
-import { SITES_CONFIG_COLLECTION } from '../config/collections';
+import Sites from './sites/sites-model';
 
 /**
  * Find sites
@@ -8,40 +8,21 @@ import { SITES_CONFIG_COLLECTION } from '../config/collections';
  * @param { object } find
  * @param { object } sort
  * @param { number } limit
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
-export function findSites(database, find, sort = {}, limit = 100) {
-    const collection = database.collection(SITES_CONFIG_COLLECTION);
+export async function findSites(database, find, sort = {}, limit = 100) {
+    const sites = await Sites
+        .find(find)
+        .sort(sort)
+        .limit(limit);
 
-    return new Promise((resolve, reject) => {
-        collection
-            .find(find)
-            .sort(sort)
-            .limit(limit)
-            .toArray((error, data) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                if (!data || data.length === 0) {
-                    return resolve([]);
-                }
-
-                delete data._id;
-
-                return resolve(data.map(d => {
-                    delete d.scheduled_jobs;
-                    delete d.token;
-                    return d;
-                }));
-            });
-    });
+    return sites.map(s => s.toJSON());
 }
 
 /**
  * Get list of sites from DB
  * @param {Db} database
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
 export function getAllSites(database) {
     return findSites(database, {}, { last_audit: -1 });
@@ -50,86 +31,81 @@ export function getAllSites(database) {
 /**
  * Get list of sites from DB
  * @param {Db} database
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
-export function getFavoriteSites(database) {
-    return findSites(database, { is_favorite: true }, { order: 1 });
+export async function getFavoriteSites() {
+    const sites = await Sites.find({ is_favorite: true }).sort({ field: 'order', test: 1 });
+    return sites.map(s => s.toJSON());
 }
 
 /**
  * Get latest n audited sites
  * @param {Db} database
  * @param {number} limit
- * @return {Promise<Sites.SiteConfig[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
-export function getLatestSites(database, limit = 50) {
-    return findSites(database, {
+export async function getLatestSites(database, limit = 50) {
+    const sites = await Sites.find({
         last_audit: {
             $exists: true,
             $ne: null,
         },
-    }, { last_audit: -1 }, limit);
+    })
+        .sort({ last_audit: -1 })
+        .limit(limit);
+
+    return sites.map(s => s.toJSON());
 }
 
 /**
  * Add new site to DB
- * @param {Db} database
- * @param {Pick<Sites.SiteConfig, "name"|"device"|"url"|"is_favorite">} config
- * @return {Promise<Sites.SiteConfig>}
+ * @param {Pick<Sites.SiteModel, "name"|"device"|"url"|"is_favorite">} config
+ * @return {Promise<Sites.SiteModel>}
  */
-export async function addSite(database, config) {
-    const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    const id = uuid();
-    await siteCollection.insertOne({ id, ...config });
-    return getSiteConfigById(database, id);
+export async function addSite(config) {
+    const site = new Sites({ ...config, id: uuid() });
+    await site.save();
+    return site.toJSON();
 }
 
 /**
  * Update site config
- * @param {Db} database
  * @param {string} id
- * @param {Partial<Sites.SiteConfig>} delta
- * @return {Promise<Sites.SiteConfig>}
+ * @param {Partial<Sites.SiteModel>} delta
+ * @return {Promise<Sites.SiteModel>}
  */
-export async function updateSite(database, id, delta) {
-    const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    await siteCollection.updateOne({ id }, { $set: delta });
-    return getSiteConfigById(database, id);
+export async function updateSite(id, delta) {
+    await Sites.updateOne({ id }, delta);
+    const site = await Sites.findOne({ id });
+    return site.toJSON();
 }
 
 /**
  * Remove site from DB
- * @param {Db} database
  * @param {string} id
  */
-export async function removeSite(database, id) {
-    const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
-    await siteCollection.deleteOne({ id });
+export async function removeSite(id) {
+    await Sites.remove({ id });
 }
 
 /**
  * Get config for specific site
  * @param {Db} database
  * @param {string} id
- * @return {Promise<Sites.SiteConfig | null>}
+ * @return {Promise<Sites.SiteModel | null>}
  */
-export async function getSiteConfigById(database, id) {
-    const sites = await findSites(database, { id }, {}, 1);
-    if (!sites || sites.length === 0) {
-        return null;
-    }
-
-    return sites.pop();
+export async function getSiteConfigById(id) {
+    const site = await Sites.findOne({ id });
+    return site.toJSON();
 }
 
 /**
  * Update the amount of scheduled jobs
  * @param {Db} database
- * @param {Sites.SiteConfig} config
+ * @param {Sites.SiteModel} config
  * @param {boolean} isScheduled
  */
 export async function setScheduledAuditForSite(database, config, isScheduled) {
-    const siteCollection = database.collection(SITES_CONFIG_COLLECTION);
     logger.debug(`Update scheduled_jobs of ${ config.name } to ${ isScheduled }`);
-    await siteCollection.updateOne({ id: config.id }, { $set: { is_scheduled: isScheduled } });
+    await updateSite(config.id, { is_scheduled: isScheduled });
 }

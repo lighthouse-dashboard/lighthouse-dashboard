@@ -30,7 +30,7 @@
     export default {
         components: { ErrorMessage, Btn, SiteCreateForm, Overlay },
         props: {
-            /** @type {Sites.SiteConfig | null} */
+            /** @type {Sites.SiteModel | null} */
             config: {
                 type: Object,
                 default: null,
@@ -41,7 +41,7 @@
             return {
                 errorMessage: null,
                 isOverlayOpen: true,
-                /** @type {Sites.SiteConfig} */
+                /** @type {Sites.SiteModel} */
                 siteConfig: null,
             };
         },
@@ -76,6 +76,7 @@
                         name: this.siteConfig.name,
                         url: this.siteConfig.url,
                         is_favorite: this.siteConfig.is_favorite,
+                        disabled: this.siteConfig.disabled,
                     },
                 })
                     .then(() => {
@@ -96,6 +97,7 @@
             this.siteConfig = this.isEdit ? { ...this.config } : {
                 name: '',
                 url: '',
+                disabled: false,
                 device: 'desktop',
                 is_favorite: true,
             };

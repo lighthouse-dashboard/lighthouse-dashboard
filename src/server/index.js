@@ -88,9 +88,6 @@ export default async function boot() {
         await start();
     } catch (e) {
         logger.error(e.message);
-        if (!IS_DEV) {
-            logger.debug(`Rebooting server in ${ RESTART_INTERVAL }ms`);
-            setTimeout(() => boot(), RESTART_INTERVAL);
-        }
+        throw e;
     }
 }

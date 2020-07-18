@@ -1,7 +1,6 @@
 import { MEDIUM } from '../../../config/cache';
 import { getReportsBySiteId } from '../../../services/report-service';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
-import { reportModelList } from '../schemas/report-model-schema';
 
 /**
  * Handler for latest created reports
@@ -24,9 +23,6 @@ export default {
         auth: 'jwt',
         validate: {
             params: reportIdParamModel,
-        },
-        response: {
-            schema: reportModelList,
         },
         cache: {
             expiresIn: MEDIUM,

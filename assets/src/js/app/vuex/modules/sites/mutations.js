@@ -11,7 +11,7 @@ export default {
     /**
      * Set sites
      * @param {SitesState} state
-     * @param {Sites.SiteConfig[]} sites
+     * @param {Sites.SiteModel[]} sites
      */
     [SET_SITES](state, { sites }) {
         state.sites = sites;
@@ -20,7 +20,7 @@ export default {
     /**
      * Add site
      * @param {SitesState} state
-     * @param {Sites.SiteConfig} site
+     * @param {Sites.SiteModel} site
      */
     [ADD_SITE](state, { site }) {
         state.sites.push(site);
@@ -29,7 +29,7 @@ export default {
     /**
      * Set search result
      * @param {SitesState} state
-     * @param {Sites.SiteConfig[]} sites
+     * @param {Sites.SiteModel[]} sites
      */
     [SET_SEARCH_RESULT](state, { sites }) {
         state.searchResult = sites;
@@ -38,7 +38,7 @@ export default {
     /**
      * Set current site config
      * @param {SitesState} state
-     * @param {Sites.SiteConfig} config
+     * @param {Sites.SiteModel} config
      */
     [SET_CURRENT_SITE_CONFIG](state, { config }) {
         state.currentSiteConfig = config;
@@ -52,7 +52,7 @@ export default {
      * Update site config
      * @param {SitesState} state
      * @param {string} id
-     * @param {Partial<Sites.SiteConfig> }delta
+     * @param {Partial<Sites.SiteModel> }delta
      */
     [UPDATE_SITE](state, { id, delta }) {
         state.sites = state.sites.map((site) => {

@@ -25,7 +25,7 @@
         "build": "gulp build",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
         "audit": "node -r esm lib/cli/index.js -a --queue",
-        "worker": "node -r esm src/worker/index.js"
+        "worker": "node -r esm -r dotenv/config src/worker/index.js"
     },
     "size-limit": [
         {
@@ -39,6 +39,7 @@
         "@hapi/hapi": "^19.1.1",
         "@hapi/inert": "^6.0.1",
         "@hapi/joi": "^17.1.1",
+        "@hapi/joi-date": "^2.0.1",
         "@hapi/vision": "^6.0.0",
         "@sentry/node": "^5.15.4",
         "autoprefixer": "^9.8.0",
@@ -62,6 +63,7 @@
         "lodash": "^4.17.15",
         "lodash.curry": "^4.1.1",
         "mongodb": "^3.5.9",
+        "mongoose": "^5.9.24",
         "twig": "^1.15.1",
         "uuid": "^3.4.0",
         "winston": "^3.2.1",

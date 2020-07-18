@@ -6,12 +6,12 @@ import { addSite } from '../../../models/sites';
  * @param {object} payload
  * @param {object} h
  * @param {MongodbDecoration} mongo
- * @return {Promise<Sites.SiteConfig>}
+ * @return {Promise<Sites.SiteModel>}
  */
 async function addSiteHandler({ payload, mongo }, h) {
     // eslint-disable-next-line camelcase
     const { url, name, device, is_favorite } = payload;
-    const config = await addSite(mongo.db, { url, name, device, is_favorite, order: 0 });
+    const config = await addSite({ url, name, device, is_favorite, order: 0 });
 
     return h.response(config).code(201);
 }
@@ -30,6 +30,7 @@ export default {
                     .string(),
                 name: joi
                     .string(),
+                disabled: joi.boolean(),
                 device: joi
                     .string()
                     .allow('desktop', 'mobile'),

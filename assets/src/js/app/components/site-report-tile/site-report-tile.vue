@@ -30,7 +30,7 @@
     export default {
         components: { ScheduledJobIndicator, ReportDetail: withLatestReport(ReportDetail), Btn, Tile },
         props: {
-            /** @type {Sites.SiteConfig} */
+            /** @type {Sites.SiteModel} */
             site: {
                 type: Object,
                 required: true,

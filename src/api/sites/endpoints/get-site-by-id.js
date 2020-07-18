@@ -8,11 +8,11 @@ import { siteConfigModel } from '../schemas/site-config-model';
  * Get site by id controller
  * @param {object} params
  * @param {MongodbDecoration} mongo
- * @return {Promise<Sites.SiteConfig|Boom<null>>}
+ * @return {Promise<Sites.SiteModel|Boom<null>>}
  */
 async function getSiteById({ params, mongo }) {
     const { id } = params;
-    const config = await getSiteConfigById(mongo.db, id);
+    const config = await getSiteConfigById(id);
     if (!config) {
         return Boom.notFound();
     }
