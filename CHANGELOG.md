@@ -8,6 +8,7 @@
 0. [Show thumbnail of LH audit for each page #49](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/49)
 0. [Show license and list of used software #55](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/55)
 0. [Use mongoose ORM #59](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/59)
+0. [Make project active/disabled in settings menu of project #3](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/3)
 
 # 5.12
 0. [Add logout button #22](https://github.com/faebeee/lighthouse-dashboard/issues/22)
