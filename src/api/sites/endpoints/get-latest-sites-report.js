@@ -1,6 +1,6 @@
 import { MEDIUM } from '../../../config/cache';
-import { getAllSites } from '../../../models/sites';
-import * as ReportService from '../../../services/report-service';
+import { getLatestReportBySiteId } from '../../../services/report-service';
+import { getAllSites } from '../../../services/site-service';
 import { siteWithReportList } from '../schemas/site-with-report';
 
 /**
@@ -13,7 +13,7 @@ async function getLatestSitesReport() {
 
     for (let i = 0; i < sites.length; i++) {
         const site = sites[i];
-        const report = await ReportService.getLatestReportBySiteId(site.id);
+        const report = await getLatestReportBySiteId(site.id);
         if (!report) {
             continue;
         }

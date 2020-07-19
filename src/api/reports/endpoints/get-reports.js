@@ -5,12 +5,11 @@ import { reportIdParamModel } from '../schemas/report-id-param-model';
 /**
  * Handler for latest created reports
  * @param {hapi.Request.params} params
- * @param {MongodbDecoration} mongo
  * @return {Promise<Reports.Report[]>}
  */
-function getReports({ params, mongo }) {
+function getReports({ params }) {
     const { id } = params;
-    return getReportsBySiteId(mongo.db, id);
+    return getReportsBySiteId(id);
 }
 
 export default {

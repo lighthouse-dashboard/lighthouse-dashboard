@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { addSite } from '../../../models/sites';
+import { addSite } from '../../../services/site-service';
 
 /**
  * Controller to add a new site
@@ -8,7 +8,7 @@ import { addSite } from '../../../models/sites';
  * @param {MongodbDecoration} mongo
  * @return {Promise<Sites.SiteModel>}
  */
-async function addSiteHandler({ payload, mongo }, h) {
+async function addSiteHandler({ payload }, h) {
     // eslint-disable-next-line camelcase
     const { url, name, device, is_favorite } = payload;
     const config = await addSite({ url, name, device, is_favorite, order: 0 });

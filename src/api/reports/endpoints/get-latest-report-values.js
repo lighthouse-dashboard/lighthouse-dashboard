@@ -9,7 +9,7 @@ import { siteIdParamModel } from '../schemas/siteid-param-model';
  * @param {MongodbDecoration} mongo
  * @return {Promise<Reports.Report | null>}
  */
-async function getLatestReportValues({ params, mongo }) {
+async function getLatestReportValues({ params }) {
     const { siteId } = params;
 
     const report = await getLatestReportBySiteId(siteId);

@@ -6,13 +6,12 @@ import { reportIdParamModel } from '../schemas/report-id-param-model';
 /**
  * Get html report handler
  * @param {object} params
- * @param {MongodbDecoration} mongo
  * @return {Promise<string|string[]>}
  */
-async function getHtmlReportHandler({ params, mongo }) {
+async function getHtmlReportHandler({ params }) {
     const { id } = params;
 
-    const report = await createHTMLReportById(mongo.db, id);
+    const report = await createHTMLReportById(id);
     if (!report) {
         throw Boom.notFound();
     }

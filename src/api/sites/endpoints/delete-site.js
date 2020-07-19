@@ -1,14 +1,13 @@
 import joi from '@hapi/joi';
-import { removeSite } from '../../../models/sites';
+import { removeSite } from '../../../services/site-service';
 
 /**
  * Delete site from DB
  * @param {object} params
  * @param {object} h
- * @param {MongodbDecoration} mongo
  * @return {Promise<void>}
  */
-async function deleteSite({ params, mongo }, h) {
+async function deleteSite({ params }, h) {
     const { id } = params;
     await removeSite(id);
     return h.response().code(201);

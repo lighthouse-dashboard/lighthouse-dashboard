@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4';
 import logger from '../../lib/logger';
-import Sites from './sites/sites-model';
+import Sites from '../models/sites/sites-model';
 
 /**
  * Find sites
@@ -39,11 +39,10 @@ export async function getFavoriteSites() {
 
 /**
  * Get latest n audited sites
- * @param {Db} database
  * @param {number} limit
  * @return {Promise<Sites.SiteModel[]>}
  */
-export async function getLatestSites(database, limit = 50) {
+export async function getLatestSites(limit = 50) {
     const sites = await Sites.find({
         last_audit: {
             $exists: true,
@@ -104,7 +103,7 @@ export async function getSiteConfigById(id) {
  * @param {Sites.SiteModel} config
  * @param {boolean} isScheduled
  */
-export async function setScheduledAuditForSite(database, config, isScheduled) {
+export async function setScheduledAuditForSite(config, isScheduled) {
     logger.debug(`Update scheduled_jobs of ${ config.name } to ${ isScheduled }`);
     await updateSite(config.id, { is_scheduled: isScheduled });
 }

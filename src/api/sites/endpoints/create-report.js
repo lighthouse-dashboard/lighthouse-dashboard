@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import logger from '../../../../lib/logger';
-import { getSiteConfigById, setScheduledAuditForSite } from '../../../models/sites';
+import { getSiteConfigById, setScheduledAuditForSite } from '../../../services/site-service';
 
 /**
  * Execute an audit
@@ -18,7 +18,7 @@ async function createReport({ params, mongo }, h) {
     }
 
     try {
-        await setScheduledAuditForSite(mongo.db, config, true);
+        await setScheduledAuditForSite(config, true);
     } catch (e) {
         logger.error(e);
         return Boom.boomify(e);

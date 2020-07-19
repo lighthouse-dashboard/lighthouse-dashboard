@@ -1,18 +1,17 @@
 import curry from 'lodash.curry';
 import logger from '../../lib/logger';
-import { saveReport } from '../models/reports';
-import { updateSite } from '../models/sites';
+import { saveReport } from '../services/report-service';
+import { updateSite } from '../services/site-service';
 import lighthouseTransformer from './lighthouse-transformer';
 import runLighthouse from './run-lighthouse';
 
 /**
  * Create new audit
- * @param {Db} database
  * @param {Sites.SiteModel} config
  * @param {ReportMeta | {}} meta
  * @return {Promise<Reports.Report>}
  */
-export async function createNewAuditForConfig(database, config, meta = {}) {
+export async function createNewAuditForConfig(config, meta = {}) {
     const { url, device } = config;
     const transformAuditCurry = curry(lighthouseTransformer);
     try {
@@ -25,10 +24,11 @@ export async function createNewAuditForConfig(database, config, meta = {}) {
 
         const thumbnail = (raw.audits && raw.audits['screenshot-thumbnails']) ? [...raw.audits['screenshot-thumbnails'].details.items].pop().data : config.thumbnail;
 
-        await saveReport(database, { ...transformed, ...meta }, raw);
+        await saveReport({ ...transformed, ...meta }, raw);
         await updateSite(config.id, { last_audit: new Date().toISOString(), thumbnail });
         return transformed;
     } catch (e) {
         logger.error(e.message);
     }
+    return null;
 }

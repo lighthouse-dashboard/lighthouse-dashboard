@@ -1,5 +1,5 @@
-import { getSiteConfigById } from '../models/sites';
 import { getDefaultParams } from '../router/utils/get-default-params';
+import { getSiteConfigById } from '../services/site-service';
 
 export default {
     method: 'GET',

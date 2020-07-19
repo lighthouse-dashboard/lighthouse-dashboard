@@ -1,15 +1,14 @@
 import joi from '@hapi/joi';
 import { MEDIUM } from '../../../config/cache';
-import { findSites, getAllSites } from '../../../models/sites';
+import { findSites, getAllSites } from '../../../services/site-service';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 /**
  * Get sites
  * @param {object} query
- * @param {MongodbDecoration} mongo
- * @return {Promise<Sites.SiteModel[]>}
+s * @return {Promise<Sites.SiteModel[]>}
  */
-function getSitesHandler({ query, mongo }) {
+function getSitesHandler({ query }) {
     const { query: searchQuery } = query;
 
     if (searchQuery) {
@@ -20,7 +19,7 @@ function getSitesHandler({ query, mongo }) {
         }
     }
 
-    return getAllSites(mongo.db);
+    return getAllSites();
 }
 
 export default {

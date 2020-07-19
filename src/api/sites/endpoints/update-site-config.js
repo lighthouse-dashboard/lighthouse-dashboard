@@ -1,15 +1,14 @@
 import joi from '@hapi/joi';
-import { updateSite } from '../../../models/sites';
+import { updateSite } from '../../../services/site-service';
 
 /**
  * Update site controller
  * @param {Partial<Sites.SiteModel>} payload
  * @param {object} h
  * @param {object} params
- * @param {MongodbDecoration} mongo
  * @return {Promise<void>}
  */
-async function updateSiteConfigHandler({ params, payload, mongo }, h) {
+async function updateSiteConfigHandler({ params, payload }, h) {
     const { id } = params;
     // eslint-disable-next-line camelcase
     const { is_favorite, url, name } = payload;
