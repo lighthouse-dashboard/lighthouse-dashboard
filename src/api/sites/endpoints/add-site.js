@@ -30,7 +30,7 @@ export default {
                     .string(),
                 name: joi
                     .string(),
-                disabled: joi.boolean(),
+                is_disabled: joi.boolean(),
                 device: joi
                     .string()
                     .allow('desktop', 'mobile'),

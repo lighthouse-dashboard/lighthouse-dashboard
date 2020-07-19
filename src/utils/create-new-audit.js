@@ -24,6 +24,10 @@ export async function createNewAuditForConfig(config, meta = {}) {
 
         const thumbnail = (raw.audits && raw.audits['screenshot-thumbnails']) ? [...raw.audits['screenshot-thumbnails'].details.items].pop().data : config.thumbnail;
 
+        if (thumbnail !== config.thumbnail) {
+            logger.debug(`Update thumbnail for ${ config.name }`);
+        }
+
         await saveReport({ ...transformed, ...meta }, raw);
         await updateSite(config.id, { last_audit: new Date().toISOString(), thumbnail });
         return transformed;

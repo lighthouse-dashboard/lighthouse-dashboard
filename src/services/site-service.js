@@ -61,7 +61,8 @@ export async function getLatestSites(limit = 50) {
  * @return {Promise<Sites.SiteModel>}
  */
 export async function addSite(config) {
-    const site = new Sites({ ...config, id: uuid() });
+    logger.info(`Create new site ${ JSON.stringify(config) }`);
+    const site = new Sites({ ...config, id: uuid(), thumbnail: null });
     await site.save();
     return site.toJSON();
 }
@@ -73,6 +74,7 @@ export async function addSite(config) {
  * @return {Promise<Sites.SiteModel>}
  */
 export async function updateSite(id, delta) {
+    logger.debug(`Update site ${ id } with ${ Object.keys(delta).join(',') }`);
     await Sites.updateOne({ id }, delta);
     const site = await Sites.findOne({ id });
     return site.toJSON();
@@ -88,18 +90,19 @@ export async function removeSite(id) {
 
 /**
  * Get config for specific site
- * @param {Db} database
  * @param {string} id
  * @return {Promise<Sites.SiteModel | null>}
  */
 export async function getSiteConfigById(id) {
     const site = await Sites.findOne({ id });
+    if (!site) {
+        return null;
+    }
     return site.toJSON();
 }
 
 /**
  * Update the amount of scheduled jobs
- * @param {Db} database
  * @param {Sites.SiteModel} config
  * @param {boolean} isScheduled
  */
@@ -114,5 +117,5 @@ export async function setScheduledAuditForSite(config, isScheduled) {
  * @return {Promise<Sites.SiteModel[]>}
  */
 export const getScheduledSites = (limit = 50) => {
-    return findSites({ is_scheduled: true, disabled: false }, {}, limit);
+    return findSites({ is_scheduled: true, is_disabled: false }, {}, limit);
 };

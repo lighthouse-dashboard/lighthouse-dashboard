@@ -1,14 +1,14 @@
 <template>
     <div class="create-site-btn">
         <btn
-                class='side-nav--action'
-                :facets='["flat", "full-width"]'
-                @click='toggleCreateOverlay'>
+                class="side-nav--action"
+                :facets="['flat', 'full-width']"
+                @click="toggleCreateOverlay">
             New Site
         </btn>
-        <site-create-overlay v-if='isCreateOverlayOpen'
+        <site-create-overlay v-if="isCreateOverlayOpen"
                 @done="onDone"
-                @close='toggleCreateOverlay'/>
+                @close="toggleCreateOverlay"/>
     </div>
 </template>
 
@@ -33,11 +33,11 @@
              * @param {Sites.SiteModel} site
              */
             onDone({ site }) {
-                debugger;
                 window.location.href = `/app/projects/${ site.id }`;
             },
 
             toggleCreateOverlay() {
+                console.log('toggle');
                 this.isCreateOverlayOpen = !this.isCreateOverlayOpen;
             },
         },

@@ -8,7 +8,6 @@ const ReportGenerator = require('lighthouse/lighthouse-core/report/report-genera
 
 /**
  * Get latest report for site
- * @param {Db} database
  * @param {string} id
  * @return {Promise<Reports.Report>}
  */
@@ -19,7 +18,6 @@ export async function getLatestReportBySiteId(id) {
 
 /**
  * Get all reprots for site id
- * @param {Db} db
  * @param {string} id
  * @return {Promise<Reports.Report[]>}
  */
@@ -37,6 +35,7 @@ export async function getReportsBySiteId(id) {
  * @param {object} raw - raw lighthouse audit report
  */
 export async function saveReport(reportData, raw) {
+    logger.debug('Save new report');
     const report = new ReportModel({ ...reportData });
     report.raw = process.env.LHD_IGNORE_RAW ? null : JSON.stringify(raw);
     if (process.env.LHD_IGNORE_RAW) {

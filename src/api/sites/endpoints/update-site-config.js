@@ -10,9 +10,7 @@ import { updateSite } from '../../../services/site-service';
  */
 async function updateSiteConfigHandler({ params, payload }, h) {
     const { id } = params;
-    // eslint-disable-next-line camelcase
-    const { is_favorite, url, name } = payload;
-    const config = await updateSite(id, { is_favorite, url, name });
+    const config = await updateSite(id, payload);
 
     return h.response(config);
 }
@@ -33,7 +31,7 @@ export default {
                 is_favorite: joi.boolean().required(),
                 name: joi.string(),
                 url: joi.string(),
-                disabled: joi.boolean(),
+                is_disabled: joi.boolean(),
             }).label('sites.SiteUpdateModel'),
         },
     },

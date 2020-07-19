@@ -12,7 +12,7 @@ export const siteConfigModel = joi.object({
     last_audit: joi.string(),
     is_scheduled: joi.boolean(),
     thumbnail: joi.optional(),
-    disabled: joi.boolean(),
+    is_disabled: joi.boolean(),
 }).label('sites.SiteConfigModel');
 
 export const siteConfigModelList = joi

@@ -12,7 +12,7 @@ function connect(uri) {
     if (_client) {
         return _client;
     }
-    logger.debug(`Connect to mongodb ${ uri }`);
+    logger.debug(`Connecting to DBs`);
     return new Promise((resolve, reject) => {
         MongoClient.connect(uri, (err, client) => {
             if (err) {

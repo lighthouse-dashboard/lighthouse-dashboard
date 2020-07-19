@@ -10,6 +10,6 @@ export default database.model('sites', new Schema({
     is_favorite: Boolean,
     last_audit: String,
     is_scheduled: Boolean,
-    thumbmail: String,
-    disabled: { type: Boolean, default: false },
+    thumbnail: { type: String, default: null },
+    is_disabled: { type: Boolean, default: false },
 }));

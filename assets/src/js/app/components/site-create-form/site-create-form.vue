@@ -21,7 +21,7 @@
         </div>
 
         <div class="site-create-form--field-set">
-            <input-checkbox v-model="value.disabled"
+            <input-checkbox v-model="value.is_disabled"
                     label="Is Disabled"/>
         </div>
 

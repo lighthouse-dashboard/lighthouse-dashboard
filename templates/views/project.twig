@@ -13,9 +13,15 @@
                         v-html="siteProps.site.name"></h4>
 
                 <component is="notification"
+                        :facets="['warning']"
+                        v-if="{{ site.is_disabled }}">
+                    Site is disabled
+                </component>
+
+                <component is="notification"
                         :facets="['success']"
-                        v-if="{{ site.is_scheduled }}">
-                    Audits are scheduled for this project
+                        v-if="{{ site.is_scheduled }} && !{{ site.is_disabled }}">
+                    Audits are scheduled for thiss project
                 </component>
 
                 <component is="reports-provider"
@@ -48,7 +54,8 @@
                                     <component is="tile"
                                             title="Thumbnail"
                                             class='project--sidebar-section'>
-                                        <img src="{{ site.thumbnail }}" alt="{{ site.name }}">
+                                        <img src="{{ site.thumbnail }}"
+                                                alt="{{ site.name }}">
                                     </component>
                                 {% endif %}
 
@@ -66,15 +73,11 @@
                                             class="project--action-btn"
                                             :site='siteProps.site'></component>
 
-                                    {% if not site.disabled %}
-                                    <component is="schedule-audit-btn"
-                                            id="{{ site.id }}"
-                                            class="project--action-btn"
-                                            :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
-                                    {% else %}
-                                        <component>
-                                            Site is disabled
-                                        </component>
+                                    {% if not site.is_disabled %}
+                                        <component is="schedule-audit-btn"
+                                                id="{{ site.id }}"
+                                                class="project--action-btn"
+                                                :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
                                     {% endif %}
 
                                     <component is="site-delete-btn"

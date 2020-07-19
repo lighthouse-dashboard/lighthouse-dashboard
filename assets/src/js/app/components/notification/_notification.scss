@@ -33,6 +33,12 @@
     &.notification__success {
         background-color: var(--color--signal-success);
         color: var(--color-mono-white);
+
+    }
+
+    &.notification__warning {
+        background-color: var(--color--signal-warning);
+        //color: var(--color-mono-white);
     }
 
     // States

@@ -1,17 +1,18 @@
 <template>
-    <overlay title='Create Site'
-            :active='true'
-            v-on='$listeners'>
-        <site-create-form v-model='siteConfig'
+    <overlay title="Create Site"
+            :active="isOverlayOpen"
+            v-on="$listeners">
+        <site-create-form v-model="siteConfig"
                 v-if="siteConfig"/>
-        <error-message :error='errorMessage'/>
-        <template slot='additional'>
-            <btn v-if='isEdit'
-                    @click='onSaveClicked'>
+
+        <error-message :error="errorMessage"/>
+        <template slot="additional">
+            <btn v-if="isEdit"
+                    @click="onSaveClicked">
                 Save
             </btn>
             <btn v-else
-                    @click='onCreateClicked'>
+                    @click="onCreateClicked">
                 Create
             </btn>
         </template>
@@ -76,7 +77,7 @@
                         name: this.siteConfig.name,
                         url: this.siteConfig.url,
                         is_favorite: this.siteConfig.is_favorite,
-                        disabled: this.siteConfig.disabled,
+                        is_disabled: this.siteConfig.is_disabled,
                     },
                 })
                     .then(() => {
@@ -97,9 +98,9 @@
             this.siteConfig = this.isEdit ? { ...this.config } : {
                 name: '',
                 url: '',
-                disabled: false,
                 device: 'desktop',
                 is_favorite: true,
+                is_disabled: false,
             };
         },
     };
