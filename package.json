@@ -24,7 +24,7 @@
         "start": "node -r esm index.js",
         "build": "gulp build",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
-        "audit": "node -r esm lib/cli/index.js -a --queue",
+        "audit": "node -r esm -r dotenv/config lib/cli/index.js  -a --queue",
         "worker": "node -r esm -r dotenv/config src/worker/index.js"
     },
     "size-limit": [
