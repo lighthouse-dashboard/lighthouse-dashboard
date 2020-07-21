@@ -44,7 +44,7 @@
         "@sentry/node": "^5.15.4",
         "autoprefixer": "^9.8.0",
         "blipp": "^4.0.1",
-        "chrome-launcher": "^0.13.1",
+        "chrome-launcher": "^0.13.3",
         "chrome-paths": "^1.0.1",
         "commander": "^4.1.1",
         "date-fns": "^2.14.0",
