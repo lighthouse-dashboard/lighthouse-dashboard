@@ -4,7 +4,7 @@
                 class="side-nav--action"
                 :facets="['flat', 'full-width']"
                 @click="toggleCreateOverlay">
-            New Site
+            {{ $t('site-create.title') }}
         </btn>
         <site-create-overlay v-if="isCreateOverlayOpen"
                 @done="onDone"

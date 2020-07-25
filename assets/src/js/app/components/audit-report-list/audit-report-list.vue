@@ -1,7 +1,7 @@
 <template>
     <list class="audit-report-list">
         <span class="caption"
-                v-if="list.length === 0">No Items</span>
+                v-if="list.length === 0">{{ $t('general.empty-list') }}</span>
         <list-item v-for="report in list"
                 :key="report._id">
             <a class="link"

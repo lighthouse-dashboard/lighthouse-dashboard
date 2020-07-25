@@ -4,7 +4,7 @@
             <list-item>
                 <a class="link"
                         href="/app/system/changelog">
-                    Changelog
+                    {{ $t('system.changelog') }}
                 </a>
             </list-item>
 
@@ -12,7 +12,16 @@
                 <a class="link"
                         target="_blank"
                         href="/storybook/index.html">
-                    Storybook
+                    {{ $t('system.storybook') }}
+                </a>
+            </list-item>
+
+
+            <list-item>
+                <a class="link"
+                        target="_blank"
+                        href="https://github.com/lighthouse-dashboard/lighthouse-dashboard/projects/1">
+                    {{ $t('system.roadmap') }}
                 </a>
             </list-item>
         </list>

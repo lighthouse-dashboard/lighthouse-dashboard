@@ -3,14 +3,10 @@
         <loading-indicator v-if="isLoading"/>
         <list>
             <list-item>
-                <span class="u-reset">Version</span>
+                <span class="u-reset">
+                    {{ $t('system.version-label') }}
+                </span>
                 <span class="u-reset">v{{ version }}</span>
-            </list-item>
-
-            <list-item v-if="health">
-                <span class="u-reset">Uptime</span>
-                <span class="u-reset"
-                        v-if="health">{{ formattedUptime }}</span>
             </list-item>
         </list>
     </tile>

@@ -2,8 +2,8 @@
     <confirm-button
             :facets='["danger", "full-width"]'
             confirm="Click to confirm"
-            @click='onDeleteClicked'>
-        Delete
+            @click="onDeleteClicked">
+        {{ $t('site.delete-btn-label') }}
     </confirm-button>
 </template>
 
@@ -28,7 +28,7 @@
                 this.deleteSite({ id: this.id })
                     .then(() => {
                         Toastify({
-                            text: 'Page deleted',
+                            text: this.$t('notifications.site.deleted'),
                             className: 'info',
                         })
                             .showToast();

@@ -1,6 +1,6 @@
 <template>
     <div class="changelog">
-        <tile title="Changelog">
+        <tile :title="$t('changelog.title')">
             <p v-html="markdown"/>
         </tile>
     </div>
