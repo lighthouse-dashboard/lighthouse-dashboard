@@ -1,9 +1,9 @@
 <template>
-    <tile title="Averages"
+    <tile :title="$t('average.label')"
             class="project--average">
-        <loading-indicator v-if='isLoading'/>
+        <loading-indicator v-if="isLoading"/>
         <gauge-chart :labels="avgFields"
-                :series='avgFields.map(field => getAvg(field))'
+                :series="avgFields.map(field => getAvg(field))"
                 v-else/>
     </tile>
 </template>
@@ -31,10 +31,9 @@
         }),
 
         methods: {
-
             getAvg(scoreId) {
                 return Math.round(getAverageForScore(this.reports, scoreId.toLocaleLowerCase()) * 100) / 100;
             },
-        }
+        },
     };
 </script>

@@ -1,7 +1,9 @@
 <template>
     <div class="error-message"
-            v-if='text'>
-        <p class='u-reset error-message--text'>{{ text }}</p>
+            v-if="text">
+        <p class="u-reset error-message--text">
+            {{ text }}
+        </p>
     </div>
 </template>
 

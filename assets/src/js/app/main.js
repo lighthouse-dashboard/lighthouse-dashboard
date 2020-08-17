@@ -1,12 +1,23 @@
 import 'es6-promise/auto';
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+import TRANSLATIONS_EN from '../../../static/translations/en.json';
 
 import registry from '../framework/registry';
 import store from './vuex';
 
 Vue.config.productionTip = false;
 
-registry(Vue, { store });
+Vue.use(VueI18n);
+const i18n = new VueI18n({
+    locale: 'en', // set locale
+    messages: {
+        en: TRANSLATIONS_EN,
+    },
+});
+
+
+registry(Vue, { store, i18n });
 
 if (process.env.NODE_ENV === 'develop') {
     // eslint-disable-next-line no-undef

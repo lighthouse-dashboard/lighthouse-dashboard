@@ -23,7 +23,7 @@
             isLoading: {
                 type: Boolean,
                 default: false,
-            }
+            },
         },
         computed: {
             chartData() {

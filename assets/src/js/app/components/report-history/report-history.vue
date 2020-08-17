@@ -1,6 +1,6 @@
 <template>
-    <tile title="History">
-        <loading-indicator v-if='isLoading'/>
+    <tile :title="$t('history.title')">
+        <loading-indicator v-if="isLoading"/>
         <line-chart :data-sets="lineChartData.datasets"
                 :labels="lineChartData.labels"
                 v-else/>

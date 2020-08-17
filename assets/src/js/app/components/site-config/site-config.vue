@@ -3,7 +3,7 @@
         <list class="site-config--list">
             <list-item class="site-config--list-item">
                 <p class="u-reset caption">
-                    Name
+                    {{ $t('site.name-field') }}
                 </p>
                 <a class="u-reset link"
                         :href="site.url">
@@ -12,8 +12,12 @@
             </list-item>
 
             <list-item class="site-config--list-item">
-                <p class="u-reset caption">Last Audit</p>
-                <p class="u-reset subtitle1">{{ site.last_audit | format-date }}</p>
+                <p class="u-reset caption">
+                    {{ $t('general.last-audit') }}
+                </p>
+                <p class="u-reset subtitle1">
+                    {{ site.last_audit | format-date }}
+                </p>
             </list-item>
         </list>
     </div>

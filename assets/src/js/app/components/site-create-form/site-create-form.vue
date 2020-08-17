@@ -2,32 +2,36 @@
     <div class="site-create-form">
         <div class="site-create-form--field-set">
             <input-field v-model="value.name"
-                    placeholder="foo.io"
-                    label="Name"/>
+                    :placeholder="$t('site.create.name-placeholder')"
+                    :label="$t('site.name-field')"/>
         </div>
 
         <div class="site-create-form--field-set">
             <input-field v-model="value.url"
-                    placeholder="https://www.foo.io"
-                    label="URL"/>
+                    :placeholder="$t('site.create.url-placeholder')"
+                    :label="$t('site.url-field')"/>
         </div>
 
         <div class="site-create-form--field-set">
             <input-select v-model="value.device"
                     label="Device">
-                <option value="desktop">Desktop</option>
-                <option value="mobile">Mobile</option>
+                <option value="desktop">
+                    {{ $t('site.devices-desktop') }}
+                </option>
+                <option value="mobile">
+                    {{ $t('site.devices-mobile') }}
+                </option>
             </input-select>
         </div>
 
         <div class="site-create-form--field-set">
             <input-checkbox v-model="value.is_disabled"
-                    label="Is Disabled"/>
+                    :label="$t('site.is-disabled')"/>
         </div>
 
         <div class="site-create-form--field-set">
             <input-checkbox v-model="value.is_favorite"
-                    label="Is Favorite"/>
+                    :label="$t('site.is-favorite')"/>
         </div>
     </div>
 </template>

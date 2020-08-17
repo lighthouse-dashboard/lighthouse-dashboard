@@ -1,17 +1,21 @@
 <template>
-    <tile title="Worker"
+    <tile :title="$t('system.worker-tile-title')"
             class="system--section">
         <loading-indicator v-if="isLoading"/>
 
         <div class="system--row"
                 v-if="info">
-            <span class="u-reset">Worker last run</span>
+            <span class="u-reset">
+                {{ $t('general.last-run') }}
+            </span>
             <span class="u-reset">{{ workerLastRunDate }}</span>
         </div>
 
         <div class="system--row"
                 v-if="info">
-            <span class="u-reset">Worker is running</span>
+            <span class="u-reset">
+                {{ $t('system.worker-is-running') }}
+            </span>
             <span class="u-reset"
                     v-if="info">{{ info.worker_is_running }}</span>
         </div>

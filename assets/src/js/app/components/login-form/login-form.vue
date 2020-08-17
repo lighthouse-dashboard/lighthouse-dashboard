@@ -6,20 +6,20 @@
             {{ title }}
         </h4>
 
-        <div class='login-form--content'>
-            <div class='login-form--input-wrapper'>
+        <div class="login-form--content">
+            <div class="login-form--input-wrapper">
                 <input-field
-                        :disabled='isLoading'
-                        placeholder='Password'
+                        :disabled="isLoading"
+                        placeholder="Password"
                         type="password"
                         :value="password"
-                        :error='errorMessage'
+                        :error="errorMessage"
                         @input='onChange'/>
             </div>
             <div>
-                <btn :disabled='isLoading || !isSubmittable'
+                <btn :disabled="isLoading || !isSubmittable"
                         @click="onLogin">
-                    Login
+                    {{ $t('login-form.submit-btn') }}
                 </btn>
             </div>
         </div>

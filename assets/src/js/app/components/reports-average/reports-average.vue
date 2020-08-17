@@ -1,11 +1,11 @@
 <template>
-    <div class='reports-average'>
-        <p class='subtitle-1'>
+    <div class="reports-average">
+        <p class="subtitle-1">
             {{ title }}
         </p>
 
-        <p class='caption'>
-            Average
+        <p class="caption">
+            {{ $t("average.label") }}
         </p>
 
         <gauge-chart :labels="['']"

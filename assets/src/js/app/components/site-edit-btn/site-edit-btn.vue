@@ -1,11 +1,12 @@
 <template>
     <div class="site-edit-btn">
-        <site-create-overlay :config='site'
-                v-if='site && isEdit'
-                @done='toggleEdit'/>
+        <site-create-overlay :config="site"
+                v-if="site && isEdit"
+                @done="toggleEdit"/>
 
         <btn :facets="['secondary', 'full-width']"
-                @click="toggleEdit">Edit
+                @click="toggleEdit">
+            {{ $t('site.edit-btn-label') }}
         </btn>
     </div>
 </template>

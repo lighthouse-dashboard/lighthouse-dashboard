@@ -1,5 +1,5 @@
 <template>
-    <overlay title="Create Site"
+    <overlay :title="$t('site-create.title')"
             :active="isOverlayOpen"
             v-on="$listeners">
         <site-create-form v-model="siteConfig"
@@ -9,11 +9,11 @@
         <template slot="additional">
             <btn v-if="isEdit"
                     @click="onSaveClicked">
-                Save
+                {{ $t('site-create.save-btn') }}
             </btn>
             <btn v-else
                     @click="onCreateClicked">
-                Create
+                {{ $t('site-create.abort-btn') }}
             </btn>
         </template>
     </overlay>
@@ -61,7 +61,7 @@
                     .then((site) => {
                         this.$emit('done', { site });
                         Toastify({
-                            text: 'Site created',
+                            text: this.$t('site-create.create-notification-text'),
                             className: 'info',
                         }).showToast();
                     })
@@ -84,7 +84,7 @@
                         this.$emit('updated');
                         this.$emit('done');
                         Toastify({
-                            text: 'Site updated',
+                            text: this.$t('site-create.update-notification-text'),
                             className: 'info',
                         }).showToast();
                     })
