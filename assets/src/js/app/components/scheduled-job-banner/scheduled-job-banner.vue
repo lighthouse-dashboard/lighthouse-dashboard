@@ -1,7 +1,7 @@
 <template>
     <notification :facets="['success']"
             v-if="hasScheduledJobs">
-        Audits are scheduled for this project
+        {{ $t('site.site-scheduled-banner-text') }}
     </notification>
 </template>
 

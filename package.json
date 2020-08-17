@@ -1,6 +1,6 @@
 {
     "name": "lighthouse-dashboard",
-    "version": "5.12.18",
+    "version": "5.13.4",
     "private": true,
     "description": "App to keep track of your websites by showing their lighthouse results",
     "author": {
@@ -24,7 +24,7 @@
         "start": "node -r esm index.js",
         "build": "gulp build",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
-        "audit": "node -r esm lib/cli/index.js -a --queue",
+        "audit": "node -r esm -r dotenv/config lib/cli/index.js  -a --queue",
         "worker": "node -r esm -r dotenv/config src/worker/index.js"
     },
     "size-limit": [
@@ -66,6 +66,7 @@
         "mongoose": "^5.9.24",
         "twig": "^1.15.1",
         "uuid": "^3.4.0",
+        "vue-i18n": "^8.18.2",
         "winston": "^3.2.1",
         "winston-daily-rotate-file": "^4.4.2"
     },

@@ -7,7 +7,6 @@ module.exports = {
      * @type {string}
      */
 
-
     // Config for the project overview chart
     siteOverviewChart: {
         fields: [

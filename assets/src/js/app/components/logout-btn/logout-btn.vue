@@ -2,7 +2,7 @@
     <btn
             to="/logout"
             :facets='["danger", "full-width"]'>
-        Logout
+        {{ $t('logout.btn') }}
     </btn>
 </template>
 

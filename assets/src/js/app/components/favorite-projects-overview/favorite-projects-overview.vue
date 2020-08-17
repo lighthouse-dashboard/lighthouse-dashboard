@@ -1,11 +1,11 @@
 <template>
-    <div class='favorite-project-overview'>
-        <p class='u-reset overline'>
-            Favorite Projects
+    <div class="favorite-project-overview">
+        <p class="u-reset overline">
+            {{ $t('favorite-projects.overview-title') }}
         </p>
 
-        <loading-indicator v-if='isLoading'/>
-        <div class='favorite-project-overview--content'
+        <loading-indicator v-if="isLoading"/>
+        <div class="favorite-project-overview--content"
                 v-else>
             <site-overview
                     v-bind="site"

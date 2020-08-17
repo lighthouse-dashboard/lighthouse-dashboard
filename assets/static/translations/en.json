@@ -1,0 +1,55 @@
+{
+    "general": {
+        "empty-list": "No items",
+        "last-audit": "Last audit",
+        "created-at": "Created at",
+        "last-run": "Last run"
+    },
+    "notifications": {
+        "site.deleted": "Site deleted"
+    },
+    "system": {
+        "database-tile-title": "Database",
+        "worker-tile-title": "Worker",
+        "database-collections": "Collections",
+        "database-connection": "Collections",
+        "database-size": "DB Size",
+        "changelog": "Changelog",
+        "storybook": "Storybook",
+        "roadmap": "Roadmap",
+        "version-label": "Version",
+        "worker-is-running": "Is running"
+    },
+    "changelog.title": "Changelog",
+    "site-create.title": "Create new site",
+    "site-create.save-btn": "Create new site",
+    "site-create.abort-btn": "Create new site",
+    "site-create.update-notification-text": "Site updated",
+    "site-create.create-notification-text": "Site created",
+    "site.site-scheduled-banner-text": "Audits are scheduled for this project",
+    "site.schedule-new-audit-button": "New audit",
+    "site.audit-scheduled-notification-text": "New audit scheduled",
+    "site.audit-already-scheduled": "Audits already scheduled",
+    "site.name-field": "Name",
+    "site.url-field": "URL",
+    "site.devices-desktop": "Desktop",
+    "site.devices-mobile": "Mobile",
+    "site.is-disabled": "Disabled",
+    "site.is-favorite": "Favorite",
+    "site.delete-btn-label": "Delete",
+    "site.edit-btn-label": "Edit",
+    "site.create.name-placeholder": "foo.io",
+    "site.create.url-placeholder": "https://www.foo.io",
+    "favorite-projects.overview-title": "Favorite Projects",
+    "latest-projects.performance-overview-title": "Latest reports performance",
+    "latest-report.title": "Latest report",
+    "login-form.submit-btn": "Login",
+    "logout.btn": "Logout",
+    "history.title": "History",
+    "average.label": "Average",
+    "navigation": {
+        "dashboard-link-text": "Dashboard",
+        "projects-link-text": "Projects",
+        "system-link-text": "Dashboard"
+    }
+}

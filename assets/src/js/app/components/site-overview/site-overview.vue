@@ -1,7 +1,7 @@
 <template>
-    <tile class='site-overview'>
+    <tile class="site-overview">
         <scheduled-job-indicator v-if="is_scheduled"/>
-        <div class='site-overview--title'
+        <div class="site-overview--title"
                 slot="title">
             <btn :to="`/app/projects/${id}`"
                     class="subtitle1"
@@ -10,7 +10,7 @@
             </btn>
         </div>
 
-        <span title="Created At"
+        <span :title="$t('general.created-at')"
                 class="u-reset caption"
                 v-if="latestReport"
                 slot="caption">
@@ -19,9 +19,11 @@
 
         <loading-indicator v-if="isLoading"/>
 
-        <div class='site-overview--content'
+        <div class="site-overview--content"
                 v-else>
-            <span v-if="runError">{{ runError.message }}</span>
+            <span v-if="runError">
+                {{ runError.message }}
+            </span>
             <line-chart
                     :data-sets="lineChartData.datasets"
                     :labels="lineChartData.labels"/>

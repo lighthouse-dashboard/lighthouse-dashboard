@@ -2,8 +2,12 @@
     <btn
             :facets="['secondary', 'full-width', ...auditBtnFacet]"
             @click="runAudit">
-        <template v-if="isScheduled">Audits already scheduled</template>
-        <template v-else>New audit</template>
+        <template v-if="isScheduled">
+            {{ $t('site.audit-already-scheduled')}}
+        </template>
+        <template v-else>
+            {{ $t('site.schedule-new-audit-button') }}
+        </template>
     </btn>
 </template>
 
@@ -49,7 +53,7 @@
                     .then(() => {
                         this.jobHasBeenScheduled = true;
                         Toastify({
-                            text: 'New audit scheduled',
+                            text: this.$t('site.audit-scheduled-notification-text'),
                             className: 'info',
                         })
                             .showToast();

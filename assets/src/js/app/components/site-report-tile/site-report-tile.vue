@@ -11,7 +11,7 @@
             </btn>
         </template>
         <span
-                title="Created At"
+                :title="$t('general-created-at')"
                 class="u-reset caption latest-audits-feed--caption"
                 slot="caption">
             {{ site.last_audit | format-date }}

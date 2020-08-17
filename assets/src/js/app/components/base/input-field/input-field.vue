@@ -1,16 +1,16 @@
 <template>
     <label class="input-field"
-            :class='classes'>
-        <span class='input-field--label'
-                v-if='label'>{{ label }}</span>
-        <input class='input-field--input'
-                :disabled='disabled'
-                :placeholder='placeholder'
-                :type='type'
-                :value='model'
-                @input='onChange'>
-        <span class='input-field--error'
-                v-if='error'>{{ error }}</span>
+            :class="classes">
+        <span class="input-field--label"
+                v-if="label">{{ label }}</span>
+        <input class="input-field--input"
+                :disabled="disabled"
+                :placeholder="placeholder"
+                :type="type"
+                :value="model"
+                @input="onChange">
+        <span class="input-field--error"
+                v-if="error">{{ error }}</span>
         <slot/>
     </label>
 </template>

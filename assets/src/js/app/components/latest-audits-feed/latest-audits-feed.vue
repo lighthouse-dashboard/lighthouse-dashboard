@@ -1,10 +1,10 @@
 <template>
     <div class="latest-audits-feed">
         <p class="u-reset overline">
-            Latest reports performance
+            {{ $t('latest-projects.performance-overview-title') }}
         </p>
 
-        <loading-indicator v-if='isLoading'/>
+        <loading-indicator v-if="isLoading"/>
         <div class="latest-audits-feed--content"
                 v-else>
             <site-report-tile

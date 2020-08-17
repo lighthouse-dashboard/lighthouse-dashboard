@@ -1,12 +1,12 @@
 <template>
     <div class="input-select"
-            :class='classes'>
+            :class="classes">
         <label>
-            <span class="input-select--label" v-if='label'>{{ label }}</span>
+            <span class="input-select--label" v-if="label">{{ label }}</span>
             <select class="input-select--select"
-                    :disabled='disabled'
-                    :value='value'
-                    @change='onChange'>
+                    :disabled="disabled"
+                    :value="value"
+                    @change="onChange">
                 <slot/>
             </select>
         </label>

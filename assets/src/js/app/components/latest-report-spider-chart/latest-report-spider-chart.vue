@@ -1,5 +1,5 @@
 <template>
-    <tile title="Latest Report"
+    <tile :title="$t('latest-report.title')"
             class="project--last-report-radar">
         <loading-indicator v-if="isLoading"/>
         <radar-chart :series="latestReportRadarData.series"

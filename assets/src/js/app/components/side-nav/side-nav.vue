@@ -1,64 +1,55 @@
 <template>
-    <div class='side-nav'
-            :class='rootClasses'>
+    <div class="side-nav"
+            :class="rootClasses">
         <side-nav-toggle
-                class='side-nav--mobile-toggle'
-                v-if='!isOpen'
-                @toggle='toggleDrawer'/>
+                class="side-nav--mobile-toggle"
+                v-if="!isOpen"
+                @toggle="toggleDrawer"/>
 
-        <div class='side-nav--backdrop'
-                @click='toggleDrawer'/>
+        <div class="side-nav--backdrop"
+                @click="toggleDrawer"/>
 
-        <nav class='side-nav--drawer'>
-            <div class='side-nav--top'>
+        <nav class="side-nav--drawer">
+            <div class="side-nav--top">
                 <div class="side-nav--header">
                     <img class="side-nav--logo"
-                            src="/static/img/logo_small.png"/>
-                    <close-btn class='side-nav--close-btn'
-                            @click='toggleDrawer'/>
+                            src="/static/img/logo_small.png">
+                    <close-btn class="side-nav--close-btn"
+                            @click="toggleDrawer"/>
                 </div>
 
                 <ul class="side-nav--list">
                     <li>
                         <a href="/app/dashboard"
                                 class="side-nav--list-item">
-                            Dashboard
-
+                            {{ $t('navigation.dashboard-link-text') }}
                         </a>
                     </li>
                     <li>
                         <a href="/app/projects"
                                 class="side-nav--list-item">
-                            Projects
+                            {{ $t('navigation.projects-link-text') }}
                         </a>
                     </li>
                     <li>
                         <a href="/app/system"
                                 class="side-nav--list-item">
-                            System
+                            {{ $t('navigation.system-link-text') }}
                         </a>
                     </li>
                 </ul>
             </div>
-
-            <div class='side-nav--secondary'>
-
-            </div>
         </nav>
-
     </div>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import bemMixin from '../../mixins/bem-mixin';
-    import Btn from '../base/btn/btn';
     import CloseBtn from '../close-btn/close-btn';
-    import SiteCreateOverlay from '../overlay/site-create-overlay/site-create-overlay';
     import SideNavToggle from './side-nav-toggle/side-nav-toggle';
 
     export default {
-        components: { CloseBtn, SiteCreateOverlay, Btn, SideNavToggle },
+        components: { CloseBtn, SideNavToggle },
 
         mixins: [bemMixin('side-nav')],
 

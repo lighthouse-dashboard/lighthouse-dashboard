@@ -40,3 +40,4 @@
 0. [#24 Avoid Autoupdate of charts](https://github.com/dreipol/lighthouse-dashboard/issues/24)
 0. [#15 Implement Search for porjects](https://github.com/dreipol/lighthouse-dashboard/issues/15)
 0. [#26 Add request decorator for better DB connection handling](https://github.com/dreipol/lighthouse-dashboard/issues/26)
+OV0I5NDcNXBVmMGZ
