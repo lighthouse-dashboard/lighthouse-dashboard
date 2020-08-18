@@ -42,7 +42,7 @@
         "@hapi/joi-date": "^2.0.1",
         "@hapi/vision": "^6.0.0",
         "@sentry/node": "^5.18.1",
-        "autoprefixer": "^9.8.0",
+        "autoprefixer": "^9.8.4",
         "blipp": "^4.0.1",
         "chrome-launcher": "^0.13.1",
         "chrome-paths": "^1.0.1",
