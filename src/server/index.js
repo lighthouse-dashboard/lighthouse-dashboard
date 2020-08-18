@@ -32,7 +32,7 @@ async function start() {
         ttl: 1000 * 60 * 60 * 24,    // 1 day lifetime
     });
 
-    server.events.on('log', (event) => console.log(event));
+    // server.events.on('log', (event) => console.log(event));
 
     await setupAuth(server);
     await loadPlugins(server);
@@ -71,11 +71,11 @@ export default async function boot() {
         return;
     }
     logger.debug(`Config ok`);
-
-    process.on('unhandledRejection', (err) => {
-        logger.error(err);
-        process.exit(1);
-    });
+    //
+    // process.on('unhandledRejection', (err) => {
+    //     logger.error(err);
+    //     process.exit(1);
+    // });
 
     process.on('SIGTERM', () => {
         logger.info('SIGTERM server');

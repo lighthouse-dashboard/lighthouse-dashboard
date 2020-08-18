@@ -1,4 +1,5 @@
 # 5.13
+**Features**
 0. [Split application into seperate projects (Core, Worker, UI) #47](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/47)
 0. [Remove webhooks logic #50](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/50)
 0. [Create list to see scheduled sites #35](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/35)
@@ -9,6 +10,12 @@
 0. [Show license and list of used software #55](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/55)
 0. [Use mongoose ORM #59](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/59)
 0. [Make project active/disabled in settings menu of project #3](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/3)
+0. [Cleanup doc #63](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/63)
+0. [Add i18n #58](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/58)
+
+**Bugs**
+0. [Large JSON reports crash the app #75](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/75)
+
 
 # 5.12
 0. [Add logout button #22](https://github.com/faebeee/lighthouse-dashboard/issues/22)
