@@ -11,7 +11,6 @@ import serverConfigSchema from '../validator/schemas/server-config-schema';
 import setupAuth from './auth';
 import loadPlugins from './plugins';
 
-const RESTART_INTERVAL = 5000;
 const IS_DEV = process.env.NODE_ENV === 'development';
 
 async function start() {
@@ -29,7 +28,7 @@ async function start() {
     server.state('token', {
         isHttpOnly: false,
         isSecure: false,
-        ttl: 1000 * 60 * 60 * 24,    // 1 day lifetime
+        ttl: 1000 * 60 * 60 * 24, // 1 day lifetime
     });
 
     // server.events.on('log', (event) => console.log(event));

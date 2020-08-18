@@ -3,7 +3,7 @@ import { MEDIUM } from '../../../config/cache';
 import { getLatestSites } from '../../../services/site-service';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
-export const getLatestSitesHandler = (request) => getLatestSites(CONFIG.api.entriesLimit);
+export const getLatestSitesHandler = () => getLatestSites(CONFIG.api.entriesLimit);
 
 export default {
     method: 'GET',

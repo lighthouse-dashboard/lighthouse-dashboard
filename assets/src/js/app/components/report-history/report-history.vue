@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import reportsToLineChart from '../../../../../../src/transformer/reports-to-line-chart';
+    import reportsToLineChart from '../../utils/reports-to-line-chart';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import LineChart from '../charts/line-chart/line-chart';
     import Tile from '../tile/tile';
