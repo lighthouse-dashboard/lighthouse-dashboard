@@ -9,7 +9,7 @@ import { getSiteConfigById, setScheduledAuditForSite } from '../../../services/s
  * @param {object} h hapi request utils
  * @return {Promise<AuditDocument>}
  */
-async function createReport({ params, mongo }, h) {
+async function createReport({ params }, h) {
     const { id } = params;
 
     const config = await getSiteConfigById(id);

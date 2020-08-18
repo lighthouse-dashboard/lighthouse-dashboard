@@ -1,6 +1,7 @@
 import CONFIG from '../../../../../config/dashboard';
 
 export const DEFAULT_CHART = {
+    series: [],
     plotOptions: {
         bar: {
             horizontal: false,
@@ -43,7 +44,6 @@ export const DEFAULT_CHART = {
         },
     },
     responsive: [
-
         {
             breakpoint: 400,
             options: {
@@ -87,6 +87,31 @@ export const GAUGE_CHART = {
     },
 };
 
+export const BAR_CHART = {
+    ...DEFAULT_CHART,
+    chart: {
+        type: 'bar',
+        height: 200,
+        background: 'transparent',
+        toolbar: {
+            show: false,
+        },
+    },
+    plotOptions: {
+        bar: {
+            horizontal: true,
+        },
+    },
+    xaxis: {
+        show: false,
+        categories: [],
+    },
+    yaxis: {
+        show: false,
+        max: 100,
+    },
+};
+
 export const RADAR_CHART = {
     ...DEFAULT_CHART,
     series: [],
@@ -106,43 +131,6 @@ export const RADAR_CHART = {
     fill: {
         opacity: 0.2,
         colors: CONFIG.chartColors,
-    },
-};
-
-export const COMPARISON_CHART = {
-    ...DEFAULT_CHART,
-    chart: {
-        height: 200,
-        type: 'bar',
-        background: 'transparent',
-        toolbar: {
-            show: false,
-        },
-    },
-    series: [],
-    title: {
-        style: {
-            colors: 'var(--color--text-color)',
-        },
-    },
-    xaxis: {
-        categories: [],
-        labels: {
-            style: {
-                colors: 'var(--color--text-color)',
-            },
-        },
-    },
-    yaxis: {
-        show: true,
-        tickAmount: 2,
-        min: 0,
-        max: 100,
-        labels: {
-            style: {
-                colors: 'var(--color--text-color)',
-            },
-        },
     },
 };
 

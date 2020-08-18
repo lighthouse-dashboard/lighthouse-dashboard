@@ -6,7 +6,7 @@ import { siteConfigModelList } from '../schemas/site-config-model';
 /**
  * Get sites
  * @param {object} query
-s * @return {Promise<Sites.SiteModel[]>}
+ * @return {Promise<Sites.SiteModel[]>}
  */
 function getSitesHandler({ query }) {
     const { query: searchQuery } = query;

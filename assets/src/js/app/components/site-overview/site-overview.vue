@@ -33,7 +33,7 @@
 
 <script>
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
-    import reportsToLineChart from '../../../../../../src/transformer/reports-to-line-chart';
+    import reportsToLineChart from '../../utils/reports-to-line-chart';
     import bemMixin from '../../mixins/bem-mixin';
     import Btn from '../base/btn/btn';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';

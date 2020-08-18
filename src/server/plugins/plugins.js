@@ -55,9 +55,7 @@ export default () => ({
                         redirect: '/login', // redirect to /login page/endpoint
                     },
                     403: { // if the statusCode is 403
-                        redirect: function(request) {
-                            return '/login?redirect=' + request.url.pathname;
-                        },
+                        redirect: (request) => `/login?redirect=${ request.url.pathname }`,
                     },
                 },
             },

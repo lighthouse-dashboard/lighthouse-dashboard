@@ -1,5 +1,5 @@
-import formatReportSummaryString from '../../utils/format-report-summary-string';
-import { getFieldsFromReport } from '../../utils/get-fields-form-reports';
+import formatReportSummaryString from '../../../../../../src/utils/format-report-summary-string';
+import { getFieldsFromReport } from '../../../../../../src/utils/get-fields-form-reports';
 
 /**
  * Transform reports to chart data
