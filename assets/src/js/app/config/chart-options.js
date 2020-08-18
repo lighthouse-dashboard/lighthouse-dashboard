@@ -134,42 +134,6 @@ export const RADAR_CHART = {
     },
 };
 
-export const COMPARISON_CHART = {
-    ...DEFAULT_CHART,
-    chart: {
-        height: 200,
-        type: 'bar',
-        background: 'transparent',
-        toolbar: {
-            show: false,
-        },
-    },
-    title: {
-        style: {
-            colors: 'var(--color--text-color)',
-        },
-    },
-    xaxis: {
-        categories: [],
-        labels: {
-            style: {
-                colors: 'var(--color--text-color)',
-            },
-        },
-    },
-    yaxis: {
-        show: true,
-        tickAmount: 2,
-        min: 0,
-        max: 100,
-        labels: {
-            style: {
-                colors: 'var(--color--text-color)',
-            },
-        },
-    },
-};
-
 export const SITE_OVERVIEW_CHART = {
     ...DEFAULT_CHART,
 
