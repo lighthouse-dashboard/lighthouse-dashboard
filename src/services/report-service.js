@@ -9,11 +9,14 @@ const ReportGenerator = require('lighthouse/lighthouse-core/report/report-genera
 /**
  * Get latest report for site
  * @param {string} id
- * @return {Promise<Reports.Report>}
+ * @return {Promise<Reports.Report | null>}
  */
 export async function getLatestReportBySiteId(id) {
     const report = await ReportModel.findOne({ siteId: id }).sort({ createdAt: 1 });
-    return report.toJSON();
+    if (!report) {
+        return null;
+    }
+    return report.toObject();
 }
 
 /**

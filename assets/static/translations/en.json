@@ -46,7 +46,7 @@
     "login-form.submit-btn": "Login",
     "logout.btn": "Logout",
     "history.title": "History",
-    "average.label": "Average",
+     "average.label": "Average",
     "navigation": {
         "dashboard-link-text": "Dashboard",
         "projects-link-text": "Projects",
