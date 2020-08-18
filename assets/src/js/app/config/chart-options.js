@@ -91,7 +91,7 @@ export const BAR_CHART = {
     ...DEFAULT_CHART,
     chart: {
         type: 'bar',
-        height: 300,
+        height: 200,
         background: 'transparent',
         toolbar: {
             show: false,
