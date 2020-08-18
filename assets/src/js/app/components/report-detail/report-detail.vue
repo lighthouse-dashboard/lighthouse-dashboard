@@ -1,19 +1,19 @@
 <template>
     <div class="report-detail">
         <loading-indicator v-if="isLoading"/>
-        <radar-chart :series="chartData.series"
+        <bar-chart :series="chartData.series"
                 :labels="chartData.labels"
                 v-if="report"/>
     </div>
 </template>
 
 <script>
-    import reportToRadarChart from '../../utils/report-to-radar-chart';
+    import reportToBarChart from '../../utils/report-to-bar-chart';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';
-    import RadarChart from '../charts/radar-chart/radar-chart';
+    import BarChart from '../charts/bar-chart/bar-chart';
 
     export default {
-        components: { LoadingIndicator, RadarChart },
+        components: { BarChart, LoadingIndicator },
         props: {
             /** @type {Reports.Report} */
             report: {
@@ -27,7 +27,7 @@
         },
         computed: {
             chartData() {
-                return reportToRadarChart(this.report);
+                return reportToBarChart(this.report);
             },
         },
     };
