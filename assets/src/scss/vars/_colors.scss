@@ -1,5 +1,5 @@
 :root {
-    --color-mono-white: rgba(255, 255, 255, 0.8);
+    --color-mono-white: rgba(255, 255, 255, 0.9);
     --color-mono-black: rgba(51, 51, 51, 0.8);
     --color-mono-gray: #6c6c6c;
     --color-mono-light-gray: #c1c1c1;
@@ -12,9 +12,9 @@
     --color--divider: var(--color-mono-black);
     --color--background-color: #ffffff;
 
-    --color--primary: #f72585;
-    --color--primary-light: #fa75b1;
-    --color--primary-very-light: #fb9dc7;
+    --color--primary: #2d4059;
+    --color--secondary: #59abaa;
+    --color--secondary-text: var(--color-mono-white);
 
     // Signal
     --color--signal-error: #f66363;
@@ -26,14 +26,11 @@
     --color--error-text: var(--color--signal-error);
 
     //Buttons
-    --color--primary-background: var(--color--primary);
-    --color--primary-text: var(--color-mono-white);
-    --color--secondary-color: var(--color--primary-light);
-    --color--secondary-text: var(--color-mono-white);
     --color--button-text-primary: var(--color--medium-emphasis);
     --color--button-danger-color: var(--color--signal-error);
     --color--button-danger-text-color: var(--color-mono-white);
-    --color--button-flat-color: var(--color--primary-light);
+
+    --color--button-flat-color: var(--color--secondary);
     --color--button-flat-text-color: var(--color-mono-white);
     --color--button-disabled-background: var(--color-mono-light-gray);
 
@@ -53,23 +50,26 @@
     --color--site-overview-background: var(--color--tile-background);
 
     // Navigation
-    --color--navigation-background: #192853;
+    --color--navigation-background: var(--color--primary);
     --color--navigation--color-text: var(--color--background-color);
-    --color--navigation--item-hover-background: var(--color--primary-light);
-    --color--navigation--item-hover-text: var(--color-mono-white);
+    --color--navigation--item-hover-background: var(--color--secondary);
+    --color--navigation--item-hover-text: var(--color--secondary);
     --color--navigation--item-active-background: var(--color--background-color);
+    --color--navigation--item-active-color: var(--color--background-color);
 
     --color--navigation--mobile-toggle-background: #ffffff;
 
+    // Loading Indicator
+    --color--loading-indicator--color: var(--color--secondary);
 
     // Lists
     --color--list--item-even: rgba(58, 80, 107, 0.1);
 
     // CHARTS
-    --color--chart-color-1: rgba(247, 37, 133, 0.8);
-    --color--chart-color-2: rgba(114, 9, 183, 0.8);
-    --color--chart-color-3: rgba(58, 12, 163, 0.8);
+    --color--chart-color-1: var(--color--secondary);
+    --color--chart-color-2: var(--color--primary);
+    --color--chart-color-3: #dd4e7b;
     --color--chart-color-4: rgba(67, 97, 238, 0.8);
-    --color--chart-color-5: rgba(76, 201, 240, 0.8);
+    --color--chart-color-5: #59abaa;
     --color--chart-color-6: rgba(197, 234, 245, 0.8);
 }

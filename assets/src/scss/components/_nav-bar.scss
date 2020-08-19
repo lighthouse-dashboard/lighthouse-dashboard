@@ -83,7 +83,7 @@
             }
 
             &.nav-bar--list-item-link__active {
-                color: var(--color--primary-light);
+                color: var(--color--navigation--item-active-color);
 
                 &::after {
                     content: '';
@@ -98,7 +98,7 @@
             }
 
             &:hover:not(.nav-bar--list-item-link__active) {
-                color: var(--color--primary);
+                color: var(--color--navigation--item-active-color);
 
                 &::before {
                     content: '';
