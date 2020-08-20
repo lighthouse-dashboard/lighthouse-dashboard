@@ -62,7 +62,7 @@ export async function getLatestSites(limit = 50) {
  */
 export async function addSite(config) {
     logger.info(`Create new site ${ JSON.stringify(config) }`);
-    const site = new Sites({ ...config, id: uuid(), thumbnail: null });
+    const site = new Sites({ ...config, id: uuid(), thumbnail: null, is_scheduled: true });
     await site.save();
     return site.toJSON();
 }
