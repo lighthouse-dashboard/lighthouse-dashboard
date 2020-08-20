@@ -5,10 +5,7 @@
             id="{{ site.id }}"
             :initial-state='{{ site | json_encode() }}'>
         <template v-slot="siteProps">
-            <component is="loading-indicator"
-                    v-if="siteProps.isLoading"></component>
-            <div class="project"
-                    v-else>
+            <div class="project">
                 <h4 class='h4 project--title'
                         v-html="siteProps.site.name"></h4>
 
@@ -31,20 +28,17 @@
                             <div class='project--insights'>
                                 <div class='project--overview'>
                                     <component is="latest-report-chart"
-                                            :reports="reportsProps.reports"
-                                            :is-loading="reportsProps.isLoading">
+                                            :reports="reportsProps.reports">
                                     </component>
 
                                     <component is="site-average"
                                             class="project--average"
-                                            :reports="reportsProps.reports"
-                                            :is-loading="reportsProps.isLoading">
+                                            :reports="reportsProps.reports">
                                     </component>
                                 </div>
 
                                 <component is="report-history"
                                         class='project--history'
-                                        :is-loading="reportsProps.isLoading"
                                         :reports='reportsProps.reports'>
                                 </component>
                             </div>
@@ -96,9 +90,7 @@
                                 <component is="tile"
                                         title='HTML Reports'
                                         class='project--sidebar-section'>
-                                    <component is="loading-indicator"
-                                            v-if="reportsProps.isLoading"></component>
-                                    <component v-else
+                                    <component
                                             is="audit-report-list"
                                             :reports='reportsProps.reports'></component>
                                 </component>

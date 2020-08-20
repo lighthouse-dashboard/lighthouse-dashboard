@@ -1,7 +1,16 @@
+<template>
+    <loading-indicator v-if="isLoading"/>
+    <div v-else-if="sites">
+        <slot :sites="sites"/>
+    </div>
+</template>
+
 <script>
     import { mapActions, mapState } from 'vuex';
+    import LoadingIndicator from '../components/base/loading-indicator/loading-indicator';
 
     export default {
+        components: { LoadingIndicator },
         data: () => ({
             isLoading: false,
         }),
@@ -14,19 +23,12 @@
             ...mapActions('sites', ['fetchAllSites']),
         },
 
-        created() {
+        mounted() {
             this.isLoading = true;
             this.fetchAllSites()
                 .finally(() => {
                     this.isLoading = false;
                 });
-        },
-
-        render() {
-            return this.$scopedSlots.default({
-                sites: this.sites,
-                isLoading: this.isLoading
-            });
         },
     };
 </script>

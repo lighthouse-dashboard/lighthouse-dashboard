@@ -1,12 +1,12 @@
 <template>
     <loading-indicator v-if="isLoading"/>
-    <div v-else-if="reports">
-        <slot :reports="reports"/>
+    <div v-else-if="report">
+        <slot :report="report"/>
     </div>
 </template>
 <script>
     import { mapActions } from 'vuex';
-    import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
+    import LoadingIndicator from '../components/base/loading-indicator/loading-indicator';
 
     export default {
         components: { LoadingIndicator },
@@ -18,17 +18,17 @@
         },
 
         data: () => ({
-            reports: null,
+            report: null,
             isLoading: false,
         }),
 
         methods: {
-            ...mapActions('reports', ['fetchReportsForSite']),
+            ...mapActions('reports', ['fetchLatestReportForSite']),
             loadData() {
                 this.isLoading = true;
-                return this.fetchReportsForSite({ id: this.id })
-                    .then((reports) => {
-                        this.reports = reports;
+                return this.fetchLatestReportForSite({ siteId: this.id })
+                    .then((report) => {
+                        this.report = report;
                     })
                     .finally(() => {
                         this.isLoading = false;
@@ -36,7 +36,7 @@
             },
         },
 
-        created() {
+        mounted() {
             this.loadData();
         },
     };
