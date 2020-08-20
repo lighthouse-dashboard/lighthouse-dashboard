@@ -11,7 +11,7 @@ import { addSite } from '../../../services/site-service';
 async function addSiteHandler({ payload }, h) {
     // eslint-disable-next-line camelcase
     const { url, name, device, is_favorite } = payload;
-    const config = await addSite({ url, name, device, is_favorite, order: 0 });
+    const config = await addSite({ url, name, device, is_favorite, order: 0,  });
 
     return h.response(config).code(201);
 }
