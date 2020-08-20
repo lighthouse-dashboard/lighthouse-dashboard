@@ -7,23 +7,30 @@
         <loading-indicator v-if="isLoading"/>
         <div class="favorite-project-overview--content"
                 v-else>
-            <site-overview
-                    v-bind="site"
-                    v-for="site in sites"
-                    :key="site.id"/>
+            <reports-provider v-for="site in sites"
+                    :id="site.id"
+                    :key="site.id">
+                <site-overview
+                        slot-scope="{reports}"
+                        v-bind="site"
+                        :reports="reports"/>
+            </reports-provider>
         </div>
     </div>
 </template>
 
 <script>
-    import withReports from '../../containers/with-reports';
+    import ReportsProvider from '../../providers/reports-provider/reports-provider';
+    import SitesProvider from '../../providers/sites-provider';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import SiteOverview from '../site-overview/site-overview.vue';
 
     export default {
         components: {
+            ReportsProvider,
+            SitesProvider,
             LoadingIndicator,
-            SiteOverview: withReports(SiteOverview),
+            SiteOverview,
         },
         props: {
             /**

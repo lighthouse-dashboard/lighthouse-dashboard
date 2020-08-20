@@ -6,16 +6,19 @@
             All Projects
         </p>
 
-        <component is="sites-provider">
-            <template v-slot="{sites, isLoading}">
-                <div class="projects--list">
-                    <component is="site-report-tile"
+        <component is="sites-provider" class="projects--list">
+            <template v-slot="{sites}">
+                <component is="latest-report-provider"
+                        v-for="site in sites"
+                        :key="site.id"
+                        :id="site.id">
+                    <component
+                            slot-scope="{report}"
+                            is="site-report-tile"
                             :site="site"
-                            v-for="site in sites"
-                            :key="site.id"></component>
-                </div>
+                            :report="report"></component>
+                </component>
             </template>
         </component>
-
     </div>
 {% endblock %}

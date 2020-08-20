@@ -7,20 +7,26 @@
         <loading-indicator v-if="isLoading"/>
         <div class="latest-audits-feed--content"
                 v-else>
-            <site-report-tile
-                    :site="site"
-                    v-for="site in latestSites"
-                    :key="site.id"/>
+            <latest-report-provider v-for="site in latestSites"
+                    :id="site.id"
+                    :key="site.id">
+                <site-report-tile
+                        slot-scope="{report}"
+                        :report="report"
+                        :site="site"/>
+            </latest-report-provider>
         </div>
     </div>
 </template>
 
 <script>
+    import LatestReportProvider from '../../providers/latest-report-provider';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import SiteReportTile from '../site-report-tile/site-report-tile';
 
     export default {
         components: {
+            LatestReportProvider,
             SiteReportTile,
             LoadingIndicator,
         },
