@@ -21,14 +21,12 @@
 
 <script>
     import ReportsProvider from '../../providers/reports-provider/reports-provider';
-    import SitesProvider from '../../providers/sites-provider';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import SiteOverview from '../site-overview/site-overview.vue';
 
     export default {
         components: {
             ReportsProvider,
-            SitesProvider,
             LoadingIndicator,
             SiteOverview,
         },

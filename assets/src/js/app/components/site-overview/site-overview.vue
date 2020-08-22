@@ -1,5 +1,6 @@
 <template>
-    <tile class="site-overview">
+    <tile
+            class="site-overview">
         <scheduled-job-indicator v-if="is_scheduled"/>
         <div class="site-overview--title"
                 slot="title">
@@ -33,8 +34,9 @@
 
 <script>
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
-    import reportsToLineChart from '../../utils/reports-to-line-chart';
     import bemMixin from '../../mixins/bem-mixin';
+    import inViewMixin from '../../mixins/in-view-mixin';
+    import reportsToLineChart from '../../utils/reports-to-line-chart';
     import Btn from '../base/btn/btn';
     import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import LineChart from '../charts/line-chart/line-chart';
@@ -50,7 +52,7 @@
             LineChart,
         },
 
-        mixins: [bemMixin('site-overview')],
+        mixins: [bemMixin('site-overview'), inViewMixin()],
 
         props: {
             id: {

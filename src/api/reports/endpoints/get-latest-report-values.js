@@ -1,5 +1,5 @@
 import Boom from '@hapi/boom';
-import { SHORT } from '../../../config/cache';
+import { MEDIUM } from '../../../config/cache';
 import { getLatestReportBySiteId } from '../../../services/report-service';
 import { siteIdParamModel } from '../schemas/siteid-param-model';
 
@@ -31,7 +31,7 @@ export default {
             params: siteIdParamModel,
         },
         cache: {
-            expiresIn: SHORT,
+            expiresIn: MEDIUM,
             privacy: 'private',
         },
     },

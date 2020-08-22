@@ -1,5 +1,6 @@
 import 'es6-promise/auto';
 import Vue from 'vue';
+import Inview from 'vue-inview';
 
 import registry from '../framework/registry';
 import i18n from './translations';
@@ -7,6 +8,7 @@ import store from './vuex';
 
 Vue.config.productionTip = false;
 
+Vue.use(Inview);
 
 registry(Vue, { store, i18n });
 

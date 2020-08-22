@@ -1,15 +1,17 @@
 <template>
-    <loading-indicator v-if="isLoading"/>
+    <chart-placeholder v-if="!isInViewport || isLoading"/>
     <div v-else-if="reports">
         <slot :reports="reports"/>
     </div>
 </template>
 <script>
     import { mapActions } from 'vuex';
-    import LoadingIndicator from '../../components/base/loading-indicator/loading-indicator';
+    import ChartPlaceholder from '../../components/chart-placeholder/chart-placeholder';
+    import inViewMixin from '../../mixins/in-view-mixin';
 
     export default {
-        components: { LoadingIndicator },
+        components: { ChartPlaceholder },
+        mixins: [inViewMixin(true)],
         props: {
             id: {
                 type: String,
@@ -34,10 +36,10 @@
                         this.isLoading = false;
                     });
             },
-        },
 
-        created() {
-            this.loadData();
+            onIntersect() {
+                this.loadData();
+            },
         },
     };
 </script>
