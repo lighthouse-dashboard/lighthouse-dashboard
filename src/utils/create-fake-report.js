@@ -1,8 +1,9 @@
 /**
  * Create new faked report
+ * @param {Partial<Reports.Report>} data
  * @return {Reports.Report}
  */
-export default function createFakeReport() {
+export default function createFakeReport(data = {}) {
     return {
         id: 'foo',
         siteId: 'foo',
@@ -33,5 +34,6 @@ export default function createFakeReport() {
                 value: Math.round(Math.random() * 100),
             },
         ],
+        ...data,
     };
 }

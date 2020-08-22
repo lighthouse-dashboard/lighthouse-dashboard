@@ -2,8 +2,11 @@
 
 
  {% block app_content %}
-     <div class="login">
+     <component is="login-provider"
+             class="login">
          <component is="login-form"
+                 :is-logged-id="isLoggedId"
+                 slot-scope="{isLoggedId}"
                  title="Login"></component>
-     </div>
+     </component>
  {% endblock %}

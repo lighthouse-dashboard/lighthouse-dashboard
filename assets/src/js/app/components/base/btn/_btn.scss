@@ -88,6 +88,7 @@
 
     &.btn__secondary {
         & {
+            background-color: rgba(var(--color--secondary-rgb), 0.1);
             border: solid 1px var(--button--secondary-color);
             color: var(--button--secondary-color);
             padding: calc(var(--button--vert-bezel) - 1px) var(--button--horiz-bezel);

@@ -5,7 +5,10 @@
         <site-create-form v-model="siteConfig"
                 v-if="siteConfig"/>
 
-        <error-message :error="errorMessage"/>
+        <notification :facets="['error']">
+            {{ errorMessage }}
+        </notification>
+
         <template slot="additional">
             <btn v-if="isEdit"
                     @click="onSaveClicked">
@@ -24,12 +27,12 @@
     import Toastify from 'toastify-js';
     import { mapActions } from 'vuex';
     import Btn from '../../base/btn/btn';
-    import ErrorMessage from '../../error-message/error-message';
+    import Notification from '../../notification/notification';
     import SiteCreateForm from '../../site-create-form/site-create-form';
     import Overlay from '../overlay';
 
     export default {
-        components: { ErrorMessage, Btn, SiteCreateForm, Overlay },
+        components: { Notification, Btn, SiteCreateForm, Overlay },
         props: {
             /** @type {Sites.SiteModel | null} */
             config: {

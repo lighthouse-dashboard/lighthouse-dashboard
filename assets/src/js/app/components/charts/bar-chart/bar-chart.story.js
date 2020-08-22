@@ -9,7 +9,7 @@ export default {
 export const component = () => ({
     components: { Chart },
     props: {
-        dataSets: {
+        series: {
             default: [
                 { name: 'Foo', data: [10, 20, 30, 40] },
                 { name: 'Bar', data: [20, 30, 40, 50] },
@@ -20,5 +20,5 @@ export const component = () => ({
             default: ['1', '2', '3', '4'],
         },
     },
-    template: '<chart :dataSets="dataSets" :labels="labels"/>',
+    template: '<chart :series="series" :labels="labels"/>',
 });

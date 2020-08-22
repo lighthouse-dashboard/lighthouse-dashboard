@@ -2,7 +2,8 @@
     // Vars
     --notification--vert-bezel: 24px;
     --notification--horiz-bezel: 16px;
-    --notification--border-radius: 2px;
+    --notification--border-radius: 4px;
+    --notification--border-width: 2px;
 
     // Support
 
@@ -12,13 +13,12 @@
             display: block;
             background: none;
             overflow: hidden;
-            border: none;
             padding: var(--notification--vert-bezel) var(--notification--horiz-bezel);
             transition: background-color 200ms ease-in-out;
             border-radius: var(--notification--border-radius);
             white-space: nowrap;
             text-overflow: ellipsis;
-            margin: 4px 0;
+            border: solid var(--notification--border-width);
         }
 
         .notification--content {
@@ -31,14 +31,22 @@
 
     // Facets
     &.notification__success {
-        background-color: var(--color--signal-success);
-        color: var(--color-mono-white);
+        border-color: var(--color--signal-success);
+        background-color: rgba(var(--color--signal-success-rgb), 0.1);
+        color: var(--color--signal-success);
 
     }
 
     &.notification__warning {
-        background-color: var(--color--signal-warning);
-        //color: var(--color-mono-white);
+        border-color: var(--color--signal-warning);
+        background-color: rgba(var(--color--signal-warning-rgb), 0.1);
+        color: var(--color--signal-warning);
+    }
+
+    &.notification__error {
+        border-color: var(--color--signal-error);
+        background-color: rgba(var(--color--signal-error-rgb), 0.1);
+        color: var(--color--signal-error);
     }
 
     // States

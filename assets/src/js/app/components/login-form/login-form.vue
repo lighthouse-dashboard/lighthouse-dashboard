@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions } from 'vuex';
     import Btn from '../base/btn/btn';
     import InputField from '../base/input-field/input-field';
 
@@ -37,6 +37,10 @@
             title: {
                 type: String,
                 required: true,
+            },
+            isLoggedIn: {
+                type: Boolean,
+                default: false,
             },
         },
 
@@ -52,8 +56,6 @@
         },
 
         computed: {
-            ...mapState('login', ['isLoggedIn']),
-
             errorMessage() {
                 return this.error?.message;
             },

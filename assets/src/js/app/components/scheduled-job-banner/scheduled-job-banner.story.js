@@ -1,11 +1,12 @@
+import createFakeSite from '../../../../../../src/utils/create-fake-site';
 import ScheduledJobBanner from './scheduled-job-banner.vue';
 
-export default { title: 'scheduled-job-banner' };
+export default { title: 'Components / Scheduled Job Banner' };
 
 export const component = () => ({
     components: { ScheduledJobBanner },
-    props: {
-
-    },
-    template: '<scheduled-job-banner />',
+    data: () => ({
+        site: createFakeSite({ is_scheduled: true, }),
+    }),
+    template: '<scheduled-job-banner :site="site" />',
 });

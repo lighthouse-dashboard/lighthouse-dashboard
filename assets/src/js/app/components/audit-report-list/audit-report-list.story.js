@@ -12,11 +12,11 @@ export const component = () => ({
     props: {
         reports: {
             default: () => [
-                createFakeReport(),
-                createFakeReport(),
-                createFakeReport(),
-                createFakeReport(),
-                createFakeReport(),
+                createFakeReport({ raw: 'foo' }),
+                createFakeReport({ raw: 'foo' }),
+                createFakeReport({ raw: 'foo' }),
+                createFakeReport({ raw: 'foo' }),
+                createFakeReport({ raw: 'foo' }),
             ],
         },
     },
