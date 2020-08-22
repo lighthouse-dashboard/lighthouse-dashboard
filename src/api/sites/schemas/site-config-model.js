@@ -10,6 +10,12 @@ export const siteConfigModel = joi.object({
     order: joi.number(),
     is_favorite: joi.boolean().required(),
     last_audit: joi.string(),
+
+    createdAt: joi.object()
+        .optional(),
+
+    updatedAt: joi.object()
+        .optional(),
     is_scheduled: joi.boolean(),
     thumbnail: joi.optional(),
     is_disabled: joi.boolean(),

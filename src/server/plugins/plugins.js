@@ -30,7 +30,7 @@ export default () => ({
         {
             plugin: require('hapi-dev-errors'),
             options: {
-                showErrors: process.env.NODE_ENV !== 'production',
+                showErrors:true,
             },
         },
     ],
@@ -46,19 +46,19 @@ export default () => ({
                 },
             },
         },
-        {
-            plugin: hapiError,
-            options: {
-                templateName: 'views/error',
-                statusCodes: {
-                    401: { // if the statusCode is 401
-                        redirect: '/login', // redirect to /login page/endpoint
-                    },
-                    403: { // if the statusCode is 403
-                        redirect: (request) => `/login?redirect=${ request.url.pathname }`,
-                    },
-                },
-            },
-        },
+        // {
+        //     plugin: hapiError,
+        //     options: {
+        //         templateName: 'views/error',
+        //         statusCodes: {
+        //             401: { // if the statusCode is 401
+        //                 redirect: '/login', // redirect to /login page/endpoint
+        //             },
+        //             403: { // if the statusCode is 403
+        //                 redirect: (request) => `/login?redirect=${ request.url.pathname }`,
+        //             },
+        //         },
+        //     },
+        // },
     ],
 });

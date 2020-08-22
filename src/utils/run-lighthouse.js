@@ -59,8 +59,6 @@ export default async function runLighthouse({ config, chromePath, port, transfor
         },
     );
 
-
-
     return { transformed: transformer(audit), raw: audit };
 }
 

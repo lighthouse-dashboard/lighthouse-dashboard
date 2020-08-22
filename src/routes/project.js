@@ -1,4 +1,5 @@
 import { getDefaultParams } from '../router/utils/get-default-params';
+import { getReportsBySiteId } from '../services/report-service';
 import { getSiteConfigById } from '../services/site-service';
 
 export default {
@@ -11,6 +12,7 @@ export default {
     handler: async (request, h) => {
         const { id } = request.params;
         const site = await getSiteConfigById(id);
-        return h.view('views/project.twig', { ...getDefaultParams(request), site });
+        const reports = await getReportsBySiteId(id);
+        return h.view('views/project.twig', { ...getDefaultParams(request), site, reports });
     },
 };

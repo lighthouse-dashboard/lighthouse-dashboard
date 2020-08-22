@@ -6,8 +6,10 @@ const ReportModelSchema = new Schema({
     siteId: String,
     createdAt: Date,
     raw: { type: String, default: null },
+    raw_report_id: { type: String, default: null },
     values: [{ id: String, value: Number }],
 }, {
+    timestamps: true,
     toObject: {
         virtuals: true,
         transform: (doc, report) => {
@@ -17,8 +19,9 @@ const ReportModelSchema = new Schema({
     },
 });
 
-ReportModelSchema.virtual('hasRawData').get(function() {
-    return !!this.raw;
+//@Todo implement check
+ReportModelSchema.virtual('hasRawData').get(() => {
+    return false;
 });
 
 export const ReportModel = database.model('reports', ReportModelSchema);

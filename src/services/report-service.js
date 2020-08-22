@@ -1,6 +1,7 @@
 import CONFIG from '../../config/server';
 import logger from '../../lib/logger';
 import { AUDIT_COLLECTION } from '../config/collections';
+import { RawReportModel } from '../models/raw-report-model';
 import { ReportModel } from '../models/reports/report-model';
 
 const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
@@ -25,7 +26,7 @@ export async function getLatestReportBySiteId(id) {
  * @return {Promise<Reports.Report[]>}
  */
 export async function getReportsBySiteId(id) {
-    const models = await ReportModel.find({ siteId: id }).limit(CONFIG.api.siteReportLimit);
+    const models = await ReportModel.find({ siteId: id }, { raw: 0 }).limit(CONFIG.api.siteReportLimit);
     return models.map(report => report.toObject());
 }
 
@@ -37,15 +38,15 @@ export async function getReportsBySiteId(id) {
 export async function saveReport(reportData, raw) {
     logger.debug('Save new report');
     const report = new ReportModel({ ...reportData });
-    report.raw = process.env.LHD_IGNORE_RAW ? null : JSON.stringify(raw);
-    if (process.env.LHD_IGNORE_RAW) {
-        logger.debug('Ignore raw data');
-    }
+    const rawReport = new RawReportModel({ raw: JSON.stringify(raw) });
+    await rawReport.save();
+    report.raw_report_id = rawReport.id;
     await report.save();
 }
 
 /**
  * Free up space in DB by remove old raw lighthouse data
+ * @Todo use new mongoose schemas
  * @param {Db} database
  * @param {number} maxRawReports
  * @return {Promise<void>}
@@ -80,17 +81,15 @@ export async function clearReports(database, maxRawReports) {
  * @return {Promise<void>}
  */
 export async function removeOldReports(database, maxReportsAge) {
-    const reportCollection = database.collection(AUDIT_COLLECTION);
     const date = new Date(Date.now() - maxReportsAge).toISOString();
     const filter = {
         createdAt: {
             $lt: date,
         },
     };
-    const rows = await reportCollection.countDocuments(filter);
-
+    const rows = await RawReportModel.find(filter);
     logger.debug(`Found ${ rows } reports to remove`);
-    const { deletedCount } = await reportCollection.deleteMany(filter);
+    const { deletedCount } = await RawReportModel.deleteMany(filter);
     logger.debug(`Removed ${ deletedCount } reports`);
 }
 

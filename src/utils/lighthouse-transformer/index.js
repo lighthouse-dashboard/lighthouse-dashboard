@@ -17,7 +17,6 @@ export default function(pageId, audit) {
     }, []);
 
     return {
-        createdAt: new Date().toISOString(),
         siteId: pageId,
         values,
     };

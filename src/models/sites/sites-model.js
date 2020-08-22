@@ -12,4 +12,4 @@ export default database.model('sites', new Schema({
     is_scheduled: Boolean,
     thumbnail: { type: String, default: null },
     is_disabled: { type: Boolean, default: false },
-}));
+}, { timestamps: true }));

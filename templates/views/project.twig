@@ -21,83 +21,80 @@
                     Audits are scheduled for this project
                 </component>
 
-                <component is="reports-provider"
-                        id="{{ site.id }}">
-                    <template v-slot="reportsProps">
-                        <div class='project--content'>
-                            <div class='project--insights'>
-                                <div class='project--overview'>
-                                    <component is="latest-report-chart"
-                                            :reports="reportsProps.reports">
-                                    </component>
+                <div class='project--content'>
+                    <div class='project--insights'>
+                        <div class='project--overview'>
+                            <component is="latest-report-chart"
+                                    :reports='{{ reports | json_encode() }}'>
+                            </component>
 
-                                    <component is="site-average"
-                                            class="project--average"
-                                            :reports="reportsProps.reports">
-                                    </component>
-                                </div>
+                            <component is="site-average"
+                                    class="project--average"
+                                    :reports='{{ reports | json_encode() }}'>
+                            </component>
 
-                                <component is="report-history"
-                                        class='project--history'
-                                        :reports='reportsProps.reports'>
-                                </component>
-                            </div>
-
-                            <div class='project--sidebar'>
-                                {% if site.thumbnail %}
-                                    <component is="tile"
-                                            title="Thumbnail"
-                                            class='project--sidebar-section'>
-                                        <img src="{{ site.thumbnail }}"
-                                                alt="{{ site.name }}">
-                                    </component>
-                                {% endif %}
-
-                                <component is="tile"
-                                        title="Settings"
-                                        class='project--sidebar-section'>
-                                    <component is="site-config"
-                                            :site='siteProps.site'></component>
-                                </component>
-
-                                <component is="tile"
-                                        title="Actions"
-                                        class='project--sidebar-section'>
-                                    <component is="site-edit-btn"
-                                            class="project--action-btn"
-                                            :site='siteProps.site'></component>
-
-                                    {% if not site.is_disabled %}
-                                        <component is="schedule-audit-btn"
-                                                id="{{ site.id }}"
-                                                class="project--action-btn"
-                                                :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
-                                    {% endif %}
-
-                                    <component is="site-delete-btn"
-                                            class="project--action-btn"
-                                            id="{{ site.id }}">
-                                    </component>
-                                </component>
-
-                                <component is="tile"
-                                        title='Tools'
-                                        class='project--sidebar-section'>
-                                    <component is="site-actions-list"
-                                            url='{{ site.url }}'></component>
-                                </component>
-
-                                <component is="tile"
-                                        title='HTML Reports'
-                                        class='project--sidebar-section'>
-                                    <component
-                                            is="audit-report-list"
-                                            :reports='reportsProps.reports'></component>
-                                </component>
-                            </div>
                         </div>
-                    </template>
-                </component>
+
+                        <component
+                                is="report-history"
+                                class='project--history'
+                                :reports='{{ reports | json_encode() }}'>
+                        </component>
+                    </div>
+
+                    <div class='project--sidebar'>
+                        {% if site.thumbnail %}
+                            <component is="tile"
+                                    title="Thumbnail"
+                                    class='project--sidebar-section'>
+                                <img src="{{ site.thumbnail }}"
+                                        alt="{{ site.name }}">
+                            </component>
+                        {% endif %}
+
+                        <component is="tile"
+                                title="Settings"
+                                class='project--sidebar-section'>
+                            <component is="site-config"
+                                    :site='siteProps.site'></component>
+                        </component>
+
+                        <component is="tile"
+                                title="Actions"
+                                class='project--sidebar-section'>
+                            <component is="site-edit-btn"
+                                    class="project--action-btn"
+                                    :site='siteProps.site'></component>
+
+                            {% if not site.is_disabled %}
+                                <component is="schedule-audit-btn"
+                                        id="{{ site.id }}"
+                                        class="project--action-btn"
+                                        :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
+                            {% endif %}
+
+                            <component is="site-delete-btn"
+                                    class="project--action-btn"
+                                    id="{{ site.id }}">
+                            </component>
+                        </component>
+
+                        <component is="tile"
+                                title='Tools'
+                                class='project--sidebar-section'>
+                            <component is="site-actions-list"
+                                    url='{{ site.url }}'></component>
+                        </component>
+
+                        <component is="tile"
+                                title='HTML Reports'
+                                class='project--sidebar-section'>
+                            <component
+                                    is="audit-report-list"
+                                    :reports='{{ reports | json_encode() }}'></component>
+                        </component>
+                    </div>
+                </div>
             </div>
         </template>
     </component>

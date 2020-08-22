@@ -29,7 +29,10 @@ export const reportModel = {
         .required(),
 
     createdAt: joi.object()
-        .required(),
+        .optional(),
+
+    updatedAt: joi.object()
+        .optional(),
 
     message: joi
         .string()

@@ -3,10 +3,9 @@ declare namespace Reports {
         values: ReportValue[];
         id: string;
         siteId: string;
-        createdAt: string;
+        createdAt?: string;
+        updatedAt?: string;
         message: string | null;
-        git_commit: string | null;
-        raw: string | null;
         hasRawData?: boolean;
     }
 
