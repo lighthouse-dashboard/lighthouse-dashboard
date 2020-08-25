@@ -13,7 +13,7 @@ const ReportGenerator = require('lighthouse/lighthouse-core/report/report-genera
  * @return {Promise<Reports.Report | null>}
  */
 export async function getLatestReportBySiteId(id) {
-    const report = await ReportModel.findOne({ siteId: id }).sort({ createdAt: 1 });
+    const report = await ReportModel.findOne({ siteId: id }).sort({ createdAt: -1 });
     if (!report) {
         return null;
     }
@@ -28,7 +28,7 @@ export async function getLatestReportBySiteId(id) {
 export async function getReportsBySiteId(id) {
     const models = await ReportModel
         .find({ siteId: id })
-        .sort({ createdAt: 1 })
+        .sort({ createdAt: -1 })
         .limit(CONFIG.api.siteReportLimit);
     return models.map(report => report.toObject());
 }
