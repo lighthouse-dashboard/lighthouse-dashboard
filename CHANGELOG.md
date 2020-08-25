@@ -15,10 +15,14 @@
 - [Cleanup doc #63](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/63)
 - [Add i18n #58](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/58)
 - [Remove "HOC" and implement provider components #83](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/83)
+- [Sort projects alphabetically in lists #72](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/72)
 
 ## Bugs
 
 - [Large JSON reports crash the app #75](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/75)
+- [Sort order for report list in project details not ordered correctly #79](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/79)
+- [Fix changelog #82](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/82)
+- [Fix storybook #81](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/81)
 
 ---
 
