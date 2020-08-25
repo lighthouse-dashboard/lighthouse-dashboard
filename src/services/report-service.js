@@ -98,7 +98,7 @@ export async function removeOldReports(database, maxReportsAge) {
 
 /**
  * Create html report by report
- * @param {Reports.Report} report
+ * @param {Reports.RawReport} report
  * @return {null|string|string[]}
  */
 export function getHtmlReport(report) {
@@ -114,6 +114,6 @@ export function getHtmlReport(report) {
  * @return {Promise<null|string|string[]>}
  */
 export async function createHTMLReportById(id) {
-    const report = await ReportModel.findById(id);
+    const report = await RawReportModel.findById(id);
     return getHtmlReport(report.toJSON());
 }

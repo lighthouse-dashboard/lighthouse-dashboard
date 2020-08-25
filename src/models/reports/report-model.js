@@ -21,7 +21,7 @@ const ReportModelSchema = new Schema({
 
 //@Todo implement check
 ReportModelSchema.virtual('hasRawData').get(() => {
-    return false;
+    return !!this.raw_report_id;
 });
 
 export const ReportModel = database.model('reports', ReportModelSchema);

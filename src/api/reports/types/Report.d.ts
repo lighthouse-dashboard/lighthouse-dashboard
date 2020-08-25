@@ -1,4 +1,8 @@
 declare namespace Reports {
+    export interface RawReport {
+        raw: string | null;
+    }
+
     export interface Report {
         values: ReportValue[];
         id: string;
@@ -6,7 +10,7 @@ declare namespace Reports {
         createdAt?: string;
         updatedAt?: string;
         message: string | null;
-        hasRawData?: boolean;
+        raw_report_id?: string | null;
     }
 
     export interface ReportValue {
