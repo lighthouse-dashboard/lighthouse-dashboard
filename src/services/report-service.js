@@ -26,7 +26,10 @@ export async function getLatestReportBySiteId(id) {
  * @return {Promise<Reports.Report[]>}
  */
 export async function getReportsBySiteId(id) {
-    const models = await ReportModel.find({ siteId: id }, { raw: 0 }).limit(CONFIG.api.siteReportLimit);
+    const models = await ReportModel
+        .find({ siteId: id })
+        .sort({ createdAt: 1 })
+        .limit(CONFIG.api.siteReportLimit);
     return models.map(report => report.toObject());
 }
 

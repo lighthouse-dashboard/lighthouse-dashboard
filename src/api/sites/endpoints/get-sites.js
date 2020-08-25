@@ -13,7 +13,7 @@ function getSitesHandler({ query }) {
 
     if (searchQuery) {
         try {
-            return findSites({ $text: { $search: searchQuery } });
+            return findSites({ $text: { $search: searchQuery } }, { name: -1 });
         } catch (e) {
             console.log(e);
         }
@@ -39,7 +39,7 @@ export default {
             schema: siteConfigModelList,
         },
         cache: {
-            expiresIn: MEDIUM,
+            expiresIn: 0,
             privacy: 'private',
         },
     },

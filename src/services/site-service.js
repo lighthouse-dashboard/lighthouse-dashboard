@@ -24,7 +24,7 @@ export async function findSites(find, sort = {}, limit = 100) {
  * @return {Promise<Sites.SiteModel[]>}
  */
 export function getAllSites() {
-    return findSites({}, { last_audit: -1 });
+    return findSites({}, { name: 1 });
 }
 
 /**
@@ -33,7 +33,7 @@ export function getAllSites() {
  * @return {Promise<Sites.SiteModel[]>}
  */
 export async function getFavoriteSites() {
-    const sites = await Sites.find({ is_favorite: true }).sort({ field: 'order', test: 1 });
+    const sites = await Sites.find({ is_favorite: true }).sort({ name: 1 });
     return sites.map(s => s.toJSON());
 }
 
