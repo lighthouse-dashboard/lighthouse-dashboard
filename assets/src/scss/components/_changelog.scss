@@ -1,0 +1,37 @@
+.changelog {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        p {
+            margin-top: calc(var(--root-spacing) * 2);
+        }
+
+        h1 {
+            @include Headline4;
+        }
+
+        h2 {
+            @include Subtitle1;
+        }
+
+        Subtitle2 {
+            @include Overline;
+        }
+
+        li {
+            @include Body2;
+            margin-bottom: var(--root-spacing);
+        }
+
+        ul {
+            margin: var(--root-spacing) 0;
+        }
+    }
+
+    // Facets
+
+    // States
+}

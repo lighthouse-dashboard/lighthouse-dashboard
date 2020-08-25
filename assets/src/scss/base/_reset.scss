@@ -46,3 +46,15 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+
+.u-reset {
+    ol, ul {
+        list-style: initial;
+    }
+
+
+    blockquote, q {
+        quotes: initial;
+    }
+}
