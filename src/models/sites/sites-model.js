@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import database from '../database';
+import database from '../../../lib/core/database';
 
 export default database.model('sites', new Schema({
     id: String,
