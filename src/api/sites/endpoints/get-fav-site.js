@@ -1,5 +1,5 @@
 import { MEDIUM } from '../../../config/cache';
-import { getFavoriteSites } from '../../../services/site-service';
+import { getFavoriteSites } from '../../../../lib/core/services/site-service';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 export default {

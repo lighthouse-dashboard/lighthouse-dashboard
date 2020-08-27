@@ -1,5 +1,6 @@
+import CONFIG from '../../../../config/server';
 import { MEDIUM } from '../../../config/cache';
-import { getReportsBySiteId } from '../../../services/report-service';
+import { getReportsBySiteId } from '../../../../lib/core/services/report-service';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 
 /**
@@ -9,7 +10,7 @@ import { reportIdParamModel } from '../schemas/report-id-param-model';
  */
 function getReports({ params }) {
     const { id } = params;
-    return getReportsBySiteId(id);
+    return getReportsBySiteId(id, CONFIG.api.siteReportLimit);
 }
 
 export default {

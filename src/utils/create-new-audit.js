@@ -1,14 +1,14 @@
 import curry from 'lodash.curry';
 import logger from '../../lib/logger';
-import { saveReport } from '../services/report-service';
-import { updateSite } from '../services/site-service';
+import { saveReport } from '../../lib/core/services/report-service';
+import { updateSite } from '../../lib/core/services/site-service';
 import lighthouseTransformer from './lighthouse-transformer';
 import runLighthouse from './run-lighthouse';
 
 /**
  * Create new audit
  * @param {Sites.SiteModel} config
- * @param {ReportMeta | {}} meta
+ * @param {Reports.ReportMeta | {}} meta
  * @return {Promise<Reports.Report>}
  */
 export async function createNewAuditForConfig(config, meta = {}) {

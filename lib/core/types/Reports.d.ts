@@ -17,4 +17,10 @@ declare namespace Reports {
         id: string;
         value: number;
     }
+
+    export type ReportMeta = {
+        message?: string | null;
+        git_commit?: string | null;
+    }
+
 }

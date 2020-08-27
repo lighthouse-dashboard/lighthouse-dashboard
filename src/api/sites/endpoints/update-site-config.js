@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { updateSite } from '../../../services/site-service';
+import { updateSite } from '../../../../lib/core/services/site-service';
 
 /**
  * Update site controller

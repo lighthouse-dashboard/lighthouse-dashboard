@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 import { MEDIUM } from '../../../config/cache';
-import { getLatestReportBySiteId } from '../../../services/report-service';
+import { getLatestReportBySiteId } from '../../../../lib/core/services/report-service';
 import { siteIdParamModel } from '../schemas/siteid-param-model';
 
 /**

@@ -1,25 +1,17 @@
-import filesize from 'filesize.js';
+import { getAuditWorkerInfo } from '../../../../lib/audit-worker/utils/get-audot-worker-info';
 import { MEDIUM } from '../../../config/cache';
-import { getSystemObject } from '../../../models/system';
 import { systemInfoModel } from '../schemas/system-info-model';
 
 /**
  * Get system info
- * @param {MongodbDecoration} mongo
+ * @param {hapi.Request} request
  * @param {object} h
  * @return {Promise<SystemAPI.Info>}
  */
-async function getSystemInfo({ mongo }, h) {
-    /** @type {Db} */
-    const db = mongo.db;
-    const config = await getSystemObject(db);
-    const dbStats = await db.stats();
+async function getSystemInfo(request, h) {
+    const config = await getAuditWorkerInfo();
     return h.response({
         ...config,
-        db: {
-            collections: dbStats.collections,
-            dataSize: filesize(dbStats.dataSize),
-        },
     });
 }
 

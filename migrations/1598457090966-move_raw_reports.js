@@ -1,8 +1,8 @@
 /**
  * Make any changes you need to make to the database here
  */
-import { RawReportModel } from '../src/models/raw-report-model';
-import { ReportModel } from '../src/models/reports/report-model';
+import { RawReportModel } from '../lib/core/models/raw-report-model';
+import { ReportModel } from '../lib/core/models/report-model';
 
 async function up() {
     const reportModels = await ReportModel.find().exec();

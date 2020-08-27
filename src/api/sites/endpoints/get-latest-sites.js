@@ -1,6 +1,6 @@
 import CONFIG from '../../../../config/server';
 import { MEDIUM } from '../../../config/cache';
-import { getLatestSites } from '../../../services/site-service';
+import { getLatestSites } from '../../../../lib/core/services/site-service';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 export const getLatestSitesHandler = () => getLatestSites(CONFIG.api.entriesLimit);

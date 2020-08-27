@@ -1,6 +1,7 @@
+import CONFIG from '../../config/server';
+import { getReportsBySiteId } from '../../lib/core/services/report-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
-import { getReportsBySiteId } from '../services/report-service';
-import { getSiteConfigById } from '../services/site-service';
+import { getSiteConfigById } from '../../lib/core/services/site-service';
 
 export default {
     method: 'GET',
@@ -12,7 +13,7 @@ export default {
     handler: async (request, h) => {
         const { id } = request.params;
         const site = await getSiteConfigById(id);
-        const reports = await getReportsBySiteId(id);
+        const reports = await getReportsBySiteId(id, CONFIG.api.siteReportLimit);
         return h.view('views/project.twig', { ...getDefaultParams(request), site, reports });
     },
 };

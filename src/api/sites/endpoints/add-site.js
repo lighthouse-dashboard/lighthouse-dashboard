@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { addSite } from '../../../services/site-service';
+import { addSite } from '../../../../lib/core/services/site-service';
 
 /**
  * Controller to add a new site

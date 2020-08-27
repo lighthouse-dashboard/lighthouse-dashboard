@@ -2,25 +2,6 @@
     <tile :title="$t('system.database-tile-title')"
             class="system--section">
         <loading-indicator v-if="isLoading"/>
-        <div class="system--row"
-                v-if="info">
-            <span class="u-reset">
-                {{ $t('system.database-collections') }}</span>
-            <span class="u-reset"
-                    v-if="info">
-                {{ info.db.collections }}
-            </span>
-        </div>
-
-        <div class="system--row"
-                v-if="info">
-            <span class="u-reset">
-                {{ $t('system.database-size') }}
-            </span>
-            <span class="u-reset"
-                    v-if="info">{{ info.db.dataSize }}</span>
-        </div>
-
 
         <div class="system--row"
                 v-if="health">

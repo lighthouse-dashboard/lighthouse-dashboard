@@ -1,6 +1,6 @@
 import { Boom } from '@hapi/boom';
 import { LIFE_TIME } from '../../../config/cache';
-import { createHTMLReportById } from '../../../services/report-service';
+import { createHTMLReportById } from '../../../../lib/core/services/report-service';
 import { reportIdParamModel } from '../schemas/report-id-param-model';
 
 /**

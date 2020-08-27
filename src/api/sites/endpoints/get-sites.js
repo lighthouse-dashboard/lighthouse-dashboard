@@ -1,6 +1,6 @@
 import joi from '@hapi/joi';
 import { MEDIUM } from '../../../config/cache';
-import { findSites, getAllSites } from '../../../services/site-service';
+import { findSites, getAllSites } from '../../../../lib/core/services/site-service';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 /**

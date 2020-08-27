@@ -1,13 +1,13 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import logger from '../../../../lib/logger';
-import { getSiteConfigById, setScheduledAuditForSite } from '../../../services/site-service';
+import { getSiteConfigById, setScheduledAuditForSite } from '../../../../lib/core/services/site-service';
 
 /**
  * Execute an audit
  * @param {hapi.Request} request
  * @param {object} h hapi request utils
- * @return {Promise<AuditDocument>}
+ * @return {Promise<Audits.AuditDocument>}
  */
 async function createReport({ params }, h) {
     const { id } = params;

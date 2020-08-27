@@ -1,4 +1,4 @@
-import { getScheduledSites } from '../../../services/site-service';
+import { getScheduledSites } from '../../../../lib/core/services/site-service';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 /**
