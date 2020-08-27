@@ -18,7 +18,7 @@
         "storybook": "Storybook",
         "roadmap": "Roadmap",
         "version-label": "Version",
-        "worker-is-running": "Is running",
+        "worker-is-running": "Is running"
     },
     "changelog.title": "Changelog",
     "site-create.title": "Create new site",
