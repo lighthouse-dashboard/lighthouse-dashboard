@@ -1,3 +1,4 @@
+import { getAllSites } from '../../lib/core/services/site-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
 
 export default {
@@ -7,7 +8,8 @@ export default {
         description: 'List of projects',
         auth: 'jwt',
     },
-    handler: (request, h) => {
-        return h.view('views/projects.twig', getDefaultParams(request));
+    handler: async (request, h) => {
+        const sites = await getAllSites();
+        return h.view('views/projects.twig', { ...getDefaultParams(request), sites });
     },
 };

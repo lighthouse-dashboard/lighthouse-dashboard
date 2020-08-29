@@ -6,6 +6,13 @@ import formatDate from '../filters/format-date';
  * @return {{series: {name: string, data: number[]}[], labels: string[]}}
  */
 export default function reportToBarChart(report) {
+    if (!report) {
+        return {
+            series: [],
+            labels: [],
+        };
+    }
+
     return {
         series: [{
             name: formatDate(report.createdAt),

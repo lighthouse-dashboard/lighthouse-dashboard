@@ -6,19 +6,18 @@
             All Projects
         </p>
 
-        <component is="sites-provider" class="projects--list">
-            <template v-slot="{sites}">
+        <div class="projects--list">
+            {% for site in sites %}
                 <component is="latest-report-provider"
-                        v-for="site in sites"
-                        :key="site.id"
-                        :id="site.id">
+                        key="{{ site.id }}"
+                        id="{{ site.id }}">
                     <component
                             slot-scope="{report}"
                             is="site-report-tile"
-                            :site="site"
+                            :site='{{ site | json_encode() }}'
                             :report="report"></component>
                 </component>
-            </template>
-        </component>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

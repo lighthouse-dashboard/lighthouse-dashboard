@@ -2,8 +2,7 @@
     <div class="report-detail">
         <loading-indicator v-if="isLoading"/>
         <bar-chart :series="chartData.series"
-                :labels="chartData.labels"
-                v-if="report"/>
+                :labels="chartData.labels"/>
     </div>
 </template>
 

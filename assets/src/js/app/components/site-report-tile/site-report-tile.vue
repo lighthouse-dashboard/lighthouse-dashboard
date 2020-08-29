@@ -1,4 +1,4 @@
-<template>
+-<template>
     <tile class="site-report-tile">
         <scheduled-job-indicator v-if="site && site.is_scheduled"/>
         <template

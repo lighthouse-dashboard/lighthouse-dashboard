@@ -6,8 +6,7 @@
             :initial-state='{{ site | json_encode() }}'>
         <template v-slot="siteProps">
             <div class="project">
-                <h4 class='h4 project--title'
-                        v-html="siteProps.site.name"></h4>
+                <h4 class='h4 project--title'>{{ site.name }}</h4>
 
                 <component is="notification"
                         :facets="['warning']"
@@ -32,7 +31,6 @@
                                     class="project--average"
                                     :reports='{{ reports | json_encode() }}'>
                             </component>
-
                         </div>
 
                         <component

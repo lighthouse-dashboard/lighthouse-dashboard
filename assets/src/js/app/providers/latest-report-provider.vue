@@ -1,6 +1,6 @@
 <template>
     <chart-placeholder v-if="!isInViewport || isLoading"/>
-    <div v-else-if="report">
+    <div v-else>
         <slot :report="report"/>
     </div>
 </template>

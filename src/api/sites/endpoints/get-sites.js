@@ -1,6 +1,6 @@
 import joi from '@hapi/joi';
-import { MEDIUM } from '../../../config/cache';
 import { findSites, getAllSites } from '../../../../lib/core/services/site-service';
+import { MEDIUM } from '../../../config/cache';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 /**
@@ -39,7 +39,7 @@ export default {
             schema: siteConfigModelList,
         },
         cache: {
-            expiresIn: 0,
+            expiresIn: MEDIUM,
             privacy: 'private',
         },
     },

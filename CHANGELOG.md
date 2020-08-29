@@ -16,6 +16,8 @@
 - [Add i18n #58](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/58)
 - [Remove "HOC" and implement provider components #83](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/83)
 - [Sort projects alphabetically in lists #72](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/72)
+- [Fix cleanup command for new RawReportModel entity #89](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/89)
+- [More usage of serverside rendered pages #93](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/93)
 
 ## Bugs
 
