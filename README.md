@@ -111,3 +111,25 @@ G_ANALYTICS_ID | `false` |`string` | Google Analytics ID for tracking | `GA-XXXX
 WINSTON_LOG_FILES |`false` | `boolean` | Define if logs should be stored in the `/logs` folder | `true`
 GOOGLE_CHROME_BIN | `false` |`string` | Point to the chromium binary | is set by the buildpack
 GOOGLE_CHROME_PORT |`false` | `number` | Define the port used for remote debugging | `9222`
+
+## Reporters
+There is functionallity built in to use 3rd party reporters like [quickmetrics.io](https://quickmetrics.io/).
+To implement a new one simply add a new entry via `register` in the `/reporters/index.js` file.
+You have to pass a function as a parameter in the `register` call. The functions 
+accepts two parameters. An event name and some data. That function will get called 
+in the code. 
+
+Find all events [here](/lib/reporter/Events.js).
+
+Example of an reporter
+
+    register((event, data) => {
+        track(event, data);
+    });
+
+
+Built in reporters [here](/lib/reporter/integrations)
+
+### Quickmetrics
+To use the internal quickmetrics reporter you have to provide the env variable
+`QUICK_METRICS_KEY` with your API access key 
