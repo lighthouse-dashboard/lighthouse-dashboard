@@ -1,44 +1,36 @@
 <template>
     <tile :title="$t('system.worker-tile-title')"
             class="system--section">
-        <loading-indicator v-if="isLoading"/>
-
-        <div class="system--row"
-                v-if="info">
+        <div class="system--row">
             <span class="u-reset">
                 {{ $t('general.last-run') }}
             </span>
             <span class="u-reset">{{ workerLastRunDate }}</span>
         </div>
 
-        <div class="system--row"
-                v-if="info">
+        <div class="system--row">
             <span class="u-reset">
                 {{ $t('system.worker-is-running') }}
             </span>
             <span class="u-reset"
-                    v-if="info">{{ info.worker_is_running }}</span>
+                    v-if="info">{{ info.is_running }}</span>
         </div>
     </tile>
 </template>
 
 <script>
     import { formatDistanceToNow } from 'date-fns';
-    import LoadingIndicator from '../../base/loading-indicator/loading-indicator';
     import Tile from '../../tile/tile';
 
     export default {
-        components: { LoadingIndicator, Tile },
+        components: {   Tile },
         props: {
-            isLoading: {
-                type: Boolean,
-                default: false,
-            },
-
-            /** @type {SystemAPI.Info} */
+            /**
+             * @type {AuditWorkerInfoModel}
+             */
             info: {
                 type: Object,
-                default: null,
+                required: true,
             },
         },
 
@@ -48,7 +40,7 @@
                     return null;
                 }
 
-                return formatDistanceToNow(new Date(this.info.worker_last_run), { addSuffix: true });
+                return formatDistanceToNow(new Date(this.info.last_run), { addSuffix: true });
             },
         },
     };

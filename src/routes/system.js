@@ -1,3 +1,4 @@
+import { getAuditWorkerInfo } from '../../lib/audit-worker/utils/get-audot-worker-info';
 import { getDefaultParams } from '../router/utils/get-default-params';
 
 export default {
@@ -7,7 +8,8 @@ export default {
         description: 'System view',
         auth: 'jwt',
     },
-    handler: (request, h) => {
-        return h.view('views/system.twig', getDefaultParams(request));
+    handler: async (request, h) => {
+        const config = await getAuditWorkerInfo();
+        return h.view('views/system.twig', { ...getDefaultParams(request), info: config });
     },
 };

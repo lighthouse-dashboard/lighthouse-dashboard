@@ -3,58 +3,41 @@
 {% block app_content %}
     <div class="system">
         <div></div>
+        <div class="system--content">
+            <component is="system-info-tile"
+                    class="system--section"
+                    version="{{ VERSION }}">
+            </component>
 
-        <component is="health-provider">
-            <template v-slot="healthProps">
-                <component is="system-info-provider">
-                    <template v-slot="systemProps">
-                        <div class="system--content">
-                            <component is="system-info-tile"
-                                    class="system--section"
-                                    :health="healthProps.health"
-                                    version="{{ VERSION }}"
-                                    :is-loading="healthProps.isLoading">
-                            </component>
+            <component is="worker-info-tile"
+                    :info='{{ info | json_encode() }}'>
+            </component>
 
-                            <component is="worker-info-tile"
-                                    :info="systemProps.info"
-                                    :is-loading="systemProps.isLoading">
-                            </component>
-
-                            <component is="db-info-tile"
-                                    :is-loading="systemProps.isLoading || healthProps.isLoading"
-                                    :info="systemProps.info"
-                                    :health="healthProps.health"></component>
-
-                            <component is="tile"
-                                    title="Links">
-                                <component is="list">
-                                    <component is="list-item">
-                                        <a class="link"
-                                                href="/app/system/changelog">
-                                            Changelog
-                                        </a>
-                                    </component>
-                                    <component is="list-item">
-                                        <a class="link"
-                                                target="_blank"
-                                                href="/storybook/index.html">
-                                            Storybook
-                                        </a>
-                                    </component>
-                                    <component is="list-item">
-                                        <a class="link"
-                                                href="/app/system/licenses">
-                                            Licenses
-                                        </a>
-                                    </component>
-                                </component>
-                            </component>
-                        </div>
-                    </template>
+            <component is="tile"
+                    title="Links">
+                <component is="list">
+                    <component is="list-item">
+                        <a class="link"
+                                href="/app/system/changelog">
+                            Changelog
+                        </a>
+                    </component>
+                    <component is="list-item">
+                        <a class="link"
+                                target="_blank"
+                                href="/storybook/index.html">
+                            Storybook
+                        </a>
+                    </component>
+                    <component is="list-item">
+                        <a class="link"
+                                href="/app/system/licenses">
+                            Licenses
+                        </a>
+                    </component>
                 </component>
-            </template>
-        </component>
+            </component>
+        </div>
         <div></div>
     </div>
 {% endblock %}
