@@ -4,6 +4,8 @@ import Hapi from '@hapi/hapi';
 import * as twig from 'twig';
 import CONFIG from '../../config/server.js';
 import logger from '../../lib/logger';
+import reporter from '../../lib/reporter';
+import { SERVER_ERROR, SERVER_SIGTERM } from '../../lib/reporter/Events';
 import { root } from '../config/path';
 import loadRoutes from '../router';
 import configValidator from '../validator/config-validator';
@@ -77,6 +79,7 @@ export default async function boot() {
     // });
 
     process.on('SIGTERM', () => {
+        reporter(SERVER_SIGTERM)
         logger.info('SIGTERM server');
         process.exit(0);
     });
@@ -86,6 +89,7 @@ export default async function boot() {
     try {
         await start();
     } catch (e) {
+        reporter(SERVER_ERROR, e.message);
         logger.error(e.message);
         throw e;
     }

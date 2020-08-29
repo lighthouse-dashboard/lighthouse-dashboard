@@ -1,4 +1,4 @@
-import { getAuditWorkerInfo } from '../../../../lib/audit-worker/utils/get-audot-worker-info';
+import { getAuditWorkerInfo } from '../../../../lib/audit-worker/utils/get-audit-worker-info';
 import { MEDIUM } from '../../../config/cache';
 import { systemInfoModel } from '../schemas/system-info-model';
 

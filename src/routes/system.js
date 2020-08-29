@@ -1,4 +1,4 @@
-import { getAuditWorkerInfo } from '../../lib/audit-worker/utils/get-audot-worker-info';
+import { getAuditWorkerInfo } from '../../lib/audit-worker/utils/get-audit-worker-info';
 import { getDefaultParams } from '../router/utils/get-default-params';
 
 export default {
