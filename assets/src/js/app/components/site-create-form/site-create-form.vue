@@ -33,6 +33,11 @@
             <input-checkbox v-model="value.is_favorite"
                     :label="$t('site.is-favorite')"/>
         </div>
+
+        <div class="site-create-form--field-set">
+            <input-checkbox v-model="value.is_public"
+                    :label="$t('site.is-public')"/>
+        </div>
     </div>
 </template>
 

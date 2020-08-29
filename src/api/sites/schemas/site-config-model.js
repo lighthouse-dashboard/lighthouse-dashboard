@@ -19,6 +19,7 @@ export const siteConfigModel = joi.object({
     is_scheduled: joi.boolean(),
     thumbnail: joi.optional(),
     is_disabled: joi.boolean(),
+    is_public: joi.boolean(),
 }).label('sites.SiteConfigModel');
 
 export const siteConfigModelList = joi

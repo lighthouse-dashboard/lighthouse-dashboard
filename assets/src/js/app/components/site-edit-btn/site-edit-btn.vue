@@ -2,6 +2,7 @@
     <div class="site-edit-btn">
         <site-create-overlay :config="site"
                 v-if="site && isEdit"
+                @close="close"
                 @done="toggleEdit"/>
 
         <btn :facets="['secondary', 'full-width']"
@@ -29,6 +30,9 @@
         }),
 
         methods: {
+            close() {
+                this.isEdit = false;
+            },
             toggleEdit() {
                 this.isEdit = !this.isEdit;
             },

@@ -31,6 +31,7 @@ export default {
                 name: joi
                     .string(),
                 is_disabled: joi.boolean(),
+                is_public: joi.boolean().optional(),
                 device: joi
                     .string()
                     .allow('desktop', 'mobile'),

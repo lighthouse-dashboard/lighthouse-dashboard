@@ -32,6 +32,7 @@ export default {
                 name: joi.string(),
                 url: joi.string(),
                 is_disabled: joi.boolean(),
+                is_public: joi.boolean(),
             }).label('sites.SiteUpdateModel'),
         },
     },

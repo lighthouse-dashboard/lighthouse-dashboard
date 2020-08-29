@@ -19,6 +19,15 @@
                     {{ site.last_audit | format-date }}
                 </p>
             </list-item>
+
+            <list-item class="site-config--list-item">
+                <p class="u-reset caption">
+                    {{ $t('site.is-public') }}
+                </p>
+                <p class="u-reset subtitle1">
+                    {{ site.is_public }}
+                </p>
+            </list-item>
         </list>
     </div>
 </template>

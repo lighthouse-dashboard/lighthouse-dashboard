@@ -5,7 +5,8 @@
         <site-create-form v-model="siteConfig"
                 v-if="siteConfig"/>
 
-        <notification :facets="['error']">
+        <notification :facets="['error']"
+                v-if="errorMessage">
             {{ errorMessage }}
         </notification>
 
@@ -16,7 +17,7 @@
             </btn>
             <btn v-else
                     @click="onCreateClicked">
-                {{ $t('site-create.abort-btn') }}
+                {{ $t('site-create.create-site-btn') }}
             </btn>
         </template>
     </overlay>
@@ -81,6 +82,7 @@
                         url: this.siteConfig.url,
                         is_favorite: this.siteConfig.is_favorite,
                         is_disabled: this.siteConfig.is_disabled,
+                        is_public: this.siteConfig.is_public,
                     },
                 })
                     .then(() => {

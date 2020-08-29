@@ -10,6 +10,7 @@ declare namespace Sites {
         is_scheduled?: boolean;
         thumbnail?: string;
         disabled?: boolean;
+        is_public: boolean;
     }
 
     export interface SiteWithReport {
