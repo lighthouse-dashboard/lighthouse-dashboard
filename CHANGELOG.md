@@ -18,6 +18,7 @@
 - [Sort projects alphabetically in lists #72](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/72)
 - [Fix cleanup command for new RawReportModel entity #89](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/89)
 - [More usage of serverside rendered pages #93](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/93)
+- [Add API to integrate 3rd party reports like quickmetrics #94](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/94)
 
 ## Bugs
 
