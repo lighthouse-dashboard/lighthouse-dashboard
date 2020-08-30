@@ -7,6 +7,7 @@ export default function inViewMixin(once = false) {
     return {
         data: () => ({
             observer: null,
+            isInViewport: false,
         }),
 
         methods: {
@@ -30,7 +31,8 @@ export default function inViewMixin(once = false) {
              * @param {IntersectionObserverEntry[]} entries
              */
             handleIntersection(entries) {
-                const isInViewport = this.hasIntersectingEntries(entries);
+                const isInViewport = this.isInViewport = this.hasIntersectingEntries(entries);
+
                 const intersects = isInViewport && this.onIntersect;
 
                 if (intersects) {
