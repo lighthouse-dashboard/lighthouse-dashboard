@@ -5,7 +5,6 @@ import { addSite } from '../../../../lib/core/services/site-service';
  * Controller to add a new site
  * @param {object} payload
  * @param {object} h
- * @param {MongodbDecoration} mongo
  * @return {Promise<Sites.SiteModel>}
  */
 async function addSiteHandler({ payload }, h) {

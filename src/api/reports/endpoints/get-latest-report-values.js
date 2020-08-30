@@ -6,7 +6,6 @@ import { siteIdParamModel } from '../schemas/siteid-param-model';
 /**
  * Handler to get latest latest created report values
  * @param {object} params
- * @param {MongodbDecoration} mongo
  * @return {Promise<Reports.Report | null>}
  */
 async function getLatestReportValues({ params }) {

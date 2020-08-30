@@ -3,7 +3,6 @@ import * as Inert from '@hapi/inert';
 import * as Vision from '@hapi/vision';
 import blipp from 'blipp';
 import hapiError from 'hapi-error';
-import * as mongoDecoratrorPlugin from 'hapi-mongodb-decorator';
 import HapiSwagger from 'hapi-swagger';
 
 import { name, version } from '../../package.json';
@@ -38,15 +37,6 @@ export default () => ({
     prod: [
         Inert,
         Vision,
-        {
-            plugin: mongoDecoratrorPlugin,
-            options: {
-                url: process.env.MONGODB_URI,
-                settings: {
-                    poolSize: 10,
-                },
-            },
-        },
         !isDev && (
             {
                 plugin: hapiError,
