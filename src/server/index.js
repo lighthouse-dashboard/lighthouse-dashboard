@@ -89,7 +89,7 @@ export default async function boot() {
     try {
         await start();
     } catch (e) {
-        report(SERVER_ERROR, e.message);
+        report(SERVER_ERROR);
         logger.error(e.message);
         throw e;
     }
