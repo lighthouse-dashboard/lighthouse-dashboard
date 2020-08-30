@@ -27,6 +27,7 @@
 - [Sort order for report list in project details not ordered correctly #79](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/79)
 - [Fix changelog #82](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/82)
 - [Fix storybook #81](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/81)
+- [Fix quality issues #44](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/44)
 
 ---
 
@@ -64,4 +65,3 @@
 - [#24 Avoid Autoupdate of charts](https://github.com/dreipol/lighthouse-dashboard/issues/24)
 - [#15 Implement Search for porjects](https://github.com/dreipol/lighthouse-dashboard/issues/15)
 - [#26 Add request decorator for better DB connection handling](https://github.com/dreipol/lighthouse-dashboard/issues/26)
-OV0I5NDcNXBVmMGZ
