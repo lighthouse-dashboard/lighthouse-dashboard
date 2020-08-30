@@ -3,7 +3,7 @@ import withLayout from '../../../storybook/decorators/withLayout';
 import LoginForm from './login-form';
 
 export default {
-    title: 'Components / Login Form',
+    title: 'Components / Auth / Login Form',
     decorators: [withLayout],
 };
 

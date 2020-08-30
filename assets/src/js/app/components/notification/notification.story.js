@@ -1,7 +1,7 @@
 import withLayout from '../../../storybook/decorators/withLayout';
 import Notification from './notification.vue';
 
-export default { title: 'Components / Notification', decorators: [withLayout] };
+export default { title: 'Base / Notification', decorators: [withLayout] };
 
 export const Success = () => ({
     components: { Notification },

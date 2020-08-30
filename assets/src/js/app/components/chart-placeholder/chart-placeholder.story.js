@@ -1,11 +1,10 @@
+import withLayout from '../../../storybook/decorators/withLayout';
 import ChartPlaceholder from './chart-placeholder.vue';
 
-export default { title: 'chart-placeholder' };
+export default { title: 'Base / Chart Placeholder', decorators: [withLayout] };
 
 export const component = () => ({
     components: { ChartPlaceholder },
-    props: {
-
-    },
+    props: {},
     template: '<chart-placeholder />',
 });

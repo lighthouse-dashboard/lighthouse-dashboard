@@ -4,7 +4,7 @@ import withLayout from '../../../storybook/decorators/withLayout';
 import SiteOverview from './site-overview.vue';
 
 export default {
-    title: 'Components / Site Overview',
+    title: 'Components / Sites / Site Overview',
     decorators: [withLayout],
 };
 

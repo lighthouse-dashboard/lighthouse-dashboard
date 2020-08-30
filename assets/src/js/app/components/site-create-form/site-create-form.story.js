@@ -2,7 +2,7 @@ import createFakeSite from '../../../../../../src/utils/create-fake-site';
 import withLayout from '../../../storybook/decorators/withLayout';
 import SiteCreateForm from './site-create-form.vue';
 
-export default { title: 'Components / Site Create Form', decorators: [withLayout] };
+export default { title: 'Components / Sites / Site Create Form', decorators: [withLayout] };
 
 export const component = () => ({
     components: { SiteCreateForm },

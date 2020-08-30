@@ -3,7 +3,7 @@ import withLayout from '../../../storybook/decorators/withLayout';
 import Tile from './tile';
 
 export default {
-    title: 'Components / Tile',
+    title: 'Base / Tile',
     decorators: [withLayout],
 };
 

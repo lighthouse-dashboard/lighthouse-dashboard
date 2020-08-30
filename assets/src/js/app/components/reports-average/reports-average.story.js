@@ -3,7 +3,7 @@ import withLayout from '../../../storybook/decorators/withLayout';
 import ReportsAverage from './reports-average.vue';
 
 export default {
-    title: 'Components / Reports Average',
+    title: 'Components / Reports / Reports Average',
     decorators: [withLayout],
 };
 
