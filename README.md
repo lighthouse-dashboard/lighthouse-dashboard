@@ -22,7 +22,6 @@ Frontend: [Vue](https://vuejs.org/)
 
 ## Screenshots
 ![Dashboard](doc/assets/dashboard.png)
-![Projects Overview](doc/assets/projects.png)
 ![Project Detail View](doc/assets/project.png)
 
 ## Architecture
