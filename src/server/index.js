@@ -10,8 +10,8 @@ import { root } from '../config/path';
 import loadRoutes from '../router';
 import configValidator from '../validator/config-validator';
 import serverConfigSchema from '../validator/schemas/server-config-schema';
-import setupAuth from './auth';
-import loadPlugins from './plugins';
+import setupAuth from '../auth';
+import loadPlugins from '../plugins';
 
 const IS_DEV = process.env.NODE_ENV === 'development';
 

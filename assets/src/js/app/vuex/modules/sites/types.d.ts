@@ -1,8 +1,6 @@
-import { Sites } from '../../../../../../../src/api/sites/types';
-
 export interface SitesState {
-    favoritedSits: Sites.SiteConfig[];
-    sites: Sites.SiteConfig[];
-    searchResult: Sites.SiteConfig[];
-    currentSiteConfig: Sites.SiteConfig;
+    favoritedSits: Sites.SiteModel[];
+    sites: Sites.SiteModel[];
+    searchResult: Sites.SiteModel[];
+    currentSiteConfig: Sites.SiteModel;
 }

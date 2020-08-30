@@ -10,25 +10,40 @@
                  </template>
              </component>
          </div>
+
          <div class="dashboard--section">
-             <component is="latest-sites-provider">
-                 <template v-slot="{ sites, isLoading }">
-                     <component
-                             is="latest-audits-feed"
-                             :sites="sites"
-                             :is-loading="isLoading"></component>
-                 </template>
-             </component>
+             <h4 class="dashboard--section-title">Latest reports</h4>
+             <div class="grid">
+                 {% for site in latestSites %}
+                     <component is="latest-report-provider"
+                             id="{{ site.id }}">
+                         <component is="site-report-tile"
+                                 slot-scope="{report}"
+                                 :report="report"
+                                 :site='{{ site | json_encode() }}'>
+                         </component>
+                     </component>
+                 {% endfor %}
+             </div>
          </div>
 
          <div class="dashboard--section">
-             <component is="favorite-sites-provider">
-                 <template v-slot="{ sites }">
-                     <component
-                             is="favorite-projects-overview"
-                             :sites="sites"></component>
-                 </template>
-             </component>
+             <h4 class="dashboard--section-title">Favorite sites</h4>
+             <div class="grid">
+                 {% for site in favoriteSites %}
+                     <component is="reports-provider"
+                             id="{{ site.id }}">
+                         <component is="site-overview"
+                                 slot-scope="{reports}"
+                                 id="{{ site.id }}"
+                                 name="{{ site.name }}"
+                                 url="{{ site.url }}"
+                                 :is_scheduled="{{ site.is_scheduled }}"
+                                 :reports="reports">
+                         </component>
+                     </component>
+                 {% endfor %}
+             </div>
          </div>
      </div>
  {% endblock %}

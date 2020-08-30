@@ -1,4 +1,5 @@
-import logger from '../../../lib/logger';
+import logger from '../../lib/logger';
+import { isDev } from '../utils/is-dev';
 import getPlugins from './plugins';
 
 /**
@@ -26,11 +27,11 @@ export default async function loadPlugins(server) {
     const { prod, dev } = getPlugins();
 
     logger.debug(`Register ${ prod.length } prod plugins`);
-    await registerPlugins(server, prod);
+    await registerPlugins(server, prod.filter(p => !!p));
 
-    if (process.env.NODE_ENV === 'development') {
+    if (isDev) {
         logger.debug(`Register ${ dev.length } dev plugins`);
-        await registerPlugins(server, dev);
+        await registerPlugins(server, dev.filter(p => !!p));
     }
 
     logger.info('Plugins complete');

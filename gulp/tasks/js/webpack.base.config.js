@@ -4,10 +4,8 @@ const MinifyJsPlugin = require('terser-webpack-plugin');
 require('dotenv').config();
 
 const path = require('path');
-const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 const paths = require('../../../src/config/path');
 const config = require('./config');

@@ -1,0 +1,34 @@
+.grid {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        & {
+            display: grid;
+            grid-template-areas: 'cell cell cell cell';
+            grid-template-columns: repeat(4, 3fr);
+            grid-gap: var(--root-spacing);
+
+            @include mq('lg') {
+                grid-template-areas: '. . .';
+                grid-template-columns: 4fr 4fr 4fr;
+            }
+
+            @include mq('md') {
+                grid-template-areas: '. .';
+                grid-template-columns: 6fr 6fr;
+            }
+
+            @include mq('<=sm') {
+                grid-template-areas: '.';
+                grid-template-columns: 12fr;
+            }
+        }
+    }
+
+    // Facets
+
+    // States
+}

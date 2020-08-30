@@ -18,10 +18,7 @@
             {{ latestReport | format-date }}
         </span>
 
-        <loading-indicator v-if="isLoading"/>
-
-        <div class="site-overview--content"
-                v-else>
+        <div class="site-overview--content">
             <span v-if="runError">
                 {{ runError.message }}
             </span>
@@ -38,14 +35,12 @@
     import inViewMixin from '../../mixins/in-view-mixin';
     import reportsToLineChart from '../../utils/reports-to-line-chart';
     import Btn from '../base/btn/btn';
-    import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import LineChart from '../charts/line-chart/line-chart';
     import ScheduledJobIndicator from '../scheduled-job-indicator/scheduled-job-indicator';
     import Tile from '../tile/tile';
 
     export default {
         components: {
-            LoadingIndicator,
             ScheduledJobIndicator,
             Tile,
             Btn,
@@ -68,11 +63,6 @@
                 required: true,
             },
 
-            is_favorite: {
-                type: Boolean,
-                required: true,
-            },
-
             is_scheduled: {
                 type: Boolean,
                 default: false,
@@ -82,11 +72,6 @@
             reports: {
                 type: Array,
                 required: true,
-            },
-
-            isLoading: {
-                type: Boolean,
-                default: false,
             },
         },
 

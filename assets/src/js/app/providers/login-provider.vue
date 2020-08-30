@@ -10,7 +10,6 @@
     export default {
         computed: {
             ...mapState('login', ['isLoggedIn']),
-
-        }
-    }
+        },
+    };
 </script>

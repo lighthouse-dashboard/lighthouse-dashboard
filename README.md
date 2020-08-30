@@ -119,16 +119,35 @@ You have to pass a function as a parameter in the `register` call. The functions
 accepts two parameters. An event name and some data. That function will get called 
 in the code. 
 
-Find all events [here](/lib/reporter/Events.js).
-
-Example of an reporter
+Example of a reporter registration
 
     register((event, data) => {
         track(event, data);
     });
 
 
+If you want to react to specific events, you can add logic inside that function body.
+Find all events [here](/lib/reporter/Events.js).
+
+    register((event, data) => {
+        if(event === Event.SERVER_ERROR){
+            track(event, data);
+        }
+    });
+
 Built in reporters [here](/lib/reporter/integrations)
+
+To use a built in reporter, import the desired reporter in the `/reporters/index.js` file, and 
+pass the function to the `register` method.
+
+Example with quickmetrics
+
+    import { register } from '../lib/reporter';
+    import qm from '../lib/reporter/integrations/quickmetrics';
+    
+    if (process.env.QUICK_METRICS_KEY) {
+        register(qm(process.env.QUICK_METRICS_KEY));
+    }
 
 ### Quickmetrics
 To use the internal quickmetrics reporter you have to provide the env variable
