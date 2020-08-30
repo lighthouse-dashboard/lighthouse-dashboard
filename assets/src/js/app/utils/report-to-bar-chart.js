@@ -1,4 +1,5 @@
 import formatDate from '../filters/format-date';
+import getReportValues from './get-report-values';
 
 /**
  * Transform a report to data which can be used with radar charts
@@ -16,9 +17,7 @@ export default function reportToBarChart(report) {
     return {
         series: [{
             name: formatDate(report.createdAt),
-            data: report.values.map((value) => {
-                return value.value;
-            }),
+            data: getReportValues(report),
         }],
         labels: report.values.map((value) => {
             return value.id;

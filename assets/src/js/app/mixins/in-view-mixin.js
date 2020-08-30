@@ -7,29 +7,38 @@ export default function inViewMixin(once = false) {
     return {
         data: () => ({
             observer: null,
-            isInViewport: false,
         }),
+
         methods: {
             /**
-             * Handle intersection events
+             * Check if any entry is  intersecting
              * @param {IntersectionObserverEntry[]} entries
+             * @return {boolean}
              */
-            handleIntersection(entries) {
-                this.isInViewport = entries.reduce((acc, entry) => {
+            hasIntersectingEntries(entries) {
+                return entries.reduce((acc, entry) => {
                     if (acc) {
                         return acc;
                     }
 
                     return entry.isIntersecting;
                 }, false);
+            },
 
+            /**
+             * Handle intersection events
+             * @param {IntersectionObserverEntry[]} entries
+             */
+            handleIntersection(entries) {
+                const isInViewport = this.hasIntersectingEntries(entries);
+                const intersects = isInViewport && this.onIntersect;
 
-                if (this.isInViewport && this.onIntersect) {
+                if (intersects) {
                     this.onIntersect();
+                }
 
-                    if (once) {
-                        this.destroy();
-                    }
+                if (intersects && once) {
+                    this.destroy();
                 }
             },
 
