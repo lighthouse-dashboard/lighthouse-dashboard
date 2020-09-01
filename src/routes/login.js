@@ -5,10 +5,7 @@ export default {
     path: '/login',
     options: {
         description: 'Main entry point',
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: false,
     },
     handler: (request, h) => {
         return h.view('views/login.twig', getDefaultParams(request));

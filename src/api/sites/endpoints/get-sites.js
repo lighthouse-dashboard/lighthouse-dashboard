@@ -1,6 +1,7 @@
 import joi from '@hapi/joi';
 import { findSites, getAllSites } from '../../../../lib/core/services/site-service';
 import { MEDIUM } from '../../../config/cache';
+import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { reportModelSchema } from '../../reports/schemas/report-model-schema';
 
 /**
@@ -29,10 +30,7 @@ export default {
     options: {
         description: 'Get all configured sites',
         tags: ['api', 'sites'],
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
         response: {
             schema: joi
                 .array()

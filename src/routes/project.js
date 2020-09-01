@@ -3,16 +3,14 @@ import CONFIG from '../../config/server';
 import { getReportsBySiteId } from '../../lib/core/services/report-service';
 import { getSiteConfigById } from '../../lib/core/services/site-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
+import { getAuthStrategy } from '../utils/get-auth-strategy';
 
 export default {
     method: 'GET',
     path: '/app/projects/{id}',
     options: {
         description: 'Details of project',
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
     },
     handler: async (request, h) => {
         const { isAuthenticated } = request.auth;

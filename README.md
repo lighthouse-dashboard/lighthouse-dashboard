@@ -111,6 +111,7 @@ G_ANALYTICS_ID | `false` |`string` | Google Analytics ID for tracking | `GA-XXXX
 WINSTON_LOG_FILES |`false` | `boolean` | Define if logs should be stored in the `/logs` folder | `true`
 GOOGLE_CHROME_BIN | `false` |`string` | Point to the chromium binary | is set by the buildpack
 GOOGLE_CHROME_PORT |`false` | `number` | Define the port used for remote debugging | `9222`
+ALLOW_ANONYMOUS_VIEW |`false` | `boolean` | With this flag, you can allow not authenticated user to browse reports which are linked to a page wich is marked `public`| `true`
 
 ## Reporters
 There is functionallity built in to use 3rd party reporters like [quickmetrics.io](https://quickmetrics.io/).

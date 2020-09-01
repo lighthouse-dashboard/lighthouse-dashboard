@@ -1,5 +1,6 @@
 import { MEDIUM } from '../../../config/cache';
 import { getFavoriteSites } from '../../../../lib/core/services/site-service';
+import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 export default {
@@ -9,10 +10,7 @@ export default {
     options: {
         description: 'Get favorited sites',
         tags: ['api', 'sites'],
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
         response: {
             schema: siteConfigModelList,
         },

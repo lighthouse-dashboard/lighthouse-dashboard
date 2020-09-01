@@ -1,15 +1,13 @@
 import { getAllSites } from '../../lib/core/services/site-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
+import { getAuthStrategy } from '../utils/get-auth-strategy';
 
 export default {
     method: 'GET',
     path: '/app/projects',
     options: {
         description: 'List of projects',
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
     },
     handler: async (request, h) => {
         const { isAuthenticated } = request.auth;

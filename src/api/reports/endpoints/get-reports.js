@@ -2,6 +2,7 @@ import joi from '@hapi/joi';
 import CONFIG from '../../../../config/server';
 import { getReportsBySiteId } from '../../../../lib/core/services/report-service';
 import { MEDIUM } from '../../../config/cache';
+import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { reportModelList } from '../schemas/report-model-schema';
 
 /**
@@ -9,10 +10,9 @@ import { reportModelList } from '../schemas/report-model-schema';
  * @param {hapi.Request.params} params
  * @return {Promise<Reports.Report[]>}
  */
-async function getReports({ params }) {
+function getReports({ params }) {
     const { id } = params;
-    const r = await getReportsBySiteId(id, CONFIG.api.siteReportLimit);
-    return r;
+    return getReportsBySiteId(id, CONFIG.api.siteReportLimit);
 }
 
 export default {
@@ -22,10 +22,7 @@ export default {
     options: {
         description: 'Get recent report entries for site',
         tags: ['api', 'reports'],
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
         validate: {
             params: joi.object({
                 id: joi

@@ -2,6 +2,7 @@ import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import { MEDIUM } from '../../../config/cache';
 import { getSiteConfigById } from '../../../../lib/core/services/site-service';
+import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { siteConfigModel } from '../schemas/site-config-model';
 
 /**
@@ -25,10 +26,7 @@ export default {
     options: {
         description: 'Get project config by id',
         tags: ['api', 'sites'],
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
         validate: {
             params: joi.object({
                 id: joi.string().required(),

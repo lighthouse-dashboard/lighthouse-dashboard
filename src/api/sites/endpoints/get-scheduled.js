@@ -1,4 +1,5 @@
 import { getScheduledSites } from '../../../../lib/core/services/site-service';
+import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { siteConfigModelList } from '../schemas/site-config-model';
 
 /**
@@ -16,10 +17,7 @@ export default {
     options: {
         description: 'Get all scheduled sites',
         tags: ['api', 'sites'],
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
         response: {
             schema: siteConfigModelList,
         },

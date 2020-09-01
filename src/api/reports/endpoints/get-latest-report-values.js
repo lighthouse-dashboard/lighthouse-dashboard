@@ -2,6 +2,7 @@ import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import { getLatestReportBySiteId } from '../../../../lib/core/services/report-service';
 import { MEDIUM } from '../../../config/cache';
+import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 
 /**
  * Handler to get latest latest created report values
@@ -25,10 +26,7 @@ export default {
     options: {
         description: 'Get latest report for site',
         tags: ['api', 'reports'],
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
         validate: {
             params: joi.object({
                 siteId: joi

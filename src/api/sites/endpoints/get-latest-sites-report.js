@@ -1,6 +1,7 @@
 import { MEDIUM } from '../../../config/cache';
 import { getLatestReportBySiteId } from '../../../../lib/core/services/report-service';
 import { getAllSites } from '../../../../lib/core/services/site-service';
+import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { siteWithReportList } from '../schemas/site-with-report';
 
 /**
@@ -38,10 +39,7 @@ export default {
     options: {
         description: 'Get latest audited sites with report',
         tags: ['api', 'sites'],
-        auth: {
-            strategy: 'jwt',
-            mode: 'optional',
-        },
+        auth: getAuthStrategy(),
         response: {
             schema: siteWithReportList,
         },
