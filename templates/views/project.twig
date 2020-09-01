@@ -56,28 +56,27 @@
                             <component is="site-config"
                                     :site='siteProps.site'></component>
                         </component>
-
-
-
-                        <component is="tile"
-                                title="Actions"
-                                class='project--sidebar-section'>
-                            <component is="site-edit-btn"
-                                    class="project--action-btn"
-                                    :site='siteProps.site'></component>
-
-                            {% if not site.is_disabled %}
-                                <component is="schedule-audit-btn"
-                                        id="{{ site.id }}"
+                        {% if isAuthenticated %}
+                            <component is="tile"
+                                    title="Actions"
+                                    class='project--sidebar-section'>
+                                <component is="site-edit-btn"
                                         class="project--action-btn"
-                                        :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
-                            {% endif %}
+                                        :site='siteProps.site'></component>
 
-                            <component is="site-delete-btn"
-                                    class="project--action-btn"
-                                    id="{{ site.id }}">
+                                {% if not site.is_disabled %}
+                                    <component is="schedule-audit-btn"
+                                            id="{{ site.id }}"
+                                            class="project--action-btn"
+                                            :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
+                                {% endif %}
+
+                                <component is="site-delete-btn"
+                                        class="project--action-btn"
+                                        id="{{ site.id }}">
+                                </component>
                             </component>
-                        </component>
+                        {% endif %}
 
                         <component is="tile"
                                 title='Tools'

@@ -27,9 +27,12 @@ export default {
     path: '/api/sites',
     handler: getSitesHandler,
     options: {
-        auth: 'jwt',
         description: 'Get all configured sites',
         tags: ['api', 'sites'],
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
         response: {
             schema: joi
                 .array()

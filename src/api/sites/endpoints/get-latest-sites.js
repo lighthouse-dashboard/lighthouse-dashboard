@@ -12,7 +12,10 @@ export default {
     options: {
         description: 'Get latest audited sites',
         tags: ['api', 'sites'],
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
         response: {
             schema: siteConfigModelList,
         },

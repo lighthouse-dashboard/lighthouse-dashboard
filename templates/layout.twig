@@ -2,11 +2,9 @@
 
 {% block content %}
     <component is="app-layout">
-        {% block sidebar %}
-            <template slot="navigation">
-                {% include 'components/nav-bar/nav-bar.twig' %}
-            </template>
-        {% endblock %}
+        <template slot="navigation">
+            {% include 'components/header/header.twig' %}
+        </template>
 
         <template slot="content">
             {% block app_content %}

@@ -6,7 +6,10 @@ export default {
     path: '/app/system',
     options: {
         description: 'System view',
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
     },
     handler: async (request, h) => {
         const config = await getAuditWorkerInfo();

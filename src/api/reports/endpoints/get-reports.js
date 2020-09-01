@@ -9,9 +9,10 @@ import { reportModelList } from '../schemas/report-model-schema';
  * @param {hapi.Request.params} params
  * @return {Promise<Reports.Report[]>}
  */
-function getReports({ params }) {
+async function getReports({ params }) {
     const { id } = params;
-    return getReportsBySiteId(id, CONFIG.api.siteReportLimit);
+    const r = await getReportsBySiteId(id, CONFIG.api.siteReportLimit);
+    return r;
 }
 
 export default {
@@ -21,7 +22,10 @@ export default {
     options: {
         description: 'Get recent report entries for site',
         tags: ['api', 'reports'],
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
         validate: {
             params: joi.object({
                 id: joi
@@ -30,7 +34,7 @@ export default {
             }).label('GetReportsParams'),
         },
         response: {
-            schema: reportModelList
+            schema: reportModelList,
         },
         cache: {
             expiresIn: MEDIUM,

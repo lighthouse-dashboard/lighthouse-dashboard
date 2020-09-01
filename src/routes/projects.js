@@ -6,10 +6,14 @@ export default {
     path: '/app/projects',
     options: {
         description: 'List of projects',
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
     },
     handler: async (request, h) => {
-        const sites = await getAllSites();
+        const { isAuthenticated } = request.auth;
+        const sites = await getAllSites(100, isAuthenticated);
         return h.view('views/projects.twig', { ...getDefaultParams(request), sites });
     },
 };

@@ -5,7 +5,10 @@ export default {
     path: '/app/system/changelog',
     options: {
         description: 'Changelog view',
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
     },
     handler: (request, h) => {
         return h.view('views/changelog.twig', getDefaultParams(request));

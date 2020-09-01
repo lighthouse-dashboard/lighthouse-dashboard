@@ -6,11 +6,15 @@ export default {
     path: '/app/dashboard',
     options: {
         description: 'Dashboard page',
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
     },
     handler: async (request, h) => {
-        const favoriteSites = await getFavoriteSites();
-        const latestSites = (await getLatestSites()).slice(0, 4);
+        const { isAuthenticated } = request.auth;
+        const favoriteSites = await getFavoriteSites(100, isAuthenticated);
+        const latestSites = (await getLatestSites(4, isAuthenticated));
         return h.view('views/dashboard.twig', { ...getDefaultParams(request), favoriteSites, latestSites });
     },
 };

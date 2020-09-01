@@ -14,9 +14,12 @@ export default {
     path: '/api/sites/scheduled',
     handler: getScheduledSitesHandler,
     options: {
-        auth: 'jwt',
         description: 'Get all scheduled sites',
         tags: ['api', 'sites'],
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
         response: {
             schema: siteConfigModelList,
         },

@@ -25,7 +25,10 @@ export default {
     options: {
         description: 'Get project config by id',
         tags: ['api', 'sites'],
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
         validate: {
             params: joi.object({
                 id: joi.string().required(),

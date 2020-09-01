@@ -5,7 +5,10 @@ export default {
     path: '/app/system/licenses',
     options: {
         description: 'Licenses view',
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
     },
     handler: (request, h) => {
         return h.view('views/licenses.twig', getDefaultParams(request));

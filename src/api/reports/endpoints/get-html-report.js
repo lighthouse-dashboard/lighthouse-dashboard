@@ -26,7 +26,6 @@ export default {
     options: {
         description: 'Get lighthouse html report',
         tags: ['api', 'reports'],
-        auth: 'jwt',
         validate: {
             params: joi.object({
                 id: joi

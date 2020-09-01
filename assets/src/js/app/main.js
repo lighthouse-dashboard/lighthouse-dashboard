@@ -12,11 +12,6 @@ Vue.use(Inview);
 
 registry(Vue, { store, i18n });
 
-if (process.env.NODE_ENV === 'develop') {
-    // eslint-disable-next-line no-undef
-    cssVarEditor();
-}
-
 function mountComponent(node) {
     const name = node.getAttribute('is');
     const Component = new Vue(name);

@@ -1,0 +1,37 @@
+<nav class="header">
+    <div class="header--title-wrapper">
+        <a href="/"
+                class="u-reset header--title">
+            Lighthouse
+        </a>
+    </div>
+
+    <ul class="header--list">
+        <li class="header--list-item">
+            <a class="header--list-item-link u-reset {% if route == '/app/dashboard' %}header--list-item-link__active{% endif %}"
+                    href="/app/dashboard">Dashboard</a>
+        </li>
+
+        <li class="header--list-item">
+            <a class="header--list-item-link u-reset {% if route == '/app/projects' or route == '/app/projects/?' %}header--list-item-link__active{% endif %}"
+                    href="/app/projects">Projects</a>
+        </li>
+
+        <li class="header--list-item">
+            <a class="header--list-item-link u-reset {% if route == '/app/system' %}header--list-item-link__active{% endif %}"
+                    href="/app/system">Info</a>
+        </li>
+    </ul>
+
+    <ul class="header--list">
+        {% if isAuthenticated %}
+            <component is="create-site-btn"></component>
+            <component is="logout-btn"></component>
+        {% else %}
+            <li class="header--list-item">
+                <a class="header--list-item-link u-reset {% if route == '/login' %}header--list-item-link__active{% endif %}"
+                        href="/login">Login</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

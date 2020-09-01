@@ -25,7 +25,10 @@ export default {
     options: {
         description: 'Get latest report for site',
         tags: ['api', 'reports'],
-        auth: 'jwt',
+        auth: {
+            strategy: 'jwt',
+            mode: 'optional',
+        },
         validate: {
             params: joi.object({
                 siteId: joi
