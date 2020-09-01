@@ -19,6 +19,10 @@ export default {
 
         const { id } = request.params;
         const site = await getSiteConfigById(id);
+        if (!site) {
+            return new Boom.notFound();
+        }
+
         if (!site.is_public && !isAuthenticated) {
             return new Boom.unauthorized('Site is private');
         }

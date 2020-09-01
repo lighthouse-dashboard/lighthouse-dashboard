@@ -20,6 +20,8 @@
 - [More usage of serverside rendered pages #93](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/93)
 - [Add API to integrate 3rd party reports like quickmetrics #94](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/94)
 - [Make a site private so it won't show in preview mode #92](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/92)
+- [Inline response schema for APIs #61](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/61)
+- [Add a preview mode #91](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/91)
 
 ## Bugs
 
