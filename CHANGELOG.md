@@ -1,5 +1,10 @@
 # 5.13
 
+## Migrations
+
+- [move_raw_reports](./migrations/1598457090966-move_raw_reports.js)
+- [private_site](./migrations/1598731395390-private_site.js)
+
 ## Features
 
 - [Split application into seperate projects (Core, Worker, UI) #47](https://github.com/lighthouse-dashboard/lighthouse-dashboard/issues/47)

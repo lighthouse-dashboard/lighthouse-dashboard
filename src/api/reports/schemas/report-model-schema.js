@@ -37,6 +37,7 @@ export const reportModel = {
 
     raw_report_id: joi
         .string()
+        .allow(null)
         .optional(),
 
     values: joi
