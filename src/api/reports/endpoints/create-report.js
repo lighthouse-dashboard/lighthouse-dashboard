@@ -29,7 +29,7 @@ async function createReport({ params }, h) {
 
 export default {
     method: 'POST',
-    path: '/api/sites/{id}',
+    path: '/api/reports/{id}',
     handler: createReport,
     options: {
         description: 'Create new report',
@@ -39,8 +39,9 @@ export default {
             params: joi.object({
                 id: joi
                     .string()
-                    .required(),
-            }).label('sites.SiteId'),
+                    .required()
+                    .label('SiteId'),
+            }).label('CreateReportParams'),
         },
     },
 };

@@ -35,7 +35,7 @@ export default {
                     .string()
                     .allow('desktop', 'mobile'),
                 is_favorite: joi.boolean(),
-            }).label('sites.CreateSiteModel'),
+            }).label('CreateSitePayload'),
         },
     },
 };

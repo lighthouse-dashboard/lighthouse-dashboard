@@ -1,7 +1,7 @@
 import { Boom } from '@hapi/boom';
-import { LIFE_TIME } from '../../../config/cache';
+import joi from '@hapi/joi';
 import { createHTMLReportById } from '../../../../lib/core/services/report-service';
-import { reportIdParamModel } from '../schemas/report-id-param-model';
+import { LIFE_TIME } from '../../../config/cache';
 
 /**
  * Get html report handler
@@ -28,7 +28,15 @@ export default {
         tags: ['api', 'reports'],
         auth: 'jwt',
         validate: {
-            params: reportIdParamModel,
+            params: joi.object({
+                id: joi
+                    .string()
+                    .required()
+                    .label('Report UUID'),
+            }).label('GetHTMLReportParams'),
+        },
+        response: {
+            schema: joi.string().label('HTML Markup'),
         },
         cache: {
             expiresIn: LIFE_TIME,

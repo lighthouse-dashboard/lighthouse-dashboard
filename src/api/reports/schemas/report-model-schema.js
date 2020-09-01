@@ -1,11 +1,6 @@
 import joi from '@hapi/joi';
 
 export const reportValueModel = joi.object({
-    //mongoose ID
-    _id: joi
-        .object(),
-
-
     id: joi
         .string()
         .required(),
@@ -13,25 +8,18 @@ export const reportValueModel = joi.object({
     value: joi
         .number()
         .required(),
-}).label('reports.ReportValueModel');
+}).label('ReportValueModel');
 
 
 export const reportModel = {
-    // mongoose ID
-    _id: joi
-        .object(),
-
-    __v: joi
-        .number(),
-
     siteId: joi
         .string()
         .required(),
 
-    createdAt: joi.object()
+    createdAt: joi.string()
         .optional(),
 
-    updatedAt: joi.object()
+    updatedAt: joi.string()
         .optional(),
 
     message: joi
@@ -55,7 +43,7 @@ export const reportModel = {
         .items(reportValueModel),
 };
 
-export const reportModelSchema = joi.object(reportModel).label('reports.ReportModel');
+export const reportModelSchema = joi.object(reportModel).label('ReportModel');
 
 export const reportModelList = joi
     .array()

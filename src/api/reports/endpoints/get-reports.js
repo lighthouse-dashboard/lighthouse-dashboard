@@ -1,7 +1,8 @@
+import joi from '@hapi/joi';
 import CONFIG from '../../../../config/server';
-import { MEDIUM } from '../../../config/cache';
 import { getReportsBySiteId } from '../../../../lib/core/services/report-service';
-import { reportIdParamModel } from '../schemas/report-id-param-model';
+import { MEDIUM } from '../../../config/cache';
+import { reportModelList } from '../schemas/report-model-schema';
 
 /**
  * Handler for latest created reports
@@ -22,7 +23,14 @@ export default {
         tags: ['api', 'reports'],
         auth: 'jwt',
         validate: {
-            params: reportIdParamModel,
+            params: joi.object({
+                id: joi
+                    .string()
+                    .required(),
+            }).label('GetReportsParams'),
+        },
+        response: {
+            schema: reportModelList
         },
         cache: {
             expiresIn: MEDIUM,

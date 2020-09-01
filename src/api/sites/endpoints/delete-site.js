@@ -24,7 +24,7 @@ export default {
         validate: {
             params: joi.object({
                 id: joi.string().required(),
-            }).label('sites.SiteId'),
+            }).label('DeleteSiteParams'),
         },
     },
 };

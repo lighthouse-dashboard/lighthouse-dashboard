@@ -26,14 +26,15 @@ export default {
         validate: {
             params: joi.object({
                 id: joi.string().required(),
-            }).label('sites.SiteId'),
+            }).label('UpdateSiteParams'),
+
             payload: joi.object({
                 is_favorite: joi.boolean().required(),
                 name: joi.string(),
                 url: joi.string(),
                 is_disabled: joi.boolean(),
                 is_public: joi.boolean(),
-            }).label('sites.SiteUpdateModel'),
+            }).label('UpdateSitePayload'),
         },
     },
 };

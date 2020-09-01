@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
+import joi from '@hapi/joi';
 import loginService from '../../../services/login-service';
-import { loginRequestModel } from '../schemas/login-request-model';
 
 function handler(request) {
     const { password } = request.payload;
@@ -21,7 +21,9 @@ export default {
         description: 'Get JWT token',
         tags: ['api', 'auth'],
         validate: {
-            payload: loginRequestModel,
+            payload: joi.object({
+                password: joi.string().required(),
+            }).label('PostAuthPayload'),
         },
     },
 };

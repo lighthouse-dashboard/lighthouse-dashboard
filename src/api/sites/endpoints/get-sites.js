@@ -1,7 +1,7 @@
 import joi from '@hapi/joi';
 import { findSites, getAllSites } from '../../../../lib/core/services/site-service';
 import { MEDIUM } from '../../../config/cache';
-import { siteConfigModelList } from '../schemas/site-config-model';
+import { reportModelSchema } from '../../reports/schemas/report-model-schema';
 
 /**
  * Get sites
@@ -30,13 +30,11 @@ export default {
         auth: 'jwt',
         description: 'Get all configured sites',
         tags: ['api', 'sites'],
-        validate: {
-            query: joi.object({
-                query: joi.string(),
-            }).label('sites.Query'),
-        },
         response: {
-            schema: siteConfigModelList,
+            schema: joi
+                .array()
+                .items(reportModelSchema)
+                .label('GetReportsResponse'),
         },
         cache: {
             expiresIn: MEDIUM,

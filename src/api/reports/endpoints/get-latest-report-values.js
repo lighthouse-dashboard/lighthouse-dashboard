@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
-import { MEDIUM } from '../../../config/cache';
+import joi from '@hapi/joi';
 import { getLatestReportBySiteId } from '../../../../lib/core/services/report-service';
-import { siteIdParamModel } from '../schemas/siteid-param-model';
+import { MEDIUM } from '../../../config/cache';
 
 /**
  * Handler to get latest latest created report values
@@ -27,7 +27,12 @@ export default {
         tags: ['api', 'reports'],
         auth: 'jwt',
         validate: {
-            params: siteIdParamModel,
+            params: joi.object({
+                siteId: joi
+                    .string()
+                    .required(),
+            })
+                .label('GetLatestReportValuesParams'),
         },
         cache: {
             expiresIn: MEDIUM,
