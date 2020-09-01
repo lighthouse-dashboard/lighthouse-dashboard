@@ -5,7 +5,12 @@ import { RawReportModel } from '../lib/core/models/raw-report-model';
 import { ReportModel } from '../lib/core/models/report-model';
 
 async function up() {
-    const reportModels = await ReportModel.find().exec();
+    const reportModels = await ReportModel.find({
+        raw_report_id: { $eq: null },
+        raw: {
+            $ne: null,
+        },
+    }).exec();
     for (let i = 0; i < reportModels.length; i++) {
         const model = reportModels[i];
         if (!model.raw) {
@@ -13,7 +18,7 @@ async function up() {
         }
         const rawReport = new RawReportModel({ raw: model.raw });
         await rawReport.save();
-        await ReportModel.updateOne(model.id, { raw_report_id: rawReport.id });
+        await ReportModel.updateOne(model.id, { raw_report_id: rawReport.id, raw: null });
     }
 }
 
