@@ -1,5 +1,4 @@
 import Boom from '@hapi/boom';
-import CONFIG from '../../config/server';
 import { getReportsBySiteId } from '../../lib/core/services/report-service';
 import { getSiteConfigById } from '../../lib/core/services/site-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
@@ -24,7 +23,7 @@ export default {
         if (!site.is_public && !isAuthenticated) {
             return new Boom.unauthorized('Site is private');
         }
-        const reports = await getReportsBySiteId(id, CONFIG.api.siteReportLimit);
+        const reports = await getReportsBySiteId(id, 50);
         return h.view('views/project.twig', { ...getDefaultParams(request), site, reports });
     },
 };

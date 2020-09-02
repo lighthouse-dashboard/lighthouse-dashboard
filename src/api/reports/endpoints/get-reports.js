@@ -1,5 +1,4 @@
 import joi from '@hapi/joi';
-import CONFIG from '../../../../config/server';
 import { getReportsBySiteId } from '../../../../lib/core/services/report-service';
 import { MEDIUM } from '../../../config/cache';
 import { getAuthStrategy } from '../../../utils/get-auth-strategy';
@@ -12,7 +11,7 @@ import { reportModelList } from '../schemas/report-model-schema';
  */
 function getReports({ params }) {
     const { id } = params;
-    return getReportsBySiteId(id, CONFIG.api.siteReportLimit);
+    return getReportsBySiteId(id, 50);
 }
 
 export default {

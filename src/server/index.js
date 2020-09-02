@@ -2,7 +2,6 @@
 
 import Hapi from '@hapi/hapi';
 import * as twig from 'twig';
-import CONFIG from '../../config/server.js';
 import logger from '../../lib/logger';
 import { report } from '../../lib/reporter';
 import { SERVER_ERROR, SERVER_SIGTERM } from '../../lib/reporter/Events';
@@ -10,8 +9,6 @@ import setupAuth from '../auth';
 import { root } from '../config/path';
 import loadPlugins from '../plugins';
 import loadRoutes from '../router';
-import configValidator from '../validator/config-validator';
-import serverConfigSchema from '../validator/schemas/server-config-schema';
 
 const IS_DEV = process.env.NODE_ENV === 'development';
 
@@ -67,11 +64,6 @@ async function start() {
 }
 
 export default async function boot() {
-    logger.debug(`Validating config`);
-
-    if (!configValidator(serverConfigSchema, CONFIG)) {
-        return;
-    }
     logger.debug(`Config ok`);
     //
     // process.on('unhandledRejection', (err) => {
