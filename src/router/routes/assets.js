@@ -1,4 +1,4 @@
-export default [
+const routes = [
     {
         method: 'GET',
         path: '/service-worker.js',
@@ -27,21 +27,6 @@ export default [
     },
     {
         method: 'GET',
-        path: '/storybook/{param*}',
-        options: {
-            description: 'Stroybook',
-            auth: false,
-        },
-        handler: {
-            directory: {
-                path: 'assets/storybook/',
-                redirectToSlash: true,
-                index: false,
-            },
-        },
-    },
-    {
-        method: 'GET',
         path: '/{param*}',
         options: {
             description: 'Static assets',
@@ -56,3 +41,23 @@ export default [
         },
     },
 ];
+
+if (new Boolean(process.env.ENABLE_STORYBOOK_VIEW) === true) {
+    routes.push({
+        method: 'GET',
+        path: '/storybook/{param*}',
+        options: {
+            description: 'Stroybook',
+            auth: false,
+        },
+        handler: {
+            directory: {
+                path: 'assets/storybook/',
+                redirectToSlash: true,
+                index: false,
+            },
+        },
+    });
+}
+
+export default routes;

@@ -24,7 +24,7 @@
         "start": "node -r esm index.js",
         "build": "gulp build",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
-        "audit": "node -r esm lib/cli/index.js  -a --queue",
+        "audit": "node -r esm lib/cli/index.js",
         "worker": "npm run cleanup && npm run audit-worker",
         "cleanup": "node -r esm lib/cleanup/cli.js",
         "audit-worker": "node -r esm lib/audit-worker/cli.js"
@@ -79,7 +79,7 @@
         "@storybook/addon-actions": "^5.3.18",
         "@storybook/addon-knobs": "^5.3.18",
         "@storybook/addon-notes": "^5.3.18",
-        "@storybook/addon-storysource": "^5.3.18",
+        "@storybook/addon-storysource": "^5.3.21",
         "@storybook/addon-viewport": "^5.3.18",
         "@storybook/addons": "^5.3.18",
         "@storybook/source-loader": "^5.3.18",

@@ -6,13 +6,11 @@ module.exports = {
         {
             name: '@storybook/addon-storysource',
             options: {
-                include: [path.resolve(__dirname, '../assets/src/js/app')],
+                rule: {
+                    test: [/\.story\.js?$/]
+                },
                 loaderOptions: {
-                    parser: 'javascript',
-                    prettierConfig: {
-                        printWidth: 100,
-                        tabWidth: 4
-                    },
+                    prettierConfig: { printWidth: 80, singleQuote: true },
                 },
             },
         },

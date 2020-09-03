@@ -113,6 +113,7 @@ GOOGLE_CHROME_BIN | `false` |`string` | Point to the chromium binary | is set by
 GOOGLE_CHROME_PORT |`false` | `number` | Define the port used for remote debugging | `9222`
 ALLOW_ANONYMOUS_VIEW |`false` | `boolean` | With this flag, you can allow not authenticated user to browse reports which are linked to a page wich is marked `public`| `true`
 MAX_REPORTS_AGE |`false` | `number` | The amount of days a Raw report should be stored. Depends on the amount of storage you have available| `7`
+ENABLE_STORYBOOK_VIEW |`false` | `boolean` | Whether to expose the storybook build in `http://localhost:4000/storybook` or not| `true`
 
 ## Reporters
 There is functionallity built in to use 3rd party reporters like [quickmetrics.io](https://quickmetrics.io/).
