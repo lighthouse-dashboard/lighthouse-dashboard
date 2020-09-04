@@ -33,7 +33,7 @@
              * @param {Sites.SiteModel} site
              */
             onDone({ site }) {
-                window.location.href = `/app/projects/${ site.id }`;
+                window.location.href = `/app/projects/${ site._id }`;
             },
 
             toggleCreateOverlay() {

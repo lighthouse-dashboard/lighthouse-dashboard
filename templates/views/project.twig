@@ -2,7 +2,7 @@
 
 {% block app_content %}
     <component is="site-provider"
-            id="{{ site.id }}"
+            id="{{ site._id }}"
             :initial-state='{{ site | json_encode() }}'>
         <template v-slot="siteProps">
             <div class="project">
@@ -66,14 +66,14 @@
 
                                 {% if not site.is_disabled %}
                                     <component is="schedule-audit-btn"
-                                            id="{{ site.id }}"
+                                            id="{{ site._id }}"
                                             class="project--action-btn"
                                             :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
                                 {% endif %}
 
                                 <component is="site-delete-btn"
                                         class="project--action-btn"
-                                        id="{{ site.id }}">
+                                        id="{{ site._id }}">
                                 </component>
                             </component>
                         {% endif %}
@@ -88,9 +88,18 @@
                         <component is="tile"
                                 title='HTML Reports'
                                 class='project--sidebar-section'>
-                            <component
-                                    is="audit-report-list"
-                                    :reports='{{ reports | json_encode() }}'></component>
+                            <component is="list"
+                                    class="audit-report-list">
+                                {% for report in reports %}
+                                    <component is="list-item">
+                                        <a class="link"
+                                                target="_blank"
+                                                href="/api/reports/report/{{ report.raw_report._id }}">
+                                            {{ report.createdAt }}
+                                        </a>
+                                    </component>
+                                {% endfor %}
+                            </component>
                         </component>
                     </div>
                 </div>

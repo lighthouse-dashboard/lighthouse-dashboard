@@ -1,4 +1,4 @@
-import { Boom } from '@hapi/boom';
+import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import { createHTMLReportById } from '../../../../lib/shared/services/report-service';
 import { LIFE_TIME } from '../../../config/cache';

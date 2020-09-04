@@ -1,20 +1,20 @@
--<template>
+<template>
     <tile class="site-report-tile">
-        <scheduled-job-indicator v-if="site && site.is_scheduled"/>
+        <scheduled-job-indicator v-if="is_scheduled"/>
         <template
                 slot="title">
             <btn facets="flat"
                     class="latest-audits-feed--title-btn"
-                    :title="site.name"
-                    :to="`/app/projects/${site.id}`">
-                {{ site.name }}
+                    :title="name"
+                    :to="`/app/projects/${id}`">
+                {{ name }}
             </btn>
         </template>
         <span
                 :title="$t('general-created-at')"
                 class="u-reset caption latest-audits-feed--caption"
                 slot="caption">
-            {{ site.last_audit | format-date }}
+            {{ last_audit | format-date }}
         </span>
         <report-detail :report="report"/>
     </tile>
@@ -29,11 +29,23 @@
     export default {
         components: { ScheduledJobIndicator, ReportDetail, Btn, Tile },
         props: {
-            /** @type {Sites.SiteModel} */
-            site: {
-                type: Object,
+            is_scheduled: {
+                type: Boolean,
+                default: false,
+            },
+            name: {
+                type: String,
                 required: true,
             },
+            id: {
+                type: String,
+                required: true,
+            },
+            last_audit: {
+                type: String,
+                required: true,
+            },
+
             /** @type {Reports.Report} */
             report: {
                 type: Object,

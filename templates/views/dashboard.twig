@@ -3,12 +3,8 @@
  {% block app_content %}
      <div class="dashboard">
          <div class="dashboard--section">
-             <component is="scheduled-sites-provider">
-                 <template v-slot="{ sites, isLoading }">
-                     <component is="sites-list"
-                             :sites="sites"></component>
-                 </template>
-             </component>
+             <component is="sites-list"
+                     :sites={{ scheduledSites | json_encode() }}></component>
          </div>
 
          <div class="dashboard--section">
@@ -16,11 +12,12 @@
              <div class="grid">
                  {% for site in latestSites %}
                      <component is="latest-report-provider"
-                             id="{{ site.id }}">
+                             id="{{ site._id }}">
                          <component is="site-report-tile"
                                  slot-scope="{report}"
                                  :report="report"
-                                 :site='{{ site | json_encode() }}'>
+                                 id="{{ site._id }}"
+                                 v-bind='{{ site | json_encode() }}'>
                          </component>
                      </component>
                  {% endfor %}
@@ -32,10 +29,10 @@
              <div class="grid">
                  {% for site in favoriteSites %}
                      <component is="reports-provider"
-                             id="{{ site.id }}">
+                             id="{{ site._id }}">
                          <component is="site-overview"
                                  slot-scope="{reports}"
-                                 id="{{ site.id }}"
+                                 id="{{ site._id }}"
                                  name="{{ site.name }}"
                                  url="{{ site.url }}"
                                  :is_scheduled="{{ site.is_scheduled }}"

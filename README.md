@@ -156,8 +156,3 @@ Example with quickmetrics
 To use the internal quickmetrics reporter you have to provide the env variable
 `QUICK_METRICS_KEY` with your API access key 
 
-## Data Migrations
-
-In order to use DB migration `migrate-mongoose` is used. Which migration are required for an update is visible in the [CHANGELOG](./CHANGELOG.md) FIle
-
-    node -r esm migrations.js up <NAME_OF_MIGRATION> -d "mongodb+srv://root:XXX"

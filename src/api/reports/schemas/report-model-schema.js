@@ -20,23 +20,19 @@ export const reportModel = {
     __v: joi.any(),
     _id: joi.any(),
 
-    siteId: joi
-        .string()
+    site: joi
+        .object()
         .required(),
+
+    raw_report: joi
+        .object()
+        .optional(),
 
     createdAt: joi.object()
         .allow(null)
         .optional(),
 
     updatedAt: joi.object()
-        .allow(null)
-        .optional(),
-
-    hasRawData: joi
-        .boolean(),
-
-    raw_report_id: joi
-        .string()
         .allow(null)
         .optional(),
 

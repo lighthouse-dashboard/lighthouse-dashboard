@@ -1,6 +1,8 @@
+import { Log } from './Log';
+
 declare namespace Sites {
     export interface SiteModel {
-        id: string;
+        _id: string;
         name: string;
         url: string;
         device: 'desktop' | 'mobile';
@@ -11,6 +13,7 @@ declare namespace Sites {
         thumbnail?: string;
         disabled?: boolean;
         is_public: boolean;
+        audit_errors: Log.AuditError[]
     }
 
     export interface SiteWithReport {

@@ -1,4 +1,4 @@
-import { getFavoriteSites, getLatestSites } from '../../lib/shared/services/site-service';
+import { getFavoriteSites, getLatestSites, getScheduledSites } from '../../lib/shared/services/site-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
 import { getAuthStrategy } from '../utils/get-auth-strategy';
 
@@ -13,6 +13,7 @@ export default {
         const { isAuthenticated } = request.auth;
         const favoriteSites = await getFavoriteSites(100, isAuthenticated);
         const latestSites = (await getLatestSites(4, isAuthenticated));
-        return h.view('views/dashboard.twig', { ...getDefaultParams(request), favoriteSites, latestSites });
+        const scheduledSites = (await getScheduledSites(4, isAuthenticated));
+        return h.view('views/dashboard.twig', { ...getDefaultParams(request), favoriteSites, latestSites, scheduledSites });
     },
 };

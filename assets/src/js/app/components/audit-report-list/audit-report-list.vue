@@ -6,7 +6,7 @@
                 :key="report._id">
             <a class="link"
                     target="_blank"
-                    :href="`/api/reports/report/${ report.raw_report_id }`">
+                    :href="`/api/reports/report/${ report.raw_report.id }`">
                 {{ report.createdAt | format-date }}
             </a>
         </list-item>
@@ -43,7 +43,7 @@
              */
             list() {
                 return this.reports
-                    .filter((report) => !!report.raw_report_id)
+                    .filter((report) => !!report.raw_report)
                     .slice(0, this.max);
             },
         },

@@ -24,7 +24,6 @@ async function getLatestSitesReport() {
             report: {
                 ...report,
                 hasRaw: !!report.raw,
-                raw: null,
             },
         });
     }

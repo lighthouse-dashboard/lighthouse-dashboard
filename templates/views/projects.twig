@@ -9,12 +9,13 @@
         <div class="grid">
             {% for site in sites %}
                 <component is="latest-report-provider"
-                        key="{{ site.id }}"
-                        id="{{ site.id }}">
+                        key="{{ site._id }}"
+                        id="{{ site._id }}">
                     <component
                             slot-scope="{report}"
                             is="site-report-tile"
-                            :site='{{ site | json_encode() }}'
+                            id="{{ site._id }}"
+                            v-bind='{{ site | json_encode() }}'
                             :report="report"></component>
                 </component>
             {% endfor %}
