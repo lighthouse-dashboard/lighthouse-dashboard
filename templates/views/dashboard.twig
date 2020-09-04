@@ -4,7 +4,7 @@
      <div class="dashboard">
          <div class="dashboard--section">
              <component is="sites-list"
-                     :sites={{ scheduledSites | json_encode() }}></component>
+                     :sites='{{ scheduledSites | json_encode() }}'></component>
          </div>
 
          <div class="dashboard--section">
