@@ -1,4 +1,4 @@
-import formatDate from '../filters/format-date';
+import formatDate from '../../../../../src/utils/format-date';
 import getReportValues from './get-report-values';
 
 /**

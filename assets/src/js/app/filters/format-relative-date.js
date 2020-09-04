@@ -1,5 +1,5 @@
 import { formatDistanceToNow, isBefore, subDays } from 'date-fns';
-import formatDate from './format-date';
+import formatDate from '../../../../../src/utils/format-date';
 
 export default function formatRelativeDate(date) {
     if (isBefore(date, subDays(new Date(), 1))) {

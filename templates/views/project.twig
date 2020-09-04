@@ -95,7 +95,7 @@
                                         <a class="link"
                                                 target="_blank"
                                                 href="/api/reports/report/{{ report.raw_report._id }}">
-                                            {{ report.createdAt }}
+                                            {{ report.createdAt | date }}
                                         </a>
                                     </component>
                                 {% endfor %}

@@ -2,6 +2,7 @@
 
 import Hapi from '@hapi/hapi';
 import * as twig from 'twig';
+import formatDate from '../utils/format-date';
 import logger from '../../lib/logger';
 import { report } from '../../lib/reporter';
 import { SERVER_ERROR, SERVER_SIGTERM } from '../../lib/reporter/Events';
@@ -38,6 +39,8 @@ async function start() {
     await loadRoutes(server);
 
     twig.cache(!IS_DEV);
+
+    twig.extendFilter('date', formatDate);
 
     await server.views({
         engines: {

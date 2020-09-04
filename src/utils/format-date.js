@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { dateFormat } from '../../../../../config/formats';
+import { dateFormat } from '../../config/formats';
 
 /**
  * Format date
