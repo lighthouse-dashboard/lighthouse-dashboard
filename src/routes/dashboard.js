@@ -1,4 +1,4 @@
-import { getFavoriteSites, getLatestSites } from '../../lib/core/services/site-service';
+import { getFavoriteSites, getLatestSites } from '../../lib/shared/services/site-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
 import { getAuthStrategy } from '../utils/get-auth-strategy';
 

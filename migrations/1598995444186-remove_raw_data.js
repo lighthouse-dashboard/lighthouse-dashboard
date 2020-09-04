@@ -1,7 +1,7 @@
 /**
  * Make any changes you need to make to the database here
  */
-import { ReportModel } from '../lib/core/models/report-model';
+import { ReportModel } from '../lib/shared/models/report-model';
 
 async function up() {
     await ReportModel.updateMany({

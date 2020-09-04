@@ -1,6 +1,6 @@
 import { MEDIUM } from '../../../config/cache';
-import { getLatestReportBySiteId } from '../../../../lib/core/services/report-service';
-import { getAllSites } from '../../../../lib/core/services/site-service';
+import { getLatestReportBySiteId } from '../../../../lib/shared/services/report-service';
+import { getAllSites } from '../../../../lib/shared/services/site-service';
 import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { siteWithReportList } from '../schemas/site-with-report';
 

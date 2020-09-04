@@ -1,4 +1,4 @@
-import { SiteModel } from '../lib/core/models/sites-model';
+import { SiteModel } from '../lib/shared/models/sites-model';
 
 /**
  * Make any changes you need to make to the database here

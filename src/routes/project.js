@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
-import { getReportsBySiteId } from '../../lib/core/services/report-service';
-import { getSiteConfigById } from '../../lib/core/services/site-service';
+import { getReportsBySiteId } from '../../lib/shared/services/report-service';
+import { getSiteConfigById } from '../../lib/shared/services/site-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
 import { getAuthStrategy } from '../utils/get-auth-strategy';
 

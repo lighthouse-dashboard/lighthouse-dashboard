@@ -1,5 +1,5 @@
 import { MEDIUM } from '../../../config/cache';
-import { getFavoriteSites } from '../../../../lib/core/services/site-service';
+import { getFavoriteSites } from '../../../../lib/shared/services/site-service';
 import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { siteConfigModelList } from '../schemas/site-config-model';
 

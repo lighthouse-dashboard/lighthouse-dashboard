@@ -1,5 +1,5 @@
 import joi from '@hapi/joi';
-import { findSites, getAllSites } from '../../../../lib/core/services/site-service';
+import { findSites, getAllSites } from '../../../../lib/shared/services/site-service';
 import { MEDIUM } from '../../../config/cache';
 import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { reportModelSchema } from '../../reports/schemas/report-model-schema';

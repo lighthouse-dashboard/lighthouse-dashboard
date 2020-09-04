@@ -1,6 +1,6 @@
 import { Boom } from '@hapi/boom';
 import joi from '@hapi/joi';
-import { createHTMLReportById } from '../../../../lib/core/services/report-service';
+import { createHTMLReportById } from '../../../../lib/shared/services/report-service';
 import { LIFE_TIME } from '../../../config/cache';
 import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 

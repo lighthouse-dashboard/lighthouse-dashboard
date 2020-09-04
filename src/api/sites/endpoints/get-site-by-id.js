@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import { MEDIUM } from '../../../config/cache';
-import { getSiteConfigById } from '../../../../lib/core/services/site-service';
+import { getSiteConfigById } from '../../../../lib/shared/services/site-service';
 import { getAuthStrategy } from '../../../utils/get-auth-strategy';
 import { siteConfigModel } from '../schemas/site-config-model';
 
