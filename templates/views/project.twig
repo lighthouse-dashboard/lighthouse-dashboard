@@ -62,6 +62,7 @@
                                     class='project--sidebar-section'>
                                 <component is="site-edit-btn"
                                         class="project--action-btn"
+                                        id="{{ site._id }}"
                                         :site='siteProps.site'></component>
 
                                 {% if not site.is_disabled %}

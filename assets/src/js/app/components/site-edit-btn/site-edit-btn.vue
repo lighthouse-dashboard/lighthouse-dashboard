@@ -1,6 +1,7 @@
 <template>
     <div class="site-edit-btn">
         <site-create-overlay :config="site"
+                :id="id"
                 v-if="site && isEdit"
                 @close="close"
                 @done="toggleEdit"/>
@@ -19,6 +20,10 @@
     export default {
         components: { Btn, SiteCreateOverlay },
         props: {
+            id: {
+                type: String,
+                required: true,
+            },
             site: {
                 type: Object,
                 required: true,

@@ -35,6 +35,11 @@
     export default {
         components: { Notification, Btn, SiteCreateForm, Overlay },
         props: {
+            id: {
+                type: String,
+                required: true,
+            },
+
             /** @type {Sites.SiteModel | null} */
             config: {
                 type: Object,
@@ -76,7 +81,7 @@
 
             onSaveClicked() {
                 this.updateSite({
-                    id: this.siteConfig.id,
+                    id: this.id,
                     delta: {
                         name: this.siteConfig.name,
                         url: this.siteConfig.url,
