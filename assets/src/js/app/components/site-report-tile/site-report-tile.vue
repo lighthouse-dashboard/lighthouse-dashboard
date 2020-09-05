@@ -1,14 +1,16 @@
 <template>
     <tile class="site-report-tile">
-        <scheduled-job-indicator v-if="is_scheduled"/>
         <template
                 slot="title">
-            <btn facets="flat"
-                    class="latest-audits-feed--title-btn"
+            <template v-if="is_disabled">
+                &#x26D4;
+            </template>
+
+            <a class="latest-audits-feed--title-btn link"
                     :title="name"
-                    :to="`/app/projects/${id}`">
+                    :href="`/app/projects/${id}`">
                 {{ name }}
-            </btn>
+            </a>
         </template>
         <span
                 :title="$t('general-created-at')"
@@ -21,13 +23,11 @@
 </template>
 
 <script>
-    import Btn from '../base/btn/btn';
     import ReportDetail from '../report-detail/report-detail';
-    import ScheduledJobIndicator from '../scheduled-job-indicator/scheduled-job-indicator';
     import Tile from '../tile/tile';
 
     export default {
-        components: { ScheduledJobIndicator, ReportDetail, Btn, Tile },
+        components: { ReportDetail, Tile },
         props: {
             is_scheduled: {
                 type: Boolean,
@@ -44,6 +44,10 @@
             last_audit: {
                 type: String,
                 required: true,
+            },
+            is_disabled: {
+                type: Boolean,
+                default: false,
             },
 
             /** @type {Reports.Report} */

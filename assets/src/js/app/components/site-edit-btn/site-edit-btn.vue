@@ -1,8 +1,9 @@
 <template>
     <div class="site-edit-btn">
-        <site-create-overlay :config="site"
-                :id="id"
+        <site-create-overlay
+                :config="site"
                 v-if="site && isEdit"
+                :id="id"
                 @close="close"
                 @done="toggleEdit"/>
 

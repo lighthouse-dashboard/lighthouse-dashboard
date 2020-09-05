@@ -50,14 +50,6 @@
             }
         }
 
-        .project--sidebar-section {
-            margin-bottom: var(--root-spacing);
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
         .project--settings {
             @include mq('<=md') {
                 order: 1;

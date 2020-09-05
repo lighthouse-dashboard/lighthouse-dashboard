@@ -51,19 +51,16 @@
                         {% endif %}
 
                         <component is="tile"
-                                title="Settings"
+                                title="&#x2699; Settings"
                                 class='project--sidebar-section'>
                             <component is="site-config"
-                                    :site='siteProps.site'></component>
+                                    id="{{ site._id }}"
+                                    :site='{{ site | json_encode() }}'></component>
                         </component>
                         {% if isAuthenticated %}
                             <component is="tile"
                                     title="Actions"
                                     class='project--sidebar-section'>
-                                <component is="site-edit-btn"
-                                        class="project--action-btn"
-                                        id="{{ site._id }}"
-                                        :site='siteProps.site'></component>
 
                                 {% if not site.is_disabled %}
                                     <component is="schedule-audit-btn"
@@ -80,28 +77,44 @@
                         {% endif %}
 
                         <component is="tile"
-                                title='Tools'
+                                title='&#x1F9F0; Tools'
                                 class='project--sidebar-section'>
                             <component is="site-actions-list"
                                     url='{{ site.url }}'></component>
                         </component>
 
-                        <component is="tile"
-                                title='HTML Reports'
-                                class='project--sidebar-section'>
-                            <component is="list"
-                                    class="audit-report-list">
-                                {% for report in reports %}
-                                    <component is="list-item">
-                                        <a class="link"
-                                                target="_blank"
-                                                href="/api/reports/report/{{ report.raw_report._id }}">
-                                            {{ report.createdAt | date }}
-                                        </a>
-                                    </component>
-                                {% endfor %}
+                        {% if reports.length > 0 %}
+                            <component is="tile"
+                                    title='&#x1F4C4; HTML Reports'>
+                                <component is="list"
+                                        class="audit-report-list">
+                                    {% for report in reports %}
+                                        <component is="list-item">
+                                            <a class="link"
+                                                    target="_blank"
+                                                    href="/api/reports/report/{{ report.raw_report._id }}">
+                                                {{ report.createdAt | date }}
+                                            </a>
+                                        </component>
+                                    {% endfor %}
+                                </component>
                             </component>
-                        </component>
+                        {% endif %}
+
+
+                        {% if errors.length > 0 %}
+                            <component is="tile"
+                                    title='&#x26A0; Errors'>
+                                <ul class="list">
+                                    {% for error in errors %}
+                                        <li class="list-item">
+                                            <p class="u-reset caption">{{ error.createdAt | date }}</p>
+                                            <p class="u-reset subtitle1">{{ error.message }}</p>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </component>
+                        {% endif %}
                     </div>
                 </div>
             </div>

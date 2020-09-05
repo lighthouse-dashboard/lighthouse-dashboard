@@ -1,5 +1,5 @@
 import Boom from '@hapi/boom';
-import { getErrorsForSite } from '../../lib/shared/services/audit-error-service';
+import { getErrorsForSite } from '../../lib/shared/services/message-service';
 import { getReportsBySiteId } from '../../lib/shared/services/report-service';
 import { getSiteConfigById } from '../../lib/shared/services/site-service';
 import { getDefaultParams } from '../router/utils/get-default-params';
@@ -25,7 +25,7 @@ export default {
             return new Boom.unauthorized('Site is private');
         }
 
-        const errors = await getErrorsForSite(site._id);
+        const errors = await getErrorsForSite(site._id, 3);
 
         const reports = await getReportsBySiteId(id, 50);
         return h.view('views/project.twig', { ...getDefaultParams(request), site, reports, errors });

@@ -156,3 +156,6 @@ Example with quickmetrics
 To use the internal quickmetrics reporter you have to provide the env variable
 `QUICK_METRICS_KEY` with your API access key 
 
+
+## Icon
+Used UTF8 Icons from [here](https://unicode.org/emoji/charts/full-emoji-list.html)

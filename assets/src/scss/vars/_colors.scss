@@ -42,10 +42,6 @@
     --color--input-error-background: #ffb5b5;
     --color--input-disabled-background: var(--color-mono-light-gray);
 
-    // Links
-    --color--link-text-color: var(--color--medium-emphasis);
-    --color--link-focus-text-color: var(--color--high-emphasis);
-
     // Site Overview
     --color--site-overview-background: var(--color--tile-background);
 
@@ -66,10 +62,10 @@
     --color--list--item-even: rgba(58, 80, 107, 0.1);
 
     // CHARTS
-    --color--chart-color-1: var(--color--secondary);
-    --color--chart-color-2: var(--color--primary);
+    --color--chart-color-1: var(--color--primary);
+    --color--chart-color-2: var(--color--secondary);
     --color--chart-color-3: #dd4e7b;
     --color--chart-color-4: rgba(67, 97, 238, 0.8);
     --color--chart-color-5: #59abaa;
-    --color--chart-color-6: rgba(197, 234, 245, 0.8);
+    --color--chart-color-6: rgba(61, 194, 130, 0.91);
 }

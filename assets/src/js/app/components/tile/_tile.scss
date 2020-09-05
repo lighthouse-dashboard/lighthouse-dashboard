@@ -17,13 +17,15 @@
 
         .tile--title {
             display: flex;
+            align-items: center;
             justify-content: space-between;
             margin-bottom: calc(var(--root-spacing) * 1);
+            margin-right: calc(var(--root-spacing) * 2);;
         }
 
         .tile--content {
             display: block;
-            padding: var(--root-spacing);
+            //padding: var(--root-spacing);
         }
 
         .tile--caption {

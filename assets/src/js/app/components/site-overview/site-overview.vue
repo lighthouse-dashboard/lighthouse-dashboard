@@ -1,14 +1,15 @@
 <template>
     <tile
             class="site-overview">
-        <scheduled-job-indicator v-if="is_scheduled"/>
         <div class="site-overview--title"
                 slot="title">
-            <btn :to="`/app/projects/${id}`"
-                    class="subtitle1"
-                    facets="flat">
+            <template v-if="is_disabled">
+                &#x26D4;
+            </template>
+            <a :href="`/app/projects/${id}`"
+                    class="link subtitle1">
                 {{ name }}
-            </btn>
+            </a>
         </div>
 
         <span :title="$t('general.created-at')"
@@ -34,16 +35,12 @@
     import bemMixin from '../../mixins/bem-mixin';
     import inViewMixin from '../../mixins/in-view-mixin';
     import reportsToLineChart from '../../utils/reports-to-line-chart';
-    import Btn from '../base/btn/btn';
     import LineChart from '../charts/line-chart/line-chart';
-    import ScheduledJobIndicator from '../scheduled-job-indicator/scheduled-job-indicator';
     import Tile from '../tile/tile';
 
     export default {
         components: {
-            ScheduledJobIndicator,
             Tile,
-            Btn,
             LineChart,
         },
 
@@ -64,6 +61,11 @@
             },
 
             is_scheduled: {
+                type: Boolean,
+                default: false,
+            },
+
+            is_disabled: {
                 type: Boolean,
                 default: false,
             },

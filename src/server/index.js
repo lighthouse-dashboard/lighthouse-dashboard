@@ -38,7 +38,7 @@ async function start() {
     await loadPlugins(server);
     await loadRoutes(server);
 
-    twig.cache(!IS_DEV);
+    twig.cache(false);
 
     twig.extendFilter('date', formatDate);
 

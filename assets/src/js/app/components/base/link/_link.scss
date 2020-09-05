@@ -1,6 +1,6 @@
 .link {
     // Vars
-    --link--color: var(--color--link-text-color);
+    --link--color: var(--color--primary);
     --link--focus-color: var(--color--link-focus-text-color);
     --link--line-width: 2px;
 
@@ -11,11 +11,11 @@
         & {
             color: var(--link--color);
             position: relative;
-            text-decoration: underline;
             font-weight: 700;
 
             &:hover {
                 color: var(--link--focus-color);
+                text-decoration: underline;
             }
         }
     }
