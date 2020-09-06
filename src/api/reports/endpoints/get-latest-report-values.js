@@ -14,7 +14,7 @@ async function getLatestReportValues({ params }) {
 
     const report = await getLatestReportBySiteId(siteId);
     if (!report) {
-        return Boom.notFound();
+        return [];
     }
     return report;
 }
