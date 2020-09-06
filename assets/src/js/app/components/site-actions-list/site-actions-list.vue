@@ -1,6 +1,6 @@
 <template>
-    <list class="site-actions-list">
-        <list-item class="site-actions-list--list-item"
+    <ul class="site-actions-list list">
+        <li class="list-item"
                 v-for="entry in menuEntries"
                 :key="entry.name">
             <a target="_blank"
@@ -8,17 +8,14 @@
                     :href="entry.link">
                 {{ entry.name }}
             </a>
-        </list-item>
-    </list>
+        </li>
+    </ul>
 </template>
 
 <script>
     import { customProjectMenuEntries } from '../../../../../../config/dashboard';
-    import List from '../base/list/list';
-    import ListItem from '../base/list/list-item/list-item';
 
     export default {
-        components: { ListItem, List },
         props: {
             url: {
                 type: String,

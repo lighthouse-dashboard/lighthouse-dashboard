@@ -1,26 +1,26 @@
 <template>
     <tile class="sites-list"
+            icon="rocket"
             :title="title"
             v-if="sites && sites.length > 0">
-        <list>
-            <list-item v-for="site in allSites"
+        <ul class="list">
+            <li class="list-item"
+                    v-for="site in allSites"
                     :key="site.id">
-                <router-link class="link"
-                        :to="{name: 'project.detail', params: {id: site.id}}">
+                <a class="link"
+                        :href="{name: 'project.detail', params: {id: site._id}}">
                     {{ site.name }}
-                </router-link>
-            </list-item>
-        </list>
+                </a>
+            </li>
+        </ul>
     </tile>
 </template>
 
 <script>
-    import List from '../base/list/list';
-    import ListItem from '../base/list/list-item/list-item';
     import Tile from '../tile/tile';
 
     export default {
-        components: { Tile, ListItem, List },
+        components: { Tile },
         props: {
             /**
              * @type {Sites.SiteModel[]}

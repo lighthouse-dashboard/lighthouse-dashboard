@@ -1,9 +1,17 @@
 <template>
     <div class="tile">
         <div class="tile--title">
-            <slot name="title">
-                <p class="subtitle1">{{ title }}</p>
-            </slot>
+            <div class="tile--title-left-wrapper">
+                <div class="tile--icon">
+                    <unicon
+                            :name="icon"
+                            v-if="icon"
+                    />
+                </div>
+                <slot name="title">
+                    <p class="subtitle1">{{ title }}</p>
+                </slot>
+            </div>
             <slot name="caption">
                 <span class="u-reset caption tile--caption">{{ caption }}</span></slot>
         </div>
@@ -16,6 +24,10 @@
 <script>
     export default {
         props: {
+            icon: {
+                type: String,
+                default: null,
+            },
             title: {
                 type: String,
                 default: '',

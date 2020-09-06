@@ -26,6 +26,17 @@
 
             @include Body1;
             position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .notification--icon {
+            margin-right: var(--root-spacing);
+        }
+
+        .notification--text {
+            margin-top: 2px;
         }
     }
 
@@ -34,6 +45,7 @@
         border-color: var(--color--signal-success);
         background-color: rgba(var(--color--signal-success-rgb), 0.1);
         color: var(--color--signal-success);
+        --uni-color-primary: var(--color--signal-success);
 
     }
 
@@ -41,12 +53,14 @@
         border-color: var(--color--signal-warning);
         background-color: rgba(var(--color--signal-warning-rgb), 0.1);
         color: var(--color--signal-warning);
+        --uni-color-primary: var(--color--signal-warning);
     }
 
     &.notification__error {
         border-color: var(--color--signal-error);
         background-color: rgba(var(--color--signal-error-rgb), 0.1);
         color: var(--color--signal-error);
+        --uni-color-primary: var(--color--signal-error);
     }
 
     // States

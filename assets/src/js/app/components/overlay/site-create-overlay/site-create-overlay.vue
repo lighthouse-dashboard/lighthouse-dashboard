@@ -88,6 +88,7 @@
                         is_favorite: this.siteConfig.is_favorite,
                         is_disabled: this.siteConfig.is_disabled,
                         is_public: this.siteConfig.is_public,
+                        device: this.siteConfig.device
                     },
                 })
                     .then(() => {

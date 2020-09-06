@@ -1,10 +1,8 @@
 <template>
-    <tile class="site-report-tile">
+    <tile class="site-report-tile"
+            :icon="icon">
         <template
                 slot="title">
-            <template v-if="is_disabled">
-                &#x26D4;
-            </template>
 
             <a class="latest-audits-feed--title-btn link"
                     :title="name"
@@ -33,6 +31,10 @@
                 type: Boolean,
                 default: false,
             },
+            is_favorite: {
+                type: Boolean,
+                default: false,
+            },
             name: {
                 type: String,
                 required: true,
@@ -43,7 +45,7 @@
             },
             last_audit: {
                 type: String,
-                required: true,
+                default: null,
             },
             is_disabled: {
                 type: Boolean,
@@ -56,5 +58,19 @@
                 default: null,
             },
         },
+        computed: {
+            icon() {
+                switch (true) {
+                    case this.is_disabled:
+                        return 'ban';
+                    case this.is_scheduled:
+                        return 'search';
+                    case this.is_favorite:
+                        return 'heart';
+                    default:
+                        return null;
+                }
+            },
+        }
     };
 </script>

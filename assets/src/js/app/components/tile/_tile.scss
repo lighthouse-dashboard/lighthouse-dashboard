@@ -20,7 +20,22 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: calc(var(--root-spacing) * 1);
-            margin-right: calc(var(--root-spacing) * 2);;
+            margin-right: calc(var(--root-spacing) * 2);
+        }
+
+        .tile--icon {
+            margin-right: calc(var(--root-spacing) * 1);
+
+            &:empty {
+                width: 24px;
+            }
+        }
+
+        .tile--title-left-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: start;
+            margin-right: calc(var(--root-spacing) * 1);
         }
 
         .tile--content {

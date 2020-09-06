@@ -1,16 +1,12 @@
 <template>
     <tile
+            :icon="icon"
             class="site-overview">
-        <div class="site-overview--title"
+        <a class="link subtitle1"
+                :href="`/app/projects/${id}`"
                 slot="title">
-            <template v-if="is_disabled">
-                &#x26D4;
-            </template>
-            <a :href="`/app/projects/${id}`"
-                    class="link subtitle1">
-                {{ name }}
-            </a>
-        </div>
+            {{ name }}
+        </a>
 
         <span :title="$t('general.created-at')"
                 class="u-reset caption"
@@ -60,6 +56,11 @@
                 required: true,
             },
 
+            is_favorite: {
+                type: Boolean,
+                default: false,
+            },
+
             is_scheduled: {
                 type: Boolean,
                 default: false,
@@ -86,6 +87,18 @@
             };
         },
         computed: {
+            icon() {
+                switch (true) {
+                    case this.is_disabled:
+                        return 'ban';
+                    case this.is_scheduled:
+                        return 'search';
+                    case this.is_favorite:
+                        return 'heart';
+                    default:
+                        return null;
+                }
+            },
             rootClasses() {
                 return [
                     this.createIfFacet(this.scheduled_jobs, 'has-scheduled-jobs'),

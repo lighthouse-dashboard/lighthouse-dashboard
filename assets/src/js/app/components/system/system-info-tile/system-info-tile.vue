@@ -1,22 +1,21 @@
 <template>
-    <tile title="System">
-        <list>
-            <list-item>
-                <span class="u-reset">
+    <tile title="System" icon="cog">
+        <ul class="list">
+            <li class="list-item">
+                <p class="u-reset subtitle1">
                     {{ $t('system.version-label') }}
-                </span>
-                <span class="u-reset">v{{ version }}</span>
-            </list-item>
-        </list>
+                </p>
+                <p class="u-reset caption">v{{ version }}</p>
+            </li>
+        </ul>
     </tile>
 </template>
 
 <script>
-    import ListItem from '../../base/list/list-item/list-item';
     import Tile from '../../tile/tile';
 
     export default {
-        components: { ListItem, Tile },
+        components: { Tile },
         props: {
             version: {
                 type: String,

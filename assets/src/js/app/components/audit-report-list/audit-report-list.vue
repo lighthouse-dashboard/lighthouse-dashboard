@@ -1,24 +1,23 @@
 <template>
-    <list class="audit-report-list">
-        <span class="caption"
-                v-if="list.length === 0">{{ $t('general.empty-list') }}</span>
-        <list-item v-for="report in list"
+    <ul class="audit-report-list list">
+        <li class="caption list-item"
+                v-if="list.length === 0">{{ $t('general.empty-list') }}
+        </li>
+        <li class="list-item"
+                v-for="report in list"
                 :key="report._id">
             <a class="link"
                     target="_blank"
                     :href="`/api/reports/report/${ report.raw_report.id }`">
                 {{ report.createdAt | format-date }}
             </a>
-        </list-item>
-    </list>
+        </li>
+    </ul>
 </template>
 
 <script>
-    import List from '../base/list/list';
-    import ListItem from '../base/list/list-item/list-item';
 
     export default {
-        components: { ListItem, List },
         props: {
             isLoading: {
                 type: Boolean,

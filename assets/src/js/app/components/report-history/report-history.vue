@@ -1,5 +1,6 @@
 <template>
-    <tile :title="$t('history.title')">
+    <tile :title="$t('history.title')"
+            icon="history">
         <loading-indicator v-if="isLoading"/>
         <line-chart :data-sets="lineChartData.datasets"
                 :labels="lineChartData.labels"

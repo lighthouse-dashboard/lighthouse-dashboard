@@ -6,8 +6,7 @@
     // Module
     & {
         & {
-            margin: var(--root-spacing) 0;
-            padding: var(--root-spacing) var(--root-spacing);
+            padding: calc(var(--root-spacing) * 2) var(--root-spacing);
 
             &:nth-child(even) {
                 background-color: var(--color--list--item-even);

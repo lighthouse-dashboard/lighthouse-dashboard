@@ -34,6 +34,7 @@ export default {
                 url: joi.string(),
                 is_disabled: joi.boolean(),
                 is_public: joi.boolean(),
+                device: joi.string(),
             }).label('UpdateSitePayload'),
         },
     },

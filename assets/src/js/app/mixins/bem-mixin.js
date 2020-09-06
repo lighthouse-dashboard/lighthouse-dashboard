@@ -5,17 +5,21 @@ export default function bemMixin(bemRootSelector) {
                 type: Array,
                 default: () => [],
             },
+            facet: {
+                type: String,
+                default: null,
+            },
         },
 
         computed: {
             rootFacets() {
-                return this.mapFacets(this.facets);
+                return this.mapFacets([this.facet, ...this.facets]);
             },
         },
 
         methods: {
             mapFacets(facets) {
-                return facets.map(f => this.createFacet(f));
+                return facets.filter(f => !!f).map(f => this.createFacet(f));
             },
 
             createFacet(facetName) {

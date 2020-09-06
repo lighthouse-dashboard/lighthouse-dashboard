@@ -1,20 +1,21 @@
 <template>
     <tile :title="$t('system.worker-tile-title')"
+            icon="rocket"
             class="system--section">
-        <div class="system--row">
-            <span class="u-reset">
-                {{ $t('general.last-run') }}
-            </span>
-            <span class="u-reset">{{ workerLastRunDate }}</span>
-        </div>
-
-        <div class="system--row">
-            <span class="u-reset">
-                {{ $t('system.worker-is-running') }}
-            </span>
-            <span class="u-reset"
-                    v-if="info">{{ info.is_running }}</span>
-        </div>
+        <ul class="list">
+            <li class="list-item">
+                <p class="u-reset subtitle1">
+                    {{ $t('general.last-run') }}
+                </p>
+                <p class="u-reset caption">{{ workerLastRunDate }}</p>
+            </li>
+            <li class="list-item">
+                <p class="u-reset subtitle1">
+                    {{ $t('system.worker-is-running') }}
+                </p>
+                <p class="u-reset caption">{{ info.is_running }}</p>
+            </li>
+        </ul>
     </tile>
 </template>
 
@@ -23,7 +24,7 @@
     import Tile from '../../tile/tile';
 
     export default {
-        components: {   Tile },
+        components: { Tile },
         props: {
             /**
              * @type {AuditWorkerInfoModel}

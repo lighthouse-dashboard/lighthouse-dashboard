@@ -15,6 +15,9 @@
                             slot-scope="{report}"
                             is="site-report-tile"
                             id="{{ site._id }}"
+                            :is_favorite="{{ site.is_favorite }}"
+                            :is_favorite="{{ site.is_scheduled }}"
+                            :is_favorite="{{ site.is_disabled }}"
                             v-bind='{{ site | json_encode() }}'
                             :report="report"></component>
                 </component>

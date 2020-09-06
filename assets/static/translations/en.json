@@ -29,7 +29,7 @@
     "site.site-scheduled-banner-text": "Audits are scheduled for this project",
     "site.schedule-new-audit-button": "New audit",
     "site.audit-scheduled-notification-text": "New audit scheduled",
-    "site.audit-already-scheduled": "Audits already scheduled",
+    "site.audit-already-scheduled": "Audit scheduled",
     "site.name-field": "Name",
     "site.url-field": "URL",
     "site.devices-desktop": "Desktop",

@@ -1,13 +1,11 @@
-.site-config {
+.list {
     // Vars
 
     // Support
 
     // Module
     & {
-        .site-config--list {
-            display: block;
-        }
+        margin: var(--root-spacing) 0;
     }
 
     // Facets

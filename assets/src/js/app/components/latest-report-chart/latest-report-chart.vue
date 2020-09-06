@@ -1,26 +1,17 @@
 <template>
-    <tile :title="$t('latest-report.title')"
-            class="project--last-report-radar">
-        <loading-indicator v-if="isLoading"/>
-        <bar-chart :series="latestReportRadarData.series"
-                :labels="latestReportRadarData.labels"
-                v-if="latestReportRadarData"/>
-    </tile>
+    <bar-chart :series="latestReportRadarData.series"
+            :labels="latestReportRadarData.labels"
+            v-if="latestReportRadarData"/>
 </template>
 
 <script>
     import reportToBarChart from '../../utils/report-to-bar-chart';
-    import LoadingIndicator from '../base/loading-indicator/loading-indicator';
     import BarChart from '../charts/bar-chart/bar-chart';
-    import Tile from '../tile/tile';
 
     export default {
-        components: { BarChart, LoadingIndicator, Tile },
+        components: { BarChart },
         props: {
-            isLoading: {
-                type: Boolean,
-                default: false,
-            },
+
 
             report: {
                 type: Object,
