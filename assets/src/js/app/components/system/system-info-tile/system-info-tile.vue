@@ -2,10 +2,10 @@
     <tile title="System" icon="cog">
         <ul class="list">
             <li class="list-item">
-                <p class="u-reset subtitle1">
+                <p class="u-reset  caption">
                     {{ $t('system.version-label') }}
                 </p>
-                <p class="u-reset caption">v{{ version }}</p>
+                <p class="u-reset subtitle1">v{{ version }}</p>
             </li>
         </ul>
     </tile>
