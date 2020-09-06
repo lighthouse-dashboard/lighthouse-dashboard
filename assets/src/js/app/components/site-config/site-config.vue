@@ -1,5 +1,12 @@
 <template>
     <div class="site-config">
+        <notification facet="warning"
+                :facets="['minimal']"
+                class="list-item"
+                v-if="site.is_scheduled && !site.is_disabled">
+            Audits are scheduled for this project
+        </notification>
+
         <ul class="list">
             <li class="list-item">
                 <a class="u-reset subtitle1 link"
@@ -8,13 +15,7 @@
                 </a>
             </li>
 
-            <li class="list-item"
-                    v-if="site.is_scheduled && !site.is_disabled">
-                <p class="u-reset subtitle1">
-                    <unicon name="ban"/>
-                    Audits are scheduled for this project
-                </p>
-            </li>
+
             <li class="list-item"
                     v-if="site.is_disabled">
                 <p class="u-reset caption">
@@ -77,10 +78,11 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import Notification from '../notification/notification';
     import SiteEditBtn from '../site-edit-btn/site-edit-btn';
 
     export default {
-        components: { SiteEditBtn },
+        components: { Notification, SiteEditBtn },
         props: {
             id: {
                 type: String,

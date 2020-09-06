@@ -41,12 +41,17 @@
     }
 
     // Facets
+
+    &.notification__minimal {
+       padding: 0;
+        border: none;
+    }
+
     &.notification__success {
         border-color: var(--color--signal-success);
         background-color: rgba(var(--color--signal-success-rgb), 0.1);
         color: var(--color--signal-success);
         --uni-color-primary: var(--color--signal-success);
-
     }
 
     &.notification__warning {
