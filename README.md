@@ -115,47 +115,7 @@ ALLOW_ANONYMOUS_VIEW |`false` | `boolean` | With this flag, you can allow not au
 MAX_REPORTS_AGE |`false` | `number` | The amount of days a Raw report should be stored. Depends on the amount of storage you have available| `7`
 ENABLE_STORYBOOK_VIEW |`false` | `boolean` | Whether to expose the storybook build in `http://localhost:4000/storybook` or not| `true`
 
-## Reporters
-There is functionallity built in to use 3rd party reporters like [quickmetrics.io](https://quickmetrics.io/).
-To implement a new one simply add a new entry via `register` in the `/reporters/index.js` file.
-You have to pass a function as a parameter in the `register` call. The functions 
-accepts two parameters. An event name and some data. That function will get called 
-in the code. 
-
-Example of a reporter registration
-
-    register((event, data) => {
-        track(event, data);
-    });
-
-
-If you want to react to specific events, you can add logic inside that function body.
-Find all events [here](/lib/reporter/Events.js).
-
-    register((event, data) => {
-        if(event === Event.SERVER_ERROR){
-            track(event, data);
-        }
-    });
-
-Built in reporters [here](/lib/reporter/integrations)
-
-To use a built in reporter, import the desired reporter in the `/reporters/index.js` file, and 
-pass the function to the `register` method.
-
-Example with quickmetrics
-
-    import { register } from '../lib/reporter';
-    import qm from '../lib/reporter/integrations/quickmetrics';
-    
-    if (process.env.QUICK_METRICS_KEY) {
-        register(qm(process.env.QUICK_METRICS_KEY));
-    }
-
-### Quickmetrics
-To use the internal quickmetrics reporter you have to provide the env variable
-`QUICK_METRICS_KEY` with your API access key 
-
+## [Reporters](lib/reporter/README.md)
 
 ## Icon
 Used UTF8 Icons from [here](https://unicode.org/emoji/charts/full-emoji-list.html)
