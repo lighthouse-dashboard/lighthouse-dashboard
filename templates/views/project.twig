@@ -22,7 +22,16 @@
                                 </component>
                             {% endif %}
 
-                            {% if isAuthenticated %}
+                            <component is="tile"
+                                    icon="cog"
+                                    title="Settings"
+                                    class='project--sidebar-section'>
+                                <component is="site-config"
+                                        id="{{ site._id }}"
+                                        :site='{{ site | json_encode() }}'></component>
+                            </component>
+
+                             {% if isAuthenticated %}
                                 <component is="tile"
                                         icon="channel"
                                         title="Actions"
@@ -40,14 +49,6 @@
                                     </component>
                                 </component>
                             {% endif %}
-                            <component is="tile"
-                                    icon="cog"
-                                    title="Settings"
-                                    class='project--sidebar-section'>
-                                <component is="site-config"
-                                        id="{{ site._id }}"
-                                        :site='{{ site | json_encode() }}'></component>
-                            </component>
                         </div>
                     </div>
 
