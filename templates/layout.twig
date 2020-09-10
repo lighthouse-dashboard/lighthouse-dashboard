@@ -1,14 +1,12 @@
 {% extends 'skeleton.twig' %}
 
 {% block content %}
-    <component is="app-layout">
-        <template slot="navigation">
-            {% include 'components/header/header.twig' %}
-        </template>
+    <div class="app-layout">
+        {% include 'components/header/header.twig' %}
 
-        <template slot="content">
+        <div class="app-layout--content">
             {% block app_content %}
             {% endblock %}
-        </template>
-    </component>
+        </div>
+    </div>
 {% endblock %}

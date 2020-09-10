@@ -1,7 +1,7 @@
 {% extends '../layout.twig' %}
 
  {% block app_content %}
-     <div class="dashboard">
+     <div class="dashboard container">
          <div class="dashboard--section">
              <component is="sites-list"
                      :sites='{{ scheduledSites | json_encode() }}'></component>

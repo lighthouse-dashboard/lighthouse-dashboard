@@ -48,7 +48,7 @@ html {
     // Prevent font scaling in landscape while allowing user zoom (Safari on iPhone)
     // @link https://stackoverflow.com/q/2710764/1602864
     -webkit-text-size-adjust: 100%;
-    background-color: var(--color-body);
+    background-color: var(--color--background-color);
 }
 
 
@@ -62,7 +62,7 @@ body {
     cursor: auto;
 
     // Remove default background colors in some browsers
-    background-color: var(--color-body);
+    background-color: var(--color--background-color);
     color: var(--color--text-color);
 
     // Type legibility improvements where applicable - Use with care

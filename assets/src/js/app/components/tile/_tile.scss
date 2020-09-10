@@ -8,6 +8,8 @@
     // Module
     & {
         & {
+            display: flex;
+            flex-direction: column;
             border-radius: var(--tile--border-radius);
             background-color: var(--tile--background-color);
             box-shadow: var(--root-shadow--1);
@@ -19,7 +21,7 @@
             align-items: center;
             justify-content: space-between;
             padding: var(--tile--root-padding);
-            border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+            border-bottom: solid 1px rgba(0, 0, 0, 0.1);
         }
 
         .tile--icon {
@@ -33,13 +35,14 @@
         .tile--title-left-wrapper {
             display: flex;
             flex-direction: row;
-            align-items: start;
+            align-items: center;
             margin-right: calc(var(--root-spacing) * 1);
         }
 
         .tile--content {
             display: block;
             padding: var(--tile--root-padding);
+            height: 100%;
             //padding: var(--root-spacing);
         }
 
@@ -50,6 +53,14 @@
     }
 
     // Facets
+    &.tile__centered {
+        .tile--content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
 
     // States
 }

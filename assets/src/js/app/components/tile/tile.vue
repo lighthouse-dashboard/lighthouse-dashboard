@@ -1,12 +1,12 @@
 <template>
-    <div class="tile">
+    <div class="tile"
+            :class="rootFacets">
         <div class="tile--title">
             <div class="tile--title-left-wrapper">
                 <div class="tile--icon">
                     <unicon
                             :name="icon"
-                            v-if="icon"
-                    />
+                            v-if="icon"/>
                 </div>
                 <slot name="title">
                     <p class="subtitle1">{{ title }}</p>
@@ -22,7 +22,10 @@
 </template>
 
 <script>
+    import bemMixin from '../../mixins/bem-mixin';
+
     export default {
+        mixins: [bemMixin('tile')],
         props: {
             icon: {
                 type: String,

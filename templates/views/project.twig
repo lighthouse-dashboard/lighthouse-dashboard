@@ -1,138 +1,144 @@
 {% extends '../layout.twig' %}
 
 {% block app_content %}
-    <component is="site-provider"
-            id="{{ site._id }}"
-            :initial-state='{{ site | json_encode() }}'>
-        <div class="project"
-                slot-scope="siteProps">
-            <h4 class='h4 project--title'>{{ site.name }}</h4>
+    <div class="container container__wide">
+        <component is="site-provider"
+                id="{{ site._id }}"
+                :initial-state='{{ site | json_encode() }}'>
+            <div class="project"
+                    slot-scope="siteProps">
+                <h4 class='h4 project--title'>{{ site.name }}</h4>
 
-            <div class='project--content'>
-                <div class='project--insights'>
-                    <div class='project--overview'>
-                        <component is="tile"
-                                title="Latest Report"
-                                icon="graph-bar"
-                                class="project--last-report-radar">
-                            {% if reports.length > 0 %}
-                                <component is="latest-report-chart"
-                                        :reports='{{ reports | json_encode() }}'>
-                                </component>
-                            {% else %}
-                                <component is="notification"
-                                        facet="warning">
-                                    No data
+                <div class="project--content">
+                    <div>
+                        <div class="project--side-bar">
+                            {% if site.thumbnail %}
+                                <component is="tile"
+                                        icon="image"
+                                        :facets="['centered']"
+                                        title="Thumbnail">
+                                    <img src="{{ site.thumbnail }}"
+                                            alt="{{ site.name }}">
                                 </component>
                             {% endif %}
-                        </component>
 
-                        <component is="tile"
-                                icon="tachometer-fast"
-                                title="Average"
-                                class="project--average">
-                            {% if reports.length > 0 %}
-                                <component is="site-average"
-                                        :reports='{{ reports | json_encode() }}'>
-                                </component>
-                            {% else %}
-                                <component is="notification"
-                                        facet="warning">
-                                    No data
+                            {% if isAuthenticated %}
+                                <component is="tile"
+                                        icon="channel"
+                                        title="Actions"
+                                        class='project--sidebar-section'>
+                                    {% if not site.is_disabled %}
+                                        <component is="schedule-audit-btn"
+                                                id="{{ site._id }}"
+                                                class="project--action-btn"
+                                                :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
+                                    {% endif %}
+
+                                    <component is="site-delete-btn"
+                                            class="project--action-btn"
+                                            id="{{ site._id }}">
+                                    </component>
                                 </component>
                             {% endif %}
-                        </component>
+                            <component is="tile"
+                                    icon="cog"
+                                    title="Settings"
+                                    class='project--sidebar-section'>
+                                <component is="site-config"
+                                        id="{{ site._id }}"
+                                        :site='{{ site | json_encode() }}'></component>
+                            </component>
+                        </div>
                     </div>
 
-                    <component
-                            is="report-history"
-                            class='project--history'
-                            :reports='{{ reports | json_encode() }}'>
-                    </component>
-                </div>
+                    <div>
+                        <div class="project--main-content">
+                            <component is="tile"
+                                    :facets="['centered']"
+                                    title="Latest Report"
+                                    icon="graph-bar"
+                                    class="project--last-report-radar">
+                                {% if reports.length > 0 %}
+                                    <component is="latest-report-chart"
+                                            :reports='{{ reports | json_encode() }}'>
+                                    </component>
+                                {% else %}
+                                    <component is="notification"
+                                            facet="warning">
+                                        No data
+                                    </component>
+                                {% endif %}
+                            </component>
 
-                <div class='project--sidebar'>
-                    {% if site.thumbnail %}
-                        <component is="tile"
-                                icon="image"
-                                title="Thumbnail"
-                                class='project--sidebar-section'>
-                            <img src="{{ site.thumbnail }}"
-                                    alt="{{ site.name }}">
-                        </component>
-                    {% endif %}
+                            <component is="tile"
+                                    icon="tachometer-fast"
+                                    title="Average"
+                                    class="project--average">
+                                {% if reports.length > 0 %}
+                                    <component is="site-average"
+                                            :reports='{{ reports | json_encode() }}'>
+                                    </component>
+                                {% else %}
+                                    <component is="notification"
+                                            facet="warning">
+                                        No data
+                                    </component>
+                                {% endif %}
+                            </component>
+                            <component
+                                    is="report-history"
+                                    class='project--history'
+                                    :reports='{{ reports | json_encode() }}'>
+                            </component>
+                        </div>
+                    </div>
 
-                    <component is="tile"
-                            icon="cog"
-                            title="Settings"
-                            class='project--sidebar-section'>
-                        <component is="site-config"
-                                id="{{ site._id }}"
-                                :site='{{ site | json_encode() }}'></component>
-                    </component>
-                    {% if isAuthenticated %}
-                        <component is="tile"
-                                icon="channel"
-                                title="Actions"
-                                class='project--sidebar-section'>
-
-                            {% if not site.is_disabled %}
-                                <component is="schedule-audit-btn"
-                                        id="{{ site._id }}"
-                                        class="project--action-btn"
-                                        :has-scheduled-jobs="siteProps.site.is_scheduled"></component>
+                    <div>
+                        <div class="project--side-bar">
+                            <component is="tile"
+                                    icon="browser"
+                                    title='Tools'
+                                    class='project--sidebar-section'>
+                                <component is="site-actions-list"
+                                        url='{{ site.url }}'></component>
+                            </component>
+                            {% if reports.length > 0 %}
+                                <component is="tile"
+                                        icon="archive"
+                                        title='HTML Reports'>
+                                    <ul class="list">
+                                        {% for report in reports %}
+                                            <li class="list-item">
+                                                <a class="link"
+                                                        target="_blank"
+                                                        href="/api/reports/report/{{ report.raw_report._id }}">
+                                                    {{ report.createdAt | date }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </component>
                             {% endif %}
 
-                            <component is="site-delete-btn"
-                                    class="project--action-btn"
-                                    id="{{ site._id }}">
-                            </component>
-                        </component>
-                    {% endif %}
 
-                    <component is="tile"
-                            icon="browser"
-                            title='Tools'
-                            class='project--sidebar-section'>
-                        <component is="site-actions-list"
-                                url='{{ site.url }}'></component>
-                    </component>
-
-                    {% if reports.length > 0 %}
-                        <component is="tile"
-                                icon="archive"
-                                title='HTML Reports'>
-                            <ul class="list">
-                                {% for report in reports %}
-                                    <li class="list-item">
-                                        <a class="link"
-                                                target="_blank"
-                                                href="/api/reports/report/{{ report.raw_report._id }}">
-                                            {{ report.createdAt | date }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </component>
-                    {% endif %}
-
-
-                    {% if errors.length > 0 %}
-                        <component is="tile"
-                                icon="exclamation-triangle"
-                                title='Errors'>
-                            <ul class="list">
-                                {% for error in errors %}
-                                    <li class="list-item">
-                                        <p class="u-reset caption">{{ error.createdAt | date }}</p>
-                                        <p class="u-reset subtitle1">{{ error.message }}</p>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </component>
-                    {% endif %}
+                            {% if errors.length > 0 %}
+                                <component is="tile"
+                                        icon="exclamation-triangle"
+                                        title='Errors'>
+                                    <ul class="list">
+                                        {% for error in errors %}
+                                            <li class="list-item">
+                                                <p class="u-reset caption">{{ error.createdAt | date }}</p>
+                                                <p class="u-reset subtitle1">{{ error.message }}</p>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </component>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </component>
+        </component>
+    </div>
 {% endblock %}

@@ -1,11 +1,9 @@
-.app-layout.app-layout {
+.app-layout {
     // Vars
     --app-layout--header-height: var(--root-sites--header-height);
     --app-layout--content-background: var(--color--background-color);
     --app-layout--edge-gutter: calc(var(--root-spacing) * 2);
     --app-layout--edge-gutter-md: calc(var(--root-spacing) * 4);
-
-    // Support
     // Support
 
     // Module
@@ -21,26 +19,12 @@
         }
 
         .app-layout--content {
-            max-width: 1440px;
-            margin: 0 auto;
+
             padding: var(--app-layout--header-height) var(--app-layout--edge-gutter);
         }
     }
 
     // Facets
-    &.app-layout__logged-in {
-        & {
-            //grid-template-areas: 'sidenav content';
-            //grid-template-columns: 2fr 10fr;
-            //
-            //@include mq('<=lg') {
-            //    display: flex;
-            //    width: 100%;
-            //    grid-template-areas: '. content';
-            //    grid-template-columns: 12fr;
-            //}
-        }
-    }
 
     // States
 }

@@ -1,0 +1,20 @@
+.container {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    // Facets
+
+    &.container__wide {
+        max-width: 1660px;
+        margin: 0 auto;
+    }
+
+    // States
+}
