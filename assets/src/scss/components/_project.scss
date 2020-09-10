@@ -14,6 +14,15 @@
             grid-template-areas: 'left main right';
             grid-template-columns: 2fr 8fr 2fr;
             gap: var(--root-spacing);
+
+            @include mq('<=xl') {
+                grid-template-columns: 3fr 6fr 3fr;
+            }
+
+            @include mq('<=md') {
+                grid-template-areas: 'main';
+                grid-template-columns: 12fr;
+            }
         }
 
         .project--side-bar {
@@ -26,6 +35,11 @@
             gap: var(--root-spacing);
             grid-template-areas: 'left right';
             grid-template-columns: 6fr 6fr;
+
+            @include mq('xl') {
+                grid-template-areas: 'main';
+                grid-template-columns: 12fr;
+            }
         }
 
         .project--history {
@@ -33,21 +47,18 @@
             grid-column-end: 3;
         }
 
-        .project--settings {
-            @include mq('<=md') {
-                order: 1;
-            }
-        }
 
         .project--average {
             @include mq('<=md') {
-                order: 2;
+                grid-column-start: 1;
+                grid-column-end: 3;
             }
         }
 
         .project--last-report-radar {
             @include mq('<=md') {
-                order: 3;
+                grid-column-start: 1;
+                grid-column-end: 3;
             }
         }
 
