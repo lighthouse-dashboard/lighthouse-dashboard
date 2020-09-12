@@ -4,6 +4,7 @@
             class="badges-overlay"
             :tile-props="{icon: 'award'}"
             v-on="$listeners">
+        <img :src="`/api/sites/${ siteId }/badge`"/>
         <p class="caption badges-overlay--title">
             Markdown
         </p>

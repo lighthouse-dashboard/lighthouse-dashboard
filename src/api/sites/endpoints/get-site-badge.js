@@ -1,6 +1,5 @@
 import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
-import nodeHtmlToImage from 'node-html-to-image';
 import { getLatestReportBySiteId } from '../../../../lib/shared/services/report-service';
 import { getSiteConfigById } from '../../../../lib/shared/services/site-service';
 import { LONG } from '../../../config/cache';
@@ -14,8 +13,11 @@ import renderTemplate from '../../../utils/render-template';
  */
 async function getSiteBadge({ params, query }, h) {
     const { id } = params;
-    const { type } = query;
     const site = await getSiteConfigById(id);
+    if (!site) {
+        return Boom.notFound();
+    }
+
     const latestReport = await getLatestReportBySiteId(id);
 
     const values = {
