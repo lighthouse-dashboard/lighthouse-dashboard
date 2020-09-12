@@ -64,7 +64,6 @@
         "lodash": "^4.17.20",
         "lodash.curry": "^4.1.1",
         "mongoose": "^5.9.24",
-        "node-html-to-image": "^3.0.1",
         "quickmetrics": "^1.0.2",
         "twig": "^1.15.1",
         "uuid": "^3.4.0",

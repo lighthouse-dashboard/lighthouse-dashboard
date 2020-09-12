@@ -27,23 +27,10 @@ async function getSiteBadge({ params, query }, h) {
     };
 
     const html = await renderTemplate('./templates/views/badge.twig', { site, values, report: latestReport });
-    if (type === 'html') {
-        return html;
-    }
 
-    const image = await nodeHtmlToImage({
-        html,
-        transparent: true,
-        puppeteerArgs: {
-            args: ['--no-sandbox', '--headless'],
-            chromePath: process.env.GOOGLE_CHROME_BIN,
-            port: process.env.GOOGLE_CHROME_PORT,
-        }
-    });
-
-    return h.response(image)
+    return h.response(html)
         .encoding('binary')
-        .header('Content-type', `image/png`)
+        .header('Content-type', `image/svg+xml`)
         .header('Content-disposition', `attachment; filename=${ site.name }`);
 }
 
