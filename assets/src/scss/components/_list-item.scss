@@ -7,6 +7,8 @@
     & {
         & {
             padding: calc(var(--root-spacing) * 2) var(--root-spacing);
+            display: flex;
+            flex-direction: column;
 
             &:nth-child(even) {
                 background-color: var(--color--list--item-even);
@@ -19,6 +21,24 @@
             &:last-child {
                 margin-bottom: 0;
             }
+        }
+
+        .list-item--caption {
+            display: block;
+            width: 100%;
+            margin-bottom: var(--root-spacing);
+        }
+
+        .list-item--content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+
+        .list-item--icon {
+            margin-right: var(--root-spacing);
         }
     }
 

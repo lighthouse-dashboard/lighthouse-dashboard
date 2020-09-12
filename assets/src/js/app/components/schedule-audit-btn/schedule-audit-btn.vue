@@ -1,6 +1,6 @@
 <template>
     <btn
-            :facets="['secondary', 'full-width', ...auditBtnFacet]"
+            :facets="['primary', 'full-width', ...auditBtnFacet]"
             @click="runAudit">
         <template v-if="isScheduled">
             {{ $t('site.audit-already-scheduled')}}

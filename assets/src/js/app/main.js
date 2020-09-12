@@ -36,7 +36,10 @@ import store from './vuex';
 Vue.config.productionTip = false;
 
 Unicon.add([uniRocket, uniShareAlt, uniTachometerFast, uniGraphBar, uniHistory, uniChannel, uniImage, uniHeart, uniAnalysis, uniAnalytics, uniArchive, uniAward, uniBan, uniClockFive, uniCog, uniDesktop, uniEdit, uniExclamationTriangle, uniFileAlt, uniLock, uniMobileAndroid, uniSearch, uniBrowser]);
-Vue.use(Unicon);
+Vue.use(Unicon, {
+    height: 24,
+    width: 24,
+});
 
 Vue.use(Inview);
 

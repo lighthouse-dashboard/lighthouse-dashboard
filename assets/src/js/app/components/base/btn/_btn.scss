@@ -4,7 +4,7 @@
     --button--horiz-bezel: 16px;
     --button--primary-background-color: var(--color--primary);
     --button--primary-text-color: var(--color-mono-white);
-    --button--primary-hover-background-color: var(--root-color--primary-hover-background);
+    --button--primary-hover-background-color: var(--color--primary-light);
 
     --button--secondary-color: var(--color--secondary);
     --button--secondary-text-color: var(--color--secondary-text);
@@ -58,32 +58,12 @@
             color: var(--button--primary-text-color);
             position: relative;
 
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 0;
-                background-color: var(--button--primary-text-color);
-                transition: width 200ms ease-in-out, height 200ms ease-in-out;
-            }
-
             &:hover, &:focus, &.btn__active {
-                color: var(--button--primary-background-color);
-
-                &::after {
-                    width: 100%;
-                    height: calc(100% - var(--button--underline-height));
-                }
+                background-color: var(--button--primary-hover-background-color);
             }
         }
 
-        &.btn__disabled {
-            pointer-events: none;
-            background-color: var(--button--disabled-background);
-            color: var(--button--text-color);
-        }
+
     }
 
     &.btn__secondary {
@@ -97,12 +77,6 @@
                 background-color: var(--button--secondary-color);
                 color: var(--button--secondary-text-color);
             }
-        }
-
-        &.btn__disabled {
-            pointer-events: none;
-            border: solid 1px var(--button--disabled);
-            color: var(--button--disabled);
         }
     }
 
@@ -122,15 +96,15 @@
             background-color: var(--button--flat-color);
             color: var(--button--flat-text-color);
         }
-
-        &.btn__disabled {
-            pointer-events: none;
-            color: var(--button--disabled-background);
-        }
     }
 
     &.btn__full-width {
         width: 100%;
+    }
+
+    &.btn__disabled {
+        pointer-events: none;
+        opacity: 0.6;
     }
 
     // States
