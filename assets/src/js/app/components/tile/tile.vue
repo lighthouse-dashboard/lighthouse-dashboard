@@ -18,6 +18,10 @@
         <div class="tile--content">
             <slot/>
         </div>
+
+        <div class="tile--footer">
+            <slot name="footer"/>
+        </div>
     </div>
 </template>
 

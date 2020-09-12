@@ -1,0 +1,50 @@
+<html>
+<head>
+    <link href="http://0.0.0.0:4000/css/app.css"
+            rel="stylesheet"
+            type="text/css"/>
+    <style>
+        body {
+            height: 24px;
+            display: flex;
+            overflow: visible;
+            width: calc(100% + {{ site.name | length }}ch);
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+<ul class="badge">
+    <li class="badge--item">
+        <span class="badge--label badge--label__primary">Lighthouse</span>
+        <span class="badge--value">{{ site.name }}</span>
+    </li>
+
+    <li class="badge--item">
+        <span class="badge--label badge--label__secondary">Performance</span>
+        <span class="badge--value">{{ values.performance }}</span>
+    </li>
+
+    <li class="badge--item">
+        <span class="badge--label badge--label__secondary">Accessibility</span>
+        <span class="badge--value">{{ values.accessibility }}</span>
+    </li>
+
+    <li class="badge--item">
+        <span class="badge--label badge--label__secondary">Best-Practices</span>
+        <span class="badge--value">{{ values.bestPractices }}</span>
+    </li>
+
+    <li class="badge--item">
+        <span class="badge--label badge--label__secondary">SEO</span>
+        <span class="badge--value">{{ values.seo }}</span>
+    </li>
+
+    <li class="badge--item">
+        <span class="badge--label badge--label__secondary">PWA</span>
+        <span class="badge--value">{{ values.pwa }}</span>
+    </li>
+</ul>
+
+</body>
+</html>

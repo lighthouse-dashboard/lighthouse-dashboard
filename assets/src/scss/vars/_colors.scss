@@ -9,10 +9,11 @@
     --color--disabled: rgba(0, 0, 0, 0.4);
 
     --color--text-color: var(--color-mono-black);
-    --color--divider: var(--color-mono-black);
+    --color--divider: rgba(0, 0, 0, 0.1);
     --color--background-color: rgb(242, 243, 248);
 
     --color--primary: #2d4059;
+    --color--primary-text: var(--color-mono-white);
     --color--primary-light: #6583ba;
 
     --color--secondary: #59abaa;

@@ -31,7 +31,7 @@
                                         :site='{{ site | json_encode() }}'></component>
                             </component>
 
-                             {% if isAuthenticated %}
+                            {% if isAuthenticated %}
                                 <component is="tile"
                                         icon="channel"
                                         title="Actions"
@@ -53,6 +53,9 @@
                     </div>
 
                     <div>
+                        <a href="/api/sites/{{ site._id }}/badge">
+                            <img src="/api/sites/{{ site._id }}/badge"/>
+                        </a>
                         <div class="project--main-content">
                             <component is="tile"
                                     :facets="['centered']"
@@ -96,6 +99,14 @@
 
                     <div>
                         <div class="project--side-bar">
+                            <component is="tile"
+                                    icon="award"
+                                    title='Badges'
+                                    class='project--sidebar-section'>
+                                <component is="show-badges-btn"
+                                        site-id='{{ site._id }}'></component>
+                            </component>
+
                             <component is="tile"
                                     icon="browser"
                                     title='Tools'

@@ -62,8 +62,6 @@
                 background-color: var(--button--primary-hover-background-color);
             }
         }
-
-
     }
 
     &.btn__secondary {
@@ -105,6 +103,23 @@
     &.btn__disabled {
         pointer-events: none;
         opacity: 0.6;
+    }
+
+    &.btn__icon {
+        --uni-color-primary: var(--button--primary-background-color);
+        border-radius: 100%;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        &:hover, &:focus, &.btn__active {
+            --uni-color-primary: var(--button--primary-text-color);
+            background-color: var(--button--primary-background-color);
+        }
     }
 
     // States

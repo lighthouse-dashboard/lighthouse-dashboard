@@ -2,6 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ab19b9e057a07543d801/maintainability)](https://codeclimate.com/github/lighthouse-dashboard/lighthouse-dashboard/maintainability)
 [![CodeFactor](https://www.codefactor.io/repository/github/lighthouse-dashboard/lighthouse-dashboard/badge)](https://www.codefactor.io/repository/github/lighthouse-dashboard/lighthouse-dashboard)
 
+[![LH Status](http://localhost:4000/api/sites/5f52925fce75b18237ea1269/badge)](http://localhost:4000/app/projects/5f52925fce75b18237ea1269)        
 
 A dashboard to keep track on the performance of your sites. Keep track during development by setting up webhooks
 in github to audit your site on every push to the `master` branch

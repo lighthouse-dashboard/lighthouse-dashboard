@@ -1,37 +1,33 @@
 <template>
     <div class="overlay"
-            v-if='active'>
-        <div class='overlay--backdrop'
-                @click='onClose'/>
-        <div class='overlay--content-wrapper'>
-            <p class='overlay--title'
-                    v-if='title'>
-                {{ title }}
-            </p>
+            v-if="active">
+        <div class="overlay--backdrop"
+                @click="onClose"/>
 
-            <div class='overlay--content'>
-                <slot/>
-            </div>
-
-            <div class='overlay--actions'>
-                <slot name='actions'>
-                    <slot name='additional'/>
-                    <btn facets='flat'
-                            class='overlay--action'
-                            @click='onClose'>
+        <tile :title="title"
+                v-bind="tileProps"
+                class="overlay--content-wrapper">
+            <slot/>
+            <template slot="footer">
+                <slot name="footer">
+                    <slot name="additional"/>
+                    <btn facets="flat"
+                            class="overlay--action"
+                            @click="onClose">
                         Close
                     </btn>
                 </slot>
-            </div>
-        </div>
+            </template>
+        </tile>
     </div>
 </template>
 
 <script>
     import Btn from '../base/btn/btn';
+    import Tile from '../tile/tile';
 
     export default {
-        components: { Btn },
+        components: { Tile, Btn },
         props: {
             title: {
                 type: String,
@@ -40,6 +36,10 @@
             active: {
                 type: Boolean,
                 default: false,
+            },
+            tileProps: {
+                type: Object,
+                default: () => ({}),
             },
         },
         methods: {

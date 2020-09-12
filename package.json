@@ -38,7 +38,7 @@
     "dependencies": {
         "@dreipol/scss-mq": "^1.0.0",
         "@hapi/boom": "^8.0.1",
-        "@hapi/hapi": "^19.1.1",
+        "@hapi/hapi": "^20.0.0",
         "@hapi/inert": "^6.0.1",
         "@hapi/joi": "^17.1.1",
         "@hapi/joi-date": "^2.0.1",
@@ -64,6 +64,7 @@
         "lodash": "^4.17.20",
         "lodash.curry": "^4.1.1",
         "mongoose": "^5.9.24",
+        "node-html-to-image": "^3.0.1",
         "quickmetrics": "^1.0.2",
         "twig": "^1.15.1",
         "uuid": "^3.4.0",
