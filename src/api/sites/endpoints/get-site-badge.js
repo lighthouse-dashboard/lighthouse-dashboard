@@ -3,7 +3,7 @@ import joi from '@hapi/joi';
 import nodeHtmlToImage from 'node-html-to-image';
 import { getLatestReportBySiteId } from '../../../../lib/shared/services/report-service';
 import { getSiteConfigById } from '../../../../lib/shared/services/site-service';
-import { LONG, MEDIUM } from '../../../config/cache';
+import { LONG } from '../../../config/cache';
 import { getReportValueScoreByKey } from '../../../utils/get-report-value-score-by-key';
 import renderTemplate from '../../../utils/render-template';
 
@@ -33,7 +33,8 @@ async function getSiteBadge({ params, query }, h) {
 
     const image = await nodeHtmlToImage({
         html,
-        transparent: true
+        transparent: true,
+        puppeteerArgs: { args: ['--no-sandbox', '--headless'] }
     });
 
     return h.response(image)
