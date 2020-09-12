@@ -34,7 +34,11 @@ async function getSiteBadge({ params, query }, h) {
     const image = await nodeHtmlToImage({
         html,
         transparent: true,
-        puppeteerArgs: { args: ['--no-sandbox', '--headless'] }
+        puppeteerArgs: {
+            args: ['--no-sandbox', '--headless'],
+            chromePath: process.env.GOOGLE_CHROME_BIN,
+            port: process.env.GOOGLE_CHROME_PORT,
+        }
     });
 
     return h.response(image)
