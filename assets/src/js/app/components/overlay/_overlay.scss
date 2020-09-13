@@ -1,7 +1,7 @@
 .overlay {
     // Vars
-    --overlay--backdrop-color: rgba(20, 20, 20, 0.2);
-    --overlay--content-background: #ffffff;
+    --overlay--backdrop-color: rgba(20, 20, 20, 0.8);
+    --overlay--content-background: var(--color--surface);
     --overlay--border-radius: 2px;
 
     // Support

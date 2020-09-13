@@ -1,5 +1,7 @@
 .list-item {
     // Vars
+    --list-item--item-even: var(--color--list--item-even);
+
 
     // Support
 
@@ -11,7 +13,7 @@
             flex-direction: column;
 
             &:nth-child(even) {
-                background-color: var(--color--list--item-even);
+                background-color: var(--list-item--item-even);
             }
 
             &:first-child {

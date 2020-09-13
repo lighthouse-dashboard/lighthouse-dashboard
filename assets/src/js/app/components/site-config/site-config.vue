@@ -1,18 +1,12 @@
 <template>
     <div class="site-config">
-        <notification facet="warning"
-                :facets="['minimal']"
-                class="list-item"
-                v-if="site.is_scheduled && !site.is_disabled">
-            Audits are scheduled for this project
-        </notification>
-
         <ul class="list">
             <li class="list-item">
                 <p class="u-reset caption list-item--caption">
                     {{ $t('site.name-field') }}
                 </p>
                 <a class="u-reset subtitle1 link"
+                        target="_blank"
                         :href="site.url">
                     {{ site.name }}
                 </a>

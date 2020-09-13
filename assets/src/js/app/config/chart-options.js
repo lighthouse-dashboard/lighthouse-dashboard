@@ -1,7 +1,9 @@
 import CONFIG from '../../../../../config/dashboard';
+import getCssVar from '../utils/get-css-var';
 
 export const DEFAULT_CHART = {
     series: [],
+
     plotOptions: {
         bar: {
             horizontal: false,
@@ -69,12 +71,16 @@ export const GAUGE_CHART = {
     chart: {
         height: 300,
         type: 'radialBar',
+        foreColor: getCssVar('--color--text-color'),
         toolbar: {
             show: false,
         },
     },
     plotOptions: {
         radialBar: {
+            track: {
+                background: 'transparent',
+            },
             dataLabels: {
                 name: {
                     fontSize: '22px',
@@ -93,6 +99,7 @@ export const BAR_CHART = {
         type: 'bar',
         height: 200,
         background: 'transparent',
+        foreColor: getCssVar('--color--text-color'),
         toolbar: {
             show: false,
         },
@@ -116,6 +123,7 @@ export const RADAR_CHART = {
     ...DEFAULT_CHART,
     series: [],
     chart: {
+        foreColor: getCssVar('--color--text-color'),
         height: 300,
         type: 'radar',
         toolbar: {
@@ -138,6 +146,7 @@ export const SITE_OVERVIEW_CHART = {
     ...DEFAULT_CHART,
 
     chart: {
+        foreColor: getCssVar('--color--text-color'),
         height: 200,
         type: 'line',
         background: 'transparent',

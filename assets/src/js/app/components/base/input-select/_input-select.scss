@@ -5,8 +5,9 @@
     --input-select--vert-input-bezel: 12px;
     --input-select--horiz-input-bezel: 16px;
     --input-select--background-active: var(--color--input-active-background);
+    --input-select--color: var(--input-field--text-color);
     --input-select--disabled-input-background: var(--color--input-disabled-background);
-
+    --input-select--background: var(--color--input-background);
     // Module
     & {
         .input-select--label {
@@ -28,6 +29,8 @@
             padding: calc(var(--input-select--vert-input-bezel) - 1px) var(--input-select--horiz-input-bezel);
             transition: background-color 200ms;
             cursor: pointer;
+            background-color: var(--input-select--background);
+            color: var(--input-select--color);
 
             &:focus, &:active, &:hover {
                 background-color: var(--input-select--background-active);

@@ -2,10 +2,10 @@
     // Vars
     --input-checkbox--size: 24px;
     --input-checkbox--border-radius: 2px;
-    --input-checkbox--color: var(--color--divider);
-    --input-checkbox--color-focus: var(--color--divider);
-    --input-checkbox--active-color: var(--color-mono-white);
-    --input-checkbox--background-active: var(--color--divider);
+    --input-checkbox--color: var(--color--input-background);
+    --input-checkbox--color-focus: var(--color--input-text-color);
+    --input-checkbox--active-color: var(--color--primary);
+    --input-checkbox--background-active: var(--color--primary-light);
 
     // Support
 
@@ -15,6 +15,12 @@
             display: flex;
             align-items: center;
             padding: var(--root-spacing) 0;
+
+            &:hover, &:active, &:focus, &:focus-within {
+                .input-checkbox--svg {
+                    background-color: var(--input-checkbox--background-active);
+                }
+            }
         }
 
         .input-checkbox--label {
@@ -39,11 +45,8 @@
             position: absolute;
             opacity: 0;
 
-            &:checked {
-                & + .input-checkbox--svg {
-                    background-color: var(--input-checkbox--background-active);
-                }
 
+            &:checked {
                 & + .input-checkbox--svg path {
                     stroke-dashoffset: 0;
                 }
@@ -68,6 +71,17 @@
     }
 
     // Facets
+    &.input-checkbox__checked {
+        .input-checkbox--wrapper {
+            border: none;
+        }
+
+        &:hover, &:active, &:focus, &:focus-within {
+            .input-checkbox--svg path {
+                stroke: var(--input-checkbox--color-focus);
+            }
+        }
+    }
 
     // States
 }

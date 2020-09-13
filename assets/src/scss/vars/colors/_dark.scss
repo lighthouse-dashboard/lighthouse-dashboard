@@ -1,0 +1,20 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color--background-color: rgb(31, 30, 30);
+        --color--text-color: rgba(255, 255, 255, 0.6);
+
+        --color--primary: #6583ba;
+        --color--primary-light: #9baece;
+        --color--primary-text: var(--color-mono-white);
+
+        --color--secondary: #73cbcb;
+        --color--secondary-text: var(--color-mono-white);
+
+        --color--surface: #404040;
+
+        // Lists
+        --color--list--item-even: rgba(58, 80, 107, 0.8);
+
+        //input
+    }
+}

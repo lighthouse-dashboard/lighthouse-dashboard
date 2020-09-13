@@ -3,26 +3,19 @@
     --button--vert-bezel: 12px;
     --button--horiz-bezel: 16px;
     --button--primary-background-color: var(--color--primary);
-    --button--primary-text-color: var(--color-mono-white);
     --button--primary-hover-background-color: var(--color--primary-light);
+    --button--primary-text-color: var(--color--primary-text);
 
     --button--secondary-color: var(--color--secondary);
     --button--secondary-text-color: var(--color--secondary-text);
 
-    --button--danger-color: var(--color--button-danger-color);
-    --button--danger-text-color: var(--color--button-danger-text-color);
+    --button--danger-color: var(--color--signal-error);
+    --button--danger-text-color: var(--color--signal-error-text);
 
-    --button--flat-color: var(--color--button-flat-color);
-    --button--flat-text-color: var(--color--button-flat-text-color);
+    --button--flat-color: var(--color--secondary);
+    --button--flat-text-color: var(--color--secondary-text);
 
-    --button--disabled: var(--color--button-disabled-background);
     --button--border-radius: 2px;
-    --button--underline-height: 4px;
-
-    --button--text-color: var(--color--button-text-primary);
-    --button--danger-background-color: var(--root-color--button-danger-background);
-    --button--text-color-accent: var(--root-color--button-text-accent-primary);
-    --button--vert-main-margin: calc(var(--root-spacing) * 0.5);
 
     // Support
 

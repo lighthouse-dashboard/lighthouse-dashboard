@@ -3,7 +3,7 @@
         <badges-overlay :is-active="isActive"
                 :site-id="siteId"
                 @close="onClose"></badges-overlay>
-        <btn :facets="['flat']"
+        <btn :facets="['flat', 'full-width']"
                 @click="toggle">
             {{ $t('badges.toggle-btn-text') }}
         </btn>

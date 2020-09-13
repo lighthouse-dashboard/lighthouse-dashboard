@@ -2,13 +2,15 @@
     // Vars
     --input-field--border-color: var(--color--divider);
     --input-field--background-active: var(--color--input-active-background);
+    --input-field--background: var(--color--input-background);
+    --input-field--text-color: var(--color--input-text-color);
     --input-field--vert-input-bezel: 12px;
     --input-field--horiz-input-bezel: 16px;
     --input-field--input-border-radius: 2px;
     --input-field--vert-main-margin: calc(var(--root-spacing) * 0.5);
     --input-field--error-text-color: var(--color--signal-error);
-    --input-field--error-input-background: var(--color--input-error-background);
-    --input-field--disabled-input-background: var(--color--input-disabled-background);
+    --input-field--error-input-background: var(--color--signal-error-input);
+    --input-field--disabled-input-background: var(--color-mono-light-gray);
 
     // Support
 
@@ -31,6 +33,8 @@
             border-radius: var(--input-field--input-border-radius);
             padding: calc(var(--input-field--vert-input-bezel) - 1px) var(--input-field--horiz-input-bezel);
             transition: background-color 200ms;
+            background-color: var(--input-field--background);
+            color: var(--input-field--text-color);
 
             &:focus {
                 background-color: var(--input-field--background-active);

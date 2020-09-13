@@ -1,5 +1,7 @@
 <template>
-    <tile title="System" icon="cog">
+    <tile title="System"
+            icon="cog"
+            :facets="['no-padding']">
         <ul class="list">
             <li class="list-item">
                 <p class="u-reset  caption">

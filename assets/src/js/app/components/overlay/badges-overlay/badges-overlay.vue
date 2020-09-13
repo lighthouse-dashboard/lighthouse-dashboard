@@ -8,7 +8,7 @@
         <p class="caption badges-overlay--title">
             Markdown
         </p>
-        <textarea class="caption badges-overlay--textarea"
+        <textarea class="text-area"
                 rows="5">
 [![LH Status]({{protocol}}//{{host}}/api/sites/{{siteId}}/badge)]({{protocol}}//{{host}}/app/projects/{{siteId}})
         </textarea>
@@ -17,7 +17,7 @@
             IFrame
         </p>
         <code class="caption">
-            <textarea class="caption badges-overlay--textarea"
+            <textarea class="text-area"
                     rows="5"><iframe src="{{ protocol }}//{{ host }}/api/sites/{{ siteId }}/badge?type=html"
                     height="24px"></iframe></textarea>
         </code>

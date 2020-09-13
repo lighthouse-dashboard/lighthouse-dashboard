@@ -25,6 +25,10 @@
             }
         }
 
+        .project--notifications {
+            margin-bottom: var(--root-spacing);
+        }
+
         .project--side-bar {
             display: grid;
             gap: var(--root-spacing);

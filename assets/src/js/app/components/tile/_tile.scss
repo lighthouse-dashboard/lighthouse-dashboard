@@ -1,6 +1,6 @@
 .tile {
     // Vars
-    --tile--background-color: var(--color--tile-background);
+    --tile--background-color: var(--color--surface);
     --tile--root-padding: calc(var(--root-spacing) * 2);
     --tile--border-radius: 2px;
     // Support
@@ -67,6 +67,16 @@
     &.tile__no-icon {
         .tile--icon {
             display: none;
+        }
+    }
+
+    &.tile__no-padding {
+        .tile--title {
+            padding: var(--tile--root-padding) calc(var(--tile--root-padding) / 2);
+        }
+
+        .tile--content {
+            padding: 0;
         }
     }
 

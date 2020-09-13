@@ -1,65 +1,41 @@
+@import "colors/dark";
+@import "colors/light";
+
+
 :root {
     --color-mono-white: rgba(255, 255, 255, 0.9);
     --color-mono-black: rgba(51, 51, 51, 0.9);
-    --color-mono-gray: #6c6c6c;
     --color-mono-light-gray: #c1c1c1;
 
     --color--medium-emphasis: rgba(0, 0, 0, 0.6);
-    --color--high-emphasis: rgba(0, 0, 0, 0.8);
-    --color--disabled: rgba(0, 0, 0, 0.4);
 
-    --color--text-color: var(--color-mono-black);
     --color--divider: rgba(0, 0, 0, 0.1);
     --color--background-color: rgb(242, 243, 248);
+    --color--text-color: var(--color-mono-black);
 
     --color--primary: #2d4059;
-    --color--primary-text: var(--color-mono-white);
     --color--primary-light: #6583ba;
+    --color--primary-text: var(--color-mono-white);
 
     --color--secondary: #59abaa;
     --color--secondary-text: var(--color-mono-white);
 
+    --color--surface: #ffffff;
+
     // Signal
     --color--signal-error: #f66363;
+    --color--signal-error-input: #ffb5b5;
+    --color--signal-error-text: var(--color-mono-white);
+
     --color--signal-success: #48ad67;
+    --color--signal-success-text: var(--color-mono-white);
+
     --color--signal-warning: #ffa72b;
+    --color--signal-warning-text: var(--color-mono-white);
 
     // Error Message
     --color--error-background: #efb8b8;
     --color--error-text: var(--color--signal-error);
-
-    //Buttons
-    --color--button-text-primary: var(--color--medium-emphasis);
-    --color--button-danger-color: var(--color--signal-error);
-    --color--button-danger-text-color: var(--color-mono-white);
-
-    --color--button-flat-color: var(--color--secondary);
-    --color--button-flat-text-color: var(--color-mono-white);
-    --color--button-disabled-background: var(--color-mono-light-gray);
-
-    // Tiles
-    --color--tile-background: #f7f7f7;
-
-    // Inputs
-    --color--input-active-background: #ffffff;
-    --color--input-error-background: #ffb5b5;
-    --color--input-disabled-background: var(--color-mono-light-gray);
-
-    // Site Overview
-    --color--site-overview-background: var(--color--tile-background);
-
-    // Navigation
-    --color--navigation-background: var(--color--primary);
-    --color--navigation--color-text: var(--color--background-color);
-    --color--navigation--item-hover-background: var(--color--secondary);
-    --color--navigation--item-hover-text: var(--color--secondary);
-    --color--navigation--item-active-background: var(--color--background-color);
-    --color--navigation--item-active-color: var(--color--background-color);
-
-    --color--navigation--mobile-toggle-background: #ffffff;
-
-    // Loading Indicator
-    --color--loading-indicator--color: var(--color--secondary);
 
     // Lists
     --color--list--item-even: rgba(58, 80, 107, 0.1);
@@ -73,5 +49,19 @@
     --color--chart-color-6: rgba(61, 194, 130, 0.91);
 
     // Icons
-    --uni-color-primary: var(--color--secondary);
+    --uni-color-primary: var(--color--primary);
+
+    //input
+    --color--input-background: var(--color--background-color);
+    --color--input-active-background: var(--color--background-color);
+    --color--input-text-color: var(--color--text-color);
+
+
+    // buttons
+    --color--btn--text: var(--color-mono-light-gray);
+    --color--btn--disabled-background: var(--color-mono-light-gray);
+
+    --color--btn--primary-background: var(--color--primary);
+    --color--btn--primary-hover-background: var(--color--primary-light);
+    --color--btn--primary-text: var(--color-mono-white);
 }

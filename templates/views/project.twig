@@ -9,6 +9,24 @@
                     slot-scope="siteProps">
                 <h4 class='h4 project--title'>{{ site.name }}</h4>
 
+                <div class="project--notifications">
+                    <component is="notification"
+                            facet="warning"
+                            class="list-item"
+                            v-if="siteProps.site.is_scheduled && !siteProps.site.is_disabled">
+                        Audits are scheduled for this project
+                    </component>
+                </div>
+
+                <div class="project--notifications">
+                    <component is="notification"
+                            facet="warning"
+                            class="list-item"
+                            v-if="siteProps.site.is_disabled">
+                        Site is disabled
+                    </component>
+                </div>
+
                 <div class="project--content">
                     <div>
                         <div class="project--side-bar">
@@ -22,7 +40,9 @@
                                 </component>
                             {% endif %}
 
-                            <component is="tile"
+                            <component
+                                    :facets="['no-padding']"
+                                    is="tile"
                                     icon="cog"
                                     title="Settings"
                                     class='project--sidebar-section'>
@@ -96,7 +116,8 @@
 
                     <div>
                         <div class="project--side-bar">
-                            <component is="tile"
+                            <component
+                                    is="tile"
                                     icon="award"
                                     title='Badges'
                                     class='project--sidebar-section'>
@@ -104,7 +125,9 @@
                                         site-id='{{ site._id }}'></component>
                             </component>
 
-                            <component is="tile"
+                            <component
+                                    :facets="['no-padding']"
+                                    is="tile"
                                     icon="browser"
                                     title='Tools'
                                     class='project--sidebar-section'>
@@ -112,7 +135,9 @@
                                         url='{{ site.url }}'></component>
                             </component>
                             {% if reports.length > 0 %}
-                                <component is="tile"
+                                <component
+                                        :facets="['no-padding']"
+                                        is="tile"
                                         icon="archive"
                                         title='HTML Reports'>
                                     <ul class="list">
@@ -131,7 +156,9 @@
 
 
                             {% if errors.length > 0 %}
-                                <component is="tile"
+                                <component
+                                        :facets="['no-padding']"
+                                        is="tile"
                                         icon="exclamation-triangle"
                                         title='Errors'>
                                     <ul class="list">

@@ -1,5 +1,6 @@
 <template>
-    <label class="input-checkbox">
+    <label class="input-checkbox"
+            :class="rootClasses">
         <span class="input-checkbox--wrapper">
             <input v-model="model"
                     type="checkbox"
@@ -14,7 +15,10 @@
 </template>
 
 <script>
+    import bemMixin from '../../../mixins/bem-mixin';
+
     export default {
+        mixins: [bemMixin('input-checkbox')],
         props: {
             label: {
                 type: String,
@@ -32,6 +36,14 @@
             };
         },
 
+        computed: {
+            rootClasses() {
+                return [
+                    this.createIfFacet(this.model, 'checked'),
+                ];
+            },
+        },
+
         watch: {
             value(v) {
                 this.model = v;
@@ -43,6 +55,6 @@
 
         mounted() {
             this.model = this.value;
-        }
+        },
     };
 </script>

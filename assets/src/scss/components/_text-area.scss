@@ -1,0 +1,29 @@
+.text-area {
+    // Vars
+    --text-area--border-color: var(--color--divider);
+    --text-area--background-color: var(--color--input-background);
+    --text-area--text-color: var(--color--input-text-color);
+    --text-area--active-background-color: var(--color--input-active-background);
+
+    // Support
+
+    // Module
+    & {
+        @include Body2;
+        color: var(--text-area--text-color);
+        background-color: var(--text-area--background-color);
+        width: 100%;
+        border: solid 1px var(--text-area--border-color);
+        outline: none;
+        padding: var(--root-spacing);
+
+        &:hover, &:focus, &:active {
+            background-color: var(--text-area--active-background-color);
+        }
+
+    }
+
+    // Facets
+
+    // States
+}

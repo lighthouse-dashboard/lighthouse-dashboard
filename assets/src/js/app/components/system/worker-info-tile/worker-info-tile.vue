@@ -1,5 +1,6 @@
 <template>
     <tile :title="$t('system.worker-tile-title')"
+            :facets="['no-padding']"
             icon="rocket"
             class="system--section">
         <ul class="list">
