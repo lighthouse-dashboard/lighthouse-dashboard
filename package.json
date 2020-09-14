@@ -24,7 +24,7 @@
         "start": "node -r esm index.js",
         "build": "gulp build",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
-        "audit": "node -r esm lib/audit-scheduler/index.js",
+        "audit": "node -r esm lib/audit-scheduler/cli.js",
         "worker": "npm run cleanup && npm run audit-worker",
         "cleanup": "node -r esm lib/cleanup/cli.js",
         "audit-worker": "node -r esm lib/audit-worker/cli.js"
