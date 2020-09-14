@@ -1,42 +1,60 @@
 <template>
-    <form class="login-form"
-            v-if="!isLoggedIn"
-            @submit.prevent="onLogin">
-        <h4>
-            {{ title }}
-        </h4>
+    <tile class="login-form"
+            :facets="['centered']"
+            icon="keyhole-circle"
+            title="Login">
 
-        <div class="login-form--content">
-            <div class="login-form--input-wrapper">
-                <input-field
-                        :disabled="isLoading"
-                        placeholder="Password"
-                        type="password"
-                        :value="password"
-                        :error="errorMessage"
-                        @input='onChange'/>
-            </div>
-            <div>
-                <btn :disabled="isLoading || !isSubmittable"
-                        @click="onLogin">
-                    {{ $t('login-form.submit-btn') }}
-                </btn>
-            </div>
+        <div class="login-form--input-wrapper">
+            <input-field
+                    :disabled="isLoading || isLoggedIn"
+                    placeholder="Password"
+                    type="password"
+                    :value="password"
+                    :error="errorMessage"
+                    @input="onChange"/>
         </div>
-    </form>
+        <template slot="footer">
+            <loading-indicator :facets="['small']"
+                    v-if="isLoading"/>
+
+            <btn type="submit"
+                    :disabled="!isSubmittable || isLoggedIn"
+                    :facets="['flat']"
+                    v-else>
+                {{ $t('login-form.submit-btn') }}
+            </btn>
+        </template>
+    </tile>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import Btn from '../base/btn/btn';
     import InputField from '../base/input-field/input-field';
+    import LoadingIndicator from '../base/loading-indicator/loading-indicator';
+    import Tile from '../tile/tile';
 
     export default {
-        components: { InputField, Btn },
+        components: { Tile, LoadingIndicator, InputField, Btn },
         props: {
+            password: {
+                type: String,
+                default: '',
+            },
+            errorMessage: {
+                type: [Error, Boolean],
+                default: false,
+            },
             title: {
                 type: String,
                 required: true,
+            },
+            isLoading: {
+                type: Boolean,
+                default: false,
+            },
+            isSubmittable: {
+                type: Boolean,
+                default: false,
             },
             isLoggedIn: {
                 type: Boolean,
@@ -44,62 +62,10 @@
             },
         },
 
-        data() {
-            return {
-                password: '',
-                redirectUrl: '/app/dashboard',
-                /** @type {Error | null}*/
-                error: null,
-
-                isLoading: false,
-            };
-        },
-
-        computed: {
-            errorMessage() {
-                return this.error?.message;
-            },
-
-            isSubmittable() {
-                return this.password.length > 0;
-            },
-        },
-
         methods: {
-            ...mapActions('login', ['doLogin']),
-
             onChange(val) {
-                this.password = val;
+                this.$emit('change', val);
             },
-
-            loginUser() {
-                window.location.href = this.redirectUrl;
-            },
-
-            async onLogin() {
-                this.isLoading = true;
-                this.error = null;
-                try {
-                    await this.doLogin({ password: this.password });
-                    this.loginUser();
-                    this.isLoading = false;
-                } catch (e) {
-                    this.error = e;
-                }
-                this.isLoading = false;
-            },
-        },
-
-        mounted() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const redirectUrl = urlParams.get('redirect');
-            if (redirectUrl) {
-                this.redirectUrl = redirectUrl;
-            }
-
-            if (this.isLoggedIn) {
-                this.loginUser();
-            }
         },
     };
 </script>

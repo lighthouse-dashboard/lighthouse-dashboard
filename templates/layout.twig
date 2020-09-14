@@ -1,8 +1,10 @@
 {% extends 'skeleton.twig' %}
 
 {% block content %}
-    <div class="app-layout">
-        {% include 'components/header/header.twig' %}
+    <div class="app-layout {% block layoutCssClass %}{% endblock %}">
+        {% block header %}
+            {% include 'components/header/header.twig' %}
+        {% endblock %}
 
         <div class="app-layout--content">
             {% block app_content %}

@@ -16,5 +16,10 @@
         margin: 0 auto;
     }
 
+    &.container__grid {
+        display: flex;
+        justify-content: center;
+    }
+
     // States
 }

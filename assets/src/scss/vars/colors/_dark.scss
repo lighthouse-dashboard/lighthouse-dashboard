@@ -1,4 +1,4 @@
-@media (prefers-color-scheme: dark) {
+@include is-dark {
     :root {
         --color--background-color: rgb(31, 30, 30);
         --color--text-color: rgba(255, 255, 255, 0.6);

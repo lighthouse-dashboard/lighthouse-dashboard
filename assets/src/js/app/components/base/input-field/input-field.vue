@@ -34,7 +34,7 @@
                 default: 'text',
             },
             error: {
-                type: String,
+                type: [Boolean, String],
                 default: null,
             },
             disabled: {
@@ -76,6 +76,6 @@
 
         mounted() {
             this.model = this.value;
-        }
+        },
     };
 </script>

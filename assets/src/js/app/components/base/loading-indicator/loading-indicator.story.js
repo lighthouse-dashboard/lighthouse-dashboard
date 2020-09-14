@@ -6,8 +6,12 @@ export default {
     decorators: [withLayout],
 };
 
-export const component = () => ({
+export const large = () => ({
     components: { LoadingIndicator },
-    props: {},
     template: '<loading-indicator />',
+});
+
+export const small = () => ({
+    components: { LoadingIndicator },
+    template: '<loading-indicator :facets="[\'small\']" />',
 });

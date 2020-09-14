@@ -72,6 +72,14 @@ const loaders = [
         // The regular expression used to match base component filenames
         /[a-zA-Z0-9-]+\.vue$/
     ),
+    require.context(
+        // The relative path of the components folder
+        '../app/container',
+        // Whether or not to look in subfolders
+        true,
+        // The regular expression used to match base component filenames
+        /[a-zA-Z0-9-]+\.vue$/
+    ),
 ];
 
 export default function registry(Vue, context) {

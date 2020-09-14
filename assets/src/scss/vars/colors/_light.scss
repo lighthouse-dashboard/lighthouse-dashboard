@@ -1,4 +1,4 @@
-@media (prefers-color-scheme: light) {
+@include is-light {
     :root {
         --color--background-color: rgb(242, 243, 248);
         --color--text-color: var(--color-mono-black);

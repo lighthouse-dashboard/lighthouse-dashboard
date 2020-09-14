@@ -1,15 +1,17 @@
 <template>
-    <div class="loading-indicator">
-        <div class="loading-indicator--content">
-            <div class="loading-indicator--bar"/>
-            <div class="loading-indicator--bar"/>
-            <div class="loading-indicator--bar"/>
-        </div>
+    <div class="loading-indicator"
+            :class="rootFacets">
+        <div class="loading-indicator--bar"/>
+        <div class="loading-indicator--bar"/>
+        <div class="loading-indicator--bar"/>
+        <div class="loading-indicator--bar"/>
     </div>
 </template>
 
 <script>
+    import bemMixin from '../../../mixins/bem-mixin';
+
     export default {
-        props: {},
+        mixins: [bemMixin('loading-indicator')],
     };
 </script>

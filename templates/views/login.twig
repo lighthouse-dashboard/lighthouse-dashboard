@@ -1,12 +1,16 @@
 {% extends '../layout.twig' %}
 
+{% block layoutCssClass %}app-layout__login{% endblock %}
+{% block header %}{% endblock %}
 
  {% block app_content %}
-     <component is="login-provider"
-             class="login">
-         <component is="login-form"
-                 :is-logged-id="isLoggedId"
-                 slot-scope="{isLoggedId}"
-                 title="Login"></component>
-     </component>
+     <div class="container container__grid">
+         <component is="login-container">
+             <component is="login-form"
+                     slot-scope="props"
+                     v-bind="props"
+                     @change="props.onPasswordChange"
+                     title="Login"></component>
+         </component>
+     </div>
  {% endblock %}

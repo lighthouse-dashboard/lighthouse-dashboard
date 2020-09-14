@@ -4,7 +4,7 @@ import { eraseCookie, getCookie } from './cookie';
 
 const AUTH_ERRORS = [401, 403];
 
-export default () => {
+export default (ignoreInterceptors = false) => {
     const jwt = getCookie(COOKIE_NAME);
     const opts = {
         timeout: 30000,
@@ -16,15 +16,17 @@ export default () => {
 
     const instance = axios.create(opts);
 
-    instance.interceptors.response.use((response) => {
-        return response;
-    }, (error) => {
-        if (AUTH_ERRORS.includes(error.response.status)) {
-            eraseCookie(COOKIE_NAME);
-            window.location.href = '/';
-        }
-        return Promise.reject(error);
-    });
+    if (!ignoreInterceptors) {
+        instance.interceptors.response.use((response) => {
+            return response;
+        }, (error) => {
+            if (AUTH_ERRORS.includes(error.response.status)) {
+                eraseCookie(COOKIE_NAME);
+                window.location.href = '/';
+            }
+            return Promise.reject(error);
+        });
+    }
 
     return instance;
 };

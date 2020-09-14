@@ -26,7 +26,8 @@ import {
     uniSearch,
     uniShareAlt,
     uniTachometerFast,
-    uniMultiply
+    uniMultiply,
+    uniKeyholeCircle,
 } from 'vue-unicons/src/icons';
 
 
@@ -36,7 +37,7 @@ import store from './vuex';
 
 Vue.config.productionTip = false;
 
-Unicon.add([uniMultiply, uniRocket, uniShareAlt, uniTachometerFast, uniGraphBar, uniHistory, uniChannel, uniImage, uniHeart, uniAnalysis, uniAnalytics, uniArchive, uniAward, uniBan, uniClockFive, uniCog, uniDesktop, uniEdit, uniExclamationTriangle, uniFileAlt, uniLock, uniMobileAndroid, uniSearch, uniBrowser]);
+Unicon.add([uniKeyholeCircle, uniMultiply, uniRocket, uniShareAlt, uniTachometerFast, uniGraphBar, uniHistory, uniChannel, uniImage, uniHeart, uniAnalysis, uniAnalytics, uniArchive, uniAward, uniBan, uniClockFive, uniCog, uniDesktop, uniEdit, uniExclamationTriangle, uniFileAlt, uniLock, uniMobileAndroid, uniSearch, uniBrowser]);
 Vue.use(Unicon, {
     height: 24,
     width: 24,
