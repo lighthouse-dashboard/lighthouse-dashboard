@@ -117,6 +117,18 @@ export const BAR_CHART = {
         show: false,
         max: 100,
     },
+    noData: {
+        text: 'No data available',
+        align: 'center',
+        verticalAlign: 'middle',
+        offsetX: 0,
+        offsetY: 0,
+        style: {
+            // color: undefined,
+            fontSize: '14px',
+            // fontFamily: undefined
+        },
+    },
 };
 
 export const RADAR_CHART = {
@@ -154,7 +166,6 @@ export const SITE_OVERVIEW_CHART = {
             show: false,
         },
     },
-
     stroke: {
         width: 2,
         curve: 'smooth',
