@@ -73,14 +73,10 @@
                             class="list-item--icon"
                             name="desktop"
                             v-else/>
-                    {{ $t(`site.devices-${site.device}`) }}
+                    {{ $t(`site.devices-${ site.device }`) }}
                 </p>
             </li>
         </ul>
-        <site-edit-btn
-                class="project--action-btn"
-                :site="site"
-                :id="id"/>
     </div>
 </template>
 

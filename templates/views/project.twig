@@ -48,7 +48,14 @@
                                     class='project--sidebar-section'>
                                 <component is="site-config"
                                         id="{{ site._id }}"
-                                        :site='{{ site | json_encode() }}'></component>
+                                        :site='siteProps.site'></component>
+
+                                {% if isAuthenticated %}
+                                    <component is="site-edit-btn"
+                                            slot="footer"
+                                            id="{{ site._id }}"
+                                            :site="siteProps.site"></component>
+                                {% endif %}
                             </component>
 
                             {% if isAuthenticated %}
@@ -64,6 +71,7 @@
                                     {% endif %}
 
                                     <component is="site-delete-btn"
+                                            slot="footer"
                                             class="project--action-btn"
                                             id="{{ site._id }}">
                                     </component>

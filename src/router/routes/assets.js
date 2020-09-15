@@ -42,7 +42,7 @@ const routes = [
     },
 ];
 
-if (new Boolean(process.env.ENABLE_STORYBOOK_VIEW) === true) {
+if (Boolean(process.env.ENABLE_STORYBOOK_VIEW) === true) {
     routes.push({
         method: 'GET',
         path: '/storybook/{param*}',
