@@ -2,6 +2,7 @@
     <tile class="sites-list"
             icon="rocket"
             :title="title"
+            :facets="['no-padding']"
             v-if="sites && sites.length > 0">
         <ul class="list">
             <li class="list-item"
