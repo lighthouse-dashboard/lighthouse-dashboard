@@ -70,6 +70,7 @@
         }
     }
 
+
     &.tile__no-padding {
         .tile--title {
             padding: var(--tile--root-padding) calc(var(--tile--root-padding) / 2);
@@ -77,6 +78,12 @@
 
         .tile--content {
             padding: 0;
+        }
+    }
+
+    &.tile__padded {
+        .tile--content {
+            padding: var(--tile--root-padding);
         }
     }
 

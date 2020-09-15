@@ -1,9 +1,9 @@
 <template>
-    <div class="changelog">
-        <tile :title="$t('changelog.title')">
-            <p v-html="markdown"/>
-        </tile>
-    </div>
+    <tile class="changelog"
+            :facets="['no-icon', 'no-padding']"
+            :title="$t('changelog.title')">
+        <div v-html="markdown"/>
+    </tile>
 </template>
 
 <script>
@@ -13,7 +13,7 @@
 
     export default {
         components: { Tile },
-        data(){
+        data() {
             return {
                 markdown: null,
             };

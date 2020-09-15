@@ -1,0 +1,25 @@
+ul:not(.u-reset) {
+    --ul--item-even: var(--color--list--item-even);
+
+    & {
+        margin: var(--root-spacing) 0;
+    }
+
+    li {
+        padding: calc(var(--root-spacing) * 2) var(--root-spacing);
+        display: flex;
+        flex-direction: column;
+
+        &:nth-child(even) {
+            background-color: var(--ul--item-even);
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

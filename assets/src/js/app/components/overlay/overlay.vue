@@ -6,6 +6,7 @@
 
         <tile :title="title"
                 v-bind="tileProps"
+                :facets="['padded']"
                 class="overlay--content-wrapper">
             <slot/>
             <template slot="footer">

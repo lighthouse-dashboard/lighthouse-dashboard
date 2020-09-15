@@ -6,7 +6,7 @@
         </a>
     </div>
 
-    <ul class="header--list">
+    <ul class="u-reset header--list">
         <li class="header--list-item">
             <a class="header--list-item-link u-reset {% if route == '/app/dashboard' %}header--list-item-link__active{% endif %}"
                     href="/app/dashboard">Dashboard</a>
@@ -23,7 +23,7 @@
         </li>
     </ul>
 
-    <ul class="header--list">
+    <ul class="u-reset header--list">
         {% if isAuthenticated %}
             <component is="create-site-btn"></component>
             <component is="logout-btn"></component>

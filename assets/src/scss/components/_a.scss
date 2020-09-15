@@ -1,0 +1,21 @@
+a:not(.u-reset):not(.link) {
+    // Vars
+    --a--color: var(--color--primary);
+    --a--focus-color: var(--color--primary-light);
+
+    // Support
+
+    // Module
+    & {
+        & {
+            color: var(--a--color);
+            position: relative;
+            font-weight: 700;
+
+            &:hover {
+                color: var(--a--focus-color);
+                text-decoration: underline;
+            }
+        }
+    }
+}
