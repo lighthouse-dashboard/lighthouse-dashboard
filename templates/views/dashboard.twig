@@ -1,51 +1,67 @@
 {% extends '../layout.twig' %}
 
  {% block app_content %}
-     <div class="dashboard container">
-         <div class="dashboard--section">
-             <component is="sites-list"
-                     :sites='{{ scheduledSites | json_encode() }}'></component>
-         </div>
+<div class="dashboard container">
 
-         <div class="dashboard--section">
-             <h4 class="dashboard--section-title">Latest reports</h4>
-             <div class="grid">
-                 {% for site in latestSites %}
-                     <component is="latest-report-provider"
-                             id="{{ site._id }}">
-                         <component is="site-report-tile"
-                                 slot-scope="{report}"
-                                 :report="report"
-                                 :is_disabled="{{ site.is_disabled }}"
-                                 :is_favorite="{{ site.is_favorite }}"
-                                 :is_scheduled="{{ site.is_scheduled }}"
-                                 id="{{ site._id }}"
-                                 v-bind='{{ site | json_encode() }}'>
-                         </component>
-                     </component>
-                 {% endfor %}
-             </div>
-         </div>
+    {% if scheduledSites.length > 0 %}
+    <div class="dashboard--section">
+        <component is="tile"
+                icon="rocket"
+                title="Scheduled jobs"
+                :facets="['no-padding']">
+            <ul class="list">
+                {% for site in scheduledSites %}
+                    <li class="list-item">
+                        <a class="link"
+                                href="/app/projects/{{ site._id }}">
+                            {{ site.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </component>
+    </div>
+    {% endif %}
 
-         <div class="dashboard--section">
-             <h4 class="dashboard--section-title">Favorite sites</h4>
-             <div class="grid">
-                 {% for site in favoriteSites %}
-                     <component is="reports-provider"
-                             id="{{ site._id }}">
-                         <component is="site-overview"
-                                 slot-scope="{reports}"
-                                 id="{{ site._id }}"
-                                 name="{{ site.name }}"
-                                 url="{{ site.url }}"
-                                 :is_favorite="{{ site.is_favorite }}"
-                                 :is_disabled="{{ site.is_disabled }}"
-                                 :is_scheduled="{{ site.is_scheduled }}"
-                                 :reports="reports">
-                         </component>
-                     </component>
-                 {% endfor %}
-             </div>
-         </div>
-     </div>
- {% endblock %}
+    <div class="dashboard--section">
+        <h4 class="dashboard--section-title">Latest reports</h4>
+        <div class="grid">
+            {% for site in latestSites %}
+                <component is="latest-report-provider"
+                        id="{{ site._id }}">
+                    <component is="site-report-tile"
+                            slot-scope="{report}"
+                            :report="report"
+                            :is_disabled="{{ site.is_disabled }}"
+                            :is_favorite="{{ site.is_favorite }}"
+                            :is_scheduled="{{ site.is_scheduled }}"
+                            id="{{ site._id }}"
+                            v-bind='{{ site | json_encode() }}'>
+                    </component>
+                </component>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="dashboard--section">
+        <h4 class="dashboard--section-title">Favorite sites</h4>
+        <div class="grid">
+            {% for site in favoriteSites %}
+                <component is="reports-provider"
+                        id="{{ site._id }}">
+                    <component is="site-overview"
+                            slot-scope="{reports}"
+                            id="{{ site._id }}"
+                            name="{{ site.name }}"
+                            url="{{ site.url }}"
+                            :is_favorite="{{ site.is_favorite }}"
+                            :is_disabled="{{ site.is_disabled }}"
+                            :is_scheduled="{{ site.is_scheduled }}"
+                            :reports="reports">
+                    </component>
+                </component>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
