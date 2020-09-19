@@ -1,7 +1,7 @@
 /**
- *
- * @param once
- * @return {{data: (function(): {observer: null, isInViewport: boolean}), methods: {handleIntersection(IntersectionObserverEntry[]): void}, mounted(): void}}
+ * In View mixin
+ * @param {boolean} once
+ * @return {object}
  */
 export default function inViewMixin(once = false) {
     return {

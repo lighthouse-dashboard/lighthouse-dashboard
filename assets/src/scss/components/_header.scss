@@ -37,10 +37,10 @@
         .header--title-wrapper {
             position: relative;
             display: flex;
+            justify-content: center;
+            flex-direction: column;
             height: 100%;
             background-color: var(--color--background-color);
-            flex-direction: column;
-            justify-content: center;
             padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 3);
 
             @include mq('<=sm') {

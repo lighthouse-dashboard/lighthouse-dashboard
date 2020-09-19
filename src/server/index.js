@@ -11,8 +11,6 @@ import { root } from '../config/path';
 import loadPlugins from '../plugins';
 import loadRoutes from '../router';
 
-const IS_DEV = process.env.NODE_ENV === 'development';
-
 async function start() {
     const server = Hapi.server({
         debug: { request: ['error'] },

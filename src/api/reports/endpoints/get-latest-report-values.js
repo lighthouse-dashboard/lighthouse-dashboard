@@ -1,4 +1,3 @@
-import Boom from '@hapi/boom';
 import joi from '@hapi/joi';
 import { getLatestReportBySiteId } from '../../../../lib/shared/services/report-service';
 import { MEDIUM } from '../../../config/cache';

@@ -52,10 +52,10 @@
         }
 
         .tile--footer {
-            border-top: solid 1px var(--color--divider);
-            padding: var(--tile--root-padding);
             display: flex;
             justify-content: flex-end;
+            border-top: solid 1px var(--color--divider);
+            padding: var(--tile--root-padding);
 
             &:empty {
                 display: none;
@@ -93,7 +93,6 @@
             justify-content: center;
             align-items: center;
         }
-
     }
 
     // States

@@ -8,9 +8,9 @@
     // Module
     & {
         & {
-            padding: calc(var(--root-spacing) * 2) var(--root-spacing);
             display: flex;
             flex-direction: column;
+            padding: calc(var(--root-spacing) * 2) var(--root-spacing);
 
             &:nth-child(even) {
                 background-color: var(--list-item--item-even);

@@ -13,6 +13,6 @@ export default function createFakeSite(data = {}) {
         is_favorite: true,
         last_audit: (new Date()).toISOString(),
         is_scheduled: true,
-        ...data
+        ...data,
     };
 }

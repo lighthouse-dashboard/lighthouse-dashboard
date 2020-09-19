@@ -100,14 +100,14 @@
 
     &.btn__icon {
         --uni-color-primary: var(--button--primary-background-color);
-        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
         width: 48px;
         height: 48px;
         padding: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        border-radius: 100%;
 
         &:hover, &:focus, &.btn__active {
             --uni-color-primary: var(--button--primary-text-color);

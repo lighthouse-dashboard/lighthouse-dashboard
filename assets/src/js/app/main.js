@@ -1,7 +1,7 @@
 import 'es6-promise/auto';
 import Vue from 'vue';
 import Inview from 'vue-inview';
-import Unicon from 'vue-unicons'
+import Unicon from 'vue-unicons';
 import {
     uniAnalysis,
     uniAnalytics,

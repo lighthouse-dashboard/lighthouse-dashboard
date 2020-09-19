@@ -9,9 +9,10 @@ import renderTemplate from '../../../utils/render-template';
 /**
  * Get site by id controller
  * @param {object} params
+ * @param {object} h
  * @return {Promise<Sites.SiteModel|Boom<null>>}
  */
-async function getSiteBadge({ params, query }, h) {
+async function getSiteBadge({ params }, h) {
     const { id } = params;
     const site = await getSiteConfigById(id);
     if (!site) {

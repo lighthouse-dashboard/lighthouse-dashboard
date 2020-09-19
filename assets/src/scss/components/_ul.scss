@@ -6,9 +6,9 @@ ul:not(.u-reset) {
     }
 
     li {
-        padding: calc(var(--root-spacing) * 2) var(--root-spacing);
         display: flex;
         flex-direction: column;
+        padding: calc(var(--root-spacing) * 2) var(--root-spacing);
 
         &:nth-child(even) {
             background-color: var(--ul--item-even);
