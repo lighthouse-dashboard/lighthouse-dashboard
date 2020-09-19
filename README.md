@@ -1,7 +1,7 @@
 # lighthouse-dashboard
 [![Maintainability](https://api.codeclimate.com/v1/badges/ab19b9e057a07543d801/maintainability)](https://codeclimate.com/github/lighthouse-dashboard/lighthouse-dashboard/maintainability)
 [![CodeFactor](https://www.codefactor.io/repository/github/lighthouse-dashboard/lighthouse-dashboard/badge)](https://www.codefactor.io/repository/github/lighthouse-dashboard/lighthouse-dashboard)
-
+![CI](https://github.com/lighthouse-dashboard/lighthouse-dashboard/workflows/CI/badge.svg)
 [![LH Status](https://dev-lighthousedashboard.herokuapp.com/api/sites/5f5c8e7e9899744fdcde5576/badge)](https://dev-lighthousedashboard.herokuapp.com/app/projects/5f5c8e7e9899744fdcde5576)        
 
 A dashboard to keep track on the performance of your sites. Keep track during development by setting up webhooks
