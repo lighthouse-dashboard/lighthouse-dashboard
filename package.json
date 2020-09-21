@@ -63,7 +63,7 @@
         "lighthouse": "^6.2.0",
         "lodash": "^4.17.20",
         "lodash.curry": "^4.1.1",
-        "mongoose": "^5.9.24",
+        "mongoose": "^5.10.2",
         "quickmetrics": "^1.0.2",
         "three": "^0.120.1",
         "twig": "^1.15.1",
