@@ -3,6 +3,7 @@ import getCssVar from '../utils/get-css-var';
 
 export const DEFAULT_CHART = {
     series: [],
+    labels: [],
 
     plotOptions: {
         bar: {
