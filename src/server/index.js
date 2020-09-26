@@ -2,7 +2,6 @@
 
 import Hapi from '@hapi/hapi';
 import * as twig from 'twig';
-import formatDate from '../utils/format-date';
 import logger from '../../lib/logger';
 import { report } from '../../lib/reporter';
 import { SERVER_ERROR, SERVER_SIGTERM } from '../../lib/reporter/Events';
@@ -10,6 +9,7 @@ import setupAuth from '../auth';
 import { root } from '../config/path';
 import loadPlugins from '../plugins';
 import loadRoutes from '../router';
+import formatDate from '../utils/format-date';
 
 async function start() {
     const server = Hapi.server({
@@ -61,7 +61,7 @@ async function start() {
     });
 
     await server.start();
-    logger.info('Server started');
+    logger.info(`Server started ${ server.info.uri }`);
 }
 
 export default async function boot() {

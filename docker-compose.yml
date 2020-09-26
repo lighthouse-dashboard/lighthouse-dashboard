@@ -5,20 +5,38 @@ services:
     container_name: 'database'
     ports:
       - '27017-27019:27017-27019'
-  queue:
-    image: 'rabbitmq'
-    container_name: 'queue'
-    ports:
-      - '5672:5672'
-    environment:
-      - RABBITMQ_DEFAULT_USER=user
-      - RABBITMQ_DEFAULT_PASS=password
+
+  scheduler:
+      container_name: 'scheduler'
+      build:
+        context: ./
+        dockerfile: ./docker/scheduler.dockerfile
+      links:
+        - database
+      environment:
+        - MONGODB_URI=mongodb://database:27017/heroku_qb9h5dc7
+        - SERVICE_NAME=scheduler
+        - WINSTON_LOG_LEVEL=debug
+
+  worker:
+      container_name: 'worker'
+      build:
+        context: ./
+        dockerfile: ./docker/audit-worker.dockerfile
+      links:
+        - database
+      environment:
+        - MONGODB_URI=mongodb://database:27017/heroku_qb9h5dc7
+        - MAX_REPORTS_AGE=3
+        - SERVICE_NAME=worker
+        - WINSTON_LOG_LEVEL=debug
+
   web:
       container_name: 'web'
       build:
         context: ./
+        dockerfile: ./docker/server.dockerfile
       links:
-        - queue
         - database
       environment:
         - LOGIN_PASS=Foo
@@ -27,7 +45,13 @@ services:
         - MONGODB_URI=mongodb://database:27017/heroku_qb9h5dc7
         - PORT=5000
         - WINSTON_LOG_LEVEL=debug
-        - MESSAGE_QUEUE_URI=amqp://user:password@queue
         - SERVICE_NAME=docker
+        - ENABLE_STORYBOOK_VIEW=true
+        - ALLOW_ANONYMOUS_VIEW=true
+
       ports:
         - '5000:5000'
+      volumes:
+        - type: bind
+          source: ./
+          target: /app
