@@ -4,8 +4,9 @@
 ![CI](https://github.com/lighthouse-dashboard/lighthouse-dashboard/workflows/CI/badge.svg)
 [![LH Status](https://dev-lighthousedashboard.herokuapp.com/api/sites/5f5c8e7e9899744fdcde5576/badge)](https://dev-lighthousedashboard.herokuapp.com/app/projects/5f5c8e7e9899744fdcde5576)        
 
-A dashboard to keep track on the performance of your sites. Keep track during development by setting up webhooks
-in github to audit your site on every push to the `master` branch
+A dashboard to keep track on the performance of your sites
+
+![Project Detail View](doc/assets/project.png)
 
 ## Frameworks
 Datatbase: [mongodb](https://www.mongodb.com/)
@@ -21,10 +22,6 @@ Frontend: [Vue](https://vuejs.org/)
 [Storybook](http://localhost:4000/storybook/index.html)
 
 [Swagger](http://0.0.0.0:4000/documentation) (only for NODE_ENV=development)
-
-## Screenshots
-![Dashboard](doc/assets/dashboard.png)
-![Project Detail View](doc/assets/project.png)
 
 ## Architecture
 
