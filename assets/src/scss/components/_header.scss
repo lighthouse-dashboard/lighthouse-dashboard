@@ -27,7 +27,6 @@
             grid-template-areas: '. . . .';
             grid-template-columns: repeat(4, auto);
             grid-gap: calc(var(--root-spacing) * 4);
-            padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 3);
 
             @include mq('<=md') {
                 grid-gap: calc(var(--root-spacing) * 2);

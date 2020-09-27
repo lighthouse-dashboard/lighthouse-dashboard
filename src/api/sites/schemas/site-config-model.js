@@ -9,10 +9,10 @@ export const siteConfigModel = joi.object({
     is_favorite: joi.boolean().required(),
     last_audit: joi.string(),
 
-    createdAt: joi.string()
+    createdAt: joi.object()
         .optional(),
 
-    updatedAt: joi.string()
+    updatedAt: joi.object()
         .optional(),
     is_scheduled: joi.boolean(),
     thumbnail: joi.optional(),

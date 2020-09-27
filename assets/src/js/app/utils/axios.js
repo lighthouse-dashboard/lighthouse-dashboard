@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { COOKIE_NAME } from '../config/cookie-name';
+import catchError from './catch-error';
 import { eraseCookie, getCookie } from './cookie';
 
 const AUTH_ERRORS = [401, 403];
@@ -23,6 +24,8 @@ export default (ignoreInterceptors = false) => {
             if (AUTH_ERRORS.includes(error.response.status)) {
                 eraseCookie(COOKIE_NAME);
                 window.location.href = '/';
+            } else {
+                catchError(error);
             }
             return Promise.reject(error);
         });
