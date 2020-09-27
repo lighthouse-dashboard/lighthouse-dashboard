@@ -4,7 +4,7 @@ import Hapi from '@hapi/hapi';
 import * as twig from 'twig';
 import logger from '../../lib/logger';
 import { report } from '../../lib/reporter';
-import { SERVER_ERROR, SERVER_SIGTERM } from '../../lib/reporter/Events';
+import { SERVER_ERROR, SERVER_SIGTERM, SERVER_STARTUP } from '../../lib/reporter/Events';
 import setupAuth from '../auth';
 import { root } from '../config/path';
 import loadPlugins from '../plugins';
@@ -81,9 +81,10 @@ export default async function boot() {
     logger.info(`Starting server`);
 
     try {
+        await report(SERVER_STARTUP);
         await start();
     } catch (e) {
-        report(SERVER_ERROR);
+        await report(SERVER_ERROR);
         logger.error(e.message);
         throw e;
     }
