@@ -25,7 +25,4 @@ RUN npm i
 
 ENV NODE_ENV=production
 
-RUN npm run build
-
-# Running
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "worker" ]

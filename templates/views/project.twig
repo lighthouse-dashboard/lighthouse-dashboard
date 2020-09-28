@@ -149,7 +149,7 @@
                                         icon="archive"
                                         title='HTML Reports'>
                                     <ul class="list">
-                                        {% for report in reports %}
+                                        {% for report in reports.slice(0, 10) %}
                                             <li class="list-item">
                                                 <a class="link"
                                                         target="_blank"

@@ -2,27 +2,6 @@
 
  {% block app_content %}
 <div class="dashboard container">
-
-    {% if scheduledSites.length > 0 %}
-    <div class="dashboard--section">
-        <component is="tile"
-                icon="rocket"
-                title="Scheduled jobs"
-                :facets="['no-padding']">
-            <ul class="list">
-                {% for site in scheduledSites %}
-                    <li class="list-item">
-                        <a class="link"
-                                href="/app/projects/{{ site._id }}">
-                            {{ site.name }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </component>
-    </div>
-    {% endif %}
-
     <div class="dashboard--section">
         <h4 class="dashboard--section-title">Latest reports</h4>
         <div class="grid">

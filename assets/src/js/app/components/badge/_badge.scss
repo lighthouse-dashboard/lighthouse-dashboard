@@ -1,0 +1,29 @@
+.badge {
+    // Vars
+
+    // Support
+
+    // Module
+    & {
+        & {
+            position: relative;
+        }
+
+        .badge--counter{
+            position: absolute;
+            top: 0;
+            right: -25%;
+            background-color: var(--color--secondary);
+            color: var(--color--secondary-text);
+            border-radius: 50%;
+            @include Caption;
+            padding: 2px 6px;
+            transform: translate3d(-50%, -50%, 0);
+            box-shadow: var(--root-shadow--1);
+        }
+    }
+
+    // Facets
+
+    // States
+}

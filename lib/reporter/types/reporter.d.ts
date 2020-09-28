@@ -2,6 +2,8 @@ import { Sites } from '../../shared/types/Sites';
 
 declare namespace Reporter {
     export type Reporter = {
+        name: string;
+
         // Server
         onServerStartup?: () => Promise<void>
         onServerSIGTERM?: () => Promise<void>

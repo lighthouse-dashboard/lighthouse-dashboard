@@ -13,7 +13,6 @@ export default {
         const { isAuthenticated } = request.auth;
         const favoriteSites = await getFavoriteSites(100, isAuthenticated);
         const latestSites = (await getLatestSites(4, isAuthenticated));
-        const scheduledSites = (await getScheduledSites(4, isAuthenticated));
-        return h.view('views/dashboard.twig', { ...getDefaultParams(request), favoriteSites, latestSites, scheduledSites });
+        return h.view('views/dashboard.twig', { ...getDefaultParams(request), favoriteSites, latestSites });
     },
 };

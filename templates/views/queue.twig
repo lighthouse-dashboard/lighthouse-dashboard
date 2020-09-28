@@ -1,0 +1,25 @@
+{% extends '../layout.twig' %}
+
+{% block app_content %}
+    <div class="container">
+        {% if scheduledSites.length > 0 %}
+            <div class="dashboard--section">
+                <component is="tile"
+                        icon="rocket"
+                        title="Queue"
+                        :facets="['no-padding']">
+                    <ul class="list">
+                        {% for site in scheduledSites %}
+                            <li class="list-item">
+                                <a class="link"
+                                        href="/app/projects/{{ site._id }}">
+                                    {{ site.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </component>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

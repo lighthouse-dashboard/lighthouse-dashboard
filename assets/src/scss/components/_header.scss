@@ -24,12 +24,11 @@
 
         .header--list {
             display: grid;
-            grid-template-areas: '. . .';
-            grid-template-columns: repeat(3, auto);
+            grid-template-areas: '. . . .';
+            grid-template-columns: repeat(4, auto);
             grid-gap: calc(var(--root-spacing) * 4);
-            padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 3);
 
-            @include mq('<=sm') {
+            @include mq('<=md') {
                 grid-gap: calc(var(--root-spacing) * 2);
             }
         }
@@ -43,7 +42,7 @@
             background-color: var(--color--background-color);
             padding: calc(var(--root-spacing) * 2) calc(var(--root-spacing) * 3);
 
-            @include mq('<=sm') {
+            @include mq('<=md') {
                 display: none;
             }
 
@@ -67,7 +66,7 @@
             font-size: 2.4rem;
             font-weight: 700;
 
-            @include mq('<=sm') {
+            @include mq('<=md') {
                 display: none;
             }
         }
@@ -80,7 +79,7 @@
             font-weight: 700;
             transition: all ease-in-out 200ms;
 
-            @include mq('<=sm') {
+            @include mq('<=md') {
                 font-size: 1.4rem;
             }
 

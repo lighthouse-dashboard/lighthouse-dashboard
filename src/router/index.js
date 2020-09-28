@@ -28,6 +28,7 @@ async function getRoutes() {
     /** @type {hapi.Route[]} */
     return [
         ...assetRoutes,
+        ...(await loadAllRoutesFor('src/api/**/endpoints/**/index.js')),
         ...(await loadAllRoutesFor('src/api/**/endpoints/*.js')),
         ...(await loadAllRoutesFor('src/routes/**/*.js')),
     ];
