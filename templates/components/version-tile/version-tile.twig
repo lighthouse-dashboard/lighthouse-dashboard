@@ -1,0 +1,19 @@
+<component is="tile"
+        icon="cog"
+        :facets="['no-padding']">
+    <ul class="list">
+        <li class="list-item">
+            <p class="u-reset  caption">
+                Local Version
+            </p>
+            <p class="u-reset subtitle1">v{{ version }}</p>
+        </li>
+
+        <li class="list-item">
+            <p class="u-reset  caption">
+                Remote Version
+            </p>
+            <p class="u-reset subtitle1">v{{ latestRemoteVersion }}</p>
+        </li>
+    </ul>
+</component>

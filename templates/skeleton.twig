@@ -75,10 +75,6 @@
 {% block body %}
     {% block content %} {% endblock %}
 
-    {% if isAuthenticated and hasNewVersion %}
-        {% include 'components/update-notification/update-notification.twig' %}
-    {% endif %}
-
     {% if G_ANALYTICS_ID %}
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <link rel="preload"

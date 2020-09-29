@@ -1,13 +1,10 @@
 {% extends '../layout.twig' %}
 
 {% block app_content %}
-    <div class="system container">
+       <div class="system container">
         <div></div>
         <div class="system--content">
-            <component is="system-info-tile"
-                    class="system--section"
-                    version="{{ VERSION }}">
-            </component>
+            {% include '../components/version-tile/version-tile.twig' with {version:VERSION, remoteVersion:latestRemoteVersion} %}
 
             <component is="worker-info-tile"
                     :info='{{ info | json_encode() }}'>

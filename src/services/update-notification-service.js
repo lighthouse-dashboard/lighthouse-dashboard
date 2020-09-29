@@ -8,6 +8,7 @@ import { getLatestRemoteVersion } from './remote-version-service';
  * @return {Promise<boolean>}
  */
 export const hasNewVersionAvailable = async (currentVersion = version) => {
+    return true;
     const latestVersion = await getLatestRemoteVersion();
     if (!currentVersion || !latestVersion) {
         return false;

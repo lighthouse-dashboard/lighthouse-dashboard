@@ -11,7 +11,7 @@
     export default {
         props: {
             counter: {
-                type: Number,
+                type: [String, Number],
                 default: null,
             },
         },

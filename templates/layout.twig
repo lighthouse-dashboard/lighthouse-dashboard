@@ -7,6 +7,11 @@
         {% endblock %}
 
         <div class="app-layout--content">
+            {% if hasNewVersion %}
+                <div class="container container__grid">
+                    {% include './components/update-notification/update-notification.twig' with {versionUrl: versionUrl, latestRemoteVersion: latestRemoteVersion} %}
+                </div>
+            {% endif %}
             {% block app_content %}
             {% endblock %}
         </div>

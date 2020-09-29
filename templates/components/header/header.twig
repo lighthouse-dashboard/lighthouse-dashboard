@@ -29,8 +29,11 @@
         </li>
 
         <li class="header--list-item">
-            <a class="header--list-item-link u-reset {% if route == '/app/system' %}header--list-item-link__active{% endif %}"
-                    href="/app/system">Info</a>
+            <component is="badge"
+                    counter="!">
+                <a class="header--list-item-link u-reset {% if route == '/app/system' %}header--list-item-link__active{% endif %}"
+                        href="/app/system">Info</a>
+            </component>
         </li>
     </ul>
 
