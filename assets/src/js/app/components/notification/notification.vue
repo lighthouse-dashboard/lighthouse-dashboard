@@ -1,13 +1,13 @@
 <template>
     <div class="notification"
             :class="rootFacets">
-        <span class="u-reset notification--content">
+        <p class="u-reset notification--content">
             <unicon class="notification--icon"
                     :name="icon"/>
-            <p class="u-reset notification--text">
+            <span class="u-reset notification--text">
                 <slot/>
-            </p>
-        </span>
+            </span>
+        </p>
     </div>
 </template>
 
@@ -16,16 +16,10 @@
 
     export default {
         mixins: [bemMixin('notification')],
-
-        data: () => ({
-            iconMap: {
-                warning: 'exclamation-triangle',
-            },
-        }),
-
-        computed: {
-            icon() {
-                return this.iconMap[this.facet] || null;
+        props: {
+            icon: {
+                type: String,
+                default: 'exclamation-triangle',
             },
         },
     };
