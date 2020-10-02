@@ -4,7 +4,7 @@ import { jsxDecorator } from 'storybook-addon-jsx';
 import Vue from 'vue';
 import i18n from '../assets/src/js/app/translations';
 import registry from '../assets/src/js/framework/registry';
-import { _breakpoints } from '../design-system/breakpoints.json'
+import { _breakpoints } from '../config/breakpoints.json'
 
 registry(Vue, { i18n });
 

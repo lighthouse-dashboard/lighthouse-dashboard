@@ -1,4 +1,4 @@
-@import './design-system/breakpoints.json';
+@import '../../../../config/breakpoints.json';
 
 
 $screen-xs-min: map-get($_breakpoints, 'xs') * 1px;
