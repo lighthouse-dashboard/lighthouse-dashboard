@@ -1,7 +1,7 @@
 <nav class="header">
     <div class="header--title-wrapper">
         <a href="/"
-                class="u-reset header--title">
+           class="u-reset header--title">
             Lighthouse
         </a>
     </div>
@@ -9,31 +9,28 @@
     <ul class="u-reset header--list">
         <li class="header--list-item">
             <a class="header--list-item-link u-reset {% if route == '/app/dashboard' %}header--list-item-link__active{% endif %}"
-                    href="/app/dashboard">Dashboard</a>
+               href="/app/dashboard">Dashboard</a>
         </li>
 
         <li class="header--list-item">
             <a class="header--list-item-link u-reset {% if route == '/app/projects' or route == '/app/projects/?' %}header--list-item-link__active{% endif %}"
-                    href="/app/projects">Projects</a>
+               href="/app/projects">Projects</a>
         </li>
 
         <li class="header--list-item">
             <component is="scheduled-sites-container">
                 <component slot-scope="{counter}"
-                        is="badge"
-                        :counter="counter">
+                           is="badge"
+                           :counter="counter">
                     <a class="header--list-item-link u-reset {% if route == '/app/queue' %}header--list-item-link__active{% endif %}"
-                            href="/app/queue">Queue</a>
+                       href="/app/queue">Queue</a>
                 </component>
             </component>
         </li>
 
         <li class="header--list-item">
-            <component is="badge"
-                    counter="!">
-                <a class="header--list-item-link u-reset {% if route == '/app/system' %}header--list-item-link__active{% endif %}"
-                        href="/app/system">Info</a>
-            </component>
+            <a class="header--list-item-link u-reset {% if route == '/app/system' %}header--list-item-link__active{% endif %}"
+               href="/app/system">Info</a>
         </li>
     </ul>
 
@@ -44,7 +41,7 @@
         {% else %}
             <li class="header--list-item">
                 <a class="header--list-item-link u-reset {% if route == '/login' %}header--list-item-link__active{% endif %}"
-                        href="/login">Login</a>
+                   href="/login">Login</a>
             </li>
         {% endif %}
     </ul>

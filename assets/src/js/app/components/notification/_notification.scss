@@ -1,6 +1,6 @@
 .notification {
     // Vars
-    --notification--vert-bezel: 24px;
+    --notification--vert-bezel: 16px;
     --notification--horiz-bezel: 16px;
     --notification--border-radius: 4px;
     --notification--border-width: 2px;
@@ -10,25 +10,20 @@
     // Module
     & {
         & {
-            display: block;
+            z-index: 2;
             background: none;
             overflow: hidden;
             padding: var(--notification--vert-bezel) var(--notification--horiz-bezel);
             transition: background-color 200ms ease-in-out;
             border-radius: var(--notification--border-radius);
+            border: solid 1px #ccc;
             white-space: nowrap;
             text-overflow: ellipsis;
-            border: solid var(--notification--border-width);
-        }
 
-        .notification--content {
-            z-index: 2;
-
-            @include Body1;
-            position: relative;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
+            align-items: center;
         }
 
         .notification--icon {
@@ -36,7 +31,9 @@
         }
 
         .notification--text {
-            margin-top: 2px;
+            @include Body1;
+
+            line-height: 1;
         }
     }
 
@@ -48,24 +45,27 @@
     }
 
     &.notification__success {
+        --uni-color-primary: var(--color--signal-success);
+
         border-color: var(--color--signal-success);
         background-color: rgba(var(--color--signal-success-rgb), 0.1);
         color: var(--color--signal-success);
-        --uni-color-primary: var(--color--signal-success);
     }
 
     &.notification__warning {
+        --uni-color-primary: var(--color--signal-warning);
+
         border-color: var(--color--signal-warning);
         background-color: rgba(var(--color--signal-warning-rgb), 0.1);
         color: var(--color--signal-warning);
-        --uni-color-primary: var(--color--signal-warning);
     }
 
     &.notification__error {
+        --uni-color-primary: var(--color--signal-error);
+
         border-color: var(--color--signal-error);
         background-color: rgba(var(--color--signal-error-rgb), 0.1);
         color: var(--color--signal-error);
-        --uni-color-primary: var(--color--signal-error);
     }
 
     // States
