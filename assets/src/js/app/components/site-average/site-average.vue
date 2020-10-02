@@ -27,13 +27,19 @@
 
         data: () => ({
             config: SITE_OVERVIEW_CHART,
-            labels: ['Performance', 'SEO', 'Accessibility'],
+            labels: ['Performance', 'Accessibility', 'Best Practices', 'SEO', 'PWA'],
         }),
 
         computed: {
             /** @type {Reports.Report} */
             lastReport() {
                 return [...this.reports].shift();
+            },
+
+            otherReports() {
+                const reports = [...this.reports];
+                reports.shift();
+                return reports;
             },
 
             series() {
@@ -51,11 +57,11 @@
                     name: 'Average',
                     type: 'line',
                     data: [
-                        getAvg(this.reports, 'performance'),
-                        getAvg(this.reports, 'accessibility'),
-                        getAvg(this.reports, 'best-practices'),
-                        getAvg(this.reports, 'seo'),
-                        getAvg(this.reports, 'pwa'),
+                        getAvg(this.otherReports, 'performance'),
+                        getAvg(this.otherReports, 'accessibility'),
+                        getAvg(this.otherReports, 'best-practices'),
+                        getAvg(this.otherReports, 'seo'),
+                        getAvg(this.otherReports, 'pwa'),
                     ],
                 }];
             },
