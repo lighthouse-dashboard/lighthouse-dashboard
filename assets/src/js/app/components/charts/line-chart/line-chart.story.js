@@ -2,7 +2,7 @@ import withLayout from '../../../../storybook/decorators/withLayout';
 import LineChart from './line-chart.vue';
 
 export default {
-    title: 'Components / Charts / Line Chart',
+    title: 'Charts / Line Chart',
     decorators: [withLayout],
 };
 

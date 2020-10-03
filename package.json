@@ -22,7 +22,7 @@
         "lint-frontend": "eslint -c .eslintrc ./assets/src && npx stylelint **/*.scss --config .stylelintrc.js",
         "lint-backend": "eslint -c .eslintrc ./src",
         "start": "node -r esm index.js",
-        "build": "gulp build",
+        "build": "gulp build && build-storybook",
         "build-storybook": "build-storybook -c .storybook -o assets/storybook",
         "audit": "node -r esm lib/audit-scheduler/cli.js",
         "worker": "npm run cleanup && npm run audit-worker",

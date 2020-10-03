@@ -3,7 +3,7 @@ import withLayout from '../../../../storybook/decorators/withLayout';
 import GaugeChart from './gauge-chart.vue';
 
 export default {
-    title: 'Components / Charts / Gauge Chart',
+    title: 'Charts / Gauge Chart',
     decorators: [withLayout],
 };
 

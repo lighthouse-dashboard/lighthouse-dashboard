@@ -2,7 +2,7 @@ import withLayout from '../../../../storybook/decorators/withLayout';
 import Chart from './bar-chart.vue';
 
 export default {
-    title: 'Components / Charts / Bar Chart',
+    title: 'Charts / Bar Chart',
     decorators: [withLayout],
 };
 

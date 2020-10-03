@@ -1,6 +1,6 @@
 import BadgesOverlay from './badges-overlay.vue';
 
-export default { title: 'badges-overlay' };
+export default { title: 'Overlays / Badges Overlay' };
 
 export const component = () => ({
     components: { BadgesOverlay },

@@ -2,7 +2,7 @@ import { boolean, text } from '@storybook/addon-knobs';
 import withLayout from '../../../../storybook/decorators/withLayout';
 import InputField from './input-field.vue';
 
-export default { title: 'Styleguide / Inputs / Field', decorators: [withLayout] };
+export default { title: 'Styleguide / Inputs / Text Field', decorators: [withLayout] };
 
 export const component = () => ({
     components: { InputField },

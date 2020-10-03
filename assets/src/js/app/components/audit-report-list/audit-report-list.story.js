@@ -3,7 +3,7 @@ import withLayout from '../../../storybook/decorators/withLayout';
 import AuditReportList from './audit-report-list.vue';
 
 export default {
-    title: 'Components / Sites / Audit Report List',
+    title: 'Reports / Audit Report List',
     decorators: [withLayout],
 };
 

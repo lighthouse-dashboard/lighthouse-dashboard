@@ -3,7 +3,7 @@ import withLayout from '../../../storybook/decorators/withLayout';
 import SiteConfig from './site-config';
 
 export default {
-    title: 'Components / Sites / Site Config',
+    title: 'Sites / Site Config',
     decorators: [withLayout],
 };
 

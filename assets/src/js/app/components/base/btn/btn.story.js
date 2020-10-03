@@ -1,3 +1,4 @@
+import { boolean, select } from '@storybook/addon-knobs';
 import withLayout from '../../../../storybook/decorators/withLayout';
 
 export default {
@@ -5,11 +6,17 @@ export default {
     decorators: [withLayout],
 };
 
-export const primary = () => '<btn>Primary</btn>';
-export const primaryDisabled = () => '<btn :disabled="true">Disabled</btn>';
-export const secondary = () => '<btn facets="secondary">Secondary</btn>';
-export const secondaryDisabled = () => '<btn facets="secondary" :disabled="true">Secondary</btn>';
-export const flat = () => '<btn facets="flat">Flat</btn>';
-export const flatDisabled = () => '<btn facets="flat" :disabled="true">Flat</btn>';
-export const danger = () => '<btn facets="danger">Danger</btn>';
-export const dangerDisabled = () => '<btn facets="danger" :disabled="true">Danger</btn>';
+export const Component = () => ({
+    props: {
+        facet: {
+            type: String,
+            default: select( 'Facet', { Primary: 'primary', Secondary: 'secondary', Flat: 'flat', Danger: 'danger' } ),
+        },
+        disabled: {
+            type: Boolean,
+            default: boolean('Is Disabled', false),
+        }
+    },
+    template: `
+        <btn :facets="facet" :disabled="disabled">My Button</btn>`,
+});

@@ -1,7 +1,7 @@
 import withLayout from '../../../storybook/decorators/withLayout';
 
 export default {
-    title: 'Components / Sites / Site Actions List',
+    title: 'Sites / Site Actions List',
     decorators: [withLayout],
 };
 

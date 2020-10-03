@@ -1,4 +1,4 @@
-export default { title: 'Styleguide / Grid' };
+export default { title: 'Layout / Grid' };
 
 export const component = () => `
 <div class="grid">

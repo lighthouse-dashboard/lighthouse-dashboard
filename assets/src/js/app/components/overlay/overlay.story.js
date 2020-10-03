@@ -1,6 +1,6 @@
 import Overlay from './overlay.vue';
 
-export default { title: 'Base / Overlay' };
+export default { title: 'Overlays' };
 
 export const component = () => ({
     components: { Overlay },

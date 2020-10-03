@@ -2,7 +2,7 @@ import withLayout from '../../../../storybook/decorators/withLayout';
 import LoadingIndicator from './loading-indicator.vue';
 
 export default {
-    title: 'Styleguide / Loading Indicator',
+    title: 'Styleguide / Notifications / Loading Indicator',
     decorators: [withLayout],
 };
 

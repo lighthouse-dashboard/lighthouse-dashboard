@@ -1,4 +1,4 @@
-export default { title: 'Styleguide / List' };
+export default { title: 'Layout / List' };
 
 export const component = () => `
 <ul class="list">
