@@ -1,6 +1,6 @@
 <component is="tile"
-        icon="cog"
-        :facets="['no-padding']">
+           icon="cog"
+           :facets="['no-padding']">
     <ul class="list">
         <li class="list-item">
             <p class="u-reset  caption">
@@ -14,6 +14,14 @@
                 Remote Version
             </p>
             <p class="u-reset subtitle1">v{{ latestRemoteVersion }}</p>
+        </li>
+
+        <li class="list-item">
+            <component is="update-check-container">
+                <component slot-scope="{ hasNewVersion,checkForUpdate }"
+                           is="update-check-btn"
+                           @checkforupdate="checkForUpdate"></component>
+            </component>
         </li>
     </ul>
 </component>
