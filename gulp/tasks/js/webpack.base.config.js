@@ -1,28 +1,29 @@
-const { matchNodeModules } = require('./utils');
-const MinifyJsPlugin = require('terser-webpack-plugin');
+const { matchNodeModules } = require( './utils' );
+const MinifyJsPlugin = require( 'terser-webpack-plugin' );
+const {EnvironmentPlugin} = require('webpack');
 
-require('dotenv').config();
+require( 'dotenv' ).config();
 
-const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require( 'path' );
+const VueLoaderPlugin = require( 'vue-loader/lib/plugin' );
+const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 
-const paths = require('../../../src/config/path');
-const config = require('./config');
+const paths = require( '../../../src/config/path' );
+const config = require( './config' );
 const isDist = process.env.NODE_ENV === 'production';
 
 // NOTE: Export webpack config
 module.exports = {
     devtool: '#source-map',
     mode: isDist ? 'production' : 'development',
-    entry: path.resolve(paths.jsAsset, 'main.js'),
-    context: path.resolve(paths.jsAsset),
+    entry: path.resolve( paths.jsAsset, 'main.js' ),
+    context: path.resolve( paths.jsAsset ),
     //indexPath: path.resolve(paths.templates, 'dist/index.html'),
 
     stats: 'detailed',
     output: {
         publicPath: '/js/',
-        path: path.resolve(paths.assetDist, 'js'),
+        path: path.resolve( paths.assetDist, 'js' ),
         filename: 'entry/[name]/index.js', // NOTE: We don't need a chunkhash as django takes care of entry modules
         chunkFilename: 'chunks/[name]/index.[chunkhash].js',
         devtoolModuleFilenameTemplate: 'source-webpack:///[resourcePath]',
@@ -35,7 +36,7 @@ module.exports = {
                 test: /\.story\.js?$/,
                 loaders: [
                     {
-                        loader: require.resolve('@storybook/source-loader'),
+                        loader: require.resolve( '@storybook/source-loader' ),
                         options: { parser: 'javascript' },
                     },
                 ],
@@ -45,7 +46,7 @@ module.exports = {
                 test: /\.md$/,
                 use: [
                     {
-                        loader: 'html-loader'
+                        loader: 'html-loader',
                     },
                     {
                         loader: 'markdown-loader',
@@ -83,26 +84,27 @@ module.exports = {
     },
 
     plugins: [
-        new VueLoaderPlugin({
+        new EnvironmentPlugin( ['SENTRY_DSN', 'SERVICE_NAME'] ),
+        new VueLoaderPlugin( {
             cacheDirectory: true,
-        }),
+        } ),
         //  new VuetifyLoaderPlugin(),
-        new HtmlWebpackPlugin({
-            filename: path.resolve(paths.templates, 'dist/index.html'),
-            template: path.resolve(paths.htmlAsset, 'index.html'),
-        }),
+        new HtmlWebpackPlugin( {
+            filename: path.resolve( paths.templates, 'dist/index.html' ),
+            template: path.resolve( paths.htmlAsset, 'index.html' ),
+        } ),
     ],
 
     optimization: {
         minimize: isDist,
-        minimizer: isDist ? [new MinifyJsPlugin(config.minify)] : [],
+        minimizer: isDist ? [new MinifyJsPlugin( config.minify )] : [],
         noEmitOnErrors: !isDist,
         runtimeChunk: true,
 
         splitChunks: {
             cacheGroups: {
                 framework: {
-                    test: matchNodeModules(['vue', 'vue-router', 'vuex']),
+                    test: matchNodeModules( ['vue', 'vue-router', 'vuex'] ),
                     name: 'framework',
                     chunks: 'all',
                 },
@@ -116,7 +118,7 @@ module.exports = {
         },
         modules: [
             'node_modules',
-            path.relative(paths.root, path.resolve(paths.jsAsset)),
+            path.relative( paths.root, path.resolve( paths.jsAsset ) ),
         ],
         extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.vue'],
     },
