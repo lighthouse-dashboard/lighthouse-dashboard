@@ -4,6 +4,9 @@ declare namespace Reporter {
     export type Reporter = {
         name: string;
 
+        // Init method called when reporter is registered
+        init?: () => void;
+
         // Server
         onServerStartup?: () => Promise<void>
         onServerSIGTERM?: () => Promise<void>

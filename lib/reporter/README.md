@@ -1,6 +1,6 @@
 # @lighthouse-dashboard/reporter
 
-A reporter is a handler for events dispatched by the normal process. See the hooks 
+A reporter is a handler for events dispatched by the normal process. See the hooks
 on where you can add your custom reporter, get data, process them and do what ever you want with them
 like send emails or integrate a slackbot.
 
@@ -28,12 +28,15 @@ Alternatively you can also pass an object directly
 ### Lighthouse-dashboard
 This is the default reporter which implements logic used to create audits for a page. If you don't want to store anything,
 remove this reporter and create your custom data handler
- 
+
 ### Quickmetrics
 To use the internal quickmetrics reporter you have to provide the env variable
-`QUICK_METRICS_KEY` with your API access key 
+`QUICK_METRICS_KEY` with your API access key
 
 ## Hooks
+
+#### `init(): void`
+Called as soon as the reporter is registered. Here you can do some initialisation work.
 
 #### `onServerStartup(): Promise<void>`
 Dispatched when the server starts
