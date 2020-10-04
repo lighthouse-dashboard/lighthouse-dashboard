@@ -84,7 +84,7 @@ export default async function boot() {
         await report(SERVER_STARTUP);
         await start();
     } catch (e) {
-        await report(SERVER_ERROR);
+        await report(SERVER_ERROR, e);
         logger.error(e.message);
         throw e;
     }
