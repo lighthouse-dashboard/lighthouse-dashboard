@@ -11,7 +11,7 @@ if (process.env.SENTRY_DSN) {
         dsn: process.env.SENTRY_DSN,
         serverName: process.env.SERVICE_NAME,
         environment: process.env.NODE_ENV,
-        tracesSampleRate: 0.2,
+        tracesSampleRate: 0.5,
 
     } );
 }
