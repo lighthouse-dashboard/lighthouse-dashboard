@@ -75,7 +75,7 @@
         "three": "^0.120.1",
         "twig": "^1.15.1",
         "uuid": "^3.4.0",
-        "vue-i18n": "^8.18.2",
+        "vue-i18n": "^8.21.1",
         "vue-unicons": "^2.3.0",
         "winston": "^3.3.3",
         "winston-daily-rotate-file": "^4.5.0"
