@@ -47,7 +47,7 @@
         "@sentry/integrations": "^5.24.2",
         "@sentry/node": "^5.24.2",
         "@sentry/tracing": "^5.24.2",
-        "autoprefixer": "^9.8.4",
+        "autoprefixer": "^10.0.0",
         "blipp": "^4.0.1",
         "chrome-launcher": "^0.13.3",
         "chrome-paths": "^1.0.1",
