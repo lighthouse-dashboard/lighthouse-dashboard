@@ -52,7 +52,7 @@
         "chrome-launcher": "^0.13.3",
         "chrome-paths": "^1.0.1",
         "commander": "^4.1.1",
-        "console-remote-client": "^0.5.1",
+        "console-remote-client": "^2.1.2",
         "date-fns": "^2.14.0",
         "dotenv": "^8.2.0",
         "esm": "^3.2.25",
