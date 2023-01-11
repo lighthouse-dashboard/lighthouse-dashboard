@@ -63,7 +63,7 @@
         "hapi-dev-errors": "^3.3.0",
         "hapi-error": "^2.3.0",
         "hapi-swagger": "^13.0.0",
-        "jsonwebtoken": "^8.5.1",
+        "jsonwebtoken": "^9.0.0",
         "laabr": "^5.1.6",
         "lighthouse": "^6.2.0",
         "lodash": "^4.17.20",
